@@ -74,14 +74,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       }
     }
     
-    // Auto-resume after longer inactivity (10 seconds instead of 5)
+    // For Patient Engagement demo, set the active label
+    if (currentStage === 0) {
+      setActiveLabel(patientEngagementLabels[step]);
+    }
+    
+    // Auto-resume after longer inactivity (15 seconds instead of 10)
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 10000); // Increased to 10 seconds
+    }, 15000); // Increased to 15 seconds for better label visibility
   };
 
   // Auto-advance substeps unless paused
@@ -108,7 +113,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
-    }, 5000); // Slightly longer interval for better reading
+    }, 7000); // Longer interval for better reading (7 seconds)
 
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
@@ -129,7 +134,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       // Auto-resume after inactivity
       resetTimerRef.current = setTimeout(() => {
         setIsPaused(false);
-      }, 10000); // 10 seconds pause during hover
+      }, 15000); // 15 seconds pause during hover
     } else if (step === null) {
       // Don't clear the label on mouse leave to keep it visible
     }
@@ -158,10 +163,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
               </Pointer>
               
-              {/* Always show active label */}
-              <PointerFollower align="bottom-right" alwaysVisible={true}>
-                <div className="bg-blue-900 text-white px-3 py-2 rounded text-sm shadow-md max-w-[250px]">
-                  {activeLabel || patientEngagementLabels[subStep]}
+              {/* Always show active label with improved visibility */}
+              <PointerFollower 
+                align="bottom-center" 
+                alwaysVisible={true}
+                offsetY={10}
+                style={{ 
+                  transform: 'translateX(-50%)' // Center horizontally
+                }}
+              >
+                <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg border border-blue-700 max-w-[280px]">
+                  <div className="font-medium">{activeLabel || patientEngagementLabels[subStep]}</div>
                 </div>
               </PointerFollower>
             </div>

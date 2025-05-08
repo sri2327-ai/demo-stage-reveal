@@ -29,7 +29,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   
-  // Auto-show label for current subStep
+  // Auto-show label for current subStep with longer display time
   useEffect(() => {
     if (subStep === 0) setActiveLabel("Authentication");
     else if (subStep === 1) setActiveLabel("Patient Schedule");
@@ -39,14 +39,34 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     
     // Clear label after 3 seconds if no user interaction
     const timer = setTimeout(() => {
-      setActiveLabel(null);
-    }, 3000);
+      if (!isInteractive) {
+        setActiveLabel(null);
+      }
+    }, 5000);
     
     return () => clearTimeout(timer);
-  }, [subStep]);
+  }, [subStep, isInteractive]);
   
   const getActiveAreaClass = (stepIndex: number) => {
     return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'bg-blue-100/40' : 'hover:bg-blue-100/30'}`;
+  };
+
+  // Get the current label for either hover state or active step
+  const getCurrentLabel = () => {
+    if (activeLabel) {
+      return {
+        title: activeLabel,
+        description: labelDescriptions[activeLabel]
+      };
+    }
+    
+    // Fallback to current substep
+    const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation"];
+    const currentStepLabel = stepLabels[subStep];
+    return {
+      title: currentStepLabel,
+      description: labelDescriptions[currentStepLabel]
+    };
   };
   
   return (
@@ -107,11 +127,18 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
           </Pointer>
           
-          {/* Label that follows the cursor - now always visible during active subStep */}
-          <PointerFollower align="bottom-right" alwaysVisible={activeLabel !== null}>
-            <div className="bg-blue-900 text-white px-3 py-2 rounded shadow-md max-w-[200px]">
-              <div className="font-medium text-sm">{activeLabel || labelDescriptions[`${Object.keys(labelDescriptions)[subStep]}`]}</div>
-              <div className="text-xs mt-1 text-blue-100">{activeLabel ? labelDescriptions[activeLabel] : ''}</div>
+          {/* Label that follows the cursor - improved visibility */}
+          <PointerFollower 
+            align="bottom-center" 
+            alwaysVisible={true} 
+            offsetY={10}
+            style={{ 
+              transform: 'translateX(-50%)' // Center horizontally
+            }}
+          >
+            <div className="bg-blue-900 text-white px-3 py-2 rounded-lg shadow-lg max-w-[250px] border border-blue-700">
+              <div className="font-medium text-sm">{getCurrentLabel().title}</div>
+              <div className="text-xs mt-1 text-blue-100">{getCurrentLabel().description}</div>
             </div>
           </PointerFollower>
         </MouseTrackerProvider>

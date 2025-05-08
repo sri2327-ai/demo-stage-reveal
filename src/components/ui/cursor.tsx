@@ -138,28 +138,35 @@ interface PointerFollowerProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  align?: 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  align?: 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'bottom-center';
   alwaysVisible?: boolean;
+  offsetY?: number; // Add offsetY prop for fine-tuning vertical position
+  offsetX?: number; // Add offsetX prop for fine-tuning horizontal position
+  style?: React.CSSProperties; // Additional style props
 }
 
 export const PointerFollower: React.FC<PointerFollowerProps> = ({ 
   children, 
   className,
   delay = 0.1,
-  align = 'center',
-  alwaysVisible = false
+  align = 'bottom-center',
+  alwaysVisible = false,
+  offsetY = 0,
+  offsetX = 0,
+  style = {}
 }) => {
   const { position, isActive } = useMousePosition();
   
   // Calculate offset based on alignment
   const getOffset = () => {
     switch(align) {
-      case 'top-left': return { x: -40, y: -40 };
-      case 'top-right': return { x: 20, y: -40 };
-      case 'bottom-left': return { x: -40, y: 30 };
-      case 'bottom-right': return { x: 20, y: 30 };
+      case 'top-left': return { x: -40 + offsetX, y: -40 + offsetY };
+      case 'top-right': return { x: 20 + offsetX, y: -40 + offsetY };
+      case 'bottom-left': return { x: -40 + offsetX, y: 30 + offsetY };
+      case 'bottom-right': return { x: 20 + offsetX, y: 30 + offsetY };
+      case 'bottom-center': return { x: 0 + offsetX, y: 30 + offsetY };
       case 'center':
-      default: return { x: 0, y: 0 };
+      default: return { x: 0 + offsetX, y: 0 + offsetY };
     }
   };
   
@@ -183,6 +190,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
           }
         }}
         exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
+        style={style}
       >
         {children}
       </motion.div>
