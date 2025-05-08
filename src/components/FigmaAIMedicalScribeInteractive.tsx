@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -73,54 +74,61 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               noteGeneration={noteGeneration}
             />
           
-            {/* Interactive overlay areas */}
-            <div className="absolute inset-0 z-10">
+            {/* Interactive overlay areas - Fixed positioning to match illustration */}
+            <div className="absolute inset-0">
               {/* Login area - step 0 */}
               <div 
-                className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%]`}
+                className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%] z-20`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Authentication")}
                 onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Authentication area"
               />
               
               {/* Schedule area - step 1 */}
               <div 
-                className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%]`}
+                className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%] z-20`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Schedule")}
                 onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Patient Schedule area"
               />
               
               {/* Templates area - step 2 */}
               <div 
-                className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%]`}
+                className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%] z-20`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Templates")}
                 onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Templates area"
               />
               
               {/* Recording area - step 3 */}
               <div 
-                className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%]`}
+                className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%] z-20`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recording")}
                 onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Recording area"
               />
               
               {/* Documentation area - step 4 */}
               <div 
-                className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%]`}
+                className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%] z-20`}
                 onClick={() => onElementClick && onElementClick(4)}
                 onMouseEnter={() => setActiveLabel("Generate Documentation")}
                 onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Documentation area"
               />
             </div>
             
-            {/* Custom cursor */}
+            {/* Custom cursor with gradient */}
             <Pointer>
               <div className="flex flex-col items-center">
-                <MousePointer2 className="fill-[#143151] stroke-white" size={24} />
-                <span className="text-xs font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+                <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
+                  fill: "url(#cursor-gradient)"
+                }} />
+                <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
               </div>
             </Pointer>
             
@@ -128,7 +136,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <PointerFollower 
               align="bottom-center" 
               alwaysVisible={true} 
-              offsetY={30}
+              offsetY={40}
               style={{ zIndex: 100 }}
             >
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-white/20">

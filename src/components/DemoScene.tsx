@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { 
-  MessageCircle, Calendar, FileText, BellRing, PhoneCall, 
-  CheckCircle, Clock, User, Database, Shield, 
-  ClipboardCheck, ArrowRight, Settings, CalendarDays, 
-  ClipboardList, Mic, Stethoscope, Server, MousePointer2
+  MousePointer2
 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage } from '../types/demo';
@@ -15,12 +12,21 @@ interface DemoSceneProps {
   stages: DemoStage[];
 }
 
-// Patient Engagement labels for hover effects
+// Updated patient engagement labels with shorter, clearer descriptions
 const patientEngagementLabels: Record<number, string> = {
   0: "AI answers patient calls and messages instantly",
   1: "AI checks provider calendar for availability",
   2: "AI automates patient intake, insurance, and medical history updates",
   3: "AI sends real-time confirmations, reminders, and follow-ups to ensure appointment adherence"
+};
+
+// Updated medical scribe labels with concise, informative descriptions
+const medicalScribeLabels: Record<number, string> = {
+  0: "Log in to Crush",
+  1: "Auto-syncs schedule from EHR",
+  2: "Auto-selects templates by visit type",
+  3: "Transcribes multilingual encounters",
+  4: "Generates notes with codes, syncs to EHR"
 };
 
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
@@ -41,13 +47,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     // Auto-show first label after stage change
     if (currentStage === 0) {
       setActiveLabel(patientEngagementLabels[0]);
+    } else if (currentStage === 1) {
+      setActiveLabel(medicalScribeLabels[0]);
     }
   }, [currentStage]);
   
-  // Auto-show label based on current subStep for Patient Engagement demo
+  // Auto-show label based on current subStep
   useEffect(() => {
     if (currentStage === 0) {
       setActiveLabel(patientEngagementLabels[subStep]);
+    } else if (currentStage === 1) {
+      setActiveLabel(medicalScribeLabels[subStep]);
     }
   }, [subStep, currentStage]);
 
@@ -74,9 +84,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       }
     }
     
-    // For Patient Engagement demo, set the active label
+    // Set the active label based on current stage
     if (currentStage === 0) {
       setActiveLabel(patientEngagementLabels[step]);
+    } else if (currentStage === 1) {
+      setActiveLabel(medicalScribeLabels[step]);
     }
     
     // Auto-resume after longer inactivity (20 seconds)
@@ -156,11 +168,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onHover={handlePatientEngagementHover}
               />
               
-              {/* Custom cursor for stage 0 */}
+              {/* Custom cursor for stage 0 with larger size and gradient */}
               <Pointer>
                 <div className="flex flex-col items-center">
-                  <MousePointer2 className="fill-[#143151] stroke-white" size={24} />
-                  <span className="text-xs font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+                  <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
+                    fill: "url(#cursor-gradient)"
+                  }} />
+                  <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
                 </div>
               </Pointer>
               
