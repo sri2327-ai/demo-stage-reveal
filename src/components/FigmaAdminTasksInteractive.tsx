@@ -23,7 +23,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   subStep,
   onElementClick,
   isInteractive = false,
-  hideTitle = false /* Default to false for backward compatibility */
+  hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [interactionActive, setInteractionActive] = useState(false);
@@ -79,8 +79,6 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative">
-            {/* Note: We can't add hideTitle to FigmaAdminTasksIllustration since it's read-only */}
-            {/* So we'll handle it differently in DemoScene.tsx */}
             <FigmaAdminTasksIllustration
               subStep={subStep}
               onElementClick={onElementClick}
@@ -168,13 +166,15 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             isInteractive={false}
           />
           
-          {/* Non-interactive label with consistent styling */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
-              <div className="font-bold text-xl">{getCurrentLabel().title}</div>
-              <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
+          {/* Only show title tooltip if not hidden */}
+          {!hideTitle && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-20">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
+                <div className="font-bold text-xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

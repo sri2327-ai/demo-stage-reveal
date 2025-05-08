@@ -198,9 +198,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onElementClick={handleElementClick}
                 isInteractive={true}
                 onHover={handlePatientEngagementHover}
-                hideTitle={true}
               />
-              
+          
               {/* Consistent cursor styling with SVG gradient */}
               <Pointer>
                 <div className="flex flex-col items-center">
@@ -267,7 +266,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 noteGeneration={noteGeneration}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                hideTitle={true}
               />
             </motion.div>
           </AnimatePresence>

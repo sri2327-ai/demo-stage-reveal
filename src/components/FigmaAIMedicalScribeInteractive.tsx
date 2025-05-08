@@ -103,11 +103,11 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   onMouseLeave={handleAreaMouseLeave}
                   aria-label={`${area.name} area`}
                   whileHover={{ 
-                    scale: 1.05, 
+                    scale: 1.08, 
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   }}
                   animate={subStep === index ? {
-                    scale: 1.03,
+                    scale: 1.06,
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   } : {
                     scale: 1,
@@ -147,10 +147,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 animate={{ 
                   opacity: 1, 
                   y: 0, 
-                  scale: interactionActive ? 1.05 : 1
+                  scale: interactionActive ? 1.1 : 1.05
                 }}
                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.5 }}
               >
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
                   <div className="font-bold text-xl">{getCurrentLabel().title}</div>
