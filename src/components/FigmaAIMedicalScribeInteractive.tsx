@@ -12,6 +12,14 @@ interface FigmaAIMedicalScribeInteractiveProps {
   isInteractive?: boolean;
 }
 
+const labelDescriptions: Record<string, string> = {
+  "Authentication": "Provider logs in securely to the AI Medical Scribe system",
+  "Patient Schedule": "AI displays today's appointments and patient information",
+  "Templates": "Select from customizable note templates for different visit types",
+  "Recording": "AI transcribes patient-provider conversation in real-time",
+  "Generate Documentation": "AI creates structured clinical notes ready for review"
+};
+
 export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInteractiveProps> = ({
   subStep,
   transcriptionActive,
@@ -82,8 +90,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Label that follows the cursor */}
           {activeLabel && (
             <PointerFollower align="bottom-right">
-              <div className="bg-blue-900 text-white px-2 py-1 rounded text-xs shadow-md">
-                {activeLabel}
+              <div className="bg-blue-900 text-white px-3 py-2 rounded shadow-md max-w-[200px]">
+                <div className="font-medium text-sm">{activeLabel}</div>
+                <div className="text-xs mt-1 text-blue-100">{labelDescriptions[activeLabel]}</div>
               </div>
             </PointerFollower>
           )}

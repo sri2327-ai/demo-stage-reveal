@@ -16,6 +16,14 @@ interface DemoSceneProps {
   stages: DemoStage[];
 }
 
+// Patient Engagement labels for hover effects
+const patientEngagementLabels: Record<number, string> = {
+  0: "AI answers patient calls and messages instantly",
+  1: "AI checks provider calendar for availability",
+  2: "AI automates patient intake, insurance, and medical history updates",
+  3: "AI sends real-time confirmations, reminders, and follow-ups to ensure appointment adherence"
+};
+
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
   const [subStep, setSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -95,6 +103,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
 
+  // Helper function to handle hovering over patient engagement steps
+  const handlePatientEngagementHover = (step: number | null) => {
+    if (step !== null && patientEngagementLabels[step]) {
+      setActiveLabel(patientEngagementLabels[step]);
+    } else {
+      setActiveLabel('');
+    }
+  };
+
   // Helper function to determine what to render based on stage
   const renderStageContent = () => {
     console.info('Current stage in DemoScene:', currentStage);
@@ -110,6 +127,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 isProcessingCall={false}
                 onElementClick={handleElementClick}
                 isInteractive={true}
+                onHover={handlePatientEngagementHover} // Add this new prop for handling hover
               />
               
               {/* Custom cursor for stage 0 */}
@@ -120,7 +138,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               {/* Add labels based on cursor position */}
               {activeLabel && (
                 <PointerFollower align="bottom-right">
-                  <div className="bg-blue-900 text-white px-2 py-1 rounded text-xs shadow-md">
+                  <div className="bg-blue-900 text-white px-3 py-2 rounded text-sm shadow-md max-w-[250px]">
                     {activeLabel}
                   </div>
                 </PointerFollower>

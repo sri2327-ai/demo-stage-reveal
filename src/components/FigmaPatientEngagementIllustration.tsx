@@ -8,6 +8,7 @@ interface FigmaPatientEngagementIllustrationProps {
   isProcessingCall: boolean;
   onElementClick?: (step: number) => void;
   isInteractive?: boolean;
+  onHover?: (step: number | null) => void;
 }
 
 export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagementIllustrationProps> = ({ 
@@ -15,7 +16,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
   cursorPosition,
   isProcessingCall,
   onElementClick,
-  isInteractive = false
+  isInteractive = false,
+  onHover
 }) => {
   return (
     <motion.div 
@@ -46,6 +48,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
               transition={{ duration: 0.5 }}
               onClick={() => isInteractive && onElementClick && onElementClick(0)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(0)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <MessageCircle size={20} />
             </motion.div>
@@ -56,6 +60,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
               transition={{ duration: 0.5 }}
               onClick={() => isInteractive && onElementClick && onElementClick(1)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(1)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <Calendar size={20} />
             </motion.div>
@@ -66,6 +72,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
               transition={{ duration: 0.5 }}
               onClick={() => isInteractive && onElementClick && onElementClick(2)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(2)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <FileText size={20} />
             </motion.div>
@@ -76,6 +84,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
               transition={{ duration: 0.5 }}
               onClick={() => isInteractive && onElementClick && onElementClick(3)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(3)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <BellRing size={20} />
             </motion.div>
@@ -87,9 +97,12 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
             {subStep === 0 && (
               <div className="h-full flex flex-col">
                 <div className="font-semibold text-blue-800 mb-2">Patient Messaging</div>
-                <div className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto space-y-3 
-                  ${isInteractive ? 'cursor-pointer' : ''}`}
+                <div 
+                  className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto space-y-3 
+                    ${isInteractive ? 'cursor-pointer' : ''}`}
                   onClick={() => isInteractive && onElementClick && onElementClick(0)}
+                  onMouseEnter={() => isInteractive && onHover && onHover(0)}
+                  onMouseLeave={() => isInteractive && onHover && onHover(null)}
                 >
                   <div className="flex justify-end">
                     <div className="bg-blue-100 text-blue-800 rounded-lg p-2 max-w-[70%] text-sm">
@@ -138,6 +151,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                       e.stopPropagation();
                       isInteractive && onElementClick && onElementClick(0);
                     }}
+                    onMouseEnter={() => isInteractive && onHover && onHover(0)}
+                    onMouseLeave={() => isInteractive && onHover && onHover(null)}
                   >
                     Send
                   </button>
@@ -152,6 +167,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 <div 
                   className={`grid grid-cols-7 gap-1 mb-4 ${isInteractive ? 'cursor-pointer' : ''}`}
                   onClick={() => isInteractive && onElementClick && onElementClick(1)}
+                  onMouseEnter={() => isInteractive && onHover && onHover(1)}
+                  onMouseLeave={() => isInteractive && onHover && onHover(null)}
                 >
                   {Array.from({ length: 7 }).map((_, i) => (
                     <div key={i} className="text-center text-xs font-medium text-blue-600 py-1">
@@ -188,6 +205,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 <div 
                   className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
                   onClick={() => isInteractive && onElementClick && onElementClick(1)}
+                  onMouseEnter={() => isInteractive && onHover && onHover(1)}
+                  onMouseLeave={() => isInteractive && onHover && onHover(null)}
                 >
                   <div className="font-medium text-blue-700 mb-2">Available Times on Thursday</div>
                   
@@ -240,6 +259,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 <div 
                   className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
                   onClick={() => isInteractive && onElementClick && onElementClick(2)}
+                  onMouseEnter={() => isInteractive && onHover && onHover(2)}
+                  onMouseLeave={() => isInteractive && onHover && onHover(null)}
                 >
                   <motion.div 
                     className="mb-4"
@@ -324,6 +345,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 <div 
                   className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
                   onClick={() => isInteractive && onElementClick && onElementClick(3)}
+                  onMouseEnter={() => isInteractive && onHover && onHover(3)}
+                  onMouseLeave={() => isInteractive && onHover && onHover(null)}
                 >
                   <motion.div 
                     className="mb-4 p-3 bg-blue-100 rounded-lg border border-blue-200"
@@ -381,9 +404,9 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
           </div>
         </div>
         
-        {/* Simulated cursor */}
+        {/* Simulated cursor - now hidden since we use the custom cursor system */}
         <motion.div
-          className="absolute w-5 h-5 z-30 pointer-events-none"
+          className="absolute w-5 h-5 z-30 pointer-events-none opacity-0"
           style={{
             left: cursorPosition.x,
             top: cursorPosition.y,

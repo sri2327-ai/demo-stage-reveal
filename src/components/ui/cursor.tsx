@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 type MousePositionContextType = {
   position: { x: number; y: number };
   setPosition: (pos: { x: number; y: number }) => void;
+  isActive: boolean;
 };
 
 const MousePositionContext = createContext<MousePositionContextType | null>(null);
@@ -16,6 +17,7 @@ interface MouseTrackerProviderProps {
 
 export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ children }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isActive, setIsActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   // Track mouse movement
@@ -27,18 +29,34 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         setPosition({ x, y });
+        setIsActive(true);
       }
+    };
+    
+    const handleMouseLeave = () => {
+      setIsActive(false);
+    };
+    
+    const handleMouseEnter = () => {
+      setIsActive(true);
     };
 
     const element = ref.current;
     if (element) {
       element.addEventListener('mousemove', handleMouseMove);
-      return () => element.removeEventListener('mousemove', handleMouseMove);
+      element.addEventListener('mouseleave', handleMouseLeave);
+      element.addEventListener('mouseenter', handleMouseEnter);
+      
+      return () => {
+        element.removeEventListener('mousemove', handleMouseMove);
+        element.removeEventListener('mouseleave', handleMouseLeave);
+        element.removeEventListener('mouseenter', handleMouseEnter);
+      };
     }
   }, []);
 
   return (
-    <MousePositionContext.Provider value={{ position, setPosition }}>
+    <MousePositionContext.Provider value={{ position, setPosition, isActive }}>
       <div ref={ref} style={{ cursor: 'none' }} className="relative w-full h-full overflow-hidden">
         {children}
       </div>
@@ -62,19 +80,22 @@ interface PointerProps {
 }
 
 export const Pointer: React.FC<PointerProps> = ({ children, className }) => {
-  const { position } = useMousePosition();
+  const { position, isActive } = useMousePosition();
 
   return (
     <AnimatePresence>
       <motion.div
         className={`pointer-events-none absolute z-50 ${className || ''}`}
+        initial={{ opacity: 0 }}
         animate={{ 
           x: position.x, 
           y: position.y,
+          opacity: isActive ? 1 : 0,
           transition: {
             type: "spring",
             damping: 25,
-            stiffness: 300
+            stiffness: 300,
+            opacity: { duration: 0.15 }
           }
         }}
       >
@@ -117,7 +138,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   delay = 0.1,
   align = 'center'
 }) => {
-  const { position } = useMousePosition();
+  const { position, isActive } = useMousePosition();
   
   // Calculate offset based on alignment
   const getOffset = () => {
@@ -139,8 +160,8 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
         className={`pointer-events-none absolute z-40 ${className || ''}`}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
-          opacity: 1,
-          scale: 1,
+          opacity: isActive ? 1 : 0,
+          scale: isActive ? 1 : 0.8,
           x: position.x + offset.x, 
           y: position.y + offset.y,
           transition: {
