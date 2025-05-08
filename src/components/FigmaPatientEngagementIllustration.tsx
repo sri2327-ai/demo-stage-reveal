@@ -9,6 +9,7 @@ interface FigmaPatientEngagementIllustrationProps {
   onElementClick?: (step: number) => void;
   isInteractive?: boolean;
   onHover?: (step: number | null) => void;
+  hideTitle?: boolean; // Added hideTitle prop
 }
 
 export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagementIllustrationProps> = ({ 
@@ -17,7 +18,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
   isProcessingCall,
   onElementClick,
   isInteractive = false,
-  onHover
+  onHover,
+  hideTitle = false // Default to false for backward compatibility
 }) => {
   return (
     <motion.div 
@@ -28,17 +30,19 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
     >
       <div className="relative aspect-video bg-white rounded-xl border border-blue-200 overflow-hidden shadow-lg">
         {/* App header */}
-        <div className="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
-          <div className="font-bold">S10.AI Patient Engagement</div>
-          <div className="flex space-x-3">
-            <div className="h-3 w-3 bg-white/50 rounded-full"></div>
-            <div className="h-3 w-3 bg-white/50 rounded-full"></div>
-            <div className="h-3 w-3 bg-white/50 rounded-full"></div>
+        {!hideTitle && (
+          <div className="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
+            <div className="font-bold">S10.AI Patient Engagement</div>
+            <div className="flex space-x-3">
+              <div className="h-3 w-3 bg-white/50 rounded-full"></div>
+              <div className="h-3 w-3 bg-white/50 rounded-full"></div>
+              <div className="h-3 w-3 bg-white/50 rounded-full"></div>
+            </div>
           </div>
-        </div>
+        )}
         
         {/* Main interface */}
-        <div className="flex h-[calc(100%-3rem)]">
+        <div className={`flex ${hideTitle ? 'h-full' : 'h-[calc(100%-3rem)]'}`}>
           {/* Left sidebar - Interactive elements */}
           <div className="w-1/6 bg-blue-50 border-r border-blue-100 flex flex-col items-center py-4 space-y-6">
             <motion.div 

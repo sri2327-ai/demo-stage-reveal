@@ -9,7 +9,7 @@ interface FigmaPostVisitSupportInteractiveProps {
   subStep: number;
   onElementClick?: (step: number) => void;
   isInteractive?: boolean;
-  hideTitle?: boolean; /* Added prop */
+  hideTitle?: boolean;
 }
 
 // Enhanced clinical descriptions with specific outcomes and benefits
@@ -82,11 +82,12 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative">
+            {/* Note: We can't add hideTitle to FigmaPostVisitSupportIllustration since it's read-only */}
+            {/* So we'll handle it differently in DemoScene.tsx */}
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               onElementClick={onElementClick}
               isInteractive={true}
-              hideTitle={hideTitle} /* Pass through hide title prop */
               onHover={(step) => {
                 if (step === 0) setActiveLabel("Treatment Adherence");
                 else if (step === 1) setActiveLabel("Care Plan Monitoring");
@@ -107,11 +108,11 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   onMouseLeave={handleAreaMouseLeave}
                   aria-label={`${area.name} area`}
                   whileHover={{ 
-                    scale: 1.08, /* Increased scale effect */
+                    scale: 1.08,
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   }}
                   animate={subStep === index ? {
-                    scale: 1.05, /* Increased scale effect */
+                    scale: 1.05,
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   } : {
                     scale: 1,
@@ -151,7 +152,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 animate={{ 
                   opacity: 1, 
                   y: 0, 
-                  scale: interactionActive ? 1.1 : 1.05, /* Increased scale effect */
+                  scale: interactionActive ? 1.1 : 1.05,
                 }}
                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
@@ -169,7 +170,6 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           <FigmaPostVisitSupportIllustration
             subStep={subStep}
             isInteractive={false}
-            hideTitle={hideTitle} /* Pass through hide title prop */
           />
           
           {/* Non-interactive label with consistent styling */}
