@@ -87,7 +87,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 15000); // 15 seconds for better interaction time
+    }, 20000); // 20 seconds for better interaction time - increased from 15s
   };
 
   // Auto-advance substeps unless paused
@@ -114,7 +114,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
-    }, 7000); // Longer interval for better reading (7 seconds)
+    }, 10000); // Longer interval for better reading (10 seconds) - increased from 7s
 
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);

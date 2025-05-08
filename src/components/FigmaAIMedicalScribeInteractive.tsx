@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -12,7 +11,7 @@ interface FigmaAIMedicalScribeInteractiveProps {
   isInteractive?: boolean;
 }
 
-// Updated labels with more detailed descriptions
+// Updated labels with detailed descriptions for each step
 const labelDescriptions: Record<string, string> = {
   "Authentication": "Log in to Crush securely with SSO or biometrics",
   "Patient Schedule": "Auto-syncs schedule from EHR with patient demographics and visit info",
@@ -38,14 +37,15 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     else if (subStep === 3) setActiveLabel("Recording");
     else if (subStep === 4) setActiveLabel("Generate Documentation");
     
-    // Clear label after 5 seconds if no user interaction
-    const timer = setTimeout(() => {
-      if (!isInteractive) {
+    // Keep label visible much longer - don't clear it automatically
+    // Only clear if not interactive mode
+    if (!isInteractive) {
+      const timer = setTimeout(() => {
         setActiveLabel(null);
-      }
-    }, 5000);
-    
-    return () => clearTimeout(timer);
+      }, 10000); // Show for 10 seconds (much longer)
+      
+      return () => clearTimeout(timer);
+    }
   }, [subStep, isInteractive]);
   
   const getActiveAreaClass = (stepIndex: number) => {

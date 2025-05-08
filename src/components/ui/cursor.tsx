@@ -151,7 +151,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   delay = 0.1,
   align = 'bottom-center',
   alwaysVisible = false,
-  offsetY = 20, // Increased default offset to prevent label from being cut off
+  offsetY = 20, // Default offset
   offsetX = 0,
   style = {}
 }) => {
@@ -164,7 +164,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
       case 'top-right': return { x: 20 + offsetX, y: -40 + offsetY };
       case 'bottom-left': return { x: -40 + offsetX, y: 40 + offsetY };
       case 'bottom-right': return { x: 20 + offsetX, y: 40 + offsetY };
-      case 'bottom-center': return { x: 0 + offsetX, y: 40 + offsetY }; // Increased Y offset
+      case 'bottom-center': return { x: 0 + offsetX, y: 40 + offsetY };
       case 'center':
       default: return { x: 0 + offsetX, y: 0 + offsetY };
     }
@@ -175,7 +175,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        className={`pointer-events-none fixed z-40 ${className || ''}`} // Changed to fixed for better positioning
+        className={`pointer-events-none fixed z-50 ${className || ''}`} 
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: alwaysVisible || isActive ? 1 : 0,
