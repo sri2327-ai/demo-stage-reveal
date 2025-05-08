@@ -24,6 +24,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   isInteractive = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
+  const [interactionActive, setInteractionActive] = useState(false);
   
   // Auto-show label for current subStep
   useEffect(() => {
@@ -50,6 +51,20 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   };
 
+  // Handle mouse enter for interactivity
+  const handleAreaMouseEnter = (name: string) => {
+    setActiveLabel(name);
+    setInteractionActive(true);
+  };
+
+  // Handle mouse leave for interactivity
+  const handleAreaMouseLeave = () => {
+    // Only clear if we're not on a forced state from subStep
+    const stepLabels = ["Prescriptions & Orders", "Patient Communications", "Insurance & Billing"];
+    setActiveLabel(stepLabels[subStep]);
+    setInteractionActive(false);
+  };
+
   // Simplified step areas - removed redundant elements
   const stepAreas = [
     { name: "Prescriptions & Orders", position: "top-[20%] left-[15%] w-[70%] h-[25%]" },
@@ -74,26 +89,33 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               }}
             />
           
-            {/* Cleaner interactive elements without outlines */}
-            <div className="absolute inset-0">
+            {/* Improved interactive elements without outlines */}
+            <div className="absolute inset-0 pointer-events-auto">
               {stepAreas.map((area, index) => (
                 <motion.div 
                   key={area.name}
                   className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer`}
                   onClick={() => onElementClick && onElementClick(index)}
-                  onMouseEnter={() => setActiveLabel(area.name)}
-                  onMouseLeave={() => setActiveLabel(null)}
+                  onMouseEnter={() => handleAreaMouseEnter(area.name)}
+                  onMouseLeave={handleAreaMouseLeave}
                   aria-label={`${area.name} area`}
                   whileHover={{ 
-                    scale: 1.03,
-                    backgroundColor: "rgba(56, 126, 137, 0.08)"
+                    scale: 1.05,
+                    backgroundColor: "rgba(56, 126, 137, 0.05)"
                   }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  animate={subStep === index ? {
+                    scale: 1.03,
+                    backgroundColor: "rgba(56, 126, 137, 0.05)"
+                  } : {
+                    scale: 1,
+                    backgroundColor: "rgba(56, 126, 137, 0)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 />
               ))}
             </div>
             
-            {/* Consistent cursor styling with SVG gradient */}
+            {/* Improved cursor styling with SVG gradient */}
             <Pointer>
               <div className="flex flex-col items-center">
                 <svg width="32" height="32" viewBox="0 0 32 32" className="filter drop-shadow-md">
@@ -118,9 +140,13 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               <motion.div 
                 key={getCurrentLabel().title}
                 className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: interactionActive ? 1.05 : 1 
+                }}
+                exit={{ opacity: 0, y: 10, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
               >
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">

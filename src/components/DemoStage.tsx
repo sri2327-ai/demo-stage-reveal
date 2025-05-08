@@ -71,7 +71,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       {/* Stage name header - consistent gradient */}
       <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 z-10">
         <div className="flex justify-between items-center">
-          <h3 className="font-semibold">{getCurrentStageName()}</h3>
+          <h3 className="font-semibold text-lg">{getCurrentStageName()}</h3>
           <button 
             onClick={togglePause}
             className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-1.5 transition-all"
@@ -90,10 +90,10 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <motion.div 
           key={currentStage}
           className="absolute inset-0 pt-12"
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <DemoScene
             currentStage={currentStage}
@@ -114,13 +114,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence>
         {showTooltip && (
           <motion.div 
-            className="absolute bottom-16 right-4 z-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
+            className="absolute bottom-16 right-4 z-30"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
             transition={{ delay: 1, duration: 0.5 }}
           >
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-2 rounded-lg shadow-lg max-w-xs flex items-start">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-xs flex items-start">
               <Info size={16} className="mt-0.5 mr-2 flex-shrink-0" />
               <div>
                 <p className="font-medium">Click to interact or select a workflow stage</p>

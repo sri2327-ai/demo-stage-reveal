@@ -47,6 +47,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [transcriptionActive, setTranscriptionActive] = useState(false);
   const [noteGeneration, setNoteGeneration] = useState(false);
   const [activeLabel, setActiveLabel] = useState('');
+  const [interactionActive, setInteractionActive] = useState(false);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset states when stage changes
@@ -54,6 +55,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     setSubStep(0);
     setTranscriptionActive(false);
     setNoteGeneration(false);
+    setInteractionActive(false);
     
     // Auto-show first label after stage change
     if (currentStage === 0) {
@@ -85,6 +87,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     // Pause auto-advance for longer duration
     setIsPaused(true);
     setSubStep(step);
+    setInteractionActive(true);
     
     // For AI Medical Scribe demo, handle special states
     if (currentStage === 1) {
@@ -120,6 +123,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
+      setInteractionActive(false);
     }, 20000); // 20 seconds for better interaction time
   };
 
@@ -160,6 +164,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const handlePatientEngagementHover = (step: number | null) => {
     if (step !== null && patientEngagementLabels[step]) {
       setActiveLabel(patientEngagementLabels[step]);
+      setInteractionActive(true);
       
       // Pause auto-advance during hover
       setIsPaused(true);
@@ -172,7 +177,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       // Auto-resume after inactivity
       resetTimerRef.current = setTimeout(() => {
         setIsPaused(false);
+        setInteractionActive(false);
       }, 15000); // 15 seconds pause during hover
+    } else {
+      setInteractionActive(false);
     }
   };
 
@@ -215,9 +223,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 <motion.div 
                   key={subStep}
                   className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: interactionActive ? 1.05 : 1 
+                  }}
+                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
                 >
                   <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
@@ -243,10 +255,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
             <motion.div 
               key="medical-scribe"
               className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
             >
               <FigmaAIMedicalScribeInteractive
                 subStep={subStep}
@@ -265,10 +277,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
             <motion.div 
               key="admin-tasks"
               className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
             >
               <FigmaAdminTasksInteractive
                 subStep={subStep}
@@ -285,10 +297,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
             <motion.div 
               key="post-visit"
               className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
             >
               <FigmaPostVisitSupportInteractive
                 subStep={subStep}
@@ -321,10 +333,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         <motion.div
           key={currentStage}
           className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           {renderStageContent()}
         </motion.div>
