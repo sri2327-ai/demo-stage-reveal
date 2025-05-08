@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -407,12 +406,12 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       ) : (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
           >
-            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-2 py-1 rounded-full text-xs text-[#143151] shadow-lg">
+            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-3 py-1.5 rounded-full text-xs text-[#143151] shadow-lg font-medium">
               Tap to explore
             </div>
           </motion.div>

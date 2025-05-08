@@ -179,7 +179,7 @@ const Index = () => {
                 animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Interactive demonstration showing key clinical workflows enhanced by S10.AI
+                Discover how S10.AI's CRUSH and BRAVO, powered by AI, streamline key clinical workflows in an interactive demo.
               </motion.p>
             </div>
             
@@ -208,7 +208,7 @@ const Index = () => {
                 size={isMobile ? "default" : "lg"}
                 className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
               >
-                Start 30-Day Free Trial
+                Try risk-free for 30 days
               </Button>
               <Button 
                 variant="outline" 
