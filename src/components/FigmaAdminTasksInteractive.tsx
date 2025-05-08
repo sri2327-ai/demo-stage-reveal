@@ -9,6 +9,7 @@ interface FigmaAdminTasksInteractiveProps {
   subStep: number;
   onElementClick?: (step: number) => void;
   isInteractive?: boolean;
+  hideTitle?: boolean; /* Added prop */
 }
 
 // Enhanced descriptions with clinical context and integration details
@@ -21,7 +22,8 @@ const labelDescriptions: Record<string, string> = {
 export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProps> = ({
   subStep,
   onElementClick,
-  isInteractive = false
+  isInteractive = false,
+  hideTitle = false /* Default to false for backward compatibility */
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [interactionActive, setInteractionActive] = useState(false);
@@ -81,6 +83,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               subStep={subStep}
               onElementClick={onElementClick}
               isInteractive={true}
+              hideTitle={hideTitle} /* Pass through hide title prop */
               onHover={(step) => {
                 if (step === 0) setActiveLabel("Prescriptions & Orders");
                 else if (step === 1) setActiveLabel("Patient Communications");
@@ -100,11 +103,11 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                   onMouseLeave={handleAreaMouseLeave}
                   aria-label={`${area.name} area`}
                   whileHover={{ 
-                    scale: 1.05,
+                    scale: 1.08, /* Increased scale effect */
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   }}
                   animate={subStep === index ? {
-                    scale: 1.03,
+                    scale: 1.05, /* Increased scale effect */
                     backgroundColor: "rgba(56, 126, 137, 0.05)"
                   } : {
                     scale: 1,
@@ -144,10 +147,10 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                 animate={{ 
                   opacity: 1, 
                   y: 0, 
-                  scale: interactionActive ? 1.05 : 1 
+                  scale: interactionActive ? 1.1 : 1.05 /* Increased scale effect */
                 }}
                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.5 }}
               >
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                   <div className="font-bold text-xl">{getCurrentLabel().title}</div>
@@ -162,6 +165,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           <FigmaAdminTasksIllustration
             subStep={subStep}
             isInteractive={false}
+            hideTitle={hideTitle} /* Pass through hide title prop */
           />
           
           {/* Non-interactive label with consistent styling */}

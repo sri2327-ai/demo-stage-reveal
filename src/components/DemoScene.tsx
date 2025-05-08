@@ -198,6 +198,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onElementClick={handleElementClick}
                 isInteractive={true}
                 onHover={handlePatientEngagementHover}
+                hideTitle={true} /* Added to hide duplicate title */
               />
               
               {/* Consistent cursor styling with SVG gradient */}
@@ -227,10 +228,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   animate={{ 
                     opacity: 1, 
                     y: 0, 
-                    scale: interactionActive ? 1.05 : 1 
+                    scale: interactionActive ? 1.1 : 1.05 /* Increased animation size */
                   }}
                   exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.5 }}
                 >
                   <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                     <div className="font-bold text-xl">
@@ -266,6 +267,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 noteGeneration={noteGeneration}
                 onElementClick={handleElementClick}
                 isInteractive={true}
+                hideTitle={true} /* Added to hide duplicate title */
               />
             </motion.div>
           </AnimatePresence>
@@ -286,6 +288,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
+                hideTitle={true} /* Added to hide duplicate title */
               />
             </motion.div>
           </AnimatePresence>
@@ -306,6 +309,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
+                hideTitle={true} /* Added to hide duplicate title */
               />
             </motion.div>
           </AnimatePresence>
@@ -333,10 +337,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         <motion.div
           key={currentStage}
           className="w-full h-full"
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.85 }} /* Bigger starting scale animation */
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0.85 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
           {renderStageContent()}
         </motion.div>

@@ -69,7 +69,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       {/* Stage name header - consistent gradient */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 z-10">
+      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 z-20">
         <div className="flex justify-between items-center">
           <h3 className="font-semibold text-lg">{getCurrentStageName()}</h3>
           <button 
@@ -90,10 +90,10 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <motion.div 
           key={currentStage}
           className="absolute inset-0 pt-12"
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.85 }} /* Increased scale effect for more dramatic animation */
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0.85 }}
+          transition={{ duration: 0.7, ease: "easeOut" }} /* Longer animation duration */
         >
           <DemoScene
             currentStage={currentStage}
