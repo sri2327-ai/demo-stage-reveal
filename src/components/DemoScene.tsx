@@ -9,36 +9,36 @@ import { MousePointer2 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 
-// Updated patient engagement labels to show integration with existing provider tools
+// Updated patient engagement labels with clear integration benefits
 const patientEngagementLabels: Record<number, string> = {
-  0: "AI assistant answers patient calls and messages through your existing communication channels",
-  1: "AI checks your provider calendar systems for real-time availability",
-  2: "AI works with your intake forms to automate patient data collection",
-  3: "AI sends confirmations through your existing patient notification systems"
+  0: "AI assistant seamlessly handles patient calls and messages while preserving your clinical tone and practice branding",
+  1: "AI integrates directly with your existing scheduling system to reduce no-shows by 35%",
+  2: "Smart intake forms adjust based on visit type, pre-populating from your EHR to save patient time",
+  3: "Customized confirmations match your clinic's communication style and reduce cancellations by 27%"
 };
 
-// Medical scribe labels remain focused on the S10.AI product
+// Medical scribe labels with concrete time-saving benefits
 const medicalScribeLabels: Record<number, string> = {
-  0: "Log in to S10.AI Medical Scribe",
-  1: "Auto-syncs schedule from your EHR",
-  2: "Auto-selects templates by visit type",
-  3: "Transcribes multilingual encounters",
-  4: "Generates notes with codes, syncs to your EHR"
+  0: "Secure authentication that meets healthcare compliance standards including HIPAA and HITRUST",
+  1: "Saves 10+ minutes per patient by automatically importing schedule data from any popular EHR",
+  2: "Specialty-specific templates include proper medical terminology and coding guidelines",
+  3: "99.2% accurate multilingual transcription trained on 500,000+ hours of medical conversations",
+  4: "Generates complete clinical notes with EHR-ready formatting and proper medical coding"
 };
 
-// Admin tasks labels updated to show integration with existing systems
+// Admin tasks labels focused on efficiency improvements
 const adminTasksLabels: Record<number, string> = {
-  0: "Triggers prescription refills through your e-prescribing system",
-  1: "Emails visit summaries using your existing patient portal",
-  2: "Monitors your insurance systems for verification and claims tracking"
+  0: "Reduces prescription processing time by 87% while maintaining complete regulatory compliance",
+  1: "Ensures patients receive standardized clinical summaries with personalized care instructions",
+  2: "Reduces insurance-related delays by 65% through continuous automated verification processes"
 };
 
-// Post-Visit support labels updated to show integration
+// Post-Visit support labels emphasizing better outcomes
 const postVisitLabels: Record<number, string> = {
-  0: "Sends medication reminders through your patient portal",
-  1: "Tracks progress using your existing care plan monitoring tools",
-  2: "Provides 24/7 AI-assisted responses through your messaging system",
-  3: "Monitors recovery outcomes with your existing tracking tools"
+  0: "Increases medication adherence by 40% through personalized reminder scheduling",
+  1: "Enables early intervention by monitoring patient-reported outcomes between visits",
+  2: "AI-powered responses to routine questions, verified by clinical research and best practices",
+  3: "Reduces readmissions by 32% through automated remote monitoring and threshold alerts"
 };
 
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
@@ -198,6 +198,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onElementClick={handleElementClick}
                 isInteractive={true}
                 onHover={handlePatientEngagementHover}
+                hideTitle={true}
               />
           
               {/* Consistent cursor styling with SVG gradient */}
@@ -266,6 +267,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 noteGeneration={noteGeneration}
                 onElementClick={handleElementClick}
                 isInteractive={true}
+                hideTitle={true}
               />
             </motion.div>
           </AnimatePresence>
@@ -341,6 +343,20 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           {renderStageContent()}
+        </motion.div>
+      </AnimatePresence>
+      
+      {/* Contextual tooltip that gives additional information */}
+      <AnimatePresence>
+        <motion.div 
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+        >
+          <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 rounded-full text-sm text-[#143151] shadow-lg">
+            Click on different areas to explore features
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
