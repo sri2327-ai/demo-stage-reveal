@@ -133,16 +133,16 @@ export const Pointer: React.FC<PointerProps> = ({ children, className }) => {
   );
 };
 
-// Pointer follower that follows the pointer with a delay
+// Pointer follower that follows the pointer with a delay - IMPROVED VERSION
 interface PointerFollowerProps {
   children: ReactNode;
   className?: string;
   delay?: number;
   align?: 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'bottom-center';
   alwaysVisible?: boolean;
-  offsetY?: number; // Add offsetY prop for fine-tuning vertical position
-  offsetX?: number; // Add offsetX prop for fine-tuning horizontal position
-  style?: React.CSSProperties; // Additional style props
+  offsetY?: number; 
+  offsetX?: number;
+  style?: React.CSSProperties;
 }
 
 export const PointerFollower: React.FC<PointerFollowerProps> = ({ 
@@ -151,7 +151,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   delay = 0.1,
   align = 'bottom-center',
   alwaysVisible = false,
-  offsetY = 0,
+  offsetY = 20, // Increased default offset to prevent label from being cut off
   offsetX = 0,
   style = {}
 }) => {
@@ -162,9 +162,9 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
     switch(align) {
       case 'top-left': return { x: -40 + offsetX, y: -40 + offsetY };
       case 'top-right': return { x: 20 + offsetX, y: -40 + offsetY };
-      case 'bottom-left': return { x: -40 + offsetX, y: 30 + offsetY };
-      case 'bottom-right': return { x: 20 + offsetX, y: 30 + offsetY };
-      case 'bottom-center': return { x: 0 + offsetX, y: 30 + offsetY };
+      case 'bottom-left': return { x: -40 + offsetX, y: 40 + offsetY };
+      case 'bottom-right': return { x: 20 + offsetX, y: 40 + offsetY };
+      case 'bottom-center': return { x: 0 + offsetX, y: 40 + offsetY }; // Increased Y offset
       case 'center':
       default: return { x: 0 + offsetX, y: 0 + offsetY };
     }
@@ -175,7 +175,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        className={`pointer-events-none absolute z-40 ${className || ''}`}
+        className={`pointer-events-none fixed z-40 ${className || ''}`} // Changed to fixed for better positioning
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: alwaysVisible || isActive ? 1 : 0,
@@ -190,7 +190,10 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
           }
         }}
         exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
-        style={style}
+        style={{
+          translateX: '-50%', // Center the tooltip
+          ...style
+        }}
       >
         {children}
       </motion.div>

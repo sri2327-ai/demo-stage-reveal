@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
@@ -79,14 +80,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(patientEngagementLabels[step]);
     }
     
-    // Auto-resume after longer inactivity (15 seconds instead of 10)
+    // Auto-resume after longer inactivity (15 seconds)
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 15000); // Increased to 15 seconds for better label visibility
+    }, 15000); // 15 seconds for better interaction time
   };
 
   // Auto-advance substeps unless paused
@@ -155,7 +156,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 isProcessingCall={false}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                onHover={handlePatientEngagementHover} // Add this new prop for handling hover
+                onHover={handlePatientEngagementHover}
               />
               
               {/* Custom cursor for stage 0 */}
@@ -167,12 +168,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               <PointerFollower 
                 align="bottom-center" 
                 alwaysVisible={true}
-                offsetY={10}
+                offsetY={30}
                 style={{ 
+                  zIndex: 100,
                   transform: 'translateX(-50%)' // Center horizontally
                 }}
               >
-                <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg border border-blue-700 max-w-[280px]">
+                <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg border border-blue-700 max-w-[300px]">
                   <div className="font-medium">{activeLabel || patientEngagementLabels[subStep]}</div>
                 </div>
               </PointerFollower>

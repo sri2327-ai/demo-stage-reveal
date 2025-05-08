@@ -12,12 +12,13 @@ interface FigmaAIMedicalScribeInteractiveProps {
   isInteractive?: boolean;
 }
 
+// Updated labels with more detailed descriptions
 const labelDescriptions: Record<string, string> = {
-  "Authentication": "Provider logs in securely to the AI Medical Scribe system",
-  "Patient Schedule": "AI displays today's appointments and patient information",
-  "Templates": "Select from customizable note templates for different visit types",
-  "Recording": "AI transcribes patient-provider conversation in real-time",
-  "Generate Documentation": "AI creates structured clinical notes ready for review"
+  "Authentication": "Log in to Crush securely with SSO or biometrics",
+  "Patient Schedule": "Auto-syncs schedule from EHR with patient demographics and visit info",
+  "Templates": "Auto-selects templates by visit type for consistent documentation",
+  "Recording": "Transcribes multilingual encounters in real-time with 99% accuracy",
+  "Generate Documentation": "Generates contextual notes with ICD-10/CPT/E/M codes, referencing prior visits and syncs to preferred EHR"
 };
 
 export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInteractiveProps> = ({
@@ -37,7 +38,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     else if (subStep === 3) setActiveLabel("Recording");
     else if (subStep === 4) setActiveLabel("Generate Documentation");
     
-    // Clear label after 3 seconds if no user interaction
+    // Clear label after 5 seconds if no user interaction
     const timer = setTimeout(() => {
       if (!isInteractive) {
         setActiveLabel(null);
@@ -71,77 +72,93 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   
   return (
     <div className="relative w-full max-w-3xl mx-auto">
-      <FigmaAIMedicalScribeIllustration
-        subStep={subStep}
-        transcriptionActive={transcriptionActive}
-        noteGeneration={noteGeneration}
-      />
-      
-      {isInteractive && (
+      {isInteractive ? (
         <MouseTrackerProvider>
-          {/* Interactive overlay areas */}
-          <div className="absolute inset-0 z-10">
-            {/* Login area - step 0 */}
-            <div 
-              className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%]`}
-              onClick={() => onElementClick && onElementClick(0)}
-              onMouseEnter={() => setActiveLabel("Authentication")}
-              onMouseLeave={() => setActiveLabel(null)}
+          <div className="relative">
+            <FigmaAIMedicalScribeIllustration
+              subStep={subStep}
+              transcriptionActive={transcriptionActive}
+              noteGeneration={noteGeneration}
             />
+          
+            {/* Interactive overlay areas */}
+            <div className="absolute inset-0 z-10">
+              {/* Login area - step 0 */}
+              <div 
+                className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%]`}
+                onClick={() => onElementClick && onElementClick(0)}
+                onMouseEnter={() => setActiveLabel("Authentication")}
+                onMouseLeave={() => setActiveLabel(null)}
+              />
+              
+              {/* Schedule area - step 1 */}
+              <div 
+                className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%]`}
+                onClick={() => onElementClick && onElementClick(1)}
+                onMouseEnter={() => setActiveLabel("Patient Schedule")}
+                onMouseLeave={() => setActiveLabel(null)}
+              />
+              
+              {/* Templates area - step 2 */}
+              <div 
+                className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%]`}
+                onClick={() => onElementClick && onElementClick(2)}
+                onMouseEnter={() => setActiveLabel("Templates")}
+                onMouseLeave={() => setActiveLabel(null)}
+              />
+              
+              {/* Recording area - step 3 */}
+              <div 
+                className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%]`}
+                onClick={() => onElementClick && onElementClick(3)}
+                onMouseEnter={() => setActiveLabel("Recording")}
+                onMouseLeave={() => setActiveLabel(null)}
+              />
+              
+              {/* Documentation area - step 4 */}
+              <div 
+                className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%]`}
+                onClick={() => onElementClick && onElementClick(4)}
+                onMouseEnter={() => setActiveLabel("Generate Documentation")}
+                onMouseLeave={() => setActiveLabel(null)}
+              />
+            </div>
             
-            {/* Schedule area - step 1 */}
-            <div 
-              className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%]`}
-              onClick={() => onElementClick && onElementClick(1)}
-              onMouseEnter={() => setActiveLabel("Patient Schedule")}
-              onMouseLeave={() => setActiveLabel(null)}
-            />
+            {/* Custom cursor */}
+            <Pointer>
+              <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
+            </Pointer>
             
-            {/* Templates area - step 2 */}
-            <div 
-              className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%]`}
-              onClick={() => onElementClick && onElementClick(2)}
-              onMouseEnter={() => setActiveLabel("Templates")}
-              onMouseLeave={() => setActiveLabel(null)}
-            />
-            
-            {/* Recording area - step 3 */}
-            <div 
-              className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%]`}
-              onClick={() => onElementClick && onElementClick(3)}
-              onMouseEnter={() => setActiveLabel("Recording")}
-              onMouseLeave={() => setActiveLabel(null)}
-            />
-            
-            {/* Documentation area - step 4 */}
-            <div 
-              className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%]`}
-              onClick={() => onElementClick && onElementClick(4)}
-              onMouseEnter={() => setActiveLabel("Generate Documentation")}
-              onMouseLeave={() => setActiveLabel(null)}
-            />
+            {/* Label that follows the cursor - improved visibility & positioning */}
+            <PointerFollower 
+              align="bottom-center" 
+              alwaysVisible={true} 
+              offsetY={30}
+              style={{ zIndex: 100 }}
+            >
+              <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-blue-700">
+                <div className="font-medium text-sm">{getCurrentLabel().title}</div>
+                <div className="text-xs mt-1 text-blue-100">{getCurrentLabel().description}</div>
+              </div>
+            </PointerFollower>
           </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="relative">
+          <FigmaAIMedicalScribeIllustration
+            subStep={subStep}
+            transcriptionActive={transcriptionActive}
+            noteGeneration={noteGeneration}
+          />
           
-          {/* Custom cursor */}
-          <Pointer>
-            <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
-          </Pointer>
-          
-          {/* Label that follows the cursor - improved visibility */}
-          <PointerFollower 
-            align="bottom-center" 
-            alwaysVisible={true} 
-            offsetY={10}
-            style={{ 
-              transform: 'translateX(-50%)' // Center horizontally
-            }}
-          >
-            <div className="bg-blue-900 text-white px-3 py-2 rounded-lg shadow-lg max-w-[250px] border border-blue-700">
+          {/* Fixed label display for non-interactive mode */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-blue-700">
               <div className="font-medium text-sm">{getCurrentLabel().title}</div>
               <div className="text-xs mt-1 text-blue-100">{getCurrentLabel().description}</div>
             </div>
-          </PointerFollower>
-        </MouseTrackerProvider>
+          </div>
+        </div>
       )}
     </div>
   );
