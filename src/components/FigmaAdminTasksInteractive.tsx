@@ -1,0 +1,145 @@
+
+import React, { useState, useEffect } from 'react';
+import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
+import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
+import { MousePointer2 } from 'lucide-react';
+
+interface FigmaAdminTasksInteractiveProps {
+  subStep: number;
+  onElementClick?: (step: number) => void;
+  isInteractive?: boolean;
+}
+
+// Detailed descriptions for each step
+const labelDescriptions: Record<string, string> = {
+  "Prescriptions & Orders": "Triggers prescription refills, referral letters, and lab orders with one click",
+  "Patient Communications": "Emails visit summaries to patients via secure email or the patient portal",
+  "Insurance & Billing": "Monitors insurance verification, claims processing, and payment tracking"
+};
+
+export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProps> = ({
+  subStep,
+  onElementClick,
+  isInteractive = false
+}) => {
+  const [activeLabel, setActiveLabel] = useState<string | null>(null);
+  
+  // Auto-show label for current subStep
+  useEffect(() => {
+    if (subStep === 0) setActiveLabel("Prescriptions & Orders");
+    else if (subStep === 1) setActiveLabel("Patient Communications");
+    else if (subStep === 2) setActiveLabel("Insurance & Billing");
+  }, [subStep]);
+  
+  const getActiveAreaClass = (stepIndex: number) => {
+    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'bg-[#143151]/20' : 'hover:bg-[#387E89]/20'}`;
+  };
+
+  // Get the current label for either hover state or active step
+  const getCurrentLabel = () => {
+    if (activeLabel) {
+      return {
+        title: activeLabel,
+        description: labelDescriptions[activeLabel]
+      };
+    }
+    
+    // Fallback to current substep
+    const stepLabels = ["Prescriptions & Orders", "Patient Communications", "Insurance & Billing"];
+    const currentStepLabel = stepLabels[subStep];
+    return {
+      title: currentStepLabel,
+      description: labelDescriptions[currentStepLabel]
+    };
+  };
+  
+  return (
+    <div className="relative w-full max-w-3xl mx-auto">
+      {isInteractive ? (
+        <MouseTrackerProvider>
+          <div className="relative">
+            <FigmaAdminTasksIllustration
+              subStep={subStep}
+              onElementClick={onElementClick}
+              isInteractive={true}
+              onHover={(step) => {
+                if (step === 0) setActiveLabel("Prescriptions & Orders");
+                else if (step === 1) setActiveLabel("Patient Communications");
+                else if (step === 2) setActiveLabel("Insurance & Billing");
+                else setActiveLabel(null);
+              }}
+            />
+          
+            {/* Interactive overlay areas */}
+            <div className="absolute inset-0">
+              {/* Prescriptions & Orders area - step 0 */}
+              <div 
+                className={`${getActiveAreaClass(0)} top-[20%] left-[15%] w-[70%] h-[25%] z-20`}
+                onClick={() => onElementClick && onElementClick(0)}
+                onMouseEnter={() => setActiveLabel("Prescriptions & Orders")}
+                onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Prescriptions & Orders area"
+              />
+              
+              {/* Patient Communications area - step 1 */}
+              <div 
+                className={`${getActiveAreaClass(1)} top-[50%] left-[15%] w-[70%] h-[20%] z-20`}
+                onClick={() => onElementClick && onElementClick(1)}
+                onMouseEnter={() => setActiveLabel("Patient Communications")}
+                onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Patient Communications area"
+              />
+              
+              {/* Insurance & Billing area - step 2 */}
+              <div 
+                className={`${getActiveAreaClass(2)} bottom-[10%] left-[15%] w-[70%] h-[25%] z-20`}
+                onClick={() => onElementClick && onElementClick(2)}
+                onMouseEnter={() => setActiveLabel("Insurance & Billing")}
+                onMouseLeave={() => setActiveLabel(null)}
+                aria-label="Insurance & Billing area"
+              />
+            </div>
+            
+            {/* Custom cursor with gradient */}
+            <Pointer>
+              <div className="flex flex-col items-center">
+                <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
+                  fill: "url(#cursor-gradient)"
+                }} />
+                <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+              </div>
+            </Pointer>
+            
+            {/* Label that follows the cursor */}
+            <PointerFollower 
+              align="bottom-center" 
+              alwaysVisible={true} 
+              offsetY={40}
+              style={{ zIndex: 100 }}
+            >
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-white/20">
+                <div className="font-medium">{getCurrentLabel().title}</div>
+                <div className="text-xs mt-1 text-white/90">{getCurrentLabel().description}</div>
+              </div>
+            </PointerFollower>
+          </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="relative">
+          <FigmaAdminTasksIllustration
+            subStep={subStep}
+            isInteractive={false}
+          />
+          
+          {/* Fixed label display for non-interactive mode */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
+              <div className="font-bold text-xl">{getCurrentLabel().title}</div>
+              <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

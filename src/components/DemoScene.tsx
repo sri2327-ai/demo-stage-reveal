@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
+import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { 
   MousePointer2,
   Shield,
@@ -11,7 +12,12 @@ import {
   CheckCircle,
   Clock,
   MessageCircle,
-  User
+  User,
+  FileText,
+  Mail,
+  DollarSign,
+  Receipt,
+  Calendar
 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage } from '../types/demo';
@@ -38,6 +44,13 @@ const medicalScribeLabels: Record<number, string> = {
   4: "Generates notes with codes, syncs to EHR"
 };
 
+// Admin tasks labels with clear descriptions
+const adminTasksLabels: Record<number, string> = {
+  0: "Triggers prescription refills, referral letters, and lab orders",
+  1: "Emails visit summaries to patients via secure email or the patient portal",
+  2: "Monitors insurance verification, claims processing, and payment tracking"
+};
+
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
   const [subStep, setSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -58,6 +71,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(patientEngagementLabels[0]);
     } else if (currentStage === 1) {
       setActiveLabel(medicalScribeLabels[0]);
+    } else if (currentStage === 2) {
+      setActiveLabel(adminTasksLabels[0]);
     }
   }, [currentStage]);
   
@@ -67,6 +82,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(patientEngagementLabels[subStep]);
     } else if (currentStage === 1) {
       setActiveLabel(medicalScribeLabels[subStep]);
+    } else if (currentStage === 2) {
+      setActiveLabel(adminTasksLabels[subStep]);
     }
   }, [subStep, currentStage]);
 
@@ -98,6 +115,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(patientEngagementLabels[step]);
     } else if (currentStage === 1) {
       setActiveLabel(medicalScribeLabels[step]);
+    } else if (currentStage === 2) {
+      setActiveLabel(adminTasksLabels[step]);
     }
     
     // Auto-resume after longer inactivity (20 seconds)
@@ -131,6 +150,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           
           return nextStep;
         });
+      } else if (currentStage === 2) { // For Admin Tasks
+        setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
@@ -212,42 +233,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           </div>
         );
         
-      case 2: // Admin Tasks
+      case 2: // Admin Tasks - Using our new interactive illustration
         return (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="max-w-2xl bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-4 text-[#143151]">Administrative Task Automation</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
-                  <Shield className="text-[#387E89] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Insurance Verification</h4>
-                    <p className="text-sm text-gray-600">Automated eligibility checks</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
-                  <ClipboardCheck className="text-[#143151] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Prior Authorization</h4>
-                    <p className="text-sm text-gray-600">Seamless approval process</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
-                  <Database className="text-[#387E89] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Claims Processing</h4>
-                    <p className="text-sm text-gray-600">Error detection & submission</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
-                  <ArrowRight className="text-[#143151] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Billing Optimization</h4>
-                    <p className="text-sm text-gray-600">Revenue cycle enhancement</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <FigmaAdminTasksInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+            />
           </div>
         );
         
@@ -297,6 +290,16 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      {/* SVG gradient definition for cursor */}
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#143151" />
+            <stop offset="100%" stopColor="#387E89" />
+          </linearGradient>
+        </defs>
+      </svg>
+      
       {renderStageContent()}
     </div>
   );
