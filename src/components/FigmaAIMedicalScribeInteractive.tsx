@@ -11,6 +11,7 @@ interface FigmaAIMedicalScribeInteractiveProps {
   noteGeneration: boolean;
   onElementClick?: (step: number) => void;
   isInteractive?: boolean;
+  hideTitle?: boolean;
 }
 
 // Enhanced clinical descriptions for each step
@@ -27,7 +28,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   transcriptionActive,
   noteGeneration,
   onElementClick,
-  isInteractive = false
+  isInteractive = false,
+  hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [interactionActive, setInteractionActive] = useState(false);
@@ -90,6 +92,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               subStep={subStep}
               transcriptionActive={transcriptionActive}
               noteGeneration={noteGeneration}
+              hideTitle={hideTitle}
             />
           
             {/* Interactive elements with cleaner, bigger animations */}
@@ -166,6 +169,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             subStep={subStep}
             transcriptionActive={transcriptionActive}
             noteGeneration={noteGeneration}
+            hideTitle={hideTitle}
           />
           
           {/* Fixed label display for non-interactive mode with consistent styling */}
