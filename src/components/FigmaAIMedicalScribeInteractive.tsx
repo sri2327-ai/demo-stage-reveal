@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -121,7 +120,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <Pointer>
               <div className="flex flex-col items-center">
                 <MousePointer2 className="fill-[#143151] stroke-white" size={24} />
-                <span className="text-xs font-medium text-[#143151] mt-1">You</span>
+                <span className="text-xs font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
               </div>
             </Pointer>
             
@@ -133,12 +132,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               style={{ zIndex: 100 }}
             >
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-white/20">
-                <div className="flex items-center gap-3">
-                  <div className="bg-[#143151] rounded-full p-1.5">
-                    <span className="text-sm font-bold">AI</span>
-                  </div>
-                  <div className="font-medium">{getCurrentLabel().title}</div>
-                </div>
+                <div className="font-medium">{getCurrentLabel().title}</div>
                 <div className="text-xs mt-1 text-white/90">{getCurrentLabel().description}</div>
               </div>
             </PointerFollower>
@@ -155,12 +149,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Fixed prominent label display for non-interactive mode - improved styling */}
           <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
             <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
-              <div className="flex items-center gap-3">
-                <div className="bg-[#143151] rounded-full p-2">
-                  <span className="text-lg font-bold">AI</span>
-                </div>
-                <div className="font-bold text-xl">{getCurrentLabel().title}</div>
-              </div>
+              <div className="font-bold text-xl">{getCurrentLabel().title}</div>
               <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
             </div>
           </div>

@@ -119,12 +119,18 @@ export const Pointer: React.FC<PointerProps> = ({ children, className }) => {
             >
               <path 
                 d="M4.36 1.33331L18.6667 9.18665L11.7067 10.96L9.18667 18.6666L4.36 1.33331Z" 
-                fill="white" 
-                stroke="black" 
+                fill="url(#cursor-gradient)" 
+                stroke="white" 
                 strokeWidth="1.5" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
               />
+              <defs>
+                <linearGradient id="cursor-gradient" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%" stopColor="#143151" />
+                  <stop offset="100%" stopColor="#387E89" />
+                </linearGradient>
+              </defs>
             </svg>
           </div>
         )}
