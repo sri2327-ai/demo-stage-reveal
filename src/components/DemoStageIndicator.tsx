@@ -19,7 +19,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
   }
   
   return (
-    <div className={`${isMobile ? 'fixed bottom-20 left-0 right-0 flex justify-center' : 'fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col'} gap-4 z-50`}>
+    <div className={`${isMobile ? 'fixed bottom-16 left-0 right-0 flex justify-center' : 'fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col'} gap-4 z-40`}>
       <div className={`${isMobile ? 'flex gap-3 bg-gradient-to-r from-[#143151]/80 to-[#387E89]/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-[#387E89]/20' : 'bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-white/20 flex flex-col gap-4'}`}>
         {Array.from({ length: totalStages }).map((_, index) => (
           <motion.button

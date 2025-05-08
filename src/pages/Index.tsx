@@ -14,6 +14,7 @@ const Index = () => {
   const demoRef = useRef<HTMLDivElement>(null);
   const [hasScrolledToDemo, setHasScrolledToDemo] = useState(false);
   const [isInViewport, setIsInViewport] = useState(false);
+  const [currentSection, setCurrentSection] = useState('hero');
   const isMobile = useIsMobile();
 
   // Scroll to demo section
@@ -23,16 +24,26 @@ const Index = () => {
     }
   };
 
-  // Track if user has scrolled to the demo section
+  // Track if user has scrolled to the demo section and monitor current section
   useEffect(() => {
     const handleScroll = () => {
       if (demoRef.current) {
-        const rect = demoRef.current.getBoundingClientRect();
-        const isVisible = rect.top <= window.innerHeight * 0.5;
-        setIsInViewport(isVisible);
+        const demoRect = demoRef.current.getBoundingClientRect();
+        const isDemoVisible = demoRect.top <= window.innerHeight * 0.5;
+        setIsInViewport(isDemoVisible);
         
-        if (isVisible && !hasScrolledToDemo) {
+        if (isDemoVisible && !hasScrolledToDemo) {
           setHasScrolledToDemo(true);
+        }
+        
+        // Determine current section
+        if (demoRect.top <= window.innerHeight * 0.5 && 
+            demoRect.bottom >= window.innerHeight * 0.5) {
+          setCurrentSection('demo');
+        } else if (demoRect.top > window.innerHeight * 0.5) {
+          setCurrentSection('hero');
+        } else {
+          setCurrentSection('roi');
         }
       }
     };
@@ -162,7 +173,7 @@ const Index = () => {
       </MouseTrackerProvider>
 
       {/* Demo Section with Enhanced Clinical Context */}
-      <main ref={demoRef}>
+      <main ref={demoRef} id="demo-section">
         <div className="px-4 py-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -389,11 +390,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </motion.div>
       </AnimatePresence>
       
-      {/* Contextual tooltip that gives additional information - mobile-responsive design */}
+      {/* Improved positioning for "Tap to explore" tooltip to avoid overlap */}
       {!isMobile ? (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -406,7 +407,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       ) : (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-28 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}

@@ -93,7 +93,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const getCurrentStageDescription = () => {
     const stageDescriptions = [
       "Automate patient communications while preserving your clinical voice",
-      "Reduce documentation time by 70% with AI-powered medical scribe",
+      "Reduce documentation time by 75% with AI-powered medical scribe",
       "Streamline administrative workflows and prevent revenue delays",
       "Improve outcomes with automated follow-up and monitoring"
     ];
@@ -168,6 +168,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
+      {/* Moved DemoStageIndicator to a more responsive position */}
       <motion.div 
         className="absolute bottom-2 sm:bottom-6 md:bottom-8 left-0 right-0"
         initial={{ y: 50, opacity: 0 }}
@@ -182,11 +183,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </motion.div>
       
-      {/* Enhanced clinical context tooltip with improved animation */}
+      {/* Enhanced clinical context tooltip with improved positioning */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div 
-            className="absolute bottom-24 sm:bottom-28 md:bottom-32 right-2 sm:right-4 md:right-6 z-30"
+            className="absolute bottom-24 sm:bottom-32 md:bottom-40 right-2 sm:right-4 md:right-6 z-30"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
