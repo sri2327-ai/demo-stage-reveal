@@ -165,18 +165,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </div>
               </Pointer>
               
-              {/* Prominent label display similar to reference screenshot */}
+              {/* Improved label display */}
               <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border-2 border-[#143151]/20 max-w-[500px]">
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px]">
                   <div className="flex items-center gap-3">
                     <div className="bg-[#143151] rounded-full p-2">
                       <span className="text-lg font-bold">AI</span>
                     </div>
-                    <div className="font-bold text-xl">
-                      {activeLabel ? "AI Patient Engagement" : "Patient Engagement"}
+                    <div className="font-medium text-xl">
+                      {activeLabel || patientEngagementLabels[subStep]}
                     </div>
                   </div>
-                  <div className="mt-2 text-sm">{activeLabel || patientEngagementLabels[subStep]}</div>
                 </div>
               </div>
             </div>

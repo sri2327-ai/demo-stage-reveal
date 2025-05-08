@@ -132,8 +132,13 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               offsetY={30}
               style={{ zIndex: 100 }}
             >
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-[#143151]">
-                <div className="font-medium text-sm">{getCurrentLabel().title}</div>
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="bg-[#143151] rounded-full p-1.5">
+                    <span className="text-sm font-bold">AI</span>
+                  </div>
+                  <div className="font-medium">{getCurrentLabel().title}</div>
+                </div>
                 <div className="text-xs mt-1 text-white/90">{getCurrentLabel().description}</div>
               </div>
             </PointerFollower>
@@ -147,9 +152,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             noteGeneration={noteGeneration}
           />
           
-          {/* Fixed prominent label display for non-interactive mode - similar to reference */}
+          {/* Fixed prominent label display for non-interactive mode - improved styling */}
           <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border-2 border-[#143151]/20">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
               <div className="flex items-center gap-3">
                 <div className="bg-[#143151] rounded-full p-2">
                   <span className="text-lg font-bold">AI</span>
