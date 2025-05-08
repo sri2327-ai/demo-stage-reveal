@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
@@ -58,7 +58,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Stage name header */}
+      {/* Stage name header - consistent gradient */}
       <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 z-10">
         <div className="flex justify-between items-center">
           <h3 className="font-semibold">{getCurrentStageName()}</h3>
@@ -76,12 +76,21 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      <div className="absolute inset-0 pt-12">
-        <DemoScene
-          currentStage={currentStage}
-          stages={stages}
-        />
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={currentStage}
+          className="absolute inset-0 pt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <DemoScene
+            currentStage={currentStage}
+            stages={stages}
+          />
+        </motion.div>
+      </AnimatePresence>
       
       <div className="absolute bottom-6 left-0 right-0">
         <DemoStageIndicator 
@@ -92,16 +101,16 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Clinical context tooltip */}
-      <div className="absolute bottom-16 right-4 z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="bg-white text-[#143151] px-4 py-2 rounded-lg shadow-lg text-sm max-w-xs"
-        >
+      <motion.div 
+        className="absolute bottom-16 right-4 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <div className="bg-white text-[#143151] px-4 py-2 rounded-lg shadow-lg text-sm max-w-xs">
           <p className="font-medium">Click to interact or select a workflow stage</p>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 };

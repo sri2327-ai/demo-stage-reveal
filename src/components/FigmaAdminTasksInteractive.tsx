@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import { MousePointer2 } from 'lucide-react';
@@ -48,6 +49,12 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
       description: labelDescriptions[currentStepLabel]
     };
   };
+
+  const stepAreas = [
+    { name: "Prescriptions & Orders", position: "top-[20%] left-[15%] w-[70%] h-[25%]" },
+    { name: "Patient Communications", position: "top-[50%] left-[15%] w-[70%] h-[20%]" },
+    { name: "Insurance & Billing", position: "bottom-[10%] left-[15%] w-[70%] h-[25%]" }
+  ];
   
   return (
     <div className="relative w-full max-w-3xl mx-auto">
@@ -66,55 +73,33 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               }}
             />
           
-            {/* Interactive elements using the clean approach */}
+            {/* Interactive elements with consistent animation */}
             <div className="absolute inset-0">
-              {/* Prescriptions & Orders area - step 0 */}
-              <div 
-                className={`absolute top-[20%] left-[15%] w-[70%] h-[25%] z-20 flex items-center justify-center ${subStep === 0 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
-                onClick={() => onElementClick && onElementClick(0)}
-                onMouseEnter={() => setActiveLabel("Prescriptions & Orders")}
-                onMouseLeave={() => setActiveLabel(null)}
-                aria-label="Prescriptions & Orders area"
-              >
-                {subStep !== 0 && (
-                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
-                    Prescriptions & Orders
-                  </div>
-                )}
-              </div>
-              
-              {/* Patient Communications area - step 1 */}
-              <div 
-                className={`absolute top-[50%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
-                onClick={() => onElementClick && onElementClick(1)}
-                onMouseEnter={() => setActiveLabel("Patient Communications")}
-                onMouseLeave={() => setActiveLabel(null)}
-                aria-label="Patient Communications area"
-              >
-                {subStep !== 1 && (
-                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
-                    Patient Communications
-                  </div>
-                )}
-              </div>
-              
-              {/* Insurance & Billing area - step 2 */}
-              <div 
-                className={`absolute bottom-[10%] left-[15%] w-[70%] h-[25%] z-20 flex items-center justify-center ${subStep === 2 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
-                onClick={() => onElementClick && onElementClick(2)}
-                onMouseEnter={() => setActiveLabel("Insurance & Billing")}
-                onMouseLeave={() => setActiveLabel(null)}
-                aria-label="Insurance & Billing area"
-              >
-                {subStep !== 2 && (
-                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
-                    Insurance & Billing
-                  </div>
-                )}
-              </div>
+              {stepAreas.map((area, index) => (
+                <motion.div 
+                  key={area.name}
+                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer ${subStep === index ? 'ring-2 ring-[#387E89] rounded-lg' : ''}`}
+                  onClick={() => onElementClick && onElementClick(index)}
+                  onMouseEnter={() => setActiveLabel(area.name)}
+                  onMouseLeave={() => setActiveLabel(null)}
+                  aria-label={`${area.name} area`}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {subStep !== index && (
+                    <motion.div 
+                      className="p-2 rounded-lg text-[#143151] hover:bg-[#387E89]/10 transition-all"
+                      initial={{ opacity: 0.7 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      {area.name}
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
             </div>
             
-            {/* Custom cursor without border */}
+            {/* Custom cursor with consistent gradient */}
             <Pointer>
               <div className="flex flex-col items-center">
                 <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
@@ -126,13 +111,22 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </div>
             </Pointer>
             
-            {/* Improved clinical label styling */}
-            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm animate-scale-in">
-                <div className="font-bold text-xl">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
-              </div>
-            </div>
+            {/* Enhanced clinical label styling with smooth animation */}
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={getCurrentLabel().title}
+                className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
+                  <div className="font-bold text-xl">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </MouseTrackerProvider>
       ) : (
@@ -142,8 +136,8 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             isInteractive={false}
           />
           
-          {/* Fixed label display for non-interactive mode */}
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
+          {/* Fixed label display for non-interactive mode with consistent styling */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
             <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
               <div className="font-bold text-xl">{getCurrentLabel().title}</div>
               <div className="mt-2 text-sm">{getCurrentLabel().description}</div>

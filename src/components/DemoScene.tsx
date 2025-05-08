@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
@@ -194,7 +196,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onHover={handlePatientEngagementHover}
               />
               
-              {/* Custom cursor for stage 0 - updated styling */}
+              {/* Custom cursor for stage 0 - updated styling for gradient consistency */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
@@ -204,57 +206,93 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </div>
               </Pointer>
               
-              {/* Improved label display with animation */}
-              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] animate-scale-in">
-                  <div className="font-bold text-xl">
-                    {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
-                     currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :
-                     currentStage === 0 && subStep === 2 ? "Patient Intake" :
-                     "Appointment Confirmations"}
+              {/* Improved label display with consistent animation */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={subStep}
+                  className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px]">
+                    <div className="font-bold text-xl">
+                      {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
+                       currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :
+                       currentStage === 0 && subStep === 2 ? "Patient Intake" :
+                       "Appointment Confirmations"}
+                    </div>
+                    <div className="mt-2 text-sm">
+                      {activeLabel || patientEngagementLabels[subStep]}
+                    </div>
                   </div>
-                  <div className="mt-2 text-sm">
-                    {activeLabel || patientEngagementLabels[subStep]}
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </MouseTrackerProvider>
         );
         
       case 1: // AI Medical Scribe - Our flagship product
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaAIMedicalScribeInteractive
-              subStep={subStep}
-              transcriptionActive={transcriptionActive}
-              noteGeneration={noteGeneration}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-            />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key="medical-scribe"
+              className="w-full h-full flex items-center justify-center relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <FigmaAIMedicalScribeInteractive
+                subStep={subStep}
+                transcriptionActive={transcriptionActive}
+                noteGeneration={noteGeneration}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+              />
+            </motion.div>
+          </AnimatePresence>
         );
         
       case 2: // Admin Tasks
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaAdminTasksInteractive
-              subStep={subStep}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-            />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key="admin-tasks"
+              className="w-full h-full flex items-center justify-center relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <FigmaAdminTasksInteractive
+                subStep={subStep}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+              />
+            </motion.div>
+          </AnimatePresence>
         );
         
       case 3: // Post-Visit Support
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaPostVisitSupportInteractive
-              subStep={subStep}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-            />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key="post-visit"
+              className="w-full h-full flex items-center justify-center relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <FigmaPostVisitSupportInteractive
+                subStep={subStep}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+              />
+            </motion.div>
+          </AnimatePresence>
         );
 
       default:
@@ -264,7 +302,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-      {/* SVG gradient definition for cursor */}
+      {/* SVG gradient definition for cursor - consistent with clinical theme */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -274,7 +312,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {renderStageContent()}
+      {/* Add smooth transitions between stages */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentStage}
+          className="w-full h-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {renderStageContent()}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
