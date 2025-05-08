@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import { MousePointer2 } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface FigmaAIMedicalScribeInteractiveProps {
   subStep: number;
@@ -20,7 +21,8 @@ const labelDescriptions: Record<string, string> = {
   "Patient Schedule": "Automatically syncs with your EHR, displaying patient demographics, visit reason, and relevant clinical history",
   "Templates": "Specialty-specific templates pre-configured for your clinical workflow with customizable sections",
   "Recording": "Multi-speaker transcription with medical terminology accuracy exceeding 98%, capturing provider-patient conversations naturally",
-  "Generate Documentation": "Creates structured clinical notes with proper ICD-10/CPT/E&M codes based on medical decision making, with full EHR integration"
+  "Generate Documentation": "Creates structured clinical notes with proper ICD-10/CPT/E&M codes based on medical decision making, with full EHR integration",
+  "EHR Integration": "One-click synchronization with your preferred EHR system, automatically mapping fields and maintaining workflow continuity"
 };
 
 export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInteractiveProps> = ({
@@ -32,6 +34,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   // Auto-show label for current subStep
   useEffect(() => {
@@ -40,6 +43,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     else if (subStep === 2) setActiveLabel("Templates");
     else if (subStep === 3) setActiveLabel("Recording");
     else if (subStep === 4) setActiveLabel("Generate Documentation");
+    else if (subStep === 5) setActiveLabel("EHR Integration");
   }, [subStep]);
   
   // Get the current label for either hover state or active step
@@ -52,7 +56,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     }
     
     // Fallback to current substep
-    const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation"];
+    const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation", "EHR Integration"];
     const currentStepLabel = stepLabels[subStep];
     return {
       title: currentStepLabel,
@@ -63,8 +67,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   // Handle click on the illustration area - now the entire area is clickable
   const handleIllustrationClick = () => {
     if (onElementClick) {
-      // Cycle through steps on click
-      const nextStep = (subStep + 1) % 5;
+      // Cycle through steps on click - now include the new step
+      const nextStep = (subStep + 1) % 6;
       onElementClick(nextStep);
     }
   };
@@ -73,8 +77,11 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     <div className="relative w-full max-w-6xl mx-auto h-full">
       {isInteractive ? (
         <MouseTrackerProvider>
-          <div className="relative h-full flex items-center justify-center">
-            <div className="relative w-full h-full" onClick={handleIllustrationClick}>
+          <div className="relative h-full flex flex-col items-center justify-center">
+            <div 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
+              onClick={handleIllustrationClick}
+            >
               <FigmaAIMedicalScribeIllustration
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
@@ -112,30 +119,30 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               </Pointer>
             </div>
             
-            {/* Redesigned floating label that won't overlap */}
+            {/* Redesigned floating label with enhanced design - now positioned at bottom for mobile too */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-4 left-0 right-0 z-30 w-full"
+                className="w-full z-30 mt-4 px-4"
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
                 <motion.div 
-                  className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20"
+                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
-                  <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
+                  <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full">
+        <div className="relative w-full h-full flex flex-col items-center justify-center">
+          <div className="relative w-full flex-1">
             <FigmaAIMedicalScribeIllustration
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -144,17 +151,17 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             />
           </div>
           
-          {/* Only show title tooltip if not hidden */}
+          {/* Only show title tooltip if not hidden - positioned at the bottom for better mobile view */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-4 left-0 right-0 z-30 w-full"
+              className="w-full z-30 mt-4 px-4"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20">
-                <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
+              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20">
+                <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
               </div>
             </motion.div>
           )}

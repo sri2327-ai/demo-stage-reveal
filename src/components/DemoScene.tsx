@@ -24,7 +24,8 @@ const medicalScribeLabels: Record<number, string> = {
   1: "Saves 10+ minutes per patient by automatically importing schedule data from any popular EHR",
   2: "Specialty-specific templates include proper medical terminology and coding guidelines",
   3: "99.2% accurate multilingual transcription trained on 500,000+ hours of medical conversations",
-  4: "Generates complete clinical notes with EHR-ready formatting and proper medical coding"
+  4: "Generates complete clinical notes with EHR-ready formatting and proper medical coding",
+  5: "One-click synchronization with your preferred EHR system, preserving all custom field mappings"
 };
 
 // Admin tasks labels focused on efficiency improvements
@@ -96,11 +97,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       // Step 3 is recording/transcription
       if (step === 3) {
         setTranscriptionActive(true);
+        setNoteGeneration(false);
       }
       // Step 4 is note generation
       else if (step === 4) {
         setNoteGeneration(true);
-      } else {
+        setTranscriptionActive(false);
+      }
+      // Step 5 is EHR integration
+      else if (step === 5) {
+        setNoteGeneration(false);
+        setTranscriptionActive(false);
+      }
+      else {
         // Reset these states for other steps
         setTranscriptionActive(false);
         setNoteGeneration(false);
@@ -136,13 +145,18 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     const interval = setInterval(() => {
       if (currentStage === 1) { // For AI Medical Scribe
         setSubStep((prev) => {
-          const nextStep = prev >= 4 ? 0 : prev + 1;
+          const nextStep = prev >= 5 ? 0 : prev + 1; // Now using 6 steps with EHR integration
           
           // Update transcription and note generation states based on step
           if (nextStep === 3) {
             setTranscriptionActive(true);
+            setNoteGeneration(false);
           } else if (nextStep === 4) {
             setNoteGeneration(true);
+            setTranscriptionActive(false);
+          } else if (nextStep === 5) {
+            setNoteGeneration(false);
+            setTranscriptionActive(false);
           } else {
             setTranscriptionActive(false);
             setNoteGeneration(false);
@@ -192,16 +206,43 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 0: // Patient Engagement
         return (
           <MouseTrackerProvider>
-            <div className="w-full h-full flex items-center justify-center relative">
-              <FigmaPatientEngagementIllustration
-                subStep={subStep}
-                cursorPosition={{ x: 0, y: 0 }}
-                isProcessingCall={false}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                onHover={handlePatientEngagementHover}
-                hideTitle={true}
-              />
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <div className="w-full flex-1 flex items-center justify-center">
+                <FigmaPatientEngagementIllustration
+                  subStep={subStep}
+                  cursorPosition={{ x: 0, y: 0 }}
+                  isProcessingCall={false}
+                  onElementClick={handleElementClick}
+                  isInteractive={true}
+                  onHover={handlePatientEngagementHover}
+                  hideTitle={true}
+                />
+              </div>
+              
+              {/* Add descriptive label for patient engagement */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`patient-engagement-label-${subStep}`}
+                  className="w-full z-30 mt-4 px-4"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                  >
+                    <div className="font-bold text-xl md:text-2xl">
+                      {subStep === 0 ? "Patient Messaging" : 
+                       subStep === 1 ? "Appointment Scheduling" : 
+                       subStep === 2 ? "Smart Intake Forms" : 
+                       "Automated Reminders"}
+                    </div>
+                    <div className="mt-2 text-sm md:text-base text-white/90">{patientEngagementLabels[subStep]}</div>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
           
               {/* Consistent cursor styling with SVG gradient */}
               <Pointer>
@@ -310,7 +351,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStage}
-          className="w-full h-full flex items-center justify-center"
+          className="w-full h-full flex flex-col items-center justify-center"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
@@ -324,7 +365,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       {!isMobile ? (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-4 sm:bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -337,7 +378,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       ) : (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}

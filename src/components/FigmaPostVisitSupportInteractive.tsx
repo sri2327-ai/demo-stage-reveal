@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import { MousePointer2 } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface FigmaPostVisitSupportInteractiveProps {
   subStep: number;
@@ -27,6 +28,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   // Auto-show label for current subStep
   useEffect(() => {
@@ -64,12 +66,12 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   };
   
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-full flex items-center justify-center">
+    <div className="relative w-full max-w-6xl mx-auto h-full">
       {isInteractive ? (
         <MouseTrackerProvider>
-          <div className="relative h-full flex items-center justify-center w-full">
+          <div className="relative h-full flex flex-col items-center justify-center">
             <div 
-              className="relative w-full h-full flex items-center justify-center cursor-pointer" 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
               onClick={handleIllustrationClick}
             >
               <FigmaPostVisitSupportIllustration
@@ -107,11 +109,11 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               </Pointer>
             </div>
             
-            {/* Redesigned floating label with enhanced design */}
+            {/* Redesigned floating label with enhanced design - positioned at bottom for better mobile view */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-4 md:bottom-8 left-0 right-0 z-30 w-full pointer-events-none"
+                className="w-full z-30 mt-4 px-4"
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -121,16 +123,16 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
-                  <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-base text-white/90">{getCurrentLabel().description}</div>
+                  <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full flex items-center justify-center">
+        <div className="relative w-full h-full flex flex-col items-center justify-center">
+          <div className="relative w-full flex-1">
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}
@@ -140,14 +142,14 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           {/* Only show title tooltip if not hidden */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-4 md:bottom-8 left-0 right-0 z-30 w-full"
+              className="w-full z-30 mt-4 px-4"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20">
-                <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-base text-white/90">{getCurrentLabel().description}</div>
+                <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
               </div>
             </motion.div>
           )}
