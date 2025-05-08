@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
+import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
+import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { 
   MessageCircle, 
   Calendar, 
