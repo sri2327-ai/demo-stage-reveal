@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -10,11 +9,11 @@ interface FigmaAdminTasksInteractiveProps {
   isInteractive?: boolean;
 }
 
-// Detailed descriptions for each step
+// Updated descriptions to emphasize integration with existing provider systems
 const labelDescriptions: Record<string, string> = {
-  "Prescriptions & Orders": "Triggers prescription refills, referral letters, and lab orders with one click",
-  "Patient Communications": "Emails visit summaries to patients via secure email or the patient portal",
-  "Insurance & Billing": "Monitors insurance verification, claims processing, and payment tracking"
+  "Prescriptions & Orders": "AI agent triggers prescription refills, referral letters, and lab orders through your existing e-prescribing system",
+  "Patient Communications": "AI seamlessly emails visit summaries to patients via your secure patient portal or email system",
+  "Insurance & Billing": "AI monitors your insurance verification, claims processing, and payment tracking systems"
 };
 
 export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProps> = ({

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -10,12 +9,12 @@ interface FigmaPostVisitSupportInteractiveProps {
   isInteractive?: boolean;
 }
 
-// Detailed descriptions for each step
+// Updated descriptions to emphasize integration with existing provider tools
 const labelDescriptions: Record<string, string> = {
-  "Treatment Adherence": "Personalized medication reminders to ensure patients take their medications correctly",
-  "Care Plan Monitoring": "Ongoing tracking of patient progress against their prescribed care plan",
-  "Patient Questions": "24/7 AI-assisted responses to common patient questions with clinical oversight",
-  "Recovery Tracking": "Comprehensive monitoring and reporting of patient outcomes and recovery milestones"
+  "Treatment Adherence": "AI sends personalized medication reminders through your existing patient portal or SMS system",
+  "Care Plan Monitoring": "AI tracks ongoing patient progress using your existing care plan management tools",
+  "Patient Questions": "AI provides 24/7 responses to common patient questions via your established communication channels with clinical oversight",
+  "Recovery Tracking": "AI monitors patient recovery through your existing EHR data for comprehensive outcome reporting"
 };
 
 export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInteractiveProps> = ({

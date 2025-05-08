@@ -13,36 +13,36 @@ import {
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 
-// Updated patient engagement labels with shorter, clearer descriptions
+// Updated patient engagement labels to show integration with existing provider tools
 const patientEngagementLabels: Record<number, string> = {
-  0: "AI answers patient calls and messages instantly",
-  1: "AI checks provider calendar for availability",
-  2: "AI automates patient intake, insurance, and medical history updates",
-  3: "AI sends real-time confirmations, reminders, and follow-ups to ensure appointment adherence"
+  0: "AI assistant answers patient calls and messages through your existing communication channels",
+  1: "AI checks your provider calendar systems for real-time availability",
+  2: "AI works with your intake forms to automate patient data collection",
+  3: "AI sends confirmations through your existing patient notification systems"
 };
 
-// Updated medical scribe labels with concise, informative descriptions
+// Medical scribe labels remain focused on the S10.AI product
 const medicalScribeLabels: Record<number, string> = {
-  0: "Log in to Crush",
-  1: "Auto-syncs schedule from EHR",
+  0: "Log in to S10.AI Medical Scribe",
+  1: "Auto-syncs schedule from your EHR",
   2: "Auto-selects templates by visit type",
   3: "Transcribes multilingual encounters",
-  4: "Generates notes with codes, syncs to EHR"
+  4: "Generates notes with codes, syncs to your EHR"
 };
 
-// Admin tasks labels with clear descriptions
+// Admin tasks labels updated to show integration with existing systems
 const adminTasksLabels: Record<number, string> = {
-  0: "Triggers prescription refills, referral letters, and lab orders",
-  1: "Emails visit summaries to patients via secure email or the patient portal",
-  2: "Monitors insurance verification, claims processing, and payment tracking"
+  0: "Triggers prescription refills through your e-prescribing system",
+  1: "Emails visit summaries using your existing patient portal",
+  2: "Monitors your insurance systems for verification and claims tracking"
 };
 
-// Post-Visit support labels
+// Post-Visit support labels updated to show integration
 const postVisitLabels: Record<number, string> = {
-  0: "Personalized medication reminders for treatment adherence",
-  1: "Ongoing progress tracking through the care plan monitoring system",
-  2: "24/7 AI-assisted responses to patient questions with clinical oversight",
-  3: "Comprehensive monitoring and reporting of recovery outcomes"
+  0: "Sends medication reminders through your patient portal",
+  1: "Tracks progress using your existing care plan monitoring tools",
+  2: "Provides 24/7 AI-assisted responses through your messaging system",
+  3: "Monitors recovery outcomes with your existing tracking tools"
 };
 
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
@@ -222,7 +222,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           </MouseTrackerProvider>
         );
         
-      case 1: // AI Medical Scribe
+      case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center relative">
             <FigmaAIMedicalScribeInteractive
