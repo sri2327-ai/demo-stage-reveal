@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Calendar, FileText, BellRing } from 'lucide-react';
@@ -7,12 +6,16 @@ interface FigmaPatientEngagementIllustrationProps {
   subStep: number;
   cursorPosition: { x: number; y: number };
   isProcessingCall: boolean;
+  onElementClick?: (step: number) => void;
+  isInteractive?: boolean;
 }
 
 export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagementIllustrationProps> = ({ 
   subStep, 
   cursorPosition,
-  isProcessingCall
+  isProcessingCall,
+  onElementClick,
+  isInteractive = false
 }) => {
   return (
     <motion.div 
@@ -34,33 +37,45 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
         
         {/* Main interface */}
         <div className="flex h-[calc(100%-3rem)]">
-          {/* Left sidebar */}
+          {/* Left sidebar - Interactive elements */}
           <div className="w-1/6 bg-blue-50 border-r border-blue-100 flex flex-col items-center py-4 space-y-6">
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 0 ? 'bg-blue-500 text-white' : 'text-blue-700'}`}
+              className={`p-2 rounded-lg ${subStep === 0 ? 'bg-blue-500 text-white' : 'text-blue-700'} 
+                ${isInteractive ? 'cursor-pointer hover:bg-blue-200' : ''}`}
               animate={{ scale: subStep === 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && onElementClick && onElementClick(0)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <MessageCircle size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 1 ? 'bg-blue-500 text-white' : 'text-blue-700'}`}
+              className={`p-2 rounded-lg ${subStep === 1 ? 'bg-blue-500 text-white' : 'text-blue-700'}
+                ${isInteractive ? 'cursor-pointer hover:bg-blue-200' : ''}`}
               animate={{ scale: subStep === 1 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && onElementClick && onElementClick(1)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <Calendar size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 2 ? 'bg-blue-500 text-white' : 'text-blue-700'}`}
+              className={`p-2 rounded-lg ${subStep === 2 ? 'bg-blue-500 text-white' : 'text-blue-700'}
+                ${isInteractive ? 'cursor-pointer hover:bg-blue-200' : ''}`}
               animate={{ scale: subStep === 2 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && onElementClick && onElementClick(2)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <FileText size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 3 ? 'bg-blue-500 text-white' : 'text-blue-700'}`}
+              className={`p-2 rounded-lg ${subStep === 3 ? 'bg-blue-500 text-white' : 'text-blue-700'}
+                ${isInteractive ? 'cursor-pointer hover:bg-blue-200' : ''}`}
               animate={{ scale: subStep === 3 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && onElementClick && onElementClick(3)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <BellRing size={20} />
             </motion.div>
@@ -72,7 +87,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
             {subStep === 0 && (
               <div className="h-full flex flex-col">
                 <div className="font-semibold text-blue-800 mb-2">Patient Messaging</div>
-                <div className="flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto space-y-3">
+                <div className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto space-y-3 
+                  ${isInteractive ? 'cursor-pointer' : ''}`}
+                  onClick={() => isInteractive && onElementClick && onElementClick(0)}
+                >
                   <div className="flex justify-end">
                     <div className="bg-blue-100 text-blue-800 rounded-lg p-2 max-w-[70%] text-sm">
                       I've been experiencing migraines and would like to schedule an appointment.
@@ -114,7 +132,15 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 </div>
                 <div className="mt-2 flex">
                   <input type="text" className="flex-1 border border-blue-200 rounded-lg px-3 py-2 text-sm" placeholder="Type your message..." />
-                  <button className="ml-2 bg-blue-500 text-white px-3 py-2 rounded-lg text-sm">Send</button>
+                  <button 
+                    className="ml-2 bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      isInteractive && onElementClick && onElementClick(0);
+                    }}
+                  >
+                    Send
+                  </button>
                 </div>
               </div>
             )}
@@ -123,7 +149,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
             {subStep === 1 && (
               <div className="h-full flex flex-col">
                 <div className="font-semibold text-blue-800 mb-2">Appointment Scheduling</div>
-                <div className="grid grid-cols-7 gap-1 mb-4">
+                <div 
+                  className={`grid grid-cols-7 gap-1 mb-4 ${isInteractive ? 'cursor-pointer' : ''}`}
+                  onClick={() => isInteractive && onElementClick && onElementClick(1)}
+                >
                   {Array.from({ length: 7 }).map((_, i) => (
                     <div key={i} className="text-center text-xs font-medium text-blue-600 py-1">
                       {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]}
@@ -156,7 +185,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                   })}
                 </div>
                 
-                <div className="flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto">
+                <div 
+                  className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
+                  onClick={() => isInteractive && onElementClick && onElementClick(1)}
+                >
                   <div className="font-medium text-blue-700 mb-2">Available Times on Thursday</div>
                   
                   <motion.div 
@@ -168,7 +200,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                     {['9:00 AM', '10:30 AM', '1:00 PM', '2:00 PM', '3:30 PM', '4:45 PM'].map((time, i) => (
                       <motion.div
                         key={i}
-                        className={`p-2 border rounded-lg text-center text-sm cursor-pointer ${
+                        className={`p-2 border rounded-lg text-center text-sm ${isInteractive ? 'cursor-pointer' : ''} ${
                           i === 3 ? 'bg-blue-500 text-white border-blue-500' : 'border-blue-200 hover:bg-blue-50'
                         }`}
                         whileHover={{ scale: 1.03 }}
@@ -176,6 +208,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                           scale: i === 3 ? [1, 1.05, 1] : 1,
                         }}
                         transition={{ duration: 0.5 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          isInteractive && onElementClick && onElementClick(1);
+                        }}
                       >
                         {time}
                       </motion.div>
@@ -201,7 +237,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
             {subStep === 2 && (
               <div className="h-full flex flex-col">
                 <div className="font-semibold text-blue-800 mb-2">Patient Intake</div>
-                <div className="flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto">
+                <div 
+                  className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
+                  onClick={() => isInteractive && onElementClick && onElementClick(2)}
+                >
                   <motion.div 
                     className="mb-4"
                     initial={{ opacity: 0, y: 10 }}
@@ -282,7 +321,10 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
             {subStep === 3 && (
               <div className="h-full flex flex-col">
                 <div className="font-semibold text-blue-800 mb-2">Patient Reminders</div>
-                <div className="flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto">
+                <div 
+                  className={`flex-1 border border-blue-100 rounded-lg p-3 overflow-y-auto ${isInteractive ? 'cursor-pointer' : ''}`}
+                  onClick={() => isInteractive && onElementClick && onElementClick(3)}
+                >
                   <motion.div 
                     className="mb-4 p-3 bg-blue-100 rounded-lg border border-blue-200"
                     initial={{ opacity: 0, x: -10 }}
