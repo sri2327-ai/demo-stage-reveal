@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -41,7 +42,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   }, [subStep]);
   
   const getActiveAreaClass = (stepIndex: number) => {
-    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'bg-blue-100/40' : 'hover:bg-blue-100/30'}`;
+    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'bg-[#143151]/20' : 'hover:bg-[#387E89]/20'}`;
   };
 
   // Get the current label for either hover state or active step
@@ -118,7 +119,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             
             {/* Custom cursor */}
             <Pointer>
-              <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
+              <div className="flex flex-col items-center">
+                <MousePointer2 className="fill-[#143151] stroke-white" size={24} />
+                <span className="text-xs font-medium text-[#143151] mt-1">You</span>
+              </div>
             </Pointer>
             
             {/* Label that follows the cursor - improved visibility & positioning */}
@@ -128,9 +132,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               offsetY={30}
               style={{ zIndex: 100 }}
             >
-              <div className="bg-blue-600 text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-blue-700">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-[#143151]">
                 <div className="font-medium text-sm">{getCurrentLabel().title}</div>
-                <div className="text-xs mt-1 text-blue-100">{getCurrentLabel().description}</div>
+                <div className="text-xs mt-1 text-white/90">{getCurrentLabel().description}</div>
               </div>
             </PointerFollower>
           </div>
@@ -145,9 +149,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           
           {/* Fixed prominent label display for non-interactive mode - similar to reference */}
           <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-blue-600 text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border-2 border-blue-500">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border-2 border-[#143151]/20">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-500 rounded-full p-2">
+                <div className="bg-[#143151] rounded-full p-2">
                   <span className="text-lg font-bold">AI</span>
                 </div>
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>

@@ -159,14 +159,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               
               {/* Custom cursor for stage 0 */}
               <Pointer>
-                <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
+                <div className="flex flex-col items-center">
+                  <MousePointer2 className="fill-[#143151] stroke-white" size={24} />
+                  <span className="text-xs font-medium text-[#143151] mt-1">You</span>
+                </div>
               </Pointer>
               
               {/* Prominent label display similar to reference screenshot */}
               <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="bg-blue-600 text-white px-8 py-4 rounded-lg shadow-lg border-2 border-blue-500 max-w-[500px]">
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border-2 border-[#143151]/20 max-w-[500px]">
                   <div className="flex items-center gap-3">
-                    <div className="bg-blue-500 rounded-full p-2">
+                    <div className="bg-[#143151] rounded-full p-2">
                       <span className="text-lg font-bold">AI</span>
                     </div>
                     <div className="font-bold text-xl">
@@ -197,33 +200,33 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         return (
           <div className="w-full h-full flex items-center justify-center">
             <div className="max-w-2xl bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-4">Administrative Task Automation</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#143151]">Administrative Task Automation</h3>
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50">
-                  <Shield className="text-blue-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
+                  <Shield className="text-[#387E89] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Insurance Verification</h4>
+                    <h4 className="font-medium text-[#143151]">Insurance Verification</h4>
                     <p className="text-sm text-gray-600">Automated eligibility checks</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-green-50">
-                  <ClipboardCheck className="text-green-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
+                  <ClipboardCheck className="text-[#143151] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Prior Authorization</h4>
+                    <h4 className="font-medium text-[#143151]">Prior Authorization</h4>
                     <p className="text-sm text-gray-600">Seamless approval process</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50">
-                  <Database className="text-purple-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
+                  <Database className="text-[#387E89] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Claims Processing</h4>
+                    <h4 className="font-medium text-[#143151]">Claims Processing</h4>
                     <p className="text-sm text-gray-600">Error detection & submission</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-amber-50">
-                  <ArrowRight className="text-amber-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
+                  <ArrowRight className="text-[#143151] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Billing Optimization</h4>
+                    <h4 className="font-medium text-[#143151]">Billing Optimization</h4>
                     <p className="text-sm text-gray-600">Revenue cycle enhancement</p>
                   </div>
                 </div>
@@ -236,33 +239,33 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         return (
           <div className="w-full h-full flex items-center justify-center">
             <div className="max-w-2xl bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-4">Post-Visit Patient Support</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#143151]">Post-Visit Patient Support</h3>
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50">
-                  <CheckCircle className="text-blue-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
+                  <CheckCircle className="text-[#387E89] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Treatment Adherence</h4>
+                    <h4 className="font-medium text-[#143151]">Treatment Adherence</h4>
                     <p className="text-sm text-gray-600">Personalized medication reminders</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-green-50">
-                  <Clock className="text-green-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
+                  <Clock className="text-[#143151] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Care Plan Monitoring</h4>
+                    <h4 className="font-medium text-[#143151]">Care Plan Monitoring</h4>
                     <p className="text-sm text-gray-600">Ongoing progress tracking</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50">
-                  <MessageCircle className="text-purple-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
+                  <MessageCircle className="text-[#387E89] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Patient Questions</h4>
+                    <h4 className="font-medium text-[#143151]">Patient Questions</h4>
                     <p className="text-sm text-gray-600">24/7 AI-assisted responses</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-amber-50">
-                  <User className="text-amber-600 mt-1" size={20} />
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
+                  <User className="text-[#143151] mt-1" size={20} />
                   <div>
-                    <h4 className="font-medium">Recovery Tracking</h4>
+                    <h4 className="font-medium text-[#143151]">Recovery Tracking</h4>
                     <p className="text-sm text-gray-600">Outcome monitoring & reporting</p>
                   </div>
                 </div>

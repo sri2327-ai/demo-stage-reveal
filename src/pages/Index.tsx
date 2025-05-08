@@ -61,8 +61,8 @@ const Index = () => {
               transition={{ duration: 0.7 }}
             >
               <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 mb-6">
-                <Sparkles className="w-4 h-4 text-blue-600" />
-                <span className="text-blue-800 text-sm font-medium">AI-Powered Healthcare</span>
+                <Sparkles className="w-4 h-4 text-[#143151]" />
+                <span className="text-[#143151] text-sm font-medium">AI-Powered Healthcare</span>
               </Card>
             </motion.div>
             
@@ -73,7 +73,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Transform Care with <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] text-transparent bg-clip-text">
                 Smarter Healthcare AI
               </span>
             </motion.h1>
@@ -97,7 +97,7 @@ const Index = () => {
               <Button 
                 onClick={scrollToDemo}
                 size="lg" 
-                className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-lg hover:shadow-xl transition-all group"
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group"
               >
                 See It in Action
                 <ArrowDown className="ml-1 group-hover:translate-y-1 transition-transform" />
@@ -106,7 +106,7 @@ const Index = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                className="border-blue-200 text-blue-700 hover:bg-blue-50"
+                className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
               >
                 Book a Demo
               </Button>
@@ -119,28 +119,28 @@ const Index = () => {
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               <div className="flex items-center gap-3">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Brain className="w-6 h-6 text-blue-700" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
+                  <Brain className="w-6 h-6 text-white" />
                 </div>
-                <p className="font-medium text-blue-800">AI-Powered</p>
+                <p className="font-medium text-[#143151]">AI-Powered</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Zap className="w-6 h-6 text-blue-700" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
+                  <Zap className="w-6 h-6 text-white" />
                 </div>
-                <p className="font-medium text-blue-800">Time-Saving</p>
+                <p className="font-medium text-[#143151]">Time-Saving</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Brain className="w-6 h-6 text-blue-700" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
+                  <Brain className="w-6 h-6 text-white" />
                 </div>
-                <p className="font-medium text-blue-800">EHR Integrated</p>
+                <p className="font-medium text-[#143151]">Compatible with over 7,000 apps and your preferred EHR</p>
               </div>
             </motion.div>
           </div>
           
           <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-blue-600 cursor-pointer"
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#143151] cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 10, 0] }}
             transition={{ 
@@ -156,7 +156,29 @@ const Index = () => {
             </div>
           </motion.div>
           
-          <Pointer />
+          <Pointer>
+            <div className="flex flex-col items-center">
+              <div className="w-5 h-5">
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 20 20" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path 
+                    d="M4.36 1.33331L18.6667 9.18665L11.7067 10.96L9.18667 18.6666L4.36 1.33331Z" 
+                    fill="#143151" 
+                    stroke="white" 
+                    strokeWidth="1.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <span className="text-xs font-medium text-[#143151] mt-1">You</span>
+            </div>
+          </Pointer>
         </header>
       </MouseTrackerProvider>
 
@@ -171,18 +193,18 @@ const Index = () => {
           )}
           
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to get started?</h2>
+            <h2 className="text-2xl font-bold text-[#143151] mb-4">Ready to get started?</h2>
             <p className="text-gray-700 mb-6 max-w-lg mx-auto">
               Join thousands of healthcare teams already using S10.AI to improve their workflow and patient care.
             </p>
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+            <button className="px-6 py-3 bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-lg shadow-lg hover:opacity-90 transition-colors">
               Start Free Trial
             </button>
           </div>
         </div>
       </main>
       
-      <footer className="bg-blue-900 text-white py-10 px-4">
+      <footer className="bg-[#143151] text-white py-10 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <p>© 2025 S10.AI Clinical Automation. All rights reserved.</p>
         </div>
