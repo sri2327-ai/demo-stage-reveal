@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -113,7 +112,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
 
-  // Handle cursor movement for interactive areas
+  // Handle cursor movement and update labels for different interactive areas
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -121,6 +120,42 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     
     setCursorPosition({ x, y });
     setIsVisible(true);
+    
+    // Update labels based on current stage and cursor position
+    if (currentStage === 0) {
+      // Patient Engagement stage - set labels based on position
+      const width = rect.width;
+      const height = rect.height;
+      
+      // Left sidebar region (messaging, calendar, intake, reminders)
+      if (x < width * 0.1) {
+        if (y < height * 0.3) setCursorLabel('Messaging');
+        else if (y < height * 0.5) setCursorLabel('Scheduling');
+        else if (y < height * 0.7) setCursorLabel('Patient Forms');
+        else setCursorLabel('Reminders');
+      }
+      // Main content area
+      else if (subStep === 0) setCursorLabel('Patient Chat');
+      else if (subStep === 1) setCursorLabel('Appointment Calendar');
+      else if (subStep === 2) setCursorLabel('Patient Info');
+      else if (subStep === 3) setCursorLabel('Notifications');
+      else setCursorLabel('');
+    }
+    else if (currentStage === 1) {
+      // AI Medical Scribe stage
+      if (subStep === 0) setCursorLabel('Authentication');
+      else if (subStep === 1) setCursorLabel('Patient Schedule');
+      else if (subStep === 2) setCursorLabel('Templates');
+      else if (subStep === 3) setCursorLabel('Recording');
+      else if (subStep === 4) setCursorLabel('Documentation');
+      else setCursorLabel('');
+    }
+  };
+
+  // Handle mouse leave to hide cursor
+  const handleMouseLeave = () => {
+    setIsVisible(false);
+    setCursorLabel('');
   };
 
   // Helper function to determine what to render based on stage
@@ -133,6 +168,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           <div 
             className="w-full h-full flex items-center justify-center relative"
             onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             <FigmaPatientEngagementIllustration
               subStep={subStep}
@@ -152,6 +188,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   x: cursorPosition.x,
                   y: cursorPosition.y
                 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
               >
                 <div className="w-8 h-8 rounded-full border-2 border-blue-500 bg-blue-100/50 flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-blue-500"></div>
@@ -171,6 +208,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           <div 
             className="w-full h-full flex items-center justify-center relative"
             onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             <FigmaAIMedicalScribeInteractive
               subStep={subStep}
@@ -190,6 +228,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   x: cursorPosition.x,
                   y: cursorPosition.y
                 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
               >
                 <div className="w-8 h-8 rounded-full border-2 border-blue-500 bg-blue-100/50 flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-blue-500"></div>
