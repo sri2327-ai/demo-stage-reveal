@@ -96,13 +96,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[650px] md:h-[750px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
+      className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Stage name header with enhanced design */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-4 px-6 z-20 border-b border-white/10"
+        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-5 px-6 z-40 border-b border-white/10"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -110,7 +110,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <motion.h3 
-              className="font-bold text-2xl"
+              className="font-bold text-3xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               key={`title-${currentStage}`}
@@ -119,7 +119,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               {getCurrentStageName()}
             </motion.h3>
             <motion.p
-              className="text-sm text-white/80 mt-1 max-w-md"
+              className="text-base text-white/80 mt-1 max-w-md"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               key={`desc-${currentStage}`}
@@ -131,15 +131,15 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           <div className="flex items-center gap-2">
             <motion.button 
               onClick={togglePause}
-              className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2.5 transition-all shadow-lg border border-white/20 group"
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition-all shadow-lg border border-white/20 group"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isPaused ? "Play demo" : "Pause demo"}
             >
               {isPaused ? (
-                <Play size={20} className="text-white group-hover:text-white/90" />
+                <Play size={22} className="text-white group-hover:text-white/90" />
               ) : (
-                <Pause size={20} className="text-white group-hover:text-white/90" />
+                <Pause size={22} className="text-white group-hover:text-white/90" />
               )}
             </motion.button>
           </div>
@@ -148,7 +148,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       
       {/* Arrow navigation overlays */}
       <motion.div 
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 z-30"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 z-50"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
         whileHover={{ opacity: 1, scale: 1.1 }}
@@ -166,7 +166,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </motion.div>
       
       <motion.div 
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 z-30"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 z-50"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
         whileHover={{ opacity: 1, scale: 1.1 }}
@@ -186,7 +186,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-20" /* Increased padding for header */
+          className="absolute inset-0 pt-24" /* Increased padding for header */
           initial={{ opacity: 0, scale: 0.85 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}

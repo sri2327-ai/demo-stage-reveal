@@ -82,7 +82,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative h-full flex items-center justify-center">
-            <div className="relative scale-110 w-[95%] h-[95%]">
+            <div className="relative scale-125 w-[100%] h-[100%]">
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 onElementClick={onElementClick}
@@ -95,7 +95,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                 }}
               />
             
-              {/* Improved interactive elements with visual feedback */}
+              {/* Improved interactive elements without visible borders */}
               <div className="absolute inset-0 pointer-events-auto">
                 {stepAreas.map((area, index) => (
                   <motion.div 
@@ -107,29 +107,17 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                     aria-label={`${area.name} area`}
                     whileHover={{ 
                       scale: 1.08, 
-                      backgroundColor: "rgba(56, 126, 137, 0.15)",
-                      boxShadow: "0 0 20px rgba(20, 49, 81, 0.3)"
+                      backgroundColor: "rgba(56, 126, 137, 0.08)",
                     }}
                     animate={subStep === index || hoverStep === index ? {
                       scale: 1.05,
-                      backgroundColor: "rgba(56, 126, 137, 0.15)",
-                      boxShadow: "0 0 15px rgba(20, 49, 81, 0.25)"
+                      backgroundColor: "rgba(56, 126, 137, 0.05)",
                     } : {
                       scale: 1,
                       backgroundColor: "rgba(56, 126, 137, 0)"
                     }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    {/* Visual indicator for clickable areas */}
-                    <motion.div
-                      className="absolute inset-0 rounded-lg border-2 border-[#387E89]/20"
-                      animate={{ 
-                        opacity: subStep === index || hoverStep === index ? 1 : 0.3,
-                        borderWidth: subStep === index || hoverStep === index ? "3px" : "2px"
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    
                     {/* Icon indicator for interactive elements */}
                     {(subStep === index || hoverStep === index) && (
                       <motion.div
@@ -145,7 +133,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                 ))}
               </div>
               
-              {/* Enhanced cursor styling with animation */}
+              {/* Enhanced cursor styling */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <motion.div
@@ -183,8 +171,8 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ 
                   opacity: 1, 
                   y: 0, 
@@ -194,7 +182,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                 transition={{ duration: 0.5 }}
               >
                 <motion.div 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 mt-6 border border-white/10"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 border border-white/10"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
                   <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
@@ -206,7 +194,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative scale-110 w-[95%] h-[95%]">
+          <div className="relative scale-125 w-[100%] h-[100%]">
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}
@@ -216,12 +204,12 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           {/* Only show title tooltip if not hidden */}
           {!hideTitle && (
             <motion.div 
-              className="absolute top-6 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
-              initial={{ opacity: 0, y: -10 }}
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 mt-6 border border-white/10">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 border border-white/10">
                 <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
                 <div className="mt-2 text-base">{getCurrentLabel().description}</div>
               </div>
