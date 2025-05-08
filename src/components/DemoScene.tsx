@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
@@ -43,7 +43,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [isProcessingCall, setIsProcessingCall] = useState(false);
   const [transcriptionActive, setTranscriptionActive] = useState(false);
   const [noteGeneration, setNoteGeneration] = useState(false);
+  const [userCursorLabel, setUserCursorLabel] = useState<string | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const [manualInteraction, setManualInteraction] = useState(false);
 
   // Reset substep when stage changes
   useEffect(() => {
@@ -53,10 +55,47 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     setTargetedArea(null);
   }, [currentStage]);
 
+  // Set cursor position based on mouse movement when manually interacting
+  useEffect(() => {
+    if (containerRef.current && (currentStage === 0 || currentStage === 1)) {
+      const handleMouseMove = (e: MouseEvent) => {
+        if (manualInteraction) {
+          const rect = containerRef.current!.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setMousePosition({ x, y });
+        }
+      };
+
+      const handleMouseDown = () => {
+        setUserInteracting(true);
+        setTimeout(() => setUserInteracting(false), 300);
+      };
+
+      containerRef.current.addEventListener('mousemove', handleMouseMove);
+      containerRef.current.addEventListener('mousedown', handleMouseDown);
+      
+      return () => {
+        if (containerRef.current) {
+          containerRef.current.removeEventListener('mousemove', handleMouseMove);
+          containerRef.current.removeEventListener('mousedown', handleMouseDown);
+        }
+      };
+    }
+  }, [currentStage, manualInteraction]);
+
+  // Allow toggling between auto and manual interaction modes
+  const toggleInteractionMode = () => {
+    setManualInteraction(!manualInteraction);
+  };
+
   // Animation for the Patient Engagement and AI Medical Scribe illustrations
-  // Automatically advance steps without requiring user interaction
+  // Auto advance steps only when not in manual interaction mode
   useEffect(() => {
     console.log("DemoScene effect running with currentStage:", currentStage);
+    
+    // Don't auto-advance if in manual interaction mode
+    if (manualInteraction) return;
     
     // For Patient Engagement
     if (currentStage === 0) {
@@ -89,7 +128,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       }, 4000);
       return () => clearInterval(interval);
     }
-  }, [currentStage]);
+  }, [currentStage, manualInteraction]);
 
   // Set AI actions based on the current step
   useEffect(() => {
@@ -115,9 +154,33 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   }, [currentStage, subStep]);
 
-  // Handle simulated mouse movement - for visual effect only
+  // Update user cursor label based on current interaction
   useEffect(() => {
-    if (currentStage === 0 || currentStage === 1) {
+    if (currentStage === 0) {
+      const labels = [
+        "Messaging with patient",
+        "Selecting appointment time",
+        "Reviewing intake form",
+        "Sending reminders"
+      ];
+      setUserCursorLabel(labels[subStep]);
+    } else if (currentStage === 1) {
+      const labels = [
+        "Authenticating provider",
+        "Reviewing patient schedule",
+        "Loading templates",
+        "Recording visit",
+        "Generating documentation"
+      ];
+      setUserCursorLabel(labels[subStep]);
+    } else {
+      setUserCursorLabel(null);
+    }
+  }, [currentStage, subStep]);
+
+  // Handle simulated mouse movement - for visual effect only when not in manual mode
+  useEffect(() => {
+    if ((currentStage === 0 || currentStage === 1) && !manualInteraction) {
       const interval = setInterval(() => {
         const areas = currentStage === 0 
           ? ["Chat", "Calendar", "Intake", "Reminders"] 
@@ -140,9 +203,21 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       
       return () => clearInterval(interval);
     }
-  }, [currentStage, subStep]);
+  }, [currentStage, subStep, manualInteraction]);
 
   console.log("Current stage in DemoScene:", currentStage);
+
+  // Manual step change for interactive mode
+  const handleManualStepChange = (step: number) => {
+    if (manualInteraction) {
+      setSubStep(step);
+      
+      if (currentStage === 1) {
+        if (step >= 3) setTranscriptionActive(true);
+        if (step >= 4) setNoteGeneration(true);
+      }
+    }
+  };
 
   // Choose the appropriate content to display based on currentStage
   const renderStageContent = () => {
@@ -216,6 +291,33 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   };
 
+  // Interactive steps that user can click on when in manual interaction mode
+  const renderInteractiveSteps = () => {
+    if (!manualInteraction || (currentStage !== 0 && currentStage !== 1)) return null;
+    
+    const steps = currentStage === 0 
+      ? ["Messaging", "Calendar", "Intake", "Reminders"] 
+      : ["Login", "Schedule", "Templates", "Transcribe", "Generate"];
+    
+    return (
+      <div className="absolute bottom-4 left-4 z-50 flex gap-2">
+        {steps.map((step, index) => (
+          <button 
+            key={index}
+            onClick={() => handleManualStepChange(index)}
+            className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+              subStep === index 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-white text-blue-700 border border-blue-300 hover:bg-blue-50'
+            }`}
+          >
+            {step}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div 
       className="w-full h-full relative bg-white"
@@ -258,10 +360,23 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         />
       </div>
       
+      {/* Interactive mode toggle */}
+      {(currentStage === 0 || currentStage === 1) && (
+        <button
+          onClick={toggleInteractionMode}
+          className="absolute top-4 right-4 z-50 bg-white px-3 py-2 rounded-lg shadow-md border border-blue-200 text-sm font-medium text-blue-700 hover:bg-blue-50 transition-colors"
+        >
+          {manualInteraction ? "Auto Mode" : "Interactive Mode"}
+        </button>
+      )}
+      
       {/* Central Display Area */}
       <div className="absolute inset-0 flex items-center justify-center p-8 z-10">
         {renderStageContent()}
       </div>
+      
+      {/* Interactive steps UI */}
+      {renderInteractiveSteps()}
       
       {/* AI agent action label */}
       {(currentStage === 0 || currentStage === 1) && aiAction && (
@@ -349,6 +464,60 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           </div>
         </motion.div>
       )}
+      
+      {/* Interactive cursor with user label */}
+      <AnimatePresence>
+        {(currentStage === 0 || currentStage === 1) && (
+          <motion.div
+            className="absolute w-5 h-5 z-30 pointer-events-none"
+            style={{
+              left: mousePosition.x,
+              top: mousePosition.y,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              x: mousePosition.x,
+              y: mousePosition.y,
+              scale: userInteracting ? 0.9 : 1,
+              opacity: 1 
+            }}
+            transition={{
+              type: "spring",
+              damping: 25,
+              stiffness: 300,
+            }}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.36 1.33331L18.6667 9.18665L11.7067 10.96L9.18667 18.6666L4.36 1.33331Z"
+                fill="white"
+                stroke={userInteracting ? "#3b82f6" : "black"}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            
+            {/* User cursor label */}
+            {userCursorLabel && (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-7 left-0 bg-blue-100 text-blue-900 px-2 py-1 rounded text-xs whitespace-nowrap font-medium border border-blue-200"
+              >
+                {userCursorLabel}
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

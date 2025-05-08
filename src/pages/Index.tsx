@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 
 const Index = () => {
   const demoRef = useRef<HTMLDivElement>(null);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasScrolledToDemo, setHasScrolledToDemo] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
 
   // Scroll to demo section
   const scrollToDemo = () => {
@@ -15,17 +16,26 @@ const Index = () => {
     }
   };
 
-  // Track if user has scrolled past the hero section
+  // Track if user has scrolled to the demo section
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
-      setHasScrolled(scrollY > heroHeight);
+      if (demoRef.current) {
+        const rect = demoRef.current.getBoundingClientRect();
+        const isVisible = rect.top <= window.innerHeight * 0.5;
+        setIsInViewport(isVisible);
+        
+        if (isVisible && !hasScrolledToDemo) {
+          setHasScrolledToDemo(true);
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [hasScrolledToDemo]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -75,10 +85,15 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Demo Section - Starts on second scroll */}
-      <main className="px-4 pb-20" ref={demoRef}>
+      {/* Demo Section - Only active after scrolling */}
+      <main className="px-4 pb-20 min-h-screen" ref={demoRef}>
         <div className="max-w-5xl mx-auto">
-          <DemoStage stages={demoStages} />
+          {isInViewport && (
+            <DemoStage 
+              stages={demoStages} 
+              autoPlay={hasScrolledToDemo} 
+            />
+          )}
           
           <div className="mt-16 text-center">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to get started?</h2>
