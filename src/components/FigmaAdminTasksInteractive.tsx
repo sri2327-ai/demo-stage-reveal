@@ -32,7 +32,8 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   }, [subStep]);
   
   const getActiveAreaClass = (stepIndex: number) => {
-    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'bg-[#143151]/20' : 'hover:bg-[#387E89]/20'}`;
+    // Replace transparent highlighting with ring styling
+    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'ring-2 ring-[#387E89] ring-opacity-70' : 'opacity-0 hover:opacity-100 hover:ring-2 hover:ring-[#387E89] hover:ring-opacity-40'}`;
   };
 
   // Get the current label for either hover state or active step
@@ -74,7 +75,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             <div className="absolute inset-0">
               {/* Prescriptions & Orders area - step 0 */}
               <div 
-                className={`${getActiveAreaClass(0)} top-[20%] left-[15%] w-[70%] h-[25%] z-20`}
+                className={`${getActiveAreaClass(0)} top-[20%] left-[15%] w-[70%] h-[25%] z-20 transition-all duration-200`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Prescriptions & Orders")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -83,7 +84,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               
               {/* Patient Communications area - step 1 */}
               <div 
-                className={`${getActiveAreaClass(1)} top-[50%] left-[15%] w-[70%] h-[20%] z-20`}
+                className={`${getActiveAreaClass(1)} top-[50%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-200`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Communications")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -92,7 +93,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               
               {/* Insurance & Billing area - step 2 */}
               <div 
-                className={`${getActiveAreaClass(2)} bottom-[10%] left-[15%] w-[70%] h-[25%] z-20`}
+                className={`${getActiveAreaClass(2)} bottom-[10%] left-[15%] w-[70%] h-[25%] z-20 transition-all duration-200`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Insurance & Billing")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -110,9 +111,9 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </div>
             </Pointer>
             
-            {/* Label that follows the cursor - Now always visible */}
-            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
+            {/* Improved label styling */}
+            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] border border-white/20 backdrop-blur-sm">
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>
                 <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
               </div>
@@ -127,8 +128,8 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           />
           
           {/* Fixed label display for non-interactive mode */}
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] border border-white/20 backdrop-blur-sm">
               <div className="font-bold text-xl">{getCurrentLabel().title}</div>
               <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
             </div>
