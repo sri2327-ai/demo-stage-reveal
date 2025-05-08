@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
@@ -109,18 +110,13 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </div>
             </Pointer>
             
-            {/* Label that follows the cursor */}
-            <PointerFollower 
-              align="bottom-center" 
-              alwaysVisible={true} 
-              offsetY={40}
-              style={{ zIndex: 100 }}
-            >
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-[300px] border border-white/20">
-                <div className="font-medium">{getCurrentLabel().title}</div>
-                <div className="text-xs mt-1 text-white/90">{getCurrentLabel().description}</div>
+            {/* Label that follows the cursor - Now always visible */}
+            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] border border-white/20">
+                <div className="font-bold text-xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
               </div>
-            </PointerFollower>
+            </div>
           </div>
         </MouseTrackerProvider>
       ) : (

@@ -213,7 +213,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               {/* Improved label display */}
               <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px]">
-                  <div className="font-medium text-xl">
+                  <div className="font-bold text-xl">
+                    {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
+                     currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :
+                     currentStage === 0 && subStep === 2 ? "Patient Intake" :
+                     "Appointment Confirmations"}
+                  </div>
+                  <div className="mt-2 text-sm">
                     {activeLabel || patientEngagementLabels[subStep]}
                   </div>
                 </div>
@@ -232,6 +238,21 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               onElementClick={handleElementClick}
               isInteractive={true}
             />
+            
+            {/* Added consistent label display for Medical Scribe */}
+            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px]">
+                <div className="font-bold text-xl">
+                  {subStep === 0 ? "Login" : 
+                   subStep === 1 ? "Schedule Sync" :
+                   subStep === 2 ? "Template Selection" :
+                   subStep === 3 ? "Transcription" : "Note Generation"}
+                </div>
+                <div className="mt-2 text-sm">
+                  {activeLabel || medicalScribeLabels[subStep]}
+                </div>
+              </div>
+            </div>
           </div>
         );
         
