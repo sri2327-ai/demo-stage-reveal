@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { DemoStage } from '../components/DemoStage';
 import { demoStages } from '../data/demoStages';
@@ -64,25 +63,25 @@ const Index = () => {
               transition={{ duration: 0.7 }}
             >
               <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 mb-6">
-                <Hospital className="w-4 h-4 text-[#143151]" />
-                <span className="text-[#143151] text-sm font-medium">Designed for Healthcare Providers</span>
+                <Hospital className="w-4 h-4 text-black" />
+                <span className="text-black text-sm font-medium">Designed for Healthcare Providers</span>
               </Card>
             </motion.div>
             
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6 leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Enhance Your Clinical Practice With <br />
-              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-black to-black/80 text-transparent bg-clip-text">
                 Intelligent Healthcare AI
               </span>
             </motion.h1>
             
             <motion.p 
-              className="text-lg sm:text-xl text-blue-700/80 max-w-2xl mx-auto mb-10"
+              className="text-lg sm:text-xl text-black/80 max-w-2xl mx-auto mb-10"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -125,25 +124,25 @@ const Index = () => {
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
                   <Clock className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-sm md:text-base text-[#143151]">Save 2+ hours daily</p>
+                <p className="font-medium text-sm md:text-base text-black">Save 2+ hours daily</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
                   <Users className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-sm md:text-base text-[#143151]">Higher satisfaction</p>
+                <p className="font-medium text-sm md:text-base text-black">Higher satisfaction</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
                   <ShieldCheck className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-sm md:text-base text-[#143151]">Seamless EHR integration</p>
+                <p className="font-medium text-sm md:text-base text-black">Works with 7,000+ apps and your EHR</p>
               </div>
             </motion.div>
           </div>
           
           <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#143151] cursor-pointer"
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-black cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 10, 0] }}
             transition={{ 
@@ -153,41 +152,11 @@ const Index = () => {
             }}
             onClick={scrollToDemo}
           >
-            <p className="font-medium mb-2 text-center">See S10.AI in action</p>
+            <p className="font-medium mb-2 text-center">Experience the clinical workflow</p>
             <div className="flex justify-center">
               <ArrowDown className="w-6 h-6" />
             </div>
           </motion.div>
-          
-          <Pointer>
-            <div className="flex flex-col items-center">
-              <div className="w-5 h-5">
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 20 20" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M4.36 1.33331L18.6667 9.18665L11.7067 10.96L9.18667 18.6666L4.36 1.33331Z" 
-                    fill="url(#cursor-gradient)" 
-                    stroke="white" 
-                    strokeWidth="1.5" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                  <defs>
-                    <linearGradient id="cursor-gradient" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
-                      <stop offset="0%" stopColor="#143151" />
-                      <stop offset="100%" stopColor="#387E89" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <span className="text-xs font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
-            </div>
-          </Pointer>
         </header>
       </MouseTrackerProvider>
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Calendar, FileText, BellRing } from 'lucide-react';
@@ -102,6 +101,19 @@ export const FigmaAIMedicalScribeIllustration: React.FC<FigmaAIMedicalScribeIllu
               onClick={() => isInteractive && onElementClick && onElementClick(4)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(4)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
+            >
+              <FileText size={20} />
+            </motion.div>
+            
+            <motion.div 
+              className={`p-2 rounded-lg ${subStep === 5 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}
+                ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
+              animate={{ scale: subStep === 5 ? [1, 1.1, 1] : 1 }}
+              transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && onElementClick && onElementClick(5)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(5)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <FileText size={20} />
@@ -496,20 +508,57 @@ export const FigmaAIMedicalScribeIllustration: React.FC<FigmaAIMedicalScribeIllu
                   </motion.div>
                   
                   {!noteGeneration ? (
-                    <motion.div
-                      className="bg-white p-4 rounded-lg border border-[#387E89]/20 text-center py-12"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      <div className="text-lg font-medium text-[#143151] mb-2">Ready to Generate Clinical Note</div>
-                      <div className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
-                        The AI assistant will create a structured clinical note based on the recorded conversation and patient data.
-                      </div>
-                      <button className="px-6 py-2 bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded hover:opacity-90 transition-opacity">
-                        Start Generation
-                      </button>
-                    </motion.div>
+                    <>
+                      <motion.div
+                        className="bg-white p-4 rounded-lg border border-[#387E89]/20 mb-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        <div className="flex justify-between items-center mb-3">
+                          <div className="font-medium text-[#143151]">Previous Visit Summary</div>
+                          <div className="text-xs text-[#387E89]">March 12, 2025</div>
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          <div>
+                            <div className="font-medium mb-1">Chief Complaint:</div>
+                            <div className="text-gray-700">Occasional headaches, fatigue</div>
+                          </div>
+                          <div>
+                            <div className="font-medium mb-1">Assessment:</div>
+                            <div className="text-gray-700">
+                              1. Tension headache (G44.209)<br />
+                              2. Fatigue (R53.83)<br />
+                              3. Family history of hypertension
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-medium mb-1">Plan:</div>
+                            <div className="text-gray-700">
+                              1. OTC pain management for headaches<br />
+                              2. Sleep hygiene counseling<br />
+                              3. Follow up in 2 months or as needed<br />
+                              4. Monitor BP at home
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div
+                        className="bg-white p-4 rounded-lg border border-[#387E89]/20 text-center py-12"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        <div className="text-lg font-medium text-[#143151] mb-2">Ready to Generate Clinical Note</div>
+                        <div className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
+                          The AI assistant will create a structured clinical note based on the recorded conversation, patient data, and previous visit information.
+                        </div>
+                        <button className="px-6 py-2 bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded hover:opacity-90 transition-opacity">
+                          Start Generation
+                        </button>
+                      </motion.div>
+                    </>
                   ) : (
                     <>
                       <motion.div
@@ -539,53 +588,14 @@ export const FigmaAIMedicalScribeIllustration: React.FC<FigmaAIMedicalScribeIllu
                           >
                             <div className="font-medium mb-1">Assessment:</div>
                             <div>
-                              1. Essential hypertension (I10), new diagnosis<br />
-                              2. Stress-related headaches (G44.209)<br />
-                              3. Sleep disturbance (G47.9)
-                            </div>
-                          </motion.div>
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.2 }}
-                          >
-                            <div className="font-medium mb-1">Plan:</div>
-                            <div className="space-y-1">
-                              <div>1. Start lisinopril 10mg daily for hypertension. Explained medication purpose, dosing, and potential side effects.</div>
-                              <div>2. Lifestyle modifications including DASH diet, sodium reduction, regular exercise of at least 30 minutes 5 times per week.</div>
-                              <div>3. Home BP monitoring with daily readings for 2 weeks.</div>
-                              <div>4. Follow up in 2 weeks to assess response to treatment.</div>
-                            </div>
-                          </motion.div>
-                        </div>
-                      </motion.div>
-                      <motion.div
-                        className="bg-[#143151]/5 p-3 rounded-lg border border-[#387E89]/10 flex justify-between items-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5 }}
-                      >
-                        <div>
-                          <div className="text-sm font-medium text-[#143151]">Note Complete</div>
-                          <div className="text-xs text-[#387E89]">CPT: 99203 - New patient visit, moderate complexity</div>
-                        </div>
-                        <div className="flex gap-2">
-                          <button className="px-3 py-1 text-xs border border-[#387E89]/30 text-[#143151] rounded hover:bg-[#387E89]/10">
-                            Edit Note
-                          </button>
-                          <button className="px-3 py-1 text-xs bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded hover:opacity-90">
-                            Save to EHR
-                          </button>
-                        </div>
-                      </motion.div>
-                    </>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+                              <motion.span 
+                                className="bg-yellow-100 px-1 py-0.5 rounded-sm inline-block mr-1"
+                                animate={{ backgroundColor: ["#fef9c3", "#fde68a", "#fef9c3"] }}
+                                transition={{ repeat: 2, duration: 1.5 }}
+                              >
+                                1. Essential hypertension (I10)
+                              </motion.span>, new diagnosis<br />
+                              <motion.span 
+                                className="bg-yellow-100 px-1 py-0.5 rounded-sm inline-block mr-1"
+                                animate={{ backgroundColor: ["#fef9c3", "#fde68a", "#fef9c3"] }}
+                                transition={{ repeat: 2, duration: 1.5, delay
