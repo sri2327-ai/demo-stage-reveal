@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
-import { Pause, Play, Info } from 'lucide-react';
+import { Pause, Play, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface DemoStageProps {
   stages: DemoStageType[];
@@ -20,6 +20,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [currentStage, setCurrentStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
+  const [animateControls, setAnimateControls] = useState(false);
   
   useEffect(() => {
     if (!autoPlay || isPaused) return;
@@ -40,8 +41,28 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     return () => clearTimeout(tooltipTimer);
   }, []);
 
+  // Show animation controls briefly when stage changes
+  useEffect(() => {
+    setAnimateControls(true);
+    const controlsTimer = setTimeout(() => {
+      setAnimateControls(false);
+    }, 2000);
+    
+    return () => clearTimeout(controlsTimer);
+  }, [currentStage]);
+
   const handleStageChange = (index: number) => {
     setCurrentStage(index);
+  };
+  
+  // Navigate to previous stage
+  const handlePrevStage = () => {
+    setCurrentStage(prev => (prev === 0 ? stages.length - 1 : prev - 1));
+  };
+  
+  // Navigate to next stage
+  const handleNextStage = () => {
+    setCurrentStage(prev => (prev === stages.length - 1 ? 0 : prev + 1));
   };
   
   // Pause autoplay when user interacts with navigation
@@ -62,38 +83,114 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     return stageNames[currentStage] || "";
   };
 
+  // Get current stage description
+  const getCurrentStageDescription = () => {
+    const stageDescriptions = [
+      "Automate patient communications while preserving your clinical voice",
+      "Reduce documentation time by 70% with AI-powered medical scribe",
+      "Streamline administrative workflows and prevent revenue delays",
+      "Improve outcomes with automated follow-up and monitoring"
+    ];
+    return stageDescriptions[currentStage] || "";
+  };
+
   return (
     <div 
-      className="relative w-full h-[600px] md:h-[700px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg overflow-hidden border border-blue-100"
+      className="relative w-full h-[650px] md:h-[750px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Stage name header - consistent gradient */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 z-20">
+      {/* Stage name header with enhanced design */}
+      <motion.div 
+        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-4 px-6 z-20 border-b border-white/10"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
         <div className="flex justify-between items-center">
-          <h3 className="font-semibold text-lg">{getCurrentStageName()}</h3>
-          <button 
-            onClick={togglePause}
-            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-1.5 transition-all"
-            aria-label={isPaused ? "Play demo" : "Pause demo"}
-          >
-            {isPaused ? (
-              <Play size={18} />
-            ) : (
-              <Pause size={18} />
-            )}
-          </button>
+          <div className="flex flex-col">
+            <motion.h3 
+              className="font-bold text-2xl"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              key={`title-${currentStage}`}
+              transition={{ duration: 0.5 }}
+            >
+              {getCurrentStageName()}
+            </motion.h3>
+            <motion.p
+              className="text-sm text-white/80 mt-1 max-w-md"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              key={`desc-${currentStage}`}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              {getCurrentStageDescription()}
+            </motion.p>
+          </div>
+          <div className="flex items-center gap-2">
+            <motion.button 
+              onClick={togglePause}
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2.5 transition-all shadow-lg border border-white/20 group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={isPaused ? "Play demo" : "Pause demo"}
+            >
+              {isPaused ? (
+                <Play size={20} className="text-white group-hover:text-white/90" />
+              ) : (
+                <Pause size={20} className="text-white group-hover:text-white/90" />
+              )}
+            </motion.button>
+          </div>
         </div>
-      </div>
+      </motion.div>
+      
+      {/* Arrow navigation overlays */}
+      <motion.div 
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 z-30"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
+        whileHover={{ opacity: 1, scale: 1.1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <motion.button
+          onClick={handlePrevStage}
+          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-3 rounded-full shadow-lg border border-[#387E89]/20"
+          whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Previous stage"
+        >
+          <ChevronLeft size={24} />
+        </motion.button>
+      </motion.div>
+      
+      <motion.div 
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 z-30"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
+        whileHover={{ opacity: 1, scale: 1.1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <motion.button
+          onClick={handleNextStage}
+          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-3 rounded-full shadow-lg border border-[#387E89]/20"
+          whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Next stage"
+        >
+          <ChevronRight size={24} />
+        </motion.button>
+      </motion.div>
       
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-12"
-          initial={{ opacity: 0, scale: 0.85 }} /* Increased scale effect for more dramatic animation */
+          className="absolute inset-0 pt-20" /* Increased padding for header */
+          initial={{ opacity: 0, scale: 0.85 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
-          transition={{ duration: 0.7, ease: "easeOut" }} /* Longer animation duration */
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <DemoScene
             currentStage={currentStage}
@@ -102,36 +199,44 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      <div className="absolute bottom-6 left-0 right-0">
+      <motion.div 
+        className="absolute bottom-8 left-0 right-0"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
         <DemoStageIndicator 
           currentStage={currentStage}
           totalStages={stages.length}
           onStageChange={handleStageChange}
         />
-      </div>
+      </motion.div>
       
-      {/* Clinical context tooltip with improved animation and dismissal */}
+      {/* Enhanced clinical context tooltip with improved animation */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div 
-            className="absolute bottom-16 right-4 z-30"
+            className="absolute bottom-24 right-6 z-30"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
             transition={{ delay: 1, duration: 0.5 }}
           >
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 rounded-lg shadow-lg max-w-xs flex items-start">
-              <Info size={16} className="mt-0.5 mr-2 flex-shrink-0" />
+            <motion.div 
+              className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-5 py-4 rounded-xl shadow-xl max-w-xs flex items-start border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.03, y: -2 }}
+            >
+              <Info size={18} className="mt-0.5 mr-3 flex-shrink-0" />
               <div>
-                <p className="font-medium">Click to interact or select a workflow stage</p>
+                <p className="font-medium text-sm">Click any highlighted area to interact with the workflow or use the navigation controls</p>
                 <button 
                   onClick={() => setShowTooltip(false)}
-                  className="text-xs opacity-80 hover:opacity-100 mt-1 underline underline-offset-2"
+                  className="text-xs opacity-80 hover:opacity-100 mt-2 underline underline-offset-2"
                 >
-                  Dismiss
+                  Dismiss hint
                 </button>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

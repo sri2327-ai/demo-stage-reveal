@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
-import { MousePointer2 } from 'lucide-react';
+import { MousePointer2, Sparkles } from 'lucide-react';
 
 interface FigmaAIMedicalScribeInteractiveProps {
   subStep: number;
@@ -33,6 +33,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [interactionActive, setInteractionActive] = useState(false);
+  const [hoverStep, setHoverStep] = useState<number | null>(null);
   
   // Auto-show label for current subStep
   useEffect(() => {
@@ -62,9 +63,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   };
 
   // Handle mouse enter for interactivity
-  const handleAreaMouseEnter = (name: string) => {
+  const handleAreaMouseEnter = (name: string, step: number) => {
     setActiveLabel(name);
     setInteractionActive(true);
+    setHoverStep(step);
   };
 
   // Handle mouse leave for interactivity
@@ -73,6 +75,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation"];
     setActiveLabel(stepLabels[subStep]);
     setInteractionActive(false);
+    setHoverStep(null);
   };
   
   const stepAreas = [
@@ -84,101 +87,152 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   ];
   
   return (
-    <div className="relative w-full max-w-3xl mx-auto">
+    <div className="relative w-full max-w-5xl mx-auto h-full">
       {isInteractive ? (
         <MouseTrackerProvider>
-          <div className="relative">
+          <div className="relative h-full flex items-center justify-center">
+            <div className="relative w-[95%] h-[95%] scale-110">
+              <FigmaAIMedicalScribeIllustration
+                subStep={subStep}
+                transcriptionActive={transcriptionActive}
+                noteGeneration={noteGeneration}
+                hideTitle={hideTitle}
+              />
+            
+              {/* Interactive elements with improved clickability and visual feedback */}
+              <div className="absolute inset-0 pointer-events-auto">
+                {stepAreas.map((area, index) => (
+                  <motion.div 
+                    key={area.name}
+                    className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer rounded-lg`}
+                    onClick={() => onElementClick && onElementClick(index)}
+                    onMouseEnter={() => handleAreaMouseEnter(area.name, index)}
+                    onMouseLeave={handleAreaMouseLeave}
+                    aria-label={`${area.name} area`}
+                    whileHover={{ 
+                      scale: 1.1, 
+                      backgroundColor: "rgba(56, 126, 137, 0.15)",
+                      boxShadow: "0 0 20px rgba(20, 49, 81, 0.3)"
+                    }}
+                    animate={subStep === index || hoverStep === index ? {
+                      scale: 1.08,
+                      backgroundColor: "rgba(56, 126, 137, 0.15)",
+                      boxShadow: "0 0 15px rgba(20, 49, 81, 0.25)"
+                    } : {
+                      scale: 1,
+                      backgroundColor: "rgba(56, 126, 137, 0)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  >
+                    {/* Visual indicator for clickable areas */}
+                    <motion.div
+                      className="absolute inset-0 rounded-lg border-2 border-[#387E89]/20"
+                      animate={{ 
+                        opacity: subStep === index || hoverStep === index ? 1 : 0.3,
+                        borderWidth: subStep === index || hoverStep === index ? "3px" : "2px"
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
+                    {/* Icon indicator for interactive elements */}
+                    {(subStep === index || hoverStep === index) && (
+                      <motion.div
+                        className="absolute top-2 right-2 text-[#387E89]"
+                        initial={{ scale: 0, rotate: -45 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <Sparkles size={18} />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Enhanced cursor styling with larger, more visible cursor */}
+              <Pointer>
+                <div className="flex flex-col items-center">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg width="40" height="40" viewBox="0 0 40 40" className="filter drop-shadow-lg">
+                      <defs>
+                        <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#143151" />
+                          <stop offset="100%" stopColor="#387E89" />
+                        </linearGradient>
+                        <filter id="cursor-glow" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="2" result="blur" />
+                          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                      </defs>
+                      <MousePointer2 size={40} className="stroke-white stroke-[1.5]" style={{
+                        fill: "url(#cursor-gradient)"
+                      }} filter="url(#cursor-glow)" />
+                    </svg>
+                  </motion.div>
+                  <motion.span 
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
+                  >
+                    Interactive
+                  </motion.span>
+                </div>
+              </Pointer>
+            </div>
+            
+            {/* Clinical context enhanced label positioned better to avoid overlap */}
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={getCurrentLabel().title}
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
+                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: interactionActive ? 1.05 : 1
+                }}
+                exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div 
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 mt-6 border border-white/10"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                >
+                  <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-base">{getCurrentLabel().description}</div>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative scale-110 w-[95%] h-[95%]">
             <FigmaAIMedicalScribeIllustration
               subStep={subStep}
               transcriptionActive={transcriptionActive}
               noteGeneration={noteGeneration}
               hideTitle={hideTitle}
             />
-          
-            {/* Interactive elements with cleaner, bigger animations */}
-            <div className="absolute inset-0 pointer-events-auto">
-              {stepAreas.map((area, index) => (
-                <motion.div 
-                  key={area.name}
-                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer`}
-                  onClick={() => onElementClick && onElementClick(index)}
-                  onMouseEnter={() => handleAreaMouseEnter(area.name)}
-                  onMouseLeave={handleAreaMouseLeave}
-                  aria-label={`${area.name} area`}
-                  whileHover={{ 
-                    scale: 1.08, 
-                    backgroundColor: "rgba(56, 126, 137, 0.05)"
-                  }}
-                  animate={subStep === index ? {
-                    scale: 1.06,
-                    backgroundColor: "rgba(56, 126, 137, 0.05)"
-                  } : {
-                    scale: 1,
-                    backgroundColor: "rgba(56, 126, 137, 0)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                />
-              ))}
-            </div>
-            
-            {/* Custom cursor with consistent gradient */}
-            <Pointer>
-              <div className="flex flex-col items-center">
-                <svg width="32" height="32" viewBox="0 0 32 32" className="filter drop-shadow-md">
-                  <defs>
-                    <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#143151" />
-                      <stop offset="100%" stopColor="#387E89" />
-                    </linearGradient>
-                  </defs>
-                  <MousePointer2 size={32} className="stroke-white" style={{
-                    fill: "url(#cursor-gradient)"
-                  }} />
-                </svg>
-                <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">
-                  You
-                </span>
-              </div>
-            </Pointer>
-            
-            {/* Clinical context enhanced label with smooth animation */}
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={getCurrentLabel().title}
-                className="absolute top-6 left-1/2 transform -translate-x-1/2 z-30"
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0, 
-                  scale: interactionActive ? 1.1 : 1.05
-                }}
-                exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
-                  <div className="font-bold text-xl">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
           </div>
-        </MouseTrackerProvider>
-      ) : (
-        <div className="relative">
-          <FigmaAIMedicalScribeIllustration
-            subStep={subStep}
-            transcriptionActive={transcriptionActive}
-            noteGeneration={noteGeneration}
-            hideTitle={hideTitle}
-          />
           
           {/* Fixed label display for non-interactive mode with consistent styling */}
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
-              <div className="font-bold text-xl">{getCurrentLabel().title}</div>
-              <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
-            </div>
-          </div>
+          {!hideTitle && (
+            <motion.div 
+              className="absolute top-6 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xl"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-4 mt-6 border border-white/10">
+                <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-base">{getCurrentLabel().description}</div>
+              </div>
+            </motion.div>
+          )}
         </div>
       )}
     </div>
