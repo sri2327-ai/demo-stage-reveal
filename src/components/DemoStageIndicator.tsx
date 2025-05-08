@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import type { DemoStageIndicatorProps } from '../types/demo';
+import { CheckCircle } from 'lucide-react';
 
 export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({ 
   currentStage, 
@@ -9,32 +10,71 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
   onStageChange 
 }) => {
   return (
-    <div className="flex items-center justify-center gap-2 md:gap-3 my-6">
-      {Array.from({ length: totalStages }).map((_, index) => {
-        const isActive = currentStage === index;
-        return (
-          <motion.button
-            key={index}
-            onClick={() => onStageChange(index)}
-            className={`relative h-3 rounded-full transition-all duration-300 ${
-              isActive ? 'w-10 bg-blue-600' : 'w-3 bg-blue-300 hover:bg-blue-400'
-            }`}
-            whileTap={{ scale: 0.9 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            aria-label={`Go to stage ${index + 1}`}
+    <div className="fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50 bg-white p-4 rounded-xl shadow-xl border-2 border-blue-600">
+      {Array.from({ length: totalStages }).map((_, index) => (
+        <motion.button
+          key={index}
+          onClick={() => onStageChange(index)}
+          className="relative"
+          initial={{ opacity: 0.5, scale: 0.8, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: index * 0.1, duration: 0.5 }}
+          aria-label={`Go to stage ${index + 1}`}
+        >
+          <motion.div
+            className={`h-6 w-6 md:h-8 md:w-8 rounded-full ${
+              index === currentStage 
+                ? 'bg-blue-600 ring-2 ring-blue-300 ring-offset-2' 
+                : index < currentStage 
+                  ? 'bg-blue-900' 
+                  : 'bg-gray-300'
+            } flex items-center justify-center cursor-pointer`}
+            initial={{ scale: 1 }}
+            animate={{ 
+              scale: index === currentStage ? [1, 1.2, 1] : 1,
+              backgroundColor: index === currentStage ? "#2563eb" : (index < currentStage ? "#1e40af" : "#d1d5db")
+            }}
+            transition={{ 
+              scale: {
+                duration: 1.5, 
+                repeat: index === currentStage ? Infinity : 0,
+                repeatType: "reverse"
+              },
+              backgroundColor: { duration: 0.3 } 
+            }}
           >
-            {isActive && (
-              <motion.div
-                className="absolute inset-0 rounded-full bg-blue-500 opacity-50"
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 0.5 }}
-              />
+            {index < currentStage && (
+              <CheckCircle className="h-4 w-4 text-white" />
             )}
-          </motion.button>
-        );
-      })}
+          </motion.div>
+          
+          {index === currentStage && (
+            <motion.div
+              className="absolute inset-0 rounded-full bg-blue-500/50"
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.8, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+            />
+          )}
+          
+          <motion.div 
+            className="absolute -left-[220px] top-0 pointer-events-none"
+            animate={{ 
+              opacity: index === currentStage ? 1 : 0,
+              x: index === currentStage ? 0 : -10
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="bg-white px-4 py-2 rounded-lg text-sm text-blue-900 whitespace-nowrap border border-blue-200 shadow-lg font-medium">
+              {index === 0 && "Discover New Features"}
+              {index === 1 && "Streamline Your Workflow"}
+              {index === 2 && "Powerful Integrations"}
+              {index === 3 && "Enterprise-Grade Security"}
+            </div>
+            <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-2 h-2 rotate-45 bg-white border-r border-t border-blue-200"></div>
+          </motion.div>
+        </motion.button>
+      ))}
     </div>
   );
 };

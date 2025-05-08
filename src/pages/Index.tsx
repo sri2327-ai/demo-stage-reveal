@@ -2,16 +2,52 @@
 import React from 'react';
 import { DemoStage } from '../components/DemoStage';
 import { demoStages } from '../data/demoStages';
+import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <header className="pt-10 pb-6 px-4">
+      <header className="pt-16 pb-10 px-4 relative">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Interactive Demo Stages</h1>
-          <p className="text-xl text-blue-700 max-w-2xl mx-auto">
-            Explore our product features with beautifully animated stage transitions.
-          </p>
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold text-blue-900 mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Experience the Future of Clinical Automation
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-blue-700 max-w-2xl mx-auto mb-8"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            From patient engagement to real-time documentation and post-visit support—see how S10.AI transforms care delivery, end-to-end.
+          </motion.p>
+          
+          <motion.div
+            className="animate-bounce flex flex-col items-center mt-10 text-blue-600"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="font-medium mb-2">Scroll to begin the journey</p>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
+          </motion.div>
         </div>
       </header>
 
