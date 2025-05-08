@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Calendar, FileText, BellRing } from 'lucide-react';
@@ -598,4 +599,188 @@ export const FigmaAIMedicalScribeIllustration: React.FC<FigmaAIMedicalScribeIllu
                               <motion.span 
                                 className="bg-yellow-100 px-1 py-0.5 rounded-sm inline-block mr-1"
                                 animate={{ backgroundColor: ["#fef9c3", "#fde68a", "#fef9c3"] }}
-                                transition={{ repeat: 2, duration: 1.5, delay
+                                transition={{ repeat: 2, duration: 1.5, delay: 0.5 }}
+                              >
+                                2. Tension-type headache (G44.2)
+                              </motion.span>, likely secondary to hypertension<br />
+                              <motion.span 
+                                className="bg-yellow-100 px-1 py-0.5 rounded-sm inline-block mr-1"
+                                animate={{ backgroundColor: ["#fef9c3", "#fde68a", "#fef9c3"] }}
+                                transition={{ repeat: 2, duration: 1.5, delay: 1 }}
+                              >
+                                3. Sleep disturbance (G47.9)
+                              </motion.span>
+                            </div>
+                          </motion.div>
+                          
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1.2 }}
+                          >
+                            <div className="font-medium mb-1">Plan:</div>
+                            <div>
+                              1. Start lisinopril 10mg daily for hypertension<br />
+                              2. Lifestyle modifications including sodium restriction, DASH diet<br />
+                              3. Home blood pressure monitoring twice daily<br />
+                              4. Follow-up appointment in 2 weeks<br />
+                              5. Basic metabolic panel to be completed prior to follow-up<br />
+                              6. Sleep hygiene counseling provided
+                            </div>
+                          </motion.div>
+                        </div>
+                        
+                        <div className="mt-4 text-center">
+                          <button className="px-4 py-2 bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-sm rounded hover:opacity-90 transition-opacity">
+                            Save to EHR
+                          </button>
+                        </div>
+                      </motion.div>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            )}
+            
+            {subStep === 5 && (
+              <motion.div 
+                className="h-full flex flex-col"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="text-lg font-medium text-[#143151] mb-3">EHR Integration</div>
+                <div className="flex-1 overflow-y-auto">
+                  <div className="mb-3 flex justify-between items-center">
+                    <div className="text-sm text-[#143151]">Patient: Michael Brown - Hypertension Evaluation</div>
+                    <div className="flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                      <span>Note Ready</span>
+                    </div>
+                  </div>
+                  
+                  <motion.div 
+                    className="bg-white p-4 rounded-lg border border-[#387E89]/20 mb-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <div className="font-medium text-[#143151] mb-3">Select EHR System</div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                      <motion.div 
+                        className="border border-[#387E89]/30 rounded-lg p-3 text-center cursor-pointer bg-[#387E89]/10"
+                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(56, 126, 137, 0.15)' }}
+                      >
+                        <div className="text-sm font-medium text-[#143151] mb-1">Epic</div>
+                        <div className="text-xs text-gray-500">Connected</div>
+                      </motion.div>
+                      <motion.div 
+                        className="border border-[#387E89]/30 rounded-lg p-3 text-center cursor-pointer"
+                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(56, 126, 137, 0.05)' }}
+                      >
+                        <div className="text-sm font-medium text-[#143151] mb-1">Cerner</div>
+                        <div className="text-xs text-gray-500">Available</div>
+                      </motion.div>
+                      <motion.div 
+                        className="border border-[#387E89]/30 rounded-lg p-3 text-center cursor-pointer"
+                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(56, 126, 137, 0.05)' }}
+                      >
+                        <div className="text-sm font-medium text-[#143151] mb-1">Athena</div>
+                        <div className="text-xs text-gray-500">Available</div>
+                      </motion.div>
+                      <motion.div 
+                        className="border border-[#387E89]/30 rounded-lg p-3 text-center cursor-pointer"
+                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(56, 126, 137, 0.05)' }}
+                      >
+                        <div className="text-sm font-medium text-[#143151] mb-1">Custom</div>
+                        <div className="text-xs text-gray-500">Configure</div>
+                      </motion.div>
+                    </div>
+                    
+                    <div className="bg-[#143151]/5 p-3 rounded-lg border border-[#387E89]/10 mb-4">
+                      <div className="flex justify-between mb-2">
+                        <div className="text-sm font-medium text-[#143151]">Field Mappings</div>
+                        <div className="text-xs text-[#387E89]">Epic Template</div>
+                      </div>
+                      
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between items-center">
+                          <div>Chief Complaint</div>
+                          <div className="text-xs text-gray-500">→ Epic.ChiefComplaint</div>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <div>History of Present Illness</div>
+                          <div className="text-xs text-gray-500">→ Epic.HPI</div>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <div>Assessment</div>
+                          <div className="text-xs text-gray-500">→ Epic.Assessment</div>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <div>Plan</div>
+                          <div className="text-xs text-gray-500">→ Epic.Plan</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      className="relative bg-white border border-[#387E89]/30 rounded-lg overflow-hidden"
+                    >
+                      <div className="bg-[#143151] text-white px-3 py-2 text-sm">
+                        Epic EHR Preview
+                      </div>
+                      <div className="p-3">
+                        <motion.div
+                          className="w-full h-48 bg-[#143151]/5 rounded border border-[#387E89]/20 p-2 overflow-y-auto text-xs"
+                          initial={{ opacity: 0.5 }}
+                          animate={{ opacity: [0.5, 1] }}
+                          transition={{ duration: 1, delay: 0.8 }}
+                        >
+                          <div className="font-medium mb-1">Progress Note - Michael Brown - 05/08/2025</div>
+                          <div className="mt-2 mb-1 font-medium">Chief Complaint:</div>
+                          <div>Headaches and dizziness, especially in the morning, for approximately three weeks. Patient also reports difficulty sleeping.</div>
+                          
+                          <div className="mt-2 mb-1 font-medium">History of Present Illness:</div>
+                          <div>Mr. Brown presents with a 3-week history of morning headaches and intermittent dizziness. Symptoms began shortly after starting a new job with increased stress and longer working hours. Patient reports increased consumption of restaurant/takeout food. No previous diagnosis of hypertension.</div>
+                          
+                          <div className="mt-2 mb-1 font-medium">Assessment:</div>
+                          <div>
+                            1. Essential hypertension (I10), new diagnosis<br />
+                            2. Tension-type headache (G44.2), likely secondary to hypertension<br />
+                            3. Sleep disturbance (G47.9)
+                          </div>
+                          
+                          <div className="mt-2 mb-1 font-medium">Plan:</div>
+                          <div>
+                            1. Start lisinopril 10mg daily for hypertension<br />
+                            2. Lifestyle modifications including sodium restriction, DASH diet<br />
+                            3. Home blood pressure monitoring twice daily<br />
+                            4. Follow-up appointment in 2 weeks<br />
+                            5. Basic metabolic panel to be completed prior to follow-up<br />
+                            6. Sleep hygiene counseling provided
+                          </div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                    
+                    <div className="mt-4 text-center">
+                      <motion.button 
+                        className="px-6 py-2 bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-sm rounded hover:opacity-90 transition-opacity"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Finalize & Send to Epic
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
