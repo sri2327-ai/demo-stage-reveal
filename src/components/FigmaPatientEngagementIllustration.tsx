@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Calendar, FileText, BellRing } from 'lucide-react';
+import { MessageCircle, Calendar, FileText, BellRing, Phone } from 'lucide-react';
 
 interface FigmaPatientEngagementIllustrationProps {
   subStep: number;
@@ -31,16 +31,17 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
 
   return (
     <motion.div 
-      className="w-full max-w-3xl mx-auto"
+      className="w-full max-w-3xl mx-auto cursor-pointer"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      onClick={() => isInteractive && onElementClick && onElementClick((subStep + 1) % 5)} // Now 5 steps with calling
     >
       <div className="relative aspect-video bg-white rounded-xl border border-[#387E89]/20 overflow-hidden shadow-lg">
         {/* App header */}
         {!hideTitle && (
           <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 flex items-center justify-between">
-            <div className="font-bold">S10.AI Patient Engagement</div>
+            <div className="font-bold">Patient Engagement</div>
             <div className="flex space-x-3">
               <div className="h-3 w-3 bg-white/50 rounded-full"></div>
               <div className="h-3 w-3 bg-white/50 rounded-full"></div>
@@ -100,6 +101,18 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
             >
               <BellRing size={20} />
+            </motion.div>
+            <motion.div 
+              className={`p-2 rounded-lg ${subStep === 4 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}
+                ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
+              animate={{ scale: subStep === 4 ? [1, 1.1, 1] : 1 }}
+              transition={{ duration: 0.5 }}
+              onClick={() => handleAreaClick(4)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
+              onMouseEnter={() => isInteractive && onHover && onHover(4)}
+              onMouseLeave={() => isInteractive && onHover && onHover(null)}
+            >
+              <Phone size={20} />
             </motion.div>
           </div>
           
@@ -370,6 +383,98 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                     <div className="text-sm font-medium text-green-800">Insurance Verification Complete</div>
                     <div className="text-sm text-green-700 mt-1">Your insurance has been verified for this visit.</div>
                     <div className="text-sm text-green-700">Estimated co-pay: $25</div>
+                  </motion.div>
+                </div>
+              </div>
+            )}
+            
+            {/* AI Calling - Step 4 (New step) */}
+            {subStep === 4 && (
+              <div className="h-full flex flex-col">
+                <div className="font-semibold text-[#143151] mb-2">AI Call Confirmation</div>
+                <div className="flex-1 border border-[#387E89]/20 rounded-lg p-3 overflow-y-auto">
+                  <motion.div 
+                    className="mb-4 flex flex-col items-center py-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <div className="w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center mb-2">
+                      <Phone size={30} className="text-white" />
+                    </div>
+                    <div className="text-lg font-medium text-[#143151]">AI Agent Calling</div>
+                    <div className="text-sm text-gray-500">Confirming appointment with patient</div>
+                    
+                    <motion.div 
+                      className="mt-3 flex space-x-3"
+                      animate={{ 
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      {[0, 1, 2].map(i => (
+                        <div key={i} className="w-3 h-3 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89]"></div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="p-4 bg-[#387E89]/5 rounded-lg border border-[#387E89]/20 mb-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <div className="text-sm font-medium text-[#143151] mb-2">Call Transcript</div>
+                    <div className="space-y-2 text-sm">
+                      <div className="font-medium text-[#143151]">AI Assistant:</div>
+                      <div className="text-gray-700 pl-4">
+                        "Hello, this is the AI assistant from Metropolitan Neurology. I'm calling to confirm your appointment with Dr. Smith this Thursday at 2:00 PM. Is this still a good time for you?"
+                      </div>
+                      <div className="font-medium text-[#143151] mt-2">Patient:</div>
+                      <div className="text-gray-700 pl-4">
+                        "Yes, that works for me. I'll be there."
+                      </div>
+                      <div className="font-medium text-[#143151] mt-2">AI Assistant:</div>
+                      <div className="text-gray-700 pl-4">
+                        "Great! Remember to bring your medication list and arrive 15 minutes early. Would you like me to send a text reminder the day before?"
+                      </div>
+                      <div className="font-medium text-[#143151] mt-2">Patient:</div>
+                      <div className="text-gray-700 pl-4">
+                        "Yes, please. That would be helpful."
+                      </div>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="p-4 bg-green-50 rounded-lg border border-green-100"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9 }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="text-sm font-medium text-green-800">Call Completed</div>
+                      <div className="text-xs text-green-600">2m 14s</div>
+                    </div>
+                    <div className="mt-2 space-y-2">
+                      <div className="flex items-center text-sm text-green-700">
+                        <svg className="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Appointment confirmed
+                      </div>
+                      <div className="flex items-center text-sm text-green-700">
+                        <svg className="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Text reminder scheduled
+                      </div>
+                      <div className="flex items-center text-sm text-green-700">
+                        <svg className="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        EHR updated
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
               </div>

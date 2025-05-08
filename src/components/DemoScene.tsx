@@ -10,12 +10,13 @@ import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
 
-// Updated patient engagement labels with clear integration benefits
+// Updated patient engagement labels with clear integration benefits and AI agent reference
 const patientEngagementLabels: Record<number, string> = {
-  0: "AI assistant seamlessly handles patient calls and messages while preserving your clinical tone and practice branding",
-  1: "AI integrates directly with your existing scheduling system to reduce no-shows by 35%",
+  0: "AI agent seamlessly handles patient calls and messages while preserving your clinical tone and practice branding",
+  1: "AI agent integrates directly with your existing scheduling system to reduce no-shows by 35%",
   2: "Smart intake forms adjust based on visit type, pre-populating from your EHR to save patient time",
-  3: "Customized confirmations match your clinic's communication style and reduce cancellations by 27%"
+  3: "Customized confirmations match your clinic's communication style and reduce cancellations by 27%",
+  4: "AI agent makes personalized confirmation calls with natural conversation flow and automatic EHR updates"
 };
 
 // Medical scribe labels with concrete time-saving benefits
@@ -35,12 +36,13 @@ const adminTasksLabels: Record<number, string> = {
   2: "Reduces insurance-related delays by 65% through continuous automated verification processes"
 };
 
-// Post-Visit support labels emphasizing better outcomes
+// Post-Visit support labels emphasizing better outcomes and AI agent
 const postVisitLabels: Record<number, string> = {
-  0: "Increases medication adherence by 40% through personalized reminder scheduling",
-  1: "Enables early intervention by monitoring patient-reported outcomes between visits",
+  0: "AI agent increases medication adherence by 40% through personalized reminder scheduling",
+  1: "Enables early intervention by AI agent monitoring patient-reported outcomes between visits",
   2: "AI-powered responses to routine questions, verified by clinical research and best practices",
-  3: "Reduces readmissions by 32% through automated remote monitoring and threshold alerts"
+  3: "Reduces readmissions by 32% through automated AI monitoring and threshold alerts",
+  4: "AI agent collects and analyzes patient feedback to help improve practice operations and clinical outcomes"
 };
 
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
@@ -143,7 +145,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      if (currentStage === 1) { // For AI Medical Scribe
+      if (currentStage === 0) { // For Patient Engagement - now with 5 steps
+        setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+      } else if (currentStage === 1) { // For AI Medical Scribe
         setSubStep((prev) => {
           const nextStep = prev >= 5 ? 0 : prev + 1; // Now using 6 steps with EHR integration
           
@@ -166,10 +170,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         });
       } else if (currentStage === 2) { // For Admin Tasks
         setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
-      } else if (currentStage === 3) { // For Post-Visit Support
-        setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
-      } else {
-        setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
+      } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
+        setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
       }
     }, 10000); // Longer interval for better reading (10 seconds)
 
@@ -219,30 +221,57 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 />
               </div>
               
-              {/* Add descriptive label for patient engagement */}
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={`patient-engagement-label-${subStep}`}
-                  className="w-full z-30 mt-4 px-4"
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
-                >
+              {/* Add descriptive label for patient engagement - appropriate for both mobile and desktop */}
+              {!isMobile ? (
+                <AnimatePresence mode="wait">
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
-                    whileHover={{ scale: 1.02, y: -2 }}
+                    key={`patient-engagement-label-${subStep}`}
+                    className="w-full z-30 mt-4 px-4"
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <div className="font-bold text-xl md:text-2xl">
-                      {subStep === 0 ? "Patient Messaging" : 
-                       subStep === 1 ? "Appointment Scheduling" : 
-                       subStep === 2 ? "Smart Intake Forms" : 
-                       "Automated Reminders"}
-                    </div>
-                    <div className="mt-2 text-sm md:text-base text-white/90">{patientEngagementLabels[subStep]}</div>
+                    <motion.div 
+                      className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
+                      whileHover={{ scale: 1.02, y: -2 }}
+                    >
+                      <div className="font-bold text-xl md:text-2xl">
+                        {subStep === 0 ? "Patient Messaging" : 
+                         subStep === 1 ? "Appointment Scheduling" : 
+                         subStep === 2 ? "Smart Intake Forms" : 
+                         subStep === 3 ? "Automated Reminders" :
+                         "AI Appointment Calls"}
+                      </div>
+                      <div className="mt-2 text-sm md:text-base text-white/90">{patientEngagementLabels[subStep]}</div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              ) : (
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={`patient-engagement-label-mobile-${subStep}`}
+                    className="w-full z-30 mt-2 px-2"
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <motion.div 
+                      className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-lg mx-auto border border-white/20"
+                    >
+                      <div className="font-bold text-base">
+                        {subStep === 0 ? "Patient Messaging" : 
+                         subStep === 1 ? "Appointment Scheduling" : 
+                         subStep === 2 ? "Smart Intake Forms" : 
+                         subStep === 3 ? "Automated Reminders" :
+                         "AI Appointment Calls"}
+                      </div>
+                      <div className="mt-1 text-xs text-white/90">{patientEngagementLabels[subStep]}</div>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+              )}
           
               {/* Consistent cursor styling with SVG gradient */}
               <Pointer>

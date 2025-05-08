@@ -86,7 +86,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
                 noteGeneration={noteGeneration}
-                hideTitle={hideTitle}
+                hideTitle={true}
               />
               
               {/* Enhanced cursor styling */}
@@ -119,7 +119,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               </Pointer>
             </div>
             
-            {/* Redesigned floating label with enhanced design - now positioned at bottom for mobile too */}
+            {/* Redesigned floating label with enhanced design - now positioned consistently for both desktop and mobile */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
@@ -147,11 +147,11 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               subStep={subStep}
               transcriptionActive={transcriptionActive}
               noteGeneration={noteGeneration}
-              hideTitle={hideTitle}
+              hideTitle={true}
             />
           </div>
           
-          {/* Only show title tooltip if not hidden - positioned at the bottom for better mobile view */}
+          {/* Only show title tooltip if not hidden - positioned consistently */}
           {!hideTitle && (
             <motion.div 
               className="w-full z-30 mt-4 px-4"

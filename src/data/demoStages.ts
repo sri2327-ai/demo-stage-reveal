@@ -7,10 +7,11 @@ export const demoStages: DemoStage[] = [
     title: 'Patient Engagement',
     description: "S10.AI's virtual assistant integrates with your existing tools to enhance patient engagement through automated messaging, scheduling, and reminders.",
     highlights: [
-      'Automated scheduling with your calendar',
-      'Smart intake forms for your EHR',
-      'Appointment reminders via your systems',
-      'Self-service options through existing portals'
+      'AI messaging with your clinical voice',
+      'Smart scheduling with your calendar',
+      'Intelligent intake forms for your EHR',
+      'Automated reminders via your systems',
+      'AI phone calls for appointment confirmations'
     ]
   },
   {
@@ -21,7 +22,8 @@ export const demoStages: DemoStage[] = [
       'Voice recognition',
       'Automated documentation',
       'EHR integration',
-      'Coding assistance'
+      'Coding assistance',
+      'Custom field mapping'
     ]
   },
   {
@@ -32,6 +34,7 @@ export const demoStages: DemoStage[] = [
       'Insurance verification with your billing system',
       'Prior authorizations via existing workflows',
       'Claims processing enhancement',
+      'Prescription management',
       'Billing optimization with your software'
     ]
   },
@@ -43,7 +46,8 @@ export const demoStages: DemoStage[] = [
       'Treatment adherence through your patient portal',
       'Care plan monitoring with your existing tools',
       'Patient questions via your communication systems',
-      'Recovery tracking integrated with your EHR'
+      'Recovery tracking integrated with your EHR',
+      'Patient feedback and satisfaction analysis'
     ]
   }
 ];

@@ -15,10 +15,11 @@ interface FigmaPostVisitSupportInteractiveProps {
 
 // Enhanced clinical descriptions with specific outcomes and benefits
 const labelDescriptions: Record<string, string> = {
-  "Treatment Adherence": "Personalized medication reminders with dosage instructions sent via your patient portal or SMS, improving adherence rates by 40%",
-  "Care Plan Monitoring": "Digital care plans with patient-reported outcomes tracking, allowing for early identification of treatment failures or complications",
+  "Treatment Adherence": "AI agent sends personalized medication reminders with dosage instructions via your patient portal or SMS, improving adherence rates by 40%",
+  "Care Plan Monitoring": "Digital care plans with patient-reported outcomes tracking, allowing AI agent to identify treatment failures or complications early",
   "Patient Questions": "24/7 AI-powered responses to FAQs with clinician oversight, freeing up your staff from routine inquiries while ensuring clinical accuracy",
-  "Recovery Tracking": "Automated remote monitoring with threshold alerts for early intervention, reducing hospital readmissions by identifying complications early"
+  "Recovery Tracking": "Automated remote monitoring with threshold alerts for early intervention, reducing hospital readmissions by identifying complications early",
+  "Patient Feedback": "AI agent automatically collects and analyzes patient satisfaction data, helping improve practice operations and clinical outcomes"
 };
 
 export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInteractiveProps> = ({
@@ -36,6 +37,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     else if (subStep === 1) setActiveLabel("Care Plan Monitoring");
     else if (subStep === 2) setActiveLabel("Patient Questions");
     else if (subStep === 3) setActiveLabel("Recovery Tracking");
+    else if (subStep === 4) setActiveLabel("Patient Feedback");
   }, [subStep]);
   
   // Get the current label for either hover state or active step
@@ -48,7 +50,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     }
     
     // Fallback to current substep
-    const stepLabels = ["Treatment Adherence", "Care Plan Monitoring", "Patient Questions", "Recovery Tracking"];
+    const stepLabels = ["Treatment Adherence", "Care Plan Monitoring", "Patient Questions", "Recovery Tracking", "Patient Feedback"];
     const currentStepLabel = stepLabels[subStep];
     return {
       title: currentStepLabel,
@@ -59,8 +61,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   // Handle click on the illustration area - now the entire area is clickable
   const handleIllustrationClick = () => {
     if (onElementClick) {
-      // Cycle through steps on click
-      const nextStep = (subStep + 1) % 4;
+      // Cycle through steps on click - now 5 steps with feedback
+      const nextStep = (subStep + 1) % 5;
       onElementClick(nextStep);
     }
   };
@@ -77,6 +79,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={true}
+                hideTitle={true} // Always hide title now
               />
               
               {/* Enhanced cursor styling */}
@@ -109,7 +112,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               </Pointer>
             </div>
             
-            {/* Redesigned floating label with enhanced design - positioned at bottom for better mobile view */}
+            {/* Redesigned floating label with enhanced design - positioned appropriately for both desktop and mobile */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
@@ -136,6 +139,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}
+              hideTitle={true} // Always hide title now
             />
           </div>
           

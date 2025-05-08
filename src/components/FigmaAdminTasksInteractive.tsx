@@ -75,6 +75,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 isInteractive={true}
+                hideTitle={true} // Always hide title now
               />
               
               {/* Enhanced cursor styling */}
@@ -134,6 +135,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}
+              hideTitle={true} // Always hide title now
             />
           </div>
           
