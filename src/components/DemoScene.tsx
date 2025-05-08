@@ -1,8 +1,17 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { 
-  MousePointer2
+  MousePointer2,
+  Shield,
+  ClipboardCheck,
+  Database,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  MessageCircle,
+  User
 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage } from '../types/demo';
