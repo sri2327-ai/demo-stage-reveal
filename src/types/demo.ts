@@ -18,3 +18,8 @@ export interface DemoStageContentProps {
   isActive: boolean;
   index: number;
 }
+
+export interface DemoSceneProps {
+  currentStage: number;
+  stages: DemoStage[];
+}

@@ -11,7 +11,7 @@ import {
   Activity
 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
-import type { DemoStage } from '../types/demo';
+import type { DemoStage, DemoSceneProps } from '../types/demo';
 
 // Updated patient engagement labels with shorter, clearer descriptions
 const patientEngagementLabels: Record<number, string> = {
