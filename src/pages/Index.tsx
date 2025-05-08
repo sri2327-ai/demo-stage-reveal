@@ -203,6 +203,7 @@ const Index = () => {
                 <DemoStage 
                   stages={demoStages} 
                   autoPlay={hasScrolledToDemo} 
+                  isDemoSection={currentSection === 'demo'}
                 />
               </div>
             )}
