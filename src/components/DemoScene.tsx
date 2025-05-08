@@ -1,31 +1,17 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
+import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
 import { 
   MousePointer2,
-  Shield,
-  ClipboardCheck,
-  Database,
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  MessageCircle,
-  User,
-  FileText,
-  Mail,
-  DollarSign,
-  Receipt,
-  Calendar
+  Heart,
+  CalendarCheck,
+  MessageSquare, 
+  Activity
 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage } from '../types/demo';
-
-interface DemoSceneProps {
-  currentStage: number;
-  stages: DemoStage[];
-}
 
 // Updated patient engagement labels with shorter, clearer descriptions
 const patientEngagementLabels: Record<number, string> = {
@@ -51,6 +37,14 @@ const adminTasksLabels: Record<number, string> = {
   2: "Monitors insurance verification, claims processing, and payment tracking"
 };
 
+// Post-Visit support labels
+const postVisitLabels: Record<number, string> = {
+  0: "Personalized medication reminders for treatment adherence",
+  1: "Ongoing progress tracking through the care plan monitoring system",
+  2: "24/7 AI-assisted responses to patient questions with clinical oversight",
+  3: "Comprehensive monitoring and reporting of recovery outcomes"
+};
+
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
   const [subStep, setSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -73,6 +67,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(medicalScribeLabels[0]);
     } else if (currentStage === 2) {
       setActiveLabel(adminTasksLabels[0]);
+    } else if (currentStage === 3) {
+      setActiveLabel(postVisitLabels[0]);
     }
   }, [currentStage]);
   
@@ -84,6 +80,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(medicalScribeLabels[subStep]);
     } else if (currentStage === 2) {
       setActiveLabel(adminTasksLabels[subStep]);
+    } else if (currentStage === 3) {
+      setActiveLabel(postVisitLabels[subStep]);
     }
   }, [subStep, currentStage]);
 
@@ -117,6 +115,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(medicalScribeLabels[step]);
     } else if (currentStage === 2) {
       setActiveLabel(adminTasksLabels[step]);
+    } else if (currentStage === 3) {
+      setActiveLabel(postVisitLabels[step]);
     }
     
     // Auto-resume after longer inactivity (20 seconds)
@@ -152,6 +152,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         });
       } else if (currentStage === 2) { // For Admin Tasks
         setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
+      } else if (currentStage === 3) { // For Post-Visit Support
+        setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
@@ -244,42 +246,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           </div>
         );
         
-      case 3: // Post-Visit Support
+      case 3: // Post-Visit Support - Now using our new interactive illustration
         return (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="max-w-2xl bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold mb-4 text-[#143151]">Post-Visit Patient Support</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
-                  <CheckCircle className="text-[#387E89] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Treatment Adherence</h4>
-                    <p className="text-sm text-gray-600">Personalized medication reminders</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
-                  <Clock className="text-[#143151] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Care Plan Monitoring</h4>
-                    <p className="text-sm text-gray-600">Ongoing progress tracking</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#143151]/10">
-                  <MessageCircle className="text-[#387E89] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Patient Questions</h4>
-                    <p className="text-sm text-gray-600">24/7 AI-assisted responses</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-[#387E89]/10">
-                  <User className="text-[#143151] mt-1" size={20} />
-                  <div>
-                    <h4 className="font-medium text-[#143151]">Recovery Tracking</h4>
-                    <p className="text-sm text-gray-600">Outcome monitoring & reporting</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <FigmaPostVisitSupportInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+            />
           </div>
         );
 
