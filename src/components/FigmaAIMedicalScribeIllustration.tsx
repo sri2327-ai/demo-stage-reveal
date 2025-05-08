@@ -1,7 +1,17 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Calendar, ClipboardList, Mic, FileText, Stethoscope } from 'lucide-react';
+import { 
+  User, 
+  Calendar, 
+  ClipboardList, 
+  Mic, 
+  FileText, 
+  Stethoscope,
+  CheckCircle,
+  Shield,
+  Clock,
+  ArrowRight
+} from 'lucide-react';
 
 interface FigmaAIMedicalScribeIllustrationProps {
   subStep: number;
