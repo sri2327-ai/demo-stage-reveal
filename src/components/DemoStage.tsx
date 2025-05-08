@@ -5,6 +5,7 @@ import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
 import { Pause, Play, Info, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface DemoStageProps {
   stages: DemoStageType[];
@@ -21,6 +22,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [isPaused, setIsPaused] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
   const [animateControls, setAnimateControls] = useState(false);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (!autoPlay || isPaused) return;
@@ -96,7 +98,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
+      className="relative w-full h-[500px] sm:h-[600px] md:h-[750px] lg:h-[850px] bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -110,7 +112,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <motion.h3 
-              className="font-bold text-3xl"
+              className="font-bold text-xl md:text-2xl lg:text-3xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               key={`title-${currentStage}`}
@@ -119,7 +121,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               {getCurrentStageName()}
             </motion.h3>
             <motion.p
-              className="text-base text-white/80 mt-1 max-w-md"
+              className="text-sm md:text-base text-white/80 mt-1 max-w-md"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               key={`desc-${currentStage}`}
@@ -131,22 +133,22 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           <div className="flex items-center gap-2">
             <motion.button 
               onClick={togglePause}
-              className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition-all shadow-lg border border-white/20 group"
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 md:p-3 transition-all shadow-lg border border-white/20 group"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isPaused ? "Play demo" : "Pause demo"}
             >
               {isPaused ? (
-                <Play size={22} className="text-white group-hover:text-white/90" />
+                <Play size={isMobile ? 18 : 22} className="text-white group-hover:text-white/90" />
               ) : (
-                <Pause size={22} className="text-white group-hover:text-white/90" />
+                <Pause size={isMobile ? 18 : 22} className="text-white group-hover:text-white/90" />
               )}
             </motion.button>
           </div>
         </div>
       </motion.div>
       
-      {/* Arrow navigation overlays */}
+      {/* Arrow navigation overlays - larger and more visible */}
       <motion.div 
         className="absolute top-1/2 left-4 transform -translate-y-1/2 z-50"
         initial={{ opacity: 0, x: -20 }}
@@ -156,12 +158,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       >
         <motion.button
           onClick={handlePrevStage}
-          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-3 rounded-full shadow-lg border border-[#387E89]/20"
+          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-2 md:p-4 rounded-full shadow-lg border border-[#387E89]/20"
           whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
           whileTap={{ scale: 0.95 }}
           aria-label="Previous stage"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft size={isMobile ? 24 : 32} />
         </motion.button>
       </motion.div>
       
@@ -174,12 +176,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       >
         <motion.button
           onClick={handleNextStage}
-          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-3 rounded-full shadow-lg border border-[#387E89]/20"
+          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-2 md:p-4 rounded-full shadow-lg border border-[#387E89]/20"
           whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
           whileTap={{ scale: 0.95 }}
           aria-label="Next stage"
         >
-          <ChevronRight size={24} />
+          <ChevronRight size={isMobile ? 24 : 32} />
         </motion.button>
       </motion.div>
       
@@ -228,7 +230,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             >
               <Info size={18} className="mt-0.5 mr-3 flex-shrink-0" />
               <div>
-                <p className="font-medium text-sm">Click any highlighted area to interact with the workflow or use the navigation controls</p>
+                <p className="font-medium text-sm">Click anywhere on the animation to explore the workflow or use the navigation controls</p>
                 <button 
                   onClick={() => setShowTooltip(false)}
                   className="text-xs opacity-80 hover:opacity-100 mt-2 underline underline-offset-2"

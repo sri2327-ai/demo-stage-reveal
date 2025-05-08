@@ -7,11 +7,14 @@ import { Pointer, MouseTrackerProvider, PointerFollower } from '../components/ui
 import { ArrowDown, Sparkles, Brain, Zap, Clock, Hospital, Users, ShieldCheck } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
+import { ROISection } from '../components/ROISection';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const Index = () => {
   const demoRef = useRef<HTMLDivElement>(null);
   const [hasScrolledToDemo, setHasScrolledToDemo] = useState(false);
   const [isInViewport, setIsInViewport] = useState(false);
+  const isMobile = useIsMobile();
 
   // Scroll to demo section
   const scrollToDemo = () => {
@@ -45,7 +48,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section with Clinical Focus */}
       <MouseTrackerProvider>
-        <header className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+        <header className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4">
           {/* Background Elements */}
           <div className="absolute inset-0 z-0">
             <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
@@ -53,7 +56,7 @@ const Index = () => {
             <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
           </div>
           
-          <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
+          <div className="max-w-5xl mx-auto text-center relative z-10">
             <motion.div
               className="inline-block mb-4"
               initial={{ scale: 0.8, opacity: 0 }}
@@ -67,7 +70,7 @@ const Index = () => {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold text-blue-900 mb-6 leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6 leading-tight"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -79,7 +82,7 @@ const Index = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-xl text-blue-700/80 max-w-2xl mx-auto mb-10"
+              className="text-lg sm:text-xl text-blue-700/80 max-w-2xl mx-auto mb-10"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -97,7 +100,7 @@ const Index = () => {
               <Button 
                 onClick={scrollToDemo}
                 size="lg" 
-                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group"
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto"
               >
                 Explore Clinical Workflows
                 <ArrowDown className="ml-1 group-hover:translate-y-1 transition-transform" />
@@ -106,35 +109,35 @@ const Index = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
+                className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 w-full sm:w-auto"
               >
                 Schedule a Personalized Demo
               </Button>
             </motion.div>
             
             <motion.div 
-              className="flex justify-center items-center gap-8 mt-10 flex-wrap"
+              className="flex justify-center items-center gap-4 md:gap-8 mt-10 flex-wrap"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
-                  <Clock className="w-6 h-6 text-white" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
+                  <Clock className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-[#143151]">Save 2+ hours daily on documentation</p>
+                <p className="font-medium text-sm md:text-base text-[#143151]">Save 2+ hours daily</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
-                  <Users className="w-6 h-6 text-white" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
+                  <Users className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-[#143151]">Improve patient satisfaction scores</p>
+                <p className="font-medium text-sm md:text-base text-[#143151]">Higher satisfaction</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
-                  <ShieldCheck className="w-6 h-6 text-white" />
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 md:p-3 rounded-full">
+                  <ShieldCheck className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <p className="font-medium text-[#143151]">Seamless integration with your existing EHR</p>
+                <p className="font-medium text-sm md:text-base text-[#143151]">Seamless EHR integration</p>
               </div>
             </motion.div>
           </div>
@@ -189,52 +192,64 @@ const Index = () => {
       </MouseTrackerProvider>
 
       {/* Demo Section with Enhanced Clinical Context */}
-      <main className="px-4 pb-20 min-h-screen" ref={demoRef}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <motion.h2 
-              className="text-3xl font-bold text-[#143151] mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
-              transition={{ duration: 0.6 }}
-            >
-              How S10.AI Transforms Your Clinical Workflow
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-700 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Interactive demonstration showing key clinical workflows enhanced by S10.AI
-            </motion.p>
+      <main ref={demoRef}>
+        <div className="px-4 py-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <motion.h2 
+                className="text-2xl sm:text-3xl font-bold text-[#143151] mb-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
+                transition={{ duration: 0.6 }}
+              >
+                How S10.AI Transforms Your Clinical Workflow
+              </motion.h2>
+              <motion.p 
+                className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Interactive demonstration showing key clinical workflows enhanced by S10.AI
+              </motion.p>
+            </div>
+            
+            {isInViewport && (
+              <DemoStage 
+                stages={demoStages} 
+                autoPlay={hasScrolledToDemo} 
+              />
+            )}
           </div>
-          
-          {isInViewport && (
-            <DemoStage 
-              stages={demoStages} 
-              autoPlay={hasScrolledToDemo} 
-            />
-          )}
-          
-          <div className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-[#143151] mb-4">Ready to transform your practice?</h2>
-            <p className="text-gray-700 mb-6 max-w-lg mx-auto">
+        </div>
+        
+        {/* ROI Section */}
+        <ROISection />
+        
+        <div className="py-16 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-4">Ready to transform your practice?</h2>
+            <p className="text-gray-700 mb-8 max-w-lg mx-auto">
               Join thousands of clinicians already using S10.AI to reduce administrative burden and improve patient care.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="px-6 py-3 bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-lg shadow-lg hover:opacity-90 transition-colors">
+              <Button 
+                size={isMobile ? "default" : "lg"}
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+              >
                 Start 30-Day Free Trial
               </Button>
-              <Button variant="outline" className="px-6 py-3 border border-[#387E89] text-[#143151] rounded-lg hover:bg-[#387E89]/10 transition-colors">
+              <Button 
+                variant="outline" 
+                size={isMobile ? "default" : "lg"}
+                className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 w-full sm:w-auto"
+              >
                 Schedule a Demo
               </Button>
             </div>
           </div>
         </div>
       </main>
-      
-      {/* Footer removed as requested */}
     </div>
   );
 };
