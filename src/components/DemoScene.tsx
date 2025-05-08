@@ -135,9 +135,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
             onMouseMove={handleMouseMove}
           >
             <FigmaPatientEngagementIllustration
-              step={subStep}
-              isInteractive={true}
+              subStep={subStep}
+              cursorPosition={cursorPosition}
+              isProcessingCall={false}
               onElementClick={handleElementClick}
+              isInteractive={true}
             />
             
             {/* Custom cursor */}
