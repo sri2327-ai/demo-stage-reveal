@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
@@ -11,13 +12,13 @@ interface FigmaAIMedicalScribeInteractiveProps {
   isInteractive?: boolean;
 }
 
-// Updated labels with detailed descriptions for each step
+// Enhanced clinical descriptions for each step
 const labelDescriptions: Record<string, string> = {
-  "Authentication": "Log in to Crush securely with SSO or biometrics",
-  "Patient Schedule": "Auto-syncs schedule from EHR with patient demographics and visit info",
-  "Templates": "Auto-selects templates by visit type for consistent documentation",
-  "Recording": "Transcribes multilingual encounters in real-time with 99% accuracy",
-  "Generate Documentation": "Generates contextual notes with ICD-10/CPT/E/M codes, referencing prior visits and syncs to preferred EHR"
+  "Authentication": "Secure clinical login with SSO integration and biometric options, compliant with healthcare security standards",
+  "Patient Schedule": "Automatically syncs with your EHR, displaying patient demographics, visit reason, and relevant clinical history",
+  "Templates": "Specialty-specific templates pre-configured for your clinical workflow with customizable sections",
+  "Recording": "Multi-speaker transcription with medical terminology accuracy exceeding 98%, capturing provider-patient conversations naturally",
+  "Generate Documentation": "Creates structured clinical notes with proper ICD-10/CPT/E&M codes based on medical decision making, with full EHR integration"
 };
 
 export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInteractiveProps> = ({
@@ -67,11 +68,11 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               noteGeneration={noteGeneration}
             />
           
-            {/* Interactive elements using the same approach as patient engagement */}
+            {/* Interactive elements without transparent background */}
             <div className="absolute inset-0">
               {/* Login area - step 0 */}
               <div 
-                className={`absolute top-[15%] left-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[15%] left-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Authentication")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -86,7 +87,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Schedule area - step 1 */}
               <div 
-                className={`absolute top-[15%] right-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[15%] right-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Schedule")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -101,7 +102,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Templates area - step 2 */}
               <div 
-                className={`absolute top-[40%] left-[25%] w-[50%] h-[15%] z-20 flex items-center justify-center ${subStep === 2 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[40%] left-[25%] w-[50%] h-[15%] z-20 flex items-center justify-center ${subStep === 2 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Templates")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -116,7 +117,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Recording area - step 3 */}
               <div 
-                className={`absolute bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recording")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -131,7 +132,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Documentation area - step 4 */}
               <div 
-                className={`absolute bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 4 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 4 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(4)}
                 onMouseEnter={() => setActiveLabel("Generate Documentation")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -151,11 +152,13 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                   fill: "url(#cursor-gradient)"
                 }} />
-                <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
+                <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">
+                  You
+                </span>
               </div>
             </Pointer>
             
-            {/* Fixed label at the top */}
+            {/* Clinical context enhanced label */}
             <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm animate-scale-in">
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>

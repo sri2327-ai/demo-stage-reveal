@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
@@ -9,12 +10,12 @@ interface FigmaPostVisitSupportInteractiveProps {
   isInteractive?: boolean;
 }
 
-// Updated descriptions to emphasize integration with existing provider tools
+// Enhanced clinical descriptions with specific outcomes and benefits
 const labelDescriptions: Record<string, string> = {
-  "Treatment Adherence": "AI sends personalized medication reminders through your existing patient portal or SMS system",
-  "Care Plan Monitoring": "AI tracks ongoing patient progress using your existing care plan management tools",
-  "Patient Questions": "AI provides 24/7 responses to common patient questions via your established communication channels with clinical oversight",
-  "Recovery Tracking": "AI monitors patient recovery through your existing EHR data for comprehensive outcome reporting"
+  "Treatment Adherence": "Personalized medication reminders with dosage instructions sent via your patient portal or SMS, improving adherence rates by 40%",
+  "Care Plan Monitoring": "Digital care plans with patient-reported outcomes tracking, allowing for early identification of treatment failures or complications",
+  "Patient Questions": "24/7 AI-powered responses to FAQs with clinician oversight, freeing up your staff from routine inquiries while ensuring clinical accuracy",
+  "Recovery Tracking": "Automated remote monitoring with threshold alerts for early intervention, reducing hospital readmissions by identifying complications early"
 };
 
 export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInteractiveProps> = ({
@@ -68,11 +69,11 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               }}
             />
           
-            {/* Interactive elements using the same approach as patient engagement */}
+            {/* Interactive elements using consistent approach */}
             <div className="absolute inset-0">
               {/* Treatment Adherence area - step 0 */}
               <div 
-                className={`absolute top-[20%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[20%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Treatment Adherence")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -87,7 +88,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Care Plan Monitoring area - step 1 */}
               <div 
-                className={`absolute top-[42%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[42%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Care Plan Monitoring")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -102,7 +103,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Patient Questions area - step 2 */}
               <div 
-                className={`absolute top-[64%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 2 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute top-[64%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 2 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Patient Questions")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -117,7 +118,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Recovery Tracking area - step 3 */}
               <div 
-                className={`absolute bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
+                className={`absolute bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'ring-2 ring-blue-500 rounded-lg transition-all duration-300' : ''}`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recovery Tracking")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -137,11 +138,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                   fill: "url(#cursor-gradient)"
                 }} />
-                <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
+                <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">
+                  You
+                </span>
               </div>
             </Pointer>
             
-            {/* Enhanced label styling */}
+            {/* Enhanced clinical label styling */}
             <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm animate-scale-in">
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>
