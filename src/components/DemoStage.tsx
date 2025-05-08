@@ -3,20 +3,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
-import type { DemoStage as DemoStageType } from '../types/demo';
+import type { DemoStageProps } from '../types/demo';
 import { Pause, Play, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
-
-interface DemoStageProps {
-  stages: DemoStageType[];
-  autoPlay?: boolean;
-  autoPlayInterval?: number;
-}
 
 export const DemoStage: React.FC<DemoStageProps> = ({ 
   stages, 
   autoPlay = true, 
-  autoPlayInterval = 5000 
+  autoPlayInterval = 5000,
+  isDemoSection = true
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -179,7 +174,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           currentStage={currentStage}
           totalStages={stages.length}
           onStageChange={handleStageChange}
-          isDemoSection={true}
+          isDemoSection={isDemoSection}
         />
       </motion.div>
       

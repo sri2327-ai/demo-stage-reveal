@@ -24,3 +24,10 @@ export interface DemoSceneProps {
   currentStage: number;
   stages: DemoStage[];
 }
+
+export interface DemoStageProps {
+  stages: DemoStage[];
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  isDemoSection?: boolean;
+}
