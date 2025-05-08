@@ -11,6 +11,7 @@ export interface DemoStageIndicatorProps {
   currentStage: number;
   totalStages: number;
   onStageChange: (stage: number) => void;
+  isDemoSection?: boolean;
 }
 
 export interface DemoStageContentProps {

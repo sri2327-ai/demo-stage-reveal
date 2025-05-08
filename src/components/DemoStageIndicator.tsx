@@ -8,13 +8,19 @@ import { useIsMobile } from '../hooks/use-mobile';
 export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({ 
   currentStage, 
   totalStages, 
-  onStageChange 
+  onStageChange,
+  isDemoSection = false
 }) => {
   const isMobile = useIsMobile();
   
+  // Don't render if not in demo section and isDemoSection is specified
+  if (isDemoSection === false) {
+    return null;
+  }
+  
   return (
-    <div className={`${isMobile ? 'fixed bottom-16 left-0 right-0 flex justify-center' : 'fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col'} gap-4 z-50`}>
-      <div className={`${isMobile ? 'flex gap-3 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-[#387E89]/20' : 'bg-white p-4 rounded-xl shadow-xl border-2 border-[#387E89] flex flex-col gap-4'}`}>
+    <div className={`${isMobile ? 'fixed bottom-20 left-0 right-0 flex justify-center' : 'fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col'} gap-4 z-50`}>
+      <div className={`${isMobile ? 'flex gap-3 bg-gradient-to-r from-[#143151]/80 to-[#387E89]/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-[#387E89]/20' : 'bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-white/20 flex flex-col gap-4'}`}>
         {Array.from({ length: totalStages }).map((_, index) => (
           <motion.button
             key={index}
@@ -28,9 +34,9 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
             <motion.div
               className={`h-6 w-6 md:h-8 md:w-8 rounded-full ${
                 index === currentStage 
-                  ? 'bg-gradient-to-r from-[#143151] to-[#387E89] ring-2 ring-[#387E89]/30 ring-offset-2' 
+                  ? 'bg-white ring-2 ring-white/30 ring-offset-2 ring-offset-[#143151]/50' 
                   : index < currentStage 
-                    ? 'bg-gradient-to-r from-[#143151]/80 to-[#387E89]/80' 
+                    ? 'bg-white/80' 
                     : 'bg-gray-300'
               } flex items-center justify-center cursor-pointer`}
               initial={{ scale: 1 }}
@@ -46,13 +52,13 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
               }}
             >
               {index < currentStage && (
-                <CheckCircle className="h-4 w-4 text-white" />
+                <CheckCircle className={`h-4 w-4 ${index === currentStage ? 'text-[#143151]' : 'text-[#143151]'}`} />
               )}
             </motion.div>
             
             {index === currentStage && (
               <motion.div
-                className="absolute inset-0 rounded-full bg-[#387E89]/50"
+                className="absolute inset-0 rounded-full bg-white/50"
                 initial={{ scale: 1 }}
                 animate={{ scale: [1, 1.8, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}

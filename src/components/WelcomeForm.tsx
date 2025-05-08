@@ -85,8 +85,7 @@ export const WelcomeForm = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            Complete this quick form to access our advanced AI medical scribe 
-            demonstration and see how we can transform your clinical workflow.
+            Complete this quick form to access our advanced AI Medical Scribe, CRUSH, and AI Agent, BRAVO, demonstration—and discover how we can transform your clinical workflow.
           </motion.p>
           
           <motion.div 
@@ -99,13 +98,13 @@ export const WelcomeForm = () => {
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 rounded-full">
                 <Users className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm text-gray-700">Trusted by 10,000+ healthcare professionals</p>
+              <p className="text-sm text-gray-700">Trusted by over 1,000 healthcare professionals</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 rounded-full">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm text-gray-700">Reduces documentation time by up to 70%</p>
+              <p className="text-sm text-gray-700">Reduces documentation time by up to 75%</p>
             </div>
           </motion.div>
         </div>

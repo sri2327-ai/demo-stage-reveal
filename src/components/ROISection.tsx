@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from './ui/card';
@@ -27,14 +26,14 @@ export const ROISection = () => {
       icon: <DollarSign className="w-10 h-10 text-[#143151]" />,
       title: "Revenue Increase",
       description: "Streamlined billing workflows and reduced claim rejections lead to significant revenue improvements",
-      value: "27%",
+      value: "40%",
       metric: "more revenue"
     },
     {
       icon: <TrendingUp className="w-10 h-10 text-[#143151]" />,
       title: "Patient Satisfaction",
       description: "Improved communication and follow-up leads to higher patient satisfaction scores",
-      value: "94%",
+      value: "95%",
       metric: "satisfaction"
     }
   ];

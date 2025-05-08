@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
@@ -23,15 +23,29 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [showTooltip, setShowTooltip] = useState(true);
   const [animateControls, setAnimateControls] = useState(false);
   const isMobile = useIsMobile();
+  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   
+  // Effect for auto-play functionality with improved timer management
   useEffect(() => {
-    if (!autoPlay || isPaused) return;
+    // Clear any existing timer
+    if (autoPlayTimerRef.current) {
+      clearInterval(autoPlayTimerRef.current);
+      autoPlayTimerRef.current = null;
+    }
     
-    const timer = setInterval(() => {
-      setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));
-    }, autoPlayInterval);
+    // Only set a new timer if autoPlay is true and not paused
+    if (autoPlay && !isPaused) {
+      autoPlayTimerRef.current = setInterval(() => {
+        setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));
+      }, autoPlayInterval);
+    }
     
-    return () => clearInterval(timer);
+    // Cleanup timer on unmount
+    return () => {
+      if (autoPlayTimerRef.current) {
+        clearInterval(autoPlayTimerRef.current);
+      }
+    };
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
 
   // Auto-hide tooltip after 10 seconds
@@ -164,6 +178,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           currentStage={currentStage}
           totalStages={stages.length}
           onStageChange={handleStageChange}
+          isDemoSection={true}
         />
       </motion.div>
       
@@ -171,7 +186,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence>
         {showTooltip && (
           <motion.div 
-            className="absolute bottom-16 sm:bottom-20 md:bottom-24 right-2 sm:right-4 md:right-6 z-30"
+            className="absolute bottom-24 sm:bottom-28 md:bottom-32 right-2 sm:right-4 md:right-6 z-30"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
