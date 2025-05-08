@@ -77,22 +77,22 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               noteGeneration={noteGeneration}
             />
           
-            {/* Interactive elements with improved animation */}
+            {/* Interactive elements with cleaner, bigger animations */}
             <div className="absolute inset-0">
               {stepAreas.map((area, index) => (
                 <motion.div 
                   key={area.name}
-                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer ${subStep === index ? 'ring-2 ring-[#387E89] rounded-lg' : ''}`}
+                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer`}
                   onClick={() => onElementClick && onElementClick(index)}
                   onMouseEnter={() => setActiveLabel(area.name)}
                   onMouseLeave={() => setActiveLabel(null)}
                   aria-label={`${area.name} area`}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(56, 126, 137, 0.08)" }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   {subStep !== index && (
                     <motion.div 
-                      className="p-2 rounded-lg text-[#143151] hover:bg-[#387E89]/10 transition-all"
+                      className="p-2 rounded-lg text-[#143151] transition-all text-center"
                       initial={{ opacity: 0.7 }}
                       whileHover={{ opacity: 1 }}
                     >
@@ -120,10 +120,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               <motion.div 
                 key={getCurrentLabel().title}
                 className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
               >
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
                   <div className="font-bold text-xl">{getCurrentLabel().title}</div>

@@ -210,15 +210,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </div>
               </Pointer>
               
-              {/* Single tooltip with consistent styling */}
+              {/* Enhanced tooltip with bigger animation */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={subStep}
                   className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
                 >
                   <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                     <div className="font-bold text-xl">
@@ -316,15 +316,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Add smooth transitions between stages */}
+      {/* Enhanced transitions between stages */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStage}
           className="w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {renderStageContent()}
         </motion.div>

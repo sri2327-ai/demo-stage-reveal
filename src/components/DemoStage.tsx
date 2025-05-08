@@ -90,10 +90,10 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <motion.div 
           key={currentStage}
           className="absolute inset-0 pt-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <DemoScene
             currentStage={currentStage}

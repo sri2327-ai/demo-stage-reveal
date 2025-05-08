@@ -74,26 +74,22 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               }}
             />
           
-            {/* Simplified interactive elements - removed text labels inside */}
+            {/* Cleaner interactive elements without outlines */}
             <div className="absolute inset-0">
               {stepAreas.map((area, index) => (
                 <motion.div 
                   key={area.name}
-                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer ${
-                    subStep === index ? 'ring-2 ring-[#387E89] rounded-lg' : ''
-                  }`}
+                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer`}
                   onClick={() => onElementClick && onElementClick(index)}
                   onMouseEnter={() => setActiveLabel(area.name)}
                   onMouseLeave={() => setActiveLabel(null)}
                   aria-label={`${area.name} area`}
                   whileHover={{ 
-                    boxShadow: "0 0 0 2px rgba(56, 126, 137, 0.3)",
-                    backgroundColor: "rgba(56, 126, 137, 0.05)"
+                    scale: 1.03,
+                    backgroundColor: "rgba(56, 126, 137, 0.08)"
                   }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  {/* Empty div - no text labels inside the clickable areas */}
-                </motion.div>
+                />
               ))}
             </div>
             
@@ -117,15 +113,15 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </div>
             </Pointer>
             
-            {/* Single tooltip with consistent styling */}
+            {/* Enhanced tooltip with bigger animation */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
                 className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
               >
                 <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                   <div className="font-bold text-xl">{getCurrentLabel().title}</div>
