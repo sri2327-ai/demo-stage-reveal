@@ -4,46 +4,46 @@ import type { DemoStage } from '../types/demo';
 export const demoStages: DemoStage[] = [
   {
     id: 'stage1',
-    title: 'Discover New Features',
-    description: 'Explore our latest platform updates designed to enhance your workflow and boost productivity.',
+    title: 'Patient Engagement',
+    description: 'S10.AI enhances patient engagement with automated messaging, scheduling, and reminders—all powered by AI.',
     highlights: [
-      'Redesigned dashboard',
-      'Faster performance',
-      'Advanced analytics',
-      'Collaborative tools'
+      'Automated scheduling',
+      'Smart intake forms',
+      'Appointment reminders',
+      'Self-service options'
     ]
   },
   {
     id: 'stage2',
-    title: 'Streamline Your Workflow',
-    description: 'Our integrated tools work together seamlessly to help you accomplish more in less time.',
+    title: 'AI Medical Scribe',
+    description: 'Eliminate documentation burden with real-time transcription and automatic note generation during patient visits.',
     highlights: [
-      'Automated reporting',
-      'Smart notifications',
-      'Custom workflows',
-      'Process templates'
+      'Voice recognition',
+      'Automated documentation',
+      'EHR integration',
+      'Coding assistance'
     ]
   },
   {
     id: 'stage3',
-    title: 'Powerful Integrations',
-    description: 'Connect with all your favorite tools and services to create a unified workspace.',
+    title: 'Admin Tasks',
+    description: 'Streamline back-office operations with AI-powered administrative task automation.',
     highlights: [
-      'API access',
-      '200+ app integrations',
-      'Data synchronization',
-      'Custom webhooks'
+      'Insurance verification',
+      'Prior authorizations',
+      'Claims processing',
+      'Billing optimization'
     ]
   },
   {
     id: 'stage4',
-    title: 'Enterprise-Grade Security',
-    description: 'Rest easy knowing your data is protected with industry-leading security and compliance features.',
+    title: 'Post-Visit Support',
+    description: 'Extend care beyond the clinic with AI-driven follow-up and ongoing patient support.',
     highlights: [
-      'End-to-end encryption',
-      'Role-based access',
-      'Audit logging',
-      'GDPR compliant'
+      'Treatment adherence',
+      'Care plan monitoring',
+      'Patient questions',
+      'Recovery tracking'
     ]
   }
 ];

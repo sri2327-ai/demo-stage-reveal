@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { DemoStageContent } from './DemoStageContent';
 import { DemoStageIndicator } from './DemoStageIndicator';
+import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
 
 interface DemoStageProps {
@@ -51,15 +51,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm">
-        {stages.map((stage, index) => (
-          <DemoStageContent 
-            key={stage.id} 
-            stage={stage} 
-            isActive={currentStage === index}
-            index={index}
-          />
-        ))}
+      <div className="absolute inset-0">
+        <DemoScene
+          currentStage={currentStage}
+          stages={stages}
+        />
       </div>
       
       <div className="absolute bottom-6 left-0 right-0 flex flex-col">

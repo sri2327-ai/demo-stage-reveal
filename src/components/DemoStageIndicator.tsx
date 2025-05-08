@@ -66,10 +66,10 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
             transition={{ duration: 0.3 }}
           >
             <div className="bg-white px-4 py-2 rounded-lg text-sm text-blue-900 whitespace-nowrap border border-blue-200 shadow-lg font-medium">
-              {index === 0 && "Discover New Features"}
-              {index === 1 && "Streamline Your Workflow"}
-              {index === 2 && "Powerful Integrations"}
-              {index === 3 && "Enterprise-Grade Security"}
+              {index === 0 && "Patient Engagement"}
+              {index === 1 && "AI Medical Scribe"}
+              {index === 2 && "Admin Tasks"}
+              {index === 3 && "Post-Visit Support"}
             </div>
             <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-2 h-2 rotate-45 bg-white border-r border-t border-blue-200"></div>
           </motion.div>

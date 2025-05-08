@@ -1,13 +1,36 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { DemoStage } from '../components/DemoStage';
 import { demoStages } from '../data/demoStages';
 import { motion } from 'framer-motion';
 
 const Index = () => {
+  const demoRef = useRef<HTMLDivElement>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  // Scroll to demo section
+  const scrollToDemo = () => {
+    if (demoRef.current) {
+      demoRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Track if user has scrolled past the hero section
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
+      setHasScrolled(scrollY > heroHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <header className="pt-16 pb-10 px-4 relative">
+      {/* Hero Section */}
+      <header className="min-h-screen flex flex-col items-center justify-center pt-16 pb-10 px-4 relative">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h1 
             className="text-4xl md:text-5xl font-bold text-blue-900 mb-4"
@@ -27,10 +50,11 @@ const Index = () => {
           </motion.p>
           
           <motion.div
-            className="animate-bounce flex flex-col items-center mt-10 text-blue-600"
+            className="animate-bounce flex flex-col items-center mt-10 text-blue-600 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
+            onClick={scrollToDemo}
           >
             <p className="font-medium mb-2">Scroll to begin the journey</p>
             <svg 
@@ -51,14 +75,15 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="px-4 pb-20">
+      {/* Demo Section - Starts on second scroll */}
+      <main className="px-4 pb-20" ref={demoRef}>
         <div className="max-w-5xl mx-auto">
           <DemoStage stages={demoStages} />
           
           <div className="mt-16 text-center">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to get started?</h2>
             <p className="text-gray-700 mb-6 max-w-lg mx-auto">
-              Join thousands of teams already using our platform to improve their workflow.
+              Join thousands of healthcare teams already using S10.AI to improve their workflow and patient care.
             </p>
             <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
               Start Free Trial
@@ -69,7 +94,7 @@ const Index = () => {
       
       <footer className="bg-blue-900 text-white py-10 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <p>© 2025 Demo Stage Reveal. All rights reserved.</p>
+          <p>© 2025 S10.AI Clinical Automation. All rights reserved.</p>
         </div>
       </footer>
     </div>
