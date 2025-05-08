@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
@@ -32,19 +31,30 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [activeLabel, setActiveLabel] = useState('');
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Reset states when stage changes
   useEffect(() => {
     console.info('DemoScene effect running with currentStage:', currentStage);
     setSubStep(0);
-
-    // Reset states when stage changes
     setTranscriptionActive(false);
     setNoteGeneration(false);
+    
+    // Auto-show first label after stage change
+    if (currentStage === 0) {
+      setActiveLabel(patientEngagementLabels[0]);
+    }
   }, [currentStage]);
+  
+  // Auto-show label based on current subStep for Patient Engagement demo
+  useEffect(() => {
+    if (currentStage === 0 && !isPaused) {
+      setActiveLabel(patientEngagementLabels[subStep]);
+    }
+  }, [subStep, currentStage, isPaused]);
 
   // Handle user click on interactive elements
   const handleElementClick = (step: number) => {
     console.info('Interactive element clicked, step:', step);
-    // Pause auto-advance
+    // Pause auto-advance for longer duration
     setIsPaused(true);
     setSubStep(step);
     
@@ -64,14 +74,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       }
     }
     
-    // Auto-resume after inactivity (5 seconds)
+    // Auto-resume after longer inactivity (10 seconds instead of 5)
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 5000);
+    }, 10000); // Increased to 10 seconds
   };
 
   // Auto-advance substeps unless paused
@@ -98,7 +108,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
-    }, 3000);
+    }, 5000); // Slightly longer interval for better reading
 
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
@@ -107,8 +117,21 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const handlePatientEngagementHover = (step: number | null) => {
     if (step !== null && patientEngagementLabels[step]) {
       setActiveLabel(patientEngagementLabels[step]);
-    } else {
-      setActiveLabel('');
+      
+      // Pause auto-advance during hover
+      setIsPaused(true);
+      
+      // Clear any existing timer
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+      
+      // Auto-resume after inactivity
+      resetTimerRef.current = setTimeout(() => {
+        setIsPaused(false);
+      }, 10000); // 10 seconds pause during hover
+    } else if (step === null) {
+      // Don't clear the label on mouse leave to keep it visible
     }
   };
 
@@ -135,14 +158,12 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
               </Pointer>
               
-              {/* Add labels based on cursor position */}
-              {activeLabel && (
-                <PointerFollower align="bottom-right">
-                  <div className="bg-blue-900 text-white px-3 py-2 rounded text-sm shadow-md max-w-[250px]">
-                    {activeLabel}
-                  </div>
-                </PointerFollower>
-              )}
+              {/* Always show active label */}
+              <PointerFollower align="bottom-right" alwaysVisible={true}>
+                <div className="bg-blue-900 text-white px-3 py-2 rounded text-sm shadow-md max-w-[250px]">
+                  {activeLabel || patientEngagementLabels[subStep]}
+                </div>
+              </PointerFollower>
             </div>
           </MouseTrackerProvider>
         );

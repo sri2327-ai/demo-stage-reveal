@@ -20,7 +20,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
   const [isActive, setIsActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Track mouse movement
+  // Track mouse movement with improved responsiveness
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (ref.current) {
@@ -28,6 +28,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
         // Calculate position relative to the container
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
+        // Update position immediately without batching
         setPosition({ x, y });
         setIsActive(true);
       }
@@ -43,7 +44,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
 
     const element = ref.current;
     if (element) {
-      element.addEventListener('mousemove', handleMouseMove);
+      element.addEventListener('mousemove', handleMouseMove, { passive: true });
       element.addEventListener('mouseleave', handleMouseLeave);
       element.addEventListener('mouseenter', handleMouseEnter);
       
@@ -91,12 +92,20 @@ export const Pointer: React.FC<PointerProps> = ({ children, className }) => {
           x: position.x, 
           y: position.y,
           opacity: isActive ? 1 : 0,
-          transition: {
-            type: "spring",
-            damping: 25,
-            stiffness: 300,
-            opacity: { duration: 0.15 }
-          }
+        }}
+        style={{ 
+          translateX: '-50%',
+          translateY: '-50%',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+        }}
+        transition={{
+          type: "spring",
+          damping: 25,
+          stiffness: 400,
+          mass: 0.1,
+          opacity: { duration: 0.15 }
         }}
       >
         {children || (
@@ -130,13 +139,15 @@ interface PointerFollowerProps {
   className?: string;
   delay?: number;
   align?: 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  alwaysVisible?: boolean;
 }
 
 export const PointerFollower: React.FC<PointerFollowerProps> = ({ 
   children, 
   className,
   delay = 0.1,
-  align = 'center'
+  align = 'center',
+  alwaysVisible = false
 }) => {
   const { position, isActive } = useMousePosition();
   
@@ -160,8 +171,8 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
         className={`pointer-events-none absolute z-40 ${className || ''}`}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
-          opacity: isActive ? 1 : 0,
-          scale: isActive ? 1 : 0.8,
+          opacity: alwaysVisible || isActive ? 1 : 0,
+          scale: alwaysVisible || isActive ? 1 : 0.8,
           x: position.x + offset.x, 
           y: position.y + offset.y,
           transition: {
