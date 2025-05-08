@@ -43,14 +43,14 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     };
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
 
-  // Auto-hide tooltip after 10 seconds
+  // Auto-hide tooltip after 5 seconds on mobile, 10 seconds on desktop
   useEffect(() => {
     const tooltipTimer = setTimeout(() => {
       setShowTooltip(false);
-    }, 10000);
+    }, isMobile ? 5000 : 10000);
     
     return () => clearTimeout(tooltipTimer);
-  }, []);
+  }, [isMobile]);
 
   // Show animation controls briefly when stage changes
   useEffect(() => {
@@ -67,8 +67,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   };
   
   // Pause autoplay when user interacts with navigation
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
+  const handleMouseEnter = () => !isMobile && setIsPaused(true);
+  const handleMouseLeave = () => !isMobile && setIsPaused(false);
   
   // Toggle pause/play manually
   const togglePause = () => setIsPaused(prev => !prev);
@@ -97,13 +97,20 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[500px] sm:h-[600px] md:h-[750px] lg:h-[850px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
+      className="relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={() => isMobile && setIsPaused(true)}
+      onTouchEnd={() => {
+        // Resume autoplay after 15 seconds of inactivity on touch devices
+        if (isMobile) {
+          setTimeout(() => setIsPaused(false), 15000);
+        }
+      }}
     >
-      {/* Stage name header with enhanced gradient design */}
+      {/* Stage name header with enhanced gradient design - improved for mobile */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 sm:py-5 sm:px-6 z-40 border-b border-white/10"
+        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-2 px-3 sm:py-3 sm:px-4 md:py-5 md:px-6 z-40 border-b border-white/10"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -111,7 +118,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <motion.h3 
-              className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl"
+              className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               key={`title-${currentStage}`}
@@ -120,7 +127,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               {getCurrentStageName()}
             </motion.h3>
             <motion.p
-              className="text-xs sm:text-sm md:text-base text-white/80 mt-1 max-w-md"
+              className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white/80 mt-0.5 sm:mt-1 max-w-md line-clamp-2 sm:line-clamp-none"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               key={`desc-${currentStage}`}
@@ -132,15 +139,15 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           <div className="flex items-center gap-2">
             <motion.button 
               onClick={togglePause}
-              className="bg-white/20 hover:bg-white/30 rounded-full p-1.5 sm:p-2 md:p-3 transition-all shadow-lg border border-white/20 group"
+              className="bg-white/20 hover:bg-white/30 rounded-full p-1 sm:p-1.5 md:p-2 transition-all shadow-lg border border-white/20 group"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isPaused ? "Play demo" : "Pause demo"}
             >
               {isPaused ? (
-                <Play size={isMobile ? 16 : 22} className="text-white group-hover:text-white/90" />
+                <Play size={isMobile ? 14 : 18} className="text-white group-hover:text-white/90" />
               ) : (
-                <Pause size={isMobile ? 16 : 22} className="text-white group-hover:text-white/90" />
+                <Pause size={isMobile ? 14 : 18} className="text-white group-hover:text-white/90" />
               )}
             </motion.button>
           </div>
@@ -150,7 +157,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-16 sm:pt-20 md:pt-24" /* Adjusted padding for header */
+          className="absolute inset-0 pt-12 sm:pt-14 md:pt-20 lg:pt-24" /* Adjusted padding for header */
           initial={{ opacity: 0, scale: 0.85 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
@@ -163,43 +170,47 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      {/* Moved DemoStageIndicator to a more responsive position */}
-      <motion.div 
-        className="absolute bottom-2 sm:bottom-6 md:bottom-8 left-0 right-0"
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <DemoStageIndicator 
-          currentStage={currentStage}
-          totalStages={stages.length}
-          onStageChange={handleStageChange}
-          isDemoSection={isDemoSection}
-        />
-      </motion.div>
+      {/* Responsive positioning for stage indicator */}
+      {isDemoSection && (
+        <motion.div 
+          className="absolute bottom-1 sm:bottom-2 md:bottom-4 lg:bottom-6 left-0 right-0"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <DemoStageIndicator 
+            currentStage={currentStage}
+            totalStages={stages.length}
+            onStageChange={handleStageChange}
+            isDemoSection={isDemoSection}
+          />
+        </motion.div>
+      )}
       
-      {/* Enhanced clinical context tooltip - now only shows on desktop */}
+      {/* Enhanced clinical context tooltip - improved for mobile and made visible on both desktop and mobile */}
       <AnimatePresence>
-        {showTooltip && !isMobile && (
+        {showTooltip && (
           <motion.div 
-            className="absolute bottom-24 sm:bottom-32 md:bottom-40 right-2 sm:right-4 md:right-6 z-30"
+            className={`absolute ${isMobile ? 'bottom-16' : 'bottom-24 sm:bottom-28 md:bottom-32'} ${isMobile ? 'right-2' : 'right-2 sm:right-4 md:right-6'} z-30`}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
             transition={{ delay: 1, duration: 0.5 }}
           >
             <motion.div 
-              className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-3 py-2 sm:px-5 sm:py-4 rounded-xl shadow-xl max-w-[200px] sm:max-w-xs flex items-start border border-white/10 backdrop-blur-sm"
+              className={`bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl shadow-xl ${isMobile ? 'max-w-[150px]' : 'max-w-[180px] sm:max-w-xs'} flex items-start border border-white/10 backdrop-blur-sm`}
               whileHover={{ scale: 1.03, y: -2 }}
             >
-              <Info size={isMobile ? 16 : 18} className="mt-0.5 mr-2 sm:mr-3 flex-shrink-0" />
+              <Info size={isMobile ? 12 : 16} className="mt-0.5 mr-1.5 sm:mr-2 flex-shrink-0" />
               <div>
-                <p className="font-medium text-xs sm:text-sm">Click anywhere on the animation to explore the workflow</p>
+                <p className={`font-medium ${isMobile ? 'text-[10px]' : 'text-xs sm:text-sm'}`}>
+                  {isMobile ? "Tap to explore features" : "Click anywhere on the animation to explore the workflow"}
+                </p>
                 <button 
                   onClick={() => setShowTooltip(false)}
-                  className="text-[10px] sm:text-xs opacity-80 hover:opacity-100 mt-1 sm:mt-2 underline underline-offset-2"
+                  className={`${isMobile ? 'text-[8px]' : 'text-[10px] sm:text-xs'} opacity-80 hover:opacity-100 mt-0.5 sm:mt-1 underline underline-offset-2`}
                 >
-                  Dismiss hint
+                  Dismiss
                 </button>
               </div>
             </motion.div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -86,9 +87,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   }, [subStep, currentStage]);
 
-  // Handle user click on interactive elements
+  // Handle user click/tap on interactive elements
   const handleElementClick = (step: number) => {
-    // Pause auto-advance for longer duration
+    // Pause auto-advance - longer for mobile to give users time to read
     setIsPaused(true);
     setSubStep(step);
     setInteractionActive(true);
@@ -128,21 +129,23 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(postVisitLabels[step]);
     }
     
-    // Auto-resume after longer inactivity (20 seconds)
+    // Auto-resume after inactivity - longer for mobile
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
+    // Longer pause on mobile to give users time to read
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
       setInteractionActive(false);
-    }, 20000); // 20 seconds for better interaction time
+    }, isMobile ? 30000 : 20000);
   };
 
-  // Auto-advance substeps unless paused
+  // Auto-advance substeps unless paused - adjusted timing for better mobile experience
   useEffect(() => {
     if (isPaused) return;
 
+    // Longer interval for mobile to give users time to read
     const interval = setInterval(() => {
       if (currentStage === 0) { // For Patient Engagement - now with 5 steps
         setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
@@ -172,10 +175,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
         setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
       }
-    }, 10000); // Longer interval for better reading (10 seconds)
+    }, isMobile ? 12000 : 10000); // Slightly longer interval for mobile
 
     return () => clearInterval(interval);
-  }, [currentStage, isPaused]);
+  }, [currentStage, isPaused, isMobile]);
 
   // Helper function to handle hovering over patient engagement steps
   const handlePatientEngagementHover = (step: number | null) => {
@@ -191,11 +194,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         clearTimeout(resetTimerRef.current);
       }
       
-      // Auto-resume after inactivity
+      // Auto-resume after inactivity - longer for mobile
       resetTimerRef.current = setTimeout(() => {
         setIsPaused(false);
         setInteractionActive(false);
-      }, 15000); // 15 seconds pause during hover
+      }, isMobile ? 25000 : 15000);
     } else {
       setInteractionActive(false);
     }
@@ -220,73 +223,51 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 />
               </div>
               
-              {/* Add descriptive label for patient engagement - appropriate for both mobile and desktop */}
-              {!isMobile ? (
-                <AnimatePresence mode="wait">
+              {/* Responsive descriptive label for patient engagement */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`patient-engagement-label-${subStep}`}
+                  className="w-full z-30 mt-1 sm:mt-2 md:mt-4 px-2 sm:px-4"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <motion.div 
-                    key={`patient-engagement-label-${subStep}`}
-                    className="w-full z-30 mt-4 px-4"
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                    transition={{ duration: 0.5 }}
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                   >
-                    <motion.div 
-                      className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
-                      whileHover={{ scale: 1.02, y: -2 }}
-                    >
-                      <div className="font-bold text-xl md:text-2xl">
-                        {subStep === 0 ? "Patient Messaging" : 
-                         subStep === 1 ? "Appointment Scheduling" : 
-                         subStep === 2 ? "Smart Intake Forms" : 
-                         subStep === 3 ? "Automated Reminders" :
-                         "AI Appointment Calls"}
-                      </div>
-                      <div className="mt-2 text-sm md:text-base text-white/90">{patientEngagementLabels[subStep]}</div>
-                    </motion.div>
+                    <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">
+                      {subStep === 0 ? "Patient Messaging" : 
+                       subStep === 1 ? "Appointment Scheduling" : 
+                       subStep === 2 ? "Smart Intake Forms" : 
+                       subStep === 3 ? "Automated Reminders" :
+                       "AI Appointment Calls"}
+                    </div>
+                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">
+                      {patientEngagementLabels[subStep]}
+                    </div>
                   </motion.div>
-                </AnimatePresence>
-              ) : (
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={`patient-engagement-label-mobile-${subStep}`}
-                    className="w-full z-30 mt-2 px-2"
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <motion.div 
-                      className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-lg mx-auto border border-white/20"
-                    >
-                      <div className="font-bold text-base">
-                        {subStep === 0 ? "Patient Messaging" : 
-                         subStep === 1 ? "Appointment Scheduling" : 
-                         subStep === 2 ? "Smart Intake Forms" : 
-                         subStep === 3 ? "Automated Reminders" :
-                         "AI Appointment Calls"}
-                      </div>
-                      <div className="mt-1 text-xs text-white/90">{patientEngagementLabels[subStep]}</div>
-                    </motion.div>
-                  </motion.div>
-                </AnimatePresence>
-              )}
+                </motion.div>
+              </AnimatePresence>
           
-              {/* Consistent cursor styling with SVG gradient */}
+              {/* Responsive cursor styling with SVG gradient */}
               <Pointer>
                 <div className="flex flex-col items-center">
-                  <svg width="32" height="32" viewBox="0 0 32 32" className="filter drop-shadow-md">
+                  <svg width={isMobile ? "24" : "32"} height={isMobile ? "24" : "32"} viewBox="0 0 32 32" className="filter drop-shadow-md">
                     <defs>
                       <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor="#143151" />
                         <stop offset="100%" stopColor="#387E89" />
                       </linearGradient>
                     </defs>
-                    <MousePointer2 size={32} className="stroke-white" style={{
+                    <MousePointer2 size={isMobile ? 24 : 32} className="stroke-white" style={{
                       fill: "url(#cursor-gradient)"
                     }} />
                   </svg>
-                  <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
+                  <span className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-[#387E89] mt-0.5 sm:mt-1 whitespace-nowrap bg-white px-1.5 py-0.5 sm:px-2 rounded-md shadow-sm`}>
+                    {isMobile ? "Tap" : "You"}
+                  </span>
                 </div>
               </Pointer>
             </div>
@@ -389,17 +370,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </motion.div>
       </AnimatePresence>
       
-      {/* Improved positioning for "Tap to explore" tooltip - now only visible on desktop */}
-      {!isMobile && (
+      {/* "Tap to explore" tooltip - responsive for both mobile and desktop */}
+      {!interactionActive && (
         <AnimatePresence>
           <motion.div 
-            className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30"
+            className="absolute bottom-12 sm:bottom-16 md:bottom-20 lg:bottom-24 left-1/2 transform -translate-x-1/2 z-30"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
           >
-            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 rounded-full text-sm text-[#143151] shadow-lg">
-              Click on different areas to explore features
+            <div className={`bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full text-xs sm:text-sm text-[#143151] shadow-lg`}>
+              {isMobile ? "Tap different areas to explore" : "Click on different areas to explore features"}
             </div>
           </motion.div>
         </AnimatePresence>
