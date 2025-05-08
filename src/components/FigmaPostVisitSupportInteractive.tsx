@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
@@ -69,43 +68,67 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               }}
             />
           
-            {/* Interactive overlay areas with clean interaction approach */}
+            {/* Interactive elements using the same approach as patient engagement */}
             <div className="absolute inset-0">
               {/* Treatment Adherence area - step 0 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[20%] left-[15%] w-[70%] h-[20%] z-20 ${subStep === 0 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[20%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Treatment Adherence")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Treatment Adherence area"
-              />
+              >
+                {subStep !== 0 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Treatment Adherence
+                  </div>
+                )}
+              </div>
               
               {/* Care Plan Monitoring area - step 1 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[42%] left-[15%] w-[70%] h-[20%] z-20 ${subStep === 1 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[42%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Care Plan Monitoring")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Care Plan Monitoring area"
-              />
+              >
+                {subStep !== 1 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Care Plan Monitoring
+                  </div>
+                )}
+              </div>
               
               {/* Patient Questions area - step 2 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[64%] left-[15%] w-[70%] h-[20%] z-20 ${subStep === 2 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[64%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 2 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Patient Questions")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Patient Questions area"
-              />
+              >
+                {subStep !== 2 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Patient Questions
+                  </div>
+                )}
+              </div>
               
               {/* Recovery Tracking area - step 3 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 ${subStep === 3 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recovery Tracking")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Recovery Tracking area"
-              />
+              >
+                {subStep !== 3 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Recovery Tracking
+                  </div>
+                )}
+              </div>
             </div>
             
             {/* Custom cursor without border */}

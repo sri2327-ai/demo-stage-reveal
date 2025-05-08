@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
@@ -66,34 +65,52 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               }}
             />
           
-            {/* Interactive overlay areas with clean approach like patient engagement */}
+            {/* Interactive elements using the same approach as patient engagement */}
             <div className="absolute inset-0">
               {/* Prescriptions & Orders area - step 0 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[20%] left-[15%] w-[70%] h-[25%] z-20 ${subStep === 0 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[20%] left-[15%] w-[70%] h-[25%] z-20 flex items-center justify-center ${subStep === 0 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Prescriptions & Orders")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Prescriptions & Orders area"
-              />
+              >
+                {subStep !== 0 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Prescriptions & Orders
+                  </div>
+                )}
+              </div>
               
               {/* Patient Communications area - step 1 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[50%] left-[15%] w-[70%] h-[20%] z-20 ${subStep === 1 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[50%] left-[15%] w-[70%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Communications")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Patient Communications area"
-              />
+              >
+                {subStep !== 1 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Patient Communications
+                  </div>
+                )}
+              </div>
               
               {/* Insurance & Billing area - step 2 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg bottom-[10%] left-[15%] w-[70%] h-[25%] z-20 ${subStep === 2 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute bottom-[10%] left-[15%] w-[70%] h-[25%] z-20 flex items-center justify-center ${subStep === 2 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Insurance & Billing")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Insurance & Billing area"
-              />
+              >
+                {subStep !== 2 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Insurance & Billing
+                  </div>
+                )}
+              </div>
             </div>
             
             {/* Custom cursor without border */}

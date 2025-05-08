@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
@@ -68,52 +67,82 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               noteGeneration={noteGeneration}
             />
           
-            {/* Interactive overlay areas - Using cleaner approach without transparent highlighting */}
+            {/* Interactive elements using the same approach as patient engagement */}
             <div className="absolute inset-0">
               {/* Login area - step 0 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[15%] left-[15%] w-[25%] h-[20%] z-20 ${subStep === 0 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[15%] left-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 0 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Authentication")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Authentication area"
-              />
+              >
+                {subStep !== 0 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Authentication
+                  </div>
+                )}
+              </div>
               
               {/* Schedule area - step 1 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[15%] right-[15%] w-[25%] h-[20%] z-20 ${subStep === 1 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[15%] right-[15%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 1 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Schedule")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Patient Schedule area"
-              />
+              >
+                {subStep !== 1 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Patient Schedule
+                  </div>
+                )}
+              </div>
               
               {/* Templates area - step 2 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg top-[40%] left-[25%] w-[50%] h-[15%] z-20 ${subStep === 2 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute top-[40%] left-[25%] w-[50%] h-[15%] z-20 flex items-center justify-center ${subStep === 2 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Templates")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Templates area"
-              />
+              >
+                {subStep !== 2 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Templates
+                  </div>
+                )}
+              </div>
               
               {/* Recording area - step 3 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 ${subStep === 3 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 3 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recording")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Recording area"
-              />
+              >
+                {subStep !== 3 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Recording
+                  </div>
+                )}
+              </div>
               
               {/* Documentation area - step 4 */}
               <div 
-                className={`absolute cursor-pointer rounded-lg bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 ${subStep === 4 ? 'ring-2 ring-blue-500' : 'hover:ring-2 hover:ring-blue-500'} transition-all duration-300`}
+                className={`absolute bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 flex items-center justify-center ${subStep === 4 ? 'bg-blue-500/10 ring-2 ring-blue-500' : ''}`}
                 onClick={() => onElementClick && onElementClick(4)}
                 onMouseEnter={() => setActiveLabel("Generate Documentation")}
                 onMouseLeave={() => setActiveLabel(null)}
                 aria-label="Documentation area"
-              />
+              >
+                {subStep !== 4 && (
+                  <div className="p-2 rounded-lg text-blue-700 hover:bg-blue-200 transition-all cursor-pointer">
+                    Documentation
+                  </div>
+                )}
+              </div>
             </div>
             
             {/* Custom cursor without border */}
