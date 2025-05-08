@@ -34,8 +34,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   }, [subStep]);
   
   const getActiveAreaClass = (stepIndex: number) => {
-    // Replace transparent highlighting with ring styling
-    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'ring-2 ring-[#387E89] ring-opacity-70' : 'opacity-0 hover:opacity-100 hover:ring-2 hover:ring-[#387E89] hover:ring-opacity-40'}`;
+    // Use ring styling instead of transparency changes for better visibility
+    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'ring-2 ring-[#387E89] ring-opacity-80 shadow-lg' : 'opacity-0 hover:opacity-100 hover:ring-2 hover:ring-[#387E89] hover:ring-opacity-60 transition-all'}`;
   };
 
   // Get the current label for either hover state or active step
@@ -78,7 +78,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             <div className="absolute inset-0">
               {/* Treatment Adherence area - step 0 */}
               <div 
-                className={`${getActiveAreaClass(0)} top-[20%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(0)} top-[20%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Treatment Adherence")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -87,7 +87,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Care Plan Monitoring area - step 1 */}
               <div 
-                className={`${getActiveAreaClass(1)} top-[42%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(1)} top-[42%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Care Plan Monitoring")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -96,7 +96,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Patient Questions area - step 2 */}
               <div 
-                className={`${getActiveAreaClass(2)} top-[64%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(2)} top-[64%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Patient Questions")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -105,7 +105,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               
               {/* Recovery Tracking area - step 3 */}
               <div 
-                className={`${getActiveAreaClass(3)} bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(3)} bottom-[5%] left-[15%] w-[70%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recovery Tracking")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -113,19 +113,19 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               />
             </div>
             
-            {/* Custom cursor with gradient */}
+            {/* Custom cursor without border */}
             <Pointer>
               <div className="flex flex-col items-center">
                 <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                   fill: "url(#cursor-gradient)"
                 }} />
-                <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+                <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#143151] to-[#387E89] mt-1 whitespace-nowrap">You</span>
               </div>
             </Pointer>
             
-            {/* Enhanced consistent label styling */}
+            {/* Enhanced consistent label styling with animation */}
             <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] border border-white/20 backdrop-blur-sm">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] border border-white/20 backdrop-blur-sm animate-scale-in">
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>
                 <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
               </div>

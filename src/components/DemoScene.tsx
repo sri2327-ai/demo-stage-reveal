@@ -200,19 +200,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onHover={handlePatientEngagementHover}
               />
               
-              {/* Custom cursor for stage 0 with larger size and gradient */}
+              {/* Custom cursor for stage 0 - fixed to remove border */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                     fill: "url(#cursor-gradient)"
                   }} />
-                  <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+                  <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#143151] to-[#387E89] mt-1 whitespace-nowrap">You</span>
                 </div>
               </Pointer>
               
-              {/* Improved label display */}
-              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px]">
+              {/* Improved label display with animation */}
+              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px] animate-scale-in">
                   <div className="font-bold text-xl">
                     {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
                      currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :

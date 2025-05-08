@@ -42,8 +42,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   }, [subStep]);
   
   const getActiveAreaClass = (stepIndex: number) => {
-    // Remove the transparent highlighting by using opacity-0 when not active
-    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'ring-2 ring-[#387E89] ring-opacity-70' : 'opacity-0 hover:opacity-100 hover:ring-2 hover:ring-[#387E89] hover:ring-opacity-40'}`;
+    // Use ring styling instead of transparency changes for better visibility
+    return `absolute cursor-pointer rounded-lg ${stepIndex === subStep ? 'ring-2 ring-[#387E89] ring-opacity-80 shadow-lg' : 'opacity-0 hover:opacity-100 hover:ring-2 hover:ring-[#387E89] hover:ring-opacity-60 transition-all'}`;
   };
 
   // Get the current label for either hover state or active step
@@ -79,7 +79,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <div className="absolute inset-0">
               {/* Login area - step 0 */}
               <div 
-                className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(0)} top-[15%] left-[15%] w-[25%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(0)}
                 onMouseEnter={() => setActiveLabel("Authentication")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -88,7 +88,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Schedule area - step 1 */}
               <div 
-                className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(1)} top-[15%] right-[15%] w-[25%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(1)}
                 onMouseEnter={() => setActiveLabel("Patient Schedule")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -97,7 +97,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Templates area - step 2 */}
               <div 
-                className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(2)} top-[40%] left-[25%] w-[50%] h-[15%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(2)}
                 onMouseEnter={() => setActiveLabel("Templates")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -106,7 +106,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Recording area - step 3 */}
               <div 
-                className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(3)} bottom-[25%] left-[20%] w-[25%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(3)}
                 onMouseEnter={() => setActiveLabel("Recording")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -115,7 +115,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               
               {/* Documentation area - step 4 */}
               <div 
-                className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 transition-all duration-200`}
+                className={`${getActiveAreaClass(4)} bottom-[25%] right-[20%] w-[25%] h-[20%] z-20 transition-all duration-300`}
                 onClick={() => onElementClick && onElementClick(4)}
                 onMouseEnter={() => setActiveLabel("Generate Documentation")}
                 onMouseLeave={() => setActiveLabel(null)}
@@ -123,19 +123,19 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               />
             </div>
             
-            {/* Custom cursor with gradient */}
+            {/* Custom cursor without border */}
             <Pointer>
               <div className="flex flex-col items-center">
                 <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                   fill: "url(#cursor-gradient)"
                 }} />
-                <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mt-1">You</span>
+                <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#143151] to-[#387E89] mt-1 whitespace-nowrap">You</span>
               </div>
             </Pointer>
             
             {/* Fixed label at the top with improved styling */}
             <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl border border-white/20 max-w-[500px] backdrop-blur-sm">
+              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl border border-white/20 max-w-[500px] backdrop-blur-sm animate-scale-in">
                 <div className="font-bold text-xl">{getCurrentLabel().title}</div>
                 <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
               </div>
