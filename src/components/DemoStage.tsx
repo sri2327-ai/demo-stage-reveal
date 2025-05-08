@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
-import { Pause, Play } from 'lucide-react';
+import { Pause, Play, Info } from 'lucide-react';
 
 interface DemoStageProps {
   stages: DemoStageType[];
@@ -19,6 +19,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(true);
   
   useEffect(() => {
     if (!autoPlay || isPaused) return;
@@ -29,6 +30,15 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     
     return () => clearInterval(timer);
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
+
+  // Auto-hide tooltip after 10 seconds
+  useEffect(() => {
+    const tooltipTimer = setTimeout(() => {
+      setShowTooltip(false);
+    }, 10000);
+    
+    return () => clearTimeout(tooltipTimer);
+  }, []);
 
   const handleStageChange = (index: number) => {
     setCurrentStage(index);
@@ -64,13 +74,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           <h3 className="font-semibold">{getCurrentStageName()}</h3>
           <button 
             onClick={togglePause}
-            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-1 transition-all"
+            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-1.5 transition-all"
             aria-label={isPaused ? "Play demo" : "Pause demo"}
           >
             {isPaused ? (
-              <Play size={16} />
+              <Play size={18} />
             ) : (
-              <Pause size={16} />
+              <Pause size={18} />
             )}
           </button>
         </div>
@@ -100,17 +110,31 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Clinical context tooltip */}
-      <motion.div 
-        className="absolute bottom-16 right-4 z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
-      >
-        <div className="bg-white text-[#143151] px-4 py-2 rounded-lg shadow-lg text-sm max-w-xs">
-          <p className="font-medium">Click to interact or select a workflow stage</p>
-        </div>
-      </motion.div>
+      {/* Clinical context tooltip with improved animation and dismissal */}
+      <AnimatePresence>
+        {showTooltip && (
+          <motion.div 
+            className="absolute bottom-16 right-4 z-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-2 rounded-lg shadow-lg max-w-xs flex items-start">
+              <Info size={16} className="mt-0.5 mr-2 flex-shrink-0" />
+              <div>
+                <p className="font-medium">Click to interact or select a workflow stage</p>
+                <button 
+                  onClick={() => setShowTooltip(false)}
+                  className="text-xs opacity-80 hover:opacity-100 mt-1 underline underline-offset-2"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

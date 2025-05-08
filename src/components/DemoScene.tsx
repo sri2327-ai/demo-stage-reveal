@@ -51,7 +51,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Reset states when stage changes
   useEffect(() => {
-    console.info('DemoScene effect running with currentStage:', currentStage);
     setSubStep(0);
     setTranscriptionActive(false);
     setNoteGeneration(false);
@@ -83,7 +82,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Handle user click on interactive elements
   const handleElementClick = (step: number) => {
-    console.info('Interactive element clicked, step:', step);
     // Pause auto-advance for longer duration
     setIsPaused(true);
     setSubStep(step);
@@ -180,8 +178,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Helper function to determine what to render based on stage
   const renderStageContent = () => {
-    console.info('Current stage in DemoScene:', currentStage);
-    
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
@@ -196,27 +192,35 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onHover={handlePatientEngagementHover}
               />
               
-              {/* Custom cursor for stage 0 - updated styling for gradient consistency */}
+              {/* Consistent cursor styling with SVG gradient */}
               <Pointer>
                 <div className="flex flex-col items-center">
-                  <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
-                    fill: "url(#cursor-gradient)"
-                  }} />
+                  <svg width="32" height="32" viewBox="0 0 32 32" className="filter drop-shadow-md">
+                    <defs>
+                      <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#143151" />
+                        <stop offset="100%" stopColor="#387E89" />
+                      </linearGradient>
+                    </defs>
+                    <MousePointer2 size={32} className="stroke-white" style={{
+                      fill: "url(#cursor-gradient)"
+                    }} />
+                  </svg>
                   <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
                 </div>
               </Pointer>
               
-              {/* Improved label display with consistent animation */}
+              {/* Single tooltip with consistent styling */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={subStep}
-                  className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20"
+                  className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px]">
+                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                     <div className="font-bold text-xl">
                       {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
                        currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :

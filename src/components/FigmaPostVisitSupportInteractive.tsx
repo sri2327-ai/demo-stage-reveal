@@ -52,6 +52,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
+  // Single array of step areas - simplified from original to remove redundancy
   const stepAreas = [
     { name: "Treatment Adherence", position: "top-[20%] left-[15%] w-[70%] h-[20%]" },
     { name: "Care Plan Monitoring", position: "top-[42%] left-[15%] w-[70%] h-[20%]" },
@@ -77,55 +78,60 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               }}
             />
           
-            {/* Interactive elements with consistent animation */}
+            {/* Interactive elements - SIMPLIFIED with single highlight */}
             <div className="absolute inset-0">
               {stepAreas.map((area, index) => (
                 <motion.div 
                   key={area.name}
-                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer ${subStep === index ? 'ring-2 ring-[#387E89] rounded-lg' : ''}`}
+                  className={`absolute ${area.position} z-20 flex items-center justify-center cursor-pointer ${
+                    subStep === index ? 'ring-2 ring-[#387E89] rounded-lg' : ''
+                  }`}
                   onClick={() => onElementClick && onElementClick(index)}
                   onMouseEnter={() => setActiveLabel(area.name)}
                   onMouseLeave={() => setActiveLabel(null)}
                   aria-label={`${area.name} area`}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ 
+                    boxShadow: "0 0 0 2px rgba(56, 126, 137, 0.3)",
+                    backgroundColor: "rgba(56, 126, 137, 0.05)"
+                  }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  {subStep !== index && (
-                    <motion.div 
-                      className="p-2 rounded-lg text-[#143151] hover:bg-[#387E89]/10 transition-all"
-                      initial={{ opacity: 0.7 }}
-                      whileHover={{ opacity: 1 }}
-                    >
-                      {area.name}
-                    </motion.div>
-                  )}
+                  {/* Empty div - no text labels inside the clickable areas */}
                 </motion.div>
               ))}
             </div>
             
-            {/* Custom cursor with consistent gradient */}
+            {/* Consistent cursor styling */}
             <Pointer>
               <div className="flex flex-col items-center">
-                <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
-                  fill: "url(#cursor-gradient)"
-                }} />
+                <svg width="32" height="32" viewBox="0 0 32 32" className="filter drop-shadow-md">
+                  <defs>
+                    <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#143151" />
+                      <stop offset="100%" stopColor="#387E89" />
+                    </linearGradient>
+                  </defs>
+                  <MousePointer2 size={32} className="stroke-white" style={{
+                    fill: "url(#cursor-gradient)"
+                  }} />
+                </svg>
                 <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">
                   You
                 </span>
               </div>
             </Pointer>
             
-            {/* Enhanced clinical label styling with smooth animation */}
+            {/* Single tooltip with consistent styling */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20"
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
                   <div className="font-bold text-xl">{getCurrentLabel().title}</div>
                   <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
                 </div>
@@ -140,9 +146,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             isInteractive={false}
           />
           
-          {/* Fixed label display for non-interactive mode with consistent styling */}
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-xl max-w-[500px] backdrop-blur-sm">
+          {/* Non-interactive label with consistent styling */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-20">
+            <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
               <div className="font-bold text-xl">{getCurrentLabel().title}</div>
               <div className="mt-2 text-sm">{getCurrentLabel().description}</div>
             </div>
