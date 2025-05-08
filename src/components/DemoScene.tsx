@@ -8,6 +8,7 @@ import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInterac
 import { MousePointer2 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
+import { useIsMobile } from '../hooks/use-mobile';
 
 // Updated patient engagement labels with clear integration benefits
 const patientEngagementLabels: Record<number, string> = {
@@ -49,6 +50,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [activeLabel, setActiveLabel] = useState('');
   const [interactionActive, setInteractionActive] = useState(false);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const isMobile = useIsMobile();
 
   // Reset states when stage changes
   useEffect(() => {
@@ -218,34 +220,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
                 </div>
               </Pointer>
-              
-              {/* Enhanced tooltip with bigger animation */}
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={subStep}
-                  className="absolute top-0 left-1/2 transform -translate-x-1/2 z-30"
-                  initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0, 
-                    scale: interactionActive ? 1.1 : 1.05
-                  }}
-                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 py-4 rounded-lg shadow-xl max-w-[500px] mt-6">
-                    <div className="font-bold text-xl">
-                      {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
-                       currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :
-                       currentStage === 0 && subStep === 2 ? "Patient Intake" :
-                       "Appointment Confirmations"}
-                    </div>
-                    <div className="mt-2 text-sm">
-                      {activeLabel || patientEngagementLabels[subStep]}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
             </div>
           </MouseTrackerProvider>
         );
@@ -336,7 +310,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStage}
-          className="w-full h-full"
+          className="w-full h-full flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
@@ -346,19 +320,34 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </motion.div>
       </AnimatePresence>
       
-      {/* Contextual tooltip that gives additional information */}
-      <AnimatePresence>
-        <motion.div 
-          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-        >
-          <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 rounded-full text-sm text-[#143151] shadow-lg">
-            Click on different areas to explore features
-          </div>
-        </motion.div>
-      </AnimatePresence>
+      {/* Contextual tooltip that gives additional information - mobile-responsive design */}
+      {!isMobile ? (
+        <AnimatePresence>
+          <motion.div 
+            className="absolute bottom-4 sm:bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 rounded-full text-sm text-[#143151] shadow-lg">
+              Click on different areas to explore features
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      ) : (
+        <AnimatePresence>
+          <motion.div 
+            className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-2 py-1 rounded-full text-xs text-[#143151] shadow-lg">
+              Tap to explore
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 };

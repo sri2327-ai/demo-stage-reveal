@@ -215,10 +215,12 @@ const Index = () => {
             </div>
             
             {isInViewport && (
-              <DemoStage 
-                stages={demoStages} 
-                autoPlay={hasScrolledToDemo} 
-              />
+              <div className="flex justify-center">
+                <DemoStage 
+                  stages={demoStages} 
+                  autoPlay={hasScrolledToDemo} 
+                />
+              </div>
             )}
           </div>
         </div>

@@ -62,11 +62,14 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   };
   
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-full">
+    <div className="relative w-full max-w-6xl mx-auto h-full flex items-center justify-center">
       {isInteractive ? (
         <MouseTrackerProvider>
-          <div className="relative h-full flex items-center justify-center">
-            <div className="relative w-full h-full" onClick={handleIllustrationClick}>
+          <div className="relative h-full flex items-center justify-center w-full">
+            <div 
+              className="relative w-full h-full flex items-center justify-center cursor-pointer" 
+              onClick={handleIllustrationClick}
+            >
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 isInteractive={true}
@@ -102,22 +105,22 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </Pointer>
             </div>
             
-            {/* Redesigned floating label that won't overlap */}
+            {/* Redesigned floating label with enhanced design */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-4 left-0 right-0 z-30 w-full"
+                className="absolute bottom-4 md:bottom-8 left-0 right-0 z-30 w-full pointer-events-none"
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
                 <motion.div 
-                  className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20"
+                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
-                  <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
+                  <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-base text-white/90">{getCurrentLabel().description}</div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
@@ -125,7 +128,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full flex items-center justify-center">
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}
@@ -135,14 +138,14 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           {/* Only show title tooltip if not hidden */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-4 left-0 right-0 z-30 w-full"
+              className="absolute bottom-4 md:bottom-8 left-0 right-0 z-30 w-full"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20">
-                <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
+              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20">
+                <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-base text-white/90">{getCurrentLabel().description}</div>
               </div>
             </motion.div>
           )}
