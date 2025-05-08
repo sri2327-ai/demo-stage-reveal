@@ -3,14 +3,8 @@ import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllu
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
-import { 
-  MousePointer2,
-  Heart,
-  CalendarCheck,
-  MessageSquare, 
-  Activity
-} from 'lucide-react';
-import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
+import { MousePointer2 } from 'lucide-react';
+import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 
 // Updated patient engagement labels to show integration with existing provider tools
@@ -200,19 +194,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 onHover={handlePatientEngagementHover}
               />
               
-              {/* Custom cursor for stage 0 - fixed to remove border */}
+              {/* Custom cursor for stage 0 - updated styling */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <MousePointer2 className="stroke-white h-8 w-8" size={32} style={{
                     fill: "url(#cursor-gradient)"
                   }} />
-                  <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-[#143151] to-[#387E89] mt-1 whitespace-nowrap">You</span>
+                  <span className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white px-2 py-0.5 rounded-md shadow-sm">You</span>
                 </div>
               </Pointer>
               
               {/* Improved label display with animation */}
               <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg border border-white/20 max-w-[500px] animate-scale-in">
+                <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-lg shadow-lg max-w-[500px] animate-scale-in">
                   <div className="font-bold text-xl">
                     {currentStage === 0 && subStep === 0 ? "Patient Messages" : 
                      currentStage === 0 && subStep === 1 ? "Appointment Scheduling" :
