@@ -1,28 +1,14 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useIsMobile } from '../hooks/use-mobile';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { 
-  MessageCircle, 
-  Calendar, 
-  FileText, 
-  BellRing, 
-  PhoneCall, 
-  CheckCircle, 
-  Clock, 
-  User, 
-  Database, 
-  Shield, 
-  ClipboardCheck, 
-  ArrowRight,
-  Settings, 
-  CalendarDays, 
-  ClipboardList, 
-  Mic, 
-  Stethoscope, 
-  Server
+  MessageCircle, Calendar, FileText, BellRing, PhoneCall, 
+  CheckCircle, Clock, User, Database, Shield, 
+  ClipboardCheck, ArrowRight, Settings, CalendarDays, 
+  ClipboardList, Mic, Stethoscope, Server, MousePointer2
 } from 'lucide-react';
+import { MouseTrackerProvider, Pointer, PointerFollower } from './ui/cursor';
 import type { DemoStage } from '../types/demo';
 
 interface DemoSceneProps {
@@ -31,14 +17,11 @@ interface DemoSceneProps {
 }
 
 export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
-  const isMobile = useIsMobile();
   const [subStep, setSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [transcriptionActive, setTranscriptionActive] = useState(false);
   const [noteGeneration, setNoteGeneration] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [cursorLabel, setCursorLabel] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
+  const [activeLabel, setActiveLabel] = useState('');
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -112,52 +95,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
 
-  // Handle cursor movement and update labels for different interactive areas
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    setCursorPosition({ x, y });
-    setIsVisible(true);
-    
-    // Update labels based on current stage and cursor position
-    if (currentStage === 0) {
-      // Patient Engagement stage - set labels based on position
-      const width = rect.width;
-      const height = rect.height;
-      
-      // Left sidebar region (messaging, calendar, intake, reminders)
-      if (x < width * 0.1) {
-        if (y < height * 0.3) setCursorLabel('Messaging');
-        else if (y < height * 0.5) setCursorLabel('Scheduling');
-        else if (y < height * 0.7) setCursorLabel('Patient Forms');
-        else setCursorLabel('Reminders');
-      }
-      // Main content area
-      else if (subStep === 0) setCursorLabel('Patient Chat');
-      else if (subStep === 1) setCursorLabel('Appointment Calendar');
-      else if (subStep === 2) setCursorLabel('Patient Info');
-      else if (subStep === 3) setCursorLabel('Notifications');
-      else setCursorLabel('');
-    }
-    else if (currentStage === 1) {
-      // AI Medical Scribe stage
-      if (subStep === 0) setCursorLabel('Authentication');
-      else if (subStep === 1) setCursorLabel('Patient Schedule');
-      else if (subStep === 2) setCursorLabel('Templates');
-      else if (subStep === 3) setCursorLabel('Recording');
-      else if (subStep === 4) setCursorLabel('Documentation');
-      else setCursorLabel('');
-    }
-  };
-
-  // Handle mouse leave to hide cursor
-  const handleMouseLeave = () => {
-    setIsVisible(false);
-    setCursorLabel('');
-  };
-
   // Helper function to determine what to render based on stage
   const renderStageContent = () => {
     console.info('Current stage in DemoScene:', currentStage);
@@ -165,51 +102,36 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <div 
-            className="w-full h-full flex items-center justify-center relative"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            <FigmaPatientEngagementIllustration
-              subStep={subStep}
-              cursorPosition={cursorPosition}
-              isProcessingCall={false}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-            />
-            
-            {/* Custom cursor */}
-            {isVisible && (
-              <motion.div 
-                className="pointer-events-none fixed z-50 flex flex-col items-center"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: 1,
-                  x: cursorPosition.x,
-                  y: cursorPosition.y
-                }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              >
-                <div className="w-8 h-8 rounded-full border-2 border-blue-500 bg-blue-100/50 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                </div>
-                {cursorLabel && (
-                  <div className="bg-blue-900 text-white px-2 py-1 rounded text-xs mt-1">
-                    {cursorLabel}
+          <MouseTrackerProvider>
+            <div className="w-full h-full flex items-center justify-center relative">
+              <FigmaPatientEngagementIllustration
+                subStep={subStep}
+                cursorPosition={{ x: 0, y: 0 }} // This prop is not used anymore with our cursor system
+                isProcessingCall={false}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+              />
+              
+              {/* Custom cursor for stage 0 */}
+              <Pointer>
+                <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
+              </Pointer>
+              
+              {/* Add labels based on cursor position */}
+              {activeLabel && (
+                <PointerFollower align="bottom-right">
+                  <div className="bg-blue-900 text-white px-2 py-1 rounded text-xs shadow-md">
+                    {activeLabel}
                   </div>
-                )}
-              </motion.div>
-            )}
-          </div>
+                </PointerFollower>
+              )}
+            </div>
+          </MouseTrackerProvider>
         );
         
       case 1: // AI Medical Scribe
         return (
-          <div 
-            className="w-full h-full flex items-center justify-center relative"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="w-full h-full flex items-center justify-center relative">
             <FigmaAIMedicalScribeInteractive
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -217,29 +139,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               onElementClick={handleElementClick}
               isInteractive={true}
             />
-            
-            {/* Custom cursor */}
-            {isVisible && (
-              <motion.div 
-                className="pointer-events-none fixed z-50 flex flex-col items-center"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: 1,
-                  x: cursorPosition.x,
-                  y: cursorPosition.y
-                }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              >
-                <div className="w-8 h-8 rounded-full border-2 border-blue-500 bg-blue-100/50 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                </div>
-                {cursorLabel && (
-                  <div className="bg-blue-900 text-white px-2 py-1 rounded text-xs mt-1">
-                    {cursorLabel}
-                  </div>
-                )}
-              </motion.div>
-            )}
           </div>
         );
         

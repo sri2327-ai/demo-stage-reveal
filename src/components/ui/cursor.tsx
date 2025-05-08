@@ -23,6 +23,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
     const handleMouseMove = (e: MouseEvent) => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
+        // Calculate position relative to the container
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         setPosition({ x, y });
@@ -38,7 +39,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
 
   return (
     <MousePositionContext.Provider value={{ position, setPosition }}>
-      <div ref={ref} className="relative w-full h-full overflow-hidden">
+      <div ref={ref} style={{ cursor: 'none' }} className="relative w-full h-full overflow-hidden">
         {children}
       </div>
     </MousePositionContext.Provider>
@@ -66,7 +67,7 @@ export const Pointer: React.FC<PointerProps> = ({ children, className }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className={`pointer-events-none absolute z-50 ${className}`}
+        className={`pointer-events-none absolute z-50 ${className || ''}`}
         animate={{ 
           x: position.x, 
           y: position.y,
@@ -121,10 +122,10 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   // Calculate offset based on alignment
   const getOffset = () => {
     switch(align) {
-      case 'top-left': return { x: -10, y: -10 };
-      case 'top-right': return { x: 10, y: -10 };
-      case 'bottom-left': return { x: -10, y: 20 };
-      case 'bottom-right': return { x: 10, y: 20 };
+      case 'top-left': return { x: -40, y: -40 };
+      case 'top-right': return { x: 20, y: -40 };
+      case 'bottom-left': return { x: -40, y: 30 };
+      case 'bottom-right': return { x: 20, y: 30 };
       case 'center':
       default: return { x: 0, y: 0 };
     }
@@ -135,17 +136,21 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        className={`pointer-events-none absolute z-40 ${className}`}
-        initial={{ opacity: 0 }}
+        className={`pointer-events-none absolute z-40 ${className || ''}`}
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: 1,
+          scale: 1,
           x: position.x + offset.x, 
           y: position.y + offset.y,
           transition: {
-            x: { type: "spring", damping: 15, stiffness: 150, delay },
-            y: { type: "spring", damping: 15, stiffness: 150, delay },
+            opacity: { duration: 0.2 },
+            scale: { duration: 0.2 },
+            x: { type: "spring", damping: 25, stiffness: 200, delay },
+            y: { type: "spring", damping: 25, stiffness: 200, delay },
           }
         }}
+        exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
       >
         {children}
       </motion.div>
