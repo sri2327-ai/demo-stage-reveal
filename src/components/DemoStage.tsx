@@ -29,14 +29,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     return () => clearInterval(timer);
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
 
-  const handleNext = () => {
-    setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));
-  };
-  
-  const handlePrev = () => {
-    setCurrentStage((prev) => (prev === 0 ? stages.length - 1 : prev - 1));
-  };
-
   const handleStageChange = (index: number) => {
     setCurrentStage(index);
   };
@@ -58,31 +50,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      <div className="absolute bottom-6 left-0 right-0 flex flex-col">
+      <div className="absolute bottom-6 left-0 right-0">
         <DemoStageIndicator 
           currentStage={currentStage}
           totalStages={stages.length}
           onStageChange={handleStageChange}
         />
-
-        <div className="flex justify-center gap-4 mt-4">
-          <motion.button
-            className="px-4 py-2 bg-white border border-blue-300 rounded-lg shadow text-blue-700 hover:bg-blue-50 transition-colors"
-            onClick={handlePrev}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Previous stage"
-          >
-            Previous
-          </motion.button>
-          <motion.button
-            className="px-4 py-2 bg-blue-600 rounded-lg shadow text-white hover:bg-blue-700 transition-colors"
-            onClick={handleNext}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Next stage"
-          >
-            Next
-          </motion.button>
-        </div>
       </div>
     </div>
   );

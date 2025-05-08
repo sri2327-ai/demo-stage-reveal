@@ -151,7 +151,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   delay = 0.1,
   align = 'bottom-center',
   alwaysVisible = false,
-  offsetY = 20, // Default offset
+  offsetY = 30, // Increased default offset for better visibility
   offsetX = 0,
   style = {}
 }) => {
@@ -160,11 +160,11 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   // Calculate offset based on alignment
   const getOffset = () => {
     switch(align) {
-      case 'top-left': return { x: -40 + offsetX, y: -40 + offsetY };
-      case 'top-right': return { x: 20 + offsetX, y: -40 + offsetY };
-      case 'bottom-left': return { x: -40 + offsetX, y: 40 + offsetY };
-      case 'bottom-right': return { x: 20 + offsetX, y: 40 + offsetY };
-      case 'bottom-center': return { x: 0 + offsetX, y: 40 + offsetY };
+      case 'top-left': return { x: -40 + offsetX, y: -60 + offsetY };
+      case 'top-right': return { x: 20 + offsetX, y: -60 + offsetY };
+      case 'bottom-left': return { x: -40 + offsetX, y: 60 + offsetY };
+      case 'bottom-right': return { x: 20 + offsetX, y: 60 + offsetY };
+      case 'bottom-center': return { x: 0 + offsetX, y: 60 + offsetY };
       case 'center':
       default: return { x: 0 + offsetX, y: 0 + offsetY };
     }
@@ -175,7 +175,7 @@ export const PointerFollower: React.FC<PointerFollowerProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        className={`pointer-events-none fixed z-50 ${className || ''}`} 
+        className={`pointer-events-none fixed z-[100] ${className || ''}`} 
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: alwaysVisible || isActive ? 1 : 0,

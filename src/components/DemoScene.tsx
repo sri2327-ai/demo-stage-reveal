@@ -47,10 +47,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   
   // Auto-show label based on current subStep for Patient Engagement demo
   useEffect(() => {
-    if (currentStage === 0 && !isPaused) {
+    if (currentStage === 0) {
       setActiveLabel(patientEngagementLabels[subStep]);
     }
-  }, [subStep, currentStage, isPaused]);
+  }, [subStep, currentStage]);
 
   // Handle user click on interactive elements
   const handleElementClick = (step: number) => {
@@ -80,14 +80,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(patientEngagementLabels[step]);
     }
     
-    // Auto-resume after longer inactivity (15 seconds)
+    // Auto-resume after longer inactivity (20 seconds)
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 20000); // 20 seconds for better interaction time - increased from 15s
+    }, 20000); // 20 seconds for better interaction time
   };
 
   // Auto-advance substeps unless paused
@@ -114,7 +114,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       } else {
         setSubStep((prev) => (prev >= 3 ? 0 : prev + 1));
       }
-    }, 10000); // Longer interval for better reading (10 seconds) - increased from 7s
+    }, 10000); // Longer interval for better reading (10 seconds)
 
     return () => clearInterval(interval);
   }, [currentStage, isPaused]);
@@ -136,8 +136,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       resetTimerRef.current = setTimeout(() => {
         setIsPaused(false);
       }, 15000); // 15 seconds pause during hover
-    } else if (step === null) {
-      // Don't clear the label on mouse leave to keep it visible
     }
   };
 
@@ -152,7 +150,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
             <div className="w-full h-full flex items-center justify-center relative">
               <FigmaPatientEngagementIllustration
                 subStep={subStep}
-                cursorPosition={{ x: 0, y: 0 }} // This prop is not used anymore with our cursor system
+                cursorPosition={{ x: 0, y: 0 }}
                 isProcessingCall={false}
                 onElementClick={handleElementClick}
                 isInteractive={true}
@@ -164,20 +162,20 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 <MousePointer2 className="fill-blue-500 stroke-white" size={24} />
               </Pointer>
               
-              {/* Always show active label with improved visibility */}
-              <PointerFollower 
-                align="bottom-center" 
-                alwaysVisible={true}
-                offsetY={30}
-                style={{ 
-                  zIndex: 100,
-                  transform: 'translateX(-50%)' // Center horizontally
-                }}
-              >
-                <div className="bg-blue-900 text-white px-4 py-3 rounded-lg shadow-lg border border-blue-700 max-w-[300px]">
-                  <div className="font-medium">{activeLabel || patientEngagementLabels[subStep]}</div>
+              {/* Prominent label display similar to reference screenshot */}
+              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+                <div className="bg-blue-600 text-white px-8 py-4 rounded-lg shadow-lg border-2 border-blue-500 max-w-[500px]">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-blue-500 rounded-full p-2">
+                      <span className="text-lg font-bold">AI</span>
+                    </div>
+                    <div className="font-bold text-xl">
+                      {activeLabel ? "AI Patient Engagement" : "Patient Engagement"}
+                    </div>
+                  </div>
+                  <div className="mt-2 text-sm">{activeLabel || patientEngagementLabels[subStep]}</div>
                 </div>
-              </PointerFollower>
+              </div>
             </div>
           </MouseTrackerProvider>
         );
