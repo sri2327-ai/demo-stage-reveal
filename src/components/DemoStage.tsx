@@ -183,9 +183,9 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </motion.div>
       
-      {/* Enhanced clinical context tooltip with improved positioning */}
+      {/* Enhanced clinical context tooltip - now only shows on desktop */}
       <AnimatePresence>
-        {showTooltip && (
+        {showTooltip && !isMobile && (
           <motion.div 
             className="absolute bottom-24 sm:bottom-32 md:bottom-40 right-2 sm:right-4 md:right-6 z-30"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}

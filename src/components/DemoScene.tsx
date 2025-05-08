@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -390,8 +389,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </motion.div>
       </AnimatePresence>
       
-      {/* Improved positioning for "Tap to explore" tooltip to avoid overlap */}
-      {!isMobile ? (
+      {/* Improved positioning for "Tap to explore" tooltip - now only visible on desktop */}
+      {!isMobile && (
         <AnimatePresence>
           <motion.div 
             className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-30"
@@ -401,19 +400,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           >
             <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 rounded-full text-sm text-[#143151] shadow-lg">
               Click on different areas to explore features
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      ) : (
-        <AnimatePresence>
-          <motion.div 
-            className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-          >
-            <div className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-3 py-1.5 rounded-full text-xs text-[#143151] shadow-lg font-medium">
-              Tap to explore
             </div>
           </motion.div>
         </AnimatePresence>

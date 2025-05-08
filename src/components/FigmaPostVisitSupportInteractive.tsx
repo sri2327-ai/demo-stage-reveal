@@ -82,34 +82,36 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 hideTitle={true} // Always hide title now
               />
               
-              {/* Enhanced cursor styling */}
-              <Pointer>
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <svg width="40" height="40" viewBox="0 0 40 40" className="filter drop-shadow-lg">
-                      <defs>
-                        <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#143151" />
-                          <stop offset="100%" stopColor="#387E89" />
-                        </linearGradient>
-                      </defs>
-                      <MousePointer2 size={40} className="stroke-white stroke-[1.5]" style={{
-                        fill: "url(#cursor-gradient)"
-                      }} />
-                    </svg>
-                  </motion.div>
-                  <motion.span 
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
-                  >
-                    Click to Explore
-                  </motion.span>
-                </div>
-              </Pointer>
+              {/* Enhanced cursor styling - only shown on desktop */}
+              {!isMobile && (
+                <Pointer>
+                  <div className="flex flex-col items-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg width="40" height="40" viewBox="0 0 40 40" className="filter drop-shadow-lg">
+                        <defs>
+                          <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#143151" />
+                            <stop offset="100%" stopColor="#387E89" />
+                          </linearGradient>
+                        </defs>
+                        <MousePointer2 size={40} className="stroke-white stroke-[1.5]" style={{
+                          fill: "url(#cursor-gradient)"
+                        }} />
+                      </svg>
+                    </motion.div>
+                    <motion.span 
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
+                    >
+                      Click to Explore
+                    </motion.span>
+                  </div>
+                </Pointer>
+              )}
             </div>
             
             {/* Redesigned floating label with enhanced design - positioned appropriately for both desktop and mobile */}
