@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStage as DemoStageType } from '../types/demo';
-import { Pause, Play, Info, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pause, Play, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 interface DemoStageProps {
@@ -55,16 +55,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   const handleStageChange = (index: number) => {
     setCurrentStage(index);
-  };
-  
-  // Navigate to previous stage
-  const handlePrevStage = () => {
-    setCurrentStage(prev => (prev === 0 ? stages.length - 1 : prev - 1));
-  };
-  
-  // Navigate to next stage
-  const handleNextStage = () => {
-    setCurrentStage(prev => (prev === stages.length - 1 ? 0 : prev + 1));
   };
   
   // Pause autoplay when user interacts with navigation
@@ -148,43 +138,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </motion.div>
       
-      {/* Arrow navigation overlays - larger and more visible */}
-      <motion.div 
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 z-50"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
-        whileHover={{ opacity: 1, scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <motion.button
-          onClick={handlePrevStage}
-          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-2 md:p-4 rounded-full shadow-lg border border-[#387E89]/20"
-          whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Previous stage"
-        >
-          <ChevronLeft size={isMobile ? 24 : 32} />
-        </motion.button>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 z-50"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: animateControls || isPaused ? 1 : 0.4, x: 0 }}
-        whileHover={{ opacity: 1, scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <motion.button
-          onClick={handleNextStage}
-          className="bg-white/80 backdrop-blur-sm hover:bg-white text-[#143151] p-2 md:p-4 rounded-full shadow-lg border border-[#387E89]/20"
-          whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.95)" }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Next stage"
-        >
-          <ChevronRight size={isMobile ? 24 : 32} />
-        </motion.button>
-      </motion.div>
-      
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
@@ -230,7 +183,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             >
               <Info size={18} className="mt-0.5 mr-3 flex-shrink-0" />
               <div>
-                <p className="font-medium text-sm">Click anywhere on the animation to explore the workflow or use the navigation controls</p>
+                <p className="font-medium text-sm">Click anywhere on the animation to explore the workflow</p>
                 <button 
                   onClick={() => setShowTooltip(false)}
                   className="text-xs opacity-80 hover:opacity-100 mt-2 underline underline-offset-2"

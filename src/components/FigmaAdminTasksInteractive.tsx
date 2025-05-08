@@ -26,7 +26,6 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
-  const [interactionActive, setInteractionActive] = useState(false);
   
   // Auto-show label for current subStep
   useEffect(() => {
@@ -53,10 +52,12 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   };
 
-  // Handle click on the illustration area
-  const handleIllustrationClick = (step: number) => {
+  // Handle click on the illustration area - now the entire area is clickable
+  const handleIllustrationClick = () => {
     if (onElementClick) {
-      onElementClick(step);
+      // Cycle through steps on click
+      const nextStep = (subStep + 1) % 3;
+      onElementClick(nextStep);
     }
   };
   
@@ -65,17 +66,11 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative h-full flex items-center justify-center">
-            <div className="relative w-full h-full scale-100 md:scale-110 lg:scale-125">
-              <div 
-                className="w-full h-full cursor-pointer"
-                onClick={() => handleIllustrationClick(subStep)}
-              >
-                <FigmaAdminTasksIllustration
-                  subStep={subStep}
-                  onElementClick={onElementClick}
-                  isInteractive={true}
-                />
-              </div>
+            <div className="relative w-full h-full" onClick={handleIllustrationClick}>
+              <FigmaAdminTasksIllustration
+                subStep={subStep}
+                isInteractive={true}
+              />
               
               {/* Enhanced cursor styling */}
               <Pointer>
@@ -107,22 +102,22 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               </Pointer>
             </div>
             
-            {/* Better positioned label that won't overlap */}
+            {/* Redesigned floating label that won't overlap */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute top-2 left-0 right-0 z-30 w-full"
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                className="absolute bottom-4 left-0 right-0 z-30 w-full"
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
                 <motion.div 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-auto max-w-xl border border-white/10"
+                  className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
-                  <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-base">{getCurrentLabel().description}</div>
+                  <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
+                  <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
@@ -130,7 +125,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full scale-100 md:scale-110 lg:scale-125">
+          <div className="relative w-full h-full">
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}
@@ -140,14 +135,14 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           {/* Only show title tooltip if not hidden */}
           {!hideTitle && (
             <motion.div 
-              className="absolute top-2 left-0 right-0 z-30 w-full"
-              initial={{ opacity: 0, y: -10 }}
+              className="absolute bottom-4 left-0 right-0 z-30 w-full"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-8 py-4 rounded-xl shadow-xl backdrop-blur-sm mx-auto max-w-xl border border-white/10">
-                <div className="font-bold text-2xl">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-base">{getCurrentLabel().description}</div>
+              <div className="bg-white/90 backdrop-blur-md text-[#143151] px-8 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-[#387E89]/20">
+                <div className="font-bold text-2xl bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">{getCurrentLabel().title}</div>
+                <div className="mt-2 text-base text-gray-700">{getCurrentLabel().description}</div>
               </div>
             </motion.div>
           )}
