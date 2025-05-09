@@ -71,7 +71,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
             
             {!isMobile && (
               <motion.div 
-                className="absolute -left-[220px] top-0 pointer-events-none"
+                className="absolute -left-[220px] top-1/2 -translate-y-1/2 pointer-events-none"
                 animate={{ 
                   opacity: index === currentStage ? 1 : 0,
                   x: index === currentStage ? 0 : -10

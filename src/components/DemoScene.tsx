@@ -244,7 +244,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 />
               </div>
               
-              {/* Responsive descriptive label for patient engagement */}
+              {/* Enhanced responsive descriptive label for patient engagement */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={`patient-engagement-label-${subStep}`}
@@ -390,8 +390,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           {renderStageContent()}
         </motion.div>
       </AnimatePresence>
-      
-      {/* Removed the "Tap to explore" tooltip that was here */}
     </div>
   );
 };
