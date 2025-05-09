@@ -53,6 +53,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [activeLabel, setActiveLabel] = useState('');
   const [interactionActive, setInteractionActive] = useState(false);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isMobile = useIsMobile();
 
   // Reset states when stage changes
@@ -72,6 +73,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     } else if (currentStage === 3) {
       setActiveLabel(postVisitLabels[0]);
     }
+    
+    // Clear any existing autoplay interval
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+      autoPlayIntervalRef.current = null;
+    }
+    
+    // Reset isPaused
+    setIsPaused(false);
   }, [currentStage]);
   
   // Auto-show label based on current subStep
@@ -141,43 +151,54 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }, isMobile ? 30000 : 20000);
   };
 
-  // Auto-advance substeps unless paused - adjusted timing for better mobile experience
+  // Auto-advance substeps unless paused - Fixed autoplay functionality
   useEffect(() => {
-    if (isPaused) return;
-
-    // Longer interval for mobile to give users time to read
-    const interval = setInterval(() => {
-      if (currentStage === 0) { // For Patient Engagement - now with 5 steps
-        setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
-      } else if (currentStage === 1) { // For AI Medical Scribe
-        setSubStep((prev) => {
-          const nextStep = prev >= 5 ? 0 : prev + 1; // Now using 6 steps with EHR integration
-          
-          // Update transcription and note generation states based on step
-          if (nextStep === 3) {
-            setTranscriptionActive(true);
-            setNoteGeneration(false);
-          } else if (nextStep === 4) {
-            setNoteGeneration(true);
-            setTranscriptionActive(false);
-          } else if (nextStep === 5) {
-            setNoteGeneration(false);
-            setTranscriptionActive(false);
-          } else {
-            setTranscriptionActive(false);
-            setNoteGeneration(false);
-          }
-          
-          return nextStep;
-        });
-      } else if (currentStage === 2) { // For Admin Tasks
-        setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
-      } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
-        setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+    // Clean up any existing interval
+    if (autoPlayIntervalRef.current) {
+      clearInterval(autoPlayIntervalRef.current);
+      autoPlayIntervalRef.current = null;
+    }
+    
+    // Only set auto-advance if not paused
+    if (!isPaused) {
+      autoPlayIntervalRef.current = setInterval(() => {
+        if (currentStage === 0) { // For Patient Engagement - now with 5 steps
+          setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+        } else if (currentStage === 1) { // For AI Medical Scribe
+          setSubStep((prev) => {
+            const nextStep = prev >= 5 ? 0 : prev + 1; // Now using 6 steps with EHR integration
+            
+            // Update transcription and note generation states based on step
+            if (nextStep === 3) {
+              setTranscriptionActive(true);
+              setNoteGeneration(false);
+            } else if (nextStep === 4) {
+              setNoteGeneration(true);
+              setTranscriptionActive(false);
+            } else if (nextStep === 5) {
+              setNoteGeneration(false);
+              setTranscriptionActive(false);
+            } else {
+              setTranscriptionActive(false);
+              setNoteGeneration(false);
+            }
+            
+            return nextStep;
+          });
+        } else if (currentStage === 2) { // For Admin Tasks
+          setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
+        } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
+          setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+        }
+      }, isMobile ? 12000 : 10000); // Slightly longer interval for mobile
+    }
+    
+    return () => {
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
+        autoPlayIntervalRef.current = null;
       }
-    }, isMobile ? 12000 : 10000); // Slightly longer interval for mobile
-
-    return () => clearInterval(interval);
+    };
   }, [currentStage, isPaused, isMobile]);
 
   // Helper function to handle hovering over patient engagement steps
@@ -370,21 +391,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </motion.div>
       </AnimatePresence>
       
-      {/* "Tap to explore" tooltip - responsive for both mobile and desktop */}
-      {!interactionActive && (
-        <AnimatePresence>
-          <motion.div 
-            className="absolute bottom-12 sm:bottom-16 md:bottom-20 lg:bottom-24 left-1/2 transform -translate-x-1/2 z-30"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-          >
-            <div className={`bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full text-xs sm:text-sm text-[#143151] shadow-lg`}>
-              {isMobile ? "Tap different areas to explore" : "Click on different areas to explore features"}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      )}
+      {/* Removed the "Tap to explore" tooltip that was here */}
     </div>
   );
 };

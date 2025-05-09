@@ -21,7 +21,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(true);
   const [animateControls, setAnimateControls] = useState(false);
   const [highlightInteractivity, setHighlightInteractivity] = useState(true);
   const isMobile = useIsMobile();
@@ -49,15 +48,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       }
     };
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
-
-  // Auto-hide tooltip after delay based on device
-  useEffect(() => {
-    const tooltipTimer = setTimeout(() => {
-      setShowTooltip(false);
-    }, isMobile ? 8000 : 12000); // Increased time for better visibility
-    
-    return () => clearTimeout(tooltipTimer);
-  }, [isMobile]);
 
   // Hide interactivity highlight after some time
   useEffect(() => {
@@ -203,37 +193,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       )}
       
-      {/* Enhanced clinical context tooltip - improved for mobile and made more visible */}
-      <AnimatePresence>
-        {showTooltip && (
-          <motion.div 
-            className={`absolute ${isMobile ? 'top-16 sm:top-18 md:top-24' : 'top-16 sm:top-20 md:top-24'} ${isMobile ? 'right-2' : 'right-2 sm:right-4 md:right-6'} z-30`}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-          >
-            <motion.div 
-              className={`bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg md:rounded-xl shadow-xl ${isMobile ? 'max-w-[180px]' : 'max-w-[220px] sm:max-w-xs'} flex items-start border border-white/20 backdrop-blur-sm`}
-              whileHover={{ scale: 1.03, y: -2 }}
-            >
-              <Info size={isMobile ? 14 : 18} className="mt-0.5 mr-2 sm:mr-3 flex-shrink-0" />
-              <div>
-                <p className={`font-medium ${isMobile ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm'}`}>
-                  {isMobile ? "Tap anywhere to explore this interactive demo" : "Click anywhere in the demo to explore features and workflows"}
-                </p>
-                <button 
-                  onClick={() => setShowTooltip(false)}
-                  className={`${isMobile ? 'text-[10px]' : 'text-xs'} opacity-80 hover:opacity-100 mt-1 underline underline-offset-2`}
-                >
-                  Dismiss
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+      {/* Removed the tooltip that was here */}
+      
       {/* New prominent interactive indicator */}
       <AnimatePresence>
         {highlightInteractivity && (
@@ -261,31 +222,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         )}
       </AnimatePresence>
       
-      {/* Additional fixed interactivity instruction at the bottom */}
-      <motion.div
-        className="absolute bottom-8 sm:bottom-12 md:bottom-14 left-1/2 transform -translate-x-1/2 z-30"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <motion.div 
-          className="bg-[#143151]/80 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md border border-white/20 flex items-center gap-2"
-          animate={{ 
-            y: [0, -4, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 2,
-            ease: "easeInOut",
-            repeatDelay: 1
-          }}
-        >
-          <MousePointerClick size={isMobile ? 12 : 16} className="text-white" />
-          <span className="text-white text-xs sm:text-sm font-medium">
-            {isMobile ? "Tap to explore" : "Click anywhere to explore"}
-          </span>
-        </motion.div>
-      </motion.div>
+      {/* Removed the bottom fixed instruction */}
     </div>
   );
 };

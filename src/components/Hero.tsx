@@ -111,25 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ scrollToDemo, currentSection }) => {
           </motion.div>
         </div>
         
-        {/* Only show the scroll indicator on desktop */}
-        {!isMobile && (
-          <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-black cursor-pointer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 10, 0] }}
-            transition={{ 
-              delay: 1.2, 
-              opacity: { duration: 0.5 },
-              y: { repeat: Infinity, duration: 1.5 } 
-            }}
-            onClick={scrollToDemo}
-          >
-            <p className="font-medium mb-2 text-center">Experience the clinical workflow</p>
-            <div className="flex justify-center">
-              <ArrowDown className="w-6 h-6" />
-            </div>
-          </motion.div>
-        )}
+        {/* Removed the scroll indicator that was previously here */}
       </header>
     </MouseTrackerProvider>
   );

@@ -51,8 +51,12 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 }
               }}
             >
-              {index < currentStage && (
-                <CheckCircle className={`h-4 w-4 ${index === currentStage ? 'text-[#143151]' : 'text-[#143151]'}`} />
+              {index < currentStage ? (
+                <CheckCircle className="h-4 w-4 text-[#143151]" />
+              ) : (
+                <span className={`font-bold text-xs md:text-sm ${index === currentStage ? 'text-[#143151]' : 'text-[#143151]/70'}`}>
+                  {index + 1}
+                </span>
               )}
             </motion.div>
             
