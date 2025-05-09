@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -368,6 +369,22 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           {renderStageContent()}
         </motion.div>
       </AnimatePresence>
+      
+      {/* "Tap to explore" tooltip - responsive for both mobile and desktop */}
+      {!interactionActive && (
+        <AnimatePresence>
+          <motion.div 
+            className="absolute bottom-12 sm:bottom-16 md:bottom-20 lg:bottom-24 left-1/2 transform -translate-x-1/2 z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+          >
+            <div className={`bg-white/80 backdrop-blur-sm border border-[#387E89]/20 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full text-xs sm:text-sm text-[#143151] shadow-lg`}>
+              {isMobile ? "Tap different areas to explore" : "Click on different areas to explore features"}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 };
