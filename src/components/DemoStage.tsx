@@ -4,8 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import type { DemoStageProps } from '../types/demo';
-import { Pause, Play, Info } from 'lucide-react';
+import { Pause, Play, Info, MousePointerClick } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export const DemoStage: React.FC<DemoStageProps> = ({ 
   stages, 
@@ -17,6 +23,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [isPaused, setIsPaused] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
   const [animateControls, setAnimateControls] = useState(false);
+  const [highlightInteractivity, setHighlightInteractivity] = useState(true);
   const isMobile = useIsMobile();
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   
@@ -43,13 +50,22 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     };
   }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
 
-  // Auto-hide tooltip after 5 seconds on mobile, 10 seconds on desktop
+  // Auto-hide tooltip after delay based on device
   useEffect(() => {
     const tooltipTimer = setTimeout(() => {
       setShowTooltip(false);
-    }, isMobile ? 5000 : 10000);
+    }, isMobile ? 8000 : 12000); // Increased time for better visibility
     
     return () => clearTimeout(tooltipTimer);
+  }, [isMobile]);
+
+  // Hide interactivity highlight after some time
+  useEffect(() => {
+    const highlightTimer = setTimeout(() => {
+      setHighlightInteractivity(false);
+    }, isMobile ? 15000 : 20000);
+    
+    return () => clearTimeout(highlightTimer);
   }, [isMobile]);
 
   // Show animation controls briefly when stage changes
@@ -187,28 +203,28 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       )}
       
-      {/* Enhanced clinical context tooltip - improved for mobile and made visible on both desktop and mobile */}
+      {/* Enhanced clinical context tooltip - improved for mobile and made more visible */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div 
-            className={`absolute ${isMobile ? 'bottom-16' : 'bottom-24 sm:bottom-28 md:bottom-32'} ${isMobile ? 'right-2' : 'right-2 sm:right-4 md:right-6'} z-30`}
+            className={`absolute ${isMobile ? 'top-16 sm:top-18 md:top-24' : 'top-16 sm:top-20 md:top-24'} ${isMobile ? 'right-2' : 'right-2 sm:right-4 md:right-6'} z-30`}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.3 } }}
-            transition={{ delay: 1, duration: 0.5 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
           >
             <motion.div 
-              className={`bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl shadow-xl ${isMobile ? 'max-w-[150px]' : 'max-w-[180px] sm:max-w-xs'} flex items-start border border-white/10 backdrop-blur-sm`}
+              className={`bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg md:rounded-xl shadow-xl ${isMobile ? 'max-w-[180px]' : 'max-w-[220px] sm:max-w-xs'} flex items-start border border-white/20 backdrop-blur-sm`}
               whileHover={{ scale: 1.03, y: -2 }}
             >
-              <Info size={isMobile ? 12 : 16} className="mt-0.5 mr-1.5 sm:mr-2 flex-shrink-0" />
+              <Info size={isMobile ? 14 : 18} className="mt-0.5 mr-2 sm:mr-3 flex-shrink-0" />
               <div>
-                <p className={`font-medium ${isMobile ? 'text-[10px]' : 'text-xs sm:text-sm'}`}>
-                  {isMobile ? "Tap to explore features" : "Click anywhere on the animation to explore the workflow"}
+                <p className={`font-medium ${isMobile ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm'}`}>
+                  {isMobile ? "Tap anywhere to explore this interactive demo" : "Click anywhere in the demo to explore features and workflows"}
                 </p>
                 <button 
                   onClick={() => setShowTooltip(false)}
-                  className={`${isMobile ? 'text-[8px]' : 'text-[10px] sm:text-xs'} opacity-80 hover:opacity-100 mt-0.5 sm:mt-1 underline underline-offset-2`}
+                  className={`${isMobile ? 'text-[10px]' : 'text-xs'} opacity-80 hover:opacity-100 mt-1 underline underline-offset-2`}
                 >
                   Dismiss
                 </button>
@@ -217,6 +233,59 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* New prominent interactive indicator */}
+      <AnimatePresence>
+        {highlightInteractivity && (
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ 
+              opacity: [0.2, 1, 0.2], 
+              scale: [0.8, 1.1, 0.8],
+              y: [0, -10, 0]
+            }}
+            transition={{ 
+              repeat: Infinity,
+              duration: 3,
+              ease: "easeInOut"
+            }}
+          >
+            <div className="bg-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-full shadow-xl border border-white/30 flex items-center gap-3">
+              <MousePointerClick size={isMobile ? 18 : 24} className="text-white" />
+              <span className={`font-bold ${isMobile ? 'text-sm' : 'text-base'}`}>
+                {isMobile ? "Tap to interact!" : "Click to interact!"}
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Additional fixed interactivity instruction at the bottom */}
+      <motion.div
+        className="absolute bottom-8 sm:bottom-12 md:bottom-14 left-1/2 transform -translate-x-1/2 z-30"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
+        <motion.div 
+          className="bg-[#143151]/80 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md border border-white/20 flex items-center gap-2"
+          animate={{ 
+            y: [0, -4, 0],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut",
+            repeatDelay: 1
+          }}
+        >
+          <MousePointerClick size={isMobile ? 12 : 16} className="text-white" />
+          <span className="text-white text-xs sm:text-sm font-medium">
+            {isMobile ? "Tap to explore" : "Click anywhere to explore"}
+          </span>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

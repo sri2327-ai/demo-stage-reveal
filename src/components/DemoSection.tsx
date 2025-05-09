@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
 import type { DemoStage as DemoStageType } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
+import { MousePointerClick } from 'lucide-react';
 
 interface DemoSectionProps {
   isInViewport: boolean;
@@ -40,6 +41,21 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
           >
             Discover how S10.AI's CRUSH and BRAVO, powered by AI, streamline key clinical workflows in an interactive demo.
           </motion.p>
+          
+          {/* New interactive instruction banner */}
+          <motion.div
+            className="flex items-center justify-center mt-3 sm:mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#387E89]/10 border border-[#387E89]/30 rounded-full text-[#143151]">
+              <MousePointerClick size={isMobile ? 14 : 18} className="text-[#387E89]" />
+              <span className="text-xs sm:text-sm font-medium">
+                {isMobile ? "Tap to explore features" : "This demo is interactive! Click to explore features"}
+              </span>
+            </div>
+          </motion.div>
         </div>
         
         {isInViewport && (
