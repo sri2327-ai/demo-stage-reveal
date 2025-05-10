@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -77,6 +78,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative h-full flex flex-col items-center justify-center">
+            <h3 className="text-center mb-2 text-lg font-bold text-[#143151] md:hidden">Post-Visit Support</h3>
             <div 
               className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
               onClick={() => handleIllustrationClick()}
@@ -120,7 +122,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               )}
             </div>
             
-            {/* Redesigned floating label with better visibility for mobile */}
+            {/* Enhanced floating label with better visibility for mobile */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
@@ -143,6 +145,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center">
+          <h3 className="text-center mb-2 text-lg font-bold text-[#143151] md:hidden">Post-Visit Support</h3>
           <div className="relative w-full flex-1">
             <FigmaPostVisitSupportIllustration
               subStep={subStep}

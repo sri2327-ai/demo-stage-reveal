@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
@@ -73,6 +74,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
       {isInteractive ? (
         <MouseTrackerProvider>
           <div className="relative h-full flex flex-col items-center justify-center">
+            <h3 className="text-center mb-2 text-lg font-bold text-[#143151] md:hidden">Admin Tasks</h3>
             <div 
               className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
               onClick={() => handleIllustrationClick()}
@@ -139,6 +141,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center">
+          <h3 className="text-center mb-2 text-lg font-bold text-[#143151] md:hidden">Admin Tasks</h3>
           <div className="relative w-full flex-1">
             <FigmaAdminTasksIllustration
               subStep={subStep}

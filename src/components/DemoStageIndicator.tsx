@@ -68,7 +68,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 >
                   <Icon size={isMobile ? 18 : 22} className="mb-1" />
                   <div className="flex flex-col items-center text-center">
-                    <span className="text-xs sm:text-sm font-medium">
+                    <span className="text-[10px] sm:text-xs font-medium line-clamp-1 px-1">
                       {stage.label}
                     </span>
                     {!isMobile && (
