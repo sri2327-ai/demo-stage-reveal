@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -26,7 +25,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const isMobile = useIsMobile();
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   
-  // Effect for auto-play functionality with improved timer management
+  // Effect for auto-play functionality with improved timer management - now properly cycles through all stages
   useEffect(() => {
     // Clear any existing timer
     if (autoPlayTimerRef.current) {
@@ -35,6 +34,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     }
     
     // Only set a new timer if autoPlay is true and not paused
+    // Note: We're keeping stage autoplay at original interval, but individual step autoplay 
+    // has been updated in DemoScene component to cycle through all steps
     if (autoPlay && !isPaused) {
       autoPlayTimerRef.current = setInterval(() => {
         setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));

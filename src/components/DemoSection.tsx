@@ -52,7 +52,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
             <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
               <MousePointerClick size={isMobile ? 16 : 20} className="text-[#387E89] animate-pulse" />
               <span className="text-sm sm:text-base font-medium">
-                {isMobile ? "Tap icons to explore features" : "This demo is fully interactive! Click icons to explore features"}
+                {isMobile ? "Tap numbered tabs to switch features & icons to explore details" : "Click numbered tabs to switch features & explore details by clicking icons in the demo"}
               </span>
             </div>
           </motion.div>

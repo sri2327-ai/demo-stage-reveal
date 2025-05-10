@@ -66,12 +66,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   return (
     <div className="relative w-full max-w-6xl mx-auto h-full">
       <div className="relative h-full flex flex-col">
-        {/* Fixed heading to always show feature label on mobile */}
-        {isMobile && (
-          <div className="absolute top-0 left-0 right-0 bg-[#143151]/90 text-white py-2 px-3 z-30 shadow-md text-center">
-            <h4 className="font-bold">{getCurrentLabel().title}</h4>
-          </div>
-        )}
+        {/* Removed duplicate heading for mobile */}
         
         {isInteractive ? (
           <MouseTrackerProvider>
@@ -132,9 +127,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                     className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-t-xl shadow-xl mx-auto max-w-sm sm:max-w-md md:max-w-lg border border-white/20 mb-0"
                     whileHover={{ scale: isMobile ? 1 : 1.02 }}
                   >
-                    {!isMobile && (
-                      <div className="font-bold text-base sm:text-lg md:text-xl">{getCurrentLabel().title}</div>
-                    )}
+                    <div className="font-bold text-base sm:text-lg md:text-xl">{getCurrentLabel().title}</div>
                     <div className="mt-0 sm:mt-1 text-xs sm:text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
                   </motion.div>
                 </motion.div>

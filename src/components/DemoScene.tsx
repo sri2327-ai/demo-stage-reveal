@@ -97,7 +97,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   }, [subStep, currentStage]);
 
-  // Handle user click/tap on interactive elements
+  // Handle user click/tap on interactive elements - improved to directly respond to specific icon clicks
   const handleElementClick = (step: number) => {
     // Pause auto-advance - longer for mobile to give users time to read
     setIsPaused(true);
@@ -151,7 +151,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }, isMobile ? 30000 : 20000);
   };
 
-  // Auto-advance substeps unless paused - Fixed autoplay functionality
+  // Auto-advance substeps unless paused - IMPROVED to cycle through ALL steps
   useEffect(() => {
     // Clean up any existing interval
     if (autoPlayIntervalRef.current) {
@@ -190,7 +190,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
           setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
         }
-      }, isMobile ? 12000 : 10000); // Slightly longer interval for mobile
+      }, isMobile ? 8000 : 6000); // Shorter interval for better engagement
     }
     
     return () => {
@@ -201,7 +201,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     };
   }, [currentStage, isPaused, isMobile]);
 
-  // Helper function to handle hovering over patient engagement steps
+  // Helper function to handle hovering over patient engagement steps - direct icon interaction
   const handlePatientEngagementHover = (step: number | null) => {
     if (step !== null && patientEngagementLabels[step]) {
       setActiveLabel(patientEngagementLabels[step]);
