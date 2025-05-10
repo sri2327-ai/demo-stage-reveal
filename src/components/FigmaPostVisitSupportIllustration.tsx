@@ -7,13 +7,22 @@ interface FigmaPostVisitSupportIllustrationProps {
   subStep: number;
   isInteractive?: boolean;
   hideTitle?: boolean;
+  onElementClick?: (step: number) => void; // Added this prop
 }
 
 export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIllustrationProps> = ({
   subStep,
   isInteractive = false,
-  hideTitle = false
+  hideTitle = false,
+  onElementClick
 }) => {
+  // Handle click events on icons
+  const handleIconClick = (step: number) => {
+    if (onElementClick && isInteractive) {
+      onElementClick(step);
+    }
+  };
+
   return (
     <motion.div
       className="w-full max-w-3xl mx-auto"
@@ -36,40 +45,45 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
         
         {/* Main interface - adjust height based on whether title is shown */}
         <div className={`flex ${hideTitle ? 'h-full' : 'h-[calc(100%-3rem)]'}`}>
-          {/* Left sidebar */}
+          {/* Left sidebar with interactive icons */}
           <div className="w-1/6 bg-[#143151]/5 border-r border-[#387E89]/10 flex flex-col items-center py-4 space-y-6">
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 0 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
+              className={`p-2 rounded-lg ${subStep === 0 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'} ${isInteractive ? 'cursor-pointer' : ''}`}
               animate={{ scale: subStep === 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleIconClick(0)}
             >
               <MessageCircle size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 1 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
+              className={`p-2 rounded-lg ${subStep === 1 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'} ${isInteractive ? 'cursor-pointer' : ''}`}
               animate={{ scale: subStep === 1 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleIconClick(1)}
             >
               <Heart size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 2 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
+              className={`p-2 rounded-lg ${subStep === 2 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'} ${isInteractive ? 'cursor-pointer' : ''}`}
               animate={{ scale: subStep === 2 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleIconClick(2)}
             >
               <Activity size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 3 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
+              className={`p-2 rounded-lg ${subStep === 3 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'} ${isInteractive ? 'cursor-pointer' : ''}`}
               animate={{ scale: subStep === 3 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleIconClick(3)}
             >
               <FileText size={20} />
             </motion.div>
             <motion.div 
-              className={`p-2 rounded-lg ${subStep === 4 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
+              className={`p-2 rounded-lg ${subStep === 4 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'} ${isInteractive ? 'cursor-pointer' : ''}`}
               animate={{ scale: subStep === 4 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleIconClick(4)}
             >
               <Star size={20} />
             </motion.div>

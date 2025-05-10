@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -85,7 +86,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 subStep={subStep}
                 isInteractive={true}
                 hideTitle={true}
-                onElementClick={(step) => handleIllustrationClick(step)} // Pass through clicks
+                onElementClick={(step) => handleIllustrationClick(step)}
               />
               
               {/* Enhanced cursor styling - only shown on desktop */}
