@@ -53,7 +53,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   useEffect(() => {
     const highlightTimer = setTimeout(() => {
       setHighlightInteractivity(false);
-    }, isMobile ? 15000 : 20000);
+    }, isMobile ? 15000 : 8000);
     
     return () => clearTimeout(highlightTimer);
   }, [isMobile]);
@@ -103,7 +103,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
+      className="relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[650px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={() => isMobile && setIsPaused(true)}
@@ -114,9 +114,9 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         }
       }}
     >
-      {/* Stage name header with enhanced gradient design - improved for mobile */}
+      {/* Enhanced header with stronger gradient and better visibility */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-2 px-3 sm:py-3 sm:px-4 md:py-5 md:px-6 z-40 border-b border-white/10"
+        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-3 sm:py-4 sm:px-4 md:py-4 md:px-6 z-40 border-b border-white/10 shadow-lg"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -124,7 +124,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <motion.h3 
-              className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
+              className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               key={`title-${currentStage}`}
@@ -133,7 +133,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               {getCurrentStageName()}
             </motion.h3>
             <motion.p
-              className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white/80 mt-0.5 sm:mt-1 max-w-md line-clamp-2 sm:line-clamp-none"
+              className="text-xs sm:text-sm md:text-base text-white/90 mt-0.5 sm:mt-1 max-w-md line-clamp-2"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               key={`desc-${currentStage}`}
@@ -145,15 +145,15 @@ export const DemoStage: React.FC<DemoStageProps> = ({
           <div className="flex items-center gap-2">
             <motion.button 
               onClick={togglePause}
-              className="bg-white/20 hover:bg-white/30 rounded-full p-1 sm:p-1.5 md:p-2 transition-all shadow-lg border border-white/20 group"
+              className="bg-white/30 hover:bg-white/40 rounded-full p-1.5 sm:p-2 md:p-2.5 transition-all shadow-lg border border-white/30 group"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isPaused ? "Play demo" : "Pause demo"}
             >
               {isPaused ? (
-                <Play size={isMobile ? 14 : 18} className="text-white group-hover:text-white/90" />
+                <Play size={isMobile ? 16 : 20} className="text-white group-hover:text-white/90" />
               ) : (
-                <Pause size={isMobile ? 14 : 18} className="text-white group-hover:text-white/90" />
+                <Pause size={isMobile ? 16 : 20} className="text-white group-hover:text-white/90" />
               )}
             </motion.button>
           </div>
@@ -163,11 +163,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-12 sm:pt-14 md:pt-20 lg:pt-24" /* Adjusted padding for header */
+          className="absolute inset-0 pt-16 sm:pt-20"
           initial={{ opacity: 0, scale: 0.85 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
+          style={{ height: "calc(100% - 64px)" }}
         >
           <DemoScene
             currentStage={currentStage}
@@ -176,53 +177,41 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      {/* Responsive positioning for stage indicator */}
-      {isDemoSection && (
-        <motion.div 
-          className="absolute bottom-1 sm:bottom-2 md:bottom-4 lg:bottom-6 left-0 right-0"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <DemoStageIndicator 
-            currentStage={currentStage}
-            totalStages={stages.length}
-            onStageChange={handleStageChange}
-            isDemoSection={isDemoSection}
-          />
-        </motion.div>
-      )}
+      {/* Optimized stage indicator positioning */}
+      <DemoStageIndicator 
+        currentStage={currentStage}
+        totalStages={stages.length}
+        onStageChange={handleStageChange}
+        isDemoSection={isDemoSection}
+      />
       
-      {/* Removed the tooltip that was here */}
-      
-      {/* New prominent interactive indicator */}
+      {/* Enhanced interactive indicator - more prominent */}
       <AnimatePresence>
         {highlightInteractivity && (
           <motion.div 
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
-              opacity: [0.2, 1, 0.2], 
+              opacity: [0.5, 1, 0.5], 
               scale: [0.8, 1.1, 0.8],
               y: [0, -10, 0]
             }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ 
-              repeat: Infinity,
-              duration: 3,
+              repeat: 3,
+              duration: 2,
               ease: "easeInOut"
             }}
           >
-            <div className="bg-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-full shadow-xl border border-white/30 flex items-center gap-3">
-              <MousePointerClick size={isMobile ? 18 : 24} className="text-white" />
+            <div className="bg-[#143151]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-[#387E89] flex items-center gap-3">
+              <MousePointerClick size={isMobile ? 18 : 24} className="text-[#387E89]" />
               <span className={`font-bold ${isMobile ? 'text-sm' : 'text-base'}`}>
-                {isMobile ? "Tap to interact!" : "Click to interact!"}
+                {isMobile ? "Tap icons to interact!" : "Click icons to interact!"}
               </span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* Removed the bottom fixed instruction */}
     </div>
   );
 };

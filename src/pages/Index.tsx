@@ -22,18 +22,19 @@ const Index = () => {
     const handleScroll = () => {
       if (demoRef.current) {
         const demoRect = demoRef.current.getBoundingClientRect();
-        const isDemoVisible = demoRect.top <= window.innerHeight * 0.5;
+        // Make demo visible earlier for better user experience
+        const isDemoVisible = demoRect.top <= window.innerHeight * 0.7;
         setIsInViewport(isDemoVisible);
         
         if (isDemoVisible && !hasScrolledToDemo) {
           setHasScrolledToDemo(true);
         }
         
-        // Determine current section
-        if (demoRect.top <= window.innerHeight * 0.5 && 
-            demoRect.bottom >= window.innerHeight * 0.5) {
+        // Determine current section with improved thresholds
+        if (demoRect.top <= window.innerHeight * 0.4 && 
+            demoRect.bottom >= window.innerHeight * 0.3) {
           setCurrentSection('demo');
-        } else if (demoRect.top > window.innerHeight * 0.5) {
+        } else if (demoRect.top > window.innerHeight * 0.4) {
           setCurrentSection('hero');
         } else {
           setCurrentSection('roi');
@@ -51,7 +52,7 @@ const Index = () => {
   return (
     <MouseTrackerProvider>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-        {/* Global cursor for the entire page */}
+        {/* Global cursor for the entire page - desktop only */}
         {!isMobile && (
           <Pointer>
             <div className="flex flex-col items-center">
