@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
 import type { DemoStage as DemoStageType } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
-import { MousePointerClick } from 'lucide-react';
 
 interface DemoSectionProps {
   isInViewport: boolean;
@@ -22,9 +21,9 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="px-4 py-8 sm:py-10">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-6 sm:mb-8">
+    <div className="px-2 sm:px-4 py-6 sm:py-8 md:py-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <motion.h2 
             className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151] mb-3 sm:mb-4 px-2"
             initial={{ opacity: 0 }}
@@ -41,30 +40,17 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
           >
             Discover how S10.AI's CRUSH and BRAVO, powered by AI, streamline key clinical workflows in an interactive demo.
           </motion.p>
-          
-          {/* New interactive instruction banner */}
-          <motion.div
-            className="flex items-center justify-center mt-3 sm:mt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#387E89]/10 border border-[#387E89]/30 rounded-full text-[#143151]">
-              <MousePointerClick size={isMobile ? 14 : 18} className="text-[#387E89]" />
-              <span className="text-xs sm:text-sm font-medium">
-                {isMobile ? "Tap to explore features" : "This demo is interactive! Click to explore features"}
-              </span>
-            </div>
-          </motion.div>
         </div>
         
         {isInViewport && (
           <div className="flex justify-center">
-            <DemoStage 
-              stages={stages} 
-              autoPlay={hasScrolledToDemo} 
-              isDemoSection={currentSection === 'demo'}
-            />
+            <div className="w-full">
+              <DemoStage 
+                stages={stages} 
+                autoPlay={hasScrolledToDemo} 
+                isDemoSection={currentSection === 'demo'}
+              />
+            </div>
           </div>
         )}
       </div>

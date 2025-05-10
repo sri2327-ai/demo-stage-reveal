@@ -99,7 +99,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Handle user click/tap on interactive elements
   const handleElementClick = (step: number) => {
-    // Pause auto-advance - longer for mobile to give users time to read
+    // Pause auto-advance
     setIsPaused(true);
     setSubStep(step);
     setInteractionActive(true);
@@ -144,14 +144,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       clearTimeout(resetTimerRef.current);
     }
     
-    // Longer pause on mobile to give users time to read
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
       setInteractionActive(false);
-    }, isMobile ? 30000 : 20000);
+    }, isMobile ? 20000 : 15000);
   };
 
-  // Auto-advance substeps unless paused - Fixed autoplay functionality
+  // Auto-advance substeps unless paused
   useEffect(() => {
     // Clean up any existing interval
     if (autoPlayIntervalRef.current) {
@@ -255,7 +254,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   transition={{ duration: 0.5 }}
                 >
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl border border-white/20"
                     whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                   >
                     <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">

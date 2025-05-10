@@ -77,7 +77,7 @@ const Index = () => {
         <Hero currentSection={currentSection} />
 
         {/* Demo Section with Enhanced Clinical Context */}
-        <main ref={demoRef} id="demo-section">
+        <main ref={demoRef} id="demo-section" className="min-h-screen">
           <DemoSection 
             isInViewport={isInViewport} 
             hasScrolledToDemo={hasScrolledToDemo} 
