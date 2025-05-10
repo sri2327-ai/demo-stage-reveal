@@ -22,11 +22,11 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="px-2 sm:px-4 py-6 sm:py-10">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-4 sm:mb-8">
+    <div className="px-1 sm:px-2 py-4 sm:py-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-2 sm:mb-4">
           <motion.h2 
-            className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151] mb-2 sm:mb-4 px-2"
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151] mb-2 sm:mb-3 px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6 }}
@@ -44,15 +44,15 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
           
           {/* Enhanced interactive instruction with clearer call to action */}
           <motion.div
-            className="flex items-center justify-center mt-3 sm:mt-4"
+            className="flex items-center justify-center mt-2 sm:mt-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
               <MousePointerClick size={isMobile ? 16 : 20} className="text-[#387E89] animate-pulse" />
-              <span className="text-sm sm:text-base font-medium">
-                {isMobile ? "Tap numbered tabs to switch features & icons to explore details" : "Click numbered tabs to switch features & explore details by clicking icons in the demo"}
+              <span className="text-xs sm:text-sm font-medium">
+                {isMobile ? "Tap numbered tabs to switch features & icons to explore details" : "Click numbered tabs to switch features & click icons inside the demo to explore details"}
               </span>
             </div>
           </motion.div>

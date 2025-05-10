@@ -23,7 +23,7 @@ const Index = () => {
       if (demoRef.current) {
         const demoRect = demoRef.current.getBoundingClientRect();
         // Make demo visible earlier for better user experience
-        const isDemoVisible = demoRect.top <= window.innerHeight * 0.7;
+        const isDemoVisible = demoRect.top <= window.innerHeight * 0.6;
         setIsInViewport(isDemoVisible);
         
         if (isDemoVisible && !hasScrolledToDemo) {
@@ -31,10 +31,10 @@ const Index = () => {
         }
         
         // Determine current section with improved thresholds
-        if (demoRect.top <= window.innerHeight * 0.4 && 
+        if (demoRect.top <= window.innerHeight * 0.3 && 
             demoRect.bottom >= window.innerHeight * 0.3) {
           setCurrentSection('demo');
-        } else if (demoRect.top > window.innerHeight * 0.4) {
+        } else if (demoRect.top > window.innerHeight * 0.3) {
           setCurrentSection('hero');
         } else {
           setCurrentSection('roi');
@@ -78,7 +78,7 @@ const Index = () => {
         <Hero currentSection={currentSection} />
 
         {/* Demo Section with Enhanced Clinical Context */}
-        <main ref={demoRef} id="demo-section">
+        <main ref={demoRef} id="demo-section" className="w-full max-w-[95vw] mx-auto">
           <DemoSection 
             isInViewport={isInViewport} 
             hasScrolledToDemo={hasScrolledToDemo} 

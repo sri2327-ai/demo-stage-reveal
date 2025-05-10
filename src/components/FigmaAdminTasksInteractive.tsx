@@ -54,7 +54,14 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   };
 
-  // Handle click on the illustration area - now the entire area is clickable
+  // Handle click on specific areas of the illustration
+  const handleIconClick = (step: number) => {
+    if (onElementClick) {
+      onElementClick(step);
+    }
+  };
+  
+  // Handle click on the illustration area for any part not covered by icons
   const handleIllustrationClick = () => {
     if (onElementClick) {
       // Cycle through steps on click
@@ -66,19 +73,18 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   return (
     <div className="relative w-full max-w-6xl mx-auto h-full">
       <div className="relative h-full flex flex-col">
-        {/* Removed duplicate heading for mobile */}
-        
         {isInteractive ? (
           <MouseTrackerProvider>
-            <div className="relative h-full flex flex-col items-center justify-center pt-8 md:pt-0">
+            <div className="relative h-full flex flex-col items-center justify-center pt-4 md:pt-0">
               <div 
-                className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
+                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
                 onClick={handleIllustrationClick}
               >
                 <FigmaAdminTasksIllustration
                   subStep={subStep}
                   isInteractive={true}
                   hideTitle={true}
+                  onIconClick={handleIconClick} // Added this prop to handle icon clicks directly
                 />
                 
                 {/* Enhanced cursor styling - only for desktop */}
@@ -106,7 +112,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                         animate={{ opacity: 1, y: 0 }}
                         className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
                       >
-                        Click to Explore
+                        Click Icons
                       </motion.span>
                     </div>
                   </Pointer>
@@ -136,7 +142,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           </MouseTrackerProvider>
         ) : (
           <div className="relative w-full h-full flex flex-col items-center justify-center">
-            <div className="relative w-full flex-1">
+            <div className="relative w-full flex-1 scale-110">
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 isInteractive={false}

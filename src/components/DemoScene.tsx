@@ -99,7 +99,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Handle user click/tap on interactive elements - improved to directly respond to specific icon clicks
   const handleElementClick = (step: number) => {
-    // Pause auto-advance - longer for mobile to give users time to read
+    // Pause auto-advance when user interacts - for much longer to give time to explore
     setIsPaused(true);
     setSubStep(step);
     setInteractionActive(true);
@@ -139,16 +139,16 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       setActiveLabel(postVisitLabels[step]);
     }
     
-    // Auto-resume after inactivity - longer for mobile
+    // Auto-resume after much longer inactivity - dramatically increased
     if (resetTimerRef.current) {
       clearTimeout(resetTimerRef.current);
     }
     
-    // Longer pause on mobile to give users time to read
+    // Much longer pause on both mobile and desktop to ensure users have time to read and explore
     resetTimerRef.current = setTimeout(() => {
       setIsPaused(false);
       setInteractionActive(false);
-    }, isMobile ? 30000 : 20000);
+    }, isMobile ? 60000 : 45000); // Dramatically increased to 45-60 seconds
   };
 
   // Auto-advance substeps unless paused - IMPROVED to cycle through ALL steps
@@ -190,7 +190,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
           setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
         }
-      }, isMobile ? 8000 : 6000); // Shorter interval for better engagement
+      }, isMobile ? 8000 : 6000); // Adjusted timing for better engagement
     }
     
     return () => {
@@ -215,11 +215,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         clearTimeout(resetTimerRef.current);
       }
       
-      // Auto-resume after inactivity - longer for mobile
+      // Auto-resume after inactivity - much longer
       resetTimerRef.current = setTimeout(() => {
         setIsPaused(false);
         setInteractionActive(false);
-      }, isMobile ? 25000 : 15000);
+      }, isMobile ? 45000 : 30000); // Significantly increased times
     } else {
       setInteractionActive(false);
     }

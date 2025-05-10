@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -15,7 +16,7 @@ import {
 export const DemoStage: React.FC<DemoStageProps> = ({ 
   stages, 
   autoPlay = true, 
-  autoPlayInterval = 5000,
+  autoPlayInterval = 15000, // Increased interval to 15 seconds for better exploration
   isDemoSection = true
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
@@ -34,8 +35,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     }
     
     // Only set a new timer if autoPlay is true and not paused
-    // Note: We're keeping stage autoplay at original interval, but individual step autoplay 
-    // has been updated in DemoScene component to cycle through all steps
     if (autoPlay && !isPaused) {
       autoPlayTimerRef.current = setInterval(() => {
         setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));
@@ -71,6 +70,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   const handleStageChange = (index: number) => {
     setCurrentStage(index);
+    // Always pause on manual stage change to give user time to explore
+    setIsPaused(true);
+    
+    // Set a longer timeout before auto-resuming
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 30000); // 30 seconds pause after manual stage change
   };
   
   // Pause autoplay when user interacts with navigation
@@ -104,14 +110,14 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[650px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
+      className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] lg:h-[700px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={() => isMobile && setIsPaused(true)}
       onTouchEnd={() => {
-        // Resume autoplay after 15 seconds of inactivity on touch devices
+        // Resume autoplay after 30 seconds of inactivity on touch devices
         if (isMobile) {
-          setTimeout(() => setIsPaused(false), 15000);
+          setTimeout(() => setIsPaused(false), 30000);
         }
       }}
     >
