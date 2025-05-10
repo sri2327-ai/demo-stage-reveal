@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
@@ -80,7 +81,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={hideTitle}
                 onElementClick={(step) => handleIllustrationClick(step)} // Pass through to the illustration
               />
               
@@ -143,7 +144,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}
-              hideTitle={true}
+              hideTitle={hideTitle}
             />
           </div>
           

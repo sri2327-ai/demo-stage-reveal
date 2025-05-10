@@ -55,19 +55,19 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
           onValueChange={(value) => onStageChange(parseInt(value))}
           className="w-full"
         >
-          <TabsList className={`bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg grid grid-cols-${isMobile ? '2 gap-1 p-1' : '4'} w-full`}>
+          <TabsList className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg w-full grid grid-cols-2 sm:grid-cols-4 gap-1 p-1">
             {stageIcons.map((stage, index) => {
               const Icon = stage.icon;
               return (
                 <TabsTrigger
                   key={index}
                   value={index.toString()}
-                  className={`flex flex-col items-center gap-1 px-3 py-2 sm:px-4 sm:py-3 data-[state=active]:bg-white/20 data-[state=active]:text-white rounded-lg transition-all ${
+                  className={`flex flex-col items-center gap-1 px-2 py-2 sm:px-4 sm:py-3 data-[state=active]:bg-white/20 data-[state=active]:text-white rounded-lg transition-all ${
                     currentStage === index ? 'text-white font-medium' : 'text-white/70'
                   }`}
                 >
                   <Icon size={isMobile ? 18 : 22} className="mb-1" />
-                  <span className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium line-clamp-1`}>
+                  <span className="text-xs sm:text-sm font-medium line-clamp-1">
                     {stage.label}
                   </span>
                   {!isMobile && (

@@ -51,20 +51,18 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div className="relative w-full">
-      {/* Move stage indicators to top position */}
-      {isDemoSection && (
-        <div className="py-4 sm:py-6">
-          <DemoStageIndicator 
-            currentStage={currentStage}
-            totalStages={stages.length}
-            onStageChange={handleStageChange}
-            isDemoSection={isDemoSection}
-          />
-        </div>
-      )}
+      {/* Always show stage indicators at top */}
+      <div className="py-3 sm:py-4">
+        <DemoStageIndicator 
+          currentStage={currentStage}
+          totalStages={stages.length}
+          onStageChange={handleStageChange}
+          isDemoSection={isDemoSection}
+        />
+      </div>
       
       <div 
-        className="relative w-full h-[500px] sm:h-[650px] md:h-[700px] lg:h-[800px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
+        className="relative w-full h-[550px] sm:h-[650px] md:h-[700px] lg:h-[800px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onTouchStart={() => isMobile && setIsPaused(true)}

@@ -85,7 +85,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={hideTitle}
                 onElementClick={(step) => handleIllustrationClick(step)}
               />
               
@@ -148,7 +148,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}
-              hideTitle={true}
+              hideTitle={hideTitle}
             />
           </div>
           
