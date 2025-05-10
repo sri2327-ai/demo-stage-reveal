@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
@@ -55,9 +54,15 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   };
 
   // Handle click on the illustration area - now the entire area is clickable
-  const handleIllustrationClick = () => {
+  const handleIllustrationClick = (step?: number) => {
     if (onElementClick) {
-      // Cycle through steps on click
+      // If specific step is provided, go to that step
+      if (step !== undefined) {
+        onElementClick(step);
+        return;
+      }
+      
+      // Otherwise cycle through steps on click
       const nextStep = (subStep + 1) % 3;
       onElementClick(nextStep);
     }
@@ -70,42 +75,45 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
           <div className="relative h-full flex flex-col items-center justify-center">
             <div 
               className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
-              onClick={handleIllustrationClick}
+              onClick={() => handleIllustrationClick()}
             >
               <FigmaAdminTasksIllustration
                 subStep={subStep}
                 isInteractive={true}
                 hideTitle={true}
+                onElementClick={(step) => handleIllustrationClick(step)} // Pass through to the illustration
               />
               
               {/* Enhanced cursor styling */}
-              <Pointer>
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <svg width={isMobile ? "30" : "40"} height={isMobile ? "30" : "40"} viewBox="0 0 40 40" className="filter drop-shadow-lg">
-                      <defs>
-                        <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#143151" />
-                          <stop offset="100%" stopColor="#387E89" />
-                        </linearGradient>
-                      </defs>
-                      <MousePointer2 size={isMobile ? 30 : 40} className="stroke-white stroke-[1.5]" style={{
-                        fill: "url(#cursor-gradient)"
-                      }} />
-                    </svg>
-                  </motion.div>
-                  <motion.span 
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm`}
-                  >
-                    {isMobile ? "Tap" : "You"}
-                  </motion.span>
-                </div>
-              </Pointer>
+              {!isMobile && (
+                <Pointer>
+                  <div className="flex flex-col items-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg width="40" height="40" viewBox="0 0 40 40" className="filter drop-shadow-lg">
+                        <defs>
+                          <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#143151" />
+                            <stop offset="100%" stopColor="#387E89" />
+                          </linearGradient>
+                        </defs>
+                        <MousePointer2 size={40} className="stroke-white stroke-[1.5]" style={{
+                          fill: "url(#cursor-gradient)"
+                        }} />
+                      </svg>
+                    </motion.div>
+                    <motion.span 
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
+                    >
+                      You
+                    </motion.span>
+                  </div>
+                </Pointer>
+              )}
             </div>
             
             {/* Redesigned floating label with enhanced design */}

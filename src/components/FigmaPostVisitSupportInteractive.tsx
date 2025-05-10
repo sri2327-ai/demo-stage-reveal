@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -58,10 +57,16 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
-  // Handle click on the illustration area - now the entire area is clickable
-  const handleIllustrationClick = () => {
+  // Handle click on the illustration area with specific step handling
+  const handleIllustrationClick = (step?: number) => {
     if (onElementClick) {
-      // Cycle through steps on click - now 5 steps with feedback
+      if (step !== undefined) {
+        // Go to specific step if provided
+        onElementClick(step);
+        return;
+      }
+      
+      // Otherwise cycle through steps on click
       const nextStep = (subStep + 1) % 5;
       onElementClick(nextStep);
     }
@@ -74,12 +79,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           <div className="relative h-full flex flex-col items-center justify-center">
             <div 
               className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
-              onClick={handleIllustrationClick}
+              onClick={() => handleIllustrationClick()}
             >
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={true}
-                hideTitle={true} // Always hide title now
+                hideTitle={true}
+                onElementClick={(step) => handleIllustrationClick(step)} // Pass through clicks
               />
               
               {/* Enhanced cursor styling - only shown on desktop */}
@@ -107,7 +113,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                       animate={{ opacity: 1, y: 0 }}
                       className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
                     >
-                      Click to Explore
+                      You
                     </motion.span>
                   </div>
                 </Pointer>
@@ -126,10 +132,10 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               >
                 <motion.div 
                   className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20"
-                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                 >
-                  <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
-                  <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
+                  <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">{getCurrentLabel().title}</div>
+                  <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
@@ -141,7 +147,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}
-              hideTitle={true} // Always hide title now
+              hideTitle={true}
             />
           </div>
           
@@ -154,8 +160,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-6 py-4 rounded-xl shadow-xl mx-auto max-w-xl border border-white/20">
-                <div className="font-bold text-xl md:text-2xl">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
+                <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">{getCurrentLabel().title}</div>
+                <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
               </div>
             </motion.div>
           )}

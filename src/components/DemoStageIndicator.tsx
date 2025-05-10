@@ -48,14 +48,14 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="px-2 sm:px-4"
+        className="w-full max-w-3xl mx-auto px-2 sm:px-4"
       >
         <Tabs 
           value={currentStage.toString()} 
           onValueChange={(value) => onStageChange(parseInt(value))}
           className="w-full"
         >
-          <TabsList className={`bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg grid ${isMobile ? 'grid-cols-2 gap-1 p-1' : 'grid-cols-4'} w-full max-w-3xl mx-auto`}>
+          <TabsList className={`bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg grid grid-cols-${isMobile ? '2 gap-1 p-1' : '4'} w-full`}>
             {stageIcons.map((stage, index) => {
               const Icon = stage.icon;
               return (
@@ -68,7 +68,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 >
                   <Icon size={isMobile ? 18 : 22} className="mb-1" />
                   <span className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium line-clamp-1`}>
-                    {isMobile ? "" : stage.label}
+                    {stage.label}
                   </span>
                   {!isMobile && (
                     <span className="text-xs opacity-80 line-clamp-1">{stage.description}</span>

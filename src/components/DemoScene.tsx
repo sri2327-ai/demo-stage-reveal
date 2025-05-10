@@ -99,8 +99,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
 
   // Handle user click/tap on interactive elements
   const handleElementClick = (step: number) => {
-    // Pause auto-advance
-    setIsPaused(true);
+    // Direct-navigate to the clicked step
     setSubStep(step);
     setInteractionActive(true);
     
@@ -138,6 +137,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     } else if (currentStage === 3) {
       setActiveLabel(postVisitLabels[step]);
     }
+    
+    // Pause auto-advance when user interacts
+    setIsPaused(true);
     
     // Auto-resume after inactivity - longer for mobile
     if (resetTimerRef.current) {
