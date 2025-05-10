@@ -67,12 +67,14 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                   }`}
                 >
                   <Icon size={isMobile ? 18 : 22} className="mb-1" />
-                  <span className="text-xs sm:text-sm font-medium line-clamp-1">
-                    {stage.label}
-                  </span>
-                  {!isMobile && (
-                    <span className="text-xs opacity-80 line-clamp-1">{stage.description}</span>
-                  )}
+                  <div className="flex flex-col items-center text-center">
+                    <span className="text-xs sm:text-sm font-medium">
+                      {stage.label}
+                    </span>
+                    {!isMobile && (
+                      <span className="text-xs opacity-80 line-clamp-1">{stage.description}</span>
+                    )}
+                  </div>
                 </TabsTrigger>
               );
             })}
