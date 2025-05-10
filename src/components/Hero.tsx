@@ -1,17 +1,16 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Clock, Hospital, Users, ShieldCheck } from 'lucide-react';
+import { Hospital, Clock, Users, ShieldCheck } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { useIsMobile } from '../hooks/use-mobile';
 
 interface HeroProps {
-  scrollToDemo: () => void;
   currentSection: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ scrollToDemo, currentSection }) => {
+export const Hero: React.FC<HeroProps> = ({ currentSection }) => {
   const isMobile = useIsMobile();
 
   return (
@@ -65,7 +64,6 @@ export const Hero: React.FC<HeroProps> = ({ scrollToDemo, currentSection }) => {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <Button 
-            onClick={scrollToDemo}
             size="lg" 
             className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto"
           >

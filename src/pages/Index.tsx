@@ -17,13 +17,6 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState('hero');
   const isMobile = useIsMobile();
 
-  // Scroll to demo section
-  const scrollToDemo = () => {
-    if (demoRef.current) {
-      demoRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Track if user has scrolled to the demo section and monitor current section
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +74,7 @@ const Index = () => {
         )}
         
         {/* Hero Section with Clinical Focus */}
-        <Hero scrollToDemo={scrollToDemo} currentSection={currentSection} />
+        <Hero currentSection={currentSection} />
 
         {/* Demo Section with Enhanced Clinical Context */}
         <main ref={demoRef} id="demo-section">
