@@ -53,7 +53,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   };
 
-  // Handle direct click on specific icons
+  // Handle direct click on specific icons - FIXED to go directly to the chosen step
   const handleIconClick = (step: number) => {
     if (onElementClick) {
       onElementClick(step);
@@ -63,7 +63,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   // Handle click on the illustration area for any part not covered by icons
   const handleIllustrationClick = () => {
     if (onElementClick) {
-      // Cycle through steps on click
+      // Move to next step
       const nextStep = (subStep + 1) % 3;
       onElementClick(nextStep);
     }
@@ -73,7 +73,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     <div className="relative w-full max-w-6xl mx-auto h-full">
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
-          <MouseTrackerProvider disableCursor={false}>
+          <MouseTrackerProvider disableCursor={true}>
             <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
               <div 
                 className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 

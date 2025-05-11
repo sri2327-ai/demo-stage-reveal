@@ -30,11 +30,14 @@ const Index = () => {
         }
         
         // Determine current section with more precise thresholds
+        const demoElement = document.querySelector('#demo-section');
         const roiElement = document.querySelector('#roi-section');
         const ctaElement = document.querySelector('#cta-section');
         
-        if (demoRect.top <= window.innerHeight * 0.3 && 
-            demoRect.bottom >= window.innerHeight * 0.3) {
+        // Improved section detection logic
+        if (demoElement && 
+            demoElement.getBoundingClientRect().top <= window.innerHeight * 0.3 && 
+            demoElement.getBoundingClientRect().bottom >= window.innerHeight * 0.3) {
           setCurrentSection('demo');
         } else if (roiElement && 
                   roiElement.getBoundingClientRect().top <= window.innerHeight * 0.5 && 
@@ -44,7 +47,7 @@ const Index = () => {
                   ctaElement.getBoundingClientRect().top <= window.innerHeight * 0.5 && 
                   ctaElement.getBoundingClientRect().bottom >= window.innerHeight * 0.5) {
           setCurrentSection('cta');
-        } else if (demoRect.top > window.innerHeight * 0.3) {
+        } else {
           setCurrentSection('hero');
         }
       }
@@ -58,7 +61,7 @@ const Index = () => {
   }, [hasScrolledToDemo]);
 
   return (
-    <MouseTrackerProvider>
+    <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         {/* Hero Section */}
         <Hero currentSection={currentSection} />

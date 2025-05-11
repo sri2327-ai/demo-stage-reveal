@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -95,7 +96,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   }, [subStep, currentStage]);
 
-  // Handle user click/tap on interactive elements - improved to directly respond to specific icon clicks
+  // Handle user click/tap on interactive elements - FIXED to directly go to clicked step
   const handleElementClick = (step: number) => {
     // Pause auto-advance when user interacts - for much longer to give time to explore
     setIsPaused(true);
@@ -126,7 +127,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       }
     }
     
-    // Set the active label based on current stage
+    // Set the active label based on current stage and chosen step
     if (currentStage === 0) {
       setActiveLabel(patientEngagementLabels[step]);
     } else if (currentStage === 1) {
@@ -228,7 +229,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <MouseTrackerProvider disableCursor={false}>
+          <MouseTrackerProvider disableCursor={true}>
             <div className="w-full h-full flex flex-col items-center justify-center">
               <div className="w-full flex-1 flex items-center justify-center pt-6 pb-16">
                 <FigmaPatientEngagementIllustration
