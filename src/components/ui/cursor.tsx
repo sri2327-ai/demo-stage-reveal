@@ -13,15 +13,21 @@ const MousePositionContext = createContext<MousePositionContextType | null>(null
 
 interface MouseTrackerProviderProps {
   children: ReactNode;
+  disableCursor?: boolean;
 }
 
-export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ children }) => {
+export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ 
+  children, 
+  disableCursor = false 
+}) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   // Track mouse movement with improved responsiveness
   useEffect(() => {
+    if (disableCursor) return;
+    
     const handleMouseMove = (e: MouseEvent) => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
@@ -54,11 +60,15 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({ chil
         element.removeEventListener('mouseenter', handleMouseEnter);
       };
     }
-  }, []);
+  }, [disableCursor]);
 
   return (
     <MousePositionContext.Provider value={{ position, setPosition, isActive }}>
-      <div ref={ref} style={{ cursor: 'none' }} className="relative w-full h-full overflow-hidden">
+      <div 
+        ref={ref} 
+        style={{ cursor: disableCursor ? 'default' : 'none' }} 
+        className="relative w-full h-full overflow-hidden"
+      >
         {children}
       </div>
     </MousePositionContext.Provider>

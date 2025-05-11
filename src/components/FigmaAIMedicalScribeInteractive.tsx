@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
@@ -74,10 +75,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   return (
     <div className="relative w-full max-w-6xl mx-auto h-full">
       {isInteractive ? (
-        <MouseTrackerProvider>
-          <div className="relative h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top to fix cut-off */}
+        <MouseTrackerProvider disableCursor={true}>
+          <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
             <div 
-              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-105" 
               onClick={handleIllustrationClick}
             >
               <FigmaAIMedicalScribeIllustration
@@ -86,15 +87,13 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 noteGeneration={noteGeneration}
                 hideTitle={true}
               />
-              
-              {/* Removed the custom cursor display */}
             </div>
             
             {/* Redesigned floating label with improved responsive design - positioned lower to prevent overlap */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="w-full z-30 mb-4 mt-2 px-3 sm:px-4 md:px-6" 
+                className="absolute bottom-2 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6" 
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -112,8 +111,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top to fix cut-off */}
-          <div className="relative w-full flex-1 scale-110">
+        <div className="relative w-full h-full flex flex-col items-center justify-center pt-12 pb-16"> 
+          <div className="relative w-full flex-1 scale-105">
             <FigmaAIMedicalScribeIllustration
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -125,7 +124,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Only show title tooltip if not hidden - positioned consistently */}
           {!hideTitle && (
             <motion.div 
-              className="w-full z-30 mb-4 mt-2 px-3 sm:px-4 md:px-6"
+              className="absolute bottom-2 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}

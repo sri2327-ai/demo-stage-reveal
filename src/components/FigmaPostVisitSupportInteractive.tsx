@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -76,10 +77,10 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     <div className="relative w-full max-w-6xl mx-auto h-full">
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
-          <MouseTrackerProvider>
-            <div className="relative h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top */}
+          <MouseTrackerProvider disableCursor={true}>
+            <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
               <div 
-                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
+                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-105" 
                 onClick={handleIllustrationClick}
               >
                 <FigmaPostVisitSupportIllustration
@@ -88,15 +89,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   hideTitle={true}
                   onElementClick={handleIconClick}
                 />
-                
-                {/* Removed custom cursor component */}
               </div>
               
               {/* Enhanced floating label that's always visible - now properly positioned */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
-                  className="w-full z-30 mx-auto px-3 sm:px-4 lg:px-6 mb-4 mt-2"
+                  className="absolute bottom-2 left-0 right-0 w-full z-30 px-3 sm:px-4 lg:px-6"
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -114,8 +113,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top */}
-            <div className="relative w-full flex-1 scale-110">
+          <div className="relative w-full h-full flex flex-col items-center justify-center pt-12 pb-16"> 
+            <div className="relative w-full flex-1 scale-105">
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={false}
@@ -126,7 +125,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             {/* Label shown on non-interactive mode */}
             {!hideTitle && (
               <motion.div 
-                className="w-full z-30 mb-4 mt-2 px-3"
+                className="absolute bottom-2 left-0 right-0 w-full z-30 px-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Calendar, FileText, BellRing, Phone } from 'lucide-react';
@@ -22,10 +21,20 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
   onHover,
   hideTitle = false
 }) => {
-  // Handle click on the entire illustration area
-  const handleAreaClick = (step: number) => {
+  // Handle click on each icon - directly set to the corresponding step instead of cycling
+  const handleAreaClick = (step: number, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event bubbling
     if (isInteractive && onElementClick) {
       onElementClick(step);
+    }
+  };
+
+  // Handle click on the entire illustration area
+  const handleIllustrationClick = () => {
+    if (isInteractive && onElementClick) {
+      // Cycle through steps on general area click
+      const nextStep = (subStep + 1) % 5;
+      onElementClick(nextStep);
     }
   };
 
@@ -35,7 +44,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      onClick={() => isInteractive && onElementClick && onElementClick((subStep + 1) % 5)} // Now 5 steps with calling
+      onClick={handleIllustrationClick}
     >
       <div className="relative aspect-video bg-white rounded-xl border border-[#387E89]/20 overflow-hidden shadow-lg">
         {/* App header */}
@@ -59,7 +68,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleAreaClick(0)}
+              onClick={(e) => handleAreaClick(0, e)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(0)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -71,7 +80,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 1 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleAreaClick(1)}
+              onClick={(e) => handleAreaClick(1, e)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(1)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -83,7 +92,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 2 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleAreaClick(2)}
+              onClick={(e) => handleAreaClick(2, e)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(2)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -95,7 +104,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 3 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleAreaClick(3)}
+              onClick={(e) => handleAreaClick(3, e)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(3)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -107,7 +116,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 4 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleAreaClick(4)}
+              onClick={(e) => handleAreaClick(4, e)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(4)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -117,7 +126,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
           </div>
           
           {/* Main content area - changes based on subStep */}
-          <div className="flex-1 p-4 overflow-hidden" onClick={() => handleAreaClick(subStep)}>
+          <div className="flex-1 p-4 overflow-hidden">
             {/* Messaging Interface - Step 0 */}
             {subStep === 0 && (
               <div className="h-full flex flex-col">
