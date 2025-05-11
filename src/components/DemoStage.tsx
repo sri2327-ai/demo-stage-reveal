@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -26,7 +25,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const isMobile = useIsMobile();
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   
-  // Effect for auto-play functionality with improved timer management - now properly cycles through all stages
+  // Effect for auto-play functionality with improved timer management
   useEffect(() => {
     // Clear any existing timer
     if (autoPlayTimerRef.current) {
@@ -106,7 +105,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[500px] sm:h-[580px] md:h-[680px] lg:h-[750px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
+      className="relative w-full h-[540px] sm:h-[620px] md:h-[720px] lg:h-[780px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
       onTouchStart={() => isMobile && setIsPaused(true)}
       onTouchEnd={() => {
         // Resume autoplay after 30 seconds of inactivity on touch devices

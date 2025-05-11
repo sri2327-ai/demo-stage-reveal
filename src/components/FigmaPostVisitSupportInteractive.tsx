@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
-import { MouseTrackerProvider, Pointer } from './ui/cursor';
-import { MousePointer2 } from 'lucide-react';
+import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
 
 interface FigmaPostVisitSupportInteractiveProps {
@@ -79,9 +77,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider>
-            <div className="relative h-full flex flex-col items-center justify-center pt-0">
+            <div className="relative h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top */}
               <div 
-                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-[1.15]" 
+                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
                 onClick={handleIllustrationClick}
               >
                 <FigmaPostVisitSupportIllustration
@@ -91,43 +89,14 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   onElementClick={handleIconClick}
                 />
                 
-                {/* Enhanced cursor styling - only show Click to interact, no "You" cursor */}
-                {!isMobile && (
-                  <Pointer>
-                    <div className="flex flex-col items-center">
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <svg width="40" height="40" viewBox="0 0 40 40" className="filter drop-shadow-lg">
-                          <defs>
-                            <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stopColor="#143151" />
-                              <stop offset="100%" stopColor="#387E89" />
-                            </linearGradient>
-                          </defs>
-                          <MousePointer2 size={40} className="stroke-white stroke-[1.5]" style={{
-                            fill: "url(#cursor-gradient)"
-                          }} />
-                        </svg>
-                      </motion.div>
-                      <motion.span 
-                        initial={{ opacity: 0, y: -5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-sm font-medium text-[#387E89] mt-1 whitespace-nowrap bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm"
-                      >
-                        Click Icons
-                      </motion.span>
-                    </div>
-                  </Pointer>
-                )}
+                {/* Removed custom cursor component */}
               </div>
               
               {/* Enhanced floating label that's always visible - now properly positioned */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
-                  className="w-full z-30 mx-auto px-3 sm:px-4 lg:px-6 mb-4"
+                  className="w-full z-30 mx-auto px-3 sm:px-4 lg:px-6 mb-4 mt-2"
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -145,8 +114,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center">
-            <div className="relative w-full flex-1 scale-[1.15]">
+          <div className="relative w-full h-full flex flex-col items-center justify-center pt-8"> {/* Added padding-top */}
+            <div className="relative w-full flex-1 scale-110">
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={false}
@@ -157,7 +126,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             {/* Label shown on non-interactive mode */}
             {!hideTitle && (
               <motion.div 
-                className="w-full z-30 mb-4 px-3"
+                className="w-full z-30 mb-4 mt-2 px-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}

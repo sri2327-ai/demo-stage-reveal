@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -6,7 +5,7 @@ import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustra
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MousePointer2 } from 'lucide-react';
-import { MouseTrackerProvider, Pointer } from './ui/cursor';
+import { MouseTrackerProvider } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
 
@@ -272,25 +271,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </motion.div>
               </AnimatePresence>
           
-              {/* Only show special cursor for those who need interaction guidance */}
-              <Pointer>
-                <div className="flex flex-col items-center">
-                  <svg width={isMobile ? "24" : "32"} height={isMobile ? "24" : "32"} viewBox="0 0 32 32" className="filter drop-shadow-md">
-                    <defs>
-                      <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#143151" />
-                        <stop offset="100%" stopColor="#387E89" />
-                      </linearGradient>
-                    </defs>
-                    <MousePointer2 size={isMobile ? 24 : 32} className="stroke-white" style={{
-                      fill: "url(#cursor-gradient)"
-                    }} />
-                  </svg>
-                  <span className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-[#387E89] mt-0.5 sm:mt-1 whitespace-nowrap bg-white px-1.5 py-0.5 sm:px-2 rounded-md shadow-sm`}>
-                    {isMobile ? "Tap" : "Click to interact"}
-                  </span>
-                </div>
-              </Pointer>
+              {/* Removed the 'You' cursor element, keeping only MouseTrackerProvider */}
             </div>
           </MouseTrackerProvider>
         );
@@ -314,6 +295,35 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 isInteractive={true}
                 hideTitle={true}
               />
+              
+              {/* Added missing description for AI Medical Scribe */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`medical-scribe-label-${subStep}`}
+                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
+                  >
+                    <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">
+                      {subStep === 0 ? "Authentication" : 
+                       subStep === 1 ? "Patient Schedule" : 
+                       subStep === 2 ? "Templates" : 
+                       subStep === 3 ? "Recording" :
+                       subStep === 4 ? "Generate Documentation" :
+                       "EHR Integration"}
+                    </div>
+                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">
+                      {medicalScribeLabels[subStep]}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
           </AnimatePresence>
         );
@@ -335,6 +345,32 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 isInteractive={true}
                 hideTitle={true}
               />
+              
+              {/* Added missing description for Admin Tasks */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`admin-tasks-label-${subStep}`}
+                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
+                  >
+                    <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">
+                      {subStep === 0 ? "Prescriptions & Orders" : 
+                       subStep === 1 ? "Patient Communications" : 
+                       "Insurance & Billing"}
+                    </div>
+                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">
+                      {adminTasksLabels[subStep]}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
           </AnimatePresence>
         );
@@ -356,6 +392,34 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 isInteractive={true}
                 hideTitle={true}
               />
+              
+              {/* Added missing description for Post-Visit Support */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`post-visit-label-${subStep}`}
+                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
+                  >
+                    <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">
+                      {subStep === 0 ? "Treatment Adherence" : 
+                       subStep === 1 ? "Care Plan Monitoring" : 
+                       subStep === 2 ? "Patient Questions" :
+                       subStep === 3 ? "Recovery Tracking" :
+                       "Patient Feedback"}
+                    </div>
+                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">
+                      {postVisitLabels[subStep]}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
           </AnimatePresence>
         );

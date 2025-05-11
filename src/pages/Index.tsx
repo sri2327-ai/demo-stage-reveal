@@ -54,8 +54,8 @@ const Index = () => {
         {/* Hero Section with Clinical Focus */}
         <Hero currentSection={currentSection} />
 
-        {/* Demo Section with Enhanced Clinical Context */}
-        <main ref={demoRef} id="demo-section" className="w-full max-w-[95vw] mx-auto">
+        {/* Demo Section with Enhanced Clinical Context - give it more space */}
+        <main ref={demoRef} id="demo-section" className="w-full max-w-[98vw] mx-auto">
           <DemoSection 
             isInViewport={isInViewport} 
             hasScrolledToDemo={hasScrolledToDemo} 
