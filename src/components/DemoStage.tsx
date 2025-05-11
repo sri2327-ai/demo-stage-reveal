@@ -34,7 +34,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       autoPlayTimerRef.current = null;
     }
     
-    // Only set a new timer if autoPlay is true and not paused
+    // Only set auto-advance if autoPlay is true and not paused
     if (autoPlay && !isPaused) {
       autoPlayTimerRef.current = setInterval(() => {
         setCurrentStage((prev) => (prev === stages.length - 1 ? 0 : prev + 1));
@@ -79,10 +79,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     }, 30000); // 30 seconds pause after manual stage change
   };
   
-  // Pause autoplay when user interacts with navigation
-  const handleMouseEnter = () => !isMobile && setIsPaused(true);
-  const handleMouseLeave = () => !isMobile && setIsPaused(false);
-  
   // Toggle pause/play manually
   const togglePause = () => setIsPaused(prev => !prev);
 
@@ -110,9 +106,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
 
   return (
     <div 
-      className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] lg:h-[700px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-[500px] sm:h-[580px] md:h-[680px] lg:h-[750px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10"
       onTouchStart={() => isMobile && setIsPaused(true)}
       onTouchEnd={() => {
         // Resume autoplay after 30 seconds of inactivity on touch devices
@@ -123,7 +117,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     >
       {/* Enhanced header with stronger gradient and better visibility */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-3 sm:py-4 sm:px-4 md:py-4 md:px-6 z-40 border-b border-white/10 shadow-lg"
+        className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-3 sm:py-4 sm:px-4 md:py-5 md:px-6 z-40 border-b border-white/10 shadow-lg"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -150,11 +144,9 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             </motion.p>
           </div>
           <div className="flex items-center gap-2">
-            <motion.button 
+            <button 
               onClick={togglePause}
-              className="bg-white/30 hover:bg-white/40 rounded-full p-1.5 sm:p-2 md:p-2.5 transition-all shadow-lg border border-white/30 group"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              className="bg-white/30 hover:bg-white/40 rounded-full p-1.5 sm:p-2 md:p-2.5 transition-all shadow-lg border border-white/30 group cursor-pointer"
               aria-label={isPaused ? "Play demo" : "Pause demo"}
             >
               {isPaused ? (
@@ -162,7 +154,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               ) : (
                 <Pause size={isMobile ? 16 : 20} className="text-white group-hover:text-white/90" />
               )}
-            </motion.button>
+            </button>
           </div>
         </div>
       </motion.div>
@@ -170,12 +162,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-16 sm:pt-20"
+          className="absolute inset-0 pt-[72px] sm:pt-[80px]"
           initial={{ opacity: 0, scale: 0.85 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.85 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          style={{ height: "calc(100% - 64px)" }}
+          style={{ height: "calc(100% - 72px)" }}
         >
           <DemoScene
             currentStage={currentStage}
@@ -184,7 +176,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      {/* Optimized stage indicator positioning */}
+      {/* Fixed positioned stage indicator at the bottom */}
       <DemoStageIndicator 
         currentStage={currentStage}
         totalStages={stages.length}

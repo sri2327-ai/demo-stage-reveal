@@ -79,7 +79,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
         <MouseTrackerProvider>
           <div className="relative h-full flex flex-col items-center justify-center">
             <div 
-              className="relative w-full flex-1 flex items-center justify-center cursor-pointer" 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-[1.15]" 
               onClick={handleIllustrationClick}
             >
               <FigmaAIMedicalScribeIllustration
@@ -89,7 +89,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 hideTitle={true}
               />
               
-              {/* Enhanced cursor styling */}
+              {/* Enhanced cursor styling - only show Click to interact */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <motion.div
@@ -119,11 +119,11 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               </Pointer>
             </div>
             
-            {/* Redesigned floating label with improved responsive design */}
+            {/* Redesigned floating label with improved responsive design - fixed position for better visibility */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="w-full z-30 mt-2 sm:mt-4 px-3 sm:px-4 md:px-6"
+                className="w-full z-30 mb-4 px-3 sm:px-4 md:px-6"
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -142,7 +142,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
         </MouseTrackerProvider>
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center">
-          <div className="relative w-full flex-1">
+          <div className="relative w-full flex-1 scale-[1.15]">
             <FigmaAIMedicalScribeIllustration
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -154,7 +154,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Only show title tooltip if not hidden - positioned consistently */}
           {!hideTitle && (
             <motion.div 
-              className="w-full z-30 mt-2 sm:mt-4 px-3 sm:px-4 md:px-6"
+              className="w-full z-30 mb-4 px-3 sm:px-4 md:px-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}

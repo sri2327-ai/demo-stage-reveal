@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
-import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
-import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
-import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
+import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
+import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
+import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MousePointer2 } from 'lucide-react';
 import { MouseTrackerProvider, Pointer } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
@@ -272,7 +272,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </motion.div>
               </AnimatePresence>
           
-              {/* Responsive cursor styling with SVG gradient */}
+              {/* Only show special cursor for those who need interaction guidance */}
               <Pointer>
                 <div className="flex flex-col items-center">
                   <svg width={isMobile ? "24" : "32"} height={isMobile ? "24" : "32"} viewBox="0 0 32 32" className="filter drop-shadow-md">
@@ -287,7 +287,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                     }} />
                   </svg>
                   <span className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-[#387E89] mt-0.5 sm:mt-1 whitespace-nowrap bg-white px-1.5 py-0.5 sm:px-2 rounded-md shadow-sm`}>
-                    {isMobile ? "Tap" : "You"}
+                    {isMobile ? "Tap" : "Click to interact"}
                   </span>
                 </div>
               </Pointer>
@@ -306,7 +306,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
             >
-              <FigmaAIMedicalScribeInteractive
+              <FigmaAIMedicalScribeIllustration
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
                 noteGeneration={noteGeneration}
@@ -329,7 +329,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
             >
-              <FigmaAdminTasksInteractive
+              <FigmaAdminTasksIllustration
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
@@ -350,7 +350,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
             >
-              <FigmaPostVisitSupportInteractive
+              <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
