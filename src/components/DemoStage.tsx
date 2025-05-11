@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -175,7 +176,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      {/* Fixed positioned stage indicator at the bottom */}
+      {/* Pass the isDemoSection prop to DemoStageIndicator */}
       <DemoStageIndicator 
         currentStage={currentStage}
         totalStages={stages.length}

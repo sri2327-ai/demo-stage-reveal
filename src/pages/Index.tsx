@@ -29,14 +29,23 @@ const Index = () => {
           setHasScrolledToDemo(true);
         }
         
-        // Determine current section with improved thresholds
+        // Determine current section with more precise thresholds
+        const roiElement = document.querySelector('#roi-section');
+        const ctaElement = document.querySelector('#cta-section');
+        
         if (demoRect.top <= window.innerHeight * 0.3 && 
             demoRect.bottom >= window.innerHeight * 0.3) {
           setCurrentSection('demo');
+        } else if (roiElement && 
+                  roiElement.getBoundingClientRect().top <= window.innerHeight * 0.5 && 
+                  roiElement.getBoundingClientRect().bottom >= window.innerHeight * 0.5) {
+          setCurrentSection('roi');
+        } else if (ctaElement && 
+                  ctaElement.getBoundingClientRect().top <= window.innerHeight * 0.5 && 
+                  ctaElement.getBoundingClientRect().bottom >= window.innerHeight * 0.5) {
+          setCurrentSection('cta');
         } else if (demoRect.top > window.innerHeight * 0.3) {
           setCurrentSection('hero');
-        } else {
-          setCurrentSection('roi');
         }
       }
     };
@@ -51,10 +60,10 @@ const Index = () => {
   return (
     <MouseTrackerProvider>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-        {/* Hero Section with Clinical Focus */}
+        {/* Hero Section */}
         <Hero currentSection={currentSection} />
 
-        {/* Demo Section with Enhanced Clinical Context - give it more space */}
+        {/* Demo Section */}
         <main ref={demoRef} id="demo-section" className="w-full max-w-[98vw] mx-auto">
           <DemoSection 
             isInViewport={isInViewport} 
@@ -63,11 +72,15 @@ const Index = () => {
             currentSection={currentSection}
           />
           
-          {/* ROI Section */}
-          <ROISection />
+          {/* ROI Section with ID for tracking */}
+          <section id="roi-section">
+            <ROISection />
+          </section>
           
-          {/* Call to Action */}
-          <CallToAction />
+          {/* Call to Action with ID for tracking */}
+          <section id="cta-section">
+            <CallToAction />
+          </section>
         </main>
       </div>
     </MouseTrackerProvider>

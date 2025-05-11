@@ -14,7 +14,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Don't render if not in demo section and isDemoSection is specified
+  // Don't render if not in demo section
   if (isDemoSection === false) {
     return null;
   }

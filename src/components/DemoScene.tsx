@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -229,7 +228,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <MouseTrackerProvider disableCursor={true}>
+          <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
               <div className="w-full flex-1 flex items-center justify-center pt-6 pb-16">
                 <FigmaPatientEngagementIllustration
@@ -247,14 +246,14 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={`patient-engagement-label-${subStep}`}
-                  className="absolute bottom-2 left-0 right-0 w-full z-30 px-2 sm:px-4"
+                  className="absolute bottom-8 left-0 right-0 w-full z-30 px-2 sm:px-4"
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.9 }}
                   transition={{ duration: 0.5 }}
                 >
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
                     whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                   >
                     <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">

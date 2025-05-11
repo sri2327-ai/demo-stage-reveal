@@ -63,10 +63,17 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     };
   };
 
-  // Handle click on the illustration area - now the entire area is clickable
+  // Handle click on specific UI elements (icons)
+  const handleIconClick = (step: number) => {
+    if (onElementClick) {
+      onElementClick(step);
+    }
+  };
+  
+  // Handle click on the illustration area - if no specific icon is clicked
   const handleIllustrationClick = () => {
     if (onElementClick) {
-      // Cycle through steps on click - now include the new step
+      // Cycle through steps on click - now include all steps (0-5)
       const nextStep = (subStep + 1) % 6;
       onElementClick(nextStep);
     }
@@ -75,10 +82,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   return (
     <div className="relative w-full max-w-6xl mx-auto h-full">
       {isInteractive ? (
-        <MouseTrackerProvider disableCursor={true}>
+        <MouseTrackerProvider disableCursor={false}>
           <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
             <div 
-              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-105" 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
               onClick={handleIllustrationClick}
             >
               <FigmaAIMedicalScribeIllustration
@@ -86,21 +93,23 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 transcriptionActive={transcriptionActive}
                 noteGeneration={noteGeneration}
                 hideTitle={true}
+                onElementClick={handleIconClick}
+                isInteractive={true}
               />
             </div>
             
-            {/* Redesigned floating label with improved responsive design - positioned lower to prevent overlap */}
+            {/* Redesigned floating label with improved responsive design */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-2 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6" 
+                className="absolute bottom-8 left-0 right-0 w-full z-30 px-3 sm:px-4 md:px-6" 
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
                 <motion.div 
-                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
                   whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                 >
                   <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">{getCurrentLabel().title}</div>

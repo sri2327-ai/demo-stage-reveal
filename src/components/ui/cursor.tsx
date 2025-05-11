@@ -66,7 +66,7 @@ export const MouseTrackerProvider: React.FC<MouseTrackerProviderProps> = ({
     <MousePositionContext.Provider value={{ position, setPosition, isActive }}>
       <div 
         ref={ref} 
-        style={{ cursor: disableCursor ? 'default' : 'none' }} 
+        style={{ cursor: 'default' }} // Changed from 'default' to maintain normal cursor
         className="relative w-full h-full overflow-hidden"
       >
         {children}
