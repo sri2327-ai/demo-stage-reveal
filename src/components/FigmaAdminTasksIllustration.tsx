@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -13,18 +14,29 @@ import {
 interface FigmaAdminTasksIllustrationProps {
   subStep: number;
   onElementClick?: (step: number) => void;
+  onIconClick?: (step: number) => void; // Add this new prop
   isInteractive?: boolean;
   onHover?: (step: number | null) => void;
-  hideTitle?: boolean; // Add the hideTitle property to the interface
+  hideTitle?: boolean;
 }
 
 export const FigmaAdminTasksIllustration: React.FC<FigmaAdminTasksIllustrationProps> = ({
   subStep,
   onElementClick,
+  onIconClick,  // Add this to the prop destructuring
   isInteractive = false,
   onHover,
-  hideTitle = false // Set a default value of false
+  hideTitle = false
 }) => {
+  // Use onIconClick if provided, otherwise fall back to onElementClick
+  const handleIconClick = (step: number) => {
+    if (onIconClick) {
+      onIconClick(step);
+    } else if (onElementClick) {
+      onElementClick(step);
+    }
+  };
+
   return (
     <motion.div 
       className="w-full max-w-3xl mx-auto"
@@ -54,7 +66,7 @@ export const FigmaAdminTasksIllustration: React.FC<FigmaAdminTasksIllustrationPr
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => isInteractive && onElementClick && onElementClick(0)}
+              onClick={() => isInteractive && handleIconClick(0)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(0)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -66,7 +78,7 @@ export const FigmaAdminTasksIllustration: React.FC<FigmaAdminTasksIllustrationPr
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 1 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => isInteractive && onElementClick && onElementClick(1)}
+              onClick={() => isInteractive && handleIconClick(1)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(1)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}
@@ -78,7 +90,7 @@ export const FigmaAdminTasksIllustration: React.FC<FigmaAdminTasksIllustrationPr
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}
               animate={{ scale: subStep === 2 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
-              onClick={() => isInteractive && onElementClick && onElementClick(2)}
+              onClick={() => isInteractive && handleIconClick(2)}
               whileHover={isInteractive ? { scale: 1.1 } : undefined}
               onMouseEnter={() => isInteractive && onHover && onHover(2)}
               onMouseLeave={() => isInteractive && onHover && onHover(null)}

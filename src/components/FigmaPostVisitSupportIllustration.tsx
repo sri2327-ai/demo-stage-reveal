@@ -7,13 +7,26 @@ interface FigmaPostVisitSupportIllustrationProps {
   subStep: number;
   isInteractive?: boolean;
   hideTitle?: boolean;
+  onIconClick?: (step: number) => void; // Add this prop
+  onElementClick?: (step: number) => void; // Add this prop for compatibility
 }
 
 export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIllustrationProps> = ({
   subStep,
   isInteractive = false,
-  hideTitle = false
+  hideTitle = false,
+  onIconClick, // Add this to the prop destructuring
+  onElementClick // Add this to the prop destructuring
 }) => {
+  // Handle icon click with fallback to onElementClick
+  const handleIconClick = (step: number) => {
+    if (onIconClick) {
+      onIconClick(step);
+    } else if (onElementClick) {
+      onElementClick(step);
+    }
+  };
+
   return (
     <motion.div
       className="w-full max-w-3xl mx-auto"
@@ -42,6 +55,8 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
               className={`p-2 rounded-lg ${subStep === 0 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
               animate={{ scale: subStep === 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && handleIconClick(0)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <MessageCircle size={20} />
             </motion.div>
@@ -49,6 +64,8 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
               className={`p-2 rounded-lg ${subStep === 1 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
               animate={{ scale: subStep === 1 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && handleIconClick(1)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <Heart size={20} />
             </motion.div>
@@ -56,6 +73,8 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
               className={`p-2 rounded-lg ${subStep === 2 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
               animate={{ scale: subStep === 2 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && handleIconClick(2)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <Activity size={20} />
             </motion.div>
@@ -63,6 +82,8 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
               className={`p-2 rounded-lg ${subStep === 3 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
               animate={{ scale: subStep === 3 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && handleIconClick(3)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <FileText size={20} />
             </motion.div>
@@ -70,6 +91,8 @@ export const FigmaPostVisitSupportIllustration: React.FC<FigmaPostVisitSupportIl
               className={`p-2 rounded-lg ${subStep === 4 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}`}
               animate={{ scale: subStep === 4 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
+              onClick={() => isInteractive && handleIconClick(4)}
+              whileHover={isInteractive ? { scale: 1.1 } : undefined}
             >
               <Star size={20} />
             </motion.div>
