@@ -63,14 +63,15 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     };
   };
 
-  // Handle click on specific UI elements (icons) - FIXED to go directly to the chosen step
+  // Handle click on specific UI elements (icons)
+  // FIXED: Go directly to the chosen step rather than cycling through steps
   const handleIconClick = (step: number) => {
     if (onElementClick) {
       onElementClick(step);
     }
   };
   
-  // Handle click on the illustration area - if no specific icon is clicked
+  // Handle click on the illustration area - for areas not covered by icons
   const handleIllustrationClick = () => {
     if (onElementClick) {
       // Move to next step

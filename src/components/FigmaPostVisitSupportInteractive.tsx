@@ -57,7 +57,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
-  // Handle click on specific icons - FIXED to go directly to the chosen step
+  // FIXED: Direct navigation to specific step when icon is clicked
   const handleIconClick = (step: number) => {
     if (onElementClick) {
       onElementClick(step);
