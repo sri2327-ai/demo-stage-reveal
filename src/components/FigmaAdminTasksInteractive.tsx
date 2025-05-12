@@ -53,8 +53,9 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   };
 
-  // FIXED: Direct navigation to specific step when icon is clicked
+  // Direct navigation to specific step when icon is clicked
   const handleIconClick = (step: number) => {
+    console.log("AdminTasks - Icon clicked for step:", step);
     if (onElementClick) {
       onElementClick(step);
     }

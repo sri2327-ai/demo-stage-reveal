@@ -95,8 +95,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     }
   }, [subStep, currentStage]);
 
-  // FIXED: Handle user click/tap on interactive elements - directly go to clicked step
+  // Direct navigation to specific step when icon is clicked
   const handleElementClick = (step: number) => {
+    console.log(`DemoScene - Element clicked for stage ${currentStage}, step ${step}`);
+    
     // Pause auto-advance when user interacts - for much longer to give time to explore
     setIsPaused(true);
     setSubStep(step);
@@ -229,7 +231,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 0: // Patient Engagement
         return (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div className="w-full h-full flex flex-col items-center justify-center pt-6 pb-16">
               <div className="w-full flex-1 flex items-center justify-center pt-6 pb-16">
                 <FigmaPatientEngagementIllustration
                   subStep={subStep}
