@@ -73,7 +73,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     <div className="relative w-full max-w-6xl mx-auto h-full">
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
-          <MouseTrackerProvider disableCursor={true}>
+          <MouseTrackerProvider disableCursor={false}>
             <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
               <div 
                 className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 

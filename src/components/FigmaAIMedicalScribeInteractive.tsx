@@ -73,7 +73,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   // Handle click on the illustration area - if no specific icon is clicked
   const handleIllustrationClick = () => {
     if (onElementClick) {
-      // Go to next step, not just cycling through
+      // Move to next step
       const nextStep = (subStep + 1) % 6;
       onElementClick(nextStep);
     }
@@ -82,7 +82,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   return (
     <div className="relative w-full max-w-6xl mx-auto h-full">
       {isInteractive ? (
-        <MouseTrackerProvider disableCursor={true}>
+        <MouseTrackerProvider disableCursor={false}>
           <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
             <div 
               className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
