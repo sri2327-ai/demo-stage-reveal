@@ -32,17 +32,6 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     return null;
   }
   
-  // Define clinical labels for each stage
-  const getStageLabel = (index: number): string => {
-    const labels = [
-      "Patient Engagement",
-      "AI Medical Scribe",
-      "Administrative Tasks",
-      "Post-Visit Support"
-    ];
-    return labels[index] || `Stage ${index + 1}`;
-  };
-  
   // Handle stage change with console logging for debugging
   const handleStageClick = (index: number) => {
     console.log("DemoStageIndicator - Stage clicked:", index);
@@ -64,7 +53,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
         {Array.from({ length: totalStages }).map((_, index) => (
           <motion.button
             key={index}
-            className={`relative px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#387E89] 
+            className={`relative h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#387E89] 
               ${currentStage === index 
                 ? 'bg-[#143151] border-[#387E89] shadow-md' 
                 : 'bg-white/80 border-gray-300 hover:border-[#387E89]/50'
@@ -74,24 +63,13 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
             whileTap={{ scale: 0.97 }}
             role="tab"
             aria-selected={currentStage === index}
-            aria-label={`View ${getStageLabel(index)} demonstration`}
+            aria-label={`View demo stage ${index + 1}`}
             aria-controls={`demo-stage-${index}`}
           >
-            <span className={`font-medium text-xs sm:text-sm md:text-base whitespace-nowrap ${
+            <span className={`font-bold text-sm sm:text-base ${
               currentStage === index ? 'text-white' : 'text-gray-700'
             }`}>
-              {isMobile ? (
-                <>
-                  <span className="hidden sm:inline">{getStageLabel(index)}</span>
-                  <span className="sm:hidden">
-                    {index === 0 ? "Engagement" : 
-                     index === 1 ? "Scribe" : 
-                     index === 2 ? "Admin" : "Follow-up"}
-                  </span>
-                </>
-              ) : (
-                getStageLabel(index)
-              )}
+              {index + 1}
             </span>
             
             {/* Active indicator dot */}
