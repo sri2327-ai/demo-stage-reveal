@@ -14,10 +14,13 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // IMPORTANT: Don't render indicator if not in demo section
+  // CRITICAL: Return null immediately if not in demo section
   if (!isDemoSection) {
+    console.log("DemoStageIndicator not shown - not in demo section");
     return null;
   }
+  
+  console.log("DemoStageIndicator shown - IS in demo section");
   
   // Define stage labels for accessibility and tooltips
   const stageLabels = [
@@ -32,7 +35,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
       ${isMobile ? 
         'fixed bottom-10 left-0 right-0 flex justify-center z-50' : 
         'fixed right-6 md:right-12 top-1/2 transform -translate-y-1/2 flex flex-col z-50'}
-      gap-4
+      gap-4 pointer-events-auto
     `}>
       <div className={`
         ${isMobile ? 
@@ -72,7 +75,10 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.button
-                    onClick={() => onStageChange(index)}
+                    onClick={() => {
+                      console.log(`DemoStageIndicator - Stage clicked: ${index}`);
+                      onStageChange(index);
+                    }}
                     className="relative group"
                     aria-label={`Go to ${stageLabels[index]}`}
                   >

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
@@ -19,6 +20,11 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   currentSection
 }) => {
   const isMobile = useIsMobile();
+  
+  // Log the current section for debugging
+  React.useEffect(() => {
+    console.log("DemoSection - currentSection:", currentSection);
+  }, [currentSection]);
   
   return (
     <div className="px-1 sm:px-2 py-4 sm:py-6">
@@ -63,7 +69,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
               <DemoStage 
                 stages={stages} 
                 autoPlay={hasScrolledToDemo} 
-                isDemoSection={currentSection === 'demo'} // This prop ensures DemoStageIndicator only shows in demo section
+                isDemoSection={currentSection === 'demo'} // This prop controls whether indicator shows
               />
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -80,6 +81,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     
     // Reset isPaused
     setIsPaused(false);
+    
+    console.log("DemoScene - Stage changed to:", currentStage);
   }, [currentStage]);
   
   // Auto-show label based on current subStep
@@ -93,6 +96,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     } else if (currentStage === 3) {
       setActiveLabel(postVisitLabels[subStep]);
     }
+    
+    console.log("DemoScene - SubStep changed to:", subStep);
   }, [subStep, currentStage]);
 
   // Direct navigation to specific step when icon is clicked

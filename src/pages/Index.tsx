@@ -50,8 +50,6 @@ const Index = () => {
         } else {
           setCurrentSection('hero');
         }
-        
-        console.log("Current section:", currentSection); // Log current section for debugging
       }
     };
 
@@ -60,7 +58,7 @@ const Index = () => {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasScrolledToDemo, currentSection]);
+  }, [hasScrolledToDemo]); // Removed currentSection from dependencies to prevent re-renders
 
   return (
     <MouseTrackerProvider disableCursor={false}>

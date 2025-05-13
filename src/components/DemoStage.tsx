@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -24,6 +25,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [highlightInteractivity, setHighlightInteractivity] = useState(true);
   const isMobile = useIsMobile();
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Log isDemoSection prop to check if it's passed correctly
+  useEffect(() => {
+    console.log("DemoStage - isDemoSection prop:", isDemoSection);
+  }, [isDemoSection]);
   
   // Effect for auto-play functionality with improved timer management
   useEffect(() => {
@@ -68,6 +74,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   }, [currentStage]);
 
   const handleStageChange = (index: number) => {
+    console.log("DemoStage - Stage changed to:", index);
     setCurrentStage(index);
     // Always pause on manual stage change to give user time to explore
     setIsPaused(true);
@@ -175,7 +182,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </motion.div>
       </AnimatePresence>
       
-      {/* Pass the isDemoSection prop to DemoStageIndicator */}
+      {/* Pass the isDemoSection prop to DemoStageIndicator - with console logs for debugging */}
       <DemoStageIndicator 
         currentStage={currentStage}
         totalStages={stages.length}

@@ -35,6 +35,16 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     else if (subStep === 2) setActiveLabel("Insurance & Billing");
   }, [subStep]);
   
+  // Log whenever subStep changes
+  useEffect(() => {
+    console.log("AdminTasks - Current subStep:", subStep);
+  }, [subStep]);
+  
+  // Log whenever onElementClick prop changes
+  useEffect(() => {
+    console.log("AdminTasks - onElementClick prop available:", !!onElementClick);
+  }, [onElementClick]);
+  
   // Get the current label for either hover state or active step
   const getCurrentLabel = () => {
     if (activeLabel) {
@@ -56,16 +66,17 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   // Direct navigation to specific step when icon is clicked
   const handleIconClick = (step: number) => {
     console.log("AdminTasks - Icon clicked for step:", step);
-    if (onElementClick) {
+    if (isInteractive && onElementClick) {
       onElementClick(step);
     }
   };
   
   // Handle click on the illustration area for any part not covered by icons
   const handleIllustrationClick = () => {
-    if (onElementClick) {
+    if (isInteractive && onElementClick) {
       // Move to next step
       const nextStep = (subStep + 1) % 3;
+      console.log("AdminTasks - Illustration clicked, moving to step:", nextStep);
       onElementClick(nextStep);
     }
   };
