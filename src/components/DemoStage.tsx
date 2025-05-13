@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 
 export const DemoStage: React.FC<DemoStageProps> = ({ 
   stages, 
@@ -145,32 +146,34 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     }
   };
 
-  // Get current stage name with more descriptive clinical terms
-  const getCurrentStageName = () => {
-    const stageNames = [
-      "Patient Engagement System",
-      "AI Medical Scribe",
-      "Clinical Administration",
-      "Post-Visit Care Management"
+  // Get stage descriptions for tabs
+  const getStageDescriptions = () => {
+    return [
+      {
+        title: "Patient Engagement",
+        description: "AI patient communication hub that preserves your clinical voice and reduces administrative burden"
+      },
+      {
+        title: "AI Medical Scribe",
+        description: "Reduce documentation time by 75% with AI-powered medical scribe that integrates with your EHR"
+      },
+      {
+        title: "Clinical Admin",
+        description: "Automate administrative workflows to prevent revenue delays and reduce staff workload"
+      },
+      {
+        title: "Post-Visit Care",
+        description: "Improve outcomes with automated follow-up and continuous monitoring between visits"
+      }
     ];
-    return stageNames[currentStage] || "";
-  };
-
-  // Get current stage description with more clinician-focused benefits
-  const getCurrentStageDescription = () => {
-    const stageDescriptions = [
-      "Streamline patient communications while maintaining your clinical voice and reducing administrative burden",
-      "Reduce documentation time by 75% with AI-powered medical scribe that integrates with your EHR",
-      "Automate administrative workflows to prevent revenue delays and reduce staff workload",
-      "Improve outcomes with automated follow-up and continuous patient monitoring between visits"
-    ];
-    return stageDescriptions[currentStage] || "";
   };
 
   // Determine ARIA label for play/pause button
   const getPlayPauseAriaLabel = () => {
     return isPaused ? "Play demo slideshow" : "Pause demo slideshow";
   };
+
+  const stageDescriptions = getStageDescriptions();
 
   return (
     <div 
@@ -180,35 +183,24 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       aria-label="Interactive clinical workflow demonstration"
       tabIndex={0}
     >
-      {/* Enhanced header with better typography and contrast */}
+      {/* Enhanced header with tabbed navigation */}
       <motion.div 
         className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-4 px-4 sm:py-5 sm:px-6 z-40 border-b border-white/10 shadow-lg"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col">
+        <div className="flex flex-col space-y-2">
+          <div className="flex justify-between items-center">
             <motion.h3 
               className="font-bold text-xl sm:text-2xl md:text-3xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              key={`title-${currentStage}`}
               transition={{ duration: 0.5 }}
             >
-              {getCurrentStageName()}
+              Clinical Workflow Demo
             </motion.h3>
-            <motion.p
-              className="text-sm sm:text-base md:text-lg text-white/90 mt-1 sm:mt-2 max-w-xl line-clamp-2"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              key={`desc-${currentStage}`}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              {getCurrentStageDescription()}
-            </motion.p>
-          </div>
-          <div className="flex items-center gap-3">
+            
             <button 
               onClick={togglePause}
               className="bg-white/30 hover:bg-white/40 rounded-full p-2 sm:p-2.5 md:p-3 transition-all shadow-lg border border-white/30 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -221,18 +213,57 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               )}
             </button>
           </div>
+          
+          {/* Tabs for feature selection */}
+          <Tabs
+            value={currentStage.toString()}
+            onValueChange={(value) => handleStageChange(parseInt(value))}
+            className="w-full"
+          >
+            <TabsList className="w-full bg-white/10 p-1 rounded-md border border-white/20">
+              {stageDescriptions.map((stage, index) => (
+                <TabsTrigger
+                  key={index}
+                  value={index.toString()}
+                  className={`flex-1 ${currentStage === index 
+                    ? 'bg-white/20 text-white' 
+                    : 'text-white/80 hover:text-white'} 
+                    data-[state=active]:bg-white/25 data-[state=active]:text-white`}
+                >
+                  <span className="hidden sm:inline">{stage.title}</span>
+                  <span className="sm:hidden">{
+                    index === 0 ? "Patient" :
+                    index === 1 ? "Scribe" :
+                    index === 2 ? "Admin" :
+                    "Post-Visit"
+                  }</span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+          
+          {/* Active feature description */}
+          <motion.p
+            className="text-sm sm:text-base text-white/90 max-w-xl line-clamp-2 mb-1"
+            key={`desc-${currentStage}`}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {stageDescriptions[currentStage].description}
+          </motion.p>
         </div>
       </motion.div>
       
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage}
-          className="absolute inset-0 pt-[80px] sm:pt-[88px] md:pt-[96px]"
+          className="absolute inset-0 pt-[120px] sm:pt-[140px] md:pt-[150px]"
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          style={{ height: "calc(100% - 80px)" }}
+          style={{ height: "calc(100% - 120px)" }}
         >
           <DemoScene
             currentStage={currentStage}
