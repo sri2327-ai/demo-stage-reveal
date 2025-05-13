@@ -77,32 +77,22 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
             aria-label={`View ${getStageLabel(index)} demonstration`}
             aria-controls={`demo-stage-${index}`}
           >
-            <div className="flex items-center">
-              <span className={`inline-flex items-center justify-center h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 rounded-full mr-1.5 sm:mr-2 text-sm sm:text-base font-bold ${
-                currentStage === index 
-                ? 'bg-[#387E89] text-white' 
-                : 'bg-gray-200 text-gray-700'
-              }`}>
-                {index + 1}
-              </span>
-              
-              <span className={`font-medium text-xs sm:text-sm md:text-base whitespace-nowrap ${
-                currentStage === index ? 'text-white' : 'text-gray-700'
-              }`}>
-                {isMobile ? (
-                  <>
-                    <span className="hidden sm:inline">{getStageLabel(index)}</span>
-                    <span className="sm:hidden">
-                      {index === 0 ? "Engagement" : 
-                       index === 1 ? "Scribe" : 
-                       index === 2 ? "Admin" : "Follow-up"}
-                    </span>
-                  </>
-                ) : (
-                  getStageLabel(index)
-                )}
-              </span>
-            </div>
+            <span className={`font-medium text-xs sm:text-sm md:text-base whitespace-nowrap ${
+              currentStage === index ? 'text-white' : 'text-gray-700'
+            }`}>
+              {isMobile ? (
+                <>
+                  <span className="hidden sm:inline">{getStageLabel(index)}</span>
+                  <span className="sm:hidden">
+                    {index === 0 ? "Engagement" : 
+                     index === 1 ? "Scribe" : 
+                     index === 2 ? "Admin" : "Follow-up"}
+                  </span>
+                </>
+              ) : (
+                getStageLabel(index)
+              )}
+            </span>
             
             {/* Active indicator dot */}
             {currentStage === index && (
