@@ -6,15 +6,15 @@
 // Standard scale factors for different screen sizes
 export const standardScales = {
   // Base scale for mobile (never below 1)
-  base: 1.1,
+  base: 1.0,
   // Small screens (most phones in landscape, small tablets)
-  sm: 1.2,
+  sm: 1.05,
   // Medium screens (tablets, small laptops)
-  md: 1.3,
+  md: 1.1,
   // Large screens (laptops, desktops)
-  lg: 1.4,
+  lg: 1.15,
   // Extra large screens (large desktops)
-  xl: 1.5,
+  xl: 1.2,
 };
 
 // Get appropriate scale based on viewport size and content type
@@ -25,12 +25,12 @@ export const getResponsiveScale = (
   // Apply element-specific modifiers
   const modifiers = {
     illustration: 1.0, // Base multiplier
-    card: 0.9,         // Cards are slightly smaller
-    button: 0.8,       // Buttons are more compact
+    card: 0.95,        // Cards are slightly smaller
+    button: 0.9,       // Buttons are more compact
   };
   
   // Base scale factor adjusted for mobile
-  const baseScale = isMobile ? standardScales.base : standardScales.base * 1.05;
+  const baseScale = isMobile ? standardScales.base : standardScales.sm;
   
   // Return appropriate scale with element-specific modifier
   return baseScale * modifiers[elementType];
@@ -38,7 +38,7 @@ export const getResponsiveScale = (
 
 // Generate Tailwind CSS scale classes for responsive elements
 export const getScaleClasses = () => {
-  return "scale-110 sm:scale-120 md:scale-130 lg:scale-140";
+  return "scale-100 sm:scale-105 md:scale-110 lg:scale-115";
 };
 
 /**

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -8,6 +7,7 @@ import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInterac
 import { MouseTrackerProvider } from './ui/cursor';
 import type { DemoStage, DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
+import { getScaleClasses } from '../lib/scale-utils';
 
 // Updated patient engagement labels with clear integration benefits and AI agent reference
 const patientEngagementLabels: Record<number, string> = {
@@ -238,7 +238,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
               <div className="w-full flex-1 flex items-center justify-center">
-                <div className="scale-125 md:scale-140 lg:scale-150">
+                <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
                   <FigmaPatientEngagementIllustration
                     subStep={subStep}
                     cursorPosition={{ x: 0, y: 0 }}
@@ -256,14 +256,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 <motion.div 
                   key={`patient-engagement-label-${subStep}`}
                   className="absolute bottom-12 left-0 right-0 w-full z-30 px-4 sm:px-6"
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.5 }}
                 >
                   <motion.div 
                     className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20"
-                    whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                   >
                     <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl truncate">
                       {subStep === 0 ? "Patient Messaging" : 

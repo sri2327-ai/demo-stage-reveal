@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
@@ -143,8 +142,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-6"> 
-            <motion.div 
+          <div className="relative h-full flex flex-col items-center justify-center py-8"> 
+            <div 
               className="relative w-full h-full flex-1 flex items-center justify-center cursor-pointer" 
               onClick={handleIllustrationClick}
               role="button"
@@ -155,10 +154,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   handleIllustrationClick();
                 }
               }}
-              // Removed hover scaling animation that caused inconsistency
-              transition={{ duration: 0.3 }}
             >
-              <div className="w-full h-full flex items-center justify-center scale-110 sm:scale-120 md:scale-130 lg:scale-140">
+              <div className="w-full h-full flex items-center justify-center scale-100 sm:scale-105 md:scale-110 lg:scale-115">
                 <FigmaAIMedicalScribeIllustration
                   subStep={subStep}
                   transcriptionActive={transcriptionActive}
@@ -168,13 +165,13 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   isInteractive={true}
                 />
               </div>
-            </motion.div>
+            </div>
             
             {/* Redesigned floating label with improved clinical focus and accessibility */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-6 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8" 
+                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8" 
                 initial={clinicalAnimations.cardAppear.initial}
                 animate={clinicalAnimations.cardAppear.animate}
                 exit={clinicalAnimations.cardAppear.exit}
@@ -233,9 +230,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-6"> 
+        <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
           <div className="relative w-full h-full flex-1 flex items-center justify-center">
-            <div className="scale-110 sm:scale-120 md:scale-130 lg:scale-140">
+            <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
               <FigmaAIMedicalScribeIllustration
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
@@ -248,7 +245,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Only show title tooltip if not hidden - enhanced design for clinicians */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-6 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
+              className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}

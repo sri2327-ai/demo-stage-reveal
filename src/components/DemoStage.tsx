@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -6,7 +5,6 @@ import { DemoScene } from './DemoScene';
 import type { DemoStageProps } from '../types/demo';
 import { Pause, Play, Info, MousePointerClick } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 
 export const DemoStage: React.FC<DemoStageProps> = ({
@@ -165,7 +163,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[650px] sm:h-[720px] md:h-[820px] lg:h-[880px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[680px] sm:h-[720px] md:h-[820px] lg:h-[880px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
@@ -234,11 +232,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </motion.div>
       
-      {/* Content container with adjusted padding to make more room for illustrations */}
+      {/* Content container with adjusted padding for better spacing */}
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage} 
-          className="absolute inset-0 pt-[120px] pb-[40px]" 
+          className="absolute inset-0 pt-[120px] pb-[60px]" 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
@@ -249,7 +247,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </AnimatePresence>
       
       {/* Bottom indicator with better positioning */}
-      <div className="absolute bottom-2 left-0 right-0">
+      <div className="absolute bottom-5 left-0 right-0">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 

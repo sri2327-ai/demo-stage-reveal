@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -137,8 +136,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex flex-col items-center justify-center py-6"> 
-              <motion.div 
+            <div className="relative h-full flex flex-col items-center justify-center py-8"> 
+              <div 
                 className="relative w-full h-full flex-1 flex items-center justify-center cursor-pointer" 
                 onClick={handleIllustrationClick}
                 role="button"
@@ -149,10 +148,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                     handleIllustrationClick();
                   }
                 }}
-                // Removed hover scaling animation that was causing zoom in/out
-                transition={{ duration: 0.3 }}
               >
-                <div className="w-full h-full flex items-center justify-center scale-110 sm:scale-120 md:scale-130 lg:scale-140">
+                <div className="w-full h-full flex items-center justify-center scale-100 sm:scale-105 md:scale-110 lg:scale-115">
                   <FigmaPostVisitSupportIllustration
                     subStep={subStep}
                     isInteractive={true}
@@ -160,13 +157,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                     onElementClick={handleIconClick}
                   />
                 </div>
-              </motion.div>
+              </div>
               
               {/* Enhanced floating label that's always visible - clinically focused */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
-                  className="absolute bottom-6 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
+                  className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
                   initial={clinicalAnimations.cardAppear.initial}
                   animate={clinicalAnimations.cardAppear.animate}
                   exit={clinicalAnimations.cardAppear.exit}
@@ -228,9 +225,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center py-6"> 
+          <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
             <div className="relative w-full h-full flex-1 flex items-center justify-center">
-              <div className="scale-110 sm:scale-120 md:scale-130 lg:scale-140">
+              <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
                 <FigmaPostVisitSupportIllustration
                   subStep={subStep}
                   isInteractive={false}
@@ -242,7 +239,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             {/* Label shown on non-interactive mode - clinically focused */}
             {!hideTitle && (
               <motion.div 
-                className="absolute bottom-6 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
+                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
