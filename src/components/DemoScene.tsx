@@ -284,7 +284,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               noteGeneration={noteGeneration}
               onElementClick={handleElementClick}
               isInteractive={true}
-              hideTitle={false}
+              hideTitle={true}
             />
           </div>
         );
@@ -296,7 +296,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               subStep={subStep}
               onElementClick={handleElementClick}
               isInteractive={true}
-              hideTitle={false}
+              hideTitle={true}
             />
           </div>
         );
@@ -308,7 +308,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
               subStep={subStep}
               onElementClick={handleElementClick}
               isInteractive={true}
-              hideTitle={false}
+              hideTitle={true}
             />
           </div>
         );

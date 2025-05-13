@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustration';
@@ -166,67 +167,6 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 />
               </div>
             </div>
-            
-            {/* Redesigned floating label with improved clinical focus and accessibility */}
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={getCurrentLabel().title}
-                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8" 
-                initial={clinicalAnimations.cardAppear.initial}
-                animate={clinicalAnimations.cardAppear.animate}
-                exit={clinicalAnimations.cardAppear.exit}
-                transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
-              >
-                <motion.div 
-                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <motion.span 
-                      className="inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-green-400"
-                      animate={{ 
-                        opacity: [1, 0.5, 1],
-                        scale: [1, 1.1, 1] 
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        repeatDelay: 0.5
-                      }}
-                    />
-                    <h3 className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</h3>
-                  </div>
-                  <div className="mt-1 text-xs sm:text-sm md:text-base text-white/95 line-clamp-3 sm:line-clamp-2">
-                    {getCurrentLabel().description}
-                  </div>
-                  
-                  <div className="mt-2 text-xs text-white/80 flex items-center">
-                    <Info size={isMobile ? 12 : 14} className="mr-1.5 text-white/70" />
-                    <span className="line-clamp-1">
-                      {isMobile ? "Tap icons to explore features" : "Click icons to explore each feature or use arrow keys"}
-                    </span>
-                  </div>
-                  
-                  {/* Step indicator dots */}
-                  <div className="mt-2 pt-1.5 border-t border-white/20 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1.5">
-                      {[0, 1, 2, 3, 4, 5].map(step => (
-                        <motion.button
-                          key={step}
-                          className={`w-2 h-2 rounded-full ${subStep === step ? 'bg-white' : 'bg-white/40'}`}
-                          whileHover={{ scale: 1.2 }}
-                          whileTap={{ scale: 0.9 }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (onElementClick) onElementClick(step);
-                          }}
-                          aria-label={`Go to ${["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation", "EHR Integration"][step]}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
           </div>
         </MouseTrackerProvider>
       ) : (
@@ -241,23 +181,6 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               />
             </div>
           </div>
-          
-          {/* Only show title tooltip if not hidden - enhanced design for clinicians */}
-          {!hideTitle && (
-            <motion.div 
-              className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
-            >
-              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20">
-                <div className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</div>
-                <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
-                  {getCurrentLabel().description}
-                </div>
-              </div>
-            </motion.div>
-          )}
         </div>
       )}
     </div>

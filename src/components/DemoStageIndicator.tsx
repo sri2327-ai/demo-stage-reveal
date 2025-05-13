@@ -42,7 +42,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
 
   return (
     <motion.div 
-      className={`absolute z-40 left-0 right-0 bottom-6 sm:bottom-5 md:bottom-6 px-3 sm:px-5 ${isMobile ? 'justify-center' : ''}`}
+      className={`absolute z-40 left-0 right-0 bottom-2 sm:bottom-3 md:bottom-3 px-3 sm:px-5 ${isMobile ? 'justify-center' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.4 }}
