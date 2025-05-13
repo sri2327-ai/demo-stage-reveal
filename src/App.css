@@ -1,42 +1,103 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Focus styling for accessibility */
+:focus {
+  outline: 2px solid rgba(56, 126, 137, 0.5);
+  outline-offset: 2px;
 }
 
-@keyframes logo-spin {
+/* Support for reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced touch targets for mobile */
+@media (max-width: 767px) {
+  button, 
+  [role="button"],
+  .interactive-element {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improved typography settings */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+p, li, blockquote {
+  line-height: 1.6;
+}
+
+/* Clinical UI enhancements */
+.clinical-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background: white;
+  border: 1px solid rgba(56, 126, 137, 0.1);
+}
+
+.clinical-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.clinical-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.clinical-button:active {
+  transform: translateY(0);
+}
+
+/* Enhanced animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes scale-in {
   from {
-    transform: rotate(0deg);
+    transform: scale(0.95);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out forwards;
 }

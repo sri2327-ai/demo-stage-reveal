@@ -22,30 +22,38 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
   
   console.log("DemoStageIndicator shown - IS in demo section");
   
-  // Define stage labels for accessibility and tooltips
+  // Define stage labels with more clinically relevant terminology
   const stageLabels = [
-    "Patient Engagement",
+    "Patient Engagement System",
     "AI Medical Scribe",
-    "Admin Tasks",
-    "Post-Visit Support"
+    "Clinical Administration",
+    "Post-Visit Care Management"
+  ];
+  
+  // Define more detailed descriptions for tooltips
+  const stageDescriptions = [
+    "Automate patient interactions while maintaining your clinical voice",
+    "Reduce documentation time by 75% with AI-powered note generation",
+    "Streamline administrative workflows for prescriptions, results, and billing",
+    "Improve outcomes with automated follow-up and patient monitoring"
   ];
   
   return (
     <div className={`
       ${isMobile ? 
-        'fixed bottom-10 left-0 right-0 flex justify-center z-50' : 
-        'fixed right-6 md:right-12 top-1/2 transform -translate-y-1/2 flex flex-col z-50'}
+        'fixed bottom-8 left-0 right-0 flex justify-center z-50' : 
+        'fixed right-6 md:right-10 top-1/2 transform -translate-y-1/2 flex flex-col z-50'}
       gap-4 pointer-events-auto
     `}>
       <div className={`
         ${isMobile ? 
-          'flex gap-3 bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-sm p-3 rounded-full shadow-lg border border-white/30' : 
+          'flex gap-3 sm:gap-4 bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-sm p-3 rounded-full shadow-lg border border-white/30' : 
           'bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-white/30 flex flex-col gap-4'}
       `}>
         {/* Interactive pulse animation to draw attention */}
         <motion.div
-          className={`absolute ${isMobile ? '-top-10 left-1/2 -translate-x-1/2' : '-left-32 top-1/2 -translate-y-1/2'} 
-            bg-white/90 text-[#143151] px-3 py-2 rounded-lg shadow-lg flex items-center gap-2 whitespace-nowrap`}
+          className={`absolute ${isMobile ? '-top-10 left-1/2 -translate-x-1/2' : '-left-36 top-1/2 -translate-y-1/2'} 
+            bg-white/90 text-[#143151] px-3 py-2 rounded-lg shadow-lg flex items-center gap-2 whitespace-nowrap border border-[#387E89]/30`}
           initial={{ opacity: 0 }}
           animate={{ 
             opacity: [0.7, 1, 0.7], 
@@ -60,7 +68,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
           }}
         >
           <MousePointerClick size={isMobile ? 16 : 18} className="text-[#387E89]" />
-          <span className="font-medium text-xs sm:text-sm">Click to navigate!</span>
+          <span className="font-semibold text-xs sm:text-sm">Click to navigate!</span>
         </motion.div>
         
         <TooltipProvider>
@@ -81,16 +89,22 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                     }}
                     className="relative group"
                     aria-label={`Go to ${stageLabels[index]}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        onStageChange(index);
+                      }
+                    }}
                   >
                     {/* Enhanced visual state for current/completed stages */}
                     <motion.div
                       className={`
-                        h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center cursor-pointer
+                        h-12 w-12 sm:h-14 sm:w-14 rounded-full flex items-center justify-center cursor-pointer
                         ${index === currentStage 
                           ? 'bg-white ring-4 ring-white/40 ring-offset-4 ring-offset-[#143151]/30' 
                           : index < currentStage 
                             ? 'bg-white/90' 
-                            : 'bg-gray-300/80'}
+                            : 'bg-gray-300/80 hover:bg-gray-200/90'}
+                        transition-all duration-300 ease-in-out
                       `}
                       initial={{ scale: 1 }}
                       animate={{ 
@@ -113,14 +127,14 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                       whileTap={{ scale: 0.95 }}
                     >
                       {index < currentStage ? (
-                        <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-[#143151]" />
+                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 text-[#143151]" />
                       ) : (
                         <div className="relative">
-                          <span className={`font-bold text-base md:text-lg ${index === currentStage ? 'text-[#143151]' : 'text-[#143151]/70'}`}>
+                          <span className={`font-bold text-lg sm:text-xl ${index === currentStage ? 'text-[#143151]' : 'text-[#143151]/70'}`}>
                             {index + 1}
                           </span>
                           {index === currentStage && (
-                            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 bg-[#387E89] rounded-full animate-pulse border border-white"></span>
+                            <span className="absolute -right-1 -top-1 h-3 w-3 bg-[#387E89] rounded-full animate-pulse border border-white"></span>
                           )}
                         </div>
                       )}
@@ -139,7 +153,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                     {/* Show stage names directly next to indicators on mobile */}
                     {isMobile && (
                       <motion.div
-                        className={`absolute top-10 whitespace-nowrap transform -translate-x-1/2 left-1/2 mt-1 ${
+                        className={`absolute top-14 whitespace-nowrap transform -translate-x-1/2 left-1/2 mt-1 ${
                           index === currentStage ? 'opacity-100' : 'opacity-0'
                         }`}
                         animate={{ opacity: index === currentStage ? 1 : 0 }}
@@ -150,23 +164,24 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                   </motion.button>
                 </TooltipTrigger>
                 
-                {/* Enhanced tooltips that are always visible on desktop */}
+                {/* Enhanced tooltips with descriptions */}
                 <TooltipContent 
                   side={isMobile ? "top" : "left"} 
                   className={`
                     ${!isMobile ? 'opacity-100 translate-x-0' : ''}
-                    bg-white text-[#143151] border border-[#387E89]/40 shadow-lg px-3 py-2
+                    bg-white text-[#143151] border border-[#387E89]/40 shadow-lg px-3 py-2 max-w-[220px]
                   `}
                   sideOffset={10}
                 >
-                  <span className="font-medium">{stageLabels[index]}</span>
+                  <div className="font-semibold">{stageLabels[index]}</div>
+                  <div className="text-xs text-[#143151]/80 mt-1">{stageDescriptions[index]}</div>
                 </TooltipContent>
               </Tooltip>
               
               {/* Persistent stage labels on desktop */}
               {!isMobile && (
                 <motion.div 
-                  className={`absolute -left-[180px] top-1/2 -translate-y-1/2 pointer-events-none ${
+                  className={`absolute -left-[200px] top-1/2 -translate-y-1/2 pointer-events-none ${
                     index === currentStage ? 'opacity-100' : 'opacity-0'
                   }`}
                   animate={{ 
@@ -175,8 +190,9 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="bg-white px-3 py-2 rounded-lg text-sm text-[#143151] whitespace-nowrap border border-[#387E89]/20 shadow-lg font-medium">
-                    {stageLabels[index]}
+                  <div className="bg-white px-4 py-3 rounded-lg text-[#143151] whitespace-nowrap border border-[#387E89]/20 shadow-lg">
+                    <div className="font-semibold text-sm">{stageLabels[index]}</div>
+                    <div className="text-xs text-[#143151]/80 mt-1 max-w-[180px]">{stageDescriptions[index]}</div>
                   </div>
                   <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-2 h-2 rotate-45 bg-white border-r border-t border-[#387E89]/20"></div>
                 </motion.div>

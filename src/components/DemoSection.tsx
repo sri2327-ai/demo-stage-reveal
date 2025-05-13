@@ -27,11 +27,11 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   }, [currentSection]);
   
   return (
-    <div className="px-1 sm:px-2 py-4 sm:py-6">
+    <div className="px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-12">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-2 sm:mb-4">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
           <motion.h2 
-            className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151] mb-2 sm:mb-3 px-2"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4 md:mb-5 px-2 leading-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6 }}
@@ -39,7 +39,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
             How S10.AI Transforms Your Clinical Workflow
           </motion.h2>
           <motion.p 
-            className="text-sm sm:text-base md:text-lg text-gray-700 max-w-2xl mx-auto px-2"
+            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-2 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -49,15 +49,17 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
           
           {/* Enhanced interactive instruction with clearer call to action */}
           <motion.div
-            className="flex items-center justify-center mt-2 sm:mt-3"
+            className="flex items-center justify-center mt-4 sm:mt-5 md:mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
-              <MousePointerClick size={isMobile ? 16 : 20} className="text-[#387E89] animate-pulse" />
-              <span className="text-xs sm:text-sm font-medium">
-                {isMobile ? "Tap numbered tabs to switch features & icons to explore details" : "Click numbered tabs to switch features & click icons inside the demo to explore details"}
+            <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
+              <MousePointerClick size={isMobile ? 20 : 24} className="text-[#387E89] animate-pulse" />
+              <span className={`${isMobile ? "text-sm" : "text-base"} font-medium max-w-md`}>
+                {isMobile 
+                  ? "Tap numbered tabs to switch features & icons to explore details" 
+                  : "Click numbered tabs to switch workflows & click icons inside each demo to explore specific features"}
               </span>
             </div>
           </motion.div>
