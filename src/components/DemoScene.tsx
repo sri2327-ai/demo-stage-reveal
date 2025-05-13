@@ -8,6 +8,9 @@ import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInterac
 import { MouseTrackerProvider } from './ui/cursor';
 import type { DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
+import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
+import { motion as framerMotion, AnimatePresence } from 'framer-motion';
+import { Info } from 'lucide-react';
 
 // Labels for each section
 const patientEngagementLabels: Record<number, string> = {
@@ -194,7 +197,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
               <div className="w-full flex-1 flex items-center justify-center">
-                <div>
+                <div className="transform-none">
                   <FigmaPatientEngagementIllustration
                     subStep={subStep}
                     cursorPosition={{ x: 0, y: 0 }}
@@ -207,21 +210,75 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </div>
               </div>
               
-              {/* Enhanced descriptive label for patient engagement */}
-              <div className="absolute bottom-12 left-0 right-0 w-full z-30 px-4 sm:px-6">
-                <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20">
-                  <div className="font-bold text-sm sm:text-base md:text-lg truncate">
-                    {subStep === 0 ? "Patient Messaging" : 
-                     subStep === 1 ? "Appointment Scheduling" : 
-                     subStep === 2 ? "Smart Intake Forms" : 
-                     subStep === 3 ? "Automated Reminders" :
-                     "AI Appointment Calls"}
-                  </div>
-                  <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-2">
-                    {patientEngagementLabels[subStep]}
-                  </div>
-                </div>
-              </div>
+              {/* Enhanced descriptive label for patient engagement - now matching other sections */}
+              <AnimatePresence mode="wait">
+                <framerMotion.div 
+                  key={patientEngagementLabels[subStep]}
+                  className="absolute bottom-12 left-0 right-0 w-full z-30 px-4 sm:px-6"
+                  initial={clinicalAnimations.cardAppear.initial}
+                  animate={clinicalAnimations.cardAppear.animate}
+                  exit={clinicalAnimations.cardAppear.exit}
+                  transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
+                >
+                  <framerMotion.div 
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <framerMotion.span 
+                        className="inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-green-400"
+                        animate={{ 
+                          opacity: [1, 0.5, 1],
+                          scale: [1, 1.1, 1] 
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity,
+                          repeatDelay: 0.5
+                        }}
+                      />
+                      <h3 className="font-bold text-sm sm:text-base md:text-lg">
+                        {subStep === 0 ? "Patient Messaging" : 
+                         subStep === 1 ? "Appointment Scheduling" : 
+                         subStep === 2 ? "Smart Intake Forms" : 
+                         subStep === 3 ? "Automated Reminders" :
+                         "AI Appointment Calls"}
+                      </h3>
+                    </div>
+                    
+                    <div className="mt-1.5 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
+                      {patientEngagementLabels[subStep]}
+                    </div>
+                    
+                    <div className="mt-2 text-xs text-white/80 flex items-center">
+                      <Info size={isMobile ? 12 : 14} className="mr-1.5 text-white/70" />
+                      <span className="line-clamp-1">
+                        {isMobile 
+                          ? "Tap icons to explore features" 
+                          : "Click icons to explore each feature"}
+                      </span>
+                    </div>
+                    
+                    {/* Step indicator */}
+                    <div className="mt-2 pt-1.5 border-t border-white/20 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-1.5">
+                        {[0, 1, 2, 3, 4].map(step => (
+                          <framerMotion.button
+                            key={step}
+                            className={`w-2 h-2 rounded-full ${subStep === step ? 'bg-white' : 'bg-white/40'}`}
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleElementClick(step);
+                            }}
+                            aria-label={`Go to ${["Patient Messaging", "Appointment Scheduling", "Smart Intake Forms", "Automated Reminders", "AI Appointment Calls"][step]}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </framerMotion.div>
+                </framerMotion.div>
+              </AnimatePresence>
             </div>
           </MouseTrackerProvider>
         );
