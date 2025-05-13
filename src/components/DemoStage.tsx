@@ -8,11 +8,11 @@ import { Pause, Play, Info, MousePointerClick } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
+
 export const DemoStage: React.FC<DemoStageProps> = ({
   stages,
   autoPlay = true,
-  autoPlayInterval = 10000,
-  // 10 seconds interval for meaningful exploration
+  autoPlayInterval = 10000, // 10 seconds interval for meaningful exploration
   isDemoSection = true
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
@@ -165,7 +165,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[600px] sm:h-[680px] md:h-[780px] lg:h-[840px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[650px] sm:h-[720px] md:h-[820px] lg:h-[880px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
@@ -234,34 +234,35 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </motion.div>
       
-      {/* Adjusted top padding to prevent content from being cut off */}
+      {/* Content container with adjusted padding */}
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage} 
-          className="absolute inset-0 pt-[140px] sm:pt-[150px] md:pt-[160px]" 
+          className="absolute inset-0 pt-[120px] pb-[60px]" 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          style={{ height: "calc(100% - 140px)" }} // Adjusted to account for the header
         >
           <DemoScene currentStage={currentStage} stages={stages} />
         </motion.div>
       </AnimatePresence>
       
-      {/* Pass the isDemoSection prop to DemoStageIndicator */}
-      <DemoStageIndicator 
-        currentStage={currentStage} 
-        totalStages={stages.length} 
-        onStageChange={handleStageChange} 
-        isDemoSection={isDemoSection} 
-      />
+      {/* Bottom indicator with better positioning */}
+      <div className="absolute bottom-4 left-0 right-0">
+        <DemoStageIndicator 
+          currentStage={currentStage} 
+          totalStages={stages.length} 
+          onStageChange={handleStageChange} 
+          isDemoSection={isDemoSection} 
+        />
+      </div>
       
-      {/* Interactive indicator - raised position to not overlap with bottom descriptions */}
+      {/* Interactive indicator with better positioning */}
       <AnimatePresence>
         {highlightInteractivity && (
           <motion.div 
-            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
+            className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: [0.7, 1, 0.7], 

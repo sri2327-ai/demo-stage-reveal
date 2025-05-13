@@ -137,9 +137,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex flex-col items-center justify-center pt-6 pb-28 md:pb-32"> 
+            <div className="relative h-full flex flex-col items-center justify-center py-4"> 
               <motion.div 
-                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110 md:scale-125 my-6" 
+                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-125 md:scale-140 lg:scale-150" 
                 onClick={handleIllustrationClick}
                 role="button"
                 aria-label="Navigate to next feature"
@@ -164,14 +164,14 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
-                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-3 sm:px-4 lg:px-6"
+                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
                   initial={clinicalAnimations.cardAppear.initial}
                   animate={clinicalAnimations.cardAppear.animate}
                   exit={clinicalAnimations.cardAppear.exit}
                   transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
                 >
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-5 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
                     whileHover={{ scale: isMobile ? 1 : 1.02 }}
                   >
                     <div className="flex items-center gap-2 mb-1">
@@ -227,8 +227,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center pt-6 pb-28 md:pb-32"> 
-            <div className="relative w-full flex-1 scale-110 md:scale-125 my-6">
+          <div className="relative w-full h-full flex flex-col items-center justify-center py-4"> 
+            <div className="relative w-full flex-1 scale-125 md:scale-140 lg:scale-150">
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={false}
@@ -239,12 +239,12 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             {/* Label shown on non-interactive mode - clinically focused */}
             {!hideTitle && (
               <motion.div 
-                className="absolute bottom-4 left-0 right-0 w-full z-30 px-3"
+                className="absolute bottom-4 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
               >
-                <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-5 md:py-3 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20">
+                <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20">
                   <div className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</div>
                   <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">{getCurrentLabel().description}</div>
                 </div>

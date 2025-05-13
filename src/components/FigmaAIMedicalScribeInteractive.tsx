@@ -143,9 +143,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center pt-8 pb-16"> 
+          <div className="relative h-full flex flex-col items-center justify-center py-4"> 
             <motion.div 
-              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
+              className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-125 md:scale-140 lg:scale-150" 
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -172,14 +172,14 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6" 
+                className="absolute bottom-4 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8" 
                 initial={clinicalAnimations.cardAppear.initial}
                 animate={clinicalAnimations.cardAppear.animate}
                 exit={clinicalAnimations.cardAppear.exit}
                 transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
               >
                 <motion.div 
-                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20"
+                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
                   whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -207,14 +207,33 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                       {isMobile ? "Tap icons to explore features" : "Click icons to explore each feature or use arrow keys"}
                     </span>
                   </div>
+                  
+                  {/* Step indicator dots */}
+                  <div className="mt-2 pt-1.5 border-t border-white/20 flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-1.5">
+                      {[0, 1, 2, 3, 4, 5].map(step => (
+                        <motion.button
+                          key={step}
+                          className={`w-2 h-2 rounded-full ${subStep === step ? 'bg-white' : 'bg-white/40'}`}
+                          whileHover={{ scale: 1.5 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onElementClick) onElementClick(step);
+                          }}
+                          aria-label={`Go to ${["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation", "EHR Integration"][step]}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center pt-8 pb-16"> 
-          <div className="relative w-full flex-1 scale-105">
+        <div className="relative w-full h-full flex flex-col items-center justify-center py-4"> 
+          <div className="relative w-full flex-1 scale-125 md:scale-140 lg:scale-150">
             <FigmaAIMedicalScribeIllustration
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -226,12 +245,12 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Only show title tooltip if not hidden - enhanced design for clinicians */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6"
+              className="absolute bottom-4 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
             >
-              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-4 sm:py-3 md:px-5 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20">
+              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20">
                 <div className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</div>
                 <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
                   {getCurrentLabel().description}
