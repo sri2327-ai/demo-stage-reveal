@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -136,9 +137,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex flex-col items-center justify-center pt-8 pb-16"> 
+            <div className="relative h-full flex flex-col items-center justify-center pt-6 pb-28 md:pb-32"> 
               <motion.div 
-                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
+                className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110 md:scale-125 my-6" 
                 onClick={handleIllustrationClick}
                 role="button"
                 aria-label="Navigate to next feature"
@@ -163,7 +164,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
-                  className="absolute bottom-10 left-0 right-0 w-full z-30 px-3 sm:px-4 lg:px-6"
+                  className="absolute bottom-4 left-0 right-0 w-full z-30 px-3 sm:px-4 lg:px-6"
                   initial={clinicalAnimations.cardAppear.initial}
                   animate={clinicalAnimations.cardAppear.animate}
                   exit={clinicalAnimations.cardAppear.exit}
@@ -226,8 +227,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center pt-8 pb-16"> 
-            <div className="relative w-full flex-1 scale-105">
+          <div className="relative w-full h-full flex flex-col items-center justify-center pt-6 pb-28 md:pb-32"> 
+            <div className="relative w-full flex-1 scale-110 md:scale-125 my-6">
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
                 isInteractive={false}
@@ -238,7 +239,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             {/* Label shown on non-interactive mode - clinically focused */}
             {!hideTitle && (
               <motion.div 
-                className="absolute bottom-10 left-0 right-0 w-full z-30 px-3"
+                className="absolute bottom-4 left-0 right-0 w-full z-30 px-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
