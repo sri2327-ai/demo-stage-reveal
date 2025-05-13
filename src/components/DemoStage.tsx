@@ -193,7 +193,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             </button>
           </div>
           
-          {/* Tabs for feature selection */}
+          {/* Tabs for feature selection - Improved with numbers and better styling */}
           <Tabs 
             value={currentStage.toString()} 
             onValueChange={value => handleStageChange(parseInt(value))} 
@@ -204,9 +204,21 @@ export const DemoStage: React.FC<DemoStageProps> = ({
                 <TabsTrigger 
                   key={index} 
                   value={index.toString()} 
-                  className={`flex-1 ${currentStage === index ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white'} 
-                    data-[state=active]:bg-white/25 data-[state=active]:text-white`}
+                  className={`flex-1 flex items-center justify-center gap-2 ${
+                    currentStage === index 
+                      ? 'bg-white/20 text-white shadow-lg' 
+                      : 'text-white/80 hover:bg-white/15 hover:text-white'
+                    } 
+                    data-[state=active]:bg-white/25 data-[state=active]:text-white
+                    transition-all duration-200 py-2 px-3 font-medium`}
                 >
+                  <span className={`inline-flex items-center justify-center h-6 w-6 sm:h-7 sm:w-7 rounded-full 
+                    ${currentStage === index 
+                      ? 'bg-[#9b87f5] text-white' 
+                      : 'bg-white/20 text-white'
+                    } text-sm sm:text-base font-bold`}>
+                    {index + 1}
+                  </span>
                   <span className="hidden sm:inline">{stage.title}</span>
                   <span className="sm:hidden">{index === 0 ? "Patient" : index === 1 ? "Scribe" : index === 2 ? "Admin" : "Post-Visit"}</span>
                 </TabsTrigger>
