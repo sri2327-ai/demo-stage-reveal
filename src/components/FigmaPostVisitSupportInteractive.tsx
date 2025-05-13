@@ -1,9 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
+import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
+import { Info, ArrowRight } from 'lucide-react';
 
 interface FigmaPostVisitSupportInteractiveProps {
   subStep: number;
@@ -12,13 +14,13 @@ interface FigmaPostVisitSupportInteractiveProps {
   hideTitle?: boolean;
 }
 
-// Enhanced clinical descriptions with specific outcomes and benefits
+// Enhanced clinical descriptions with specific outcomes, metrics and benefits for clinicians
 const labelDescriptions: Record<string, string> = {
-  "Treatment Adherence": "AI agent sends personalized medication reminders with dosage instructions via your patient portal or SMS, improving adherence rates by 40%",
-  "Care Plan Monitoring": "Digital care plans with patient-reported outcomes tracking, allowing AI agent to identify treatment failures or complications early",
-  "Patient Questions": "24/7 AI-powered responses to FAQs with clinician oversight, freeing up your staff from routine inquiries while ensuring clinical accuracy",
-  "Recovery Tracking": "Automated remote monitoring with threshold alerts for early intervention, reducing hospital readmissions by identifying complications early",
-  "Patient Feedback": "AI agent automatically collects and analyzes patient satisfaction data, helping improve practice operations and clinical outcomes"
+  "Treatment Adherence": "AI agent sends personalized medication reminders with dosage instructions via patient portal or SMS, improving adherence rates by 40%. Includes side effect monitoring and alerts for missed doses.",
+  "Care Plan Monitoring": "Digital care plans with patient-reported outcomes tracking allow early intervention, reducing complications by 32% and hospital readmissions. Collects data between visits on symptoms, vitals, and recovery milestones.",
+  "Patient Questions": "24/7 AI-powered responses to FAQs with clinician oversight, reducing call volume by 67% while maintaining high satisfaction. Includes medication guidance, post-procedure instructions, and symptom assessment.",
+  "Recovery Tracking": "Automated remote monitoring with threshold alerts enables early intervention, providing real-time vitals and symptom data with clinical decision support algorithms.",
+  "Patient Feedback": "AI agent automatically collects and analyzes patient satisfaction data, helping improve clinical outcomes and operational efficiency with structured reporting by service area."
 };
 
 export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInteractiveProps> = ({
@@ -28,16 +30,50 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   hideTitle = false
 }) => {
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [lastInteraction, setLastInteraction] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   
   // Always ensure label is displayed based on current step
   useEffect(() => {
-    if (subStep === 0) setActiveLabel("Treatment Adherence");
-    else if (subStep === 1) setActiveLabel("Care Plan Monitoring");
-    else if (subStep === 2) setActiveLabel("Patient Questions");
-    else if (subStep === 3) setActiveLabel("Recovery Tracking");
-    else if (subStep === 4) setActiveLabel("Patient Feedback");
+    const stepLabels = ["Treatment Adherence", "Care Plan Monitoring", "Patient Questions", "Recovery Tracking", "Patient Feedback"];
+    if (subStep >= 0 && subStep < stepLabels.length) {
+      setActiveLabel(stepLabels[subStep]);
+    }
+    console.log("PostVisit - Current step updated to:", subStep);
   }, [subStep]);
+  
+  // Add keyboard navigation for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isInteractive || !onElementClick) return;
+      
+      // Update last interaction time to pause autoplay
+      setLastInteraction(Date.now());
+      
+      // Arrow key navigation
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        onElementClick((subStep + 1) % 5);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        onElementClick((subStep - 1 + 5) % 5);
+        e.preventDefault();
+      } else if (e.key >= '1' && e.key <= '5') {
+        // Number keys 1-5 for direct navigation
+        onElementClick(parseInt(e.key) - 1);
+        e.preventDefault();
+      }
+    };
+    
+    if (isInteractive) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isInteractive, onElementClick, subStep]);
   
   // Get the current label for either hover state or active step
   const getCurrentLabel = () => {
@@ -57,11 +93,18 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
-  // Direct navigation to specific step when icon is clicked
+  // Direct navigation to specific step when icon is clicked - enhanced with feedback
   const handleIconClick = (step: number) => {
     console.log("PostVisit - Icon clicked for step:", step);
     if (onElementClick) {
+      // Track interaction time for autoplay management
+      setLastInteraction(Date.now());
       onElementClick(step);
+      
+      // Provide haptic feedback on mobile if available
+      if (navigator.vibrate && isMobile) {
+        navigator.vibrate(40);
+      }
     }
   };
   
@@ -70,19 +113,44 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     if (onElementClick) {
       // Move to next step
       const nextStep = (subStep + 1) % 5;
+      console.log("PostVisit - Illustration clicked, moving to step:", nextStep);
+      setLastInteraction(Date.now());
       onElementClick(nextStep);
+      
+      // Provide minimal haptic feedback on mobile if available
+      if (navigator.vibrate && isMobile) {
+        navigator.vibrate(20);
+      }
     }
   };
   
   return (
-    <div className="relative w-full max-w-6xl mx-auto h-full">
+    <div 
+      ref={containerRef}
+      className="relative w-full max-w-6xl mx-auto h-full"
+      role="region"
+      aria-label="Post-Visit Support Interactive Demo"
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      tabIndex={-1}
+    >
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex flex-col items-center justify-center pt-12 pb-16"> 
-              <div 
+            <div className="relative h-full flex flex-col items-center justify-center pt-8 pb-16"> 
+              <motion.div 
                 className="relative w-full flex-1 flex items-center justify-center cursor-pointer scale-110" 
                 onClick={handleIllustrationClick}
+                role="button"
+                aria-label="Navigate to next feature"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleIllustrationClick();
+                  }
+                }}
+                {...clinicalAnimations.microInteraction}
+                {...accessibilityHelpers.getFocusAnimationProps(isFocused)}
               >
                 <FigmaPostVisitSupportIllustration
                   subStep={subStep}
@@ -90,31 +158,89 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   hideTitle={true}
                   onElementClick={handleIconClick}
                 />
-              </div>
+              </motion.div>
               
-              {/* Enhanced floating label that's always visible - better positioned */}
+              {/* Enhanced floating label that's always visible - clinically focused */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={getCurrentLabel().title}
                   className="absolute bottom-8 left-0 right-0 w-full z-30 px-3 sm:px-4 lg:px-6"
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
+                  initial={clinicalAnimations.cardAppear.initial}
+                  animate={clinicalAnimations.cardAppear.animate}
+                  exit={clinicalAnimations.cardAppear.exit}
+                  transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
                 >
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-xl shadow-xl mx-auto max-w-sm sm:max-w-md md:max-w-lg border border-white/20"
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-xl shadow-xl mx-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20"
                     whileHover={{ scale: isMobile ? 1 : 1.02 }}
                   >
-                    <div className="font-bold text-base sm:text-lg md:text-xl">{getCurrentLabel().title}</div>
-                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">{getCurrentLabel().description}</div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <motion.span 
+                        className="inline-flex h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-400"
+                        animate={{ 
+                          opacity: [1, 0.5, 1],
+                          scale: [1, 1.1, 1] 
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity,
+                          repeatDelay: 0.5
+                        }}
+                      />
+                      <h3 className="font-bold text-base sm:text-lg md:text-xl">{getCurrentLabel().title}</h3>
+                    </div>
+                    
+                    <div className="mt-1 sm:mt-2 text-sm sm:text-base md:text-lg text-white/90 leading-relaxed">
+                      {getCurrentLabel().description}
+                    </div>
+                    
+                    <div className="mt-3 text-xs sm:text-sm text-white/80 flex items-center">
+                      <Info size={isMobile ? 14 : 16} className="mr-1.5 text-white/70" />
+                      <span>
+                        {isMobile 
+                          ? "Tap icons to explore features" 
+                          : "Click icons to explore each feature or use arrow keys to navigate"}
+                      </span>
+                    </div>
+                    
+                    {/* Clinical step indicator */}
+                    <div className="mt-3 pt-2 border-t border-white/20 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-1.5">
+                        {[0, 1, 2, 3, 4].map(step => (
+                          <motion.button
+                            key={step}
+                            className={`w-2 h-2 rounded-full ${subStep === step ? 'bg-white' : 'bg-white/40'}`}
+                            whileHover={{ scale: 1.5 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (onElementClick) onElementClick(step);
+                            }}
+                            aria-label={`Go to ${["Treatment Adherence", "Care Plan Monitoring", "Patient Questions", "Recovery Tracking", "Patient Feedback"][step]}`}
+                          />
+                        ))}
+                      </div>
+                      
+                      <motion.button
+                        className="flex items-center text-white/90 hover:text-white"
+                        whileHover={{ x: 2 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (onElementClick) onElementClick((subStep + 1) % 5);
+                        }}
+                      >
+                        <span className="mr-1">Next feature</span>
+                        <ArrowRight size={12} />
+                      </motion.button>
+                    </div>
                   </motion.div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center pt-12 pb-16"> 
+          <div className="relative w-full h-full flex flex-col items-center justify-center pt-8 pb-16"> 
             <div className="relative w-full flex-1 scale-105">
               <FigmaPostVisitSupportIllustration
                 subStep={subStep}
@@ -123,13 +249,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               />
             </div>
             
-            {/* Label shown on non-interactive mode */}
+            {/* Label shown on non-interactive mode - clinically focused */}
             {!hideTitle && (
               <motion.div 
-                className="absolute bottom-2 left-0 right-0 w-full z-30 px-3"
+                className="absolute bottom-5 left-0 right-0 w-full z-30 px-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
               >
                 <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20">
                   <div className="font-bold text-base sm:text-lg md:text-xl">{getCurrentLabel().title}</div>

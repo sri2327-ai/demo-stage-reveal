@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
 import type { DemoStage as DemoStageType } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
-import { MousePointerClick } from 'lucide-react';
+import { MousePointerClick, Play, Info } from 'lucide-react';
+import { clinicalAnimations } from '../lib/animation-utils';
 
 interface DemoSectionProps {
   isInViewport: boolean;
@@ -21,9 +22,10 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Log the current section for debugging
-  React.useEffect(() => {
+  // Debug current section to ensure it's being passed correctly
+  useEffect(() => {
     console.log("DemoSection - currentSection:", currentSection);
+    console.log("DemoSection - isDemoSection value:", currentSection === 'demo');
   }, [currentSection]);
   
   return (
@@ -44,24 +46,57 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Discover how S10.AI's CRUSH and BRAVO, powered by AI, streamline key clinical workflows in an interactive demo.
+            Discover how S10.AI's CRUSH and BRAVO streamline your clinical workflow, reduce documentation time by 75%, and improve patient engagement.
           </motion.p>
           
-          {/* Enhanced interactive instruction with clearer call to action */}
+          {/* Enhanced interactive instruction with clearer clinical context */}
           <motion.div
             className="flex items-center justify-center mt-4 sm:mt-5 md:mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInViewport ? 1 : 0, y: isInViewport ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md">
-              <MousePointerClick size={isMobile ? 20 : 24} className="text-[#387E89] animate-pulse" />
-              <span className={`${isMobile ? "text-sm" : "text-base"} font-medium max-w-md`}>
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 bg-[#387E89]/20 border-2 border-[#387E89]/40 rounded-full text-[#143151] shadow-md"
+              {...clinicalAnimations.clinicalPulse}
+              transition={{ 
+                repeat: Infinity,
+                duration: 3,
+                delay: 1
+              }}
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [1, 0.8, 1]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatDelay: 1
+                }}
+              >
+                {isMobile ? (
+                  <Play size={24} className="text-[#387E89]" />
+                ) : (
+                  <MousePointerClick size={24} className="text-[#387E89]" />
+                )}
+              </motion.div>
+              
+              <span className={`${isMobile ? "text-sm" : "text-base"} font-semibold max-w-md`}>
                 {isMobile 
-                  ? "Tap numbered tabs to switch features & icons to explore details" 
-                  : "Click numbered tabs to switch workflows & click icons inside each demo to explore specific features"}
+                  ? "Tap numbered tabs to explore different features" 
+                  : "Click the numbered tabs to navigate between clinical workflows"}
               </span>
-            </div>
+              
+              <motion.div 
+                className="flex gap-1 items-center text-xs sm:text-sm text-[#143151]/80 ml-1 pl-2 border-l border-[#387E89]/30"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Info size={16} className="text-[#387E89]" />
+                <span>Interactive demo</span>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
         
@@ -71,7 +106,8 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
               <DemoStage 
                 stages={stages} 
                 autoPlay={hasScrolledToDemo} 
-                isDemoSection={currentSection === 'demo'} // This prop controls whether indicator shows
+                isDemoSection={currentSection === 'demo'} // This is the key prop for the indicator
+                autoPlayInterval={8000} // Slightly faster for better clinical engagement
               />
             </div>
           </div>
