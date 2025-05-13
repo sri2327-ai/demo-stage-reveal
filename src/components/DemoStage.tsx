@@ -214,7 +214,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
                 >
                   <span className={`inline-flex items-center justify-center h-6 w-6 sm:h-7 sm:w-7 rounded-full 
                     ${currentStage === index 
-                      ? 'bg-[#9b87f5] text-white' 
+                      ? 'bg-[#FFDEE2] text-[#143151]' 
                       : 'bg-white/20 text-white'
                     } text-sm sm:text-base font-bold`}>
                     {index + 1}
