@@ -258,7 +258,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         return (
           <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="w-full flex-1 flex items-center justify-center">
+              <div className="w-full flex-1 flex items-center justify-center pb-16">
                 <div className="transform-none">
                   <FigmaPatientEngagementIllustration
                     subStep={subStep}
@@ -278,38 +278,44 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaAIMedicalScribeInteractive
-              subStep={subStep}
-              transcriptionActive={transcriptionActive}
-              noteGeneration={noteGeneration}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-              hideTitle={true}
-            />
+            <div className="w-full h-full pb-16">
+              <FigmaAIMedicalScribeInteractive
+                subStep={subStep}
+                transcriptionActive={transcriptionActive}
+                noteGeneration={noteGeneration}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+                hideTitle={true}
+              />
+            </div>
           </div>
         );
         
       case 2: // Admin Tasks
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaAdminTasksInteractive
-              subStep={subStep}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-              hideTitle={true}
-            />
+            <div className="w-full h-full pb-16">
+              <FigmaAdminTasksInteractive
+                subStep={subStep}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+                hideTitle={true}
+              />
+            </div>
           </div>
         );
         
       case 3: // Post-Visit Support
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <FigmaPostVisitSupportInteractive
-              subStep={subStep}
-              onElementClick={handleElementClick}
-              isInteractive={true}
-              hideTitle={true}
-            />
+            <div className="w-full h-full pb-16">
+              <FigmaPostVisitSupportInteractive
+                subStep={subStep}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+                hideTitle={true}
+              />
+            </div>
           </div>
         );
 
@@ -331,7 +337,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       </svg>
       
       <div className="w-full h-full flex flex-col items-center justify-center">
-        {renderStageContent()}
+        <div className="w-full h-full flex flex-col relative">
+          {renderStageContent()}
+        </div>
         
         {/* Shared description component placed at the bottom for all animations */}
         <AnimationDescription 

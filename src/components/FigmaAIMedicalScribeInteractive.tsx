@@ -5,7 +5,6 @@ import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustra
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
-import { Info } from 'lucide-react';
 
 interface FigmaAIMedicalScribeInteractiveProps {
   subStep: number;
@@ -16,16 +15,6 @@ interface FigmaAIMedicalScribeInteractiveProps {
   hideTitle?: boolean;
 }
 
-// Enhanced clinical descriptions with detailed information optimized for clinicians
-const labelDescriptions: Record<string, string> = {
-  "Authentication": "Secure HIPAA-compliant login with biometric options and SSO integration that saves 45 seconds per session. Compatible with hospital credential systems and 2FA.",
-  "Patient Schedule": "Direct EHR integration displays patient demographics, visit context, and flags high-priority clinical information. Color-coded urgency indicators help prioritize care.",
-  "Templates": "Specialty-specific templates with CPT/ICD-10 coding support and personalized sections aligned with your clinical workflow. Includes departmental protocols and billing requirements.",
-  "Recording": "Multi-speaker clinical transcription with 98.7% accuracy that captures medical terminology, preserves context, and distinguishes between provider and patient voices.",
-  "Generate Documentation": "Creates complete SOAP notes with automatically suggested billing codes based on medical decision-making complexity, saving 8-12 minutes per patient encounter.",
-  "EHR Integration": "Bi-directional synchronization with major EHR systems including Epic, Cerner, and Athena with field mapping preservation and custom template support."
-};
-
 export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInteractiveProps> = ({
   subStep,
   transcriptionActive,
@@ -34,21 +23,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   isInteractive = false,
   hideTitle = false
 }) => {
-  const [activeLabel, setActiveLabel] = useState<string | null>(null);
-  const [isFocused, setIsFocused] = useState(false);
   const [lastInteraction, setLastInteraction] = useState(0);
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Auto-show label for current subStep
-  useEffect(() => {
-    const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation", "EHR Integration"];
-    if (subStep >= 0 && subStep < stepLabels.length) {
-      setActiveLabel(stepLabels[subStep]);
-    }
-    
-    console.log("MedicalScribe - Current step changed to:", subStep);
-  }, [subStep]);
   
   // Add keyboard navigation for accessibility
   useEffect(() => {
@@ -80,24 +57,6 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isInteractive, onElementClick, subStep]);
-  
-  // Get the current label for either hover state or active step
-  const getCurrentLabel = () => {
-    if (activeLabel) {
-      return {
-        title: activeLabel,
-        description: labelDescriptions[activeLabel]
-      };
-    }
-    
-    // Fallback to current substep
-    const stepLabels = ["Authentication", "Patient Schedule", "Templates", "Recording", "Generate Documentation", "EHR Integration"];
-    const currentStepLabel = stepLabels[subStep];
-    return {
-      title: currentStepLabel,
-      description: labelDescriptions[currentStepLabel]
-    };
-  };
 
   // Handle click on specific UI elements (icons) with better event tracking
   const handleIconClick = (step: number) => {
@@ -137,8 +96,6 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
       className="relative w-full max-w-6xl mx-auto h-full" 
       role="region" 
       aria-label="AI Medical Scribe Interactive Demo"
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
       tabIndex={-1}
     >
       {isInteractive ? (
