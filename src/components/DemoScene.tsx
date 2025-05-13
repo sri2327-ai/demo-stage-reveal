@@ -1,15 +1,15 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
 import { MouseTrackerProvider } from './ui/cursor';
-import type { DemoStage, DemoSceneProps } from '../types/demo';
+import type { DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
-import { getScaleClasses } from '../lib/scale-utils';
 
-// Updated patient engagement labels with clear integration benefits and AI agent reference
+// Labels for each section
 const patientEngagementLabels: Record<number, string> = {
   0: "AI agent seamlessly handles patient calls and messages while preserving your clinical tone and practice branding",
   1: "AI agent integrates directly with your existing scheduling system to reduce no-shows by 35%",
@@ -18,7 +18,6 @@ const patientEngagementLabels: Record<number, string> = {
   4: "AI agent makes personalized confirmation calls with natural conversation flow and automatic EHR updates"
 };
 
-// Medical scribe labels with concrete time-saving benefits
 const medicalScribeLabels: Record<number, string> = {
   0: "Secure authentication that meets healthcare compliance standards including HIPAA and HITRUST",
   1: "Saves 10+ minutes per patient by automatically importing schedule data from any popular EHR",
@@ -28,14 +27,12 @@ const medicalScribeLabels: Record<number, string> = {
   5: "One-click synchronization with your preferred EHR system, preserving all custom field mappings"
 };
 
-// Admin tasks labels focused on efficiency improvements
 const adminTasksLabels: Record<number, string> = {
   0: "Reduces prescription processing time by 87% while maintaining complete regulatory compliance",
   1: "Ensures patients receive standardized clinical summaries with personalized care instructions",
   2: "Reduces insurance-related delays by 65% through continuous automated verification processes"
 };
 
-// Post-Visit support labels emphasizing better outcomes and AI agent
 const postVisitLabels: Record<number, string> = {
   0: "AI agent increases medication adherence by 40% through personalized reminder scheduling",
   1: "Enables early intervention by AI agent monitoring patient-reported outcomes between visits",
@@ -50,8 +47,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [transcriptionActive, setTranscriptionActive] = useState(false);
   const [noteGeneration, setNoteGeneration] = useState(false);
   const [activeLabel, setActiveLabel] = useState('');
-  const [interactionActive, setInteractionActive] = useState(false);
-  const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isMobile = useIsMobile();
 
@@ -60,7 +55,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     setSubStep(0);
     setTranscriptionActive(false);
     setNoteGeneration(false);
-    setInteractionActive(false);
     
     // Auto-show first label after stage change
     if (currentStage === 0) {
@@ -107,7 +101,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     // Pause auto-advance when user interacts - for much longer to give time to explore
     setIsPaused(true);
     setSubStep(step);
-    setInteractionActive(true);
     
     // For AI Medical Scribe demo, handle special states
     if (currentStage === 1) {
@@ -132,31 +125,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         setNoteGeneration(false);
       }
     }
-    
-    // Set the active label based on current stage and chosen step
-    if (currentStage === 0) {
-      setActiveLabel(patientEngagementLabels[step]);
-    } else if (currentStage === 1) {
-      setActiveLabel(medicalScribeLabels[step]);
-    } else if (currentStage === 2) {
-      setActiveLabel(adminTasksLabels[step]);
-    } else if (currentStage === 3) {
-      setActiveLabel(postVisitLabels[step]);
-    }
-    
-    // Auto-resume after much longer inactivity - dramatically increased
-    if (resetTimerRef.current) {
-      clearTimeout(resetTimerRef.current);
-    }
-    
-    // Much longer pause on both mobile and desktop to ensure users have time to read and explore
-    resetTimerRef.current = setTimeout(() => {
-      setIsPaused(false);
-      setInteractionActive(false);
-    }, isMobile ? 60000 : 45000); // Dramatically increased to 45-60 seconds
   };
 
-  // Auto-advance substeps unless paused - IMPROVED to cycle through ALL steps
+  // Auto-advance substeps unless paused
   useEffect(() => {
     // Clean up any existing interval
     if (autoPlayIntervalRef.current) {
@@ -167,11 +138,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     // Only set auto-advance if not paused
     if (!isPaused) {
       autoPlayIntervalRef.current = setInterval(() => {
-        if (currentStage === 0) { // For Patient Engagement - now with 5 steps
+        if (currentStage === 0) { // For Patient Engagement
           setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
         } else if (currentStage === 1) { // For AI Medical Scribe
           setSubStep((prev) => {
-            const nextStep = prev >= 5 ? 0 : prev + 1; // Now using 6 steps with EHR integration
+            const nextStep = prev >= 5 ? 0 : prev + 1;
             
             // Update transcription and note generation states based on step
             if (nextStep === 3) {
@@ -192,10 +163,10 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           });
         } else if (currentStage === 2) { // For Admin Tasks
           setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
-        } else if (currentStage === 3) { // For Post-Visit Support - now with 5 steps
+        } else if (currentStage === 3) { // For Post-Visit Support
           setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
         }
-      }, isMobile ? 8000 : 6000); // Adjusted timing for better engagement
+      }, isMobile ? 8000 : 6000); // Adjusted timing
     }
     
     return () => {
@@ -206,27 +177,12 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     };
   }, [currentStage, isPaused, isMobile]);
 
-  // Helper function to handle hovering over patient engagement steps - direct icon interaction
+  // Helper function to handle hovering over patient engagement steps
   const handlePatientEngagementHover = (step: number | null) => {
     if (step !== null && patientEngagementLabels[step]) {
       setActiveLabel(patientEngagementLabels[step]);
-      setInteractionActive(true);
-      
       // Pause auto-advance during hover
       setIsPaused(true);
-      
-      // Clear any existing timer
-      if (resetTimerRef.current) {
-        clearTimeout(resetTimerRef.current);
-      }
-      
-      // Auto-resume after inactivity - much longer
-      resetTimerRef.current = setTimeout(() => {
-        setIsPaused(false);
-        setInteractionActive(false);
-      }, isMobile ? 45000 : 30000); // Significantly increased times
-    } else {
-      setInteractionActive(false);
     }
   };
 
@@ -238,7 +194,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
               <div className="w-full flex-1 flex items-center justify-center">
-                <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+                <div>
                   <FigmaPatientEngagementIllustration
                     subStep={subStep}
                     cursorPosition={{ x: 0, y: 0 }}
@@ -251,99 +207,61 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 </div>
               </div>
               
-              {/* Enhanced responsive descriptive label for patient engagement */}
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={`patient-engagement-label-${subStep}`}
-                  className="absolute bottom-12 left-0 right-0 w-full z-30 px-4 sm:px-6"
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20"
-                  >
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl truncate">
-                      {subStep === 0 ? "Patient Messaging" : 
-                       subStep === 1 ? "Appointment Scheduling" : 
-                       subStep === 2 ? "Smart Intake Forms" : 
-                       subStep === 3 ? "Automated Reminders" :
-                       "AI Appointment Calls"}
-                    </div>
-                    <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
-                      {patientEngagementLabels[subStep]}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </AnimatePresence>
+              {/* Enhanced descriptive label for patient engagement */}
+              <div className="absolute bottom-12 left-0 right-0 w-full z-30 px-4 sm:px-6">
+                <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20">
+                  <div className="font-bold text-sm sm:text-base md:text-lg truncate">
+                    {subStep === 0 ? "Patient Messaging" : 
+                     subStep === 1 ? "Appointment Scheduling" : 
+                     subStep === 2 ? "Smart Intake Forms" : 
+                     subStep === 3 ? "Automated Reminders" :
+                     "AI Appointment Calls"}
+                  </div>
+                  <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-2">
+                    {patientEngagementLabels[subStep]}
+                  </div>
+                </div>
+              </div>
             </div>
           </MouseTrackerProvider>
         );
         
       case 1: // AI Medical Scribe - Our flagship product
         return (
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key="medical-scribe"
-              className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
-              <FigmaAIMedicalScribeInteractive
-                subStep={subStep}
-                transcriptionActive={transcriptionActive}
-                noteGeneration={noteGeneration}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <FigmaAIMedicalScribeInteractive
+              subStep={subStep}
+              transcriptionActive={transcriptionActive}
+              noteGeneration={noteGeneration}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
+          </div>
         );
         
       case 2: // Admin Tasks
         return (
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key="admin-tasks"
-              className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
-              <FigmaAdminTasksInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <FigmaAdminTasksInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
+          </div>
         );
         
       case 3: // Post-Visit Support
         return (
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key="post-visit"
-              className="w-full h-full flex items-center justify-center relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
-              <FigmaPostVisitSupportInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <FigmaPostVisitSupportInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
+          </div>
         );
 
       default:
@@ -353,7 +271,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-      {/* SVG gradient definition for cursor - consistent with clinical theme */}
+      {/* SVG gradient definition for cursor */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -363,19 +281,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Enhanced transitions between stages */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentStage}
-          className="w-full h-full flex flex-col items-center justify-center"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.85 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          {renderStageContent()}
-        </motion.div>
-      </AnimatePresence>
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        {renderStageContent()}
+      </div>
     </div>
   );
 };

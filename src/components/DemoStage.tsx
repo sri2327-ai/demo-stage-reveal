@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -163,28 +164,22 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[680px] sm:h-[720px] md:h-[820px] lg:h-[880px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[680px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
     >
-      {/* Header with tabbed navigation - adjusted height and padding */}
-      <motion.div 
+      {/* Header with tabbed navigation */}
+      <div 
         className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#143151] to-[#387E89] text-white py-3 px-4 sm:py-4 sm:px-6 z-40 border-b border-white/10 shadow-lg"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between items-center">
-            <motion.h3 
+            <h3 
               className="font-bold text-xl sm:text-2xl md:text-3xl" 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
             >
               AI Clinical Workflows Demo
-            </motion.h3>
+            </h3>
             
             <button 
               onClick={togglePause} 
@@ -198,7 +193,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             </button>
           </div>
           
-          {/* Tabs for feature selection - adjusted spacing */}
+          {/* Tabs for feature selection */}
           <Tabs 
             value={currentStage.toString()} 
             onValueChange={value => handleStageChange(parseInt(value))} 
@@ -219,34 +214,21 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             </TabsList>
           </Tabs>
           
-          {/* Active feature description - made more compact */}
-          <motion.p 
+          {/* Active feature description */}
+          <p 
             className="text-sm sm:text-base text-white/90 max-w-xl line-clamp-2 mb-0.5" 
-            key={`desc-${currentStage}`} 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
           >
             {stageDescriptions[currentStage].description}
-          </motion.p>
+          </p>
         </div>
-      </motion.div>
+      </div>
       
-      {/* Content container with adjusted padding for better spacing */}
-      <AnimatePresence mode="wait">
-        <motion.div 
-          key={currentStage} 
-          className="absolute inset-0 pt-[120px] pb-[60px]" 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <DemoScene currentStage={currentStage} stages={stages} />
-        </motion.div>
-      </AnimatePresence>
+      {/* Content container */}
+      <div className="absolute inset-0 pt-[120px] pb-[60px]">
+        <DemoScene currentStage={currentStage} stages={stages} />
+      </div>
       
-      {/* Bottom indicator with better positioning */}
+      {/* Bottom indicator */}
       <div className="absolute bottom-5 left-0 right-0">
         <DemoStageIndicator 
           currentStage={currentStage} 
@@ -256,20 +238,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Interactive indicator with better positioning */}
+      {/* Interactive indicator */}
       <AnimatePresence>
         {highlightInteractivity && (
-          <motion.div 
+          <div 
             className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ 
-              opacity: [0.7, 1, 0.7], 
-              scale: [0.9, 1.05, 0.9],
-              y: [0, -10, 0]
-            }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ repeat: 3, duration: 2, ease: "easeInOut" }}
-            aria-hidden="true" // Hide from screen readers as this is just a visual cue
+            aria-hidden="true"
           >
             <div className="bg-[#143151]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-[#387E89] flex items-center gap-3">
               <MousePointerClick size={isMobile ? 20 : 24} className="text-[#387E89]" />
@@ -277,7 +251,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
                 {isMobile ? "Tap icons to interact!" : "Click icons to explore features!"}
               </span>
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>

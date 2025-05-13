@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from './ui/card';
@@ -39,13 +40,13 @@ export const ROISection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
+    <section id="roi-section" className="py-16 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[#143151] mb-4">
@@ -89,7 +90,7 @@ export const ROISection = () => {
           className="mt-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl p-8 text-white shadow-xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -101,7 +102,7 @@ export const ROISection = () => {
             </div>
             <motion.button
               className="bg-white text-[#143151] py-3 px-6 rounded-lg font-medium shadow-lg hover:bg-blue-50 transition-colors"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
               Use ROI Calculator

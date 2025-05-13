@@ -14,9 +14,9 @@ const Index = () => {
   const roiRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   
-  const [hasScrolledToDemo, setHasScrolledToDemo] = useState(false);
-  const [isInViewport, setIsInViewport] = useState(false);
-  const [currentSection, setCurrentSection] = useState('hero');
+  const [hasScrolledToDemo, setHasScrolledToDemo] = useState(true); // Start with demo visible
+  const [isInViewport, setIsInViewport] = useState(true); // Start with demo in viewport
+  const [currentSection, setCurrentSection] = useState('demo'); // Start with demo as current section
   const isMobile = useIsMobile();
 
   // Enhanced scroll tracking with IntersectionObserver for more accurate section detection
@@ -25,7 +25,7 @@ const Index = () => {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.4, // 40% of the section must be visible to trigger
+      threshold: 0.2, // 20% of the section must be visible to trigger (reduced for better detection)
     };
 
     const demoObserver = new IntersectionObserver((entries) => {
@@ -68,8 +68,8 @@ const Index = () => {
           setCurrentSection('hero');
         }
       });
-    }, {...observerOptions, threshold: 0.6}); // Higher threshold for hero
-
+    }, {...observerOptions, threshold: 0.4}); // Higher threshold for hero
+    
     // Observe sections
     if (demoRef.current) demoObserver.observe(demoRef.current);
     if (roiRef.current) roiObserver.observe(roiRef.current);
@@ -91,31 +91,37 @@ const Index = () => {
 
   return (
     <MouseTrackerProvider disableCursor={false}>
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="min-h-screen bg-white">
         {/* Hero Section with ID for tracking */}
         <section id="hero-section" className="relative w-full">
           <Hero currentSection={currentSection} />
         </section>
 
         {/* Demo Section - Now with ref for tracking */}
-        <main ref={demoRef} id="demo-section" className="w-full max-w-[98vw] mx-auto">
+        <motion.main 
+          ref={demoRef} 
+          id="demo-section" 
+          className="w-full max-w-[98vw] mx-auto"
+          initial={{ opacity: 1 }}  // No initial animation
+          animate={{ opacity: 1 }}  // No animation
+        >
           <DemoSection 
-            isInViewport={isInViewport} 
-            hasScrolledToDemo={hasScrolledToDemo} 
+            isInViewport={true} 
+            hasScrolledToDemo={true} 
             stages={demoStages}
             currentSection={currentSection}
           />
           
           {/* ROI Section with ref for tracking */}
-          <section ref={roiRef} id="roi-section" className="relative">
+          <section ref={roiRef} className="relative">
             <ROISection />
           </section>
           
           {/* Call to Action with ref for tracking */}
-          <section ref={ctaRef} id="cta-section" className="relative">
+          <section ref={ctaRef} className="relative">
             <CallToAction />
           </section>
-        </main>
+        </motion.main>
         
         {/* Debug indicator for development */}
         {process.env.NODE_ENV === 'development' && (
