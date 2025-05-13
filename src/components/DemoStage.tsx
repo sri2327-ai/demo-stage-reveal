@@ -234,11 +234,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </motion.div>
       
-      {/* Content container with adjusted padding */}
+      {/* Content container with adjusted padding to make more room for illustrations */}
       <AnimatePresence mode="wait">
         <motion.div 
           key={currentStage} 
-          className="absolute inset-0 pt-[120px] pb-[60px]" 
+          className="absolute inset-0 pt-[120px] pb-[40px]" 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
@@ -249,7 +249,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </AnimatePresence>
       
       {/* Bottom indicator with better positioning */}
-      <div className="absolute bottom-4 left-0 right-0">
+      <div className="absolute bottom-2 left-0 right-0">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 
@@ -262,7 +262,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence>
         {highlightInteractivity && (
           <motion.div 
-            className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
+            className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: [0.7, 1, 0.7], 
