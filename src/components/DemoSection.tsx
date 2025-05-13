@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
@@ -64,7 +63,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
               <DemoStage 
                 stages={stages} 
                 autoPlay={hasScrolledToDemo} 
-                isDemoSection={currentSection === 'demo'}
+                isDemoSection={currentSection === 'demo'} // This prop ensures DemoStageIndicator only shows in demo section
               />
             </div>
           </div>

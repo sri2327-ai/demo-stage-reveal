@@ -16,7 +16,7 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState('hero');
   const isMobile = useIsMobile();
 
-  // Track if user has scrolled to the demo section and monitor current section
+  // Enhanced scroll tracking to accurately determine current section
   useEffect(() => {
     const handleScroll = () => {
       if (demoRef.current) {
@@ -29,12 +29,12 @@ const Index = () => {
           setHasScrolledToDemo(true);
         }
         
-        // Determine current section with more precise thresholds
+        // Get all section elements for more accurate current section detection
         const demoElement = document.querySelector('#demo-section');
         const roiElement = document.querySelector('#roi-section');
         const ctaElement = document.querySelector('#cta-section');
         
-        // Improved section detection logic
+        // Improved section detection logic with more precise thresholds
         if (demoElement && 
             demoElement.getBoundingClientRect().top <= window.innerHeight * 0.3 && 
             demoElement.getBoundingClientRect().bottom >= window.innerHeight * 0.3) {
@@ -50,6 +50,8 @@ const Index = () => {
         } else {
           setCurrentSection('hero');
         }
+        
+        console.log("Current section:", currentSection); // Log current section for debugging
       }
     };
 
@@ -58,7 +60,7 @@ const Index = () => {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasScrolledToDemo]);
+  }, [hasScrolledToDemo, currentSection]);
 
   return (
     <MouseTrackerProvider disableCursor={false}>
@@ -76,12 +78,12 @@ const Index = () => {
           />
           
           {/* ROI Section with ID for tracking */}
-          <section id="roi-section">
+          <section id="roi-section" className="relative">
             <ROISection />
           </section>
           
           {/* Call to Action with ID for tracking */}
-          <section id="cta-section">
+          <section id="cta-section" className="relative">
             <CallToAction />
           </section>
         </main>

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import type { DemoStageIndicatorProps } from '../types/demo';
 import { CheckCircle, MousePointerClick } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({ 
   currentStage, 
@@ -14,7 +14,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Don't render if not in demo section
+  // IMPORTANT: Don't render indicator if not in demo section
   if (!isDemoSection) {
     return null;
   }
