@@ -85,8 +85,8 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
               
               <span className={`${isMobile ? "text-sm" : "text-base"} font-semibold max-w-md`}>
                 {isMobile 
-                  ? "Tap numbered tabs to explore different features" 
-                  : "Click the numbered tabs to navigate between clinical workflows"}
+                  ? "Tap tabs to explore different features" 
+                  : "Click the tabs to navigate between clinical workflows"}
               </span>
               
               <motion.div 
