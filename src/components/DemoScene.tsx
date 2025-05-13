@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -236,24 +235,26 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 0: // Patient Engagement
         return (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="w-full h-full flex flex-col items-center justify-center pt-6 pb-16">
-              <div className="w-full flex-1 flex items-center justify-center pt-6 pb-16">
-                <FigmaPatientEngagementIllustration
-                  subStep={subStep}
-                  cursorPosition={{ x: 0, y: 0 }}
-                  isProcessingCall={false}
-                  onElementClick={handleElementClick}
-                  isInteractive={true}
-                  onHover={handlePatientEngagementHover}
-                  hideTitle={true}
-                />
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <div className="w-full flex-1 flex items-center justify-center pt-4 pb-20 md:py-4 lg:py-2">
+                <div className="scale-110 md:scale-125 lg:scale-130">
+                  <FigmaPatientEngagementIllustration
+                    subStep={subStep}
+                    cursorPosition={{ x: 0, y: 0 }}
+                    isProcessingCall={false}
+                    onElementClick={handleElementClick}
+                    isInteractive={true}
+                    onHover={handlePatientEngagementHover}
+                    hideTitle={true}
+                  />
+                </div>
               </div>
               
               {/* Enhanced responsive descriptive label for patient engagement */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={`patient-engagement-label-${subStep}`}
-                  className="absolute bottom-8 left-0 right-0 w-full z-30 px-2 sm:px-4"
+                  className="absolute bottom-6 left-0 right-0 w-full z-30 px-2 sm:px-4"
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.9 }}
