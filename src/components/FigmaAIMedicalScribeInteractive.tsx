@@ -172,19 +172,19 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
             <AnimatePresence mode="wait">
               <motion.div 
                 key={getCurrentLabel().title}
-                className="absolute bottom-8 left-0 right-0 w-full z-30 px-4 sm:px-6" 
+                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6" 
                 initial={clinicalAnimations.cardAppear.initial}
                 animate={clinicalAnimations.cardAppear.animate}
                 exit={clinicalAnimations.cardAppear.exit}
                 transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
               >
                 <motion.div 
-                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-5 py-4 sm:px-6 sm:py-5 md:px-7 md:py-6 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                  className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20"
                   whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                 >
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1">
                     <motion.span 
-                      className="inline-flex h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-400"
+                      className="inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-green-400"
                       animate={{ 
                         opacity: [1, 0.5, 1],
                         scale: [1, 1.1, 1] 
@@ -195,16 +195,16 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                         repeatDelay: 0.5
                       }}
                     />
-                    <h3 className="font-bold text-base sm:text-xl md:text-2xl">{getCurrentLabel().title}</h3>
+                    <h3 className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</h3>
                   </div>
-                  <div className="mt-1 sm:mt-2 text-sm sm:text-base md:text-lg text-white/95 leading-relaxed">
+                  <div className="mt-1 text-xs sm:text-sm md:text-base text-white/95 line-clamp-3 sm:line-clamp-2">
                     {getCurrentLabel().description}
                   </div>
                   
-                  <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-white/80 flex items-center">
-                    <Info size={isMobile ? 14 : 16} className="mr-1.5 text-white/70" />
-                    <span>
-                      {isMobile ? "Tap icons to explore features" : "Click icons to explore each feature or use arrow keys to navigate"}
+                  <div className="mt-2 text-xs text-white/80 flex items-center">
+                    <Info size={isMobile ? 12 : 14} className="mr-1.5 text-white/70" />
+                    <span className="line-clamp-1">
+                      {isMobile ? "Tap icons to explore features" : "Click icons to explore each feature or use arrow keys"}
                     </span>
                   </div>
                 </motion.div>
@@ -226,14 +226,14 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           {/* Only show title tooltip if not hidden - enhanced design for clinicians */}
           {!hideTitle && (
             <motion.div 
-              className="absolute bottom-5 left-0 right-0 w-full z-30 px-4 sm:px-6"
+              className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
             >
-              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20">
-                <div className="font-bold text-base sm:text-xl md:text-2xl">{getCurrentLabel().title}</div>
-                <div className="mt-2 text-sm sm:text-base md:text-lg text-white/90 leading-relaxed">
+              <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-4 sm:py-3 md:px-5 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20">
+                <div className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</div>
+                <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
                   {getCurrentLabel().description}
                 </div>
               </div>

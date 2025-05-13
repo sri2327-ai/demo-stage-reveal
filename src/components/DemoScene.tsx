@@ -260,17 +260,17 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                   transition={{ duration: 0.5 }}
                 >
                   <motion.div 
-                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-xl border border-white/20"
+                    className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-lg sm:rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg border border-white/20"
                     whileHover={{ scale: isMobile ? 1 : 1.02, y: isMobile ? 0 : -2 }}
                   >
-                    <div className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl truncate">
                       {subStep === 0 ? "Patient Messaging" : 
                        subStep === 1 ? "Appointment Scheduling" : 
                        subStep === 2 ? "Smart Intake Forms" : 
                        subStep === 3 ? "Automated Reminders" :
                        "AI Appointment Calls"}
                     </div>
-                    <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-white/90">
+                    <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">
                       {patientEngagementLabels[subStep]}
                     </div>
                   </motion.div>
