@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -155,12 +154,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container - adjusted positioning to avoid overlap with header */}
-      <div className="absolute inset-0 pt-[146px] sm:pt-[150px] md:pt-[156px] pb-[60px]">
+      {/* Content container - adjusted to maintain safe distance from header and bottom area */}
+      <div className="absolute inset-0 pt-[170px] sm:pt-[170px] md:pt-[175px] pb-[90px] overflow-hidden">
         <DemoScene currentStage={currentStage} stages={stages} />
       </div>
       
-      {/* Bottom indicator */}
+      {/* Bottom indicator - now positioned with more space */}
       <div className="absolute bottom-5 left-0 right-0">
         <DemoStageIndicator 
           currentStage={currentStage} 
