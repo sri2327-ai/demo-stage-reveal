@@ -28,7 +28,7 @@ export const AnimationDescription: React.FC<AnimationDescriptionProps> = ({
     <AnimatePresence mode="wait">
       <framerMotion.div 
         key={`description-${currentStage}-${subStep}`}
-        className="w-full z-30 px-4 sm:px-6 absolute bottom-6 left-0 right-0"
+        className="w-full z-30 px-4 sm:px-6 absolute bottom-8 left-0 right-0"
         initial={clinicalAnimations.cardAppear.initial}
         animate={clinicalAnimations.cardAppear.animate}
         exit={clinicalAnimations.cardAppear.exit}

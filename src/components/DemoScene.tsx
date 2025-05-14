@@ -341,7 +341,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           {renderStageContent()}
         </div>
         
-        {/* Shared description component placed at the bottom for all animations */}
+        {/* Single shared description component placed at the bottom for all animations */}
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}
