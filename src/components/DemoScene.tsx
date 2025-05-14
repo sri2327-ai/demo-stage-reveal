@@ -258,7 +258,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         return (
           <MouseTrackerProvider disableCursor={false}>
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="w-full flex-1 flex items-center justify-center pb-16">
+              <div className="w-full flex-1 flex items-center justify-center pb-20">
                 <div className="transform-none">
                   <FigmaPatientEngagementIllustration
                     subStep={subStep}
@@ -278,7 +278,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-16">
+            <div className="w-full h-full pb-20">
               <FigmaAIMedicalScribeInteractive
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
@@ -294,7 +294,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 2: // Admin Tasks
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-16">
+            <div className="w-full h-full pb-20">
               <FigmaAdminTasksInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -308,7 +308,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 3: // Post-Visit Support
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-16">
+            <div className="w-full h-full pb-20">
               <FigmaPostVisitSupportInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -341,7 +341,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           {renderStageContent()}
         </div>
         
-        {/* Single shared description component placed at the bottom for all animations */}
+        {/* Animation description now positioned at the bottom where the stage indicators were */}
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}
