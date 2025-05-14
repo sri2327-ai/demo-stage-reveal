@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -257,7 +256,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 0: // Patient Engagement
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
+            <div className="w-full h-full pb-20">
               <FigmaPatientEngagementInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -271,7 +270,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
+            <div className="w-full h-full pb-20">
               <FigmaAIMedicalScribeInteractive
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
@@ -287,7 +286,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 2: // Admin Tasks
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
+            <div className="w-full h-full pb-20">
               <FigmaAdminTasksInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -301,7 +300,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 3: // Post-Visit Support
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
+            <div className="w-full h-full pb-20">
               <FigmaPostVisitSupportInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -330,22 +329,19 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       </svg>
       
       <div className="w-full h-full flex flex-col items-center justify-center">
-        {/* Content area with proper spacing from header and description */}
-        <div className="w-full flex-grow flex flex-col justify-center relative px-4 py-6">
+        <div className="w-full h-full flex flex-col relative">
           {renderStageContent()}
         </div>
         
-        {/* Animation description now with fixed height and separation */}
-        <div className="w-full">
-          <AnimationDescription 
-            currentStage={currentStage}
-            subStep={subStep}
-            labels={getCurrentStageLabels()}
-            labelTitles={getCurrentStageTitles()}
-            maxSteps={getMaxStepsForStage()}
-            onElementClick={handleElementClick}
-          />
-        </div>
+        {/* Animation description now positioned at the bottom where the stage indicators were */}
+        <AnimationDescription 
+          currentStage={currentStage}
+          subStep={subStep}
+          labels={getCurrentStageLabels()}
+          labelTitles={getCurrentStageTitles()}
+          maxSteps={getMaxStepsForStage()}
+          onElementClick={handleElementClick}
+        />
       </div>
     </div>
   );
