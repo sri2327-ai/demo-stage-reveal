@@ -40,49 +40,5 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     }
   };
 
-  return (
-    <motion.div 
-      className={`absolute z-40 left-0 right-0 bottom-2 sm:bottom-3 md:bottom-3 px-3 sm:px-5 ${isMobile ? 'justify-center' : ''}`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.4 }}
-      role="tablist"
-      aria-label="Clinical demonstration stages"
-    >
-      <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
-        {Array.from({ length: totalStages }).map((_, index) => (
-          <motion.button
-            key={index}
-            className={`relative h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#387E89] 
-              ${currentStage === index 
-                ? 'bg-[#143151] border-[#387E89] shadow-md' 
-                : 'bg-white/80 border-gray-300 hover:border-[#387E89]/50'
-              }`}
-            onClick={() => handleStageClick(index)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            role="tab"
-            aria-selected={currentStage === index}
-            aria-label={`View demo stage ${index + 1}`}
-            aria-controls={`demo-stage-${index}`}
-          >
-            <span className={`font-bold text-sm sm:text-base ${
-              currentStage === index ? 'text-white' : 'text-gray-700'
-            }`}>
-              {index + 1}
-            </span>
-            
-            {/* Active indicator dot */}
-            {currentStage === index && (
-              <motion.div 
-                className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-[#387E89] rounded-full"
-                layoutId="activeIndicator"
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
-            )}
-          </motion.button>
-        ))}
-      </div>
-    </motion.div>
-  );
+  return null; // Remove the entire indicator UI
 };
