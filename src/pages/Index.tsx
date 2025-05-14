@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { demoStages } from '../data/demoStages';
 import { motion } from 'framer-motion';
@@ -8,6 +7,7 @@ import { ROISection } from '../components/ROISection';
 import { CallToAction } from '../components/CallToAction';
 import { MouseTrackerProvider } from '../components/ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
+import { StageTitle } from '../components/StageTitle';
 
 const Index = () => {
   const demoRef = useRef<HTMLDivElement>(null);
@@ -105,6 +105,11 @@ const Index = () => {
           initial={{ opacity: 1 }}  // No initial animation
           animate={{ opacity: 1 }}  // No animation
         >
+          {/* Only show StageTitle when in demo section */}
+          {currentSection === 'demo' && (
+            <StageTitle currentStage={0} />
+          )}
+          
           <DemoSection 
             isInViewport={true} 
             hasScrolledToDemo={true} 
