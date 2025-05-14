@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
+import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
 import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteractive';
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
@@ -256,23 +255,16 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <MouseTrackerProvider disableCursor={false}>
-            <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="w-full flex-1 flex items-center justify-center pb-20">
-                <div className="transform-none">
-                  <FigmaPatientEngagementIllustration
-                    subStep={subStep}
-                    cursorPosition={{ x: 0, y: 0 }}
-                    isProcessingCall={false}
-                    onElementClick={handleElementClick}
-                    isInteractive={true}
-                    onHover={handlePatientEngagementHover}
-                    hideTitle={true}
-                  />
-                </div>
-              </div>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <div className="w-full h-full pb-20">
+              <FigmaPatientEngagementInteractive
+                subStep={subStep}
+                onElementClick={handleElementClick}
+                isInteractive={true}
+                hideTitle={true}
+              />
             </div>
-          </MouseTrackerProvider>
+          </div>
         );
         
       case 1: // AI Medical Scribe - Our flagship product

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
+import { AspectRatio } from './ui/aspect-ratio';
 
 interface FigmaPatientEngagementInteractiveProps {
   subStep: number;
@@ -116,18 +117,20 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 }
               }}
             >
-              {/* Fixed consistent sizing wrapper */}
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="w-full max-w-3xl">
-                  <FigmaPatientEngagementIllustration
-                    subStep={subStep}
-                    cursorPosition={cursorPosition}
-                    isProcessingCall={isProcessingCall}
-                    onElementClick={handleIconClick}
-                    isInteractive={true}
-                    onHover={handleHover}
-                    hideTitle={hideTitle}
-                  />
+              {/* Fixed consistent sizing wrapper with strict dimensions */}
+              <div className="w-full flex items-center justify-center">
+                <div className="w-full max-w-3xl mx-auto">
+                  <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+                    <FigmaPatientEngagementIllustration
+                      subStep={subStep}
+                      cursorPosition={cursorPosition}
+                      isProcessingCall={isProcessingCall}
+                      onElementClick={handleIconClick}
+                      isInteractive={true}
+                      onHover={handleHover}
+                      hideTitle={hideTitle}
+                    />
+                  </AspectRatio>
                 </div>
               </div>
             </div>
@@ -136,14 +139,18 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
           <div className="relative w-full h-full flex-1 flex items-center justify-center">
-            {/* Fixed consistent sizing wrapper */}
-            <div className="w-full max-w-3xl">
-              <FigmaPatientEngagementIllustration
-                subStep={subStep}
-                cursorPosition={cursorPosition}
-                isProcessingCall={isProcessingCall}
-                hideTitle={hideTitle}
-              />
+            {/* Fixed consistent sizing wrapper with strict dimensions */}
+            <div className="w-full flex items-center justify-center">
+              <div className="w-full max-w-3xl mx-auto">
+                <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+                  <FigmaPatientEngagementIllustration
+                    subStep={subStep}
+                    cursorPosition={cursorPosition}
+                    isProcessingCall={isProcessingCall}
+                    hideTitle={hideTitle}
+                  />
+                </AspectRatio>
+              </div>
             </div>
           </div>
         </div>
