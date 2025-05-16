@@ -139,7 +139,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           <MouseTrackerProvider disableCursor={false}>
             <div className="relative h-full flex items-center justify-center"> 
               <div 
-                className="relative w-full h-[90%] flex items-center justify-center cursor-pointer" 
+                className="relative w-full h-[80%] flex items-center justify-center cursor-pointer" 
                 onClick={handleIllustrationClick}
                 role="button"
                 aria-label="Navigate to next feature"
@@ -150,7 +150,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   }
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center scale-85 sm:scale-90 md:scale-95">
+                <div className="w-full h-full flex items-center justify-center scale-80 sm:scale-85 md:scale-90">
                   <FigmaPostVisitSupportIllustration
                     subStep={subStep}
                     isInteractive={true}
@@ -165,8 +165,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           </MouseTrackerProvider>
         ) : (
           <div className="relative w-full h-full flex items-center justify-center"> 
-            <div className="relative w-full h-[90%] flex items-center justify-center">
-              <div className="scale-85 sm:scale-90 md:scale-95">
+            <div className="relative w-full h-[80%] flex items-center justify-center">
+              <div className="scale-80 sm:scale-85 md:scale-90">
                 <FigmaPostVisitSupportIllustration
                   subStep={subStep}
                   isInteractive={false}

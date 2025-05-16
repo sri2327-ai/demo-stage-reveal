@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -329,12 +328,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Animation content - now takes up only the top part of the container */}
-      <div className="flex-1 w-full overflow-hidden">
+      {/* Animation content - now takes up a smaller portion to make room for description */}
+      <div className="flex-1 w-full overflow-hidden max-h-[75%]">
         {renderStageContent()}
       </div>
       
-      {/* Description panel - now positioned below the animation content */}
+      {/* Spacer to create more distance between animation and description */}
+      <div className="h-6 sm:h-8 md:h-10"></div>
+      
+      {/* Description panel - now positioned with more space below the animation */}
       <div className="w-full mt-auto">
         <AnimationDescription 
           currentStage={currentStage}
