@@ -58,6 +58,31 @@ export const clinicalAnimations = {
       repeat: Infinity,
       repeatDelay: 1
     }
+  },
+  
+  // New mobile-specific animations with gradients
+  mobileTabGradient: {
+    initial: { opacity: 0.8 },
+    animate: { opacity: 1 },
+    whileHover: { 
+      backgroundImage: "linear-gradient(135deg, #143151 0%, #387E89 100%)",
+      color: "white"
+    },
+    transition: { duration: 0.3 }
+  },
+  
+  // Button hover effect with gradient
+  buttonGradientHover: {
+    initial: { 
+      backgroundImage: "linear-gradient(135deg, #143151 0%, #387E89 100%)",
+      opacity: 0.9
+    },
+    whileHover: { 
+      opacity: 1,
+      scale: 1.05
+    },
+    whileTap: { scale: 0.98 },
+    transition: { duration: 0.2 }
   }
 };
 

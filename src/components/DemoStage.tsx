@@ -8,6 +8,7 @@ import { MobileStageAnimation } from './MobileStageAnimation';
 import type { DemoStageProps } from '../types/demo';
 import { MousePointerClick, Play, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { clinicalAnimations } from '../lib/animation-utils';
 
 export const DemoStage: React.FC<DemoStageProps> = ({
   stages,
@@ -271,8 +272,18 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       tabIndex={0}
     >
       {isMobile ? (
-        // Mobile/Tablet Layout - Enhanced visibility
+        // Mobile/Tablet Layout with TABS on top
         <div className="w-full h-full flex flex-col overflow-hidden">
+          {/* New tabs navigation on top for mobile */}
+          <div className="sticky top-0 left-0 right-0 z-50 pt-2 px-2 bg-white border-b border-[#387E89]/10 shadow-sm">
+            <DemoStageIndicator 
+              currentStage={currentStage} 
+              totalStages={stages.length} 
+              onStageChange={handleStageChange} 
+              isDemoSection={isDemoSection} 
+            />
+          </div>
+          
           <MobileStageAnimation
             currentStage={currentStage}
             subStep={currentSubStep}
