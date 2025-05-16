@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MobileAnimationProps } from '../types/demo';
@@ -37,26 +38,6 @@ export const MobileStageAnimation: React.FC<MobileAnimationProps> = ({
       case 2: return "Admin Tasks";
       case 3: return "Post-Visit Support";
       default: return "Clinical Workflow";
-    }
-  };
-
-  // Render the interface content based on stage and step
-  const renderInterfaceContent = () => {
-    switch (currentStage) {
-      case 0: // Patient Engagement
-        return renderPatientEngagementInterface(subStep);
-      case 1: // AI Medical Scribe
-        return renderMedicalScribeInterface(subStep);
-      case 2: // Admin Tasks
-        return renderAdminTasksInterface(subStep);
-      case 3: // Post-Visit Support
-        return renderPostVisitInterface(subStep);
-      default:
-        return (
-          <div className="text-center text-gray-500">
-            <p>Interface not available</p>
-          </div>
-        );
     }
   };
 
@@ -264,184 +245,228 @@ export const MobileStageAnimation: React.FC<MobileAnimationProps> = ({
           </div>
         );
         
-      case 3: // Automated Reminders
+      case 3:
+      case 4:
+      default:
+        // For other cases we can reuse previously defined interfaces or show a simple message
         return (
           <div className="bg-white rounded-lg shadow-md p-3 max-w-[280px] mx-auto">
-            <div className="border-b pb-2 mb-3">
-              <h4 className="text-sm font-medium text-gray-800">Appointment Confirmation</h4>
-              <p className="text-xs text-gray-500">Tomorrow at 10:30 AM with Dr. Smith</p>
-            </div>
-            
-            <div className="bg-blue-50 border border-blue-200 p-2 rounded-md mb-3">
-              <div className="flex items-start">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center mr-2">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 16.36v-1.36a2 2 0 0 0-2-2h-3v5h3a2 2 0 0 0 2-2z"></path>
-                    <path d="M6.6 10h2.8a2 2 0 0 0 1.8-2.8l-2.4-5.2A1.9 1.9 0 0 0 7 1.2L3.5 4.7a2 2 0 0 0 0 2.8z"></path>
-                    <path d="M3.6 14h2.8a2 2 0 0 1 1.8 2.8l-2.4 5.2A1.9 1.9 0 0 1 4 22.8l-3.5-3.5a2 2 0 0 1 0-2.8z"></path>
-                    <path d="M14 5L22 5"></path>
-                    <path d="M14 9L22 9"></path>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-medium">Appointment Reminder</p>
-                  <p className="text-xs text-gray-600 mt-1">Please arrive 15 minutes early to complete any necessary paperwork.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between items-center text-xs">
-                <span>Pre-visit Checklist:</span>
-                <motion.span 
-                  className="text-blue-600 font-medium"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  3/5 Completed
-                </motion.span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center mr-2">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <span className="text-xs text-gray-800">Confirm appointment</span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center mr-2">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <span className="text-xs text-gray-800">Complete intake form</span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center mr-2">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <span className="text-xs text-gray-800">Insurance verification</span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 mr-2"></div>
-                <span className="text-xs text-gray-500">Upload recent lab results</span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 mr-2"></div>
-                <span className="text-xs text-gray-500">Prepare list of questions</span>
-              </div>
-            </div>
-            
-            <div className="flex gap-2 mt-3">
-              <motion.button 
-                className="flex-1 border border-blue-500 text-blue-500 text-xs py-1.5 rounded"
-                whileTap={{ scale: 0.98 }}
-              >
-                Reschedule
-              </motion.button>
-              <motion.button 
-                className="flex-1 bg-blue-500 text-white text-xs py-1.5 rounded"
-                whileTap={{ scale: 0.98 }}
-              >
-                Confirm
-              </motion.button>
+            <div className="text-center">
+              <p className="text-sm text-gray-700">Patient Engagement Feature</p>
+              <p className="text-xs text-gray-500 mt-2">Step {step + 1}</p>
             </div>
           </div>
         );
+    }
+  };
+  
+  // AI Medical Scribe Interfaces
+  const renderMedicalScribeInterface = (step: number) => {
+    // For brevity, we're showing a simplified version
+    return (
+      <div className="bg-white rounded-lg shadow-md p-3 max-w-[280px] mx-auto">
+        <div className="border-b pb-2 mb-3">
+          <h4 className="text-sm font-medium text-gray-800">AI Medical Scribe</h4>
+          <p className="text-xs text-gray-500">Step {step + 1}: {currentTitle}</p>
+        </div>
         
-      case 4: // AI Appointment Calls
-        return (
-          <div className="bg-white rounded-lg shadow-md p-3 max-w-[280px] mx-auto">
-            <div className="border-b pb-2 mb-3 flex items-center justify-between">
-              <div>
-                <h4 className="text-sm font-medium text-gray-800">Incoming Call</h4>
-                <p className="text-xs text-gray-500">City Medical Center</p>
+        <div className="space-y-3 mb-3">
+          <div className="bg-blue-50 p-3 rounded-lg">
+            <p className="text-xs">{currentDescription}</p>
+          </div>
+          
+          {step === 3 && (
+            <motion.div 
+              className="bg-green-50 border border-green-200 p-2 rounded-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center">
+                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <p className="text-xs text-green-800 font-medium">Transcription active</p>
               </div>
-              <motion.div 
-                className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </motion.div>
+          )}
+          
+          {step === 4 && (
+            <motion.div 
+              className="bg-blue-50 border border-blue-200 p-2 rounded-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center">
+                <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 9h1"/><path d="M9 13h6"/><path d="M9 17h6"/>
+                  </svg>
+                </div>
+                <p className="text-xs text-blue-800 font-medium">Generating clinical note</p>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Admin Tasks Interfaces
+  const renderAdminTasksInterface = (step: number) => {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-3 max-w-[280px] mx-auto">
+        <div className="border-b pb-2 mb-3">
+          <h4 className="text-sm font-medium text-gray-800">Admin Tasks</h4>
+          <p className="text-xs text-gray-500">Step {step + 1}: {currentTitle}</p>
+        </div>
+        
+        <div className="space-y-3 mb-3">
+          <div className="bg-amber-50 p-3 rounded-lg">
+            <p className="text-xs">{currentDescription}</p>
+          </div>
+          
+          {step === 0 && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-xs font-medium">Prior Authorization</p>
+                <div className="bg-green-500 h-2 w-2 rounded-full"></div>
+              </div>
+              <div className="flex gap-2">
+                <div className="bg-amber-100 text-amber-800 text-[10px] px-1 py-0.5 rounded">Pending</div>
+                <div className="bg-green-100 text-green-800 text-[10px] px-1 py-0.5 rounded">In Progress</div>
+              </div>
+            </motion.div>
+          )}
+          
+          {step === 1 && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xs font-medium mb-1">Clinical Summary</p>
+              <div className="grid grid-cols-2 gap-1 text-[10px]">
+                <div>Patient:</div>
+                <div>John Doe</div>
+                <div>Diagnosis:</div>
+                <div>Migraine</div>
+                <div>Treatment:</div>
+                <div>Sumatriptan 50mg</div>
+              </div>
+            </motion.div>
+          )}
+          
+          {step === 2 && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xs font-medium mb-1">Insurance Verification</p>
+              <div className="flex items-center gap-1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
                 </svg>
-              </motion.div>
-            </div>
-            
-            <div className="space-y-3 mb-4">
-              <div className="bg-blue-50 p-2 rounded-lg">
-                <p className="text-xs">Hello, this is Sarah from City Medical Center. I'm calling to confirm your appointment with Dr. Smith tomorrow at 10:30 AM. Is that still good for you?</p>
-                <div className="flex justify-end">
-                  <motion.div 
-                    className="w-4 h-4 mt-1"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4b5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                  </motion.div>
-                </div>
+                <p className="text-xs text-green-700">Verified</p>
               </div>
-              
-              <motion.div 
-                className="bg-gray-100 p-2 rounded-lg"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-              >
-                <p className="text-xs">Yes, that works for me.</p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-blue-50 p-2 rounded-lg"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5 }}
-              >
-                <p className="text-xs">Great! Do you need any assistance with directions to our office or have any questions before your visit?</p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gray-100 p-2 rounded-lg" 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2 }}
-              >
-                <p className="text-xs">No, I know where it is. Thank you.</p>
-              </motion.div>
-            </div>
-            
-            <div className="border-t pt-2 flex justify-between">
-              <motion.button 
-                className="text-xs border border-red-500 text-red-500 rounded-full px-3 py-1.5"
-                whileTap={{ scale: 0.95 }}
-              >
-                End Call
-              </motion.button>
-              
-              <motion.div 
-                className="text-xs text-gray-500 flex items-center"
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1"></span>
-                <span>01:24</span>
-              </motion.div>
-            </div>
-          </div>
-        );
+            </motion.div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Post-Visit Support Interfaces
+  const renderPostVisitInterface = (step: number) => {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-3 max-w-[280px] mx-auto">
+        <div className="border-b pb-2 mb-3">
+          <h4 className="text-sm font-medium text-gray-800">Post-Visit Support</h4>
+          <p className="text-xs text-gray-500">Step {step + 1}: {currentTitle}</p>
+        </div>
         
+        <div className="space-y-3 mb-3">
+          <div className="bg-teal-50 p-3 rounded-lg">
+            <p className="text-xs">{currentDescription}</p>
+          </div>
+          
+          {step === 0 && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xs font-medium mb-1">Medication Schedule</p>
+              <div className="flex gap-1 flex-wrap">
+                <div className="bg-teal-100 text-teal-800 text-[10px] px-2 py-0.5 rounded-full">8:00 AM</div>
+                <div className="bg-teal-100 text-teal-800 text-[10px] px-2 py-0.5 rounded-full">2:00 PM</div>
+                <div className="bg-teal-100 text-teal-800 text-[10px] px-2 py-0.5 rounded-full">8:00 PM</div>
+              </div>
+            </motion.div>
+          )}
+          
+          {step === 1 && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xs font-medium mb-1">Health Monitoring</p>
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-teal-500 rounded-full" 
+                    initial={{ width: "0%" }}
+                    animate={{ width: "65%" }}
+                    transition={{ delay: 0.8, duration: 1 }}
+                  />
+                </div>
+                <span className="text-[10px]">65%</span>
+              </div>
+            </motion.div>
+          )}
+          
+          {(step >= 2) && (
+            <motion.div 
+              className="bg-white border border-gray-200 p-2 rounded-lg"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xs font-medium mb-1">{currentTitle}</p>
+              <p className="text-[10px] text-gray-600">Feature details will be displayed here</p>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Render the interface content based on stage and step
+  const renderInterfaceContent = () => {
+    switch (currentStage) {
+      case 0: // Patient Engagement
+        return renderPatientEngagementInterface(subStep);
+      case 1: // AI Medical Scribe
+        return renderMedicalScribeInterface(subStep);
+      case 2: // Admin Tasks
+        return renderAdminTasksInterface(subStep);
+      case 3: // Post-Visit Support
+        return renderPostVisitInterface(subStep);
       default:
         return (
           <div className="text-center text-gray-500">
@@ -450,7 +475,7 @@ export const MobileStageAnimation: React.FC<MobileAnimationProps> = ({
         );
     }
   };
-  
+
   // Get animation icon based on stage and step
   const getAnimationIcon = () => {
     switch (currentStage) {
