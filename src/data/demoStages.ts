@@ -5,7 +5,7 @@ export const demoStages: DemoStage[] = [
   {
     id: 'stage1',
     title: 'Patient Engagement',
-    description: "S10.AI's CRUSH virtual assistant integrates with your existing tools to enhance patient engagement through personalized messaging using your unique clinical voice.",
+    description: "Our AI agent integrates with your existing patient management tools to enhance engagement through personalized messaging using your unique clinical voice.",
     highlights: [
       'AI preserves your clinical voice across all patient communications',
       'Smart scheduling reduces no-shows by 35%',
@@ -29,7 +29,7 @@ export const demoStages: DemoStage[] = [
   {
     id: 'stage3',
     title: 'Admin Tasks',
-    description: "S10.AI's CRUSH agent enhances your administrative team's capacity by automating complex back-office tasks while preserving your clinical protocols.",
+    description: "Our AI agent enhances your administrative team's capacity by automating complex back-office tasks while working with your existing clinical systems and protocols.",
     highlights: [
       'Reduces prescription processing time by 87%',
       'Standardizes clinical summaries with personalized care instructions',
@@ -41,7 +41,7 @@ export const demoStages: DemoStage[] = [
   {
     id: 'stage4',
     title: 'Post-Visit Support',
-    description: "S10.AI's BRAVO follow-up assistant extends care beyond the clinic by working with your existing patient communication channels to improve outcomes.",
+    description: "Our AI follow-up assistant extends care beyond the clinic by working with your existing patient communication channels to improve outcomes.",
     highlights: [
       'AI agent increases medication adherence by 40%',
       'Remote monitoring prevents 32% of readmissions',
