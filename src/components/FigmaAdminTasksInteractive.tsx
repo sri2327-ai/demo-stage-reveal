@@ -96,7 +96,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   return (
     <div 
       ref={containerRef}
-      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow}`}
+      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region" 
       aria-label="Admin Tasks Interactive Demo"
       tabIndex={-1}
@@ -105,7 +105,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         <MouseTrackerProvider disableCursor={false}>
           <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full h-full flex items-center justify-center" 
+              className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -127,7 +127,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
         </MouseTrackerProvider>
       ) : (
         <div className="w-full h-full flex items-center justify-center"> 
-          <div className="w-full h-full flex items-center justify-center">
+          <div className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
             <FigmaAdminTasksIllustration
               subStep={subStep}
               isInteractive={false}

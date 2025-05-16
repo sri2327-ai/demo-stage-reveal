@@ -100,16 +100,16 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full max-w-6xl mx-auto h-full ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow}`}
+      className={`relative w-full max-w-6xl mx-auto h-full ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region" 
       aria-label="AI Medical Scribe Interactive Demo"
       tabIndex={-1}
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-8"> 
+          <div className="relative h-full flex flex-col items-center justify-center py-4"> 
             <div 
-              className="relative w-full h-full flex-1 flex items-center justify-center cursor-pointer" 
+              className={`relative w-full h-full flex-1 flex items-center justify-center cursor-pointer ${colorTheme.highlight} rounded-lg`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -134,8 +134,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
-          <div className="relative w-full h-full flex-1 flex items-center justify-center">
+        <div className="relative w-full h-full flex flex-col items-center justify-center py-4"> 
+          <div className={`relative w-full h-full flex-1 flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
             <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
               <FigmaAIMedicalScribeIllustration
                 subStep={subStep}

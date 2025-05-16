@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -134,7 +133,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   return (
     <div 
       ref={containerRef}
-      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow}`}
+      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region"
       aria-label="Post-Visit Support Interactive Demo"
       onFocus={() => setIsFocused(true)}
@@ -145,7 +144,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
         <MouseTrackerProvider disableCursor={false}>
           <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full h-full flex items-center justify-center" 
+              className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -167,7 +166,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
         </MouseTrackerProvider>
       ) : (
         <div className="w-full h-full flex items-center justify-center"> 
-          <div className="w-full h-full flex items-center justify-center"> 
+          <div className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}

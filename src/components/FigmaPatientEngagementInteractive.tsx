@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -105,7 +104,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   return (
     <div 
       ref={containerRef}
-      className={`w-full h-full flex items-center justify-center`}
+      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}
       role="region" 
       aria-label="Patient Engagement Interactive Demo"
     >
@@ -113,7 +112,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
         <MouseTrackerProvider disableCursor={false}>
           <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className={`w-full max-w-3xl mx-auto ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}
+              className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -124,7 +123,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 }
               }}
             >
-              <AspectRatio ratio={16/9} className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden border border-[#387E89]/10 shadow-sm">
+              <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
                 <FigmaPatientEngagementIllustration
                   subStep={subStep}
                   cursorPosition={cursorPosition}
@@ -140,8 +139,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
         </MouseTrackerProvider>
       ) : (
         <div className="w-full h-full flex items-center justify-center"> 
-          <div className={`w-full max-w-3xl mx-auto ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}>
-            <AspectRatio ratio={16/9} className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden border border-[#387E89]/10 shadow-sm">
+          <div className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}>
+            <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
               <FigmaPatientEngagementIllustration
                 subStep={subStep}
                 cursorPosition={cursorPosition}
