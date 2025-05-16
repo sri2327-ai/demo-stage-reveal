@@ -5,6 +5,7 @@ import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllust
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
+import { clinicalColorThemes } from '../lib/color-themes';
 import { Info, ArrowRight } from 'lucide-react';
 
 interface FigmaPostVisitSupportInteractiveProps {
@@ -126,11 +127,14 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       }
     }
   };
+
+  // Get theme colors for post-visit support
+  const colorTheme = clinicalColorThemes.postVisitSupport;
   
   return (
     <div 
       ref={containerRef}
-      className="w-full h-full flex items-center justify-center" 
+      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow}`}
       role="region"
       aria-label="Post-Visit Support Interactive Demo"
       onFocus={() => setIsFocused(true)}
@@ -175,4 +179,3 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     </div>
   );
 };
-

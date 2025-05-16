@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -8,6 +7,7 @@ import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInterac
 import { MouseTrackerProvider } from './ui/cursor';
 import type { DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
+import { clinicalColorThemes } from '../lib/color-themes';
 
 // Labels for each section
 const patientEngagementLabels: Record<number, string> = {

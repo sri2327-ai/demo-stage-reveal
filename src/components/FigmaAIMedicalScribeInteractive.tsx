@@ -5,6 +5,7 @@ import { FigmaAIMedicalScribeIllustration } from './FigmaAIMedicalScribeIllustra
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
+import { clinicalColorThemes } from '../lib/color-themes';
 
 interface FigmaAIMedicalScribeInteractiveProps {
   subStep: number;
@@ -93,10 +94,13 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     }
   };
   
+  // Get theme colors for AI Medical Scribe
+  const colorTheme = clinicalColorThemes.aiMedicalScribe;
+  
   return (
     <div 
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto h-full" 
+      className={`relative w-full max-w-6xl mx-auto h-full ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow}`}
       role="region" 
       aria-label="AI Medical Scribe Interactive Demo"
       tabIndex={-1}

@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
 import { MouseTrackerProvider } from './ui/cursor';
 import { useIsMobile } from '../hooks/use-mobile';
 import { AspectRatio } from './ui/aspect-ratio';
+import { clinicalColorThemes } from '../lib/color-themes';
 
 interface FigmaPatientEngagementInteractiveProps {
   subStep: number;
@@ -96,11 +98,14 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
       }
     }
   };
+
+  // Get theme colors for patient engagement
+  const colorTheme = clinicalColorThemes.patientEngagement;
   
   return (
     <div 
       ref={containerRef}
-      className="w-full h-full flex items-center justify-center" 
+      className={`w-full h-full flex items-center justify-center`}
       role="region" 
       aria-label="Patient Engagement Interactive Demo"
     >
@@ -108,7 +113,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
         <MouseTrackerProvider disableCursor={false}>
           <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full max-w-3xl mx-auto"
+              className={`w-full max-w-3xl mx-auto ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -119,7 +124,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 }
               }}
             >
-              <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+              <AspectRatio ratio={16/9} className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden border border-[#387E89]/10 shadow-sm">
                 <FigmaPatientEngagementIllustration
                   subStep={subStep}
                   cursorPosition={cursorPosition}
@@ -135,8 +140,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
         </MouseTrackerProvider>
       ) : (
         <div className="w-full h-full flex items-center justify-center"> 
-          <div className="w-full max-w-3xl mx-auto">
-            <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+          <div className={`w-full max-w-3xl mx-auto ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}>
+            <AspectRatio ratio={16/9} className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden border border-[#387E89]/10 shadow-sm">
               <FigmaPatientEngagementIllustration
                 subStep={subStep}
                 cursorPosition={cursorPosition}
