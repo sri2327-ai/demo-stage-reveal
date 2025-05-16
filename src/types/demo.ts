@@ -23,6 +23,8 @@ export interface DemoStageContentProps {
 export interface DemoSceneProps {
   currentStage: number;
   stages: DemoStage[];
+  subStep?: number;
+  onSubStepChange?: (step: number) => void;
 }
 
 export interface DemoStageProps {

@@ -6,7 +6,6 @@ import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteracti
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
 import { MouseTrackerProvider } from './ui/cursor';
-import { AnimationDescription } from './AnimationDescription';
 import type { DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
 
@@ -73,7 +72,12 @@ const postVisitTitles: Record<number, string> = {
   4: "Feedback Analysis"
 };
 
-export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) => {
+export const DemoScene: React.FC<DemoSceneProps> = ({ 
+  currentStage, 
+  stages,
+  onSubStepChange,
+  subStep: externalSubStep 
+}) => {
   const [subStep, setSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [transcriptionActive, setTranscriptionActive] = useState(false);
@@ -81,6 +85,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   const [activeLabel, setActiveLabel] = useState('');
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isMobile = useIsMobile();
+
+  // Use external subStep if provided
+  useEffect(() => {
+    if (externalSubStep !== undefined) {
+      setSubStep(externalSubStep);
+    }
+  }, [externalSubStep]);
 
   // Reset states when stage changes
   useEffect(() => {
@@ -111,21 +122,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     console.log("DemoScene - Stage changed to:", currentStage);
   }, [currentStage]);
   
-  // Auto-show label based on current subStep
-  useEffect(() => {
-    if (currentStage === 0) {
-      setActiveLabel(patientEngagementLabels[subStep]);
-    } else if (currentStage === 1) {
-      setActiveLabel(medicalScribeLabels[subStep]);
-    } else if (currentStage === 2) {
-      setActiveLabel(adminTasksLabels[subStep]);
-    } else if (currentStage === 3) {
-      setActiveLabel(postVisitLabels[subStep]);
-    }
-    
-    console.log("DemoScene - SubStep changed to:", subStep);
-  }, [subStep, currentStage]);
-
   // Direct navigation to specific step when icon is clicked
   const handleElementClick = (step: number) => {
     console.log(`DemoScene - Element clicked for stage ${currentStage}, step ${step}`);
@@ -133,6 +129,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     // Pause auto-advance when user interacts - for much longer to give time to explore
     setIsPaused(true);
     setSubStep(step);
+
+    // Notify parent component if callback is provided
+    if (onSubStepChange) {
+      onSubStepChange(step);
+    }
     
     // For AI Medical Scribe demo, handle special states
     if (currentStage === 1) {
@@ -171,32 +172,37 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     if (!isPaused) {
       autoPlayIntervalRef.current = setInterval(() => {
         if (currentStage === 0) { // For Patient Engagement
-          setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+          const nextStep = subStep >= 4 ? 0 : subStep + 1;
+          setSubStep(nextStep);
+          if (onSubStepChange) onSubStepChange(nextStep);
         } else if (currentStage === 1) { // For AI Medical Scribe
-          setSubStep((prev) => {
-            const nextStep = prev >= 5 ? 0 : prev + 1;
-            
-            // Update transcription and note generation states based on step
-            if (nextStep === 3) {
-              setTranscriptionActive(true);
-              setNoteGeneration(false);
-            } else if (nextStep === 4) {
-              setNoteGeneration(true);
-              setTranscriptionActive(false);
-            } else if (nextStep === 5) {
-              setNoteGeneration(false);
-              setTranscriptionActive(false);
-            } else {
-              setTranscriptionActive(false);
-              setNoteGeneration(false);
-            }
-            
-            return nextStep;
-          });
+          const nextStep = subStep >= 5 ? 0 : subStep + 1;
+          
+          // Update transcription and note generation states based on step
+          if (nextStep === 3) {
+            setTranscriptionActive(true);
+            setNoteGeneration(false);
+          } else if (nextStep === 4) {
+            setNoteGeneration(true);
+            setTranscriptionActive(false);
+          } else if (nextStep === 5) {
+            setNoteGeneration(false);
+            setTranscriptionActive(false);
+          } else {
+            setTranscriptionActive(false);
+            setNoteGeneration(false);
+          }
+          
+          setSubStep(nextStep);
+          if (onSubStepChange) onSubStepChange(nextStep);
         } else if (currentStage === 2) { // For Admin Tasks
-          setSubStep((prev) => (prev >= 2 ? 0 : prev + 1));
+          const nextStep = subStep >= 2 ? 0 : subStep + 1;
+          setSubStep(nextStep);
+          if (onSubStepChange) onSubStepChange(nextStep);
         } else if (currentStage === 3) { // For Post-Visit Support
-          setSubStep((prev) => (prev >= 4 ? 0 : prev + 1));
+          const nextStep = subStep >= 4 ? 0 : subStep + 1;
+          setSubStep(nextStep);
+          if (onSubStepChange) onSubStepChange(nextStep);
         }
       }, isMobile ? 8000 : 6000); // Adjusted timing
     }
@@ -207,16 +213,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         autoPlayIntervalRef.current = null;
       }
     };
-  }, [currentStage, isPaused, isMobile]);
-
-  // Helper function to handle hovering over patient engagement steps
-  const handlePatientEngagementHover = (step: number | null) => {
-    if (step !== null && patientEngagementLabels[step]) {
-      setActiveLabel(patientEngagementLabels[step]);
-      // Pause auto-advance during hover
-      setIsPaused(true);
-    }
-  };
+  }, [currentStage, isPaused, isMobile, subStep, onSubStepChange]);
 
   // Helper function to get max steps for current stage
   const getMaxStepsForStage = () => {
@@ -321,23 +318,11 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Animation content area - clear padding to avoid overlapping */}
-      <div className="flex-1 w-full overflow-hidden flex items-center justify-center pb-4">
+      {/* Full-height animation content area */}
+      <div className="flex-1 w-full h-full overflow-hidden flex items-center justify-center">
         <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
         </MouseTrackerProvider>
-      </div>
-      
-      {/* Description panel - positioned with proper spacing */}
-      <div className="w-full h-[120px] mt-auto">
-        <AnimationDescription 
-          currentStage={currentStage}
-          subStep={subStep}
-          labels={getCurrentStageLabels()}
-          labelTitles={getCurrentStageTitles()}
-          maxSteps={getMaxStepsForStage()}
-          onElementClick={handleElementClick}
-        />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import { DemoHeader } from './DemoHeader';
+import { FloatingAnimationDescription } from './FloatingAnimationDescription';
 import type { DemoStageProps } from '../types/demo';
 import { MousePointerClick, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -15,6 +16,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   isDemoSection = true
 }) => {
   const [currentStage, setCurrentStage] = useState(0);
+  const [currentSubStep, setCurrentSubStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
   const [highlightInteractivity, setHighlightInteractivity] = useState(true);
@@ -22,6 +24,93 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
   const demoContainerRef = useRef<HTMLDivElement>(null);
+
+  // Get labels and titles for the current stage
+  const getLabelsForStage = (stageIndex: number) => {
+    switch (stageIndex) {
+      case 0: // Patient Engagement
+        return {
+          0: "AI agent seamlessly handles patient calls and messages while preserving your clinical tone and practice branding",
+          1: "AI agent integrates directly with your existing scheduling system to reduce no-shows by 35%",
+          2: "Smart intake forms adjust based on visit type, pre-populating from your EHR to save patient time",
+          3: "Customized confirmations match your clinic's communication style and reduce cancellations by 27%",
+          4: "AI agent makes personalized confirmation calls with natural conversation flow and automatic EHR updates"
+        };
+      case 1: // AI Medical Scribe
+        return {
+          0: "Secure authentication that meets healthcare compliance standards including HIPAA and HITRUST",
+          1: "Saves 10+ minutes per patient by automatically importing schedule data from any popular EHR",
+          2: "Specialty-specific templates include proper medical terminology and coding guidelines",
+          3: "99.2% accurate multilingual transcription trained on 500,000+ hours of medical conversations",
+          4: "Generates complete clinical notes with EHR-ready formatting and proper medical coding",
+          5: "One-click synchronization with your preferred EHR system, preserving all custom field mappings"
+        };
+      case 2: // Admin Tasks
+        return {
+          0: "Reduces prescription processing time by 87% while maintaining complete regulatory compliance",
+          1: "Ensures patients receive standardized clinical summaries with personalized care instructions",
+          2: "Reduces insurance-related delays by 65% through continuous automated verification processes"
+        };
+      case 3: // Post-Visit Support
+        return {
+          0: "AI agent increases medication adherence by 40% through personalized reminder scheduling",
+          1: "Enables early intervention by AI agent monitoring patient-reported outcomes between visits",
+          2: "AI-powered responses to routine questions, verified by clinical research and best practices",
+          3: "Reduces readmissions by 32% through automated AI monitoring and threshold alerts",
+          4: "AI agent collects and analyzes patient feedback to help improve practice operations and clinical outcomes"
+        };
+      default:
+        return {};
+    }
+  };
+
+  const getTitlesForStage = (stageIndex: number) => {
+    switch (stageIndex) {
+      case 0: // Patient Engagement
+        return {
+          0: "Patient Messaging",
+          1: "Appointment Scheduling",
+          2: "Smart Intake Forms",
+          3: "Automated Reminders",
+          4: "AI Appointment Calls"
+        };
+      case 1: // AI Medical Scribe
+        return {
+          0: "Secure Authentication",
+          1: "EHR Integration",
+          2: "Specialty Templates",
+          3: "Medical Transcription",
+          4: "Note Generation",
+          5: "EHR Synchronization"
+        };
+      case 2: // Admin Tasks
+        return {
+          0: "Prescription Management",
+          1: "Clinical Summaries",
+          2: "Insurance Verification"
+        };
+      case 3: // Post-Visit Support
+        return {
+          0: "Medication Management",
+          1: "Patient Monitoring",
+          2: "AI Support",
+          3: "Readmission Prevention",
+          4: "Feedback Analysis"
+        };
+      default:
+        return {};
+    }
+  };
+
+  const getMaxStepsForStage = (stageIndex: number) => {
+    switch (stageIndex) {
+      case 0: return 5; // Patient Engagement
+      case 1: return 6; // AI Medical Scribe
+      case 2: return 3; // Admin Tasks
+      case 3: return 5; // Post-Visit Support
+      default: return 5;
+    }
+  };
 
   // Log isDemoSection prop to check if it's passed correctly
   useEffect(() => {
@@ -108,6 +197,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const handleStageChange = (index: number) => {
     console.log("DemoStage - Stage changed to:", index);
     setCurrentStage(index);
+    setCurrentSubStep(0);
 
     // Pause on manual stage change to give user time to explore
     setUserInteracted(true);
@@ -136,6 +226,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       navigator.vibrate(50);
     }
   };
+
+  // Handle substep changes from DemoScene
+  const handleSubStepChange = (step: number) => {
+    setCurrentSubStep(step);
+  };
   
   return (
     <div 
@@ -155,13 +250,30 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container with increased top padding to prevent header cutoff */}
+      {/* Animation content container with maximum space for animation */}
       <div className="absolute inset-0 pt-[180px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
-            <DemoScene currentStage={currentStage} stages={stages} />
+            <DemoScene 
+              currentStage={currentStage} 
+              stages={stages} 
+              subStep={currentSubStep}
+              onSubStepChange={handleSubStepChange}
+            />
           </div>
         </div>
+      </div>
+      
+      {/* Floating description positioned at the bottom */}
+      <div className="absolute bottom-[60px] left-0 right-0 z-30 px-4 sm:px-6">
+        <FloatingAnimationDescription
+          currentStage={currentStage}
+          subStep={currentSubStep}
+          labels={getLabelsForStage(currentStage)}
+          labelTitles={getTitlesForStage(currentStage)}
+          maxSteps={getMaxStepsForStage(currentStage)}
+          onElementClick={handleSubStepChange}
+        />
       </div>
       
       {/* Bottom indicator - positioned with more space */}
