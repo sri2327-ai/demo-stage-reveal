@@ -80,14 +80,14 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
           </TabsList>
         </Tabs>
       ) : (
-        // Desktop indicator (dots) remains unchanged
+        // Desktop indicator (dots) with white text when selected
         <div className="flex items-center justify-center gap-3">
           {Array.from({ length: totalStages }).map((_, index) => (
             <motion.button
               key={index}
               className={`w-3 h-3 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#387E89] focus:ring-offset-2 ${
                 currentStage === index
-                  ? 'bg-gradient-to-r from-[#143151] to-[#387E89] shadow-lg w-6'
+                  ? 'bg-gradient-to-r from-[#143151] to-[#387E89] shadow-lg w-6 text-white'
                   : 'bg-gray-300 hover:bg-gray-400'
               }`}
               onClick={() => handleStageClick(index)}
