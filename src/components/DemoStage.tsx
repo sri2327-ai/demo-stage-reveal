@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -251,7 +250,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Animation content container with maximum space for animation */}
-      <div className="absolute inset-0 pt-[180px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+      <div className="absolute inset-0 pt-[180px] pb-[130px] px-2 sm:px-4 md:px-6 overflow-y-auto">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
             <DemoScene 
@@ -264,8 +263,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      {/* Floating description positioned at the bottom */}
-      <div className="absolute bottom-[60px] left-0 right-0 z-30 px-4 sm:px-6">
+      {/* Floating description positioned at the bottom with improved spacing */}
+      <div className="absolute bottom-[72px] left-1/2 transform -translate-x-1/2 z-30 px-4 sm:px-6 w-full max-w-[90%]">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}
