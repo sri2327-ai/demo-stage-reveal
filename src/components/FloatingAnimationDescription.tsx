@@ -42,15 +42,15 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
           className="w-full"
         >
           <motion.div 
-            className={`bg-gradient-to-r from-[#143151]/80 to-[#387E89]/70 backdrop-blur-lg text-white 
-                      px-4 py-4 sm:px-5 sm:py-4 md:px-6 md:py-5 rounded-xl border border-white/20 
-                      shadow-xl flex flex-col justify-between ${isCollapsed ? 'rounded-b-none' : ''}`}
+            className={`bg-gradient-to-r from-[#143151]/85 to-[#387E89]/80 backdrop-blur-xl text-white 
+                      px-4 py-4 sm:px-6 sm:py-5 md:px-7 md:py-6 rounded-xl border border-white/25 
+                      shadow-2xl flex flex-col justify-between ${isCollapsed ? 'rounded-b-none' : ''}`}
           >
             {/* Collapse toggle and title row */}
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2.5">
+            <div className="flex items-center justify-between mb-2.5">
+              <div className="flex items-center gap-3">
                 <motion.div 
-                  className="flex items-center justify-center h-6 w-6 rounded-full bg-white/30"
+                  className="flex items-center justify-center h-7 w-7 rounded-full bg-white/30"
                   animate={{ 
                     opacity: [1, 0.7, 1],
                     scale: [1, 1.1, 1] 
@@ -62,7 +62,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                   }}
                 >
                   <motion.span 
-                    className="inline-flex h-2.5 w-2.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.6)]"
+                    className="inline-flex h-3 w-3 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.7)]"
                   />
                 </motion.div>
                 <h3 className="font-bold text-sm sm:text-base md:text-lg text-white">
@@ -72,14 +72,14 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
               
               <CollapsibleTrigger asChild>
                 <button 
-                  className="rounded-full p-1.5 hover:bg-white/30 transition-colors" 
+                  className="rounded-full p-2 hover:bg-white/30 transition-colors" 
                   onClick={() => setIsCollapsed(!isCollapsed)}
                   aria-label={isCollapsed ? "Expand description" : "Collapse description"}
                 >
                   {isCollapsed ? (
-                    <ChevronDown size={18} className="text-white" />
+                    <ChevronDown size={20} className="text-white" />
                   ) : (
-                    <ChevronUp size={18} className="text-white" />
+                    <ChevronUp size={20} className="text-white" />
                   )}
                 </button>
               </CollapsibleTrigger>
@@ -88,18 +88,18 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
             {/* Content */}
             <CollapsibleContent className="overflow-hidden">
               {/* Description text */}
-              <div className="text-xs sm:text-sm md:text-base text-white leading-relaxed mt-1 mb-2">
+              <div className="text-xs sm:text-sm md:text-base text-white leading-relaxed mt-2 mb-3">
                 {labels[subStep]}
               </div>
               
               {/* Step indicator dots with improved spacing and size */}
-              <div className="mt-3 flex items-center gap-2.5 justify-center">
+              <div className="mt-4 flex items-center gap-3 justify-center">
                 {Array.from({ length: maxSteps }).map((_, step) => (
                   <motion.button
                     key={step}
-                    className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                    className={`w-3.5 h-3.5 rounded-full transition-colors duration-300 ${
                       subStep === step 
-                        ? 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.7)]' 
+                        ? 'bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]' 
                         : 'bg-white/40 hover:bg-white/70'
                     }`}
                     whileHover={{ scale: 1.2 }}

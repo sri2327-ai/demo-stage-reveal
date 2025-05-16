@@ -31,10 +31,10 @@ export const demoStages: DemoStage[] = [
     title: 'Admin Tasks',
     description: "S10.AI's CRUSH agent enhances your administrative team's capacity by automating complex back-office tasks while preserving your clinical protocols.",
     highlights: [
-      'Reduces prior authorization time by 87%',
-      'Standardizes clinical summaries with personalized instructions',
+      'Reduces prescription processing time by 87%',
+      'Standardizes clinical summaries with personalized care instructions',
       'Accelerates insurance verification by 65%',
-      'Streamlines prescription management workflows',
+      'Automates prior authorization workflows saving 7+ hours weekly',
       'Enhances billing accuracy with your existing software'
     ]
   },

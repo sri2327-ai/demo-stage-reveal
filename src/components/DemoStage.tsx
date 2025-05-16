@@ -264,7 +264,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Floating description positioned at the bottom with improved spacing */}
-      <div className="absolute bottom-[72px] left-1/2 transform -translate-x-1/2 z-30 px-4 sm:px-6 w-full max-w-[90%]">
+      <div className="absolute bottom-[80px] left-1/2 transform -translate-x-1/2 z-30 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%]">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}

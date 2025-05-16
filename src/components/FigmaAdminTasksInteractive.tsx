@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaAdminTasksIllustration } from './FigmaAdminTasksIllustration';
@@ -16,9 +15,9 @@ interface FigmaAdminTasksInteractiveProps {
 
 // Enhanced descriptions with clinical context, metrics and integration details
 const labelDescriptions: Record<string, string> = {
-  "Prescriptions & Orders": "Reduces prescription processing by 87% through automated e-prescribing integration with Surescripts and DrFirst. Handles medication refills, lab orders, imaging studies, and referrals while maintaining compliance with state and federal regulations.",
-  "Patient Communications": "Automatically generates and sends clinical summaries with custom care instructions through patient portal or SMS. Includes follow-up appointment details, educational resources, and post-care instructions in the patient's preferred format.",
-  "Insurance & Billing": "Continuous monitoring of insurance verification, prior authorizations, and claims processing reduces denials by 34% and accelerates payment collection by 12 days. Includes automated CPT/ICD-10 code validation."
+  "Prescriptions & Orders": "Reduces prescription processing time by 87% through automated e-prescribing integration with Surescripts and DrFirst. Handles medication refills, lab orders, imaging studies, and referrals while maintaining compliance with state and federal regulations.",
+  "Patient Communications": "Automatically generates and sends clinical summaries with personalized care instructions through patient portal or SMS. Includes follow-up appointment details, educational resources, and post-care instructions tailored to patient's health literacy level.",
+  "Insurance & Billing": "Continuous monitoring of insurance verification, prior authorizations, and claims processing reduces denials by 34% and accelerates payment collection by 12 days. Includes automated CPT/ICD-10 code validation and real-time eligibility checks."
 };
 
 export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProps> = ({

@@ -45,9 +45,9 @@ const medicalScribeTitles: Record<number, string> = {
 };
 
 const adminTasksLabels: Record<number, string> = {
-  0: "Reduces prescription processing time by 87% while maintaining complete regulatory compliance",
-  1: "Ensures patients receive standardized clinical summaries with personalized care instructions",
-  2: "Reduces insurance-related delays by 65% through continuous automated verification processes"
+  0: "Reduces prescription processing time by 87% while maintaining complete regulatory compliance with automated prior authorization",
+  1: "Ensures patients receive standardized clinical summaries with personalized care instructions tailored to health literacy level",
+  2: "Reduces insurance-related delays by 65% through continuous automated verification processes and real-time eligibility checks"
 };
 
 const adminTasksTitles: Record<number, string> = {
