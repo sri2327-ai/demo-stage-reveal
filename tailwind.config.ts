@@ -19,6 +19,11 @@ export default {
 			}
 		},
 		extend: {
+			// Additional custom breakpoints for finer control
+			screens: {
+				'xxs': '360px',  // Extra extra small screens
+				'xs': '480px',   // Extra small screens
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
