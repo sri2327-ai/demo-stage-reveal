@@ -35,6 +35,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   
+  // Only hide title on mobile, or if explicitly needed for a specific layout
+  const shouldHideTitle = isMobile ? hideTitle : false;
+  
   // Always ensure label is displayed based on current step
   useEffect(() => {
     const stepLabels = ["Treatment Adherence", "Care Plan Monitoring", "Patient Questions", "Recovery Tracking", "Patient Feedback"];
@@ -154,7 +157,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   <FigmaPostVisitSupportIllustration
                     subStep={subStep}
                     isInteractive={true}
-                    hideTitle={true}
+                    hideTitle={shouldHideTitle}
                     onElementClick={handleIconClick}
                   />
                 </div>
@@ -170,13 +173,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 <FigmaPostVisitSupportIllustration
                   subStep={subStep}
                   isInteractive={false}
-                  hideTitle={true}
+                  hideTitle={shouldHideTitle}
                 />
               </div>
             </div>
             
             {/* Only show label if hideTitle is false and we're not in the DemoScene component */}
-            {!hideTitle && (
+            {!shouldHideTitle && (
               <motion.div 
                 className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
                 initial={{ opacity: 0, y: 10 }}

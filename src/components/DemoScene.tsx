@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -262,7 +261,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={false}
               />
             </div>
           </div>
@@ -278,7 +277,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 noteGeneration={noteGeneration}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={false}
               />
             </div>
           </div>
@@ -292,7 +291,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={false}
               />
             </div>
           </div>
@@ -306,7 +305,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
                 subStep={subStep}
                 onElementClick={handleElementClick}
                 isInteractive={true}
-                hideTitle={true}
+                hideTitle={false}
               />
             </div>
           </div>
@@ -333,8 +332,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       <div className="flex-1 w-full overflow-hidden max-h-[92%]">
         {renderStageContent()}
       </div>
-      
-      {/* Completely removed spacer between animation and description */}
       
       {/* Description panel */}
       <div className="w-full mt-auto">

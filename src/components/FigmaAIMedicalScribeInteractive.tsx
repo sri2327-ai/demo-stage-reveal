@@ -27,6 +27,9 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Only hide title on mobile, or if explicitly needed for a specific layout
+  const shouldHideTitle = isMobile ? hideTitle : false;
+  
   // Add keyboard navigation for accessibility
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -118,7 +121,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   subStep={subStep}
                   transcriptionActive={transcriptionActive}
                   noteGeneration={noteGeneration}
-                  hideTitle={true}
+                  hideTitle={shouldHideTitle}
                   onElementClick={handleIconClick}
                   isInteractive={true}
                 />
@@ -134,7 +137,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
                 noteGeneration={noteGeneration}
-                hideTitle={true}
+                hideTitle={shouldHideTitle}
               />
             </div>
           </div>
