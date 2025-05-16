@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -130,71 +129,48 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   return (
     <div 
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto h-full"
+      className="w-full h-full flex items-center justify-center"
       role="region"
       aria-label="Post-Visit Support Interactive Demo"
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       tabIndex={-1}
     >
-      <div className="relative h-full flex flex-col">
-        {isInteractive ? (
-          <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex items-center justify-center"> 
-              <div 
-                className="relative w-full h-[80%] flex items-center justify-center cursor-pointer" 
-                onClick={handleIllustrationClick}
-                role="button"
-                aria-label="Navigate to next feature"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleIllustrationClick();
-                  }
-                }}
-              >
-                <div className="w-full h-full flex items-center justify-center scale-80 sm:scale-85 md:scale-90">
-                  <FigmaPostVisitSupportIllustration
-                    subStep={subStep}
-                    isInteractive={true}
-                    hideTitle={shouldHideTitle}
-                    onElementClick={handleIconClick}
-                  />
-                </div>
-              </div>
-              
-              {/* Remove the enhanced floating label since it's handled by AnimationDescription in DemoScene */}
+      {isInteractive ? (
+        <MouseTrackerProvider disableCursor={false}>
+          <div className="w-full h-full flex items-center justify-center"> 
+            <div 
+              className="w-full max-w-3xl mx-auto"
+              onClick={handleIllustrationClick}
+              role="button"
+              aria-label="Navigate to next feature"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleIllustrationClick();
+                }
+              }}
+            >
+              <FigmaPostVisitSupportIllustration
+                subStep={subStep}
+                isInteractive={true}
+                hideTitle={shouldHideTitle}
+                onElementClick={handleIconClick}
+              />
             </div>
-          </MouseTrackerProvider>
-        ) : (
-          <div className="relative w-full h-full flex items-center justify-center"> 
-            <div className="relative w-full h-[80%] flex items-center justify-center">
-              <div className="scale-80 sm:scale-85 md:scale-90">
-                <FigmaPostVisitSupportIllustration
-                  subStep={subStep}
-                  isInteractive={false}
-                  hideTitle={shouldHideTitle}
-                />
-              </div>
-            </div>
-            
-            {/* Only show label if hideTitle is false and we're not in the DemoScene component */}
-            {!shouldHideTitle && (
-              <motion.div 
-                className="absolute bottom-10 left-0 right-0 w-full z-30 px-4 sm:px-6 lg:px-8"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: accessibilityHelpers.getDuration(0.5), delay: 0.3 }}
-              >
-                <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl border border-white/20">
-                  <div className="font-bold text-sm sm:text-base md:text-lg truncate">{getCurrentLabel().title}</div>
-                  <div className="mt-1 text-xs sm:text-sm md:text-base text-white/90 line-clamp-3 sm:line-clamp-2">{getCurrentLabel().description}</div>
-                </div>
-              </motion.div>
-            )}
           </div>
-        )}
-      </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className="w-full max-w-3xl mx-auto">
+            <FigmaPostVisitSupportIllustration
+              subStep={subStep}
+              isInteractive={false}
+              hideTitle={shouldHideTitle}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -22,6 +21,9 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   const [lastInteraction, setLastInteraction] = useState(0);
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Only hide title on mobile, or if explicitly needed for a specific layout
+  const shouldHideTitle = isMobile ? hideTitle : false;
   
   // Set up cursor position for hover effects
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -98,15 +100,15 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   return (
     <div 
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto h-full" 
+      className="w-full h-full flex items-center justify-center" 
       role="region" 
       aria-label="Patient Engagement Interactive Demo"
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
+          <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center cursor-pointer" 
+              className="w-full max-w-3xl mx-auto"
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -117,41 +119,31 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 }
               }}
             >
-              {/* Fixed consistent sizing wrapper with strict dimensions */}
-              <div className="w-full flex items-center justify-center">
-                <div className="w-full max-w-3xl mx-auto">
-                  <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
-                    <FigmaPatientEngagementIllustration
-                      subStep={subStep}
-                      cursorPosition={cursorPosition}
-                      isProcessingCall={isProcessingCall}
-                      onElementClick={handleIconClick}
-                      isInteractive={true}
-                      onHover={handleHover}
-                      hideTitle={hideTitle}
-                    />
-                  </AspectRatio>
-                </div>
-              </div>
+              <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+                <FigmaPatientEngagementIllustration
+                  subStep={subStep}
+                  cursorPosition={cursorPosition}
+                  isProcessingCall={isProcessingCall}
+                  onElementClick={handleIconClick}
+                  isInteractive={true}
+                  onHover={handleHover}
+                  hideTitle={shouldHideTitle}
+                />
+              </AspectRatio>
             </div>
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
-          <div className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center">
-            {/* Fixed consistent sizing wrapper with strict dimensions */}
-            <div className="w-full flex items-center justify-center">
-              <div className="w-full max-w-3xl mx-auto">
-                <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
-                  <FigmaPatientEngagementIllustration
-                    subStep={subStep}
-                    cursorPosition={cursorPosition}
-                    isProcessingCall={isProcessingCall}
-                    hideTitle={hideTitle}
-                  />
-                </AspectRatio>
-              </div>
-            </div>
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className="w-full max-w-3xl mx-auto">
+            <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+              <FigmaPatientEngagementIllustration
+                subStep={subStep}
+                cursorPosition={cursorPosition}
+                isProcessingCall={isProcessingCall}
+                hideTitle={shouldHideTitle}
+              />
+            </AspectRatio>
           </div>
         </div>
       )}

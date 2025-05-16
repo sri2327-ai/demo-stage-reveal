@@ -255,59 +255,51 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
-              <FigmaPatientEngagementInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+          <div className="w-full h-full flex items-center justify-center">
+            <FigmaPatientEngagementInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 1: // AI Medical Scribe - Our flagship product
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
-              <FigmaAIMedicalScribeInteractive
-                subStep={subStep}
-                transcriptionActive={transcriptionActive}
-                noteGeneration={noteGeneration}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+          <div className="w-full h-full flex items-center justify-center">
+            <FigmaAIMedicalScribeInteractive
+              subStep={subStep}
+              transcriptionActive={transcriptionActive}
+              noteGeneration={noteGeneration}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 2: // Admin Tasks
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
-              <FigmaAdminTasksInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+          <div className="w-full h-full flex items-center justify-center">
+            <FigmaAdminTasksInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 3: // Post-Visit Support
         return (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full">
-              <FigmaPostVisitSupportInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+          <div className="w-full h-full flex items-center justify-center">
+            <FigmaPostVisitSupportInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
 
@@ -317,7 +309,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   };
   
   return (
-    <div className="relative w-full h-full flex flex-col overflow-hidden">
+    <div className="relative w-full h-full flex flex-col">
       {/* SVG gradient definition for cursor */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -328,13 +320,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Animation content - takes up full space now */}
-      <div className="flex-1 w-full overflow-hidden max-h-[92%]">
-        {renderStageContent()}
+      {/* Animation content - takes up most of the available space */}
+      <div className="flex-1 w-full h-full overflow-hidden flex items-center">
+        <MouseTrackerProvider disableCursor={false}>
+          {renderStageContent()}
+        </MouseTrackerProvider>
       </div>
       
-      {/* Description panel */}
-      <div className="w-full mt-auto">
+      {/* Description panel - fixed height at bottom */}
+      <div className="w-full h-[80px] mt-auto">
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}

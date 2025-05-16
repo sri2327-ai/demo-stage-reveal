@@ -145,8 +145,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
     >
-      {/* Header with tabbed navigation */}
-      <div className="absolute top-0 left-0 right-0 z-40">
+      {/* Header with tabbed navigation - fixed positioning */}
+      <div className="absolute top-0 left-0 right-0 z-50">
         <DemoHeader 
           currentStage={currentStage}
           isPaused={isPaused}
@@ -155,13 +155,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container - adjusted to give more vertical space */}
-      <div className="absolute inset-0 pt-[180px] pb-[120px] px-2 sm:px-4 md:px-6">
+      {/* Content container with clear spacing from header and footer */}
+      <div className="absolute inset-0 pt-[140px] pb-[80px] px-2 sm:px-4 md:px-6">
         <DemoScene currentStage={currentStage} stages={stages} />
       </div>
       
-      {/* Bottom indicator - now a separate component below the animation section */}
-      <div className="absolute bottom-4 left-0 right-0 z-30">
+      {/* Bottom indicator - absolute positioned at the bottom */}
+      <div className="absolute bottom-2 left-0 right-0 z-40">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 
@@ -174,7 +174,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence>
         {highlightInteractivity && (
           <div 
-            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none" 
+            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
             aria-hidden="true"
           >
             <div className="bg-[#143151]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-[#387E89] flex items-center gap-3">
