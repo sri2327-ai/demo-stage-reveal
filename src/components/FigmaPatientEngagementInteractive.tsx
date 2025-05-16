@@ -128,7 +128,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   return (
     <div 
       ref={containerRef}
-      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}
+      className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2 sm:p-3 md:p-4`}
       role="region" 
       aria-label="Patient Engagement Interactive Demo"
       tabIndex={-1}
@@ -142,7 +142,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
             animate="show"
           > 
             <motion.div 
-              className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow} scale-100 sm:scale-105 md:scale-110`}
+              className={`w-full max-w-4xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -152,7 +152,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                   handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
-              whileHover={{ scale: isMobile ? 1 : 1.02 }}
+              whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
@@ -177,8 +177,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
           animate="show"
         > 
           <motion.div 
-            className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow} scale-100 sm:scale-105 md:scale-110`}
-            whileHover={{ scale: isMobile ? 1 : 1.02 }}
+            className={`w-full max-w-4xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}
+            whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
