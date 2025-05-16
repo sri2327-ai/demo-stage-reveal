@@ -253,7 +253,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center scale-90 sm:scale-100 md:scale-110">
             <FigmaPatientEngagementInteractive
               subStep={subStep}
               onElementClick={handleElementClick}
@@ -265,7 +265,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         
       case 1: // AI Medical Scribe - Our flagship product
         return (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center scale-90 sm:scale-100 md:scale-110">
             <FigmaAIMedicalScribeInteractive
               subStep={subStep}
               transcriptionActive={transcriptionActive}
@@ -279,7 +279,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         
       case 2: // Admin Tasks
         return (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center scale-90 sm:scale-100 md:scale-110">
             <FigmaAdminTasksInteractive
               subStep={subStep}
               onElementClick={handleElementClick}
@@ -291,7 +291,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         
       case 3: // Post-Visit Support
         return (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center scale-90 sm:scale-100 md:scale-110">
             <FigmaPostVisitSupportInteractive
               subStep={subStep}
               onElementClick={handleElementClick}
@@ -318,8 +318,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         </defs>
       </svg>
       
-      {/* Full-height animation content area */}
-      <div className="flex-1 w-full h-full overflow-hidden flex items-center justify-center">
+      {/* Full-height animation content area with improved mobile scaling */}
+      <div className="flex-1 w-full h-full overflow-hidden flex items-center justify-center p-1 sm:p-2 md:p-4">
         <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
         </MouseTrackerProvider>
