@@ -328,15 +328,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Animation content - now takes up a smaller portion to make room for description */}
-      <div className="flex-1 w-full overflow-hidden max-h-[75%]">
+      {/* Animation content - takes up more vertical space now */}
+      <div className="flex-1 w-full overflow-hidden max-h-[85%]">
         {renderStageContent()}
       </div>
       
-      {/* Spacer to create more distance between animation and description */}
-      <div className="h-6 sm:h-8 md:h-10"></div>
+      {/* Reduced spacer between animation and description */}
+      <div className="h-4 sm:h-6 md:h-8"></div>
       
-      {/* Description panel - now positioned with more space below the animation */}
+      {/* Description panel */}
       <div className="w-full mt-auto">
         <AnimationDescription 
           currentStage={currentStage}
