@@ -64,13 +64,13 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
               <TabsTrigger 
                 key={index} 
                 value={index.toString()} 
-                className={`flex-1 text-xs sm:text-sm ${currentStage === index ? 
-                  'bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' : 
-                  'text-[#143151] hover:text-[#387E89] font-medium'}`}
+                className={currentStage === index ? 
+                  'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' : 
+                  'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89] font-medium'}
               >
                 {/* Show shorter names on very small screens */}
-                <span className="hidden xs:inline text-current">{stageName}</span>
-                <span className="inline xs:hidden text-current">
+                <span className="hidden xs:inline">{stageName}</span>
+                <span className="inline xs:hidden">
                   {index === 0 ? "Patient" : 
                    index === 1 ? "Scribe" : 
                    index === 2 ? "Admin" : "Post"}
