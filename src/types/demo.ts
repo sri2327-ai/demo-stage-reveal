@@ -42,6 +42,4 @@ export interface MobileAnimationProps {
   onStageChange: (stage: number) => void;
   labels: Record<number, string>;
   labelTitles: Record<number, string>;
-  isPaused?: boolean;
-  togglePause?: (e: React.MouseEvent) => void;
 }
