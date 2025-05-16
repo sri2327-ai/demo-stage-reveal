@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -76,29 +75,6 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
         </div>}
 
       {/* Add Previous/Next navigation buttons for mobile */}
-      {isMobile && (
-        <div className="flex justify-between w-full mt-2">
-          <Button 
-            onClick={handlePrevious} 
-            disabled={currentStage === 0} 
-            variant="outline" 
-            size="sm"
-            className={`${currentStage === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#143151]/10'}`}
-          >
-            <ChevronLeft className="mr-1" size={16} />
-            Previous
-          </Button>
-          <Button 
-            onClick={handleNext} 
-            disabled={currentStage === totalStages - 1} 
-            variant="outline" 
-            size="sm"
-            className={`${currentStage === totalStages - 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#387E89]/10'}`}
-          >
-            Next
-            <ChevronRight className="ml-1" size={16} />
-          </Button>
-        </div>
-      )}
+      {isMobile}
     </div>;
 };
