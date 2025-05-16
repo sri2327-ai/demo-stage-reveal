@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface DemoStageIndicatorProps {
   currentStage: number;
@@ -43,45 +44,90 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
   };
   
   // Handle stage change with console logging for debugging
-  const handleStageClick = (index: number) => {
+  const handleStageChange = (index: number) => {
     console.log("DemoStageIndicator - Stage clicked:", index);
     if (onStageChange) {
       onStageChange(index);
     }
   };
 
+  // Handle previous/next navigation
+  const handlePrevious = () => {
+    if (currentStage > 0) {
+      handleStageChange(currentStage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStage < totalStages - 1) {
+      handleStageChange(currentStage + 1);
+    }
+  };
+
   return (
-    <div className="flex justify-center w-full px-2">
+    <div className="flex flex-col w-full px-2 gap-4">
       {isMobile ? (
-        // Mobile Tab Design with Gradients for mobile
-        <Tabs 
-          defaultValue={currentStage.toString()} 
-          className="w-full" 
-          onValueChange={(value) => handleStageClick(parseInt(value))}
-        >
-          <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20">
-            {getStageNames().map((stageName, index) => (
-              <TabsTrigger 
-                key={index} 
-                value={index.toString()} 
-                className={currentStage === index ? 
-                  'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' : 
-                  'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89] font-medium'}
-              >
-                {/* Show shorter names on very small screens */}
-                <span className="hidden xs:inline">{stageName}</span>
-                <span className="inline xs:hidden">
-                  {index === 0 ? "Patient" : 
-                   index === 1 ? "Scribe" : 
-                   index === 2 ? "Admin" : "Post"}
-                </span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+        <>
+          {/* Mobile Tab Design with Gradients for mobile */}
+          <Tabs 
+            defaultValue={currentStage.toString()} 
+            className="w-full" 
+            onValueChange={(value) => handleStageChange(parseInt(value))}
+          >
+            <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20">
+              {getStageNames().map((stageName, index) => (
+                <TabsTrigger 
+                  key={index} 
+                  value={index.toString()} 
+                  className={currentStage === index ? 
+                    'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold shadow-md' : 
+                    'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89] font-medium'}
+                  style={currentStage === index ? { textShadow: '0 1px 2px rgba(0,0,0,0.2)' } : {}}
+                >
+                  {/* Show shorter names on very small screens */}
+                  <span className="hidden xs:inline">{stageName}</span>
+                  <span className="inline xs:hidden">
+                    {index === 0 ? "Patient" : 
+                     index === 1 ? "Scribe" : 
+                     index === 2 ? "Admin" : "Post"}
+                  </span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+          
+          {/* Consistent Previous/Next Navigation for Mobile */}
+          <div className="flex justify-between w-full mt-2 px-2">
+            <button
+              onClick={handlePrevious}
+              disabled={currentStage === 0}
+              className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm transition-all ${
+                currentStage === 0 
+                  ? 'opacity-50 cursor-not-allowed bg-gray-200 text-gray-500' 
+                  : 'bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 text-white shadow-md hover:shadow-lg active:transform active:scale-95'
+              }`}
+            >
+              <ArrowLeft size={16} />
+              <span>Previous</span>
+            </button>
+            
+            <button
+              onClick={handleNext}
+              disabled={currentStage === totalStages - 1}
+              className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm transition-all ${
+                currentStage === totalStages - 1 
+                  ? 'opacity-50 cursor-not-allowed bg-gray-200 text-gray-500' 
+                  : 'bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 text-white shadow-md hover:shadow-lg active:transform active:scale-95'
+              }`}
+            >
+              <span>Next</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </>
       ) : (
-        // Desktop indicator (dots) with white text when selected
-        <div className="flex items-center justify-center gap-3">
+        // Desktop indicator with enhanced dots
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {Array.from({ length: totalStages }).map((_, index) => (
             <motion.button
               key={index}
@@ -90,7 +136,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                   ? 'bg-gradient-to-r from-[#143151] to-[#387E89] shadow-lg w-6 text-white'
                   : 'bg-gray-300 hover:bg-gray-400'
               }`}
-              onClick={() => handleStageClick(index)}
+              onClick={() => handleStageChange(index)}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
               aria-label={`Go to stage ${index + 1}`}
