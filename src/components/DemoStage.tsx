@@ -292,8 +292,6 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             onStageChange={handleStageChange}
             labels={getLabelsForStage(currentStage)}
             labelTitles={getTitlesForStage(currentStage)}
-            isPaused={isPaused}
-            togglePause={togglePause}
           />
         </div>
       ) : (
