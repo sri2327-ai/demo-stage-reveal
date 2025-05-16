@@ -46,10 +46,10 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
   // Get stage icons for better visual recognition
   const getStageIcon = (index: number) => {
     switch(index) {
-      case 0: return <UserRound size={isMobile ? 16 : 18} />;
-      case 1: return <Stethoscope size={isMobile ? 16 : 18} />;
-      case 2: return <ClipboardList size={isMobile ? 16 : 18} />;
-      case 3: return <FileText size={isMobile ? 16 : 18} />;
+      case 0: return <UserRound size={isMobile ? 16 : 20} className="flex-shrink-0" />;
+      case 1: return <Stethoscope size={isMobile ? 16 : 20} className="flex-shrink-0" />;
+      case 2: return <ClipboardList size={isMobile ? 16 : 20} className="flex-shrink-0" />;
+      case 3: return <FileText size={isMobile ? 16 : 20} className="flex-shrink-0" />;
       default: return null;
     }
   };
@@ -79,13 +79,18 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 className={`
                   flex-1 text-xs sm:text-sm transition-all duration-200
                   ${currentStage === index 
-                    ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' 
-                    : 'text-[#143151] hover:text-[#387E89] hover:bg-[#387E89]/10 font-medium'}
+                    ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-medium' 
+                    : 'text-[#143151] hover:text-[#387E89] hover:bg-[#387E89]/10'}
                   ${index === 1 ? 'border-2 border-[#387E89]/40 border-dashed' : ''}
                 `}
+                style={{
+                  textShadow: currentStage === index ? '0px 1px 2px rgba(0,0,0,0.2)' : 'none'
+                }}
               >
                 <div className="flex flex-col items-center justify-center gap-1 py-0.5">
-                  {getStageIcon(index)}
+                  <span className={`${currentStage === index ? 'text-white' : ''}`}>
+                    {getStageIcon(index)}
+                  </span>
                   {/* Show shorter names on very small screens */}
                   <span className="hidden xs:inline whitespace-normal text-center text-[10px] sm:text-xs">
                     {stageName}
@@ -96,7 +101,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                      index === 2 ? "Admin" : "Post"}
                   </span>
                   {index === 1 && (
-                    <span className="bg-[#387E89] text-white text-[9px] px-1.5 py-0.5 rounded-full absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3">
+                    <span className="bg-[#387E89] text-white text-[9px] px-1.5 py-0.5 rounded-full absolute -top-1 -right-1 transform">
                       S10
                     </span>
                   )}
@@ -108,7 +113,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
       ) : (
         // Desktop indicator with improved clinical focus
         <div className="flex flex-col items-center gap-3">
-          <div className="flex items-center justify-center gap-4 mb-1">
+          <div className="flex items-center justify-center gap-4 mb-1 flex-wrap">
             {getStageNames().map((name, index) => (
               <motion.button
                 key={index}
@@ -116,7 +121,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-md transition-all
                   ${currentStage === index 
-                    ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-lg' 
+                    ? 'bg-gradient-to-r from-[#143151] to-[#387E89] shadow-lg' 
                     : 'bg-gray-100 hover:bg-gray-200 text-[#143151]'}
                   ${index === 1 ? 'border-2 border-[#387E89] border-dashed' : ''}
                   relative
@@ -127,11 +132,15 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 role="tab"
                 aria-selected={currentStage === index}
               >
-                {getStageIcon(index)}
-                <span className="font-medium text-sm">{name}</span>
+                <span className={`${currentStage === index ? 'text-white' : 'text-[#143151]'}`}>
+                  {getStageIcon(index)}
+                </span>
+                <span className={`font-medium text-sm ${currentStage === index ? 'text-white' : 'text-[#143151]'}`}>
+                  {name}
+                </span>
                 
                 {index === 1 && (
-                  <span className="bg-[#387E89] text-white text-xs px-2 py-0.5 rounded-full absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3">
+                  <span className="bg-[#387E89] text-white text-xs px-2 py-0.5 rounded-full absolute -top-2 -right-2">
                     S10.AI Product
                   </span>
                 )}
