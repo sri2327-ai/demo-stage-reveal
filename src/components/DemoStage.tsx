@@ -155,8 +155,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container with clear spacing to prevent overlapping */}
-      <div className="absolute inset-0 pt-[160px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+      {/* Content container with increased top padding to prevent header cutoff */}
+      <div className="absolute inset-0 pt-[180px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
             <DemoScene currentStage={currentStage} stages={stages} />
