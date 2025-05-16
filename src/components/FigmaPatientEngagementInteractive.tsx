@@ -70,16 +70,16 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
 
   // Handle click on specific UI elements (icons) with improved validation and event handling
   const handleIconClick = (step: number, e?: React.MouseEvent) => {
-    // Stop event propagation if event is provided
+    // Ensure we have an event object and stop propagation
     if (e) {
+      e.preventDefault();
       e.stopPropagation();
     }
     
     console.log("PatientEngagement - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 5) {
-      // Track interaction time
+      // Track interaction time and navigate
       setLastInteraction(Date.now());
-      // Navigate to clicked step
       onElementClick(step);
       
       // Provide haptic feedback on mobile if available
@@ -91,12 +91,12 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   
   // Handle click on the illustration area with better feedback
   const handleIllustrationClick = (e: React.MouseEvent) => {
+    // Don't handle if the click was on a child element that should handle its own clicks
+    if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+      return;
+    }
+    
     if (onElementClick) {
-      // Don't handle if the click was on a child element that should handle its own clicks
-      if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
-        return;
-      }
-      
       // Move to next step
       const nextStep = (subStep + 1) % 5;
       console.log("PatientEngagement - Illustration area clicked, moving to step:", nextStep);
@@ -119,6 +119,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
       className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-2`}
       role="region" 
       aria-label="Patient Engagement Interactive Demo"
+      tabIndex={-1}
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>

@@ -27,10 +27,17 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
   const currentLabel = labels[subStep] || "Description not available";
   const currentTitle = labelTitles[subStep] || `Step ${subStep + 1}`;
 
-  // Handle button click to prevent event propagation
+  // Handle button click to prevent event propagation and ensure proper navigation
   const handleButtonClick = (step: number, e: React.MouseEvent) => {
-    e.stopPropagation();
+    // Prevent event bubbling
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    console.log("FloatingAnimationDescription - Button clicked for step:", step);
     if (onElementClick) {
+      // Navigate directly to the clicked step
       onElementClick(step);
       
       // Provide haptic feedback on mobile if available
@@ -89,7 +96,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
 
           {/* Interactive navigation - Conditionally rendered based on prop */}
           {onElementClick && (
-            <div className="mt-4 flex justify-start gap-2 overflow-x-auto">
+            <div className="mt-4 flex flex-wrap justify-start gap-2 overflow-x-auto pb-1">
               {Array.from({ length: maxSteps }, (_, i) => (
                 <motion.button
                   key={i}

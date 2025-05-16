@@ -60,16 +60,16 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
 
   // Handle click on specific UI elements (icons) with improved validation and event handling
   const handleIconClick = (step: number, e?: React.MouseEvent) => {
-    // Stop event propagation if event is provided
+    // Ensure we have an event object and stop propagation
     if (e) {
+      e.preventDefault();
       e.stopPropagation();
     }
     
     console.log("AdminTasks - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 3) {
-      // Track interaction time for autoplay management
+      // Track interaction time and navigate
       setLastInteraction(Date.now());
-      // Directly navigate to clicked step
       onElementClick(step);
       
       // Provide haptic feedback on mobile if available

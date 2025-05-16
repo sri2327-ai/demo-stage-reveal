@@ -99,15 +99,15 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
 
   // Direct navigation to specific step when icon is clicked - enhanced with validation and event handling
   const handleIconClick = (step: number, e?: React.MouseEvent) => {
-    // Stop event propagation if event is provided
+    // Ensure we have an event object and stop propagation
     if (e) {
+      e.preventDefault();
       e.stopPropagation();
     }
     
     console.log("PostVisit - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 5) {
-      // Validate step is within bounds
-      // Track interaction time for autoplay management
+      // Track interaction time and navigate
       setLastInteraction(Date.now());
       onElementClick(step);
       
