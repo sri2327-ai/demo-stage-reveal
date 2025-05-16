@@ -65,7 +65,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 key={index} 
                 value={index.toString()} 
                 className={`flex-1 text-xs sm:text-sm ${currentStage === index ? 
-                  'bg-gradient-to-r from-[#143151]/80 to-[#387E89]/80 text-white font-medium' : 
+                  'bg-gradient-to-r from-[#143151]/80 to-[#387E89]/80 text-white font-bold' : 
                   'text-[#143151] hover:text-[#387E89] font-medium'}`}
               >
                 {/* Show shorter names on very small screens */}
