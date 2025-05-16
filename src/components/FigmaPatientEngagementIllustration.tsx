@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Calendar, FileText, BellRing, Phone } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface FigmaPatientEngagementIllustrationProps {
   subStep: number;
@@ -21,6 +23,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
   onHover,
   hideTitle = false
 }) => {
+  const isMobile = useIsMobile();
+  
   // Handle click on each icon - directly set to the corresponding step instead of cycling
   const handleAreaClick = (step: number, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent event bubbling
@@ -38,6 +42,9 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
     }
   };
 
+  // Only hide title on mobile, or if explicitly needed for a specific layout
+  const shouldHideTitle = isMobile ? hideTitle : false;
+
   return (
     <motion.div 
       className="w-full max-w-3xl mx-auto cursor-pointer"
@@ -47,8 +54,8 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
       onClick={handleIllustrationClick}
     >
       <div className="relative aspect-video bg-white rounded-xl border border-[#387E89]/20 overflow-hidden shadow-lg">
-        {/* App header */}
-        {!hideTitle && (
+        {/* App header - now shows on desktop even when hideTitle is true */}
+        {!shouldHideTitle && (
           <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-4 py-3 flex items-center justify-between">
             <div className="font-bold">Patient Engagement</div>
             <div className="flex space-x-3">
@@ -60,7 +67,7 @@ export const FigmaPatientEngagementIllustration: React.FC<FigmaPatientEngagement
         )}
         
         {/* Main interface */}
-        <div className={`flex ${hideTitle ? 'h-full' : 'h-[calc(100%-3rem)]'}`}>
+        <div className={`flex ${shouldHideTitle ? 'h-full' : 'h-[calc(100%-3rem)]'}`}>
           {/* Left sidebar - Interactive elements */}
           <div className="w-1/6 bg-gradient-to-b from-[#143151]/5 to-[#387E89]/10 border-r border-[#387E89]/10 flex flex-col items-center py-4 space-y-6">
             <motion.div 
