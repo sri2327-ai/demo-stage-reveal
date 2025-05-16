@@ -112,18 +112,6 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
 
   // Get theme colors for patient engagement
   const colorTheme = clinicalColorThemes.patientEngagement;
-
-  // Enhanced animation variants for better visibility
-  const containerAnimation = {
-    hidden: { opacity: 0 },
-    show: { 
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        staggerChildren: 0.2
-      }
-    }
-  };
   
   return (
     <div 
@@ -135,14 +123,9 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <motion.div 
-            className="w-full h-full flex items-center justify-center"
-            variants={containerAnimation}
-            initial="hidden"
-            animate="show"
-          > 
-            <motion.div 
-              className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow} scale-100 sm:scale-105 md:scale-110`}
+          <div className="w-full h-full flex items-center justify-center"> 
+            <div 
+              className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -152,8 +135,6 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                   handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
-              whileHover={{ scale: isMobile ? 1 : 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
                 <FigmaPatientEngagementIllustration
@@ -166,21 +147,12 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                   hideTitle={shouldHideTitle}
                 />
               </AspectRatio>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </MouseTrackerProvider>
       ) : (
-        <motion.div 
-          className="w-full h-full flex items-center justify-center"
-          variants={containerAnimation}
-          initial="hidden"
-          animate="show"
-        > 
-          <motion.div 
-            className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow} scale-100 sm:scale-105 md:scale-110`}
-            whileHover={{ scale: isMobile ? 1 : 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className={`w-full max-w-3xl mx-auto rounded-xl overflow-hidden ${colorTheme.border} ${colorTheme.shadow}`}>
             <AspectRatio ratio={16/9} className={`${colorTheme.accent} backdrop-blur-sm rounded-lg overflow-hidden border ${colorTheme.border} shadow-sm`}>
               <FigmaPatientEngagementIllustration
                 subStep={subStep}
@@ -189,8 +161,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 hideTitle={shouldHideTitle}
               />
             </AspectRatio>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -103,68 +103,18 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
   // Get theme colors for Admin Tasks
   const colorTheme = clinicalColorThemes.adminTasks;
   
-  // Enhanced animations for better visibility
-  const containerVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      }
-    }
-  };
-  
-  const contentVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: {
-        delay: 0.2,
-        duration: 0.4
-      }
-    }
-  };
-  
-  // Step-specific animations to highlight current content
-  const getStepAnimation = () => {
-    const baseAnimation = {
-      scale: [1, 1.03, 1],
-      transition: { duration: 1.5, repeat: Infinity, repeatDelay: 1 }
-    };
-    
-    switch (subStep) {
-      case 0:
-        return { ...baseAnimation, filter: ["brightness(1)", "brightness(1.05)", "brightness(1)"] };
-      case 1:
-        return { ...baseAnimation, boxShadow: ["0px 0px 0px rgba(56, 126, 137, 0)", "0px 0px 8px rgba(56, 126, 137, 0.3)", "0px 0px 0px rgba(56, 126, 137, 0)"] };
-      case 2:
-        return { ...baseAnimation, backgroundColor: ["rgba(255, 255, 255, 0.6)", "rgba(255, 255, 255, 0.7)", "rgba(255, 255, 255, 0.6)"] };
-      default:
-        return baseAnimation;
-    }
-  };
-  
   return (
-    <motion.div 
+    <div 
       ref={containerRef}
       className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region" 
       aria-label="Admin Tasks Interactive Demo"
       tabIndex={-1}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      layoutId="admin-tasks-container"
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <motion.div 
-            className="w-full h-full flex items-center justify-center"
-            variants={contentVariants}
-          > 
-            <motion.div 
+          <div className="w-full h-full flex items-center justify-center"> 
+            <div 
               className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
               onClick={handleIllustrationClick}
               role="button"
@@ -175,42 +125,27 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
                   handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
-              animate={getStepAnimation()}
-              whileHover={{ scale: isMobile ? 1 : 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
-              <motion.div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
-                <FigmaAdminTasksIllustration
-                  subStep={subStep}
-                  onElementClick={handleIconClick}
-                  isInteractive={true}
-                  hideTitle={shouldHideTitle}
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </MouseTrackerProvider>
-      ) : (
-        <motion.div 
-          className="w-full h-full flex items-center justify-center"
-          variants={contentVariants}
-        > 
-          <motion.div 
-            className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
-            animate={getStepAnimation()}
-            whileHover={{ scale: isMobile ? 1 : 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
               <FigmaAdminTasksIllustration
                 subStep={subStep}
-                isInteractive={false}
+                onElementClick={handleIconClick}
+                isInteractive={true}
                 hideTitle={shouldHideTitle}
               />
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
+            <FigmaAdminTasksIllustration
+              subStep={subStep}
+              isInteractive={false}
+              hideTitle={shouldHideTitle}
+            />
+          </div>
+        </div>
       )}
-    </motion.div>
+    </div>
   );
 };

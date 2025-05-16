@@ -23,8 +23,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
   onElementClick
 }) => {
   const isMobile = useIsMobile();
-  // Default to collapsed on mobile for better visibility of animations
-  const [isOpen, setIsOpen] = useState(!isMobile);
+  const [isOpen, setIsOpen] = useState(true);
   const currentLabel = labels[subStep] || "Description not available";
   const currentTitle = labelTitles[subStep] || `Step ${subStep + 1}`;
 
@@ -37,7 +36,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
     }
     
     console.log("FloatingAnimationDescription - Button clicked for step:", step);
-    if (onElementClick && step >= 0 && step < maxSteps) {
+    if (onElementClick) {
       // Navigate directly to the clicked step
       onElementClick(step);
       
@@ -50,7 +49,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
 
   return (
     <motion.div 
-      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto backdrop-blur-sm bg-white/90"
+      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -59,19 +58,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
         {/* Top section with title and collapse toggle */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-3">
-            <motion.div 
-              className="bg-[#387E89]/10 rounded-full p-1 sm:p-1.5"
-              animate={{
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 0.5
-              }}
-            >
-              <div className="font-semibold text-lg sm:text-xl text-[#143151]">{currentTitle}</div>
-            </motion.div>
+            <div className="font-semibold text-lg sm:text-xl text-[#143151]">{currentTitle}</div>
           </div>
           <div className="flex items-center gap-2">
             <motion.button
@@ -102,42 +89,31 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
         </div>
 
         <CollapsibleContent>
-          {/* Description text with subtle animation */}
-          <motion.p 
-            className="text-sm sm:text-base text-gray-700 leading-relaxed"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: isOpen ? 1 : 0, height: "auto" }}
-            transition={{ duration: 0.3 }}
-          >
+          {/* Description text */}
+          <motion.p className="text-sm sm:text-base text-gray-700 leading-relaxed">
             {currentLabel}
           </motion.p>
 
           {/* Interactive navigation - Conditionally rendered based on prop */}
           {onElementClick && (
-            <motion.div 
-              className="mt-4 flex flex-wrap justify-start gap-2 overflow-x-auto pb-1"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            <div className="mt-4 flex flex-wrap justify-start gap-2 overflow-x-auto pb-1">
               {Array.from({ length: maxSteps }, (_, i) => (
                 <motion.button
                   key={i}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
                               ${subStep === i
-                      ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md scale-105'
+                      ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   onClick={(e) => handleButtonClick(i, e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={`Go to step ${i + 1}`}
-                  data-clickable="true"
                 >
                   {i + 1}
                 </motion.button>
               ))}
-            </motion.div>
+            </div>
           )}
         </CollapsibleContent>
       </Collapsible>
