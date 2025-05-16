@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -6,7 +5,6 @@ import { FigmaAIMedicalScribeInteractive } from './FigmaAIMedicalScribeInteracti
 import { FigmaAdminTasksInteractive } from './FigmaAdminTasksInteractive';
 import { FigmaPostVisitSupportInteractive } from './FigmaPostVisitSupportInteractive';
 import { MouseTrackerProvider } from './ui/cursor';
-import { FloatingAnimationDescription } from './FloatingAnimationDescription';
 import type { DemoSceneProps } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalColorThemes } from '../lib/color-themes';
@@ -325,18 +323,6 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
         </MouseTrackerProvider>
-      </div>
-      
-      {/* Floating description component */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 flex justify-center">
-        <FloatingAnimationDescription
-          currentStage={currentStage}
-          subStep={subStep}
-          labels={getCurrentStageLabels()}
-          labelTitles={getCurrentStageTitles()}
-          maxSteps={getMaxStepsForStage()}
-          onElementClick={handleElementClick}
-        />
       </div>
     </div>
   );

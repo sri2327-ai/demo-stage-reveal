@@ -58,7 +58,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   }, [isInteractive, onElementClick, subStep]);
 
-  // Handle click on specific UI elements (icons) with improved validation
+  // Handle click on specific UI elements (icons) with improved validation and event handling
   const handleIconClick = (step: number, e?: React.MouseEvent) => {
     // Ensure we have an event object and stop propagation
     if (e) {
@@ -67,7 +67,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     }
     
     console.log("AdminTasks - Icon clicked for step:", step);
-    if (onElementClick && step >= 0 && step < 3) { // Ensure step is valid
+    if (onElementClick && step >= 0 && step < 3) {
       // Track interaction time and navigate
       setLastInteraction(Date.now());
       onElementClick(step);
@@ -79,19 +79,10 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     }
   };
   
-  // Handle click on the illustration area
+  // Handle click on the illustration area with improved event checking
   const handleIllustrationClick = (e: React.MouseEvent) => {
     // Don't handle if the click was on a child element that should handle its own clicks
     if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
-      return;
-    }
-    
-    // Check if the click target is a menu icon or related element
-    const iconElement = (e.target as HTMLElement).closest('.icon-menu-item');
-    if (iconElement && iconElement.dataset.step !== undefined) {
-      // If clicking on a menu icon, use that step
-      const step = parseInt(iconElement.dataset.step);
-      handleIconClick(step, e);
       return;
     }
     

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Info, ChevronUp, ChevronDown } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
