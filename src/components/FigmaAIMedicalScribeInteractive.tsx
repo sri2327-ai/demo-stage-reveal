@@ -27,8 +27,8 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Always show title on mobile for better context
-  const shouldHideTitle = false;
+  // Only hide title on mobile, or if explicitly needed for a specific layout
+  const shouldHideTitle = isMobile ? hideTitle : false;
   
   // Add keyboard navigation for accessibility
   useEffect(() => {
@@ -96,16 +96,16 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   return (
     <div 
       ref={containerRef}
-      className="relative w-full mx-auto h-full" 
+      className="relative w-full max-w-6xl mx-auto h-full" 
       role="region" 
       aria-label="AI Medical Scribe Interactive Demo"
       tabIndex={-1}
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
+          <div className="relative h-full flex flex-col items-center justify-center py-8"> 
             <div 
-              className={`relative w-full h-full flex-1 flex items-center justify-center cursor-pointer ${isMobile ? 'mt-8' : ''}`}
+              className="relative w-full h-full flex-1 flex items-center justify-center cursor-pointer" 
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -116,45 +116,29 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                 }
               }}
             >
-              {/* Responsive scaling and positioning for optimal visibility */}
-              <div className={`w-full flex items-center justify-center ${
-                isMobile 
-                  ? 'scale-125 sm:scale-110 mt-8 transform-gpu' 
-                  : 'scale-100 sm:scale-105 md:scale-110 lg:scale-115'
-              }`}>
-                {/* Added container with improved background for better visibility */}
-                <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
-                  <FigmaAIMedicalScribeIllustration
-                    subStep={subStep}
-                    transcriptionActive={transcriptionActive}
-                    noteGeneration={noteGeneration}
-                    hideTitle={shouldHideTitle}
-                    onElementClick={handleIconClick}
-                    isInteractive={true}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </MouseTrackerProvider>
-      ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
-          <div className="relative w-full h-full flex-1 flex items-center justify-center">
-            {/* Improved scaling for mobile and desktop */}
-            <div className={`${
-              isMobile 
-                ? 'scale-125 sm:scale-110 mt-8 transform-gpu' 
-                : 'scale-100 sm:scale-105 md:scale-110 lg:scale-115'
-            }`}>
-              {/* Added container with improved background for better visibility */}
-              <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
+              <div className="w-full h-full flex items-center justify-center scale-100 sm:scale-105 md:scale-110 lg:scale-115">
                 <FigmaAIMedicalScribeIllustration
                   subStep={subStep}
                   transcriptionActive={transcriptionActive}
                   noteGeneration={noteGeneration}
                   hideTitle={shouldHideTitle}
+                  onElementClick={handleIconClick}
+                  isInteractive={true}
                 />
               </div>
+            </div>
+          </div>
+        </MouseTrackerProvider>
+      ) : (
+        <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
+          <div className="relative w-full h-full flex-1 flex items-center justify-center">
+            <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+              <FigmaAIMedicalScribeIllustration
+                subStep={subStep}
+                transcriptionActive={transcriptionActive}
+                noteGeneration={noteGeneration}
+                hideTitle={shouldHideTitle}
+              />
             </div>
           </div>
         </div>
