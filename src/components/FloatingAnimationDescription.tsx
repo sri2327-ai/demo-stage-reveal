@@ -49,7 +49,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
 
   return (
     <motion.div 
-      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto mt-4 sm:mt-8"
+      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto mt-6 sm:mt-10 md:mt-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
