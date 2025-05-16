@@ -55,12 +55,12 @@ export const AnimationDescription: React.FC<AnimationDescriptionProps> = ({
             </h3>
           </div>
           
-          <div className="mt-1 text-xs sm:text-sm text-white/90 line-clamp-1 sm:line-clamp-2">
+          <div className="mt-1 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-2 md:line-clamp-3">
             {labels[subStep]}
           </div>
           
           {/* Step indicator dots */}
-          <div className="mt-1.5 flex items-center gap-1.5 justify-center">
+          <div className="mt-2 flex items-center gap-1.5 justify-center">
             {Array.from({ length: maxSteps }).map((_, step) => (
               <framerMotion.button
                 key={step}

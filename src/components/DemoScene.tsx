@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -327,8 +328,8 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </MouseTrackerProvider>
       </div>
       
-      {/* Description panel - fixed height at bottom */}
-      <div className="w-full h-[80px] mt-auto">
+      {/* Description panel - positioned lower with more height */}
+      <div className="w-full h-[100px] mt-auto mb-2">
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}
