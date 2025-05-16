@@ -46,8 +46,8 @@
   button, 
   [role="button"],
   .interactive-element {
-    min-height: 44px; /* Apple HIG recommendation */
-    min-width: 44px;
+    min-height: 48px; /* Apple HIG recommendation */
+    min-width: 48px;
   }
   
   /* Clinical font adjustments for small screens */
@@ -96,53 +96,6 @@
     transform: translate(-50%, -50%) scale(1.5);
     opacity: 1;
     transition: transform 0.3s, opacity 0s;
-  }
-  
-  /* Improved mobile animation container sizing */
-  .animation-container {
-    transform: scale(1.1);
-    transform-origin: center center;
-  }
-}
-
-/* Extra breakpoints for better responsiveness */
-@media (max-width: 350px) {
-  /* Very small screens like iPhone 5 or SE */
-  .animation-container {
-    transform: scale(0.9);
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  /* Tablet specific adjustments */
-  .animation-container {
-    transform: scale(1.05);
-  }
-}
-
-/* Added for better responsive buttons on small screens */
-.mobile-touch-target {
-  min-height: 44px;
-  min-width: 44px;
-}
-
-/* Improved mobile scrolling */
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari, Opera */
-}
-
-/* Extra tiny screens support */
-@media (max-width: 320px) {
-  .xxs\:inline {
-    display: inline;
-  }
-  .xxs\:max-w-\[60px\] {
-    max-width: 60px;
   }
 }
 
