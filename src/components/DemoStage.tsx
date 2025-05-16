@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -235,7 +234,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[min(90vh,800px)] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[760px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
@@ -251,7 +250,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Animation content container with maximum space for animation */}
-      <div className="absolute inset-0 pt-[150px] sm:pt-[170px] md:pt-[180px] pb-[150px] sm:pb-[170px] md:pb-[180px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+      <div className="absolute inset-0 pt-[180px] pb-[180px] px-2 sm:px-4 md:px-6 overflow-y-auto">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
             <DemoScene 
@@ -264,12 +263,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      {/* Floating description with dynamic positioning based on viewport */}
-      <div className={`
-        absolute z-50 px-4 sm:px-6 w-full max-w-[96%] sm:max-w-[90%] md:max-w-[85%] 
-        ${isMobile ? 'bottom-[120px]' : 'bottom-[160px]'}
-        left-1/2 transform -translate-x-1/2 pointer-events-auto
-      `}>
+      {/* Floating description positioned lower to avoid overlap with animations */}
+      <div className="absolute bottom-[140px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}
@@ -280,7 +275,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Bottom indicator with responsive positioning */}
+      {/* Bottom indicator - positioned with more space and lower z-index than floating description */}
       <div className="absolute bottom-4 left-0 right-0 z-40">
         <DemoStageIndicator 
           currentStage={currentStage} 
@@ -312,13 +307,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
                   repeatDelay: 0.5
                 }}
               >
-                <MousePointerClick size={isMobile ? 24 : 28} className="text-white" />
+                <MousePointerClick size={isMobile ? 20 : 24} className="text-white" />
               </motion.div>
               <div className="flex flex-col">
-                <span className={`font-semibold ${isMobile ? 'text-sm sm:text-base' : 'text-base'} whitespace-normal`}>
+                <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-normal`}>
                   {isMobile ? "Tap icons to interact!" : "Click on highlighted sections to explore features"}
                 </span>
-                <span className="text-xs sm:text-sm text-white/80">
+                <span className="text-xs text-white/80">
                   {isMobile ? "Explore each clinical workflow" : "Interactive demonstration of clinical workflows"}
                 </span>
               </div>

@@ -50,7 +50,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
 
   return (
     <motion.div 
-      className="relative bg-white/95 rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 border border-[#387E89]/20 z-50 pointer-events-auto backdrop-blur-sm"
+      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto backdrop-blur-sm bg-white/90"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -60,7 +60,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-3">
             <motion.div 
-              className="bg-[#387E89]/10 rounded-full p-1.5 sm:p-2"
+              className="bg-[#387E89]/10 rounded-full p-1 sm:p-1.5"
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -70,7 +70,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                 repeatDelay: 0.5
               }}
             >
-              <div className="font-semibold text-base sm:text-lg md:text-xl text-[#143151]">{currentTitle}</div>
+              <div className="font-semibold text-lg sm:text-xl text-[#143151]">{currentTitle}</div>
             </motion.div>
           </div>
           <div className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
               aria-label="More information"
               onClick={(e) => e.stopPropagation()} // Prevent event propagation
             >
-              <Info size={isMobile ? 18 : 20} />
+              <Info size={isMobile ? 16 : 20} />
             </motion.button>
             <CollapsibleTrigger asChild>
               <motion.button
@@ -92,9 +92,9 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                 onClick={(e) => e.stopPropagation()} // Prevent event propagation
               >
                 {isOpen ? (
-                  <ChevronUp size={isMobile ? 18 : 20} />
+                  <ChevronUp size={isMobile ? 16 : 20} />
                 ) : (
-                  <ChevronDown size={isMobile ? 18 : 20} />
+                  <ChevronDown size={isMobile ? 16 : 20} />
                 )}
               </motion.button>
             </CollapsibleTrigger>
@@ -123,9 +123,9 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
               {Array.from({ length: maxSteps }, (_, i) => (
                 <motion.button
                   key={i}
-                  className={`px-3 py-2 sm:py-1.5 rounded-full text-sm font-medium transition-colors touch-manipulation
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
                               ${subStep === i
-                      ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md scale-[1.1]'
+                      ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md scale-105'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   onClick={(e) => handleButtonClick(i, e)}
@@ -133,10 +133,6 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                   whileTap={{ scale: 0.95 }}
                   aria-label={`Go to step ${i + 1}`}
                   data-clickable="true"
-                  style={{
-                    minWidth: isMobile ? '40px' : '36px',
-                    minHeight: isMobile ? '40px' : '36px'
-                  }}
                 >
                   {i + 1}
                 </motion.button>

@@ -248,76 +248,56 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
     }
   };
 
-  // Calculate the optimal scale based on viewport
-  const getOptimalScale = () => {
-    // Mobile gets a larger scale to improve visibility
-    if (isMobile) {
-      return "scale-[1.2] xs:scale-[1.15] sm:scale-[1.1]";
-    }
-    // Tablet gets a medium scale
-    return "scale-[1.05] md:scale-[1.1] lg:scale-[1.15]";
-  };
-
   // Helper function to determine what to render based on stage
   const renderStageContent = () => {
-    const scaleClass = getOptimalScale();
-    
     switch (currentStage) {
       case 0: // Patient Engagement
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <div className={`transform ${scaleClass} w-full max-w-5xl`}>
-              <FigmaPatientEngagementInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+            <FigmaPatientEngagementInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <div className={`transform ${scaleClass} w-full max-w-5xl`}>
-              <FigmaAIMedicalScribeInteractive
-                subStep={subStep}
-                transcriptionActive={transcriptionActive}
-                noteGeneration={noteGeneration}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+            <FigmaAIMedicalScribeInteractive
+              subStep={subStep}
+              transcriptionActive={transcriptionActive}
+              noteGeneration={noteGeneration}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 2: // Admin Tasks
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <div className={`transform ${scaleClass} w-full max-w-5xl`}>
-              <FigmaAdminTasksInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+            <FigmaAdminTasksInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
         
       case 3: // Post-Visit Support
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <div className={`transform ${scaleClass} w-full max-w-5xl`}>
-              <FigmaPostVisitSupportInteractive
-                subStep={subStep}
-                onElementClick={handleElementClick}
-                isInteractive={true}
-                hideTitle={false}
-              />
-            </div>
+            <FigmaPostVisitSupportInteractive
+              subStep={subStep}
+              onElementClick={handleElementClick}
+              isInteractive={true}
+              hideTitle={false}
+            />
           </div>
         );
 
@@ -338,7 +318,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         </defs>
       </svg>
       
-      {/* Full-height animation content area with improved scaling */}
+      {/* Full-height animation content area */}
       <div className="flex-1 w-full h-full overflow-hidden flex items-center justify-center">
         <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
