@@ -26,48 +26,48 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
   const isMobile = useIsMobile();
   const [isCollapsed, setIsCollapsed] = useState(false);
   
-  // Get color scheme based on current stage - updated with more subtle colors
+  // Get color scheme based on current stage - updated with very subtle pink tones
   const getStageColorScheme = () => {
     switch(currentStage) {
       case 0: // Patient Engagement
         return {
-          gradient: 'from-blue-700/80 to-blue-500/80',
-          highlight: 'bg-blue-300',
-          shadow: 'shadow-[0_0_6px_rgba(96,165,250,0.5)]',
-          iconBg: 'bg-blue-500/20',
-          activeDot: 'bg-blue-100 shadow-[0_0_8px_rgba(186,230,253,0.6)]'
+          gradient: 'from-pink-200/70 to-pink-100/70',
+          highlight: 'bg-pink-100',
+          shadow: 'shadow-[0_0_6px_rgba(252,231,243,0.4)]',
+          iconBg: 'bg-pink-200/20',
+          activeDot: 'bg-pink-50 shadow-[0_0_8px_rgba(252,231,243,0.5)]'
         };
       case 1: // AI Medical Scribe
         return {
-          gradient: 'from-indigo-700/80 to-indigo-500/80',
-          highlight: 'bg-indigo-300',
-          shadow: 'shadow-[0_0_6px_rgba(99,102,241,0.5)]',
-          iconBg: 'bg-indigo-500/20',
-          activeDot: 'bg-indigo-100 shadow-[0_0_8px_rgba(199,210,254,0.6)]'
+          gradient: 'from-pink-300/60 to-pink-100/60',
+          highlight: 'bg-pink-200',
+          shadow: 'shadow-[0_0_6px_rgba(249,168,212,0.3)]',
+          iconBg: 'bg-pink-200/15',
+          activeDot: 'bg-pink-50 shadow-[0_0_8px_rgba(252,231,243,0.5)]'
         };
       case 2: // Admin Tasks
         return {
-          gradient: 'from-emerald-700/80 to-emerald-500/80',
-          highlight: 'bg-emerald-300',
-          shadow: 'shadow-[0_0_6px_rgba(16,185,129,0.5)]',
-          iconBg: 'bg-emerald-500/20',
-          activeDot: 'bg-emerald-100 shadow-[0_0_8px_rgba(209,250,229,0.6)]'
+          gradient: 'from-pink-200/70 to-rose-50/70',
+          highlight: 'bg-pink-100',
+          shadow: 'shadow-[0_0_6px_rgba(254,205,211,0.4)]',
+          iconBg: 'bg-pink-200/20',
+          activeDot: 'bg-pink-50 shadow-[0_0_8px_rgba(252,231,243,0.5)]'
         };
       case 3: // Post-Visit Support
         return {
-          gradient: 'from-amber-700/80 to-amber-500/80',
-          highlight: 'bg-amber-300',
-          shadow: 'shadow-[0_0_6px_rgba(245,158,11,0.5)]',
-          iconBg: 'bg-amber-500/20',
-          activeDot: 'bg-amber-100 shadow-[0_0_8px_rgba(254,243,199,0.6)]'
+          gradient: 'from-rose-200/60 to-pink-100/60',
+          highlight: 'bg-pink-100',
+          shadow: 'shadow-[0_0_6px_rgba(254,205,211,0.3)]',
+          iconBg: 'bg-pink-200/15',
+          activeDot: 'bg-pink-50 shadow-[0_0_8px_rgba(252,231,243,0.5)]'
         };
       default:
         return {
-          gradient: 'from-slate-700/80 to-slate-500/80',
-          highlight: 'bg-slate-300',
-          shadow: 'shadow-[0_0_6px_rgba(100,116,139,0.5)]',
-          iconBg: 'bg-slate-500/20',
-          activeDot: 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]'
+          gradient: 'from-slate-200/70 to-slate-100/70',
+          highlight: 'bg-slate-200',
+          shadow: 'shadow-[0_0_6px_rgba(241,245,249,0.5)]',
+          iconBg: 'bg-slate-200/20',
+          activeDot: 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]'
         };
     }
   };
@@ -79,15 +79,15 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
     // Select icon based on stage and subStep
     switch(currentStage) {
       case 0: // Patient Engagement
-        return <MessageSquare size={isMobile ? 16 : 18} className="text-blue-100" />;
+        return <MessageSquare size={isMobile ? 16 : 18} className="text-pink-800/70" />;
       case 1: // AI Medical Scribe
-        return <Clock size={isMobile ? 16 : 18} className="text-indigo-100" />;
+        return <Clock size={isMobile ? 16 : 18} className="text-pink-700/70" />;
       case 2: // Admin Tasks
-        return <ShieldCheck size={isMobile ? 16 : 18} className="text-emerald-100" />;
+        return <ShieldCheck size={isMobile ? 16 : 18} className="text-pink-800/70" />;
       case 3: // Post-Visit Support
-        return <Shield size={isMobile ? 16 : 18} className="text-amber-100" />;
+        return <Shield size={isMobile ? 16 : 18} className="text-pink-700/70" />;
       default:
-        return <Info size={isMobile ? 16 : 18} className="text-white" />;
+        return <Info size={isMobile ? 16 : 18} className="text-slate-700" />;
     }
   };
 
@@ -107,8 +107,8 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
           className="w-full"
         >
           <motion.div 
-            className={`bg-gradient-to-r ${colors.gradient} backdrop-blur-sm text-white 
-                      px-4 py-4 sm:px-6 sm:py-5 md:px-7 md:py-6 rounded-xl border border-white/15 
+            className={`bg-gradient-to-r ${colors.gradient} backdrop-blur-sm text-slate-800 
+                      px-4 py-4 sm:px-6 sm:py-5 md:px-7 md:py-6 rounded-xl border border-pink-200/10 
                       shadow-lg flex flex-col justify-between ${isCollapsed ? 'rounded-b-none' : ''}`}
           >
             {/* Collapse toggle and title row */}
@@ -130,21 +130,21 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                     {getThemedIcon()}
                   </motion.div>
                 </motion.div>
-                <h3 className="font-bold text-sm sm:text-base md:text-lg text-white drop-shadow-sm">
+                <h3 className="font-bold text-sm sm:text-base md:text-lg text-slate-800 drop-shadow-sm">
                   {labelTitles[subStep]}
                 </h3>
               </div>
               
               <CollapsibleTrigger asChild>
                 <button 
-                  className="rounded-full p-2 hover:bg-white/20 transition-colors" 
+                  className="rounded-full p-2 hover:bg-pink-200/20 transition-colors" 
                   onClick={() => setIsCollapsed(!isCollapsed)}
                   aria-label={isCollapsed ? "Expand description" : "Collapse description"}
                 >
                   {isCollapsed ? (
-                    <ChevronDown size={20} className="text-white" />
+                    <ChevronDown size={20} className="text-slate-700" />
                   ) : (
-                    <ChevronUp size={20} className="text-white" />
+                    <ChevronUp size={20} className="text-slate-700" />
                   )}
                 </button>
               </CollapsibleTrigger>
@@ -153,7 +153,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
             {/* Content */}
             <CollapsibleContent className="overflow-hidden">
               {/* Description text */}
-              <div className="text-xs sm:text-sm md:text-base text-white leading-relaxed mt-2 mb-4 font-medium">
+              <div className="text-xs sm:text-sm md:text-base text-slate-700 leading-relaxed mt-2 mb-4 font-medium">
                 {labels[subStep]}
               </div>
               
@@ -162,10 +162,10 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                 {Array.from({ length: maxSteps }).map((_, step) => (
                   <motion.button
                     key={step}
-                    className={`w-3 h-3 rounded-full transition-colors duration-300 flex items-center justify-center ${
+                    className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 flex items-center justify-center ${
                       subStep === step 
                         ? `${colors.activeDot}` 
-                        : 'bg-white/30 hover:bg-white/50'
+                        : 'bg-slate-400/30 hover:bg-slate-400/40'
                     }`}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
