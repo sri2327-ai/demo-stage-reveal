@@ -58,7 +58,7 @@ export const DemoHeader: React.FC<DemoHeaderProps> = ({
         
         {/* Tabs for feature selection - enhanced for better responsive behavior */}
         <Tabs value={currentStage.toString()} onValueChange={value => handleStageChange(parseInt(value))} className="w-full">
-          <TabsList className="w-full bg-white/10 p-0.5 sm:p-1 rounded-md border border-white/20 overflow-x-auto flex flex-nowrap no-scrollbar">
+          <TabsList className="w-full bg-white/10 p-0.5 sm:p-1 rounded-md border border-white/20 overflow-x-auto flex flex-nowrap no-scrollbar scroll-pl-3 scroll-smooth">
             {stageDescriptions.map((stage, index) => (
               <TabsTrigger 
                 key={index} 
@@ -70,7 +70,14 @@ export const DemoHeader: React.FC<DemoHeaderProps> = ({
                     'text-white/80 hover:bg-white/15 hover:text-white'}
                   data-[state=active]:bg-white/25 data-[state=active]:text-white
                   transition-all duration-200 py-1.5 px-1.5 xs:px-2 sm:px-3 sm:py-2 text-xs sm:text-sm md:text-base font-medium
+                  touch-manipulation
                 `}
+                onClick={() => {
+                  // Add haptic feedback on mobile if available
+                  if (navigator.vibrate && isMobile) {
+                    navigator.vibrate(40);
+                  }
+                }}
               >
                 <span className={`
                   inline-flex items-center justify-center
@@ -83,7 +90,7 @@ export const DemoHeader: React.FC<DemoHeaderProps> = ({
                 </span>
                 
                 {/* More adaptive text display for different screen sizes */}
-                <span className="hidden xxs:inline xxs:max-w-[40px] xs:max-w-[60px] sm:max-w-none truncate">
+                <span className="hidden xxs:inline xxs:max-w-[50px] xs:max-w-[70px] sm:max-w-none truncate">
                   {isMobile ? 
                     (index === 0 ? "Patient" : 
                      index === 1 ? "Scribe" : 

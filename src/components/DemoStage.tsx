@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -265,7 +264,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Floating description positioned lower to avoid overlap with animations */}
-      <div className="absolute bottom-[100px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
+      <div className="absolute bottom-[140px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}

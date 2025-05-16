@@ -106,19 +106,51 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   
   // Get theme colors for AI Medical Scribe
   const colorTheme = clinicalColorThemes.aiMedicalScribe;
+
+  // Enhanced animation variants for better visibility
+  const containerAnimation = {
+    hidden: { opacity: 0, scale: 0.98 },
+    show: { 
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const contentAnimation = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: 0.2
+      }
+    }
+  };
   
   return (
-    <div 
+    <motion.div 
       ref={containerRef}
       className={`relative w-full max-w-6xl mx-auto h-full ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region" 
       aria-label="AI Medical Scribe Interactive Demo"
       tabIndex={-1}
+      variants={containerAnimation}
+      initial="hidden"
+      animate="show"
+      layoutId="medical-scribe-container"
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-4"> 
-            <div 
+          <motion.div 
+            className="relative h-full flex flex-col items-center justify-center py-4" 
+            variants={contentAnimation}
+          > 
+            <motion.div 
               className={`relative w-full h-full flex-1 flex items-center justify-center cursor-pointer ${colorTheme.highlight} rounded-lg`}
               onClick={handleIllustrationClick}
               role="button"
@@ -129,8 +161,20 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
+              whileHover={{ scale: isMobile ? 1 : 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="w-full h-full flex items-center justify-center scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+              <motion.div 
+                className="w-full h-full flex items-center justify-center scale-100 sm:scale-105 md:scale-110 lg:scale-115"
+                animate={{ 
+                  scale: transcriptionActive ? [1, 1.02, 1] : 1,
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: transcriptionActive ? Infinity : 0,
+                  repeatDelay: 1
+                }}
+              >
                 <FigmaAIMedicalScribeIllustration
                   subStep={subStep}
                   transcriptionActive={transcriptionActive}
@@ -140,24 +184,41 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   isInteractive={true}
                   onHover={(step) => console.log("Hover on step:", step)}
                 />
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-4"> 
-          <div className={`relative w-full h-full flex-1 flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
-            <div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+        <motion.div 
+          className="relative w-full h-full flex flex-col items-center justify-center py-4" 
+          variants={contentAnimation}
+        > 
+          <motion.div 
+            className={`relative w-full h-full flex-1 flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
+            whileHover={{ scale: isMobile ? 1 : 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.div 
+              className="scale-100 sm:scale-105 md:scale-110 lg:scale-115"
+              animate={{ 
+                scale: transcriptionActive ? [1, 1.02, 1] : 1,
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: transcriptionActive ? Infinity : 0,
+                repeatDelay: 1
+              }}
+            >
               <FigmaAIMedicalScribeIllustration
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
                 noteGeneration={noteGeneration}
                 hideTitle={shouldHideTitle}
               />
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };

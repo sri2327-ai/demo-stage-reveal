@@ -33,6 +33,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [lastInteraction, setLastInteraction] = useState(0);
+  const [isHighlighted, setIsHighlighted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   
@@ -46,6 +47,12 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       setActiveLabel(stepLabels[subStep]);
     }
     console.log("PostVisit - Current step updated to:", subStep);
+    
+    // Temporarily highlight the active feature
+    setIsHighlighted(true);
+    const timer = setTimeout(() => setIsHighlighted(false), 1500);
+    
+    return () => clearTimeout(timer);
   }, [subStep]);
   
   // Add keyboard navigation for accessibility
@@ -142,8 +149,47 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   // Get theme colors for post-visit support
   const colorTheme = clinicalColorThemes.postVisitSupport;
   
+  // Enhanced animations
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+  
+  const contentVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.4
+      }
+    }
+  };
+  
+  // Step-specific highlight animation
+  const getHighlightAnimation = () => {
+    if (!isHighlighted) return {};
+    
+    return {
+      boxShadow: [
+        "0px 0px 0px rgba(56, 126, 137, 0)",
+        "0px 0px 20px rgba(56, 126, 137, 0.4)",
+        "0px 0px 0px rgba(56, 126, 137, 0)"
+      ],
+      transition: { duration: 1.5 }
+    };
+  };
+  
   return (
-    <div 
+    <motion.div 
       ref={containerRef}
       className={`w-full h-full flex items-center justify-center ${colorTheme.background} rounded-xl ${colorTheme.border} ${colorTheme.shadow} p-3`}
       role="region"
@@ -151,42 +197,64 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       tabIndex={-1}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      layoutId="post-visit-container"
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="w-full h-full flex items-center justify-center"> 
-            <div 
-              className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}
+          <motion.div 
+            className="w-full h-full flex items-center justify-center"
+            variants={contentVariants}
+          > 
+            <motion.div 
+              className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg overflow-hidden backdrop-blur-sm`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
               tabIndex={0}
+              animate={getHighlightAnimation()}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
+              whileHover={{ scale: isMobile ? 1 : 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <FigmaPostVisitSupportIllustration
-                subStep={subStep}
-                isInteractive={true}
-                hideTitle={shouldHideTitle}
-                onElementClick={handleIconClick}
-              />
-            </div>
-          </div>
+              <motion.div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+                <FigmaPostVisitSupportIllustration
+                  subStep={subStep}
+                  isInteractive={true}
+                  hideTitle={shouldHideTitle}
+                  onElementClick={handleIconClick}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </MouseTrackerProvider>
       ) : (
-        <div className="w-full h-full flex items-center justify-center"> 
-          <div className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg`}>
-            <FigmaPostVisitSupportIllustration
-              subStep={subStep}
-              isInteractive={false}
-              hideTitle={shouldHideTitle}
-            />
-          </div>
-        </div>
+        <motion.div 
+          className="w-full h-full flex items-center justify-center"
+          variants={contentVariants}
+        > 
+          <motion.div 
+            className={`w-full h-full flex items-center justify-center ${colorTheme.highlight} rounded-lg overflow-hidden backdrop-blur-sm`}
+            animate={getHighlightAnimation()}
+            whileHover={{ scale: isMobile ? 1 : 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.div className="scale-100 sm:scale-105 md:scale-110 lg:scale-115">
+              <FigmaPostVisitSupportIllustration
+                subStep={subStep}
+                isInteractive={false}
+                hideTitle={shouldHideTitle}
+              />
+            </motion.div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
