@@ -137,9 +137,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
       <div className="relative h-full flex flex-col">
         {isInteractive ? (
           <MouseTrackerProvider disableCursor={false}>
-            <div className="relative h-full flex flex-col items-center justify-center py-4"> 
+            <div className="relative h-full flex items-center justify-center"> 
               <div 
-                className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center cursor-pointer" 
+                className="relative w-full h-[90%] flex items-center justify-center cursor-pointer" 
                 onClick={handleIllustrationClick}
                 role="button"
                 aria-label="Navigate to next feature"
@@ -150,7 +150,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                   }
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center scale-90 sm:scale-95 md:scale-100">
+                <div className="w-full h-full flex items-center justify-center scale-85 sm:scale-90 md:scale-95">
                   <FigmaPostVisitSupportIllustration
                     subStep={subStep}
                     isInteractive={true}
@@ -164,9 +164,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
             </div>
           </MouseTrackerProvider>
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center py-4"> 
-            <div className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center">
-              <div className="scale-90 sm:scale-95 md:scale-100">
+          <div className="relative w-full h-full flex items-center justify-center"> 
+            <div className="relative w-full h-[90%] flex items-center justify-center">
+              <div className="scale-85 sm:scale-90 md:scale-95">
                 <FigmaPostVisitSupportIllustration
                   subStep={subStep}
                   isInteractive={false}

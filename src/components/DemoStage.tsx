@@ -140,12 +140,12 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[680px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[720px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
     >
-      {/* Header with tabbed navigation - now a separate component */}
+      {/* Header with tabbed navigation */}
       <div className="absolute top-0 left-0 right-0 z-40">
         <DemoHeader 
           currentStage={currentStage}
@@ -155,13 +155,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container - adjusted positioning with more space for header and footer */}
-      <div className="absolute inset-0 pt-[200px] sm:pt-[200px] md:pt-[200px] pb-[140px] px-2 sm:px-4 md:px-6">
+      {/* Content container - adjusted positioning with more space for animation content */}
+      <div className="absolute inset-0 pt-[200px] pb-[100px] px-2 sm:px-4 md:px-6">
         <DemoScene currentStage={currentStage} stages={stages} />
       </div>
       
-      {/* Bottom indicator - moved up further to avoid overlap with content */}
-      <div className="absolute bottom-12 left-0 right-0 z-30">
+      {/* Bottom indicator - now a separate component below the animation section */}
+      <div className="absolute bottom-4 left-0 right-0 z-30">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -317,7 +318,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
   };
   
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-full flex flex-col overflow-hidden">
       {/* SVG gradient definition for cursor */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -328,12 +329,13 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className="w-full h-full flex flex-col relative">
-          {renderStageContent()}
-        </div>
-        
-        {/* Animation description positioned at the bottom with adequate spacing */}
+      {/* Animation content - now takes up only the top part of the container */}
+      <div className="flex-1 w-full overflow-hidden">
+        {renderStageContent()}
+      </div>
+      
+      {/* Description panel - now positioned below the animation content */}
+      <div className="w-full mt-auto">
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}

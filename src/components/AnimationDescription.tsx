@@ -28,14 +28,14 @@ export const AnimationDescription: React.FC<AnimationDescriptionProps> = ({
     <AnimatePresence mode="wait">
       <framerMotion.div 
         key={`description-${currentStage}-${subStep}`}
-        className="w-full z-30 px-4 sm:px-6 absolute bottom-8 left-0 right-0"
+        className="w-full z-30 px-4 sm:px-6 mt-4 relative"
         initial={clinicalAnimations.cardAppear.initial}
         animate={clinicalAnimations.cardAppear.animate}
         exit={clinicalAnimations.cardAppear.exit}
         transition={{ duration: accessibilityHelpers.getDuration(0.5) }}
       >
         <framerMotion.div 
-          className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3.5 md:px-6 md:py-4 rounded-t-xl shadow-xl mx-auto"
+          className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-4 py-3 sm:px-5 sm:py-3.5 md:px-6 md:py-4 rounded-xl shadow-xl mx-auto"
         >
           <div className="flex items-center gap-2">
             <framerMotion.span 
