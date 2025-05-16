@@ -45,7 +45,7 @@ export const FigmaAIMedicalScribeIllustration: React.FC<FigmaAIMedicalScribeIllu
         {/* Main interface - adjust height based on whether title is shown */}
         <div className={`flex ${hideTitle ? 'h-full' : 'h-[calc(100%-3rem)]'}`}>
           {/* Left sidebar */}
-          <div className="w-1/6 bg-[#143151]/5 border-r border-[#387E89]/10 flex flex-col items-center py-4 space-y-6">
+          <div className="w-1/6 bg-[#143151]/5 border-r border-[#387E89]/10 flex flex-col items-center py-4 space-y-6 z-10">
             <motion.div 
               className={`p-2 rounded-lg ${subStep === 0 ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'text-[#143151]'}
                 ${isInteractive ? 'cursor-pointer hover:bg-[#387E89]/20' : ''}`}

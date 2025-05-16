@@ -58,10 +58,10 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   }, [isInteractive, onElementClick, subStep]);
 
-  // Handle click on specific UI elements (icons)
+  // Handle click on specific UI elements (icons) - now properly functioning
   const handleIconClick = (step: number) => {
     console.log("AdminTasks - Icon clicked for step:", step);
-    if (onElementClick) {
+    if (onElementClick && step >= 0 && step < 3) {
       // Track interaction time for autoplay management
       setLastInteraction(Date.now());
       // Directly navigate to clicked step

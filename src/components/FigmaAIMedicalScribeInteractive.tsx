@@ -62,10 +62,10 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
     };
   }, [isInteractive, onElementClick, subStep]);
 
-  // Handle click on specific UI elements (icons) with better event tracking
+  // Handle click on specific UI elements (icons) with improved validation
   const handleIconClick = (step: number) => {
     console.log("MedicalScribe - Icon clicked for step:", step);
-    if (onElementClick) {
+    if (onElementClick && step >= 0 && step < 6) { // Ensure step is valid
       // Track interaction time for autoplay management
       setLastInteraction(Date.now());
       // Directly navigate to clicked step
@@ -128,6 +128,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
                   hideTitle={shouldHideTitle}
                   onElementClick={handleIconClick}
                   isInteractive={true}
+                  onHover={(step) => console.log("Hover on step:", step)}
                 />
               </div>
             </div>
