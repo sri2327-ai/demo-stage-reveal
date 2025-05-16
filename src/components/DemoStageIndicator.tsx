@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
+import { Button } from './ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface DemoStageIndicatorProps {
   currentStage: number;
@@ -25,22 +27,6 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     console.log("DemoStageIndicator - isDemoSection:", isDemoSection);
     console.log("DemoStageIndicator - currentStage:", currentStage);
   }, [isDemoSection, currentStage]);
-
-  // This component should only be rendered in the demo section
-  if (!isDemoSection) {
-    console.log("DemoStageIndicator - Not rendering due to isDemoSection = false");
-    return null;
-  }
-  
-  // Get stage names
-  const getStageNames = () => {
-    return [
-      "Patient Engagement",
-      "Medical Scribe",
-      "Admin Tasks",
-      "Post-Visit"
-    ];
-  };
   
   // Handle stage change with console logging for debugging
   const handleStageClick = (index: number) => {
@@ -50,16 +36,40 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     }
   };
 
+  // Handle previous/next navigation
+  const handlePrevious = () => {
+    if (currentStage > 0 && onStageChange) {
+      onStageChange(currentStage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStage < totalStages - 1 && onStageChange) {
+      onStageChange(currentStage + 1);
+    }
+  };
+
+  // Get stage names
+  const getStageNames = () => {
+    return [
+      "Patient Engagement",
+      "Medical Scribe",
+      "Admin Tasks",
+      "Post-Visit"
+    ];
+  };
+
   return (
-    <div className="flex justify-center w-full px-2">
+    <div className="flex flex-col justify-center w-full px-2 gap-3">
       {isMobile ? (
         // Mobile Tab Design with Gradients for mobile
         <Tabs 
           defaultValue={currentStage.toString()} 
           className="w-full" 
           onValueChange={(value) => handleStageClick(parseInt(value))}
+          value={currentStage.toString()}
         >
-          <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20">
+          <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20 sticky top-0 z-10">
             {getStageNames().map((stageName, index) => (
               <TabsTrigger 
                 key={index} 
@@ -99,6 +109,41 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
               tabIndex={0}
             />
           ))}
+        </div>
+      )}
+
+      {/* Add Previous/Next navigation buttons for mobile */}
+      {isMobile && (
+        <div className="flex justify-between w-full mt-2 mb-1 px-1">
+          <Button
+            onClick={handlePrevious}
+            disabled={currentStage === 0}
+            variant="outline"
+            size="sm"
+            className={`flex items-center gap-1 ${
+              currentStage === 0 
+                ? 'opacity-50 cursor-not-allowed' 
+                : 'hover:bg-[#143151]/10'
+            }`}
+          >
+            <ChevronLeft size={16} />
+            <span>Previous</span>
+          </Button>
+
+          <Button
+            onClick={handleNext}
+            disabled={currentStage === totalStages - 1}
+            variant="outline"
+            size="sm"
+            className={`flex items-center gap-1 ${
+              currentStage === totalStages - 1 
+                ? 'opacity-50 cursor-not-allowed' 
+                : 'hover:bg-[#387E89]/10'
+            }`}
+          >
+            <span>Next</span>
+            <ChevronRight size={16} />
+          </Button>
         </div>
       )}
     </div>

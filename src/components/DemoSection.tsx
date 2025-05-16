@@ -29,7 +29,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   }, [currentSection]);
   
   return (
-    <div className="px-4 sm:px-5 md:px-8 py-4 sm:py-6 md:py-12 bg-gradient-to-b from-white to-gray-50">
+    <div className="px-4 sm:px-5 md:px-8 py-4 sm:py-6 md:py-12 bg-gradient-to-b from-white to-gray-50 relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <motion.h2 
@@ -106,7 +106,7 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
               <DemoStage 
                 stages={stages} 
                 autoPlay={hasScrolledToDemo} 
-                isDemoSection={currentSection === 'demo'} // This is the key prop for the indicator
+                isDemoSection={true} // Always force this to true to keep navigation visible
                 autoPlayInterval={8000} // Slightly faster for better clinical engagement
               />
             </div>
