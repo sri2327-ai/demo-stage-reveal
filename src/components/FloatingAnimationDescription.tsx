@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Info, ChevronUp, ChevronDown } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext } from './ui/pagination';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface FloatingAnimationDescriptionProps {
   currentStage: number;
@@ -23,100 +23,88 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
   onElementClick
 }) => {
   const isMobile = useIsMobile();
-  const [isOpen, setIsOpen] = useState(true);
-  const currentLabel = labels[subStep] || "Description not available";
-  const currentTitle = labelTitles[subStep] || `Step ${subStep + 1}`;
-
-  // Handle button click to prevent event propagation and ensure proper navigation
-  const handleButtonClick = (step: number, e: React.MouseEvent) => {
-    // Prevent event bubbling
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    
-    console.log("FloatingAnimationDescription - Button clicked for step:", step);
+  
+  // Handle navigation
+  const handlePreviousStep = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (onElementClick) {
-      // Navigate directly to the clicked step
-      onElementClick(step);
-      
-      // Provide haptic feedback on mobile if available
-      if (navigator.vibrate && isMobile) {
-        navigator.vibrate(40);
-      }
+      const prevStep = (subStep - 1 + maxSteps) % maxSteps;
+      onElementClick(prevStep);
+    }
+  };
+
+  const handleNextStep = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onElementClick) {
+      const nextStep = (subStep + 1) % maxSteps;
+      onElementClick(nextStep);
     }
   };
 
   return (
-    <motion.div 
-      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto mt-6 sm:mt-10 md:mt-12"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        {/* Top section with title and collapse toggle */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="font-semibold text-lg sm:text-xl text-[#143151]">{currentTitle}</div>
-          </div>
-          <div className="flex items-center gap-2">
+    <div className="relative w-full">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.4 }}
+        className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-lg shadow-lg p-4 relative"
+      >
+        {/* Upper navigation dots */}
+        <div className="flex justify-center items-center mb-2">
+          {Array.from({ length: maxSteps }).map((_, i) => (
             <motion.button
-              className="p-2 rounded-full bg-[#387E89]/10 text-[#143151] hover:bg-[#387E89]/20 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="More information"
-              onClick={(e) => e.stopPropagation()} // Prevent event propagation
-            >
-              <Info size={isMobile ? 16 : 20} />
-            </motion.button>
-            <CollapsibleTrigger asChild>
-              <motion.button
-                className="p-2 rounded-full bg-[#387E89]/10 text-[#143151] hover:bg-[#387E89]/20 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={isOpen ? "Collapse description" : "Expand description"}
-                onClick={(e) => e.stopPropagation()} // Prevent event propagation
-              >
-                {isOpen ? (
-                  <ChevronUp size={isMobile ? 16 : 20} />
-                ) : (
-                  <ChevronDown size={isMobile ? 16 : 20} />
-                )}
-              </motion.button>
-            </CollapsibleTrigger>
-          </div>
+              key={i}
+              onClick={() => onElementClick && onElementClick(i)}
+              className={`w-2 h-2 mx-1 rounded-full transition-all ${
+                i === subStep ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60'
+              }`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Go to sub-step ${i + 1}`}
+            />
+          ))}
         </div>
 
-        <CollapsibleContent>
-          {/* Description text */}
-          <motion.p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-            {currentLabel}
-          </motion.p>
-
-          {/* Interactive navigation - Conditionally rendered based on prop */}
-          {onElementClick && (
-            <div className="mt-4 flex flex-wrap justify-start gap-2 overflow-x-auto pb-1">
-              {Array.from({ length: maxSteps }, (_, i) => (
-                <motion.button
-                  key={i}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
-                              ${subStep === i
-                      ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  onClick={(e) => handleButtonClick(i, e)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={`Go to step ${i + 1}`}
-                >
-                  {i + 1}
-                </motion.button>
-              ))}
-            </div>
-          )}
-        </CollapsibleContent>
-      </Collapsible>
-    </motion.div>
+        {/* Title */}
+        <h3 className="font-semibold text-lg md:text-xl mb-1">
+          {labelTitles[subStep] || `Step ${subStep + 1}`}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-sm md:text-base text-white/90">
+          {labels[subStep] || "Description not available"}
+        </p>
+        
+        {/* Previous/Next buttons with improved positioning and visibility */}
+        <div className="flex justify-between items-center mt-3">
+          <motion.button
+            onClick={handlePreviousStep}
+            className="flex items-center justify-center gap-1 px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-md text-white text-sm font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Previous feature"
+          >
+            <ChevronLeft size={16} />
+            <span>Previous</span>
+          </motion.button>
+          
+          <div className="text-xs text-white/70">
+            {subStep + 1} of {maxSteps}
+          </div>
+          
+          <motion.button
+            onClick={handleNextStep}
+            className="flex items-center justify-center gap-1 px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-md text-white text-sm font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Next feature"
+          >
+            <span>Next</span>
+            <ChevronRight size={16} />
+          </motion.button>
+        </div>
+      </motion.div>
+    </div>
   );
 };

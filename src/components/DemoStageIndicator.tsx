@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
 import { clinicalAnimations, accessibilityHelpers } from '../lib/animation-utils';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface DemoStageIndicatorProps {
   currentStage: number;
@@ -50,14 +51,41 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     }
   };
 
+  // Navigation handlers for previous/next buttons
+  const handlePrevious = () => {
+    if (onStageChange) {
+      const prevStage = (currentStage - 1 + totalStages) % totalStages;
+      onStageChange(prevStage);
+    }
+  };
+
+  const handleNext = () => {
+    if (onStageChange) {
+      const nextStage = (currentStage + 1) % totalStages;
+      onStageChange(nextStage);
+    }
+  };
+
   return (
-    <div className="flex justify-center w-full px-2">
+    <div className="flex justify-center items-center w-full px-2 gap-2">
+      {/* Previous button - visible on all devices */}
+      <motion.button
+        onClick={handlePrevious}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 text-white flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-[#387E89]"
+        aria-label="Previous stage"
+      >
+        <ChevronLeft size={18} />
+      </motion.button>
+
       {isMobile ? (
         // Mobile Tab Design with Gradients for mobile
         <Tabs 
           defaultValue={currentStage.toString()} 
           className="w-full" 
           onValueChange={(value) => handleStageClick(parseInt(value))}
+          value={currentStage.toString()}
         >
           <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20">
             {getStageNames().map((stageName, index) => (
@@ -65,7 +93,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                 key={index} 
                 value={index.toString()} 
                 className={currentStage === index ? 
-                  'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' : 
+                  'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-medium' : 
                   'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89] font-medium'}
               >
                 {/* Show shorter names on very small screens */}
@@ -101,6 +129,17 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
           ))}
         </div>
       )}
+      
+      {/* Next button - visible on all devices */}
+      <motion.button
+        onClick={handleNext}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 text-white flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-[#387E89]"
+        aria-label="Next stage"
+      >
+        <ChevronRight size={18} />
+      </motion.button>
     </div>
   );
 };
