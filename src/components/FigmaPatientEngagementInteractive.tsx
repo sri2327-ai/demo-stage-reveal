@@ -104,9 +104,9 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="relative h-full flex flex-col items-center justify-center py-8"> 
+          <div className="relative h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
             <div 
-              className="relative w-full h-full flex-1 flex items-center justify-center cursor-pointer" 
+              className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center cursor-pointer" 
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -137,8 +137,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="relative w-full h-full flex flex-col items-center justify-center py-8"> 
-          <div className="relative w-full h-full flex-1 flex items-center justify-center">
+        <div className="relative w-full h-full flex flex-col items-center justify-center py-4 sm:py-6 md:py-8"> 
+          <div className="relative w-full h-full max-h-[calc(100%-40px)] flex items-center justify-center">
             {/* Fixed consistent sizing wrapper with strict dimensions */}
             <div className="w-full flex items-center justify-center">
               <div className="w-full max-w-3xl mx-auto">

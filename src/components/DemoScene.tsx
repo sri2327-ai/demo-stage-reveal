@@ -256,7 +256,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 0: // Patient Engagement
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-20">
+            <div className="w-full h-full">
               <FigmaPatientEngagementInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -270,7 +270,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 1: // AI Medical Scribe - Our flagship product
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-20">
+            <div className="w-full h-full">
               <FigmaAIMedicalScribeInteractive
                 subStep={subStep}
                 transcriptionActive={transcriptionActive}
@@ -286,7 +286,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 2: // Admin Tasks
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-20">
+            <div className="w-full h-full">
               <FigmaAdminTasksInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -300,7 +300,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
       case 3: // Post-Visit Support
         return (
           <div className="w-full h-full flex items-center justify-center relative">
-            <div className="w-full h-full pb-20">
+            <div className="w-full h-full">
               <FigmaPostVisitSupportInteractive
                 subStep={subStep}
                 onElementClick={handleElementClick}
@@ -333,7 +333,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
           {renderStageContent()}
         </div>
         
-        {/* Animation description now positioned at the bottom where the stage indicators were */}
+        {/* Animation description positioned at the bottom with adequate spacing */}
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}
