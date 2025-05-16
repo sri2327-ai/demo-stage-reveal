@@ -97,8 +97,13 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
-  // Direct navigation to specific step when icon is clicked - enhanced with validation
-  const handleIconClick = (step: number) => {
+  // Direct navigation to specific step when icon is clicked - enhanced with validation and event handling
+  const handleIconClick = (step: number, e?: React.MouseEvent) => {
+    // Stop event propagation if event is provided
+    if (e) {
+      e.stopPropagation();
+    }
+    
     console.log("PostVisit - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 5) {
       // Validate step is within bounds
@@ -114,7 +119,12 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   };
   
   // Handle click on the illustration area - for areas not covered by icons
-  const handleIllustrationClick = () => {
+  const handleIllustrationClick = (e: React.MouseEvent) => {
+    // Don't handle if the click was on a child element that should handle its own clicks
+    if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+      return;
+    }
+    
     if (onElementClick) {
       // Move to next step
       const nextStep = (subStep + 1) % 5;
@@ -153,7 +163,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  handleIllustrationClick();
+                  handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
             >

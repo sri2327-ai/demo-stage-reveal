@@ -250,7 +250,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       </div>
       
       {/* Animation content container with maximum space for animation */}
-      <div className="absolute inset-0 pt-[180px] pb-[150px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+      <div className="absolute inset-0 pt-[180px] pb-[180px] px-2 sm:px-4 md:px-6 overflow-y-auto">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
             <DemoScene 
@@ -263,8 +263,9 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      {/* Floating description positioned with improved z-index and positioning to avoid overlap */}
-      <div className="absolute bottom-[120px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%]">
+      {/* Floating description positioned with improved z-index and positioning to avoid overlap 
+          Moved higher up to prevent overlapping with bottom navigation elements */}
+      <div className="absolute bottom-[140px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}

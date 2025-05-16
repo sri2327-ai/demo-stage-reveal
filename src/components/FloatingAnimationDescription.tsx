@@ -27,9 +27,22 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
   const currentLabel = labels[subStep] || "Description not available";
   const currentTitle = labelTitles[subStep] || `Step ${subStep + 1}`;
 
+  // Handle button click to prevent event propagation
+  const handleButtonClick = (step: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onElementClick) {
+      onElementClick(step);
+      
+      // Provide haptic feedback on mobile if available
+      if (navigator.vibrate && isMobile) {
+        navigator.vibrate(40);
+      }
+    }
+  };
+
   return (
     <motion.div 
-      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50"
+      className="relative bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-[#387E89]/20 z-50 pointer-events-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -46,6 +59,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label="More information"
+              onClick={(e) => e.stopPropagation()} // Prevent event propagation
             >
               <Info size={isMobile ? 16 : 20} />
             </motion.button>
@@ -55,6 +69,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={isOpen ? "Collapse description" : "Expand description"}
+                onClick={(e) => e.stopPropagation()} // Prevent event propagation
               >
                 {isOpen ? (
                   <ChevronUp size={isMobile ? 16 : 20} />
@@ -83,7 +98,7 @@ export const FloatingAnimationDescription: React.FC<FloatingAnimationDescription
                       ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
-                  onClick={() => onElementClick(i)}
+                  onClick={(e) => handleButtonClick(i, e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={`Go to step ${i + 1}`}

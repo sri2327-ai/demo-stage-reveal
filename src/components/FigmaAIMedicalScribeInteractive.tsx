@@ -63,7 +63,12 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   }, [isInteractive, onElementClick, subStep]);
 
   // Handle click on specific UI elements (icons) with improved validation
-  const handleIconClick = (step: number) => {
+  const handleIconClick = (step: number, e?: React.MouseEvent) => {
+    // Stop event propagation if event is provided
+    if (e) {
+      e.stopPropagation();
+    }
+    
     console.log("MedicalScribe - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 6) { // Ensure step is valid
       // Track interaction time for autoplay management
@@ -79,7 +84,12 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
   };
   
   // Handle click on the illustration area with better feedback
-  const handleIllustrationClick = () => {
+  const handleIllustrationClick = (e: React.MouseEvent) => {
+    // Don't handle if the click was on a child element that should handle its own clicks
+    if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+      return;
+    }
+    
     if (onElementClick) {
       // Move to next step
       const nextStep = (subStep + 1) % 6;
@@ -116,7 +126,7 @@ export const FigmaAIMedicalScribeInteractive: React.FC<FigmaAIMedicalScribeInter
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  handleIllustrationClick();
+                  handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
             >

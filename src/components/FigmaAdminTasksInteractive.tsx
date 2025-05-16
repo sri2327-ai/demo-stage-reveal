@@ -58,8 +58,13 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     };
   }, [isInteractive, onElementClick, subStep]);
 
-  // Handle click on specific UI elements (icons) - now properly functioning
-  const handleIconClick = (step: number) => {
+  // Handle click on specific UI elements (icons) with improved validation and event handling
+  const handleIconClick = (step: number, e?: React.MouseEvent) => {
+    // Stop event propagation if event is provided
+    if (e) {
+      e.stopPropagation();
+    }
+    
     console.log("AdminTasks - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 3) {
       // Track interaction time for autoplay management
@@ -74,8 +79,13 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
     }
   };
   
-  // Handle click on the illustration area
-  const handleIllustrationClick = () => {
+  // Handle click on the illustration area with improved event checking
+  const handleIllustrationClick = (e: React.MouseEvent) => {
+    // Don't handle if the click was on a child element that should handle its own clicks
+    if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+      return;
+    }
+    
     if (onElementClick) {
       // Move to next step
       const nextStep = (subStep + 1) % 3;
@@ -112,7 +122,7 @@ export const FigmaAdminTasksInteractive: React.FC<FigmaAdminTasksInteractiveProp
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  handleIllustrationClick();
+                  handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
             >

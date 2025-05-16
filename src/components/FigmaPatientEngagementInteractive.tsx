@@ -65,16 +65,21 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   // Handle hover on specific elements
   const handleHover = (step: number | null) => {
     // We can handle hover states here if needed
+    console.log("PatientEngagement - Hover on step:", step);
   };
 
-  // Handle click on specific UI elements (icons) - improved validation
-  const handleIconClick = (step: number) => {
+  // Handle click on specific UI elements (icons) with improved validation and event handling
+  const handleIconClick = (step: number, e?: React.MouseEvent) => {
+    // Stop event propagation if event is provided
+    if (e) {
+      e.stopPropagation();
+    }
+    
     console.log("PatientEngagement - Icon clicked for step:", step);
     if (onElementClick && step >= 0 && step < 5) {
-      // Validate the step is within bounds
-      // Track interaction time for autoplay management
+      // Track interaction time
       setLastInteraction(Date.now());
-      // Directly navigate to clicked step
+      // Navigate to clicked step
       onElementClick(step);
       
       // Provide haptic feedback on mobile if available
@@ -84,9 +89,14 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     }
   };
   
-  // Handle click on the illustration area
-  const handleIllustrationClick = () => {
+  // Handle click on the illustration area with better feedback
+  const handleIllustrationClick = (e: React.MouseEvent) => {
     if (onElementClick) {
+      // Don't handle if the click was on a child element that should handle its own clicks
+      if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+        return;
+      }
+      
       // Move to next step
       const nextStep = (subStep + 1) % 5;
       console.log("PatientEngagement - Illustration area clicked, moving to step:", nextStep);
@@ -121,7 +131,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  handleIllustrationClick();
+                  handleIllustrationClick(e as unknown as React.MouseEvent);
                 }
               }}
             >
