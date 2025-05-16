@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FigmaPostVisitSupportIllustration } from './FigmaPostVisitSupportIllustration';
@@ -96,10 +97,11 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     };
   };
 
-  // Direct navigation to specific step when icon is clicked - enhanced with feedback
+  // Direct navigation to specific step when icon is clicked - enhanced with validation
   const handleIconClick = (step: number) => {
     console.log("PostVisit - Icon clicked for step:", step);
-    if (onElementClick) {
+    if (onElementClick && step >= 0 && step < 5) {
+      // Validate step is within bounds
       // Track interaction time for autoplay management
       setLastInteraction(Date.now());
       onElementClick(step);

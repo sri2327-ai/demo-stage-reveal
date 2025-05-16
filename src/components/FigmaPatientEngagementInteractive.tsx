@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -66,10 +67,11 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     // We can handle hover states here if needed
   };
 
-  // Handle click on specific UI elements (icons)
+  // Handle click on specific UI elements (icons) - improved validation
   const handleIconClick = (step: number) => {
     console.log("PatientEngagement - Icon clicked for step:", step);
-    if (onElementClick) {
+    if (onElementClick && step >= 0 && step < 5) {
+      // Validate the step is within bounds
       // Track interaction time for autoplay management
       setLastInteraction(Date.now());
       // Directly navigate to clicked step

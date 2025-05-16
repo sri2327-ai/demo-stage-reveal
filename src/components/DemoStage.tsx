@@ -263,8 +263,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      {/* Floating description positioned at the bottom with improved spacing - adjusted position to avoid overlap */}
-      <div className="absolute bottom-[100px] left-1/2 transform -translate-x-1/2 z-20 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%]">
+      {/* Floating description positioned with improved z-index and positioning to avoid overlap */}
+      <div className="absolute bottom-[120px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%]">
         <FloatingAnimationDescription
           currentStage={currentStage}
           subStep={currentSubStep}
@@ -275,7 +275,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Bottom indicator - positioned with more space */}
+      {/* Bottom indicator - positioned with more space and lower z-index than floating description */}
       <div className="absolute bottom-4 left-0 right-0 z-40">
         <DemoStageIndicator 
           currentStage={currentStage} 
