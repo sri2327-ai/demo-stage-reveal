@@ -35,13 +35,14 @@ export const AnimationDescription: React.FC<AnimationDescriptionProps> = ({
         transition={{ duration: accessibilityHelpers.getDuration(0.3) }}
       >
         <framerMotion.div 
-          className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-md text-white px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-xl shadow-xl mx-auto h-full flex flex-col justify-center"
+          className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-md text-white px-3 py-3 sm:px-4 sm:py-3 md:px-5 md:py-4 rounded-xl shadow-lg mx-auto h-full flex flex-col justify-between"
         >
-          <div className="flex items-center gap-2">
-            <framerMotion.span 
-              className="inline-flex h-2 w-2 rounded-full bg-green-400"
+          {/* Header with title */}
+          <div className="flex items-center gap-2 mb-1">
+            <framerMotion.div 
+              className="flex items-center justify-center h-6 w-6 rounded-full bg-white/20"
               animate={{ 
-                opacity: [1, 0.5, 1],
+                opacity: [1, 0.7, 1],
                 scale: [1, 1.1, 1] 
               }}
               transition={{ 
@@ -49,29 +50,37 @@ export const AnimationDescription: React.FC<AnimationDescriptionProps> = ({
                 repeat: Infinity,
                 repeatDelay: 0.5
               }}
-            />
-            <h3 className="font-bold text-sm sm:text-base md:text-lg truncate">
+            >
+              <framerMotion.span 
+                className="inline-flex h-2 w-2 rounded-full bg-green-400"
+              />
+            </framerMotion.div>
+            <h3 className="font-bold text-sm sm:text-base md:text-lg">
               {labelTitles[subStep]}
             </h3>
           </div>
           
-          <div className="mt-1 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-2 md:line-clamp-3">
+          {/* Description text with proper height */}
+          <div className="text-xs sm:text-sm md:text-base text-white/95 max-h-[60px] overflow-y-auto pr-1 leading-relaxed">
             {labels[subStep]}
           </div>
           
-          {/* Step indicator dots */}
-          <div className="mt-2 flex items-center gap-1.5 justify-center">
+          {/* Step indicator dots with improved spacing and size */}
+          <div className="mt-auto pt-2 flex items-center gap-2 justify-center">
             {Array.from({ length: maxSteps }).map((_, step) => (
               <framerMotion.button
                 key={step}
-                className={`w-2 h-2 rounded-full ${subStep === step ? 'bg-white' : 'bg-white/40'}`}
+                className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
+                  subStep === step ? 'bg-white shadow-glow' : 'bg-white/40 hover:bg-white/60'
+                }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   onElementClick(step);
                 }}
-                aria-label={`Go to step ${step + 1}`}
+                aria-label={`Go to ${labelTitles[step]} step (${step + 1} of ${maxSteps})`}
+                title={labelTitles[step]}
               />
             ))}
           </div>

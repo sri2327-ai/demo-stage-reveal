@@ -145,8 +145,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
     >
-      {/* Header with tabbed navigation - fixed positioning */}
-      <div className="absolute top-0 left-0 right-0 z-50">
+      {/* Fixed header with improved visibility */}
+      <div className="absolute top-0 left-0 right-0 z-50 shadow-md">
         <DemoHeader 
           currentStage={currentStage}
           isPaused={isPaused}
@@ -155,13 +155,17 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container with clear spacing from header and footer */}
-      <div className="absolute inset-0 pt-[140px] pb-[80px] px-2 sm:px-4 md:px-6">
-        <DemoScene currentStage={currentStage} stages={stages} />
+      {/* Content container with clear spacing to prevent overlapping */}
+      <div className="absolute inset-0 pt-[160px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+        <div className="h-full flex flex-col">
+          <div className="flex-grow relative">
+            <DemoScene currentStage={currentStage} stages={stages} />
+          </div>
+        </div>
       </div>
       
-      {/* Bottom indicator - absolute positioned at the bottom */}
-      <div className="absolute bottom-2 left-0 right-0 z-40">
+      {/* Bottom indicator - positioned with more space */}
+      <div className="absolute bottom-4 left-0 right-0 z-40">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 
@@ -170,22 +174,49 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Interactive indicator */}
+      {/* Enhanced interactive indicator */}
       <AnimatePresence>
         {highlightInteractivity && (
-          <div 
-            className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
+          <motion.div 
+            className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
             aria-hidden="true"
           >
-            <div className="bg-[#143151]/95 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-[#387E89] flex items-center gap-3">
-              <MousePointerClick size={isMobile ? 20 : 24} className="text-[#387E89]" />
-              <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-nowrap`}>
-                {isMobile ? "Tap icons to interact!" : "Click icons to explore features!"}
-              </span>
+            <div className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-white/20 flex items-center gap-3 max-w-[90%] w-auto mx-auto">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity,
+                  repeatDelay: 0.5
+                }}
+              >
+                <MousePointerClick size={isMobile ? 20 : 24} className="text-white" />
+              </motion.div>
+              <div className="flex flex-col">
+                <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-normal`}>
+                  {isMobile ? "Tap icons to interact!" : "Click on highlighted sections to explore features"}
+                </span>
+                <span className="text-xs text-white/80">
+                  {isMobile ? "Explore each clinical workflow" : "Interactive demonstration of clinical workflows"}
+                </span>
+              </div>
             </div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Accessibility helper - screen reader only */}
+      <div className="sr-only">
+        <p>Clinical workflow demonstration. Use tab to navigate through interactive elements.</p>
+        <p>Current stage: {stages[currentStage]?.title || `Stage ${currentStage + 1}`}</p>
+        <p>Press Space or Enter to interact with selected elements.</p>
+      </div>
     </div>
   );
 };

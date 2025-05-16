@@ -321,15 +321,15 @@ export const DemoScene: React.FC<DemoSceneProps> = ({ currentStage, stages }) =>
         </defs>
       </svg>
       
-      {/* Animation content - takes up most of the available space */}
-      <div className="flex-1 w-full h-full overflow-hidden flex items-center">
+      {/* Animation content area - clear padding to avoid overlapping */}
+      <div className="flex-1 w-full overflow-hidden flex items-center justify-center pb-4">
         <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
         </MouseTrackerProvider>
       </div>
       
-      {/* Description panel - positioned lower with more height */}
-      <div className="w-full h-[100px] mt-auto mb-2">
+      {/* Description panel - positioned with proper spacing */}
+      <div className="w-full h-[120px] mt-auto">
         <AnimationDescription 
           currentStage={currentStage}
           subStep={subStep}
