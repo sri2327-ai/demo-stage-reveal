@@ -155,13 +155,13 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container - adjusted positioning to avoid overlap with header */}
-      <div className="absolute inset-0 pt-[180px] sm:pt-[180px] md:pt-[180px] pb-[120px] px-2 sm:px-4 md:px-6">
+      {/* Content container - adjusted positioning with more space for header and footer */}
+      <div className="absolute inset-0 pt-[200px] sm:pt-[200px] md:pt-[200px] pb-[140px] px-2 sm:px-4 md:px-6">
         <DemoScene currentStage={currentStage} stages={stages} />
       </div>
       
-      {/* Bottom indicator - moved up to avoid overlap with content */}
-      <div className="absolute bottom-8 left-0 right-0 z-30">
+      {/* Bottom indicator - moved up further to avoid overlap with content */}
+      <div className="absolute bottom-12 left-0 right-0 z-30">
         <DemoStageIndicator 
           currentStage={currentStage} 
           totalStages={stages.length} 
