@@ -24,6 +24,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
   const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
   const demoContainerRef = useRef<HTMLDivElement>(null);
+  const subStepTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get labels and titles for the current stage
   const getLabelsForStage = (stageIndex: number) => {
@@ -106,7 +107,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     switch (stageIndex) {
       case 0: return 5; // Patient Engagement
       case 1: return 6; // AI Medical Scribe
-      case 2: return 3; // Admin Tasks
+      case 2: return 3; // Admin Tasks - Fixed: now correctly shows 3
       case 3: return 5; // Post-Visit Support
       default: return 5;
     }
@@ -162,20 +163,41 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     };
   }, [userInteracted]);
 
-  // Effect for auto-play functionality with improved timer management
+  // Effect for auto-play functionality to handle both stage changes and substep changes
   useEffect(() => {
-    // Clear any existing timer
+    // Clear any existing timers
     if (autoPlayTimerRef.current) {
       clearInterval(autoPlayTimerRef.current);
       autoPlayTimerRef.current = null;
     }
 
+    if (subStepTimerRef.current) {
+      clearTimeout(subStepTimerRef.current);
+      subStepTimerRef.current = null;
+    }
+
     // Only set auto-advance if autoPlay is true and not paused
     if (autoPlay && !isPaused) {
       console.log("DemoStage - Starting autoplay");
-      autoPlayTimerRef.current = setInterval(() => {
-        setCurrentStage(prev => prev === stages.length - 1 ? 0 : prev + 1);
-      }, autoPlayInterval);
+      
+      // Set timer for substep navigation
+      const subStepInterval = Math.min(autoPlayInterval / 2, 5000); // Half the main interval or 5 seconds max
+      
+      // Auto-cycle through substeps
+      subStepTimerRef.current = setInterval(() => {
+        // Get max steps for current stage
+        const maxSteps = getMaxStepsForStage(currentStage);
+        
+        // Check if we need to move to the next substep or next stage
+        if (currentSubStep < maxSteps - 1) {
+          // Move to next substep
+          setCurrentSubStep(prev => prev + 1);
+        } else {
+          // We're at the last substep, prepare to move to next stage
+          setCurrentSubStep(0);
+          setCurrentStage(prev => prev === stages.length - 1 ? 0 : prev + 1);
+        }
+      }, subStepInterval);
     }
 
     // Cleanup timer on unmount
@@ -183,8 +205,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       if (autoPlayTimerRef.current) {
         clearInterval(autoPlayTimerRef.current);
       }
+      if (subStepTimerRef.current) {
+        clearInterval(subStepTimerRef.current);
+      }
     };
-  }, [autoPlay, autoPlayInterval, stages.length, isPaused]);
+  }, [autoPlay, autoPlayInterval, stages.length, isPaused, currentStage, currentSubStep]);
 
   // Hide interactivity highlight after some time
   useEffect(() => {
