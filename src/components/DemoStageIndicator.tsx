@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -69,8 +68,8 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
                   'text-[#143151] hover:text-[#387E89] font-medium'}`}
               >
                 {/* Show shorter names on very small screens */}
-                <span className="hidden xs:inline text-current">{stageName}</span>
-                <span className="inline xs:hidden text-current">
+                <span className="hidden xs:inline text-white">{stageName}</span>
+                <span className="inline xs:hidden text-white">
                   {index === 0 ? "Patient" : 
                    index === 1 ? "Scribe" : 
                    index === 2 ? "Admin" : "Post"}

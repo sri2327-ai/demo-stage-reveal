@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
@@ -333,7 +334,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
             />
           </div>
           
-          {/* Bottom indicator - positioned with more space and lower z-index than floating description */}
+          {/* Bottom indicator - Removed previous/next navigation as requested */}
           <div className="absolute bottom-4 left-0 right-0 z-40">
             <DemoStageIndicator 
               currentStage={currentStage} 
