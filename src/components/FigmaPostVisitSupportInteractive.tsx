@@ -130,7 +130,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   return (
     <div 
       ref={containerRef}
-      className="w-full h-full flex items-center justify-center pt-32 pb-20" // Added padding top to avoid header overlap
+      className="w-full h-full flex items-center justify-center" 
       role="region"
       aria-label="Post-Visit Support Interactive Demo"
       onFocus={() => setIsFocused(true)}
@@ -139,9 +139,9 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="w-full h-full flex items-center justify-center max-h-[550px]"> {/* Set max height to ensure visibility */}
+          <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full max-w-3xl mx-auto transform scale-90 sm:scale-95 md:scale-100" // Added scaling for responsiveness
+              className="w-full h-full flex items-center justify-center" 
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -162,8 +162,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="w-full h-full flex items-center justify-center max-h-[550px]"> {/* Set max height to ensure visibility */}
-          <div className="w-full max-w-3xl mx-auto transform scale-90 sm:scale-95 md:scale-100"> {/* Added scaling for responsiveness */}
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className="w-full h-full flex items-center justify-center"> 
             <FigmaPostVisitSupportIllustration
               subStep={subStep}
               isInteractive={false}
@@ -175,3 +175,4 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     </div>
   );
 };
+
