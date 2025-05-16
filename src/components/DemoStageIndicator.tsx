@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -54,7 +55,7 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
     // Mobile Tab Design with Gradients for mobile
     <Tabs defaultValue={currentStage.toString()} className="w-full" onValueChange={value => handleStageClick(parseInt(value))} value={currentStage.toString()}>
           <TabsList className="w-full bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 border border-[#387E89]/20 sticky top-0 z-10">
-            {getStageNames().map((stageName, index) => <TabsTrigger key={index} value={index.toString()} className={currentStage === index ? 'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white font-bold' : 'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89] font-medium'}>
+            {getStageNames().map((stageName, index) => <TabsTrigger key={index} value={index.toString()} className={currentStage === index ? 'flex-1 text-xs sm:text-sm bg-gradient-to-r from-[#143151] to-[#387E89] text-white' : 'flex-1 text-xs sm:text-sm text-[#143151] hover:text-[#387E89]'}>
                 {/* Show shorter names on very small screens */}
                 <span className="hidden xs:inline">{stageName}</span>
                 <span className="inline xs:hidden">
@@ -75,6 +76,29 @@ export const DemoStageIndicator: React.FC<DemoStageIndicatorProps> = ({
         </div>}
 
       {/* Add Previous/Next navigation buttons for mobile */}
-      {isMobile}
+      {isMobile && (
+        <div className="flex justify-between w-full mt-2">
+          <Button 
+            onClick={handlePrevious} 
+            disabled={currentStage === 0} 
+            variant="outline" 
+            size="sm"
+            className={`${currentStage === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#143151]/10'}`}
+          >
+            <ChevronLeft className="mr-1" size={16} />
+            Previous
+          </Button>
+          <Button 
+            onClick={handleNext} 
+            disabled={currentStage === totalStages - 1} 
+            variant="outline" 
+            size="sm"
+            className={`${currentStage === totalStages - 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#387E89]/10'}`}
+          >
+            Next
+            <ChevronRight className="ml-1" size={16} />
+          </Button>
+        </div>
+      )}
     </div>;
 };
