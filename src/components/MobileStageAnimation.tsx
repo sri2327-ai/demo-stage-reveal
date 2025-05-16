@@ -2,8 +2,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MobileAnimationProps } from '../types/demo';
-import { ChevronUp, ChevronDown, Circle } from 'lucide-react';
+import { ChevronUp, ChevronDown, Circle, Check } from 'lucide-react';
 import { clinicalColorThemes } from '../lib/color-themes';
+import { clinicalAnimations } from '../lib/animation-utils';
 
 export const MobileStageAnimation: React.FC<MobileAnimationProps> = ({
   currentStage,
@@ -39,6 +40,9 @@ export const MobileStageAnimation: React.FC<MobileAnimationProps> = ({
       default: return "Clinical Workflow";
     }
   };
+
+  // Log component rendering and props for debugging
+  console.log("MobileStageAnimation rendering:", { currentStage, subStep, maxSteps, labels, labelTitles });
 
   return (
     <div className="w-full h-full flex flex-col">

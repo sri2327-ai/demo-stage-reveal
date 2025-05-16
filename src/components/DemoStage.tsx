@@ -6,7 +6,7 @@ import { DemoHeader } from './DemoHeader';
 import { FloatingAnimationDescription } from './FloatingAnimationDescription';
 import { MobileStageAnimation } from './MobileStageAnimation';
 import type { DemoStageProps } from '../types/demo';
-import { MousePointerClick, Info } from 'lucide-react';
+import { MousePointerClick, Play, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 export const DemoStage: React.FC<DemoStageProps> = ({
@@ -25,6 +25,11 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
   const demoContainerRef = useRef<HTMLDivElement>(null);
   const subStepTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Debug log for mobile detection
+  useEffect(() => {
+    console.log("DemoStage - isMobile detected:", isMobile);
+  }, [isMobile]);
 
   // Get labels and titles for the current stage
   const getLabelsForStage = (stageIndex: number) => {
@@ -107,7 +112,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
     switch (stageIndex) {
       case 0: return 5; // Patient Engagement
       case 1: return 6; // AI Medical Scribe
-      case 2: return 3; // Admin Tasks - Fixed: now correctly shows 3
+      case 2: return 3; // Admin Tasks
       case 3: return 5; // Post-Visit Support
       default: return 5;
     }
@@ -266,8 +271,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       tabIndex={0}
     >
       {isMobile ? (
-        // Mobile/Tablet Layout
-        <div className="w-full h-full">
+        // Mobile/Tablet Layout - Enhanced visibility
+        <div className="w-full h-full flex flex-col overflow-hidden">
           <MobileStageAnimation
             currentStage={currentStage}
             subStep={currentSubStep}
