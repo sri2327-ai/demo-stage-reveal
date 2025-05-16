@@ -12,11 +12,7 @@ export const demoStages: DemoStage[] = [
       'Intelligent intake connects directly to your EHR',
       'Automated reminders decrease cancellations by 27%',
       'Voice-enabled AI phone calls confirm appointments naturally'
-    ],
-    themeColors: {
-      primary: 'from-[#0EA5E9] to-[#38BDF8]',
-      secondary: 'from-[#38BDF8] to-[#7DD3FC]'
-    }
+    ]
   },
   {
     id: 'stage2',
@@ -28,11 +24,7 @@ export const demoStages: DemoStage[] = [
       'Integrates seamlessly with all major EHR systems',
       'Automatic ICD-10 and CPT coding with 95% accuracy',
       'Field mapping maintains your preferred EHR template structure'
-    ],
-    themeColors: {
-      primary: 'from-[#8B5CF6] to-[#A78BFA]',
-      secondary: 'from-[#A78BFA] to-[#C4B5FD]'
-    }
+    ]
   },
   {
     id: 'stage3',
@@ -44,11 +36,7 @@ export const demoStages: DemoStage[] = [
       'Accelerates insurance verification by 65%',
       'Automates prior authorization workflows saving 7+ hours weekly',
       'Enhances billing accuracy with your existing software'
-    ],
-    themeColors: {
-      primary: 'from-[#F97316] to-[#FB923C]',
-      secondary: 'from-[#FB923C] to-[#FDBA74]'
-    }
+    ]
   },
   {
     id: 'stage4',
@@ -60,10 +48,6 @@ export const demoStages: DemoStage[] = [
       'Evidence-based responses to routine patient questions',
       'Seamless care plan tracking with threshold alerts',
       'Patient feedback analysis improves practice outcomes'
-    ],
-    themeColors: {
-      primary: 'from-[#10B981] to-[#34D399]',
-      secondary: 'from-[#34D399] to-[#6EE7B7]'
-    }
+    ]
   }
 ];
