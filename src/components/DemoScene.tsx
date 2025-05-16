@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementInteractive } from './FigmaPatientEngagementInteractive';
@@ -319,9 +318,9 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
         </defs>
       </svg>
       
-      {/* Full-height animation content area with better mobile support */}
+      {/* Full-height animation content area */}
       <div className="flex-1 w-full h-full overflow-hidden flex items-center justify-center">
-        <MouseTrackerProvider disableCursor={isMobile}>
+        <MouseTrackerProvider disableCursor={false}>
           {renderStageContent()}
         </MouseTrackerProvider>
       </div>

@@ -1,7 +1,6 @@
 
 import * as React from "react";
 
-// Adjusted breakpoint for better responsive behavior
 const MOBILE_BREAKPOINT = 768;
 
 export function useIsMobile() {
@@ -18,29 +17,17 @@ export function useIsMobile() {
     // Check immediately on mount
     checkIfMobile();
     
-    // Set up listener for resize events with debounce for better performance
-    let debounceTimer: NodeJS.Timeout | null = null;
-    const handleResize = () => {
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
-      }
-      debounceTimer = setTimeout(() => {
-        checkIfMobile();
-      }, 100); // 100ms debounce
-    };
-    
-    // Use the appropriate event listener 
-    window.addEventListener("resize", handleResize);
-    
-    // Also use matchMedia for more reliable breakpoint detection
+    // Set up listener for resize events
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
-    const handleChange = (e: MediaQueryListEvent) => {
-      console.log("useIsMobile - Media query change:", e.matches);
-      setIsMobile(e.matches);
-    };
+    
+    // Use the appropriate event listener based on browser support
+    const handleChange = () => checkIfMobile();
     
     if (mql.addEventListener) {
       mql.addEventListener("change", handleChange);
+    } else {
+      // For older browsers
+      window.addEventListener("resize", handleChange);
     }
     
     // Log initial state
@@ -48,12 +35,10 @@ export function useIsMobile() {
     
     // Cleanup
     return () => {
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
-      }
-      window.removeEventListener("resize", handleResize);
       if (mql.removeEventListener) {
         mql.removeEventListener("change", handleChange);
+      } else {
+        window.removeEventListener("resize", handleChange);
       }
     };
   }, []);
