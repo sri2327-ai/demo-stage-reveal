@@ -140,7 +140,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   return (
     <div 
       ref={demoContainerRef} 
-      className="relative w-full h-[760px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/10" 
+      className="relative w-full h-[800px] sm:h-[760px] bg-gradient-to-b from-white to-blue-50 rounded-2xl shadow-xl overflow-hidden border border-[#387E89]/20" 
       role="region" 
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
@@ -155,8 +155,8 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         />
       </div>
       
-      {/* Content container with clear spacing to prevent overlapping */}
-      <div className="absolute inset-0 pt-[160px] pb-[100px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+      {/* Content container with optimized spacing */}
+      <div className="absolute inset-0 pt-[140px] pb-[120px] sm:pt-[160px] sm:pb-[110px] px-2 sm:px-4 md:px-6 overflow-hidden">
         <div className="h-full flex flex-col">
           <div className="flex-grow relative">
             <DemoScene currentStage={currentStage} stages={stages} />
@@ -164,7 +164,7 @@ export const DemoStage: React.FC<DemoStageProps> = ({
         </div>
       </div>
       
-      {/* Bottom indicator - positioned with more space */}
+      {/* Bottom indicator with improved positioning */}
       <div className="absolute bottom-4 left-0 right-0 z-40">
         <DemoStageIndicator 
           currentStage={currentStage} 
@@ -178,14 +178,14 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       <AnimatePresence>
         {highlightInteractivity && (
           <motion.div 
-            className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
+            className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none max-w-[90%] w-auto" 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.4 }}
             aria-hidden="true"
           >
-            <div className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-white/20 flex items-center gap-3 max-w-[90%] w-auto mx-auto">
+            <div className="bg-gradient-to-r from-[#143151]/95 to-[#387E89]/95 backdrop-blur-lg text-white px-5 py-4 rounded-lg shadow-xl border-2 border-white/20 flex items-center gap-4 mx-auto">
               <motion.div
                 animate={{ 
                   scale: [1, 1.15, 1],
@@ -200,10 +200,10 @@ export const DemoStage: React.FC<DemoStageProps> = ({
               </motion.div>
               <div className="flex flex-col">
                 <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-normal`}>
-                  {isMobile ? "Tap icons to interact!" : "Click on highlighted sections to explore features"}
+                  {isMobile ? "Tap highlighted areas to explore features" : "Click on highlighted elements to explore clinical workflows"}
                 </span>
                 <span className="text-xs text-white/80">
-                  {isMobile ? "Explore each clinical workflow" : "Interactive demonstration of clinical workflows"}
+                  {isMobile ? "Interactive clinical demonstration" : "Interactive demonstration of S10.AI's clinical workflow features"}
                 </span>
               </div>
             </div>

@@ -3,7 +3,7 @@
 export const clinicalAnimations = {
   // For card and tooltip animations - smooth and professional
   cardAppear: {
-    initial: { opacity: 0, y: 20, scale: 0.96 },
+    initial: { opacity: 0, y: 15, scale: 0.96 },
     animate: { opacity: 1, y: 0, scale: 1 },
     exit: { opacity: 0, y: -10, scale: 0.96 },
     transition: { duration: 0.4, ease: "easeOut" }
@@ -11,8 +11,8 @@ export const clinicalAnimations = {
   
   // Fast micro-interactions for buttons and clickable elements
   microInteraction: {
-    whileHover: { scale: 1.04, y: -2 },
-    whileTap: { scale: 0.98 },
+    whileHover: { scale: 1.05, y: -2 },
+    whileTap: { scale: 0.97 },
     transition: { duration: 0.2, type: "spring", stiffness: 400 }
   },
   
@@ -20,9 +20,9 @@ export const clinicalAnimations = {
   iconHighlight: {
     initial: { boxShadow: "0px 0px 0px rgba(0,0,0,0)" },
     whileHover: { 
-      scale: 1.08, 
-      boxShadow: "0px 4px 12px rgba(56, 126, 137, 0.25)",
-      backgroundColor: "rgba(255,255,255,0.9)" 
+      scale: 1.12, 
+      boxShadow: "0px 4px 15px rgba(56, 126, 137, 0.35)",
+      backgroundColor: "rgba(255,255,255,0.95)" 
     },
     whileTap: { scale: 0.95 },
     transition: { duration: 0.2 }
@@ -46,17 +46,54 @@ export const clinicalAnimations = {
   // Attention-grabbing pulse for important clinical data
   clinicalPulse: {
     animate: {
-      scale: [1, 1.03, 1],
+      scale: [1, 1.04, 1],
       boxShadow: [
         "0px 0px 0px rgba(56, 126, 137, 0.0)",
-        "0px 0px 15px rgba(56, 126, 137, 0.3)",
+        "0px 0px 20px rgba(56, 126, 137, 0.35)",
         "0px 0px 0px rgba(56, 126, 137, 0.0)"
       ]
     },
     transition: { 
-      duration: 2.5, 
+      duration: 2.2, 
       repeat: Infinity,
-      repeatDelay: 1
+      repeatDelay: 0.8
+    }
+  },
+  
+  // Mobile-specific animations - enhanced visibility and feedback
+  mobilePulse: {
+    animate: {
+      scale: [1, 1.08, 1],
+      opacity: [0.95, 1, 0.95],
+    },
+    transition: { 
+      duration: 2, 
+      repeat: Infinity,
+      repeatDelay: 0.5
+    }
+  },
+  
+  // Card entry animation for sequential display
+  cardEntry: {
+    initial: { opacity: 0, x: -20, scale: 0.96 },
+    animate: { opacity: 1, x: 0, scale: 1 },
+    exit: { opacity: 0, x: 20, scale: 0.96 },
+    transition: { duration: 0.4, ease: "easeOut" }
+  },
+  
+  // Spotlight effect for highlighting critical areas
+  spotlightEffect: {
+    animate: {
+      boxShadow: [
+        "0px 0px 0px 0px rgba(56, 126, 137, 0)",
+        "0px 0px 0px 8px rgba(56, 126, 137, 0.2)",
+        "0px 0px 0px 0px rgba(56, 126, 137, 0)"
+      ]
+    },
+    transition: {
+      duration: 2.5,
+      repeat: Infinity,
+      repeatDelay: 0.5
     }
   }
 };
@@ -86,5 +123,17 @@ export const accessibilityHelpers = {
         : "0px 0px 0px rgba(0,0,0,0)"
     },
     transition: { duration: 0.2 }
-  })
+  }),
+  
+  // Responsive sizing calculator for different screen sizes
+  getResponsiveSize: (base: number, isMobile: boolean) => {
+    return isMobile ? Math.min(base * 1.25, base + 12) : base;
+  },
+  
+  // Enhanced color contrast for better visibility
+  getAccessibleColor: (baseColor: string, enhanceContrast: boolean = false) => {
+    // This is a placeholder function - in a real implementation 
+    // we would calculate color contrast ratios
+    return enhanceContrast ? `${baseColor}` : baseColor;
+  }
 };

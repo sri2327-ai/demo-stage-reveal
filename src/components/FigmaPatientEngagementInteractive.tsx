@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FigmaPatientEngagementIllustration } from './FigmaPatientEngagementIllustration';
@@ -22,8 +23,8 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Only hide title on mobile, or if explicitly needed for a specific layout
-  const shouldHideTitle = isMobile ? hideTitle : false;
+  // Always show title for better clarity
+  const shouldHideTitle = false;
   
   // Set up cursor position for hover effects
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -108,7 +109,9 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
         <MouseTrackerProvider disableCursor={false}>
           <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full max-w-3xl mx-auto"
+              className={`w-full max-w-3xl mx-auto ${
+                isMobile ? 'transform scale-125 mt-6 sm:mt-0 sm:scale-110' : ''
+              }`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -119,31 +122,39 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
                 }
               }}
             >
-              <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
-                <FigmaPatientEngagementIllustration
-                  subStep={subStep}
-                  cursorPosition={cursorPosition}
-                  isProcessingCall={isProcessingCall}
-                  onElementClick={handleIconClick}
-                  isInteractive={true}
-                  onHover={handleHover}
-                  hideTitle={shouldHideTitle}
-                />
-              </AspectRatio>
+              {/* Added enhanced container for better visibility on mobile */}
+              <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
+                <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+                  <FigmaPatientEngagementIllustration
+                    subStep={subStep}
+                    cursorPosition={cursorPosition}
+                    isProcessingCall={isProcessingCall}
+                    onElementClick={handleIconClick}
+                    isInteractive={true}
+                    onHover={handleHover}
+                    hideTitle={shouldHideTitle}
+                  />
+                </AspectRatio>
+              </div>
             </div>
           </div>
         </MouseTrackerProvider>
       ) : (
         <div className="w-full h-full flex items-center justify-center"> 
-          <div className="w-full max-w-3xl mx-auto">
-            <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
-              <FigmaPatientEngagementIllustration
-                subStep={subStep}
-                cursorPosition={cursorPosition}
-                isProcessingCall={isProcessingCall}
-                hideTitle={shouldHideTitle}
-              />
-            </AspectRatio>
+          <div className={`w-full max-w-3xl mx-auto ${
+                isMobile ? 'transform scale-125 mt-6 sm:mt-0 sm:scale-110' : ''
+              }`}>
+            {/* Added enhanced container for better visibility on mobile */}
+            <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
+              <AspectRatio ratio={16/9} className="bg-white rounded-xl overflow-hidden border border-[#387E89]/20 shadow-lg">
+                <FigmaPatientEngagementIllustration
+                  subStep={subStep}
+                  cursorPosition={cursorPosition}
+                  isProcessingCall={isProcessingCall}
+                  hideTitle={shouldHideTitle}
+                />
+              </AspectRatio>
+            </div>
           </div>
         </div>
       )}

@@ -35,8 +35,8 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   
-  // Only hide title on mobile, or if explicitly needed for a specific layout
-  const shouldHideTitle = isMobile ? hideTitle : false;
+  // Always show titles on mobile for clarity
+  const shouldHideTitle = false;
   
   // Always ensure label is displayed based on current step
   useEffect(() => {
@@ -130,7 +130,7 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
   return (
     <div 
       ref={containerRef}
-      className="w-full h-full flex items-center justify-center pt-32 pb-20" // Added padding top to avoid header overlap
+      className="w-full h-full flex items-center justify-center pt-14 md:pt-20"
       role="region"
       aria-label="Post-Visit Support Interactive Demo"
       onFocus={() => setIsFocused(true)}
@@ -139,9 +139,11 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
     >
       {isInteractive ? (
         <MouseTrackerProvider disableCursor={false}>
-          <div className="w-full h-full flex items-center justify-center max-h-[550px]"> {/* Set max height to ensure visibility */}
+          <div className="w-full h-full flex items-center justify-center"> 
             <div 
-              className="w-full max-w-3xl mx-auto transform scale-90 sm:scale-95 md:scale-100" // Added scaling for responsiveness
+              className={`w-full max-w-3xl mx-auto ${
+                isMobile ? 'transform scale-125 mt-6 sm:mt-0 sm:scale-110' : ''
+              }`}
               onClick={handleIllustrationClick}
               role="button"
               aria-label="Navigate to next feature"
@@ -152,23 +154,31 @@ export const FigmaPostVisitSupportInteractive: React.FC<FigmaPostVisitSupportInt
                 }
               }}
             >
-              <FigmaPostVisitSupportIllustration
-                subStep={subStep}
-                isInteractive={true}
-                hideTitle={shouldHideTitle}
-                onElementClick={handleIconClick}
-              />
+              {/* Added container with improved background for better visibility on mobile */}
+              <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
+                <FigmaPostVisitSupportIllustration
+                  subStep={subStep}
+                  isInteractive={true}
+                  hideTitle={shouldHideTitle}
+                  onElementClick={handleIconClick}
+                />
+              </div>
             </div>
           </div>
         </MouseTrackerProvider>
       ) : (
-        <div className="w-full h-full flex items-center justify-center max-h-[550px]"> {/* Set max height to ensure visibility */}
-          <div className="w-full max-w-3xl mx-auto transform scale-90 sm:scale-95 md:scale-100"> {/* Added scaling for responsiveness */}
-            <FigmaPostVisitSupportIllustration
-              subStep={subStep}
-              isInteractive={false}
-              hideTitle={shouldHideTitle}
-            />
+        <div className="w-full h-full flex items-center justify-center"> 
+          <div className={`w-full max-w-3xl mx-auto ${
+            isMobile ? 'transform scale-125 mt-6 sm:mt-0 sm:scale-110' : ''
+          }`}>
+            {/* Added container with improved background for better visibility on mobile */}
+            <div className={`${isMobile ? 'bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10' : ''}`}>
+              <FigmaPostVisitSupportIllustration
+                subStep={subStep}
+                isInteractive={false}
+                hideTitle={shouldHideTitle}
+              />
+            </div>
           </div>
         </div>
       )}
