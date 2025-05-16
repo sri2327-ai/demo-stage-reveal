@@ -33,3 +33,13 @@ export interface DemoStageProps {
   autoPlayInterval?: number;
   isDemoSection?: boolean;
 }
+
+export interface MobileAnimationProps {
+  currentStage: number;
+  subStep: number;
+  maxSteps: number;
+  onStepChange: (step: number) => void;
+  onStageChange: (stage: number) => void;
+  labels: Record<number, string>;
+  labelTitles: Record<number, string>;
+}

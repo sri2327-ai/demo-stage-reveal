@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DemoStageIndicator } from './DemoStageIndicator';
 import { DemoScene } from './DemoScene';
 import { DemoHeader } from './DemoHeader';
 import { FloatingAnimationDescription } from './FloatingAnimationDescription';
+import { MobileStageAnimation } from './MobileStageAnimation';
 import type { DemoStageProps } from '../types/demo';
 import { MousePointerClick, Info } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -265,88 +265,106 @@ export const DemoStage: React.FC<DemoStageProps> = ({
       aria-label="Interactive clinical workflow demonstration" 
       tabIndex={0}
     >
-      {/* Fixed header with improved visibility */}
-      <div className="absolute top-0 left-0 right-0 z-50 shadow-md">
-        <DemoHeader 
-          currentStage={currentStage}
-          isPaused={isPaused}
-          togglePause={togglePause}
-          handleStageChange={handleStageChange}
-        />
-      </div>
-      
-      {/* Animation content container with maximum space for animation */}
-      <div className="absolute inset-0 pt-[180px] pb-[230px] px-2 sm:px-4 md:px-6 overflow-y-auto">
-        <div className="h-full flex flex-col">
-          <div className="flex-grow relative">
-            <DemoScene 
-              currentStage={currentStage} 
-              stages={stages} 
-              subStep={currentSubStep}
-              onSubStepChange={handleSubStepChange}
+      {isMobile ? (
+        // Mobile/Tablet Layout
+        <div className="w-full h-full">
+          <MobileStageAnimation
+            currentStage={currentStage}
+            subStep={currentSubStep}
+            maxSteps={getMaxStepsForStage(currentStage)}
+            onStepChange={handleSubStepChange}
+            onStageChange={handleStageChange}
+            labels={getLabelsForStage(currentStage)}
+            labelTitles={getTitlesForStage(currentStage)}
+          />
+        </div>
+      ) : (
+        // Desktop Layout - Keep original
+        <>
+          {/* Fixed header with improved visibility */}
+          <div className="absolute top-0 left-0 right-0 z-50 shadow-md">
+            <DemoHeader 
+              currentStage={currentStage}
+              isPaused={isPaused}
+              togglePause={togglePause}
+              handleStageChange={handleStageChange}
             />
           </div>
-        </div>
-      </div>
-      
-      {/* Floating description positioned lower to avoid overlap with animations */}
-      <div className="absolute bottom-[60px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
-        <FloatingAnimationDescription
-          currentStage={currentStage}
-          subStep={currentSubStep}
-          labels={getLabelsForStage(currentStage)}
-          labelTitles={getTitlesForStage(currentStage)}
-          maxSteps={getMaxStepsForStage(currentStage)}
-          onElementClick={handleSubStepChange}
-        />
-      </div>
-      
-      {/* Bottom indicator - positioned with more space and lower z-index than floating description */}
-      <div className="absolute bottom-4 left-0 right-0 z-40">
-        <DemoStageIndicator 
-          currentStage={currentStage} 
-          totalStages={stages.length} 
-          onStageChange={handleStageChange} 
-          isDemoSection={isDemoSection} 
-        />
-      </div>
-      
-      {/* Enhanced interactive indicator */}
-      <AnimatePresence>
-        {highlightInteractivity && (
-          <motion.div 
-            className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.4 }}
-            aria-hidden="true"
-          >
-            <div className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-white/20 flex items-center gap-3 max-w-[90%] w-auto mx-auto">
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.15, 1],
-                }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity,
-                  repeatDelay: 0.5
-                }}
-              >
-                <MousePointerClick size={isMobile ? 20 : 24} className="text-white" />
-              </motion.div>
-              <div className="flex flex-col">
-                <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-normal`}>
-                  {isMobile ? "Tap icons to interact!" : "Click on highlighted sections to explore features"}
-                </span>
-                <span className="text-xs text-white/80">
-                  {isMobile ? "Explore each clinical workflow" : "Interactive demonstration of clinical workflows"}
-                </span>
+          
+          {/* Animation content container with maximum space for animation */}
+          <div className="absolute inset-0 pt-[180px] pb-[230px] px-2 sm:px-4 md:px-6 overflow-y-auto">
+            <div className="h-full flex flex-col">
+              <div className="flex-grow relative">
+                <DemoScene 
+                  currentStage={currentStage} 
+                  stages={stages} 
+                  subStep={currentSubStep}
+                  onSubStepChange={handleSubStepChange}
+                />
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+          
+          {/* Floating description positioned lower to avoid overlap with animations */}
+          <div className="absolute bottom-[60px] left-1/2 transform -translate-x-1/2 z-50 px-4 sm:px-6 w-full max-w-[94%] sm:max-w-[90%] md:max-w-[85%] pointer-events-auto">
+            <FloatingAnimationDescription
+              currentStage={currentStage}
+              subStep={currentSubStep}
+              labels={getLabelsForStage(currentStage)}
+              labelTitles={getTitlesForStage(currentStage)}
+              maxSteps={getMaxStepsForStage(currentStage)}
+              onElementClick={handleSubStepChange}
+            />
+          </div>
+          
+          {/* Bottom indicator - positioned with more space and lower z-index than floating description */}
+          <div className="absolute bottom-4 left-0 right-0 z-40">
+            <DemoStageIndicator 
+              currentStage={currentStage} 
+              totalStages={stages.length} 
+              onStageChange={handleStageChange} 
+              isDemoSection={isDemoSection} 
+            />
+          </div>
+          
+          {/* Enhanced interactive indicator */}
+          <AnimatePresence>
+            {highlightInteractivity && (
+              <motion.div 
+                className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none" 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                aria-hidden="true"
+              >
+                <div className="bg-gradient-to-r from-[#143151]/90 to-[#387E89]/90 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-xl border-2 border-white/20 flex items-center gap-3 max-w-[90%] w-auto mx-auto">
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.15, 1],
+                    }}
+                    transition={{ 
+                      duration: 1.5, 
+                      repeat: Infinity,
+                      repeatDelay: 0.5
+                    }}
+                  >
+                    <MousePointerClick size={isMobile ? 20 : 24} className="text-white" />
+                  </motion.div>
+                  <div className="flex flex-col">
+                    <span className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} whitespace-normal`}>
+                      {isMobile ? "Tap icons to interact!" : "Click on highlighted sections to explore features"}
+                    </span>
+                    <span className="text-xs text-white/80">
+                      {isMobile ? "Explore each clinical workflow" : "Interactive demonstration of clinical workflows"}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      )}
 
       {/* Accessibility helper - screen reader only */}
       <div className="sr-only">
