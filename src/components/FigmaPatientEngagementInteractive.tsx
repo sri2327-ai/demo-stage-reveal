@@ -68,7 +68,7 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     console.log("PatientEngagement - Hover on step:", step);
   };
 
-  // Handle click on specific UI elements (icons) with improved validation and event handling
+  // Handle click on specific UI elements (icons) with improved validation
   const handleIconClick = (step: number, e?: React.MouseEvent) => {
     // Ensure we have an event object and stop propagation
     if (e) {
@@ -89,10 +89,19 @@ export const FigmaPatientEngagementInteractive: React.FC<FigmaPatientEngagementI
     }
   };
   
-  // Handle click on the illustration area with better feedback
+  // Handle click on the illustration area
   const handleIllustrationClick = (e: React.MouseEvent) => {
     // Don't handle if the click was on a child element that should handle its own clicks
     if ((e.target as HTMLElement).closest('[data-clickable="true"]')) {
+      return;
+    }
+    
+    // Check if the click target is a menu icon or related element
+    const iconElement = (e.target as HTMLElement).closest('.icon-menu-item');
+    if (iconElement && iconElement.dataset.step !== undefined) {
+      // If clicking on a menu icon, use that step
+      const step = parseInt(iconElement.dataset.step);
+      handleIconClick(step, e);
       return;
     }
     

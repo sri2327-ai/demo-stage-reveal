@@ -25,6 +25,7 @@ export interface DemoSceneProps {
   stages: DemoStage[];
   subStep?: number;
   onSubStepChange?: (step: number) => void;
+  showFloatingDescription?: boolean;
 }
 
 export interface DemoStageProps {
@@ -32,4 +33,5 @@ export interface DemoStageProps {
   autoPlay?: boolean;
   autoPlayInterval?: number;
   isDemoSection?: boolean;
+  showFloatingDescription?: boolean;
 }
