@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -104,9 +103,9 @@ const HealthSystems = () => {
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white backdrop-blur-sm border-0 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-2xl">
-                <Target className="w-4 h-4 md:w-6 md:h-6" />
-                <span className="text-sm md:text-lg font-semibold">Strategic AI Transformation for Health Systems</span>
+              <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2 shadow-2xl">
+                <Target className="w-3 sm:w-4 h-3 sm:h-4 text-black" />
+                <span className="text-black text-xs sm:text-sm font-semibold">Strategic AI Transformation for Health Systems</span>
               </Card>
             </motion.div>
             
