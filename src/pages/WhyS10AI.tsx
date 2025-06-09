@@ -15,7 +15,9 @@ import {
   TrendingUp,
   Star,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  Clock3,
+  Phone
 } from 'lucide-react';
 
 const WhyS10AI = () => {
@@ -163,48 +165,136 @@ const WhyS10AI = () => {
         {/* Stacked Cards Sections (2, 3, 4) */}
         <StackedCards cards={stackedCardsData} />
 
-        {/* Final CTA Section */}
-        <section className="relative px-4 sm:px-5 md:px-8 py-16">
-          {/* Decorative Background */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-12 left-24 w-52 h-52 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-            <div className="absolute bottom-12 right-16 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-60"></div>
-            <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-cyan-100 rounded-full blur-3xl opacity-45"></div>
+        {/* Modern CTA Section */}
+        <section className="relative px-4 sm:px-5 md:px-8 py-20 lg:py-24">
+          {/* Enhanced Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-purple-100 to-blue-100 rounded-full blur-3xl opacity-25"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-cyan-100 to-purple-100 rounded-full blur-3xl opacity-20"></div>
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <div className="relative z-10 max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="text-center"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-6">
-                Ready to See a Complete Transformation?
-              </h2>
+              {/* Trust Badge */}
+              <motion.div
+                className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#387E89]/20 rounded-full px-4 py-2 mb-8"
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <CheckCircle className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-[#143151]">Trusted by 500+ Healthcare Practices</span>
+              </motion.div>
+
+              {/* Main Headline */}
+              <motion.h2 
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Transform Your Practice Today
+              </motion.h2>
               
-              <p className="text-lg md:text-xl text-gray-700 mb-8">
-                Stop solving one problem at a time. Let us show you how a unified AI platform can elevate your entire practice in just 15 minutes.
-              </p>
+              {/* Value Props Grid */}
+              <motion.div
+                className="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
+                    <Clock3 className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-semibold text-[#143151] text-sm">15-Minute Setup</p>
+                    <p className="text-gray-600 text-xs">Quick implementation</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-semibold text-[#143151] text-sm">HIPAA Compliant</p>
+                    <p className="text-gray-600 text-xs">Enterprise security</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-semibold text-[#143151] text-sm">24/7 Support</p>
+                    <p className="text-gray-600 text-xs">Always available</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.p 
+                className="text-lg md:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Join healthcare providers who've reduced administrative time by 75% while improving patient satisfaction scores.
+              </motion.p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              {/* CTA Buttons */}
+              <motion.div 
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-8 py-4 text-lg font-semibold"
                 >
-                  Book Your Free Workflow Assessment
-                  <Calendar className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
+                  Start Your Free Assessment
+                  <Calendar className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform duration-200" />
                 </Button>
                 
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 w-full sm:w-auto"
+                  className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 w-full sm:w-auto px-8 py-4 text-lg font-semibold hover:scale-105 transform"
                 >
-                  Have Questions? Talk to an Expert
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  Watch 2-Min Demo
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
-              </div>
+              </motion.div>
+
+              {/* Social Proof */}
+              <motion.p 
+                className="text-sm text-gray-600 mt-8 flex items-center justify-center gap-2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <span className="ml-2">4.9/5 from 200+ healthcare professionals</span>
+              </motion.p>
             </motion.div>
           </div>
         </section>
