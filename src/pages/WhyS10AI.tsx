@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -80,12 +79,8 @@ const WhyS10AI = () => {
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-5 md:px-8 py-12 md:py-20">
-          {/* Decorative Background */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
-            <div className="absolute bottom-20 left-20 w-72 h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
-            <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
-          </div>
+          {/* Animated Gradient Background */}
+          <div className="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-pulse-gradient bg-400 animate-pulse-gradient opacity-20 blur-3xl rounded-full z-0"></div>
           
           <div className="relative z-10 max-w-6xl mx-auto text-center">
             <motion.div
