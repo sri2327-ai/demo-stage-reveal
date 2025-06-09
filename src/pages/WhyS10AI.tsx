@@ -200,21 +200,33 @@ const WhyS10AI = () => {
           }} viewport={{
             once: true
           }} className="text-center">
-              {/* Trust Badge */}
-              <motion.div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#387E89]/20 rounded-full px-4 py-2 mb-8" initial={{
-              scale: 0.9,
-              opacity: 0
-            }} whileInView={{
-              scale: 1,
-              opacity: 1
-            }} transition={{
-              delay: 0.2,
-              duration: 0.6
-            }} viewport={{
-              once: true
-            }}>
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-[#143151]">Trusted by 1000+ Healthcare Practices</span>
+              {/* Enhanced Trust Badge */}
+              <motion.div 
+                className="flex justify-center mb-8"
+                initial={{ scale: 0.9, opacity: 0 }} 
+                whileInView={{ scale: 1, opacity: 1 }} 
+                transition={{ delay: 0.2, duration: 0.6 }} 
+                viewport={{ once: true }}
+              >
+                <div className="relative group/badge">
+                  {/* Outer glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-lg opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500 scale-110"></div>
+                  
+                  {/* Main badge with gradient border */}
+                  <div className="relative bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-[1px] rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 rounded-full px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2 group-hover/badge:from-blue-500/15 group-hover/badge:to-purple-500/15 transition-all duration-300">
+                      <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-1.5 rounded-full group-hover/badge:scale-110 transition-transform duration-200">
+                        <CheckCircle className="w-3 sm:w-4 h-3 sm:h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                        Trusted by 1000+ Healthcare Practices
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Subtle shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-pulse transition-opacity duration-300"></div>
+                </div>
               </motion.div>
 
               {/* Main Headline */}
