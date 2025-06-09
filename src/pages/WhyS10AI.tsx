@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
+import StackedCardsSection from '../components/StackedCardsSection';
 import { 
   Stethoscope, 
   Clock, 
@@ -18,6 +19,58 @@ import {
 } from 'lucide-react';
 
 const WhyS10AI = () => {
+  // Data for the clinician cards
+  const clinicianCards = [
+    {
+      id: 'documentation',
+      title: 'For the Clinician',
+      subtitle: 'The Joy of Focused Medicine',
+      description: 'The burden of documentation is the biggest drain on a clinician\'s time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes.',
+      benefits: [
+        {
+          title: 'Slash Documentation Time by 75%',
+          description: 'Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home.'
+        },
+        {
+          title: 'Maximize Patient Interaction',
+          description: 'With notes handled, you can be fully present with your patients, increasing face-time by over 40%.'
+        },
+        {
+          title: 'Boost Clinician Well-being',
+          description: 'By removing the primary driver of burnout, we help you get back to the joy of practicing medicine.'
+        }
+      ],
+      backgroundGradient: 'bg-gradient-to-br from-blue-50 to-sky-50',
+      icon: <Heart className="w-6 h-6 text-white" />
+    }
+  ];
+
+  // Data for the practice cards
+  const practiceCards = [
+    {
+      id: 'operations',
+      title: 'For the Practice',
+      subtitle: 'The Power of a Resilient Operation',
+      description: 'Staffing shortages and administrative overhead can cripple a practice\'s growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and cost-effective operation.',
+      benefits: [
+        {
+          title: 'Automate 85% of Front Office Tasks',
+          description: 'From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind.'
+        },
+        {
+          title: 'Address Staffing Shortages',
+          description: 'Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions.'
+        },
+        {
+          title: 'Improve Financial Impact',
+          description: 'Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40%.'
+        }
+      ],
+      backgroundGradient: 'bg-gradient-to-br from-blue-50 to-sky-50',
+      icon: <TrendingUp className="w-6 h-6 text-white" />
+    }
+  ];
+
   return (
     <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -91,127 +144,21 @@ const WhyS10AI = () => {
           </div>
         </section>
 
-        {/* Section 1: For the Clinician */}
-        <section className="px-4 sm:px-5 md:px-8 py-16">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-12 items-center"
-            >
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
-                    <Heart className="w-6 h-6 text-white" />
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151]">
-                    For the Clinician
-                  </h2>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold text-[#143151] mb-4">
-                  The Joy of Focused Medicine
-                </h3>
-                <p className="text-lg text-gray-700 mb-6">
-                  <strong>Streamline Documentation & Boost Well-being</strong>
-                </p>
-                <p className="text-gray-700 mb-6">
-                  The burden of documentation is the biggest drain on a clinician's time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes.
-                </p>
-              </div>
-              
-              <Card className="p-6 bg-gradient-to-br from-blue-50 to-sky-50 border-blue-200/40">
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Slash Documentation Time by 75%</h4>
-                      <p className="text-gray-700">Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Maximise Patient Interaction</h4>
-                      <p className="text-gray-700">With notes handled, you can be fully present with your patients, increasing face-time by over 40%.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Boost Clinician Well-being</h4>
-                      <p className="text-gray-700">By removing the primary driver of burnout, we help you get back to the joy of practicing medicine.</p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-        </section>
+        {/* Stacked Cards Section 1: For the Clinician */}
+        <StackedCardsSection
+          title="Streamline Documentation & Boost Well-being"
+          subtitle="Transform your clinical workflow with AI-powered documentation"
+          cards={clinicianCards}
+          sectionId="clinician-section"
+        />
 
-        {/* Section 2: For the Practice */}
-        <section className="px-4 sm:px-5 md:px-8 py-16 bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-12 items-center"
-            >
-              <Card className="p-6 bg-gradient-to-br from-blue-50 to-sky-50 border-blue-200/40 order-2 md:order-1">
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Automate 85% of Front Office Tasks</h4>
-                      <p className="text-gray-700">From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Address Staffing Shortages</h4>
-                      <p className="text-gray-700">Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-[#143151] mb-2">Improve Financial Impact</h4>
-                      <p className="text-gray-700">Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40%.</p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              
-              <div className="order-1 md:order-2">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 rounded-full">
-                    <TrendingUp className="w-6 h-6 text-white" />
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151]">
-                    For the Practice
-                  </h2>
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold text-[#143151] mb-4">
-                  The Power of a Resilient Operation
-                </h3>
-                <p className="text-lg text-gray-700 mb-6">
-                  <strong>Automate Your Front Office & Improve Financials</strong>
-                </p>
-                <p className="text-gray-700 mb-6">
-                  Staffing shortages and administrative overhead can cripple a practice's growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and cost-effective operation.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        {/* Stacked Cards Section 2: For the Practice */}
+        <StackedCardsSection
+          title="Automate Your Front Office & Improve Financials"
+          subtitle="Create a resilient operation with comprehensive AI automation"
+          cards={practiceCards}
+          sectionId="practice-section"
+        />
 
         {/* Ultimate Goal Section */}
         <section className="px-4 sm:px-5 md:px-8 py-16">
