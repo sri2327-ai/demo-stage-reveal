@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -14,10 +15,7 @@ import {
   TrendingUp,
   Star,
   CheckCircle,
-  ArrowRight,
-  Timer,
-  UserCheck,
-  Award
+  ArrowRight
 } from 'lucide-react';
 
 const WhyS10AI = () => {
@@ -82,136 +80,57 @@ const WhyS10AI = () => {
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-5 md:px-8 py-12 md:py-20">
-          {/* Enhanced Medical-Grade Background */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            {/* Primary gradient backdrop */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white to-cyan-50/60"></div>
-            
-            {/* Animated clinical-grade elliptical gradients */}
-            <div className="absolute -top-20 -right-32 w-96 h-96 bg-gradient-radial from-blue-200/40 via-blue-100/30 to-transparent rounded-full blur-3xl animate-pulse-subtle"></div>
-            <div className="absolute -bottom-32 -left-20 w-[500px] h-[500px] bg-gradient-radial from-cyan-200/35 via-cyan-100/25 to-transparent rounded-full blur-3xl animate-pulse-subtle" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gradient-radial from-purple-200/30 via-purple-100/20 to-transparent rounded-full blur-3xl animate-pulse-subtle" style={{ animationDelay: '4s' }}></div>
-            
-            {/* Subtle grid pattern for medical precision */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,126,137,0.03)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute bottom-20 left-20 w-72 h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
           </div>
           
-          <div className="relative z-10 max-w-7xl mx-auto">
-            {/* Trust Badge for Clinicians */}
+          <div className="relative z-10 max-w-6xl mx-auto text-center">
             <motion.div
-              className="flex justify-center mb-8"
+              className="inline-block mb-6"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 backdrop-blur-sm border border-[#387E89]/20 px-6 py-3 inline-flex items-center gap-3 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-[#387E89]" />
-                  <span className="text-[#143151] text-sm font-semibold">HIPAA Compliant</span>
-                </div>
-                <div className="w-px h-4 bg-[#387E89]/30"></div>
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-[#387E89]" />
-                  <span className="text-[#143151] text-sm font-semibold">Trusted by 500+ Clinicians</span>
-                </div>
+              <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 inline-flex items-center gap-2">
+                <Stethoscope className="w-5 h-5 text-[#143151]" />
+                <span className="text-[#143151] text-sm font-medium">The Power of a Unified Platform</span>
               </Card>
             </motion.div>
             
-            <div className="text-center">
-              {/* Main Headline - Clinical Focus */}
-              <motion.h1 
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#143151] mb-6 leading-tight max-w-5xl mx-auto"
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Get Back to <span className="bg-gradient-to-r from-[#387E89] to-[#143151] bg-clip-text text-transparent">Practicing Medicine</span>
-              </motion.h1>
-              
-              {/* Clinical Value Proposition */}
-              <motion.p 
-                className="text-xl sm:text-2xl md:text-3xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed font-medium"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                Stop drowning in documentation. <strong className="text-[#143151]">S10.ai eliminates 75% of your admin work</strong> so you can focus on what matters most—your patients.
-              </motion.p>
+            <motion.h1 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Why S10.AI?
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              Other tools solve one problem. <strong>S10.ai transforms your entire practice.</strong> We are the only platform that integrates clinical relief with operational excellence, creating a healthier ecosystem for your clinicians, staff, and patients.
+            </motion.p>
 
-              {/* Clinical Benefits Cards */}
-              <motion.div
-                className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group"
               >
-                <Card className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 p-6 shadow-lg hover:shadow-xl transition-all group">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-3 rounded-xl">
-                      <Timer className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-bold text-[#143151] text-lg">Save 2+ Hours Daily</h3>
-                  </div>
-                  <p className="text-gray-700">End "pajama time" charting. Our AI handles documentation instantly.</p>
-                </Card>
-
-                <Card className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 p-6 shadow-lg hover:shadow-xl transition-all group">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-3 rounded-xl">
-                      <UserCheck className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-bold text-[#143151] text-lg">40% More Patient Time</h3>
-                  </div>
-                  <p className="text-gray-700">Be fully present during visits. No more typing while talking.</p>
-                </Card>
-
-                <Card className="bg-white/80 backdrop-blur-sm border border-[#387E89]/20 p-6 shadow-lg hover:shadow-xl transition-all group">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-3 rounded-xl">
-                      <Heart className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-bold text-[#143151] text-lg">Reduce Burnout</h3>
-                  </div>
-                  <p className="text-gray-700">Eliminate the #1 cause of physician burnout: administrative burden.</p>
-                </Card>
-              </motion.div>
-
-              {/* Enhanced CTAs for Clinicians */}
-              <motion.div
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all group text-lg px-8 py-4 w-full sm:w-auto"
-                >
-                  See S10.ai in Action
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-[#387E89]/40 text-[#143151] hover:bg-[#387E89]/5 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto text-lg px-8 py-4"
-                >
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Book 15-min Demo
-                </Button>
-              </motion.div>
-
-              {/* Trust Indicator */}
-              <motion.p
-                className="text-sm text-gray-600 mt-6 flex items-center justify-center gap-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 0.6 }}
-              >
-                <CheckCircle className="w-4 h-4 text-[#387E89]" />
-                No setup required • Works with any EHR • 30-day free trial
-              </motion.p>
-            </div>
+                See the Platform in Action
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
           </div>
         </section>
 
