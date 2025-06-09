@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -212,7 +213,7 @@ const HealthSystems = () => {
                 transition={{ duration: 0.8, delay: 0.2 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                <Card className="p-6 md:p-8 h-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
                       <Stethoscope className="w-6 h-6 md:w-8 md:h-8 text-white" />
@@ -235,7 +236,7 @@ const HealthSystems = () => {
                 transition={{ duration: 0.8, delay: 0.4 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                <Card className="p-6 md:p-8 h-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
                       <Calendar className="w-6 h-6 md:w-8 md:h-8 text-white" />
