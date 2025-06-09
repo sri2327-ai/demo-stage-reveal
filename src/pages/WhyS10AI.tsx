@@ -81,7 +81,7 @@ const WhyS10AI = () => {
     <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-5 md:px-8 py-12 md:py-20">
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           {/* Decorative Background */}
           <div className="absolute inset-0 z-0">
             <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
@@ -112,7 +112,7 @@ const WhyS10AI = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-8"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -122,21 +122,21 @@ const WhyS10AI = () => {
 
             {/* Subtle value indicators */}
             <motion.div
-              className="flex flex-wrap justify-center gap-6 mb-8 max-w-4xl mx-auto"
+              className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Clock className="w-4 h-4 text-[#387E89]" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                <Clock className="w-4 h-4 text-[#387E89] flex-shrink-0" />
                 <span>75% Less Documentation Time</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Users className="w-4 h-4 text-[#387E89]" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                <Users className="w-4 h-4 text-[#387E89] flex-shrink-0" />
                 <span>Enhanced Patient Interaction</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <TrendingUp className="w-4 h-4 text-[#387E89]" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                <TrendingUp className="w-4 h-4 text-[#387E89] flex-shrink-0" />
                 <span>Improved Practice Efficiency</span>
               </div>
             </motion.div>
@@ -148,7 +148,7 @@ const WhyS10AI = () => {
             >
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group"
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto"
               >
                 See the Platform in Action
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -158,7 +158,7 @@ const WhyS10AI = () => {
         </section>
 
         {/* Introduction Section */}
-        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           {/* Decorative Background */}
           <div className="absolute inset-0 z-0">
             <div className="absolute top-10 left-10 w-48 h-48 bg-purple-100 rounded-full blur-3xl opacity-40"></div>
@@ -173,21 +173,21 @@ const WhyS10AI = () => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-6">
                 Stop Patching Problems. Start Solving Them.
               </h2>
-              <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
                 You can buy an AI scribe and still have a chaotic front office. You can automate scheduling and still have clinician burnout. Point solutions create silos. <strong>S10.ai provides a complete workflow transformation</strong> by fixing both sides of the equation.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Stacked Cards Sections (2, 3, 4) */}
+        {/* Stacked Cards Sections */}
         <StackedCards cards={stackedCardsData} />
 
         {/* Modern CTA Section */}
-        <section className="relative px-4 sm:px-5 md:px-8 py-20 lg:py-24">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           {/* Enhanced Background */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-30"></div>
@@ -217,7 +217,7 @@ const WhyS10AI = () => {
 
               {/* Main Headline */}
               <motion.h2 
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -228,7 +228,7 @@ const WhyS10AI = () => {
               
               {/* Value Props Grid */}
               <motion.div
-                className="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 max-w-4xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -238,7 +238,7 @@ const WhyS10AI = () => {
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                     <Clock3 className="w-5 h-5 text-white" />
                   </div>
-                  <div className="text-left">
+                  <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-sm">15-Minute Setup</p>
                     <p className="text-gray-600 text-xs">Quick implementation</p>
                   </div>
@@ -248,7 +248,7 @@ const WhyS10AI = () => {
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                     <Shield className="w-5 h-5 text-white" />
                   </div>
-                  <div className="text-left">
+                  <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-sm">HIPAA Compliant</p>
                     <p className="text-gray-600 text-xs">Enterprise security</p>
                   </div>
@@ -258,7 +258,7 @@ const WhyS10AI = () => {
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                     <Phone className="w-5 h-5 text-white" />
                   </div>
-                  <div className="text-left">
+                  <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-sm">24/7 Support</p>
                     <p className="text-gray-600 text-xs">Always available</p>
                   </div>
@@ -266,7 +266,7 @@ const WhyS10AI = () => {
               </motion.div>
 
               <motion.p 
-                className="text-lg md:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -285,7 +285,7 @@ const WhyS10AI = () => {
               >
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-8 py-4 text-lg font-semibold"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
                 >
                   Start Your Free Assessment
                   <Calendar className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform duration-200" />
@@ -294,7 +294,7 @@ const WhyS10AI = () => {
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 w-full sm:w-auto px-8 py-4 text-lg font-semibold hover:scale-105 transform"
+                  className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold hover:scale-105 transform"
                 >
                   Watch 2-Min Demo
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -303,17 +303,19 @@ const WhyS10AI = () => {
 
               {/* Social Proof */}
               <motion.p 
-                className="text-sm text-gray-600 mt-8 flex items-center justify-center gap-2"
+                className="text-xs sm:text-sm text-gray-600 mt-8 flex items-center justify-center gap-2 flex-wrap"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                </div>
                 <span className="ml-2">4.9/5 from 200+ healthcare professionals</span>
               </motion.p>
             </motion.div>
