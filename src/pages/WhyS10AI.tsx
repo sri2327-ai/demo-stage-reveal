@@ -5,6 +5,7 @@ import { Card } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
 import StackedCards from '../components/StackedCards';
 import { Stethoscope, Clock, Users, Heart, Calendar, Shield, TrendingUp, Star, CheckCircle, ArrowRight, Clock3, Phone } from 'lucide-react';
+
 const WhyS10AI = () => {
   const stackedCardsData = [{
     id: 'clinician',
@@ -70,9 +71,9 @@ const WhyS10AI = () => {
           }} transition={{
             duration: 0.7
           }}>
-              <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 inline-flex items-center gap-2">
-                <Stethoscope className="w-5 h-5 text-[#143151]" />
-                <span className="text-[#143151] text-sm font-medium">Maximize Patient Time. Minimize Documentation.</span>
+              <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2">
+                <Stethoscope className="w-3 sm:w-4 h-3 sm:h-4 text-black flex-shrink-0" />
+                <span className="text-black text-xs sm:text-sm font-medium">Maximize Patient Time. Minimize Documentation.</span>
               </Card>
             </motion.div>
             
@@ -341,4 +342,5 @@ const WhyS10AI = () => {
       </div>
     </MouseTrackerProvider>;
 };
+
 export default WhyS10AI;
