@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -80,7 +79,7 @@ const PrivatePractice = () => {
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white backdrop-blur-sm border-0 px-3 py-2 md:px-4 md:py-2 inline-flex items-center gap-2 shadow-2xl">
+              <Card className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white backdrop-blur-sm border border-white/20 px-3 py-2 md:px-4 md:py-2 inline-flex items-center gap-2 shadow-2xl">
                 <Target className="w-4 h-4 md:w-5 md:h-5" />
                 <span className="text-sm md:text-base font-semibold">For Private Practices</span>
               </Card>
