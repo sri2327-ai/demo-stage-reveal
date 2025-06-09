@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WhyS10AI from "./pages/WhyS10AI";
+import HealthSystems from "./pages/HealthSystems";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/welcome" element={<WelcomeForm />} />
           <Route path="/demo" element={<Index />} />
           <Route path="/why-s10ai" element={<WhyS10AI />} />
+          <Route path="/health-systems" element={<HealthSystems />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
