@@ -27,22 +27,22 @@ const PrivatePractice = () => {
     {
       value: '$150,000+',
       label: 'Annual Cost Savings',
-      icon: <PiggyBank className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+      icon: <PiggyBank className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
     },
     {
       value: '-50%',
       label: 'Patient No-Shows',
-      icon: <Calendar className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+      icon: <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#387E89]" />
     },
     {
       value: '+40%',
       label: 'Patient Face-Time',
-      icon: <Clock className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+      icon: <Clock className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
     },
     {
       value: '95%',
       label: 'Patient Satisfaction',
-      icon: <Heart className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
+      icon: <Heart className="w-5 h-5 md:w-6 md:h-6 text-[#387E89]" />
     }
   ];
 
