@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -434,6 +433,46 @@ const HealthSystems = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Privacy Statement */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.8, delay: 0.2 }} 
+                viewport={{ once: true }}
+                className="mb-8"
+              >
+                <Card className="inline-block px-12 py-6 bg-gradient-to-r from-purple-500/10 to-indigo-600/10 backdrop-blur-sm border border-purple-500/20 shadow-xl">
+                  <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-sm font-medium text-[#143151]">Data Privacy</div>
+                        <div className="text-lg font-bold text-purple-600">Zero Customer Data Training</div>
+                      </div>
+                    </div>
+                    
+                    <div className="w-px h-12 bg-purple-500/30 hidden md:block"></div>
+                    
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <Database className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-sm font-medium text-[#143151]">Data Storage</div>
+                        <div className="text-lg font-bold text-purple-600">No Data Retention</div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+
+              <p className="text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+                S10.ai does not use customer data for model training and does not store patient or operational data. 
+                Your information remains secure and private within your own systems.
+              </p>
 
               <Button 
                 variant="outline" 
