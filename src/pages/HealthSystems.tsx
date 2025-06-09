@@ -474,9 +474,9 @@ const HealthSystems = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="p-4 md:p-6 bg-white hover:shadow-lg transition-all duration-300">
+                    <Card className="p-4 md:p-6 bg-white hover:shadow-lg transition-all duration-300 border border-white/40">
                       <div className="flex flex-col items-center gap-2 md:gap-3">
-                        <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-gray-400 to-gray-500 rounded-lg flex items-center justify-center">
+                        <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center border-2 border-white shadow-lg">
                           <div className="text-white">{compliance.icon}</div>
                         </div>
                         <p className="font-semibold text-sm md:text-base text-gray-600">{compliance.name}</p>
