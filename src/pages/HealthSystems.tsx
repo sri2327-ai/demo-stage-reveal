@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -461,7 +462,7 @@ const HealthSystems = () => {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-gray-600">
                 Security
               </h2>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-6 md:mb-8">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mb-6 md:mb-8">
                 Enterprise-Grade
               </h3>
               
