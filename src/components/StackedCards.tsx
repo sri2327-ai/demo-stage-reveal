@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Card } from './ui/card';
 import { CheckCircle } from 'lucide-react';
@@ -28,13 +28,43 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
     offset: ["start start", "end end"]
   });
 
+  // Pre-calculate all transform values to avoid hooks in loops
+  const cardTransforms = useMemo(() => {
+    return cards.map((_, index) => {
+      const targetScale = 1 - ((cards.length - index) * 0.05);
+      const targetY = index * 30;
+      
+      // Calculate progress for each card with better distribution
+      const start = (index / cards.length) * 0.7;
+      const end = ((index + 1) / cards.length) * 0.7 + 0.3;
+      
+      return {
+        scale: useTransform(
+          scrollYProgress,
+          [start, end],
+          [targetScale, 1]
+        ),
+        y: useTransform(
+          scrollYProgress,
+          [start, end],
+          [targetY, 0]
+        ),
+        opacity: useTransform(
+          scrollYProgress,
+          [start - 0.1, start, end, end + 0.1],
+          [0, 1, 1, 0.8]
+        ),
+      };
+    });
+  }, [cards.length, scrollYProgress]);
+
   console.log('StackedCards rendered with', cards.length, 'cards');
 
   return (
     <div 
       ref={containerRef} 
       className="relative w-full"
-      style={{ height: `${cards.length * 90}vh` }}
+      style={{ height: `${cards.length * 100}vh` }}
     >
       {/* Decorative Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -44,38 +74,21 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
       </div>
 
       {cards.map((card, index) => {
-        const targetScale = 1 - ((cards.length - index) * 0.03);
-        const targetY = index * 20;
-        
-        // Calculate progress for each card with better distribution
-        const start = (index / cards.length) * 0.8;
-        const end = ((index + 1) / cards.length) * 0.8 + 0.2;
+        const transforms = cardTransforms[index];
         
         return (
           <div
             key={card.id}
-            className="sticky top-4 sm:top-8 flex items-center justify-center min-h-[80vh] sm:min-h-[85vh] px-4 sm:px-6 lg:px-8 py-4 sm:py-8"
+            className="sticky top-4 sm:top-8 flex items-center justify-center min-h-[90vh] px-4 sm:px-6 lg:px-8 py-4 sm:py-8"
             style={{ 
               zIndex: cards.length - index,
             }}
           >
             <motion.div
               style={{
-                scale: useTransform(
-                  scrollYProgress,
-                  [start, end],
-                  [targetScale, 1]
-                ),
-                y: useTransform(
-                  scrollYProgress,
-                  [start, end],
-                  [targetY, 0]
-                ),
-                opacity: useTransform(
-                  scrollYProgress,
-                  [start - 0.1, start, end, end + 0.1],
-                  [0, 1, 1, 0.3]
-                ),
+                scale: transforms.scale,
+                y: transforms.y,
+                opacity: transforms.opacity,
               }}
               className="w-full max-w-6xl xl:max-w-7xl"
             >
