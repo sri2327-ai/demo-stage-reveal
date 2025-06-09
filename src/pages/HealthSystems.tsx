@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -442,27 +443,27 @@ const HealthSystems = () => {
                 viewport={{ once: true }}
                 className="mb-8"
               >
-                <Card className="inline-block px-12 py-6 bg-gradient-to-r from-purple-500/10 to-indigo-600/10 backdrop-blur-sm border border-purple-500/20 shadow-xl">
+                <Card className="inline-block px-12 py-6 bg-gradient-to-r from-white/90 to-slate-50/90 backdrop-blur-sm border border-[#387E89]/20 shadow-xl">
                   <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                         <Shield className="w-5 h-5 text-white" />
                       </div>
                       <div className="text-left">
                         <div className="text-sm font-medium text-[#143151]">Data Privacy</div>
-                        <div className="text-lg font-bold text-purple-600">Zero Customer Data Training</div>
+                        <div className="text-lg font-bold text-[#387E89]">Zero Customer Data Training</div>
                       </div>
                     </div>
                     
-                    <div className="w-px h-12 bg-purple-500/30 hidden md:block"></div>
+                    <div className="w-px h-12 bg-[#387E89]/30 hidden md:block"></div>
                     
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                         <Database className="w-5 h-5 text-white" />
                       </div>
                       <div className="text-left">
                         <div className="text-sm font-medium text-[#143151]">Data Storage</div>
-                        <div className="text-lg font-bold text-purple-600">No Data Retention</div>
+                        <div className="text-lg font-bold text-[#387E89]">No Data Retention</div>
                       </div>
                     </div>
                   </div>
