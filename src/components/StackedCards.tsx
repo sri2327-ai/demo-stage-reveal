@@ -68,97 +68,124 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                   [targetY, 0]
                 ),
               }}
-              className="w-full max-w-6xl"
+              className="w-full max-w-7xl"
             >
-              <Card className="bg-white/95 backdrop-blur-sm border border-white/20 shadow-2xl p-6 sm:p-8 lg:p-12">
-                <div className={`${card.theme === 'goal' ? '' : 'grid md:grid-cols-2 gap-8 lg:gap-12'} items-center`}>
-                  {card.theme === 'practice' ? (
-                    <>
-                      <Card className="p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-sky-50 border-blue-200/40 order-2 md:order-1">
-                        <div className="space-y-4 sm:space-y-6">
-                          {card.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-start gap-3 sm:gap-4">
-                              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                              <div>
-                                <h4 className="font-semibold text-[#143151] mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h4>
-                                <p className="text-gray-700 text-xs sm:text-sm">{feature.description}</p>
-                              </div>
+              <Card className="bg-gradient-to-br from-white via-white to-gray-50/30 backdrop-blur-xl border-0 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-3xl overflow-hidden relative group hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-500">
+                {/* Gradient border effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#143151]/20 via-[#387E89]/20 to-[#143151]/20 p-[1px] rounded-3xl">
+                  <div className="h-full w-full bg-gradient-to-br from-white via-white to-gray-50/30 rounded-3xl" />
+                </div>
+                
+                <div className="relative z-10 p-8 sm:p-12 lg:p-16">
+                  <div className={`${card.theme === 'goal' ? '' : 'grid md:grid-cols-2 gap-12 lg:gap-16'} items-center`}>
+                    {card.theme === 'practice' ? (
+                      <>
+                        <div className="order-2 md:order-1">
+                          <Card className="bg-gradient-to-br from-blue-50/80 via-sky-50/60 to-cyan-50/40 backdrop-blur-sm border border-blue-200/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="space-y-6">
+                              {card.features.map((feature, featureIndex) => (
+                                <motion.div 
+                                  key={featureIndex} 
+                                  className="flex items-start gap-4 group/feature"
+                                  initial={{ opacity: 0, x: -20 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: featureIndex * 0.1 }}
+                                >
+                                  <div className="bg-gradient-to-br from-[#387E89] to-[#143151] p-2 rounded-xl shadow-lg group-hover/feature:scale-110 transition-transform duration-200">
+                                    <CheckCircle className="w-5 h-5 text-white" />
+                                  </div>
+                                  <div className="flex-1">
+                                    <h4 className="font-bold text-[#143151] mb-2 text-lg group-hover/feature:text-[#387E89] transition-colors duration-200">{feature.title}</h4>
+                                    <p className="text-gray-700 leading-relaxed">{feature.description}</p>
+                                  </div>
+                                </motion.div>
+                              ))}
                             </div>
-                          ))}
+                          </Card>
                         </div>
-                      </Card>
-                      
-                      <div className="order-1 md:order-2">
-                        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                          <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 sm:p-3 rounded-full flex-shrink-0">
+                        
+                        <div className="order-1 md:order-2">
+                          <div className="flex items-center gap-4 mb-8">
+                            <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-4 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                              {card.icon}
+                            </div>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
+                              {card.title}
+                            </h2>
+                          </div>
+                          <h3 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-6 leading-tight">
+                            {card.subtitle}
+                          </h3>
+                          <p className="text-gray-700 text-lg leading-relaxed">
+                            {card.description}
+                          </p>
+                        </div>
+                      </>
+                    ) : card.theme === 'goal' ? (
+                      <div className="text-center max-w-4xl mx-auto">
+                        <div className="flex justify-center mb-8">
+                          <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-6 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300">
                             {card.icon}
                           </div>
-                          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">
-                            {card.title}
-                          </h2>
                         </div>
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#143151] mb-3 sm:mb-4">
-                          {card.subtitle}
-                        </h3>
-                        <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
+                        
+                        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mb-8 leading-tight">
+                          {card.title}
+                        </h2>
+                        
+                        <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8 font-medium">
                           {card.description}
                         </p>
-                      </div>
-                    </>
-                  ) : card.theme === 'goal' ? (
-                    <div className="text-center">
-                      <div className="flex justify-center mb-4 sm:mb-6">
-                        <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-3 sm:p-4 rounded-full">
-                          {card.icon}
+                        
+                        <div className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-2xl p-6 inline-block">
+                          <p className="text-2xl font-bold text-[#143151]">
+                            {card.subtitle}
+                          </p>
                         </div>
                       </div>
-                      
-                      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-4 sm:mb-6">
-                        {card.title}
-                      </h2>
-                      
-                      <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8">
-                        {card.description}
-                      </p>
-                      
-                      <p className="text-lg sm:text-xl font-semibold text-[#143151]">
-                        {card.subtitle}
-                      </p>
-                    </div>
-                  ) : (
-                    <>
-                      <div>
-                        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                          <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 sm:p-3 rounded-full flex-shrink-0">
-                            {card.icon}
-                          </div>
-                          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">
-                            {card.title}
-                          </h2>
-                        </div>
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#143151] mb-3 sm:mb-4">
-                          {card.subtitle}
-                        </h3>
-                        <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
-                          {card.description}
-                        </p>
-                      </div>
-                      
-                      <Card className="p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-sky-50 border-blue-200/40">
-                        <div className="space-y-4 sm:space-y-6">
-                          {card.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-start gap-3 sm:gap-4">
-                              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#387E89] mt-1 flex-shrink-0" />
-                              <div>
-                                <h4 className="font-semibold text-[#143151] mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h4>
-                                <p className="text-gray-700 text-xs sm:text-sm">{feature.description}</p>
-                              </div>
+                    ) : (
+                      <>
+                        <div>
+                          <div className="flex items-center gap-4 mb-8">
+                            <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-4 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                              {card.icon}
                             </div>
-                          ))}
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
+                              {card.title}
+                            </h2>
+                          </div>
+                          <h3 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-6 leading-tight">
+                            {card.subtitle}
+                          </h3>
+                          <p className="text-gray-700 text-lg leading-relaxed">
+                            {card.description}
+                          </p>
                         </div>
-                      </Card>
-                    </>
-                  )}
+                        
+                        <Card className="bg-gradient-to-br from-blue-50/80 via-sky-50/60 to-cyan-50/40 backdrop-blur-sm border border-blue-200/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                          <div className="space-y-6">
+                            {card.features.map((feature, featureIndex) => (
+                              <motion.div 
+                                key={featureIndex} 
+                                className="flex items-start gap-4 group/feature"
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: featureIndex * 0.1 }}
+                              >
+                                <div className="bg-gradient-to-br from-[#387E89] to-[#143151] p-2 rounded-xl shadow-lg group-hover/feature:scale-110 transition-transform duration-200">
+                                  <CheckCircle className="w-5 h-5 text-white" />
+                                </div>
+                                <div className="flex-1">
+                                  <h4 className="font-bold text-[#143151] mb-2 text-lg group-hover/feature:text-[#387E89] transition-colors duration-200">{feature.title}</h4>
+                                  <p className="text-gray-700 leading-relaxed">{feature.description}</p>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </Card>
+                      </>
+                    )}
+                  </div>
                 </div>
               </Card>
             </motion.div>
