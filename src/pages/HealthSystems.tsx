@@ -265,9 +265,9 @@ const HealthSystems = () => {
               className="text-center mb-12 md:mb-16"
             >
               <div className="inline-block mb-4 md:mb-6">
-                <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-lg">
-                  <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
-                  <span className="text-[#143151] text-sm md:text-lg font-semibold">Unified Platform Advantage</span>
+                <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-lg">
+                  <Zap className="w-3 sm:w-4 h-3 sm:h-4 text-black" />
+                  <span className="text-black text-sm md:text-lg font-semibold">Unified Platform Advantage</span>
                 </Card>
               </div>
               
@@ -366,9 +366,9 @@ const HealthSystems = () => {
               className="text-center mb-12 md:mb-16"
             >
               <div className="inline-block mb-4 md:mb-6">
-                <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-lg">
-                  <Building2 className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
-                  <span className="text-[#143151] text-sm md:text-lg font-semibold">Enterprise Implementation</span>
+                <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-lg">
+                  <Building2 className="w-3 sm:w-4 h-3 sm:h-4 text-black" />
+                  <span className="text-black text-sm md:text-lg font-semibold">Enterprise Implementation</span>
                 </Card>
               </div>
               
