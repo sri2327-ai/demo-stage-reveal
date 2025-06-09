@@ -449,92 +449,140 @@ const HealthSystems = () => {
         </section>
 
         {/* Security & Trust Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-gradient-to-r from-gray-50 to-blue-50">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center"
+              className="text-center mb-12 md:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-gray-600">
-                Security
-              </h2>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-6 md:mb-8">
-                Enterprise-Grade
-              </h3>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
-                {complianceLogos.map((compliance, index) => (
-                  <motion.div
-                    key={compliance.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="p-4 md:p-6 bg-white hover:shadow-lg transition-all duration-300 border border-white/40">
-                      <div className="flex flex-col items-center gap-2 md:gap-3">
-                        <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center border-2 border-white shadow-lg">
-                          <div className="text-white">{compliance.icon}</div>
-                        </div>
-                        <p className="font-semibold text-sm md:text-base text-gray-600">{compliance.name}</p>
-                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
+              <div className="inline-block mb-4 md:mb-6">
+                <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-4 py-2 md:px-6 md:py-3 inline-flex items-center gap-2 md:gap-3 shadow-lg">
+                  <Shield className="w-3 sm:w-4 h-3 sm:h-4 text-black" />
+                  <span className="text-black text-sm md:text-lg font-semibold">Security & Compliance</span>
+                </Card>
               </div>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#143151] mb-6 md:mb-8 leading-tight">
+                Enterprise-Grade Security
+              </h2>
+              
+              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-4xl mx-auto mb-8 md:mb-12 leading-relaxed">
+                Built with the highest security standards and compliance frameworks to protect your data and maintain trust.
+              </p>
+            </motion.div>
 
-              {/* Privacy Statement */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.8, delay: 0.2 }} 
-                viewport={{ once: true }}
-                className="mb-6 md:mb-8"
-              >
-                <Card className="inline-block px-8 py-4 md:px-12 md:py-6 bg-gradient-to-r from-white/90 to-slate-50/90 backdrop-blur-sm border border-[#387E89]/20 shadow-xl">
-                  <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 lg:gap-12">
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
-                        <Shield className="w-4 h-4 md:w-5 md:h-5 text-white" />
+            {/* Compliance Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
+              {complianceLogos.map((compliance, index) => (
+                <motion.div
+                  key={compliance.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <Card className="p-4 md:p-6 bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 border border-slate-200/50 group-hover:scale-105 group-hover:border-[#387E89]/30 h-full">
+                    <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center border-2 border-white shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <div className="text-white">{compliance.icon}</div>
                       </div>
-                      <div className="text-left">
-                        <div className="text-xs md:text-sm font-medium text-[#143151]">Data Privacy</div>
-                        <div className="text-sm md:text-lg font-bold text-[#387E89]">Zero Customer Data Training</div>
+                      <div>
+                        <p className="font-bold text-sm md:text-base text-[#143151] mb-1">{compliance.name}</p>
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 mx-auto" />
                       </div>
                     </div>
-                    
-                    <div className="w-px h-8 md:h-12 bg-[#387E89]/30 hidden md:block"></div>
-                    
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
-                        <Database className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-xs md:text-sm font-medium text-[#143151]">Data Storage</div>
-                        <div className="text-sm md:text-lg font-bold text-[#387E89]">No Data Retention</div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Security Features Grid */}
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                transition={{ duration: 0.8, delay: 0.2 }} 
+                viewport={{ once: true }}
+              >
+                <Card className="p-6 md:p-8 bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl transition-all duration-300 h-full">
+                  <div className="flex items-start gap-4 md:gap-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-[#143151] mb-3">Data Privacy</h3>
+                      <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-3">
+                        Zero customer data training policy ensures your sensitive information remains completely private and secure.
+                      </p>
+                      <div className="inline-block px-3 py-1.5 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-full">
+                        <span className="text-xs md:text-sm font-semibold text-green-700">No Data Retention</span>
                       </div>
                     </div>
                   </div>
                 </Card>
               </motion.div>
 
-              <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed">
-                S10.ai does not use customer data for model training and does not store patient or operational data. 
-                Your information remains secure and private within your own systems.
-              </p>
-
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 text-sm md:text-base"
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                transition={{ duration: 0.8, delay: 0.4 }} 
+                viewport={{ once: true }}
               >
-                Review Our Security Architecture
-                <FileCheck className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-              </Button>
+                <Card className="p-6 md:p-8 bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl transition-all duration-300 h-full">
+                  <div className="flex items-start gap-4 md:gap-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Database className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-[#143151] mb-3">Secure Infrastructure</h3>
+                      <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-3">
+                        Enterprise-grade encryption, secure data processing, and comprehensive audit trails for complete transparency.
+                      </p>
+                      <div className="inline-block px-3 py-1.5 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-full">
+                        <span className="text-xs md:text-sm font-semibold text-purple-700">End-to-End Encryption</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            </div>
+
+            {/* Call to Action */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8, delay: 0.6 }} 
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="max-w-3xl mx-auto">
+                <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 leading-relaxed">
+                  S10.ai maintains the highest security standards while ensuring your data remains private and secure within your own systems.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 text-sm md:text-base"
+                  >
+                    Review Security Documentation
+                    <FileCheck className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 text-sm md:text-base"
+                  >
+                    Schedule Security Assessment
+                    <Shield className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                  </Button>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
