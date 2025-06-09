@@ -22,8 +22,15 @@ const WhyS10AI = () => {
     <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
-        <section className="px-4 sm:px-5 md:px-8 py-12 md:py-20">
-          <div className="max-w-6xl mx-auto text-center">
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-5 md:px-8 py-12 md:py-20">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute bottom-20 left-20 w-72 h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto text-center">
             <motion.div
               className="inline-block mb-6"
               initial={{ scale: 0.8, opacity: 0 }}
@@ -58,7 +65,6 @@ const WhyS10AI = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mb-16"
             >
               <Button 
                 size="lg" 
