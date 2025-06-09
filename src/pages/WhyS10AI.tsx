@@ -1,84 +1,55 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
 import StackedCards from '../components/StackedCards';
-import { 
-  Stethoscope, 
-  Clock, 
-  Users, 
-  Heart, 
-  Calendar,
-  Shield,
-  TrendingUp,
-  Star,
-  CheckCircle,
-  ArrowRight,
-  Clock3,
-  Phone
-} from 'lucide-react';
-
+import { Stethoscope, Clock, Users, Heart, Calendar, Shield, TrendingUp, Star, CheckCircle, ArrowRight, Clock3, Phone } from 'lucide-react';
 const WhyS10AI = () => {
-  const stackedCardsData = [
-    {
-      id: 'clinician',
-      icon: <Heart className="w-6 h-6 text-white" />,
-      title: 'For the Clinician',
-      subtitle: 'The Joy of Focused Medicine',
-      description: 'The burden of documentation is the biggest drain on a clinician\'s time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes.',
-      features: [
-        {
-          title: 'Slash Documentation Time by 75%',
-          description: 'Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home.'
-        },
-        {
-          title: 'Maximise Patient Interaction',
-          description: 'With notes handled, you can be fully present with your patients, increasing face-time by over 40%.'
-        },
-        {
-          title: 'Boost Clinician Well-being',
-          description: 'By removing the primary driver of burnout, we help you get back to the joy of practicing medicine.'
-        }
-      ],
-      theme: 'clinician' as const
-    },
-    {
-      id: 'practice',
-      icon: <TrendingUp className="w-6 h-6 text-white" />,
-      title: 'For the Practice',
-      subtitle: 'The Power of a Resilient Operation',
-      description: 'Staffing shortages and administrative overhead can cripple a practice\'s growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and cost-effective operation.',
-      features: [
-        {
-          title: 'Automate 85% of Front Office Tasks',
-          description: 'From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind.'
-        },
-        {
-          title: 'Address Staffing Shortages',
-          description: 'Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions.'
-        },
-        {
-          title: 'Improve Financial Impact',
-          description: 'Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40%.'
-        }
-      ],
-      theme: 'practice' as const
-    },
-    {
-      id: 'goal',
-      icon: <Star className="w-8 h-8 text-white" />,
-      title: 'It All Leads to One Thing: Delivering Better Patient Care',
-      subtitle: 'That is the S10.ai difference.',
-      description: 'Why do we obsess over workflow? Because the ultimate outcome of a streamlined practice is a superior patient experience. When clinicians are unburdened and operations are frictionless, patients get the focused, timely, and attentive care they deserve. They feel heard, supported, and valued at every step.',
-      features: [],
-      theme: 'goal' as const
-    }
-  ];
-
-  return (
-    <MouseTrackerProvider disableCursor={false}>
+  const stackedCardsData = [{
+    id: 'clinician',
+    icon: <Heart className="w-6 h-6 text-white" />,
+    title: 'For the Clinician',
+    subtitle: 'The Joy of Focused Medicine',
+    description: 'The burden of documentation is the biggest drain on a clinician\'s time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes.',
+    features: [{
+      title: 'Slash Documentation Time by 75%',
+      description: 'Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home.'
+    }, {
+      title: 'Maximise Patient Interaction',
+      description: 'With notes handled, you can be fully present with your patients, increasing face-time by over 40%.'
+    }, {
+      title: 'Boost Clinician Well-being',
+      description: 'By removing the primary driver of burnout, we help you get back to the joy of practicing medicine.'
+    }],
+    theme: 'clinician' as const
+  }, {
+    id: 'practice',
+    icon: <TrendingUp className="w-6 h-6 text-white" />,
+    title: 'For the Practice',
+    subtitle: 'The Power of a Resilient Operation',
+    description: 'Staffing shortages and administrative overhead can cripple a practice\'s growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and cost-effective operation.',
+    features: [{
+      title: 'Automate 85% of Front Office Tasks',
+      description: 'From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind.'
+    }, {
+      title: 'Address Staffing Shortages',
+      description: 'Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions.'
+    }, {
+      title: 'Improve Financial Impact',
+      description: 'Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40%.'
+    }],
+    theme: 'practice' as const
+  }, {
+    id: 'goal',
+    icon: <Star className="w-8 h-8 text-white" />,
+    title: 'It All Leads to One Thing: Delivering Better Patient Care',
+    subtitle: 'That is the S10.ai difference.',
+    description: 'Why do we obsess over workflow? Because the ultimate outcome of a streamlined practice is a superior patient experience. When clinicians are unburdened and operations are frictionless, patients get the focused, timely, and attentive care they deserve. They feel heard, supported, and valued at every step.',
+    features: [],
+    theme: 'goal' as const
+  }];
+  return <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -90,43 +61,58 @@ const WhyS10AI = () => {
           </div>
           
           <div className="relative z-10 max-w-6xl mx-auto text-center">
-            <motion.div
-              className="inline-block mb-6"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.7 }}
-            >
+            <motion.div className="inline-block mb-6" initial={{
+            scale: 0.8,
+            opacity: 0
+          }} animate={{
+            scale: 1,
+            opacity: 1
+          }} transition={{
+            duration: 0.7
+          }}>
               <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 inline-flex items-center gap-2">
                 <Stethoscope className="w-5 h-5 text-[#143151]" />
                 <span className="text-[#143151] text-sm font-medium">Maximize Patient Time. Minimize Documentation.</span>
               </Card>
             </motion.div>
             
-            <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight" initial={{
+            opacity: 0,
+            y: -20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }}>
               Why S10.AI?
             </motion.h1>
             
-            <motion.p 
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
+            <motion.p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed" initial={{
+            opacity: 0,
+            y: -10
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.4
+          }}>
               While others solve single problems, <strong>S10.ai transforms your entire practice workflow.</strong> We streamline documentation, automate front-office tasks, and boost efficiency—so you can focus on what matters most: exceptional patient care.
             </motion.p>
 
             {/* Subtle value indicators */}
-            <motion.div
-              className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
+            <motion.div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 max-w-4xl mx-auto" initial={{
+            opacity: 0,
+            y: 10
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.5,
+            duration: 0.6
+          }}>
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
                 <Clock className="w-4 h-4 text-[#387E89] flex-shrink-0" />
                 <span>75% Less Documentation Time</span>
@@ -141,15 +127,17 @@ const WhyS10AI = () => {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto"
-              >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.6,
+            duration: 0.6
+          }}>
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto">
                 See the Platform in Action
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -166,13 +154,17 @@ const WhyS10AI = () => {
           </div>
           
           <div className="relative z-10 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.8
+          }} viewport={{
+            once: true
+          }} className="text-center">
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-6">
                 Stop Patching Problems. Start Solving Them.
               </h2>
@@ -196,44 +188,63 @@ const WhyS10AI = () => {
           </div>
           
           <div className="relative z-10 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.8
+          }} viewport={{
+            once: true
+          }} className="text-center">
               {/* Trust Badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#387E89]/20 rounded-full px-4 py-2 mb-8"
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
+              <motion.div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-[#387E89]/20 rounded-full px-4 py-2 mb-8" initial={{
+              scale: 0.9,
+              opacity: 0
+            }} whileInView={{
+              scale: 1,
+              opacity: 1
+            }} transition={{
+              delay: 0.2,
+              duration: 0.6
+            }} viewport={{
+              once: true
+            }}>
                 <CheckCircle className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-[#143151]">Trusted by 500+ Healthcare Practices</span>
+                <span className="text-sm font-medium text-[#143151]">Trusted by 1000+ Healthcare Practices</span>
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h2 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <motion.h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight" initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.3,
+              duration: 0.8
+            }} viewport={{
+              once: true
+            }}>
                 Transform Your Practice Today
               </motion.h2>
               
               {/* Value Props Grid */}
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 max-w-4xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 max-w-4xl mx-auto" initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.4,
+              duration: 0.8
+            }} viewport={{
+              once: true
+            }}>
                 <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/20">
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                     <Clock3 className="w-5 h-5 text-white" />
@@ -265,50 +276,56 @@ const WhyS10AI = () => {
                 </div>
               </motion.div>
 
-              <motion.p 
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed" initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.5,
+              duration: 0.8
+            }} viewport={{
+              once: true
+            }}>
                 Join healthcare providers who've reduced administrative time by 75% while improving patient satisfaction scores.
               </motion.p>
               
               {/* CTA Buttons */}
-              <motion.div 
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
-                >
+              <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6" initial={{
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.6,
+              duration: 0.8
+            }} viewport={{
+              once: true
+            }}>
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold">
                   Start Your Free Assessment
                   <Calendar className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform duration-200" />
                 </Button>
                 
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold hover:scale-105 transform"
-                >
+                <Button variant="outline" size="lg" className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 transition-all duration-300 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold hover:scale-105 transform">
                   Watch 2-Min Demo
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </motion.div>
 
               {/* Social Proof */}
-              <motion.p 
-                className="text-xs sm:text-sm text-gray-600 mt-8 flex items-center justify-center gap-2 flex-wrap"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
+              <motion.p className="text-xs sm:text-sm text-gray-600 mt-8 flex items-center justify-center gap-2 flex-wrap" initial={{
+              opacity: 0
+            }} whileInView={{
+              opacity: 1
+            }} transition={{
+              delay: 0.8,
+              duration: 0.6
+            }} viewport={{
+              once: true
+            }}>
                 <div className="flex items-center gap-1">
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
@@ -322,8 +339,6 @@ const WhyS10AI = () => {
           </div>
         </section>
       </div>
-    </MouseTrackerProvider>
-  );
+    </MouseTrackerProvider>;
 };
-
 export default WhyS10AI;
