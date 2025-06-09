@@ -79,10 +79,10 @@ const PrivatePractice = () => {
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white backdrop-blur-sm border border-white/20 px-3 py-2 md:px-4 md:py-2 inline-flex items-center gap-2 shadow-2xl">
-                <Target className="w-4 h-4 md:w-5 md:h-5" />
-                <span className="text-sm md:text-base font-semibold">For Private Practices</span>
-              </Card>
+              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-foreground backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2 shadow-lg rounded-full">
+                <Target className="w-3 sm:w-4 h-3 sm:h-4" />
+                <span className="text-xs sm:text-sm font-semibold">For Private Practices</span>
+              </div>
             </motion.div>
             
             {/* Main Headline */}
