@@ -321,32 +321,32 @@ const HealthSystems = () => {
                       <Database className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-xs md:text-sm font-medium text-[#143151]">Training Data</div>
-                      <div className="text-sm md:text-lg font-bold text-[#387E89]">10M+ Encounters</div>
+                      <div className="text-xs md:text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">Training Data</div>
+                      <div className="text-sm md:text-lg font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">10M+ Encounters</div>
                     </div>
                   </div>
                   
                   <div className="w-px h-8 md:h-12 bg-[#387E89]/30 hidden md:block"></div>
                   
                   <div className="flex items-center gap-2 md:gap-3">
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                       <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-xs md:text-sm font-medium text-[#143151]">Adoption Rate</div>
-                      <div className="text-sm md:text-lg font-bold text-green-600">90%+ Success</div>
+                      <div className="text-xs md:text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">Adoption Rate</div>
+                      <div className="text-sm md:text-lg font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">90%+ Success</div>
                     </div>
                   </div>
                   
                   <div className="w-px h-8 md:h-12 bg-[#387E89]/30 hidden md:block"></div>
                   
                   <div className="flex items-center gap-2 md:gap-3">
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                       <Shield className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-xs md:text-sm font-medium text-[#143151]">Security</div>
-                      <div className="text-sm md:text-lg font-bold text-purple-600">Enterprise-Grade</div>
+                      <div className="text-xs md:text-sm font-medium bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">Security</div>
+                      <div className="text-sm md:text-lg font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">Enterprise-Grade</div>
                     </div>
                   </div>
                 </div>
@@ -398,7 +398,7 @@ const HealthSystems = () => {
                       </div>
                       <h3 className="text-lg md:text-xl font-bold text-[#143151] mb-3 md:mb-4">{advantage.title}</h3>
                       <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4 md:mb-6 flex-grow">{advantage.description}</p>
-                      <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full self-start">
+                      <div className="inline-block px-3 py-1.5 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full self-start">
                         <span className="text-xs md:text-sm font-semibold text-[#143151]">{advantage.stats}</span>
                       </div>
                     </div>
