@@ -186,7 +186,7 @@ const HealthSystems = () => {
                 transition={{ duration: 0.8, delay: 0.4 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-8 h-full bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200/40 hover:shadow-xl transition-all duration-300">
+                <Card className="p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
                       <Calendar className="w-8 h-8 text-white" />
