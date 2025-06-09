@@ -86,53 +86,103 @@ const HealthSystems = () => {
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-          {/* Decorative Background */}
+          {/* Strategic Background Pattern */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
-            <div className="absolute bottom-20 left-20 w-72 h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
-            <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
+            <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-blue-100/50 to-cyan-100/50 rounded-full blur-3xl opacity-60"></div>
+            
+            {/* Strategic Grid Pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
           </div>
           
-          <div className="relative z-10 max-w-6xl mx-auto text-center">
+          <div className="relative z-10 max-w-7xl mx-auto">
+            {/* Executive Badge */}
             <motion.div 
-              className="inline-block mb-6" 
+              className="text-center mb-8" 
               initial={{ scale: 0.8, opacity: 0 }} 
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 inline-flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-[#143151]" />
-                <span className="text-[#143151] text-sm font-medium">Enterprise-Grade Clinical AI</span>
+              <Card className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white backdrop-blur-sm border-0 px-6 py-3 inline-flex items-center gap-3 shadow-2xl">
+                <Target className="w-6 h-6" />
+                <span className="text-lg font-semibold">Strategic AI Transformation for Health Systems</span>
               </Card>
             </motion.div>
             
+            {/* Executive-Focused Headline */}
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight" 
+              className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#143151] mb-8 leading-tight" 
               initial={{ opacity: 0, y: -20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Unify Your Clinical & Operational AI
+              Accelerate Revenue.<br />
+              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                Reduce Costs.
+              </span><br />
+              Scale Operations.
             </motion.h1>
             
+            {/* Value Proposition */}
             <motion.p 
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed" 
+              className="text-center text-xl md:text-2xl lg:text-3xl text-gray-700 max-w-5xl mx-auto mb-12 leading-relaxed font-medium" 
               initial={{ opacity: 0, y: -10 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              The single platform to solve clinician burnout and optimize system-wide operations. S10.ai synchronizes ambient clinical intelligence <strong>(CRUSH)</strong> with administrative automation <strong>(BRAVO)</strong> to deliver unparalleled ROI and adoption.
+              The unified AI platform that delivers <strong className="text-[#143151]">40% revenue growth</strong> while reducing operational costs by <strong className="text-[#143151]">60%</strong>. Transform your health system with enterprise-grade clinical and administrative AI.
             </motion.p>
 
+            {/* Key Metrics Row */}
             <motion.div 
+              className="flex flex-wrap justify-center gap-8 md:gap-12 mb-12"
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto">
-                Request a Strategic Consultation
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#143151]">40%</div>
+                <div className="text-sm md:text-base text-gray-600 font-medium">Revenue Increase</div>
+              </div>
+              <div className="hidden md:block w-px h-16 bg-[#387E89]/30"></div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#143151]">60%</div>
+                <div className="text-sm md:text-base text-gray-600 font-medium">Cost Reduction</div>
+              </div>
+              <div className="hidden md:block w-px h-16 bg-[#387E89]/30"></div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#143151]">90%</div>
+                <div className="text-sm md:text-base text-gray-600 font-medium">Staff Satisfaction</div>
+              </div>
+              <div className="hidden md:block w-px h-16 bg-[#387E89]/30"></div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-[#143151]">6 Mo</div>
+                <div className="text-sm md:text-base text-gray-600 font-medium">Full ROI</div>
+              </div>
+            </motion.div>
+
+            {/* Executive CTA */}
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-8 py-4 text-lg font-semibold">
+                  Schedule Executive Briefing
+                  <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button variant="outline" size="lg" className="border-2 border-[#387E89] text-[#143151] hover:bg-[#387E89]/10 px-8 py-4 text-lg font-semibold">
+                  View ROI Calculator
+                  <BarChart3 className="w-6 h-6 ml-2" />
+                </Button>
+              </div>
+              
+              <p className="text-sm text-gray-500 mt-4 max-w-2xl mx-auto">
+                Join 50+ health systems already transforming their operations with S10.ai
+              </p>
             </motion.div>
           </div>
         </section>
