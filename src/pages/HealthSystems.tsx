@@ -210,24 +210,42 @@ const HealthSystems = () => {
         </section>
 
         {/* Enhanced Executive ROI & Control Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-20 lg:py-28 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-10 right-20 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 left-10 w-80 h-80 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#143151] mb-6">
-                Precision + Customization = Clinical Transformation
+              <div className="inline-block mb-6">
+                <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-6 py-3 inline-flex items-center gap-3 shadow-lg">
+                  <Brain className="w-6 h-6 text-[#143151]" />
+                  <span className="text-[#143151] text-lg font-semibold">Clinical Transformation Platform</span>
+                </Card>
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#143151] mb-8 leading-tight">
+                Precision + Customization = <br />
+                <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                  Clinical Excellence
+                </span>
               </h2>
-              <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto mb-8">
+              
+              <p className="text-xl md:text-2xl text-gray-700 max-w-5xl mx-auto mb-12 leading-relaxed">
                 We deliver provider-level personalization with the system-level governance, security, and financial results you need. Built for clinicians. Engineered for enterprise.
               </p>
               
               {/* Clinical Advantages Row */}
-              <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
                 {clinicalAdvantages.map((advantage, index) => (
                   <motion.div
                     key={advantage.title}
@@ -235,13 +253,16 @@ const HealthSystems = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
+                    className="group"
                   >
-                    <Card className="p-6 bg-white/80 backdrop-blur-sm border border-slate-200/50 hover:shadow-lg transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-3">
-                        {advantage.icon}
-                        <h4 className="font-semibold text-[#143151]">{advantage.title}</h4>
+                    <Card className="p-8 bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl hover:bg-white transition-all duration-300 group-hover:scale-105 group-hover:border-[#387E89]/30">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-xl flex items-center justify-center group-hover:from-[#143151]/20 group-hover:to-[#387E89]/20 transition-all duration-300">
+                          {advantage.icon}
+                        </div>
+                        <h4 className="text-xl font-bold text-[#143151]">{advantage.title}</h4>
                       </div>
-                      <p className="text-sm text-gray-600 leading-relaxed">{advantage.description}</p>
+                      <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -249,58 +270,85 @@ const HealthSystems = () => {
             </motion.div>
 
             {/* Enhanced Benefits Grid */}
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-10">
               {benefitsData.map((benefit, index) => (
                 <motion.div
                   key={benefit.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.7, delay: index * 0.15 }}
                   viewport={{ once: true }}
+                  className="group"
                 >
-                  <Card className="p-8 h-full hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border border-slate-200/50 group">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className={`w-14 h-14 bg-gradient-to-r ${benefit.gradient} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                        {benefit.icon}
+                  <Card className="p-10 h-full hover:shadow-2xl transition-all duration-500 bg-white/95 backdrop-blur-sm border border-slate-200/50 group-hover:border-slate-300/70 group-hover:scale-[1.02] relative overflow-hidden">
+                    {/* Subtle background gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-slate-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-start gap-6 mb-8">
+                        <div className={`w-16 h-16 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                          {benefit.icon}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-colors duration-300">
+                            {benefit.title}
+                          </h3>
+                          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full">
+                            <span className="text-sm font-semibold text-[#143151]">{benefit.stats}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-[#143151] mb-2">
-                          {benefit.title}
-                        </h3>
-                        <div className="text-sm font-medium text-[#387E89] mb-3">{benefit.stats}</div>
-                      </div>
+                      <p className="text-lg text-gray-700 leading-relaxed">
+                        {benefit.description}
+                      </p>
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
-                      {benefit.description}
-                    </p>
                   </Card>
                 </motion.div>
               ))}
             </div>
 
-            {/* Trust Indicators */}
+            {/* Enhanced Trust Indicators */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8, delay: 0.4 }} 
               viewport={{ once: true }}
-              className="text-center mt-12"
+              className="text-center mt-20"
             >
-              <Card className="inline-block px-8 py-4 bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 border border-[#387E89]/20">
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <Database className="w-5 h-5 text-[#143151]" />
-                    <span className="text-sm font-medium text-[#143151]">10M+ Encounters Trained</span>
+              <Card className="inline-block px-12 py-6 bg-gradient-to-r from-white/90 to-slate-50/90 backdrop-blur-sm border border-[#387E89]/20 shadow-xl">
+                <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
+                      <Database className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-medium text-[#143151]">Training Data</div>
+                      <div className="text-lg font-bold text-[#387E89]">10M+ Encounters</div>
+                    </div>
                   </div>
-                  <div className="w-px h-6 bg-[#387E89]/30"></div>
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-[#143151]" />
-                    <span className="text-sm font-medium text-[#143151]">90%+ Adoption Rate</span>
+                  
+                  <div className="w-px h-12 bg-[#387E89]/30 hidden md:block"></div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-medium text-[#143151]">Adoption Rate</div>
+                      <div className="text-lg font-bold text-green-600">90%+ Success</div>
+                    </div>
                   </div>
-                  <div className="w-px h-6 bg-[#387E89]/30"></div>
-                  <div className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-[#143151]" />
-                    <span className="text-sm font-medium text-[#143151]">Enterprise Security</span>
+                  
+                  <div className="w-px h-12 bg-[#387E89]/30 hidden md:block"></div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                      <Shield className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-medium text-[#143151]">Security</div>
+                      <div className="text-lg font-bold text-purple-600">Enterprise-Grade</div>
+                    </div>
                   </div>
                 </div>
               </Card>
