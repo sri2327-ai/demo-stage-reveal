@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -33,19 +34,19 @@ import {
 const HealthSystems = () => {
   const unifiedPlatformBenefits = [
     {
-      icon: <Brain className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <Brain className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'Dual-Agent Intelligence',
       description: 'Unlike single-point solutions, our CRUSH + BRAVO platform addresses both clinical documentation and administrative workflows simultaneously, delivering comprehensive ROI.',
       stats: 'Complete workflow coverage'
     },
     {
-      icon: <Network className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <Network className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'Unified Data Strategy',
       description: 'One platform means unified analytics, streamlined compliance, and coordinated AI governance across your entire health system.',
       stats: 'Single source of truth'
     },
     {
-      icon: <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'Exponential ROI Growth',
       description: 'When clinical efficiency gains combine with administrative automation, the financial impact compounds - delivering up to 40% revenue increase.',
       stats: 'Up to 40% revenue boost'
@@ -54,19 +55,19 @@ const HealthSystems = () => {
 
   const enterpriseAdvantages = [
     {
-      icon: <Shield className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <Shield className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'Enterprise-Grade Security',
       description: 'Built for health systems from day one with comprehensive compliance, audit trails, and enterprise data governance frameworks.',
       stats: 'HIPAA, GDPR, ISO 27001'
     },
     {
-      icon: <Workflow className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <Workflow className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'System-Wide Standardization',
       description: 'Deploy consistent AI workflows across departments while maintaining clinician autonomy and specialty-specific customization.',
       stats: 'Universal EHR integration'
     },
     {
-      icon: <Target className="w-6 h-6 md:w-8 md:h-8 text-[#143151]" />,
+      icon: <Target className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
       title: 'Strategic AI Partnership',
       description: 'Beyond software - we provide change management expertise, implementation strategy, and ongoing optimization for sustainable AI adoption.',
       stats: '90%+ adoption success'
@@ -74,44 +75,44 @@ const HealthSystems = () => {
   ];
 
   const complianceLogos = [
-    { name: 'HIPAA', icon: <Shield className="w-4 h-4 md:w-6 md:h-6" /> },
-    { name: 'PIPEDA', icon: <Lock className="w-4 h-4 md:w-6 md:h-6" /> },
-    { name: 'GDPR', icon: <Globe className="w-4 h-4 md:w-6 md:h-6" /> },
-    { name: 'ISO 27001', icon: <Award className="w-4 h-4 md:w-6 md:h-6" /> }
+    { name: 'HIPAA', icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> },
+    { name: 'PIPEDA', icon: <Lock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> },
+    { name: 'GDPR', icon: <Globe className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> },
+    { name: 'ISO 27001', icon: <Award className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" /> }
   ];
 
   return (
     <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           {/* Strategic Background Pattern */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-20 right-20 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
-            <div className="absolute bottom-20 left-20 w-40 h-40 md:w-80 md:h-80 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
-            <div className="absolute top-1/2 left-1/3 w-32 h-32 md:w-64 md:h-64 bg-gradient-to-br from-blue-100/50 to-cyan-100/50 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-32 h-32 sm:w-48 sm:h-48 lg:w-96 lg:h-96 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
+            <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-24 h-24 sm:w-40 sm:h-40 lg:w-80 lg:h-80 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute top-1/2 left-1/3 w-20 h-20 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-gradient-to-br from-blue-100/50 to-cyan-100/50 rounded-full blur-3xl opacity-60"></div>
             
             {/* Strategic Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]"></div>
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto">
             {/* Executive Badge */}
             <motion.div 
-              className="text-center mb-6 md:mb-8" 
+              className="text-center mb-4 sm:mb-6 lg:mb-8" 
               initial={{ scale: 0.8, opacity: 0 }} 
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2 shadow-2xl">
-                <Target className="w-3 sm:w-4 h-3 sm:h-4 text-black" />
-                <span className="text-black text-xs sm:text-sm font-semibold">Strategic AI Transformation for Health Systems</span>
-              </Card>
+              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 inline-flex items-center gap-2 shadow-lg rounded-full">
+                <Target className="w-3 h-3 sm:w-4 sm:h-4 text-black" />
+                <span className="text-black text-xs sm:text-sm lg:text-base font-semibold">Strategic AI Transformation for Health Systems</span>
+              </div>
             </motion.div>
             
             {/* Executive-Focused Headline */}
             <motion.h1 
-              className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 md:mb-8 leading-tight" 
+              className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 lg:mb-8 leading-tight px-4" 
               initial={{ opacity: 0, y: -20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -125,7 +126,7 @@ const HealthSystems = () => {
             
             {/* Value Proposition */}
             <motion.p 
-              className="text-center text-lg md:text-xl lg:text-2xl text-gray-700 max-w-5xl mx-auto mb-8 md:mb-12 leading-relaxed font-medium" 
+              className="text-center text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 max-w-5xl mx-auto mb-6 sm:mb-8 lg:mb-12 leading-relaxed font-medium px-4" 
               initial={{ opacity: 0, y: -10 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -135,51 +136,51 @@ const HealthSystems = () => {
 
             {/* Key Metrics Row */}
             <motion.div 
-              className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12"
+              className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 xl:gap-12 mb-6 sm:mb-8 lg:mb-12 px-4"
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <div className="text-center">
-                <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">40%</div>
-                <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Revenue Increase</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151]">40%</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600 font-medium">Revenue Increase</div>
               </div>
-              <div className="hidden md:block w-px h-12 lg:h-16 bg-[#387E89]/30"></div>
+              <div className="hidden sm:block w-px h-8 sm:h-12 lg:h-16 bg-[#387E89]/30"></div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">60%</div>
-                <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Cost Reduction</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151]">60%</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600 font-medium">Cost Reduction</div>
               </div>
-              <div className="hidden md:block w-px h-12 lg:h-16 bg-[#387E89]/30"></div>
+              <div className="hidden sm:block w-px h-8 sm:h-12 lg:h-16 bg-[#387E89]/30"></div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">90%</div>
-                <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Staff Satisfaction</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151]">90%</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600 font-medium">Staff Satisfaction</div>
               </div>
-              <div className="hidden md:block w-px h-12 lg:h-16 bg-[#387E89]/30"></div>
+              <div className="hidden sm:block w-px h-8 sm:h-12 lg:h-16 bg-[#387E89]/30"></div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151]">6 Mo</div>
-                <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Full ROI</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151]">6 Mo</div>
+                <div className="text-xs sm:text-sm lg:text-base text-gray-600 font-medium">Full ROI</div>
               </div>
             </motion.div>
 
             {/* Executive CTA */}
             <motion.div 
-              className="text-center"
+              className="text-center px-4"
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center max-w-2xl mx-auto">
+                <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold">
                   Schedule Executive Briefing
-                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" size="lg" className="border-2 border-[#387E89] text-[#143151] hover:bg-[#387E89]/10 px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-[#387E89] text-[#143151] hover:bg-[#387E89]/10 px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold">
                   View ROI Calculator
-                  <BarChart3 className="w-5 h-5 md:w-6 md:h-6 ml-2" />
+                  <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 ml-2" />
                 </Button>
               </div>
               
-              <p className="text-xs md:text-sm text-gray-500 mt-4 max-w-2xl mx-auto">
+              <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 max-w-2xl mx-auto">
                 Join 50+ health systems already transforming their operations with S10.ai
               </p>
             </motion.div>
@@ -187,24 +188,24 @@ const HealthSystems = () => {
         </section>
 
         {/* Platform Solution Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center mb-8 md:mb-12"
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4 md:mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4 lg:mb-6">
                 The Complete Workflow Solution
               </h2>
-              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 Address clinical and operational friction simultaneously with our dual-agent platform.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               {/* CRUSH Column */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }} 
@@ -212,17 +213,17 @@ const HealthSystems = () => {
                 transition={{ duration: 0.8, delay: 0.2 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
-                      <Stethoscope className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#143151]">CRUSH</h3>
-                      <p className="text-base md:text-lg text-gray-600">AI Medical Scribe</p>
+                    <div className="min-w-0">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">CRUSH</h3>
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">AI Medical Scribe</p>
                     </div>
                   </div>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
                     Listens to patient encounters and generates accurate, specialty-specific notes in your EHR, saving clinicians over 2 hours daily.
                   </p>
                 </Card>
@@ -235,17 +236,17 @@ const HealthSystems = () => {
                 transition={{ duration: 0.8, delay: 0.4 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
-                      <Calendar className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#143151]">BRAVO</h3>
-                      <p className="text-base md:text-lg text-gray-600">AI Staffing Agent</p>
+                    <div className="min-w-0">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">BRAVO</h3>
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">AI Staffing Agent</p>
                     </div>
                   </div>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
                     Automates 85% of admin work—scheduling, intake, refills, and more—to boost efficiency and accelerate revenue.
                   </p>
                 </Card>

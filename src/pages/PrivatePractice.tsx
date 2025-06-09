@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -27,22 +28,22 @@ const PrivatePractice = () => {
     {
       value: '$150,000+',
       label: 'Annual Cost Savings',
-      icon: <PiggyBank className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
+      icon: <PiggyBank className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#143151]" />
     },
     {
       value: '-50%',
       label: 'Patient No-Shows',
-      icon: <Calendar className="w-5 h-5 md:w-6 md:h-6 text-[#387E89]" />
+      icon: <Calendar className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#387E89]" />
     },
     {
       value: '+40%',
       label: 'Patient Face-Time',
-      icon: <Clock className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
+      icon: <Clock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#143151]" />
     },
     {
       value: '95%',
       label: 'Patient Satisfaction',
-      icon: <Heart className="w-5 h-5 md:w-6 md:h-6 text-[#387E89]" />
+      icon: <Heart className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#387E89]" />
     }
   ];
 
@@ -63,31 +64,31 @@ const PrivatePractice = () => {
     <MouseTrackerProvider disableCursor={false}>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           {/* Background Pattern */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-20 right-20 w-32 h-32 md:w-64 md:h-64 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
-            <div className="absolute bottom-20 left-20 w-24 h-24 md:w-48 md:h-48 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-24 h-24 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
+            <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-20 h-20 sm:w-24 sm:h-24 lg:w-48 lg:h-48 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]"></div>
           </div>
           
           <div className="relative z-10 max-w-5xl mx-auto text-center">
             {/* Badge */}
             <motion.div 
-              className="mb-6" 
+              className="mb-4 sm:mb-6" 
               initial={{ scale: 0.8, opacity: 0 }} 
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-foreground backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2 shadow-lg rounded-full">
-                <Target className="w-3 sm:w-4 h-3 sm:h-4" />
-                <span className="text-xs sm:text-sm font-semibold">For Private Practices</span>
+              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-foreground backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 inline-flex items-center gap-1.5 sm:gap-2 shadow-lg rounded-full">
+                <Target className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm lg:text-base font-semibold">For Private Practices</span>
               </div>
             </motion.div>
             
             {/* Main Headline */}
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#143151] mb-4 md:mb-6 leading-tight" 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-3 sm:mb-4 lg:mb-6 leading-tight px-4" 
               initial={{ opacity: 0, y: -20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -100,7 +101,7 @@ const PrivatePractice = () => {
             
             {/* Subtitle */}
             <motion.p 
-              className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto mb-8 leading-relaxed" 
+              className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 max-w-4xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4" 
               initial={{ opacity: 0, y: -10 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -110,23 +111,23 @@ const PrivatePractice = () => {
 
             {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 px-4"
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold">
-                <Play className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold">
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mr-2" />
                 Watch a 5-Minute Demo
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="ghost" size="lg" className="text-[#143151] hover:bg-[#387E89]/10 px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold underline">
+              <Button variant="ghost" size="lg" className="w-full sm:w-auto text-[#143151] hover:bg-[#387E89]/10 px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold underline">
                 See Pricing
               </Button>
             </motion.div>
 
             <motion.p 
-              className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto"
+              className="text-xs sm:text-sm lg:text-base text-gray-500 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               transition={{ delay: 0.8, duration: 0.6 }}
@@ -137,24 +138,24 @@ const PrivatePractice = () => {
         </section>
 
         {/* All-in-One Solution Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center mb-8 md:mb-12"
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
                 Your AI Team, Ready on Day One
               </h2>
-              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 S10.ai gives you a personal scribe and a front-office assistant in one simple platform.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               {/* CRUSH Column */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }} 
@@ -162,17 +163,17 @@ const PrivatePractice = () => {
                 transition={{ duration: 0.8, delay: 0.2 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
-                      <FileText className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FileText className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#143151]">CRUSH</h3>
-                      <p className="text-base md:text-lg text-gray-600">Your AI Medical Scribe</p>
+                    <div className="min-w-0">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">CRUSH</h3>
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">Your AI Medical Scribe</p>
                     </div>
                   </div>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
                     Saves you 2+ hours on charting every day. Generates perfect, customized notes and codes them automatically. No more after-hours work.
                   </p>
                 </Card>
@@ -185,17 +186,17 @@ const PrivatePractice = () => {
                 transition={{ duration: 0.8, delay: 0.4 }} 
                 viewport={{ once: true }}
               >
-                <Card className="p-6 md:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
-                      <Headphones className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Headphones className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#143151]">BRAVO</h3>
-                      <p className="text-base md:text-lg text-gray-600">Your AI Front-Office Assistant</p>
+                    <div className="min-w-0">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">BRAVO</h3>
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">Your AI Front-Office Assistant</p>
                     </div>
                   </div>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
                     Works 24/7 to automate scheduling, handle patient intake, and manage refills, reducing your staff's administrative burden.
                   </p>
                 </Card>
@@ -205,24 +206,24 @@ const PrivatePractice = () => {
         </section>
 
         {/* Quantifiable Results Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center mb-8 md:mb-12"
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
                 Run a More Profitable Practice
               </h2>
-              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
+              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 Our platform delivers an immediate return.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
               {metrics.map((metric, index) => (
                 <motion.div
                   key={metric.label}
@@ -231,14 +232,14 @@ const PrivatePractice = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="p-4 md:p-6 text-center bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl transition-all duration-300">
-                    <div className="flex justify-center mb-2 md:mb-3">
+                  <Card className="p-3 sm:p-4 lg:p-6 text-center bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl transition-all duration-300">
+                    <div className="flex justify-center mb-2 sm:mb-3">
                       {metric.icon}
                     </div>
-                    <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143151] mb-1 md:mb-2">
+                    <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-[#143151] mb-1 lg:mb-2">
                       {metric.value}
                     </div>
-                    <div className="text-xs md:text-sm text-gray-600 font-medium">
+                    <div className="text-xs sm:text-sm lg:text-sm text-gray-600 font-medium leading-tight">
                       {metric.label}
                     </div>
                   </Card>
