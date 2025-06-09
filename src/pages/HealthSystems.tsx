@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -188,8 +187,8 @@ const HealthSystems = () => {
               >
                 <Card className="p-8 h-full bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200/40 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl flex items-center justify-center">
-                      <Calendar className="w-8 h-8 text-white" />
+                    <div className="w-16 h-16 bg-white/70 backdrop-blur-sm rounded-xl flex items-center justify-center border border-pink-200/30">
+                      <Calendar className="w-8 h-8 text-pink-600" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-[#143151]">BRAVO</h3>
