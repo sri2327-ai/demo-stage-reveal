@@ -98,7 +98,7 @@ const WhyS10AI = () => {
             >
               <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-4 py-2 inline-flex items-center gap-2">
                 <Stethoscope className="w-5 h-5 text-[#143151]" />
-                <span className="text-[#143151] text-sm font-medium">The Power of a Unified Platform</span>
+                <span className="text-[#143151] text-sm font-medium">Maximize Patient Time. Minimize Documentation.</span>
               </Card>
             </motion.div>
             
@@ -117,8 +117,29 @@ const WhyS10AI = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Other tools solve one problem. <strong>S10.ai transforms your entire practice.</strong> We are the only platform that integrates clinical relief with operational excellence, creating a healthier ecosystem for your clinicians, staff, and patients.
+              While others solve single problems, <strong>S10.ai transforms your entire practice workflow.</strong> We streamline documentation, automate front-office tasks, and boost efficiency—so you can focus on what matters most: exceptional patient care.
             </motion.p>
+
+            {/* Subtle value indicators */}
+            <motion.div
+              className="flex flex-wrap justify-center gap-6 mb-8 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Clock className="w-4 h-4 text-[#387E89]" />
+                <span>75% Less Documentation Time</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Users className="w-4 h-4 text-[#387E89]" />
+                <span>Enhanced Patient Interaction</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <TrendingUp className="w-4 h-4 text-[#387E89]" />
+                <span>Improved Practice Efficiency</span>
+              </div>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
