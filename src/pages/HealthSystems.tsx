@@ -265,39 +265,39 @@ const HealthSystems = () => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <Card className="inline-block px-12 py-6 bg-gradient-to-r from-slate-50/80 to-gray-50/80 backdrop-blur-sm border border-slate-200/50 shadow-lg">
+              <Card className="inline-block px-12 py-6 bg-gradient-to-r from-white/90 to-slate-50/90 backdrop-blur-sm border border-[#387E89]/20 shadow-xl">
                 <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
                       <Database className="w-5 h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-medium text-slate-600">Training Data</div>
-                      <div className="text-lg font-bold text-slate-700">10M+ Encounters</div>
+                      <div className="text-sm font-medium text-[#143151]">Training Data</div>
+                      <div className="text-lg font-bold text-[#387E89]">10M+ Encounters</div>
                     </div>
                   </div>
                   
-                  <div className="w-px h-12 bg-slate-300/50 hidden md:block"></div>
+                  <div className="w-px h-12 bg-[#387E89]/30 hidden md:block"></div>
                   
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-medium text-slate-600">Adoption Rate</div>
-                      <div className="text-lg font-bold text-slate-700">90%+ Success</div>
+                      <div className="text-sm font-medium text-[#143151]">Adoption Rate</div>
+                      <div className="text-lg font-bold text-green-600">90%+ Success</div>
                     </div>
                   </div>
                   
-                  <div className="w-px h-12 bg-slate-300/50 hidden md:block"></div>
+                  <div className="w-px h-12 bg-[#387E89]/30 hidden md:block"></div>
                   
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
                       <Shield className="w-5 h-5 text-white" />
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-medium text-slate-600">Security</div>
-                      <div className="text-lg font-bold text-slate-700">Enterprise-Grade</div>
+                      <div className="text-sm font-medium text-[#143151]">Security</div>
+                      <div className="text-lg font-bold text-purple-600">Enterprise-Grade</div>
                     </div>
                   </div>
                 </div>
