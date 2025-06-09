@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -78,8 +77,14 @@ const WhyS10AI = () => {
         </section>
 
         {/* Introduction Section */}
-        <section className="px-4 sm:px-5 md:px-8 py-16 bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-10 left-10 w-48 h-48 bg-purple-100 rounded-full blur-3xl opacity-40"></div>
+            <div className="absolute bottom-10 right-10 w-56 h-56 bg-cyan-100 rounded-full blur-3xl opacity-50"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -98,8 +103,14 @@ const WhyS10AI = () => {
         </section>
 
         {/* Section 1: For the Clinician */}
-        <section className="px-4 sm:px-5 md:px-8 py-16">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-20 right-32 w-40 h-40 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
+            <div className="absolute bottom-32 left-20 w-52 h-52 bg-purple-100 rounded-full blur-3xl opacity-60"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -159,8 +170,14 @@ const WhyS10AI = () => {
         </section>
 
         {/* Section 2: For the Practice */}
-        <section className="px-4 sm:px-5 md:px-8 py-16 bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-16 left-16 w-60 h-60 bg-cyan-100 rounded-full blur-3xl opacity-55"></div>
+            <div className="absolute bottom-20 right-24 w-44 h-44 bg-blue-100 rounded-full blur-3xl opacity-65"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -220,8 +237,14 @@ const WhyS10AI = () => {
         </section>
 
         {/* Ultimate Goal Section */}
-        <section className="px-4 sm:px-5 md:px-8 py-16">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-24 right-20 w-36 h-36 bg-purple-100 rounded-full blur-3xl opacity-45"></div>
+            <div className="absolute bottom-16 left-32 w-48 h-48 bg-cyan-100 rounded-full blur-3xl opacity-55"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -250,8 +273,15 @@ const WhyS10AI = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="px-4 sm:px-5 md:px-8 py-16 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="relative px-4 sm:px-5 md:px-8 py-16">
+          {/* Decorative Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-12 left-24 w-52 h-52 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
+            <div className="absolute bottom-12 right-16 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-cyan-100 rounded-full blur-3xl opacity-45"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
