@@ -82,7 +82,7 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                 
                 <div className="relative z-10 p-6 sm:p-8 lg:p-12">
                   {card.theme === 'goal' ? (
-                    // Goal card - centered layout
+                    // Goal card - centered layout with enhanced button presentation
                     <div className="text-center max-w-5xl mx-auto">
                       <div className="flex justify-center mb-6">
                         <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-4 sm:p-5 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300">
@@ -94,14 +94,30 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                         {card.title}
                       </h2>
                       
-                      <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-6 font-medium max-w-4xl mx-auto">
+                      <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-8 font-medium max-w-4xl mx-auto">
                         {card.description}
                       </p>
                       
-                      <div className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-2xl p-4 sm:p-6 inline-block">
-                        <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">
-                          {card.subtitle}
-                        </p>
+                      {/* Enhanced button presentation with modern design */}
+                      <div className="flex justify-center mb-4">
+                        <motion.div 
+                          className="relative group/badge"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3, duration: 0.6 }}
+                        >
+                          {/* Glow effect background */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#143151]/20 to-[#387E89]/20 rounded-2xl blur-xl opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
+                          
+                          {/* Main badge */}
+                          <div className="relative bg-gradient-to-r from-[#143151] via-[#387E89] to-[#143151] p-[1px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="bg-gradient-to-r from-white/95 via-white/90 to-white/95 backdrop-blur-sm rounded-2xl px-6 sm:px-8 py-3 sm:py-4 group-hover/badge:from-white group-hover/badge:via-white group-hover/badge:to-white transition-all duration-300">
+                              <p className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                                {card.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
                       </div>
                     </div>
                   ) : (
