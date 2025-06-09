@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -460,15 +458,10 @@ const HealthSystems = () => {
               viewport={{ once: true }} 
               className="text-center"
             >
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center border-2 border-white shadow-lg">
-                  <Shield className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-600">
-                  Security
-                </h2>
-              </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent mb-6 md:mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-gray-600">
+                Security
+              </h2>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-6 md:mb-8">
                 Enterprise-Grade
               </h3>
               
@@ -551,4 +544,3 @@ const HealthSystems = () => {
 };
 
 export default HealthSystems;
-
