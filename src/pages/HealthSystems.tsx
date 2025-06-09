@@ -25,56 +25,52 @@ import {
   Settings,
   Brain,
   Zap,
-  Database
+  Database,
+  Network,
+  BarChart3,
+  Workflow
 } from 'lucide-react';
 
 const HealthSystems = () => {
-  const benefitsData = [
+  const unifiedPlatformBenefits = [
     {
-      icon: <Brain className="w-8 h-8 text-white" />,
-      title: 'Precision + Customization = Clinical Excellence',
-      description: 'Our dual-agent AI (CRUSH + BRAVO) delivers specialty-specific documentation and workflow automation trained on 10M+ encounters, with provider-level customization that ensures 90%+ adoption rates.',
-      gradient: 'from-blue-500 to-cyan-600',
-      stats: '90%+ adoption rate'
+      icon: <Brain className="w-8 h-8 text-[#143151]" />,
+      title: 'Dual-Agent Intelligence',
+      description: 'Unlike single-point solutions, our CRUSH + BRAVO platform addresses both clinical documentation and administrative workflows simultaneously, delivering comprehensive ROI.',
+      stats: 'Complete workflow coverage'
     },
     {
-      icon: <DollarSign className="w-8 h-8 text-white" />,
-      title: 'Maximize Financial Impact',
-      description: 'Increase revenue up to 40% with AI-driven coding optimization and intelligent scheduling that works across both clinical and administrative workflows.',
-      gradient: 'from-green-500 to-emerald-600',
-      stats: 'Up to 40% revenue increase'
+      icon: <Network className="w-8 h-8 text-[#143151]" />,
+      title: 'Unified Data Strategy',
+      description: 'One platform means unified analytics, streamlined compliance, and coordinated AI governance across your entire health system.',
+      stats: 'Single source of truth'
     },
     {
-      icon: <Shield className="w-8 h-8 text-white" />,
-      title: 'Operationalize AI with Confidence',
-      description: 'As your strategic AI partner, we provide comprehensive change management, enterprise data strategies, and unparalleled transparency in healthcare AI implementation.',
-      gradient: 'from-purple-500 to-indigo-600',
-      stats: 'Enterprise-grade security'
-    },
-    {
-      icon: <Building2 className="w-8 h-8 text-white" />,
-      title: 'Standardize with Deep Integration',
-      description: 'Deploy one secure platform that integrates seamlessly with any EHR and your existing infrastructure, supporting organization-wide standards while maintaining clinician autonomy.',
-      gradient: 'from-orange-500 to-red-600',
-      stats: 'Universal EHR compatibility'
+      icon: <BarChart3 className="w-8 h-8 text-[#143151]" />,
+      title: 'Exponential ROI Growth',
+      description: 'When clinical efficiency gains combine with administrative automation, the financial impact compounds - delivering up to 40% revenue increase.',
+      stats: 'Up to 40% revenue boost'
     }
   ];
 
-  const clinicalAdvantages = [
+  const enterpriseAdvantages = [
     {
-      icon: <Target className="w-6 h-6 text-[#143151]" />,
-      title: 'Specialty-Specific Intelligence',
-      description: 'Trained on diverse clinical encounters with discrete specialty labeling for accurate complex case documentation.'
+      icon: <Shield className="w-8 h-8 text-[#143151]" />,
+      title: 'Enterprise-Grade Security',
+      description: 'Built for health systems from day one with comprehensive compliance, audit trails, and enterprise data governance frameworks.',
+      stats: 'HIPAA, GDPR, ISO 27001'
     },
     {
-      icon: <Settings className="w-6 h-6 text-[#143151]" />,
-      title: 'Workflow-Level Customization',
-      description: 'Adapts to each clinician\'s unique style, preferences, and organizational protocols automatically.'
+      icon: <Workflow className="w-8 h-8 text-[#143151]" />,
+      title: 'System-Wide Standardization',
+      description: 'Deploy consistent AI workflows across departments while maintaining clinician autonomy and specialty-specific customization.',
+      stats: 'Universal EHR integration'
     },
     {
-      icon: <Zap className="w-6 h-6 text-[#143151]" />,
-      title: 'Dual-Agent Efficiency',
-      description: 'Unlike single-point solutions, our CRUSH + BRAVO platform addresses both clinical and operational friction simultaneously.'
+      icon: <Target className="w-8 h-8 text-[#143151]" />,
+      title: 'Strategic AI Partnership',
+      description: 'Beyond software - we provide change management expertise, implementation strategy, and ongoing optimization for sustainable AI adoption.',
+      stats: '90%+ adoption success'
     }
   ];
 
@@ -209,111 +205,65 @@ const HealthSystems = () => {
           </div>
         </section>
 
-        {/* Enhanced Executive ROI & Control Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-20 lg:py-28 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-10 right-20 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 left-10 w-80 h-80 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div>
-          
-          <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Unified Platform Advantage Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-20 lg:py-28 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 30 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }} 
               viewport={{ once: true }} 
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
               <div className="inline-block mb-6">
                 <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-6 py-3 inline-flex items-center gap-3 shadow-lg">
-                  <Brain className="w-6 h-6 text-[#143151]" />
-                  <span className="text-[#143151] text-lg font-semibold">Clinical Transformation Platform</span>
+                  <Zap className="w-6 h-6 text-[#143151]" />
+                  <span className="text-[#143151] text-lg font-semibold">Unified Platform Advantage</span>
                 </Card>
               </div>
               
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#143151] mb-8 leading-tight">
-                Precision + Customization = <br />
-                <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
-                  Clinical Excellence
-                </span>
+                Beyond Single-Point Solutions
               </h2>
               
-              <p className="text-xl md:text-2xl text-gray-700 max-w-5xl mx-auto mb-12 leading-relaxed">
-                We deliver provider-level personalization with the system-level governance, security, and financial results you need. Built for clinicians. Engineered for enterprise.
+              <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-12 leading-relaxed">
+                While competitors offer isolated tools, S10.ai delivers a unified platform where clinical and administrative AI work in harmony to multiply your impact.
               </p>
-              
-              {/* Clinical Advantages Row */}
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
-                {clinicalAdvantages.map((advantage, index) => (
-                  <motion.div
-                    key={advantage.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <Card className="p-8 bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl hover:bg-white transition-all duration-300 group-hover:scale-105 group-hover:border-[#387E89]/30">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-xl flex items-center justify-center group-hover:from-[#143151]/20 group-hover:to-[#387E89]/20 transition-all duration-300">
-                          {advantage.icon}
-                        </div>
-                        <h4 className="text-xl font-bold text-[#143151]">{advantage.title}</h4>
-                      </div>
-                      <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
 
-            {/* Enhanced Benefits Grid */}
-            <div className="grid lg:grid-cols-2 gap-10">
-              {benefitsData.map((benefit, index) => (
+            <div className="grid lg:grid-cols-3 gap-8 mb-16">
+              {unifiedPlatformBenefits.map((benefit, index) => (
                 <motion.div
                   key={benefit.title}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.15 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="group"
                 >
-                  <Card className="p-10 h-full hover:shadow-2xl transition-all duration-500 bg-white/95 backdrop-blur-sm border border-slate-200/50 group-hover:border-slate-300/70 group-hover:scale-[1.02] relative overflow-hidden">
-                    {/* Subtle background gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-slate-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-start gap-6 mb-8">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
-                          {benefit.icon}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-colors duration-300">
-                            {benefit.title}
-                          </h3>
-                          <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full">
-                            <span className="text-sm font-semibold text-[#143151]">{benefit.stats}</span>
-                          </div>
-                        </div>
+                  <Card className="p-8 h-full bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl hover:bg-white transition-all duration-300 group-hover:scale-105 group-hover:border-[#387E89]/30">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-xl flex items-center justify-center mb-6 group-hover:from-[#143151]/20 group-hover:to-[#387E89]/20 transition-all duration-300">
+                        {benefit.icon}
                       </div>
-                      <p className="text-lg text-gray-700 leading-relaxed">
-                        {benefit.description}
-                      </p>
+                      <h3 className="text-xl font-bold text-[#143151] mb-4">{benefit.title}</h3>
+                      <p className="text-gray-600 leading-relaxed mb-4">{benefit.description}</p>
+                      <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full">
+                        <span className="text-sm font-semibold text-[#143151]">{benefit.stats}</span>
+                      </div>
                     </div>
                   </Card>
                 </motion.div>
               ))}
             </div>
 
-            {/* Enhanced Trust Indicators */}
+            {/* Trust Indicators */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8, delay: 0.4 }} 
               viewport={{ once: true }}
-              className="text-center mt-20"
+              className="text-center"
             >
               <Card className="inline-block px-12 py-6 bg-gradient-to-r from-white/90 to-slate-50/90 backdrop-blur-sm border border-[#387E89]/20 shadow-xl">
                 <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
@@ -353,6 +303,60 @@ const HealthSystems = () => {
                 </div>
               </Card>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Enterprise Implementation Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+          <div className="max-w-7xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8 }} 
+              viewport={{ once: true }} 
+              className="text-center mb-16"
+            >
+              <div className="inline-block mb-6">
+                <Card className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 backdrop-blur-sm border border-[#387E89]/20 px-6 py-3 inline-flex items-center gap-3 shadow-lg">
+                  <Building2 className="w-6 h-6 text-[#143151]" />
+                  <span className="text-[#143151] text-lg font-semibold">Enterprise Implementation</span>
+                </Card>
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#143151] mb-8 leading-tight">
+                Built for Health System Scale
+              </h2>
+              
+              <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-12 leading-relaxed">
+                From pilot to system-wide deployment, we provide the infrastructure, support, and strategic guidance to ensure successful AI transformation at enterprise scale.
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              {enterpriseAdvantages.map((advantage, index) => (
+                <motion.div
+                  key={advantage.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <Card className="p-8 h-full bg-white hover:shadow-xl transition-all duration-300 group-hover:scale-105 border border-slate-200/50 group-hover:border-[#387E89]/30">
+                    <div className="flex flex-col">
+                      <div className="w-16 h-16 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-xl flex items-center justify-center mb-6 group-hover:from-[#143151]/20 group-hover:to-[#387E89]/20 transition-all duration-300">
+                        {advantage.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-[#143151] mb-4">{advantage.title}</h3>
+                      <p className="text-gray-600 leading-relaxed mb-6 flex-grow">{advantage.description}</p>
+                      <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full self-start">
+                        <span className="text-sm font-semibold text-[#143151]">{advantage.stats}</span>
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -421,7 +425,7 @@ const HealthSystems = () => {
                     <Card className="p-6 bg-white hover:shadow-lg transition-all duration-300">
                       <div className="flex flex-col items-center gap-3">
                         <div className="w-12 h-12 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
-                          {compliance.icon}
+                          <div className="text-white">{compliance.icon}</div>
                         </div>
                         <p className="font-semibold text-[#143151]">{compliance.name}</p>
                         <CheckCircle className="w-5 h-5 text-green-600" />
