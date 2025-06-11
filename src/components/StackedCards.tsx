@@ -1,4 +1,3 @@
-
 import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Card } from './ui/card';
@@ -28,20 +27,20 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
     offset: ["start start", "end end"]
   });
 
-  // Optimized transform calculations with reduced mobile height
+  // Enhanced transform calculations with better mobile optimization
   const cardTransforms = useMemo(() => {
     return cards.map((_, index) => {
       const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-      const scaleReduction = isMobile ? 0.02 : 0.04;
-      const yOffset = isMobile ? 8 : 20;
+      const scaleReduction = isMobile ? 0.015 : 0.03;
+      const yOffset = isMobile ? 6 : 15;
       
       const targetScale = 1 - ((cards.length - index - 1) * scaleReduction);
       const targetY = index * yOffset;
       
-      // Tighter progress distribution for smoother transitions
+      // More aggressive progress distribution for smoother transitions
       const cardProgress = index / Math.max(1, cards.length - 1);
-      const start = Math.max(0, cardProgress * 0.5);
-      const end = Math.min(1, start + 0.6);
+      const start = Math.max(0, cardProgress * 0.4);
+      const end = Math.min(1, start + 0.7);
       
       return {
         scale: useTransform(
@@ -58,8 +57,8 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
         ),
         opacity: useTransform(
           scrollYProgress,
-          [Math.max(0, start - 0.03), start, end, Math.min(1, end + 0.03)],
-          [0.8, 1, 1, 0.95],
+          [Math.max(0, start - 0.02), start, end, Math.min(1, end + 0.02)],
+          [0.85, 1, 1, 0.98],
           { clamp: true }
         ),
       };
@@ -73,7 +72,7 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
       ref={containerRef} 
       className="relative w-full"
       style={{ 
-        height: `${Math.max(200, cards.length * (typeof window !== 'undefined' && window.innerWidth < 768 ? 80 : 100))}vh` 
+        height: `${Math.max(150, cards.length * (typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 80))}vh` 
       }}
     >
       {/* Optimized decorative background */}
@@ -89,7 +88,7 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
         return (
           <div
             key={card.id}
-            className="sticky top-1 sm:top-4 md:top-8 flex items-center justify-center min-h-[80vh] sm:min-h-[90vh] px-3 sm:px-6 lg:px-8 py-1 sm:py-4 md:py-8"
+            className="sticky top-1 sm:top-4 md:top-8 flex items-center justify-center min-h-[75vh] sm:min-h-[85vh] px-3 sm:px-6 lg:px-8 py-1 sm:py-4 md:py-6"
             style={{ 
               zIndex: cards.length - index,
             }}
@@ -103,20 +102,18 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
               className="w-full max-w-5xl xl:max-w-6xl"
               transition={{
                 type: "spring",
-                stiffness: 120,
-                damping: 25,
-                mass: 0.8
+                stiffness: 140,
+                damping: 30,
+                mass: 0.7
               }}
             >
               <Card className="bg-gradient-to-br from-white/95 via-white/90 to-gray-50/80 backdrop-blur-xl border-0 shadow-[0_6px_24px_rgba(0,0,0,0.04)] sm:shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden relative group hover:shadow-[0_10px_32px_rgba(0,0,0,0.08)] sm:hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-500">
-                {/* Enhanced gradient border effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#143151]/10 via-[#387E89]/10 to-[#143151]/10 p-[1px] rounded-xl sm:rounded-2xl lg:rounded-3xl">
                   <div className="h-full w-full bg-gradient-to-br from-white/95 via-white/90 to-gray-50/80 rounded-xl sm:rounded-2xl lg:rounded-3xl" />
                 </div>
                 
                 <div className="relative z-10 p-3 sm:p-6 lg:p-8 xl:p-10">
                   {card.theme === 'goal' ? (
-                    // Goal card - enhanced mobile layout
                     <div className="text-center max-w-3xl xl:max-w-4xl mx-auto">
                       <div className="flex justify-center mb-3 sm:mb-6">
                         <div className="bg-gradient-to-br from-[#143151] to-[#387E89] p-2 sm:p-4 lg:p-5 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-lg group-hover:scale-105 transition-transform duration-300">
@@ -132,7 +129,6 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                         {card.description}
                       </p>
                       
-                      {/* Enhanced mobile-friendly button presentation */}
                       <div className="flex justify-center mb-2 sm:mb-4">
                         <motion.div 
                           className="relative group/badge w-full max-w-md sm:max-w-none sm:w-auto"
@@ -140,10 +136,8 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2, duration: 0.5 }}
                         >
-                          {/* Mobile-optimized glow effect */}
                           <div className="absolute inset-0 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-lg sm:rounded-xl lg:rounded-2xl blur-lg opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
                           
-                          {/* Responsive badge design */}
                           <div className="relative bg-gradient-to-r from-[#143151] via-[#387E89] to-[#143151] p-[1px] rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
                             <div className="bg-gradient-to-r from-white/95 via-white/90 to-white/95 backdrop-blur-sm rounded-lg sm:rounded-xl lg:rounded-2xl px-3 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 group-hover/badge:from-white group-hover/badge:via-white group-hover/badge:to-white transition-all duration-300">
                               <p className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
@@ -155,7 +149,6 @@ const StackedCards: React.FC<StackedCardsProps> = ({ cards }) => {
                       </div>
                     </div>
                   ) : (
-                    // Regular cards - improved mobile two-column layout
                     <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-12 items-center">
                       <div className={card.theme === 'practice' ? 'order-2 lg:order-1' : ''}>
                         <div className="flex items-start gap-2.5 sm:gap-4 mb-3 sm:mb-6">
