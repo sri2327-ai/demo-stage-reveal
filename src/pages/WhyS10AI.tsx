@@ -180,11 +180,13 @@ const WhyS10AI = () => {
           </div>
         </section>
 
-        {/* Stacked Cards Sections */}
-        <StackedCards cards={stackedCardsData} />
+        {/* Stacked Cards Sections - Reduced bottom spacing */}
+        <div className="pb-6 sm:pb-12">
+          <StackedCards cards={stackedCardsData} />
+        </div>
 
-        {/* Modern CTA Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        {/* Modern CTA Section - Reduced top spacing and improved mobile spacing */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           {/* Enhanced Background */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-20 sm:opacity-30"></div>
@@ -206,7 +208,7 @@ const WhyS10AI = () => {
             }} className="text-center">
               {/* Enhanced Trust Badge */}
               <motion.div 
-                className="flex justify-center mb-6 sm:mb-8"
+                className="flex justify-center mb-4 sm:mb-6 lg:mb-8"
                 initial={{ scale: 0.9, opacity: 0 }} 
                 whileInView={{ scale: 1, opacity: 1 }} 
                 transition={{ delay: 0.2, duration: 0.6 }} 
@@ -219,7 +221,7 @@ const WhyS10AI = () => {
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight px-4" initial={{
+              <motion.h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-3 sm:mb-4 lg:mb-6 leading-tight px-4" initial={{
                 opacity: 0,
                 y: 20
               }} whileInView={{
@@ -235,7 +237,7 @@ const WhyS10AI = () => {
               </motion.h2>
               
               {/* Value Props Grid */}
-              <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 max-w-4xl mx-auto px-4" initial={{
+              <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 lg:mb-10 max-w-4xl mx-auto px-4" initial={{
                 opacity: 0,
                 y: 20
               }} whileInView={{
@@ -278,7 +280,7 @@ const WhyS10AI = () => {
                 </div>
               </motion.div>
 
-              <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-4" initial={{
+              <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-6 sm:mb-8 lg:mb-10 max-w-3xl mx-auto leading-relaxed px-4" initial={{
                 opacity: 0,
                 y: 20
               }} whileInView={{
@@ -318,7 +320,7 @@ const WhyS10AI = () => {
               </motion.div>
 
               {/* Social Proof */}
-              <motion.p className="text-xs sm:text-sm text-gray-600 mt-6 sm:mt-8 flex items-center justify-center gap-2 flex-wrap px-4" initial={{
+              <motion.p className="text-xs sm:text-sm text-gray-600 mt-4 sm:mt-6 lg:mt-8 flex items-center justify-center gap-2 flex-wrap px-4" initial={{
                 opacity: 0
               }} whileInView={{
                 opacity: 1
