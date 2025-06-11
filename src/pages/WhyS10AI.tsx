@@ -107,6 +107,7 @@ const WhyS10AI = () => {
               While others solve single problems, <strong>S10.ai transforms your entire practice workflow.</strong> We streamline documentation, automate front-office tasks, and boost efficiency—so you can focus on what matters most: exceptional patient care.
             </motion.p>
 
+            {/* Subtle value indicators */}
             <motion.div className="flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 max-w-4xl mx-auto px-4" initial={{
               opacity: 0,
               y: 10
@@ -179,13 +180,13 @@ const WhyS10AI = () => {
           </div>
         </section>
 
-        {/* Stacked Cards Sections - Significantly reduced spacing */}
-        <div className="pb-2 sm:pb-4">
+        {/* Stacked Cards Sections - Reduced bottom spacing */}
+        <div className="pb-6 sm:pb-12">
           <StackedCards cards={stackedCardsData} />
         </div>
 
-        {/* Modern CTA Section - Reduced top spacing and tighter integration */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
+        {/* Modern CTA Section - Reduced top spacing and improved mobile spacing */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           {/* Enhanced Background */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-20 sm:opacity-30"></div>
