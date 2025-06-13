@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
@@ -13,16 +14,16 @@ const WhyS10AI = () => {
       icon: <Heart className="w-6 h-6 text-white" />,
       title: 'For the Clinician',
       subtitle: 'The Joy of Focused Medicine',
-      description: 'The burden of documentation is the biggest drain on a clinician\'s time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes.',
+      description: 'The burden of documentation is the biggest drain on a clinician\'s time and energy. We solve it completely. Our AI Medical Scribe, CRUSH, listens to natural patient conversations and instantly drafts pristine, specialty-specific clinical notes—making your daily routine effortless.',
       features: [{
         title: 'Slash Documentation Time by 75%',
-        description: 'Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home.'
+        description: 'Reclaim over 2 hours every day. Eliminate "pajama time" spent charting at home and make work-life balance easier.'
       }, {
         title: 'Maximise Patient Interaction',
-        description: 'With notes handled, you can be fully present with your patients, increasing face-time by over 40%.'
+        description: 'With notes handled automatically, you can be fully present with your patients, increasing face-time by over 40%.'
       }, {
         title: 'Boost Clinician Well-being',
-        description: 'By removing the primary driver of burnout, we help you get back to the joy of practicing medicine.'
+        description: 'By removing the primary driver of burnout, we help you get back to the joy of practicing medicine without the stress.'
       }],
       theme: 'clinician' as const
     }, {
@@ -30,24 +31,24 @@ const WhyS10AI = () => {
       icon: <TrendingUp className="w-6 h-6 text-white" />,
       title: 'For the Practice',
       subtitle: 'The Power of a Resilient Operation',
-      description: 'Staffing shortages and administrative overhead can cripple a practice\'s growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and cost-effective operation.',
+      description: 'Staffing shortages and administrative overhead can cripple a practice\'s growth and profitability. Our AI Staffing Agent, BRAVO, is your solution. BRAVO works 24/7 as your automated front-office engine, creating a seamless, efficient, and effortless operation.',
       features: [{
         title: 'Automate 85% of Front Office Tasks',
-        description: 'From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind.'
+        description: 'From patient scheduling and intake to insurance verification and prescription refills, BRAVO handles the administrative grind seamlessly.'
       }, {
         title: 'Address Staffing Shortages',
-        description: 'Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions.'
+        description: 'Reduce dependency on manual administrative work by 30%, allowing your team to focus on high-value patient interactions with ease.'
       }, {
         title: 'Improve Financial Impact',
-        description: 'Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40%.'
+        description: 'Accelerate your revenue cycle with automated coding. Practices see revenue increase by up to 40% without extra effort.'
       }],
       theme: 'practice' as const
     }, {
       id: 'goal',
       icon: <Star className="w-8 h-8 text-white" />,
-      title: 'It All Leads to One Thing: Delivering Better Patient Care',
+      title: 'It All Leads to One Thing: Making Healthcare Easier for Everyone',
       subtitle: 'That is the S10.ai difference.',
-      description: 'Why do we obsess over workflow? Because the ultimate outcome of a streamlined practice is a superior patient experience. When clinicians are unburdened and operations are frictionless, patients get the focused, timely, and attentive care they deserve. They feel heard, supported, and valued at every step.',
+      description: 'Why do we obsess over workflow? Because when healthcare becomes easier for providers, it becomes better for patients. When clinicians are unburdened and operations are frictionless, patients get the focused, timely, and attentive care they deserve. They feel heard, supported, and valued at every step.',
       features: [],
       theme: 'goal' as const
     }
@@ -77,7 +78,7 @@ const WhyS10AI = () => {
             }}>
               <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2">
                 <Stethoscope className="w-3 sm:w-4 h-3 sm:h-4 text-black flex-shrink-0" />
-                <span className="text-black text-xs sm:text-sm font-medium">Maximize Patient Time. Minimize Documentation.</span>
+                <span className="text-black text-xs sm:text-sm font-medium">Making Healthcare Easier for Everyone.</span>
               </Card>
             </motion.div>
             
@@ -91,7 +92,7 @@ const WhyS10AI = () => {
               duration: 0.6,
               delay: 0.2
             }}>
-              Why S10.AI?
+              Why S10.AI Makes Your Life Easier
             </motion.h1>
             
             <motion.p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 max-w-4xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4" initial={{
@@ -104,7 +105,7 @@ const WhyS10AI = () => {
               duration: 0.6,
               delay: 0.4
             }}>
-              While others solve single problems, <strong>S10.ai transforms your entire practice workflow.</strong> We streamline documentation, automate front-office tasks, and boost efficiency—so you can focus on what matters most: exceptional patient care.
+              While others solve single problems, <strong>S10.ai makes your entire practice workflow effortless.</strong> We streamline documentation, automate front-office tasks, and boost efficiency—so you can focus on what matters most: exceptional patient care without the stress.
             </motion.p>
 
             {/* Subtle value indicators */}
@@ -124,11 +125,11 @@ const WhyS10AI = () => {
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
                 <Users className="w-3 sm:w-4 h-3 sm:h-4 text-[#387E89] flex-shrink-0" />
-                <span>Enhanced Patient Interaction</span>
+                <span>Effortless Patient Interaction</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
                 <TrendingUp className="w-3 sm:w-4 h-3 sm:h-4 text-[#387E89] flex-shrink-0" />
-                <span>Improved Practice Efficiency</span>
+                <span>Seamless Practice Operations</span>
               </div>
             </motion.div>
 
@@ -143,7 +144,7 @@ const WhyS10AI = () => {
               duration: 0.6
             }}>
               <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto">
-                See the Platform in Action
+                See How We Make It Easier
                 <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
@@ -171,10 +172,10 @@ const WhyS10AI = () => {
               once: true
             }} className="text-center">
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151] mb-4 sm:mb-6 px-4">
-                Stop Patching Problems. Start Solving Them.
+                Stop Making Healthcare Harder. Start Making It Easier.
               </h2>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed px-4">
-                You can buy an AI scribe and still have a chaotic front office. You can automate scheduling and still have clinician burnout. Point solutions create silos. <strong>S10.ai provides a complete workflow transformation</strong> by fixing both sides of the equation.
+                You can buy an AI scribe and still have a chaotic front office. You can automate scheduling and still have clinician burnout. Point solutions create complexity. <strong>S10.ai provides a complete workflow transformation</strong> that makes every aspect of your practice easier to manage.
               </p>
             </motion.div>
           </div>
@@ -216,7 +217,7 @@ const WhyS10AI = () => {
               >
                 <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-2 sm:px-3 py-1 sm:py-1.5 inline-flex items-center gap-1.5 sm:gap-2">
                   <CheckCircle className="w-3 sm:w-4 h-3 sm:h-4 text-black flex-shrink-0" />
-                  <span className="text-black text-xs sm:text-sm font-medium">Trusted by 1000+ Healthcare Practices</span>
+                  <span className="text-black text-xs sm:text-sm font-medium">Making Life Easier for 1000+ Healthcare Practices</span>
                 </Card>
               </motion.div>
 
@@ -233,7 +234,7 @@ const WhyS10AI = () => {
               }} viewport={{
                 once: true
               }}>
-                Transform Your Practice Today
+                Make Your Practice Easier Today
               </motion.h2>
               
               {/* Value Props Grid */}
@@ -255,7 +256,7 @@ const WhyS10AI = () => {
                   </div>
                   <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-xs sm:text-sm">15-Minute Setup</p>
-                    <p className="text-gray-600 text-xs">Quick implementation</p>
+                    <p className="text-gray-600 text-xs">Effortlessly simple</p>
                   </div>
                 </div>
                 
@@ -265,7 +266,7 @@ const WhyS10AI = () => {
                   </div>
                   <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-xs sm:text-sm">HIPAA Compliant</p>
-                    <p className="text-gray-600 text-xs">Enterprise security</p>
+                    <p className="text-gray-600 text-xs">Security made simple</p>
                   </div>
                 </div>
                 
@@ -275,7 +276,7 @@ const WhyS10AI = () => {
                   </div>
                   <div className="text-left min-w-0">
                     <p className="font-semibold text-[#143151] text-xs sm:text-sm">24/7 Support</p>
-                    <p className="text-gray-600 text-xs">Always available</p>
+                    <p className="text-gray-600 text-xs">Help when you need it</p>
                   </div>
                 </div>
               </motion.div>
@@ -292,7 +293,7 @@ const WhyS10AI = () => {
               }} viewport={{
                 once: true
               }}>
-                Join healthcare providers who've reduced administrative time by 75% while improving patient satisfaction scores.
+                Join healthcare providers who've made their daily routine 75% easier while improving patient satisfaction scores.
               </motion.p>
               
               {/* CTA Buttons */}
@@ -309,7 +310,7 @@ const WhyS10AI = () => {
                 once: true
               }}>
                 <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105 w-full sm:w-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-sm sm:text-base lg:text-lg font-semibold">
-                  Start Your Free Assessment
+                  Start Making Life Easier
                   <Calendar className="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:scale-110 transition-transform duration-200" />
                 </Button>
                 
