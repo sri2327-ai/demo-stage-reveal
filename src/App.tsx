@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import WhyS10AI from "./pages/WhyS10AI";
 import HealthSystems from "./pages/HealthSystems";
 import PrivatePractice from "./pages/PrivatePractice";
+import Diagnoses from "./pages/Diagnoses";
+import DiagnosisDetail from "./pages/DiagnosisDetail";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/why-s10ai" element={<WhyS10AI />} />
           <Route path="/health-systems" element={<HealthSystems />} />
           <Route path="/private-practice" element={<PrivatePractice />} />
+          <Route path="/diagnoses" element={<Diagnoses />} />
+          <Route path="/diagnoses/:id" element={<DiagnosisDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
