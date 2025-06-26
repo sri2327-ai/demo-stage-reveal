@@ -14,16 +14,16 @@ const DiagnosisDetail = () => {
 
   if (!diagnosis) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0A0F1C] via-[#1A2332] to-[#2A3441] flex items-center justify-center px-4">
-        <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
+        <Card className="max-w-md mx-auto bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-xl">
           <CardContent className="p-8 sm:p-12 text-center">
-            <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <XCircle className="w-8 h-8 text-red-400" />
+            <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <XCircle className="w-8 h-8 text-red-500" />
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-white mb-4">Diagnosis Not Found</h1>
-            <p className="text-gray-300 mb-8">The requested diagnosis could not be found in our database.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#143151] mb-4">Diagnosis Not Found</h1>
+            <p className="text-gray-600 mb-8">The requested diagnosis could not be found in our database.</p>
             <Link to="/diagnoses">
-              <Button className="bg-[#387E89] hover:bg-[#143151] text-white">
+              <Button className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Diagnoses
               </Button>
@@ -35,13 +35,13 @@ const DiagnosisDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0F1C] via-[#1A2332] to-[#2A3441]">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
           <Link 
             to="/diagnoses" 
-            className="inline-flex items-center text-[#387E89] hover:text-white transition-colors group"
+            className="inline-flex items-center text-[#387E89] hover:text-[#143151] transition-colors group"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to All Diagnoses
@@ -50,30 +50,30 @@ const DiagnosisDetail = () => {
 
         {/* Header Section */}
         <div className="mb-8 sm:mb-12">
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg">
             <CardHeader className="p-6 sm:p-8">
               <div className="flex flex-col gap-6">
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
-                    <Badge variant="outline" className="text-base sm:text-lg px-3 sm:px-4 py-2 font-mono bg-[#387E89]/20 text-[#387E89] border-[#387E89]/50 w-fit">
+                    <Badge variant="outline" className="text-base sm:text-lg px-3 sm:px-4 py-2 font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 w-fit">
                       {diagnosis.primaryCode}
                     </Badge>
-                    <Badge variant="secondary" className="text-sm bg-white/10 text-gray-300 border border-white/20 w-fit">
+                    <Badge variant="secondary" className="text-sm bg-gray-100 text-gray-600 border border-gray-200 w-fit">
                       {diagnosis.codeType}
                     </Badge>
                   </div>
-                  <CardTitle className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                  <CardTitle className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-4 leading-tight">
                     {diagnosis.name}
                   </CardTitle>
-                  <p className="text-lg sm:text-xl text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-lg sm:text-xl text-gray-600 mb-6 leading-relaxed">
                     {diagnosis.description}
                   </p>
                   {diagnosis.alsoKnownAs.length > 0 && (
                     <div>
-                      <p className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">Also known as</p>
+                      <p className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Also known as</p>
                       <div className="flex flex-wrap gap-2">
                         {diagnosis.alsoKnownAs.map((term, index) => (
-                          <Badge key={index} variant="secondary" className="bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20">
+                          <Badge key={index} variant="secondary" className="bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200">
                             {term}
                           </Badge>
                         ))}
@@ -89,32 +89,32 @@ const DiagnosisDetail = () => {
         {/* Overview Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-[#387E89]/20 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-[#387E89]" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Clinical Overview</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Clinical Overview</h2>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
               <CardHeader>
-                <CardTitle className="flex items-center text-lg sm:text-xl text-white">
-                  <CheckCircle className="h-5 w-5 text-green-400 mr-3" />
+                <CardTitle className="flex items-center text-lg sm:text-xl text-[#143151]">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
                   Key Information
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h4 className="font-bold text-white mb-3">Primary Code Range</h4>
-                  <p className="text-gray-300 bg-white/5 p-3 rounded-lg border border-white/10">{diagnosis.details.codeRange}</p>
+                  <h4 className="font-bold text-[#143151] mb-3">Primary Code Range</h4>
+                  <p className="text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-200">{diagnosis.details.codeRange}</p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-white mb-3">Clinical Criteria</h4>
+                  <h4 className="font-bold text-[#143151] mb-3">Clinical Criteria</h4>
                   <ul className="space-y-2">
                     {diagnosis.details.clinicalCriteria.map((criteria, index) => (
                       <li key={index} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-300 text-sm sm:text-base">{criteria}</span>
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 text-sm sm:text-base">{criteria}</span>
                       </li>
                     ))}
                   </ul>
@@ -122,24 +122,24 @@ const DiagnosisDetail = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
               <CardHeader>
-                <CardTitle className="flex items-center text-lg sm:text-xl text-white">
-                  <AlertTriangle className="h-5 w-5 text-amber-400 mr-3" />
+                <CardTitle className="flex items-center text-lg sm:text-xl text-[#143151]">
+                  <AlertTriangle className="h-5 w-5 text-amber-500 mr-3" />
                   Clinical Decision Support
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-6 leading-relaxed text-sm sm:text-base">
+                <p className="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">
                   Always review the patient's clinical documentation thoroughly. When in doubt, 
                   choose the more specific code and ensure documentation supports it.
                 </p>
-                <div className="bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 p-4 sm:p-6 rounded-xl border border-[#387E89]/20">
+                <div className="bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5 p-4 sm:p-6 rounded-xl border border-[#387E89]/20">
                   <h4 className="font-bold text-[#387E89] mb-3 flex items-center">
                     <CheckCircle className="w-5 h-5 mr-2" />
                     Best Practice
                   </h4>
-                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     {diagnosis.details.bestPractice}
                   </p>
                 </div>
@@ -151,40 +151,40 @@ const DiagnosisDetail = () => {
         {/* ICD-10 Codes Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
-              <Code className="w-5 h-5 text-purple-400" />
+            <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
+              <Code className="w-5 h-5 text-purple-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">ICD-10 Codes</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">ICD-10 Codes</h2>
           </div>
           
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-lg sm:text-xl text-white">Primary ICD-10-CM Codes</CardTitle>
+              <CardTitle className="text-lg sm:text-xl text-[#143151]">Primary ICD-10-CM Codes</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="border-b-2 border-white/20">
-                      <TableHead className="font-bold text-gray-300">Code</TableHead>
-                      <TableHead className="font-bold text-gray-300">Description</TableHead>
-                      <TableHead className="font-bold text-gray-300">Status</TableHead>
-                      <TableHead className="font-bold text-gray-300">Notes</TableHead>
+                    <TableRow className="border-b-2 border-gray-200">
+                      <TableHead className="font-bold text-gray-700">Code</TableHead>
+                      <TableHead className="font-bold text-gray-700">Description</TableHead>
+                      <TableHead className="font-bold text-gray-700">Status</TableHead>
+                      <TableHead className="font-bold text-gray-700">Notes</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {diagnosis.details.relatedCodes.map((code, index) => (
-                      <TableRow key={index} className="hover:bg-white/5 border-b border-white/10">
-                        <TableCell className="font-mono font-bold text-[#387E89] bg-[#387E89]/10 rounded">
+                      <TableRow key={index} className="hover:bg-gray-50 border-b border-gray-100">
+                        <TableCell className="font-mono font-bold text-[#387E89] bg-[#387E89]/5 rounded">
                           {code.code}
                         </TableCell>
-                        <TableCell className="font-medium text-white">{code.description}</TableCell>
+                        <TableCell className="font-medium text-[#143151]">{code.description}</TableCell>
                         <TableCell>
-                          <Badge variant={code.billable ? "default" : "secondary"} className={code.billable ? "bg-green-500/20 text-green-400 border-green-500/50" : "bg-gray-500/20 text-gray-400 border-gray-500/50"}>
+                          <Badge variant={code.billable ? "default" : "secondary"} className={code.billable ? "bg-green-500/10 text-green-600 border-green-500/30" : "bg-gray-100 text-gray-600 border-gray-200"}>
                             {code.billable ? "Billable" : "Non-billable"}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-gray-300">{code.notes}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{code.notes}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -197,47 +197,47 @@ const DiagnosisDetail = () => {
         {/* Documentation Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
-              <FileText className="w-5 h-5 text-green-400" />
+            <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+              <FileText className="w-5 h-5 text-green-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Documentation Requirements</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Documentation Requirements</h2>
           </div>
           
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardContent className="p-6 sm:p-8">
               <div className="space-y-8">
                 <div>
-                  <h4 className="font-bold text-white mb-4 text-lg sm:text-xl">Required Elements</h4>
+                  <h4 className="font-bold text-[#143151] mb-4 text-lg sm:text-xl">Required Elements</h4>
                   <div className="grid gap-3">
                     {diagnosis.details.documentationRequirements.map((req, index) => (
-                      <div key={index} className="flex items-start bg-green-500/10 p-4 rounded-lg border border-green-500/20">
-                        <CheckCircle className="h-5 w-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-300 font-medium text-sm sm:text-base">{req}</span>
+                      <div key={index} className="flex items-start bg-green-50 p-4 rounded-lg border border-green-200/60">
+                        <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium text-sm sm:text-base">{req}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                  <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 p-4 sm:p-6 rounded-xl border border-red-500/20">
-                    <h4 className="font-bold text-red-400 mb-4 flex items-center text-base sm:text-lg">
+                  <div className="bg-gradient-to-br from-red-50 to-red-100/50 p-4 sm:p-6 rounded-xl border border-red-200/60">
+                    <h4 className="font-bold text-red-600 mb-4 flex items-center text-base sm:text-lg">
                       <XCircle className="h-5 w-5 mr-2" />
                       Poor Documentation Example
                     </h4>
-                    <div className="bg-white/5 p-4 rounded-lg border border-red-500/20">
-                      <p className="text-red-300 italic font-medium text-sm sm:text-base">
+                    <div className="bg-white/80 p-4 rounded-lg border border-red-200/60">
+                      <p className="text-red-700 italic font-medium text-sm sm:text-base">
                         "{diagnosis.details.examples.poor}"
                       </p>
                     </div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 p-4 sm:p-6 rounded-xl border border-green-500/20">
-                    <h4 className="font-bold text-green-400 mb-4 flex items-center text-base sm:text-lg">
+                  <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-4 sm:p-6 rounded-xl border border-green-200/60">
+                    <h4 className="font-bold text-green-600 mb-4 flex items-center text-base sm:text-lg">
                       <CheckCircle className="h-5 w-5 mr-2" />
                       Good Documentation Example
                     </h4>
-                    <div className="bg-white/5 p-4 rounded-lg border border-green-500/20">
-                      <p className="text-green-300 italic font-medium text-sm sm:text-base">
+                    <div className="bg-white/80 p-4 rounded-lg border border-green-200/60">
+                      <p className="text-green-700 italic font-medium text-sm sm:text-base">
                         "{diagnosis.details.examples.good}"
                       </p>
                     </div>
@@ -251,22 +251,22 @@ const DiagnosisDetail = () => {
         {/* Risks Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5 text-red-400" />
+            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center">
+              <AlertTriangle className="w-5 h-5 text-red-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Documentation & Coding Risks</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Documentation & Coding Risks</h2>
           </div>
           
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardContent className="p-6 sm:p-8">
               <div className="grid gap-6">
                 {diagnosis.details.risks.map((risk, index) => (
-                  <div key={index} className="border-l-4 border-amber-400 bg-amber-500/10 p-4 sm:p-6 rounded-r-lg">
-                    <h4 className="font-bold text-white mb-2 text-base sm:text-lg flex items-center">
-                      <AlertTriangle className="w-5 h-5 text-amber-400 mr-2" />
+                  <div key={index} className="border-l-4 border-amber-500 bg-amber-50 p-4 sm:p-6 rounded-r-lg">
+                    <h4 className="font-bold text-[#143151] mb-2 text-base sm:text-lg flex items-center">
+                      <AlertTriangle className="w-5 h-5 text-amber-500 mr-2" />
                       {risk.title}
                     </h4>
-                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{risk.description}</p>
+                    <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{risk.description}</p>
                   </div>
                 ))}
               </div>
@@ -277,23 +277,23 @@ const DiagnosisDetail = () => {
         {/* FAQ Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center">
-              <HelpCircle className="w-5 h-5 text-indigo-400" />
+            <div className="w-10 h-10 bg-indigo-500/10 rounded-full flex items-center justify-center">
+              <HelpCircle className="w-5 h-5 text-indigo-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Frequently Asked Questions</h2>
           </div>
           
           <div className="grid gap-6">
             {diagnosis.details.faq.map((item, index) => (
-              <Card key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+              <Card key={index} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-lg sm:text-xl text-white flex items-start">
-                    <HelpCircle className="w-5 h-5 text-indigo-400 mr-3 mt-1 flex-shrink-0" />
+                  <CardTitle className="text-lg sm:text-xl text-[#143151] flex items-start">
+                    <HelpCircle className="w-5 h-5 text-indigo-600 mr-3 mt-1 flex-shrink-0" />
                     {item.question}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300 leading-relaxed pl-8 text-sm sm:text-base">{item.answer}</p>
+                  <p className="text-gray-600 leading-relaxed pl-8 text-sm sm:text-base">{item.answer}</p>
                 </CardContent>
               </Card>
             ))}
@@ -303,24 +303,24 @@ const DiagnosisDetail = () => {
         {/* Templates Section */}
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-teal-500/20 rounded-full flex items-center justify-center">
-              <FileCheck className="w-5 h-5 text-teal-400" />
+            <div className="w-10 h-10 bg-teal-500/10 rounded-full flex items-center justify-center">
+              <FileCheck className="w-5 h-5 text-teal-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Documentation Templates</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Documentation Templates</h2>
           </div>
           
-          <Card className="bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardContent className="p-6 sm:p-8">
               <div className="space-y-8">
                 {diagnosis.details.templates.map((template, index) => (
-                  <div key={index} className="border rounded-xl p-4 sm:p-6 bg-gradient-to-r from-white/5 to-[#387E89]/5 border-white/20">
+                  <div key={index} className="border rounded-xl p-4 sm:p-6 bg-gradient-to-r from-gray-50 to-blue-50/30 border-gray-200/60">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                      <h4 className="font-bold text-white text-base sm:text-lg">{template.title}</h4>
-                      <Badge variant="outline" className="bg-[#387E89]/20 text-[#387E89] border-[#387E89]/50 w-fit">
+                      <h4 className="font-bold text-[#143151] text-base sm:text-lg">{template.title}</h4>
+                      <Badge variant="outline" className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 w-fit">
                         {template.specialty}
                       </Badge>
                     </div>
-                    <div className="bg-[#0A0F1C] p-4 sm:p-6 rounded-lg font-mono text-xs sm:text-sm text-green-400 overflow-x-auto border border-white/10">
+                    <div className="bg-gray-900 p-4 sm:p-6 rounded-lg font-mono text-xs sm:text-sm text-green-400 overflow-x-auto border border-gray-700">
                       <pre className="whitespace-pre-wrap">{template.template}</pre>
                     </div>
                   </div>
@@ -335,7 +335,7 @@ const DiagnosisDetail = () => {
           <Button 
             variant="outline" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="bg-white/10 hover:bg-[#387E89] border-white/20 hover:border-[#387E89] text-white hover:text-white"
+            className="bg-white/80 hover:bg-[#387E89] border-gray-200 hover:border-[#387E89] text-gray-700 hover:text-white"
           >
             <ArrowLeft className="w-4 h-4 mr-2 rotate-90" />
             Back to Top
