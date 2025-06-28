@@ -11,6 +11,7 @@ import HealthSystems from "./pages/HealthSystems";
 import PrivatePractice from "./pages/PrivatePractice";
 import Diagnoses from "./pages/Diagnoses";
 import DiagnosisDetail from "./pages/DiagnosisDetail";
+import Templates from "./pages/Templates";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/private-practice" element={<PrivatePractice />} />
           <Route path="/diagnoses" element={<Diagnoses />} />
           <Route path="/diagnoses/:id" element={<DiagnosisDetail />} />
+          <Route path="/templates" element={<Templates />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
