@@ -406,96 +406,99 @@ const Templates = () => {
   if (selectedTemplate) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
-          {/* Breadcrumb Navigation */}
-          <nav className="mb-6 text-sm" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-gray-600">
-              <li><Link to="/" className="hover:text-[#387E89] transition-colors">Home</Link></li>
-              <li className="mx-2">/</li>
-              <li><button onClick={() => setSelectedTemplate(null)} className="hover:text-[#387E89] transition-colors">Templates</button></li>
-              <li className="mx-2">/</li>
-              <li className="text-[#143151] font-medium">{selectedTemplate.title}</li>
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+          {/* Breadcrumb Navigation - Responsive */}
+          <nav className="mb-4 sm:mb-6 text-xs sm:text-sm" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-1 sm:space-x-2 text-gray-600 overflow-x-auto">
+              <li><Link to="/" className="hover:text-[#387E89] transition-colors whitespace-nowrap">Home</Link></li>
+              <li className="mx-1 sm:mx-2">/</li>
+              <li><button onClick={() => setSelectedTemplate(null)} className="hover:text-[#387E89] transition-colors whitespace-nowrap">Templates</button></li>
+              <li className="mx-1 sm:mx-2">/</li>
+              <li className="text-[#143151] font-medium truncate">{selectedTemplate.title}</li>
             </ol>
           </nav>
 
-          {/* Back Button */}
+          {/* Back Button - Responsive */}
           <Button 
             variant="ghost" 
             onClick={() => setSelectedTemplate(null)}
-            className="mb-6 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all"
+            className="mb-4 sm:mb-6 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all text-sm sm:text-base"
           >
             ← Back to Templates
           </Button>
 
-          {/* Template Header */}
-          <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-2xl p-6 sm:p-8 mb-8 shadow-lg">
-            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+          {/* Template Header - Responsive */}
+          <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 shadow-lg">
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6">
               <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs sm:text-sm">
+                <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <Stethoscope className="w-3 h-3 mr-1" />
                     {selectedTemplate.specialty}
                   </Badge>
-                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs sm:text-sm">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <FileText className="w-3 h-3 mr-1" />
                     {selectedTemplate.category}
                   </Badge>
-                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs sm:text-sm">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <Clock className="w-3 h-3 mr-1" />
                     {selectedTemplate.estimatedTime}
                   </Badge>
                 </div>
                 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 leading-tight">{selectedTemplate.title}</h1>
-                <p className="text-lg sm:text-xl text-white/90 mb-6 leading-relaxed">{selectedTemplate.description}</p>
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{selectedTemplate.title}</h1>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-6 leading-relaxed">{selectedTemplate.description}</p>
                 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-white/80 text-sm sm:text-base">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    <span>{selectedTemplate.uses.toLocaleString()} uses</span>
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 text-white/80 text-xs sm:text-sm md:text-base">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="truncate">{selectedTemplate.uses.toLocaleString()} uses</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 fill-current" />
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
                     <span>{selectedTemplate.rating}/5.0</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" />
-                    <span>{selectedTemplate.complexity}</span>
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="truncate">{selectedTemplate.complexity}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>Updated {new Date(selectedTemplate.lastUpdated).toLocaleDateString()}</span>
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="truncate">Updated {new Date(selectedTemplate.lastUpdated).toLocaleDateString()}</span>
                   </div>
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:min-w-[200px]">
+              <div className="flex flex-row lg:flex-col gap-2 sm:gap-3 lg:min-w-[180px] xl:min-w-[200px]">
                 <Button 
                   variant="secondary" 
-                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all"
+                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none"
                 >
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share Template
+                  <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Share Template</span>
+                  <span className="sm:hidden">Share</span>
                 </Button>
                 <Button 
                   variant="secondary" 
-                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all"
+                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none"
                 >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download PDF
+                  <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Download PDF</span>
+                  <span className="sm:hidden">Download</span>
                 </Button>
                 <Button 
-                  className="bg-[#387E89] hover:bg-[#306b75] text-white transition-all"
+                  className="bg-[#387E89] hover:bg-[#306b75] text-white transition-all text-xs sm:text-sm flex-1 lg:flex-none lg:w-full"
                 >
-                  <Eye className="w-4 h-4 mr-2" />
-                  Use Template
+                  <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Use Template</span>
+                  <span className="sm:hidden">Use</span>
                 </Button>
               </div>
             </div>
           </div>
 
-          {/* Template Content Grid */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          {/* Template Content Grid - Responsive */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
             {/* Left Column - About & Author */}
             <div className="xl:col-span-1 space-y-6">
               <Card className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
@@ -603,22 +606,22 @@ const Templates = () => {
             </div>
           </div>
 
-          {/* Sample Content */}
-          <Card className="bg-white border border-gray-200 shadow-sm mb-12">
-            <CardHeader>
-              <CardTitle className="text-2xl text-[#143151] flex items-center gap-2">
-                <FileText className="w-6 h-6" />
+          {/* Sample Content - Responsive */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl text-[#143151] flex items-center gap-2">
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 Sample Clinical Note
               </CardTitle>
-              <p className="text-gray-600 mt-2">Example of a completed clinical note using this template</p>
+              <p className="text-sm sm:text-base text-gray-600 mt-2">Example of a completed clinical note using this template</p>
             </CardHeader>
-            <CardContent>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 border-l-4 border-[#387E89]">
-                <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
+            <CardContent className="p-4 sm:p-6">
+              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 md:p-6 border-l-4 border-[#387E89]">
+                <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
                   {selectedTemplate.sampleContent}
                 </pre>
               </div>
-              <div className="mt-4 text-xs text-gray-500">
+              <div className="mt-3 sm:mt-4 text-xs text-gray-500">
                 * This is a sample note for demonstration purposes. Patient information is fictional.
               </div>
             </CardContent>
@@ -633,48 +636,49 @@ const Templates = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
-        {/* Hero Section */}
-        <div className="text-center mb-10 sm:mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 backdrop-blur-sm rounded-full text-[#143151] text-sm font-medium mb-6 border border-[#387E89]/20">
-            <FileText className="w-4 h-4 mr-2" />
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+        {/* Hero Section - Responsive */}
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-[#387E89]/20">
+            <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             Professional Medical Documentation
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
             Clinical Templates & Documentation
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 mb-8">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-3 sm:px-4 mb-6 sm:mb-8">
             Professional medical documentation templates created by healthcare experts. Streamline your clinical workflow with structured, comprehensive templates for every specialty and use case. Trusted by over 1,000+ clinicians worldwide.
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-10 sm:mb-16">
-          <div className="max-w-5xl mx-auto space-y-6">
-            {/* Main Search Bar */}
-            <div className="relative group">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 group-focus-within:text-[#387E89] transition-colors" />
+        {/* Search and Filters - Responsive */}
+        <div className="mb-8 sm:mb-12 md:mb-16">
+          <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
+            {/* Main Search Bar - Responsive */}
+            <div className="relative group px-2 sm:px-0">
+              <Search className="absolute left-4 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5 group-focus-within:text-[#387E89] transition-colors" />
               <Input
                 type="text"
-                placeholder="Search templates by specialty, condition, author, or keywords..."
+                placeholder="Search templates by specialty, condition, author..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-12 sm:h-14 text-base sm:text-lg bg-white border-2 border-gray-200 rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                className="pl-10 sm:pl-12 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500"
                 aria-label="Search medical templates"
               />
             </div>
 
-            {/* Filter Controls */}
-            <div className="flex flex-wrap gap-4 justify-center items-center">
-              <div className="flex items-center gap-2 text-gray-700">
-                <Filter className="w-4 h-4" />
-                <span className="text-sm font-medium">Filter by:</span>
+            {/* Filter Controls - Responsive */}
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center items-center px-2 sm:px-0">
+              <div className="flex items-center gap-1 sm:gap-2 text-gray-700 text-xs sm:text-sm">
+                <Filter className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="font-medium hidden sm:inline">Filter by:</span>
+                <span className="font-medium sm:hidden">Filter:</span>
               </div>
               
               <select
                 value={selectedSpecialty}
                 onChange={(e) => setSelectedSpecialty(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-sm bg-white transition-all"
+                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
                 aria-label="Filter by medical specialty"
               >
                 <option value="">All Specialties</option>
@@ -686,7 +690,7 @@ const Templates = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-sm bg-white transition-all"
+                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
                 aria-label="Filter by template category"
               >
                 <option value="">All Categories</option>
@@ -698,7 +702,7 @@ const Templates = () => {
               <select
                 value={selectedComplexity}
                 onChange={(e) => setSelectedComplexity(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-sm bg-white transition-all"
+                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
                 aria-label="Filter by complexity level"
               >
                 <option value="">All Levels</option>
@@ -710,18 +714,18 @@ const Templates = () => {
           </div>
         </div>
 
-        {/* Results Section */}
-        <div className="mb-16">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">
+        {/* Results Section - Responsive */}
+        <div className="mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-3 sm:gap-4 px-2 sm:px-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151]">
               Available Templates
             </h2>
-            <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+              <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
                 {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
               </div>
               {totalPages > 1 && (
-                <div className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
                   Page {currentPage} of {totalPages}
                 </div>
               )}
@@ -730,11 +734,11 @@ const Templates = () => {
 
           {currentTemplates.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 px-2 sm:px-0">
                 {currentTemplates.map((template) => (
                   <Card 
                     key={template.id} 
-                    className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group"
+                    className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group"
                     onClick={() => setSelectedTemplate(template)}
                     role="button"
                     tabIndex={0}
@@ -745,9 +749,9 @@ const Templates = () => {
                     }}
                     aria-label={`View ${template.title} template details`}
                   >
-                    <CardHeader className="pb-4">
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex flex-wrap gap-2">
+                    <CardHeader className="pb-3 sm:pb-4 p-4 sm:p-6">
+                      <div className="flex items-start justify-between mb-2 sm:mb-3">
+                        <div className="flex flex-wrap gap-1 sm:gap-2 flex-1 mr-2">
                           <Badge variant="outline" className="text-xs bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
                             {template.specialty}
                           </Badge>
@@ -758,45 +762,47 @@ const Templates = () => {
                             {template.complexity}
                           </Badge>
                         </div>
-                        <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200" />
+                        <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200 flex-shrink-0" />
                       </div>
-                      <CardTitle className="text-lg sm:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors line-clamp-2 leading-tight">
+                      <CardTitle className="text-base sm:text-lg md:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors line-clamp-2 leading-tight">
                         {template.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-0 flex flex-col h-full">
-                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed text-sm sm:text-base flex-grow">
+                    <CardContent className="pt-0 flex flex-col h-full p-4 sm:p-6">
+                      <p className="text-gray-600 mb-3 sm:mb-4 line-clamp-3 leading-relaxed text-xs sm:text-sm md:text-base flex-grow">
                         {template.description}
                       </p>
                       
-                      <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
-                        <div className="flex items-center gap-4">
+                      <div className="flex items-center justify-between mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600">
+                        <div className="flex items-center gap-2 sm:gap-4">
                           <div className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            <span>{template.uses.toLocaleString()}</span>
+                            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="hidden sm:inline">{template.uses.toLocaleString()}</span>
+                            <span className="sm:hidden">{template.uses > 1000 ? `${Math.floor(template.uses/1000)}k` : template.uses}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-current text-yellow-500" />
+                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-yellow-500" />
                             <span>{template.rating}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
+                            <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                             <span>{template.estimatedTime}</span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-auto">
+                      <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200 mt-auto">
                         <div>
-                          <span className="text-xs text-gray-500 font-medium">
+                          <span className="text-xs text-gray-500 font-medium block truncate">
                             By {template.author}
                           </span>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-gray-400 truncate">
                             {template.authorSpecialty}
                           </p>
                         </div>
-                        <div className="flex items-center text-[#387E89] text-sm font-medium group-hover:text-[#143151] transition-colors">
-                          View Details
+                        <div className="flex items-center text-[#387E89] text-xs sm:text-sm font-medium group-hover:text-[#143151] transition-colors">
+                          <span className="hidden sm:inline">View Details</span>
+                          <span className="sm:hidden">View</span>
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </div>
                       </div>
@@ -805,11 +811,11 @@ const Templates = () => {
                 ))}
               </div>
 
-              {/* Pagination */}
+              {/* Pagination - Responsive */}
               {totalPages > 1 && (
-                <div className="flex justify-center">
+                <div className="flex justify-center px-2 sm:px-0">
                   <Pagination>
-                    <PaginationContent>
+                    <PaginationContent className="flex-wrap gap-1 sm:gap-2">
                       <PaginationItem>
                         <PaginationPrevious 
                           href="#"
@@ -819,14 +825,14 @@ const Templates = () => {
                               setCurrentPage(currentPage - 1);
                             }
                           }}
-                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                          className={`${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`}
                         />
                       </PaginationItem>
                       
                       {getPageNumbers().map((page, index) => (
                         <PaginationItem key={index}>
                           {page === 'ellipsis' ? (
-                            <PaginationEllipsis />
+                            <PaginationEllipsis className="text-xs sm:text-sm" />
                           ) : (
                             <PaginationLink
                               href="#"
@@ -835,7 +841,7 @@ const Templates = () => {
                                 setCurrentPage(page);
                               }}
                               isActive={currentPage === page}
-                              className="cursor-pointer"
+                              className="cursor-pointer text-xs sm:text-sm w-8 h-8 sm:w-9 sm:h-9"
                             >
                               {page}
                             </PaginationLink>
@@ -852,7 +858,7 @@ const Templates = () => {
                               setCurrentPage(currentPage + 1);
                             }
                           }}
-                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                          className={`${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`}
                         />
                       </PaginationItem>
                     </PaginationContent>
@@ -861,13 +867,13 @@ const Templates = () => {
               )}
             </>
           ) : (
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm">
-              <CardContent className="p-8 sm:p-16 text-center">
-                <div className="w-16 h-16 bg-[#387E89]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Search className="w-8 h-8 text-[#387E89]" />
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm mx-2 sm:mx-0">
+              <CardContent className="p-6 sm:p-8 md:p-16 text-center">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#387E89]/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Search className="w-6 h-6 sm:w-8 sm:h-8 text-[#387E89]" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-2">No templates found</h3>
-                <p className="text-gray-600 mb-6">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#143151] mb-2">No templates found</h3>
+                <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
                   Try adjusting your search terms or filters to find relevant templates.
                 </p>
                 <Button 
@@ -878,7 +884,7 @@ const Templates = () => {
                     setSelectedCategory('');
                     setSelectedComplexity('');
                   }}
-                  className="bg-transparent border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white transition-all"
+                  className="bg-transparent border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white transition-all text-sm sm:text-base"
                 >
                   Clear All Filters
                 </Button>
