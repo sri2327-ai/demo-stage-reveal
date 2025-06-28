@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { CallToAction } from '@/components/CallToAction';
 
 // Enhanced mock data with better SEO structure
@@ -331,6 +331,8 @@ const Templates = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedComplexity, setSelectedComplexity] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const templatesPerPage = 6;
 
   // Filter templates
   const filteredTemplates = useMemo(() => {
@@ -349,10 +351,57 @@ const Templates = () => {
     });
   }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
 
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredTemplates.length / templatesPerPage);
+  const startIndex = (currentPage - 1) * templatesPerPage;
+  const endIndex = startIndex + templatesPerPage;
+  const currentTemplates = filteredTemplates.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
+
   // Get unique values for filters
   const specialties = [...new Set(mockTemplates.map(t => t.specialty))];
   const categories = [...new Set(mockTemplates.map(t => t.category))];
   const complexities = [...new Set(mockTemplates.map(t => t.complexity))];
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push('ellipsis');
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push('ellipsis');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push('ellipsis');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push('ellipsis');
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
 
   if (selectedTemplate) {
     return (
@@ -667,86 +716,150 @@ const Templates = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">
               Available Templates
             </h2>
-            <div className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 shadow-sm">
-              {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
+            <div className="flex items-center gap-4">
+              <div className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
+              </div>
+              {totalPages > 1 && (
+                <div className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                  Page {currentPage} of {totalPages}
+                </div>
+              )}
             </div>
           </div>
 
-          {filteredTemplates.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-              {filteredTemplates.map((template) => (
-                <Card 
-                  key={template.id} 
-                  className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group"
-                  onClick={() => setSelectedTemplate(template)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      setSelectedTemplate(template);
-                    }
-                  }}
-                  aria-label={`View ${template.title} template details`}
-                >
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="outline" className="text-xs bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
-                          {template.specialty}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs bg-[#143151]/10 text-[#143151] border-[#143151]/30">
-                          {template.category}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-                          {template.complexity}
-                        </Badge>
+          {currentTemplates.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 mb-12">
+                {currentTemplates.map((template) => (
+                  <Card 
+                    key={template.id} 
+                    className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group"
+                    onClick={() => setSelectedTemplate(template)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        setSelectedTemplate(template);
+                      }
+                    }}
+                    aria-label={`View ${template.title} template details`}
+                  >
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex flex-wrap gap-2">
+                          <Badge variant="outline" className="text-xs bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
+                            {template.specialty}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs bg-[#143151]/10 text-[#143151] border-[#143151]/30">
+                            {template.category}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                            {template.complexity}
+                          </Badge>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200" />
                       </div>
-                      <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200" />
-                    </div>
-                    <CardTitle className="text-lg sm:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors line-clamp-2 leading-tight">
-                      {template.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0 flex flex-col h-full">
-                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed text-sm sm:text-base flex-grow">
-                      {template.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{template.uses.toLocaleString()}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4 fill-current text-yellow-500" />
-                          <span>{template.rating}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{template.estimatedTime}</span>
+                      <CardTitle className="text-lg sm:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors line-clamp-2 leading-tight">
+                        {template.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0 flex flex-col h-full">
+                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed text-sm sm:text-base flex-grow">
+                        {template.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            <span>{template.uses.toLocaleString()}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Star className="w-4 h-4 fill-current text-yellow-500" />
+                            <span>{template.rating}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            <span>{template.estimatedTime}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-auto">
-                      <div>
-                        <span className="text-xs text-gray-500 font-medium">
-                          By {template.author}
-                        </span>
-                        <p className="text-xs text-gray-400">
-                          {template.authorSpecialty}
-                        </p>
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-auto">
+                        <div>
+                          <span className="text-xs text-gray-500 font-medium">
+                            By {template.author}
+                          </span>
+                          <p className="text-xs text-gray-400">
+                            {template.authorSpecialty}
+                          </p>
+                        </div>
+                        <div className="flex items-center text-[#387E89] text-sm font-medium group-hover:text-[#143151] transition-colors">
+                          View Details
+                          <ArrowRight className="ml-1 h-3 w-3" />
+                        </div>
                       </div>
-                      <div className="flex items-center text-[#387E89] text-sm font-medium group-hover:text-[#143151] transition-colors">
-                        View Details
-                        <ArrowRight className="ml-1 h-3 w-3" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage > 1) {
+                              setCurrentPage(currentPage - 1);
+                            }
+                          }}
+                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                      
+                      {getPageNumbers().map((page, index) => (
+                        <PaginationItem key={index}>
+                          {page === 'ellipsis' ? (
+                            <PaginationEllipsis />
+                          ) : (
+                            <PaginationLink
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage(page);
+                              }}
+                              isActive={currentPage === page}
+                              className="cursor-pointer"
+                            >
+                              {page}
+                            </PaginationLink>
+                          )}
+                        </PaginationItem>
+                      ))}
+                      
+                      <PaginationItem>
+                        <PaginationNext 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage < totalPages) {
+                              setCurrentPage(currentPage + 1);
+                            }
+                          }}
+                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
+            </>
           ) : (
             <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm">
               <CardContent className="p-8 sm:p-16 text-center">
