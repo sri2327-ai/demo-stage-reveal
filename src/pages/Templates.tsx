@@ -655,7 +655,7 @@ const Templates = () => {
         <div className="mb-8 sm:mb-12 md:mb-16">
           <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
             {/* Main Search Bar - Responsive */}
-            <div className="relative group px-2 sm:px-0">
+            <div className="relative group">
               <Search className="absolute left-4 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5 group-focus-within:text-[#387E89] transition-colors" />
               <Input
                 type="text"
@@ -668,7 +668,7 @@ const Templates = () => {
             </div>
 
             {/* Filter Controls - Responsive */}
-            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center items-center px-2 sm:px-0">
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center items-center">
               <div className="flex items-center gap-1 sm:gap-2 text-gray-700 text-xs sm:text-sm">
                 <Filter className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span className="font-medium hidden sm:inline">Filter by:</span>
@@ -786,7 +786,8 @@ const Templates = () => {
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-                            <span>{template.estimatedTime}</span>
+                            <span className="hidden sm:inline">{template.estimatedTime}</span>
+                            <span className="sm:hidden">{template.estimatedTime.split(' ')[0]}</span>
                           </div>
                         </div>
                       </div>
