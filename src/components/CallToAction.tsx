@@ -7,7 +7,7 @@ export const CallToAction: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="py-12 sm:py-16 px-3 sm:px-4 md:px-6">
+    <div className="py-16 sm:py-20 md:py-24 px-3 sm:px-4 md:px-6 mt-12 sm:mt-16 md:mt-20">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151] mb-3 sm:mb-4 px-2">
           Ready to transform your practice?
