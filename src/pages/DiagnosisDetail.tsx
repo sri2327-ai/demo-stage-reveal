@@ -12,6 +12,49 @@ const DiagnosisDetail = () => {
   const { id } = useParams<{ id: string }>();
   const diagnosis = getDiagnosisById(id || '');
 
+  // Mock data for the new sections - these should come from API
+  const relatedCodeRanges = [
+    {
+      range: "A00-B99",
+      title: "Primary Range",
+      description: "Certain infectious and parasitic diseases",
+      details: "Includes codes for sepsis and specific infections like Acinetobacter baumannii."
+    },
+    {
+      range: "I10-I15",
+      title: "Hypertensive diseases",
+      description: "Covers hypertension-related conditions and their coding.",
+      details: ""
+    },
+    {
+      range: "E08-E13",
+      title: "Diabetes mellitus",
+      description: "Includes codes for diabetes and related complications.",
+      details: ""
+    },
+    {
+      range: "J45",
+      title: "Asthma",
+      description: "Covers asthma types and severity levels.",
+      details: ""
+    }
+  ];
+
+  const codeComparisons = [
+    {
+      code: "A41.54",
+      description: "Sepsis due to Acinetobacter baumannii",
+      whenToUse: "Use when sepsis is confirmed to be due to Acinetobacter baumannii.",
+      keyDocumentation: ["Blood culture confirming Acinetobacter", "Documentation of specific organism"]
+    },
+    {
+      code: "I12.9",
+      description: "Hypertensive chronic kidney disease",
+      whenToUse: "Use when hypertension is documented with CKD.",
+      keyDocumentation: ["Diagnosis of hypertension and CKD"]
+    }
+  ];
+
   if (!diagnosis) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
@@ -35,7 +78,7 @@ const DiagnosisDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50" data-api-endpoint="/api/diagnoses">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
@@ -83,6 +126,91 @@ const DiagnosisDetail = () => {
                 </div>
               </div>
             </CardHeader>
+          </Card>
+        </div>
+
+        {/* Related ICD-10 Code Ranges Section */}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-indigo-500/10 rounded-full flex items-center justify-center">
+              <Code className="w-5 h-5 text-indigo-600" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Related ICD-10 Code Ranges</h2>
+          </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl text-[#143151]">Complete code families applicable to {diagnosis.name}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6" data-api-endpoint="/api/diagnoses/code-ranges">
+              {relatedCodeRanges.map((range, index) => (
+                <div key={index} className="border rounded-xl p-4 sm:p-6 bg-gradient-to-r from-gray-50 to-blue-50/30 border-gray-200/60">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <Badge variant="outline" className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 font-mono text-base px-3 py-1 w-fit">
+                      {range.range}
+                    </Badge>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-[#143151] text-lg mb-2">{range.title}</h4>
+                      <p className="text-gray-700 mb-2">{range.description}</p>
+                      {range.details && (
+                        <p className="text-gray-600 text-sm italic">{range.details}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Code Comparison Section */}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
+              <CheckCircle className="w-5 h-5 text-purple-600" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">Code Comparison: When to Use Each Code</h2>
+          </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg sm:text-xl text-[#143151]">Compare key differences between these codes to ensure accurate selection</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto" data-api-endpoint="/api/diagnoses/code-comparisons">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-b-2 border-gray-200">
+                      <TableHead className="font-bold text-gray-700">Code</TableHead>
+                      <TableHead className="font-bold text-gray-700">Description</TableHead>
+                      <TableHead className="font-bold text-gray-700">When to Use</TableHead>
+                      <TableHead className="font-bold text-gray-700">Key Documentation</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {codeComparisons.map((comparison, index) => (
+                      <TableRow key={index} className="hover:bg-gray-50 border-b border-gray-100">
+                        <TableCell className="font-mono font-bold text-[#387E89] bg-[#387E89]/5 rounded">
+                          {comparison.code}
+                        </TableCell>
+                        <TableCell className="font-medium text-[#143151]">{comparison.description}</TableCell>
+                        <TableCell className="text-sm text-gray-700">{comparison.whenToUse}</TableCell>
+                        <TableCell className="text-sm text-gray-600">
+                          <ul className="space-y-1">
+                            {comparison.keyDocumentation.map((doc, docIndex) => (
+                              <li key={docIndex} className="flex items-start">
+                                <CheckCircle className="h-3 w-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" />
+                                <span>{doc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
           </Card>
         </div>
 
@@ -146,52 +274,6 @@ const DiagnosisDetail = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        {/* ICD-10 Codes Section */}
-        <div className="mb-8 sm:mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
-              <Code className="w-5 h-5 text-purple-600" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151]">ICD-10 Codes</h2>
-          </div>
-          
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader>
-              <CardTitle className="text-lg sm:text-xl text-[#143151]">Primary ICD-10-CM Codes</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-b-2 border-gray-200">
-                      <TableHead className="font-bold text-gray-700">Code</TableHead>
-                      <TableHead className="font-bold text-gray-700">Description</TableHead>
-                      <TableHead className="font-bold text-gray-700">Status</TableHead>
-                      <TableHead className="font-bold text-gray-700">Notes</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {diagnosis.details.relatedCodes.map((code, index) => (
-                      <TableRow key={index} className="hover:bg-gray-50 border-b border-gray-100">
-                        <TableCell className="font-mono font-bold text-[#387E89] bg-[#387E89]/5 rounded">
-                          {code.code}
-                        </TableCell>
-                        <TableCell className="font-medium text-[#143151]">{code.description}</TableCell>
-                        <TableCell>
-                          <Badge variant={code.billable ? "default" : "secondary"} className={code.billable ? "bg-green-500/10 text-green-600 border-green-500/30" : "bg-gray-100 text-gray-600 border-gray-200"}>
-                            {code.billable ? "Billable" : "Non-billable"}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-sm text-gray-600">{code.notes}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Documentation Section */}
