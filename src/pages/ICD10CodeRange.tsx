@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, ChevronRight, Info, HelpCircle, Copy, Check } from 'lucide-react';
@@ -21,7 +22,6 @@ const codeRangeData: {
     nonBillableCodes: 15,
     chaptersCount: 1,
     aboutRange: {
-      overview: 'The A00-A09 range encompasses intestinal infectious diseases that are commonly encountered in clinical practice. These codes are essential for accurate documentation of gastrointestinal infections and their associated complications.',
       clinicalUse: 'Used when documenting patients with confirmed or suspected intestinal infections, including cholera, typhoid fever, salmonella infections, and other bacterial gastroenteritis.',
       documentation: 'Requires clinical documentation of symptoms, laboratory findings, and specific organism identification when available.'
     },
@@ -101,6 +101,7 @@ const codeRangeData: {
     }]
   }
 };
+
 const ICD10CodeRange = () => {
   const {
     range
@@ -206,10 +207,6 @@ const ICD10CodeRange = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2">Overview</h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{data.aboutRange.overview}</p>
-              </div>
-              <div>
                 <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2">Clinical Use</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{data.aboutRange.clinicalUse}</p>
               </div>
@@ -304,7 +301,7 @@ const ICD10CodeRange = () => {
                   </Button>
                 </Link>
                 <Link to="/diagnoses">
-                  <Button variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base">
+                  <Button variant="outline" className="border-white text-black hover:bg-white/10 font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base">
                     Browse Medical Diagnoses
                   </Button>
                 </Link>
