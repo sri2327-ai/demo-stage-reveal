@@ -516,7 +516,7 @@ const Templates = () => {
 
           {/* Side-by-Side: Template Structure and Sample Clinical Notes */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            {/* Interactive Template Structure */}
+            {/* Template Structure */}
             <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
                 <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
@@ -535,20 +535,16 @@ const Templates = () => {
                     </div>)}
                 </div>
                 
-                {/* Interactive Template Editor */}
+                {/* Template Editor */}
                 <div className="border-t pt-6">
-                  <h4 className="font-semibold text-[#143151] mb-3">Your Template Content</h4>
-                  <Textarea placeholder="Start documenting using this template structure..." value={templateContent} onChange={e => setTemplateContent(e.target.value)} className="min-h-[400px] font-mono text-sm" data-api-endpoint="/api/templates/structure" />
-                  <div className="flex gap-2 mt-3">
-                    <Button size="sm" className="bg-[#387E89] hover:bg-[#306b75] text-white">
-                      <Download className="w-4 h-4 mr-2" />
-                      Export
-                    </Button>
-                    <Button size="sm" variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                      <Copy className="w-4 h-4 mr-2" />
-                      Copy
-                    </Button>
-                  </div>
+                  <h4 className="font-semibold text-[#143151] mb-3">Template Editor</h4>
+                  <Textarea 
+                    placeholder="Start documenting using this template structure..." 
+                    value={templateContent} 
+                    onChange={e => setTemplateContent(e.target.value)} 
+                    className="min-h-[400px] font-mono text-sm" 
+                    data-api-endpoint="/api/templates/structure" 
+                  />
                 </div>
               </CardContent>
             </Card>
