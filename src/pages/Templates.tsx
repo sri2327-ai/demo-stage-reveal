@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
@@ -537,14 +538,14 @@ const Templates = () => {
 
           {/* Side-by-Side: Template Structure and Sample Clinical Notes */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            {/* Template Structure */}
+            {/* Interactive Template Structure */}
             <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
                 <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
                   Template Structure
                 </CardTitle>
-                <p className="text-sm sm:text-base text-gray-600">Interactive template sections for clinical documentation</p>
+                <p className="text-sm sm:text-base text-gray-600">Interactive template editor for clinical documentation</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
@@ -558,14 +559,14 @@ const Templates = () => {
                   ))}
                 </div>
                 
-                {/* Interactive Template Area */}
+                {/* Interactive Template Editor */}
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-[#143151] mb-3">Your Template Content</h4>
                   <Textarea
                     placeholder="Start documenting using this template structure..."
                     value={templateContent}
                     onChange={(e) => setTemplateContent(e.target.value)}
-                    className="min-h-[300px] font-mono text-sm"
+                    className="min-h-[400px] font-mono text-sm"
                     data-api-endpoint="/api/templates/structure"
                   />
                   <div className="flex gap-2 mt-3">
@@ -866,3 +867,4 @@ const Templates = () => {
 };
 
 export default Templates;
+
