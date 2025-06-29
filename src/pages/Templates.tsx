@@ -538,25 +538,33 @@ const Templates = () => {
                 <p className="text-sm sm:text-base text-gray-600">Example of completed documentation using this template</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#387E89] mb-6">
-                  <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto max-h-[400px] overflow-y-auto">
+                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#387E89]">
+                  <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
                     {selectedTemplate.sampleContent}
                   </pre>
-                </div>
-                
-                {/* Clinical Benefits */}
-                <div className="border-t pt-6">
-                  <h4 className="font-semibold text-[#143151] mb-3">Clinical Benefits</h4>
-                  <ul className="space-y-2">
-                    {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>{benefit}</span>
-                      </li>)}
-                  </ul>
                 </div>
               </CardContent>
             </Card>
           </div>
+
+          {/* Clinical Benefits Section */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                Clinical Benefits
+              </CardTitle>
+              <p className="text-sm sm:text-base text-gray-600">Key advantages of using this template in clinical practice</p>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3">
+                {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>{benefit}</span>
+                  </li>)}
+              </ul>
+            </CardContent>
+          </Card>
 
           {/* FAQ Section */}
           <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
