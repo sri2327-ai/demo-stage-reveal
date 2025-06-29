@@ -485,33 +485,33 @@ const ICD10Codes = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section */}
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-sm font-medium mb-6 border border-blue-200/40">
-            <BookOpen className="w-4 h-4 mr-2" />
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-200/40">
+            <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             ICD-10-CM Classification System
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#143151] mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 px-4">
             ICD-10 Code Directory
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
             Comprehensive ICD-10-CM code classification system organized by chapters and categories. 
             Find the right codes for accurate medical billing and documentation.
           </p>
         </div>
 
         {/* Search Section */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <div className="max-w-2xl mx-auto px-4">
             <div className="relative group">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 group-focus-within:text-[#387E89] transition-colors" />
+              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5 group-focus-within:text-[#387E89] transition-colors" />
               <Input
                 type="text"
                 placeholder="Search ICD-10 codes, categories, or conditions..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-12 sm:h-14 text-base sm:text-lg bg-white border-2 border-gray-200 rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                className="pl-10 sm:pl-12 h-10 sm:h-12 lg:h-14 text-sm sm:text-base lg:text-lg bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500"
                 data-api-search="icd10-codes"
               />
             </div>
@@ -519,50 +519,50 @@ const ICD10Codes = () => {
         </div>
 
         {/* Chapters Grid */}
-        <div className="space-y-12 mb-12" data-api-chapters="icd10-chapters">
+        <div className="space-y-8 sm:space-y-12 mb-8 sm:mb-12" data-api-chapters="icd10-chapters">
           {currentChapters.map((chapter) => (
-            <Card key={chapter.id} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="pb-6">
-                <div className="flex items-start justify-between mb-4">
-                  <Badge variant="outline" className="text-sm font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
+            <Card key={chapter.id} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm overflow-hidden">
+              <CardHeader className="pb-4 sm:pb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
+                  <Badge variant="outline" className="text-xs sm:text-sm font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 w-fit">
                     {chapter.chapter}
                   </Badge>
-                  <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                  <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600 w-fit">
                     {chapter.subcategories.length} categories
                   </Badge>
                 </div>
-                <CardTitle className="text-2xl sm:text-3xl font-bold text-[#143151] mb-2">
+                <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] mb-2 leading-tight">
                   {chapter.range}
                 </CardTitle>
-                <p className="text-lg text-gray-600 font-medium">
+                <p className="text-base sm:text-lg text-gray-600 font-medium leading-relaxed">
                   {chapter.title}
                 </p>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-4" data-api-subcategories={chapter.id}>
+              <CardContent className="px-4 sm:px-6">
+                <div className="grid gap-3 sm:gap-4" data-api-subcategories={chapter.id}>
                   {chapter.subcategories.map((subcategory) => (
                     <Link
                       key={subcategory.range}
                       to={`/icd10-codes/${subcategory.range.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                       className="group block"
                     >
-                      <Card className="bg-white border border-gray-200/60 hover:border-[#387E89]/30 hover:shadow-md transition-all duration-200 hover:-translate-y-1">
-                        <CardContent className="p-4 sm:p-6">
-                          <div className="flex items-center justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <Badge variant="outline" className="text-xs font-mono bg-blue-50 text-blue-700 border-blue-200">
+                      <Card className="bg-white border border-gray-200/60 hover:border-[#387E89]/30 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
+                        <CardContent className="p-3 sm:p-4 lg:p-6">
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                                <Badge variant="outline" className="text-xs font-mono bg-blue-50 text-blue-700 border-blue-200 w-fit">
                                   {subcategory.range}
                                 </Badge>
-                                <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-500">
+                                <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-500 w-fit">
                                   {subcategory.codeCount}+ codes
                                 </Badge>
                               </div>
-                              <h3 className="text-base sm:text-lg font-semibold text-[#143151] group-hover:text-[#387E89] transition-colors">
+                              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-[#143151] group-hover:text-[#387E89] transition-colors leading-tight">
                                 {subcategory.title}
                               </h3>
                             </div>
-                            <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200" />
+                            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200 flex-shrink-0" />
                           </div>
                         </CardContent>
                       </Card>
@@ -576,30 +576,42 @@ const ICD10Codes = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mb-16" data-api-pagination="icd10-chapters">
+          <div className="mb-12 sm:mb-16 flex justify-center" data-api-pagination="icd10-chapters">
             <Pagination>
-              <PaginationContent>
+              <PaginationContent className="flex-wrap gap-1">
                 <PaginationItem>
                   <PaginationPrevious 
                     onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                    className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                    className={`${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer hover:bg-[#387E89]/10'} text-xs sm:text-sm`}
                   />
                 </PaginationItem>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <PaginationItem key={page}>
-                    <PaginationLink
-                      onClick={() => handlePageChange(page)}
-                      isActive={page === currentPage}
-                      className="cursor-pointer"
-                    >
-                      {page}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let page;
+                  if (totalPages <= 5) {
+                    page = i + 1;
+                  } else if (currentPage <= 3) {
+                    page = i + 1;
+                  } else if (currentPage >= totalPages - 2) {
+                    page = totalPages - 4 + i;
+                  } else {
+                    page = currentPage - 2 + i;
+                  }
+                  return (
+                    <PaginationItem key={page}>
+                      <PaginationLink
+                        onClick={() => handlePageChange(page)}
+                        isActive={page === currentPage}
+                        className="cursor-pointer hover:bg-[#387E89]/10 text-xs sm:text-sm min-w-[32px] sm:min-w-[40px]"
+                      >
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
                 <PaginationItem>
                   <PaginationNext 
                     onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                    className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                    className={`${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer hover:bg-[#387E89]/10'} text-xs sm:text-sm`}
                   />
                 </PaginationItem>
               </PaginationContent>
@@ -608,22 +620,22 @@ const ICD10Codes = () => {
         )}
 
         {/* About ICD-10-CM Section */}
-        <div className="mb-16" data-api-section="about-icd10">
+        <div className="mb-12 sm:mb-16" data-api-section="about-icd10">
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center text-2xl font-bold text-[#143151]">
-                <Info className="w-6 h-6 mr-3 text-[#387E89]" />
+              <CardTitle className="flex items-center text-xl sm:text-2xl font-bold text-[#143151]">
+                <Info className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-[#387E89]" />
                 About ICD-10-CM
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600 leading-relaxed">
+            <CardContent className="space-y-3 sm:space-y-4">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 The International Classification of Diseases, 10th Revision, Clinical Modification (ICD-10-CM) serves as the standard diagnostic tool used by healthcare professionals worldwide to classify and code diagnoses, symptoms, and medical procedures with precision and consistency.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 ICD-10-CM is systematically structured into 22 distinct chapters, with each chapter dedicated to specific body systems or categories of medical conditions. Every chapter is identified by a unique code range (such as A00-B99 for infectious and parasitic diseases). The coding system utilizes 3-7 character codes, where the first character is always a letter (A-Z) followed by numbers or additional letters.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 This comprehensive code browser enables healthcare professionals to navigate the complete ICD-10-CM classification system, access detailed information about individual codes, and understand the hierarchical relationships between different diagnostic categories. Users can efficiently browse by chapter, explore specific categories, or search for particular codes to ensure accurate medical documentation and billing compliance.
               </p>
             </CardContent>
@@ -631,22 +643,22 @@ const ICD10Codes = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-br from-[#143151] to-[#387E89] border-0 shadow-xl">
-            <CardContent className="p-8 sm:p-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+        <div className="text-center">
+          <Card className="bg-gradient-to-br from-[#143151] to-[#387E89] border-0 shadow-xl overflow-hidden">
+            <CardContent className="p-6 sm:p-8 lg:p-12">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4">
                 Ready to Streamline Your Coding Process?
               </h2>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
                 Use S10.AI's intelligent coding assistant to ensure accurate ICD-10 code selection 
                 and reduce documentation time.
               </p>
               <Link
                 to="/demo"
-                className="inline-flex items-center px-8 py-3 bg-white text-[#143151] font-semibold rounded-xl hover:bg-gray-50 transition-colors shadow-lg"
+                className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-[#143151] font-semibold rounded-xl hover:bg-gray-50 transition-colors shadow-lg text-sm sm:text-base"
               >
                 Start Coding with S10.AI
-                <ChevronRight className="ml-2 h-5 w-5" />
+                <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </CardContent>
           </Card>
