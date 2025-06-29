@@ -12,6 +12,8 @@ import PrivatePractice from "./pages/PrivatePractice";
 import Diagnoses from "./pages/Diagnoses";
 import DiagnosisDetail from "./pages/DiagnosisDetail";
 import Templates from "./pages/Templates";
+import ICD10Codes from "./pages/ICD10Codes";
+import ICD10CodeRange from "./pages/ICD10CodeRange";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/diagnoses" element={<Diagnoses />} />
           <Route path="/diagnoses/:id" element={<DiagnosisDetail />} />
           <Route path="/templates" element={<Templates />} />
+          <Route path="/icd10-codes" element={<ICD10Codes />} />
+          <Route path="/icd10-codes/:range" element={<ICD10CodeRange />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
