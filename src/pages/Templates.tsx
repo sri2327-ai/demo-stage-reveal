@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
@@ -863,4 +864,5 @@ const Templates = () => {
       </div>
     </div>;
 };
+
 export default Templates;
