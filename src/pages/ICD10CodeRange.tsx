@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, ChevronRight, Info, HelpCircle, Copy, Check } from 'lucide-react';
@@ -21,10 +20,7 @@ const codeRangeData: {
     billableCodes: 79,
     nonBillableCodes: 15,
     chaptersCount: 1,
-    aboutRange: {
-      clinicalUse: 'Used when documenting patients with confirmed or suspected intestinal infections, including cholera, typhoid fever, salmonella infections, and other bacterial gastroenteritis.',
-      documentation: 'Requires clinical documentation of symptoms, laboratory findings, and specific organism identification when available.'
-    },
+    aboutRange: {}, // Removed clinical use and documentation requirements
     codes: [{
       code: 'A00',
       title: 'Cholera',
@@ -158,7 +154,7 @@ const ICD10CodeRange = () => {
         {/* Header */}
         <div className="mb-8 sm:mb-12">
           <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-200/40">
-            <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+            <BookOpen className="w-3 h-3 mr-1.5 sm:mr-2" />
             {data.chapter}
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
@@ -205,14 +201,6 @@ const ICD10CodeRange = () => {
                   <div className="text-xl sm:text-2xl font-bold text-[#387E89]">{data.chaptersCount}</div>
                   <div className="text-xs sm:text-sm text-gray-600">Chapters</div>
                 </div>
-              </div>
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2">Clinical Use</h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{data.aboutRange.clinicalUse}</p>
-              </div>
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2">Documentation Requirements</h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{data.aboutRange.documentation}</p>
               </div>
             </CardContent>
           </Card>
@@ -336,4 +324,5 @@ const ICD10CodeRange = () => {
       </div>
     </div>;
 };
+
 export default ICD10CodeRange;
