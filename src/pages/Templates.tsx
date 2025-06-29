@@ -462,14 +462,8 @@ const Templates = () => {
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
                     <span>{selectedTemplate.rating}/5.0</span>
                   </div>
-                  <div className="flex items-center gap-1 sm:gap-2">
-                    <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="truncate">{selectedTemplate.complexity}</span>
-                  </div>
-                  <div className="flex items-center gap-1 sm:gap-2">
-                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="truncate">Updated {new Date(selectedTemplate.lastUpdated).toLocaleDateString()}</span>
-                  </div>
+                  
+                  
                 </div>
               </div>
               
