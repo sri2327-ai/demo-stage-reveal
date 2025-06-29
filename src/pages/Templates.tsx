@@ -9,43 +9,25 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import { CallToAction } from '@/components/CallToAction';
 
 // Enhanced mock data with better SEO structure
-const mockTemplates = [
-  {
-    id: 1,
-    slug: 'nhs-gp-consultation-template',
-    title: "NHS GP Consultation Template",
-    description: "Comprehensive tool designed for General Practitioners to document patient consultations effectively following NHS guidelines and best practices.",
-    specialty: "General Practice",
-    category: "Consultation",
-    uses: 3275,
-    rating: 4.9,
-    lastUpdated: "2025-01-15",
-    tags: ["GP", "NHS", "Consultation", "Primary Care", "SOAP Notes"],
-    author: "Dr. Sarah Johnson",
-    authorSpecialty: "General Practitioner",
-    authorCredentials: "MBBS, MRCGP",
-    estimatedTime: "5-10 minutes",
-    complexity: "Beginner",
-    structure: [
-      "Patient Demographics & Registration",
-      "Chief Complaint & Presenting Problem",
-      "History of Present Illness (HPI)",
-      "Past Medical History & Medications",
-      "Social & Family History",
-      "Review of Systems",
-      "Physical Examination Findings",
-      "Clinical Assessment & Differential",
-      "Investigation & Management Plan",
-      "Patient Education & Follow-up",
-      "Coding & Administrative Notes"
-    ],
-    clinicalBenefits: [
-      "Reduces documentation time by 40%",
-      "Ensures comprehensive patient history capture",
-      "Improves clinical decision-making workflow",
-      "Maintains NHS coding compliance"
-    ],
-    sampleContent: `PATIENT: John Smith, DOB: 15/03/1978, NHS No: 123 456 7890
+const mockTemplates = [{
+  id: 1,
+  slug: 'nhs-gp-consultation-template',
+  title: "NHS GP Consultation Template",
+  description: "Comprehensive tool designed for General Practitioners to document patient consultations effectively following NHS guidelines and best practices.",
+  specialty: "General Practice",
+  category: "Consultation",
+  uses: 3275,
+  rating: 4.9,
+  lastUpdated: "2025-01-15",
+  tags: ["GP", "NHS", "Consultation", "Primary Care", "SOAP Notes"],
+  author: "Dr. Sarah Johnson",
+  authorSpecialty: "General Practitioner",
+  authorCredentials: "MBBS, MRCGP",
+  estimatedTime: "5-10 minutes",
+  complexity: "Beginner",
+  structure: ["Patient Demographics & Registration", "Chief Complaint & Presenting Problem", "History of Present Illness (HPI)", "Past Medical History & Medications", "Social & Family History", "Review of Systems", "Physical Examination Findings", "Clinical Assessment & Differential", "Investigation & Management Plan", "Patient Education & Follow-up", "Coding & Administrative Notes"],
+  clinicalBenefits: ["Reduces documentation time by 40%", "Ensures comprehensive patient history capture", "Improves clinical decision-making workflow", "Maintains NHS coding compliance"],
+  sampleContent: `PATIENT: John Smith, DOB: 15/03/1978, NHS No: 123 456 7890
 
 PRESENTING COMPLAINT:
 45-year-old male presents with persistent productive cough and mild shortness of breath, ongoing for 2 weeks.
@@ -94,43 +76,25 @@ PLAN:
 
 FOLLOW-UP: PRN or in 2 weeks if no improvement
 CODES: H05z.00 (Upper respiratory tract infection, unspecified)`
-  },
-  {
-    id: 2,
-    slug: 'cardiology-assessment-template',
-    title: "Comprehensive Cardiology Assessment Template",
-    description: "Specialized template for cardiovascular examinations, risk stratification, and evidence-based treatment planning for cardiac patients.",
-    specialty: "Cardiology",
-    category: "Assessment",
-    uses: 1842,
-    rating: 4.8,
-    lastUpdated: "2025-01-10",
-    tags: ["Cardiology", "Heart Disease", "Risk Assessment", "ECG", "Echocardiogram"],
-    author: "Dr. Michael Chen",
-    authorSpecialty: "Consultant Cardiologist",
-    authorCredentials: "MD, FACC, FESC",
-    estimatedTime: "15-20 minutes",
-    complexity: "Intermediate",
-    structure: [
-      "Cardiovascular History Taking",
-      "Chest Pain Characterization",
-      "Cardiovascular Risk Factor Assessment",
-      "Functional Capacity Evaluation",
-      "Physical Examination Protocol",
-      "ECG Interpretation Framework",
-      "Diagnostic Test Planning",
-      "Risk Stratification Tools",
-      "Evidence-Based Treatment Plan",
-      "Patient Education & Lifestyle",
-      "Follow-up & Monitoring Plan"
-    ],
-    clinicalBenefits: [
-      "Standardizes cardiac risk assessment",
-      "Improves diagnostic accuracy",
-      "Ensures guideline-compliant care",
-      "Facilitates MDT communication"
-    ],
-    sampleContent: `CARDIOVASCULAR ASSESSMENT
+}, {
+  id: 2,
+  slug: 'cardiology-assessment-template',
+  title: "Comprehensive Cardiology Assessment Template",
+  description: "Specialized template for cardiovascular examinations, risk stratification, and evidence-based treatment planning for cardiac patients.",
+  specialty: "Cardiology",
+  category: "Assessment",
+  uses: 1842,
+  rating: 4.8,
+  lastUpdated: "2025-01-10",
+  tags: ["Cardiology", "Heart Disease", "Risk Assessment", "ECG", "Echocardiogram"],
+  author: "Dr. Michael Chen",
+  authorSpecialty: "Consultant Cardiologist",
+  authorCredentials: "MD, FACC, FESC",
+  estimatedTime: "15-20 minutes",
+  complexity: "Intermediate",
+  structure: ["Cardiovascular History Taking", "Chest Pain Characterization", "Cardiovascular Risk Factor Assessment", "Functional Capacity Evaluation", "Physical Examination Protocol", "ECG Interpretation Framework", "Diagnostic Test Planning", "Risk Stratification Tools", "Evidence-Based Treatment Plan", "Patient Education & Lifestyle", "Follow-up & Monitoring Plan"],
+  clinicalBenefits: ["Standardizes cardiac risk assessment", "Improves diagnostic accuracy", "Ensures guideline-compliant care", "Facilitates MDT communication"],
+  sampleContent: `CARDIOVASCULAR ASSESSMENT
 
 PATIENT: Maria Rodriguez, 58F, DOB: 22/07/1966
 
@@ -193,43 +157,25 @@ LIFESTYLE COUNSELING:
 - Diabetes self-management education
 
 FOLLOW-UP: 2 weeks (medication tolerance), then 6 weeks with results`
-  },
-  {
-    id: 3,
-    slug: 'mental-health-assessment-template',
-    title: "Mental Health Assessment Template",
-    description: "Comprehensive psychiatric evaluation template for mental health professionals, including risk assessment and treatment planning frameworks.",
-    specialty: "Psychiatry",
-    category: "Assessment",
-    uses: 2156,
-    rating: 4.7,
-    lastUpdated: "2025-01-08",
-    tags: ["Mental Health", "Psychiatry", "Risk Assessment", "DSM-5", "Therapy Planning"],
-    author: "Dr. Lisa Rodriguez",
-    authorSpecialty: "Consultant Psychiatrist",
-    authorCredentials: "MD, MRCPsych",
-    estimatedTime: "30-45 minutes",
-    complexity: "Advanced",
-    structure: [
-      "Mental Status Examination",
-      "Psychiatric History Taking",
-      "Risk Assessment Protocol",
-      "Substance Use Screening",
-      "Cognitive Assessment",
-      "Psychosocial Formulation",
-      "DSM-5 Diagnostic Criteria",
-      "Treatment Planning Framework",
-      "Safety Planning Protocol",
-      "Capacity Assessment",
-      "Discharge Planning"
-    ],
-    clinicalBenefits: [
-      "Standardizes mental health assessments",
-      "Improves risk identification",
-      "Ensures comprehensive evaluation",
-      "Facilitates treatment planning"
-    ],
-    sampleContent: `MENTAL HEALTH ASSESSMENT
+}, {
+  id: 3,
+  slug: 'mental-health-assessment-template',
+  title: "Mental Health Assessment Template",
+  description: "Comprehensive psychiatric evaluation template for mental health professionals, including risk assessment and treatment planning frameworks.",
+  specialty: "Psychiatry",
+  category: "Assessment",
+  uses: 2156,
+  rating: 4.7,
+  lastUpdated: "2025-01-08",
+  tags: ["Mental Health", "Psychiatry", "Risk Assessment", "DSM-5", "Therapy Planning"],
+  author: "Dr. Lisa Rodriguez",
+  authorSpecialty: "Consultant Psychiatrist",
+  authorCredentials: "MD, MRCPsych",
+  estimatedTime: "30-45 minutes",
+  complexity: "Advanced",
+  structure: ["Mental Status Examination", "Psychiatric History Taking", "Risk Assessment Protocol", "Substance Use Screening", "Cognitive Assessment", "Psychosocial Formulation", "DSM-5 Diagnostic Criteria", "Treatment Planning Framework", "Safety Planning Protocol", "Capacity Assessment", "Discharge Planning"],
+  clinicalBenefits: ["Standardizes mental health assessments", "Improves risk identification", "Ensures comprehensive evaluation", "Facilitates treatment planning"],
+  sampleContent: `MENTAL HEALTH ASSESSMENT
 
 PATIENT: James Thompson, 34M, DOB: 12/11/1989
 
@@ -322,9 +268,7 @@ SAFETY PLAN:
 CAPACITY: Has capacity to make treatment decisions
 
 FOLLOW-UP: 2 weeks (medication review), 4 weeks (progress review)`
-  }
-];
-
+}];
 const Templates = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -337,16 +281,10 @@ const Templates = () => {
   // Filter templates
   const filteredTemplates = useMemo(() => {
     return mockTemplates.filter(template => {
-      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        template.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        template.specialty.toLowerCase().includes(searchTerm.toLowerCase());
-      
+      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) || template.description.toLowerCase().includes(searchTerm.toLowerCase()) || template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) || template.author.toLowerCase().includes(searchTerm.toLowerCase()) || template.specialty.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesSpecialty = selectedSpecialty ? template.specialty === selectedSpecialty : true;
       const matchesCategory = selectedCategory ? template.category === selectedCategory : true;
       const matchesComplexity = selectedComplexity ? template.complexity === selectedComplexity : true;
-      
       return matchesSearch && matchesSpecialty && matchesCategory && matchesComplexity;
     });
   }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
@@ -371,7 +309,6 @@ const Templates = () => {
   const getPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 5;
-    
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
@@ -399,13 +336,10 @@ const Templates = () => {
         pages.push(totalPages);
       }
     }
-    
     return pages;
   };
-
   if (selectedTemplate) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
           {/* Breadcrumb Navigation - Responsive */}
           <nav className="mb-4 sm:mb-6 text-xs sm:text-sm" aria-label="Breadcrumb">
@@ -419,11 +353,7 @@ const Templates = () => {
           </nav>
 
           {/* Back Button - Responsive */}
-          <Button 
-            variant="ghost" 
-            onClick={() => setSelectedTemplate(null)}
-            className="mb-4 sm:mb-6 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all text-sm sm:text-base"
-          >
+          <Button variant="ghost" onClick={() => setSelectedTemplate(null)} className="mb-4 sm:mb-6 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all text-sm sm:text-base">
             ← Back to Templates
           </Button>
 
@@ -447,7 +377,7 @@ const Templates = () => {
                 </div>
                 
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{selectedTemplate.title}</h1>
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-6 leading-relaxed">{selectedTemplate.description}</p>
+                
                 
                 <div className="grid grid-cols-2 gap-2 sm:gap-4 text-white/80 text-xs sm:text-sm md:text-base">
                   <div className="flex items-center gap-1 sm:gap-2">
@@ -470,25 +400,13 @@ const Templates = () => {
               </div>
               
               <div className="flex flex-row lg:flex-col gap-2 sm:gap-3 lg:min-w-[180px] xl:min-w-[200px]">
-                <Button 
-                  variant="secondary" 
-                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none"
-                >
+                <Button variant="secondary" className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none">
                   <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">Share Template</span>
                   <span className="sm:hidden">Share</span>
                 </Button>
-                <Button 
-                  variant="secondary" 
-                  className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none"
-                >
-                  <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Download PDF</span>
-                  <span className="sm:hidden">Download</span>
-                </Button>
-                <Button 
-                  className="bg-[#387E89] hover:bg-[#306b75] text-white transition-all text-xs sm:text-sm flex-1 lg:flex-none lg:w-full"
-                >
+                
+                <Button className="bg-[#387E89] hover:bg-[#306b75] text-white transition-all text-xs sm:text-sm flex-1 lg:flex-none lg:w-full">
                   <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">Use Template</span>
                   <span className="sm:hidden">Use</span>
@@ -514,12 +432,10 @@ const Templates = () => {
                   <div className="border-t pt-6">
                     <h4 className="font-semibold text-[#143151] mb-3">Clinical Benefits</h4>
                     <ul className="space-y-2">
-                      {selectedTemplate.clinicalBenefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
                           <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <span>{benefit}</span>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </div>
                   
@@ -537,16 +453,7 @@ const Templates = () => {
                     </div>
                   </div>
 
-                  <div className="border-t pt-6">
-                    <h4 className="font-semibold text-[#143151] mb-3">Keywords</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedTemplate.tags.map((tag, index) => (
-                        <Badge key={index} variant="secondary" className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/20 hover:bg-[#387E89]/20 transition-colors">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
+                  
                 </CardContent>
               </Card>
             </div>
@@ -562,14 +469,12 @@ const Templates = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {selectedTemplate.structure.map((section, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
+                    {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
                         <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                           {index + 1}
                         </div>
                         <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </CardContent>
               </Card>
@@ -630,12 +535,9 @@ const Templates = () => {
           {/* Call to Action */}
           <CallToAction />
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+  return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section - Responsive */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -657,14 +559,7 @@ const Templates = () => {
             {/* Main Search Bar - Responsive */}
             <div className="relative group">
               <Search className="absolute left-4 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5 group-focus-within:text-[#387E89] transition-colors" />
-              <Input
-                type="text"
-                placeholder="Search templates by specialty, condition, author..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 sm:pl-12 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500"
-                aria-label="Search medical templates"
-              />
+              <Input type="text" placeholder="Search templates by specialty, condition, author..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 sm:pl-12 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500" aria-label="Search medical templates" />
             </div>
 
             {/* Filter Controls - Responsive */}
@@ -675,40 +570,19 @@ const Templates = () => {
                 <span className="font-medium sm:hidden">Filter:</span>
               </div>
               
-              <select
-                value={selectedSpecialty}
-                onChange={(e) => setSelectedSpecialty(e.target.value)}
-                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
-                aria-label="Filter by medical specialty"
-              >
+              <select value={selectedSpecialty} onChange={e => setSelectedSpecialty(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by medical specialty">
                 <option value="">All Specialties</option>
-                {specialties.map(specialty => (
-                  <option key={specialty} value={specialty}>{specialty}</option>
-                ))}
+                {specialties.map(specialty => <option key={specialty} value={specialty}>{specialty}</option>)}
               </select>
 
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
-                aria-label="Filter by template category"
-              >
+              <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by template category">
                 <option value="">All Categories</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
+                {categories.map(category => <option key={category} value={category}>{category}</option>)}
               </select>
 
-              <select
-                value={selectedComplexity}
-                onChange={(e) => setSelectedComplexity(e.target.value)}
-                className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink"
-                aria-label="Filter by complexity level"
-              >
+              <select value={selectedComplexity} onChange={e => setSelectedComplexity(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by complexity level">
                 <option value="">All Levels</option>
-                {complexities.map(complexity => (
-                  <option key={complexity} value={complexity}>{complexity}</option>
-                ))}
+                {complexities.map(complexity => <option key={complexity} value={complexity}>{complexity}</option>)}
               </select>
             </div>
           </div>
@@ -724,31 +598,19 @@ const Templates = () => {
               <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
                 {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
               </div>
-              {totalPages > 1 && (
-                <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
+              {totalPages > 1 && <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
                   Page {currentPage} of {totalPages}
-                </div>
-              )}
+                </div>}
             </div>
           </div>
 
-          {currentTemplates.length > 0 ? (
-            <>
+          {currentTemplates.length > 0 ? <>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 px-2 sm:px-0">
-                {currentTemplates.map((template) => (
-                  <Card 
-                    key={template.id} 
-                    className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group"
-                    onClick={() => setSelectedTemplate(template)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        setSelectedTemplate(template);
-                      }
-                    }}
-                    aria-label={`View ${template.title} template details`}
-                  >
+                {currentTemplates.map(template => <Card key={template.id} className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group" onClick={() => setSelectedTemplate(template)} role="button" tabIndex={0} onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setSelectedTemplate(template);
+              }
+            }} aria-label={`View ${template.title} template details`}>
                     <CardHeader className="pb-3 sm:pb-4 p-4 sm:p-6">
                       <div className="flex items-start justify-between mb-2 sm:mb-3">
                         <div className="flex flex-wrap gap-1 sm:gap-2 flex-1 mr-2">
@@ -778,7 +640,7 @@ const Templates = () => {
                           <div className="flex items-center gap-1">
                             <Users className="w-3 h-3 sm:w-4 sm:h-4" />
                             <span className="hidden sm:inline">{template.uses.toLocaleString()}</span>
-                            <span className="sm:hidden">{template.uses > 1000 ? `${Math.floor(template.uses/1000)}k` : template.uses}</span>
+                            <span className="sm:hidden">{template.uses > 1000 ? `${Math.floor(template.uses / 1000)}k` : template.uses}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-yellow-500" />
@@ -808,67 +670,43 @@ const Templates = () => {
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
 
               {/* Pagination - Responsive */}
-              {totalPages > 1 && (
-                <div className="flex justify-center px-2 sm:px-0">
+              {totalPages > 1 && <div className="flex justify-center px-2 sm:px-0">
                   <Pagination>
                     <PaginationContent className="flex-wrap gap-1 sm:gap-2">
                       <PaginationItem>
-                        <PaginationPrevious 
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (currentPage > 1) {
-                              setCurrentPage(currentPage - 1);
-                            }
-                          }}
-                          className={`${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`}
-                        />
+                        <PaginationPrevious href="#" onClick={e => {
+                    e.preventDefault();
+                    if (currentPage > 1) {
+                      setCurrentPage(currentPage - 1);
+                    }
+                  }} className={`${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`} />
                       </PaginationItem>
                       
-                      {getPageNumbers().map((page, index) => (
-                        <PaginationItem key={index}>
-                          {page === 'ellipsis' ? (
-                            <PaginationEllipsis className="text-xs sm:text-sm" />
-                          ) : (
-                            <PaginationLink
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setCurrentPage(page);
-                              }}
-                              isActive={currentPage === page}
-                              className="cursor-pointer text-xs sm:text-sm w-8 h-8 sm:w-9 sm:h-9"
-                            >
+                      {getPageNumbers().map((page, index) => <PaginationItem key={index}>
+                          {page === 'ellipsis' ? <PaginationEllipsis className="text-xs sm:text-sm" /> : <PaginationLink href="#" onClick={e => {
+                    e.preventDefault();
+                    setCurrentPage(page);
+                  }} isActive={currentPage === page} className="cursor-pointer text-xs sm:text-sm w-8 h-8 sm:w-9 sm:h-9">
                               {page}
-                            </PaginationLink>
-                          )}
-                        </PaginationItem>
-                      ))}
+                            </PaginationLink>}
+                        </PaginationItem>)}
                       
                       <PaginationItem>
-                        <PaginationNext 
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (currentPage < totalPages) {
-                              setCurrentPage(currentPage + 1);
-                            }
-                          }}
-                          className={`${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`}
-                        />
+                        <PaginationNext href="#" onClick={e => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) {
+                      setCurrentPage(currentPage + 1);
+                    }
+                  }} className={`${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`} />
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>
-                </div>
-              )}
-            </>
-          ) : (
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm mx-2 sm:mx-0">
+                </div>}
+            </> : <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm mx-2 sm:mx-0">
               <CardContent className="p-6 sm:p-8 md:p-16 text-center">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#387E89]/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <Search className="w-6 h-6 sm:w-8 sm:h-8 text-[#387E89]" />
@@ -877,28 +715,21 @@ const Templates = () => {
                 <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
                   Try adjusting your search terms or filters to find relevant templates.
                 </p>
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedSpecialty('');
-                    setSelectedCategory('');
-                    setSelectedComplexity('');
-                  }}
-                  className="bg-transparent border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white transition-all text-sm sm:text-base"
-                >
+                <Button variant="outline" onClick={() => {
+              setSearchTerm('');
+              setSelectedSpecialty('');
+              setSelectedCategory('');
+              setSelectedComplexity('');
+            }} className="bg-transparent border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white transition-all text-sm sm:text-base">
                   Clear All Filters
                 </Button>
               </CardContent>
-            </Card>
-          )}
+            </Card>}
         </div>
 
         {/* Call to Action */}
         <CallToAction />
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Templates;
