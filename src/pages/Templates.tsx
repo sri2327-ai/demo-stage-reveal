@@ -1,5 +1,3 @@
-
-
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
@@ -80,28 +78,22 @@ PLAN:
 
 FOLLOW-UP: PRN or in 2 weeks if no improvement
 CODES: H05z.00 (Upper respiratory tract infection, unspecified)`,
-  faqs: [
-    {
-      question: "How do I customize this template for my practice?",
-      answer: "This template can be easily customized by modifying the sections to match your specific practice needs. You can add or remove fields, adjust the clinical assessment criteria, and modify the coding sections to align with your local healthcare system requirements."
-    },
-    {
-      question: "Is this template compliant with NHS guidelines?",
-      answer: "Yes, this template has been designed to fully comply with current NHS documentation standards and clinical governance requirements. It includes all mandatory fields for GP consultations and follows the recommended SOAP note structure."
-    },
-    {
-      question: "Can I integrate this with my existing EMR system?",
-      answer: "Absolutely. This template is designed to be EMR-agnostic and can be integrated with most electronic medical record systems. The structured format makes it easy to map fields to your existing system's database schema."
-    },
-    {
-      question: "What training is needed to use this template effectively?",
-      answer: "Minimal training is required as the template follows standard clinical documentation practices. Most clinicians can start using it immediately, though we recommend a brief orientation session to familiarize users with the specific workflow and any customizations."
-    },
-    {
-      question: "How often is this template updated?",
-      answer: "This template is reviewed and updated quarterly to ensure compliance with the latest clinical guidelines and regulatory requirements. Users are automatically notified of any significant updates or changes."
-    }
-  ]
+  faqs: [{
+    question: "How do I customize this template for my practice?",
+    answer: "This template can be easily customized by modifying the sections to match your specific practice needs. You can add or remove fields, adjust the clinical assessment criteria, and modify the coding sections to align with your local healthcare system requirements."
+  }, {
+    question: "Is this template compliant with NHS guidelines?",
+    answer: "Yes, this template has been designed to fully comply with current NHS documentation standards and clinical governance requirements. It includes all mandatory fields for GP consultations and follows the recommended SOAP note structure."
+  }, {
+    question: "Can I integrate this with my existing EMR system?",
+    answer: "Absolutely. This template is designed to be EMR-agnostic and can be integrated with most electronic medical record systems. The structured format makes it easy to map fields to your existing system's database schema."
+  }, {
+    question: "What training is needed to use this template effectively?",
+    answer: "Minimal training is required as the template follows standard clinical documentation practices. Most clinicians can start using it immediately, though we recommend a brief orientation session to familiarize users with the specific workflow and any customizations."
+  }, {
+    question: "How often is this template updated?",
+    answer: "This template is reviewed and updated quarterly to ensure compliance with the latest clinical guidelines and regulatory requirements. Users are automatically notified of any significant updates or changes."
+  }]
 }, {
   id: 2,
   slug: 'cardiology-assessment-template',
@@ -183,28 +175,22 @@ LIFESTYLE COUNSELING:
 - Diabetes self-management education
 
 FOLLOW-UP: 2 weeks (medication tolerance), then 6 weeks with results`,
-  faqs: [
-    {
-      question: "What makes this cardiology template different from general templates?",
-      answer: "This template is specifically designed for cardiovascular assessments and includes specialized sections for cardiac risk stratification, ECG interpretation, and evidence-based cardiac treatment protocols that aren't found in general medical templates."
-    },
-    {
-      question: "How does the QRISK3 calculation work within this template?",
-      answer: "The template includes prompts for all QRISK3 risk factors and provides guidance on interpretation. While the actual calculation can be integrated via API, the template ensures all necessary data points are captured systematically."
-    },
-    {
-      question: "Can this template be used for both inpatient and outpatient cardiology?",
-      answer: "Yes, this template is designed to be flexible for both settings. The structure can be adapted based on the clinical context, with additional sections for inpatient-specific assessments like telemetry monitoring and acute cardiac markers."
-    },
-    {
-      question: "Is this template aligned with ESC/AHA guidelines?",
-      answer: "Absolutely. This template incorporates the latest European Society of Cardiology (ESC) and American Heart Association (AHA) guidelines for cardiovascular assessment and management, ensuring evidence-based clinical practice."
-    },
-    {
-      question: "How can I integrate cardiac imaging results into this template?",
-      answer: "The template includes dedicated sections for ECG, echocardiogram, and other cardiac imaging results. These can be enhanced with direct integration to PACS systems or imaging databases through our API framework."
-    }
-  ]
+  faqs: [{
+    question: "What makes this cardiology template different from general templates?",
+    answer: "This template is specifically designed for cardiovascular assessments and includes specialized sections for cardiac risk stratification, ECG interpretation, and evidence-based cardiac treatment protocols that aren't found in general medical templates."
+  }, {
+    question: "How does the QRISK3 calculation work within this template?",
+    answer: "The template includes prompts for all QRISK3 risk factors and provides guidance on interpretation. While the actual calculation can be integrated via API, the template ensures all necessary data points are captured systematically."
+  }, {
+    question: "Can this template be used for both inpatient and outpatient cardiology?",
+    answer: "Yes, this template is designed to be flexible for both settings. The structure can be adapted based on the clinical context, with additional sections for inpatient-specific assessments like telemetry monitoring and acute cardiac markers."
+  }, {
+    question: "Is this template aligned with ESC/AHA guidelines?",
+    answer: "Absolutely. This template incorporates the latest European Society of Cardiology (ESC) and American Heart Association (AHA) guidelines for cardiovascular assessment and management, ensuring evidence-based clinical practice."
+  }, {
+    question: "How can I integrate cardiac imaging results into this template?",
+    answer: "The template includes dedicated sections for ECG, echocardiogram, and other cardiac imaging results. These can be enhanced with direct integration to PACS systems or imaging databases through our API framework."
+  }]
 }, {
   id: 3,
   slug: 'mental-health-assessment-template',
@@ -316,30 +302,23 @@ SAFETY PLAN:
 CAPACITY: Has capacity to make treatment decisions
 
 FOLLOW-UP: 2 weeks (medication review), 4 weeks (progress review)`,
-  faqs: [
-    {
-      question: "How does this template ensure comprehensive mental health assessment?",
-      answer: "This template follows evidence-based psychiatric assessment protocols, incorporating DSM-5 criteria, standardized mental status examination components, and comprehensive risk assessment frameworks to ensure no critical areas are missed."
-    },
-    {
-      question: "What risk assessment tools are integrated into this template?",
-      answer: "The template includes structured risk assessment for suicide, self-harm, and risk to others, incorporating validated screening tools and safety planning protocols that align with clinical best practices and legal requirements."
-    },
-    {
-      question: "Can this template be customized for different mental health specialties?",
-      answer: "Yes, while designed as a comprehensive psychiatric assessment, the template can be adapted for various mental health specialties including psychology, counseling, and specialized services like addiction or forensic psychiatry."
-    },
-    {
-      question: "How does the template handle crisis situations and emergency protocols?",
-      answer: "The template includes dedicated sections for crisis assessment, safety planning, and emergency protocols. It prompts clinicians to document protective factors, warning signs, and emergency contacts systematically."
-    },
-    {
-      question: "What training is recommended before using this advanced template?",
-      answer: "This template is designed for qualified mental health professionals. Users should have appropriate clinical training in psychiatric assessment, risk evaluation, and crisis intervention before implementing this comprehensive assessment framework."
-    }
-  ]
+  faqs: [{
+    question: "How does this template ensure comprehensive mental health assessment?",
+    answer: "This template follows evidence-based psychiatric assessment protocols, incorporating DSM-5 criteria, standardized mental status examination components, and comprehensive risk assessment frameworks to ensure no critical areas are missed."
+  }, {
+    question: "What risk assessment tools are integrated into this template?",
+    answer: "The template includes structured risk assessment for suicide, self-harm, and risk to others, incorporating validated screening tools and safety planning protocols that align with clinical best practices and legal requirements."
+  }, {
+    question: "Can this template be customized for different mental health specialties?",
+    answer: "Yes, while designed as a comprehensive psychiatric assessment, the template can be adapted for various mental health specialties including psychology, counseling, and specialized services like addiction or forensic psychiatry."
+  }, {
+    question: "How does the template handle crisis situations and emergency protocols?",
+    answer: "The template includes dedicated sections for crisis assessment, safety planning, and emergency protocols. It prompts clinicians to document protective factors, warning signs, and emergency contacts systematically."
+  }, {
+    question: "What training is recommended before using this advanced template?",
+    answer: "This template is designed for qualified mental health professionals. Users should have appropriate clinical training in psychiatric assessment, risk evaluation, and crisis intervention before implementing this comprehensive assessment framework."
+  }]
 }];
-
 const Templates = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -421,29 +400,28 @@ const Templates = () => {
 
   // Template Detail View
   if (selectedTemplate) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
           {/* SEO-optimized structured data and meta information */}
           <script type="application/ld+json">
             {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MedicalEntity",
-              "name": selectedTemplate.title,
-              "description": selectedTemplate.description,
-              "specialty": selectedTemplate.specialty,
-              "author": {
-                "@type": "Person",
-                "name": selectedTemplate.author,
-                "jobTitle": selectedTemplate.authorSpecialty
-              },
-              "dateModified": selectedTemplate.lastUpdated,
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": selectedTemplate.rating,
-                "ratingCount": selectedTemplate.uses
-              }
-            })}
+            "@context": "https://schema.org",
+            "@type": "MedicalEntity",
+            "name": selectedTemplate.title,
+            "description": selectedTemplate.description,
+            "specialty": selectedTemplate.specialty,
+            "author": {
+              "@type": "Person",
+              "name": selectedTemplate.author,
+              "jobTitle": selectedTemplate.authorSpecialty
+            },
+            "dateModified": selectedTemplate.lastUpdated,
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": selectedTemplate.rating,
+              "ratingCount": selectedTemplate.uses
+            }
+          })}
           </script>
 
           {/* Breadcrumb Navigation - Responsive */}
@@ -549,26 +527,18 @@ const Templates = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
-                  {selectedTemplate.structure.map((section, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
+                  {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
                       <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
                       <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
                 
                 {/* Interactive Template Editor */}
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-[#143151] mb-3">Your Template Content</h4>
-                  <Textarea
-                    placeholder="Start documenting using this template structure..."
-                    value={templateContent}
-                    onChange={(e) => setTemplateContent(e.target.value)}
-                    className="min-h-[400px] font-mono text-sm"
-                    data-api-endpoint="/api/templates/structure"
-                  />
+                  <Textarea placeholder="Start documenting using this template structure..." value={templateContent} onChange={e => setTemplateContent(e.target.value)} className="min-h-[400px] font-mono text-sm" data-api-endpoint="/api/templates/structure" />
                   <div className="flex gap-2 mt-3">
                     <Button size="sm" className="bg-[#387E89] hover:bg-[#306b75] text-white">
                       <Download className="w-4 h-4 mr-2" />
@@ -603,12 +573,10 @@ const Templates = () => {
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-[#143151] mb-3">Clinical Benefits</h4>
                   <ul className="space-y-2">
-                    {selectedTemplate.clinicalBenefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                    {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
                         <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                         <span>{benefit}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
               </CardContent>
@@ -625,25 +593,15 @@ const Templates = () => {
               <p className="text-sm sm:text-base text-gray-600">Common questions about this template and its usage</p>
             </CardHeader>
             <CardContent className="space-y-4" data-api-endpoint="/api/templates/faqs">
-              {selectedTemplate.faqs.map((faq, index) => (
-                <Collapsible 
-                  key={index} 
-                  open={expandedFaq === index} 
-                  onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                >
+              {selectedTemplate.faqs.map((faq, index) => <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                   <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <h4 className="font-medium text-[#143151] text-sm sm:text-base pr-4">{faq.question}</h4>
-                    {expandedFaq === index ? (
-                      <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />
-                    )}
+                    {expandedFaq === index ? <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" /> : <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />}
                   </CollapsibleTrigger>
                   <CollapsibleContent className="px-4 py-3 text-sm sm:text-base text-gray-700 leading-relaxed">
                     {faq.answer}
                   </CollapsibleContent>
-                </Collapsible>
-              ))}
+                </Collapsible>)}
             </CardContent>
           </Card>
 
@@ -653,10 +611,7 @@ const Templates = () => {
               <Eye className="w-4 h-4 mr-2" />
               Start Using This Template
             </Button>
-            <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-              <Download className="w-4 h-4 mr-2" />
-              Download PDF Guide
-            </Button>
+            
             <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
               <Share2 className="w-4 h-4 mr-2" />
               Share with Colleagues
@@ -666,10 +621,8 @@ const Templates = () => {
           {/* Call to Action */}
           <CallToAction />
         </div>
-      </div>
-    );
+      </div>;
   }
-
   return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section - Responsive */}
@@ -865,6 +818,4 @@ const Templates = () => {
       </div>
     </div>;
 };
-
 export default Templates;
-
