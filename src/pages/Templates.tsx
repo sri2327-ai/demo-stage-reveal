@@ -1,14 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope } from 'lucide-react';
+import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { Textarea } from '@/components/ui/textarea';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { CallToAction } from '@/components/CallToAction';
 
-// Enhanced mock data with better SEO structure
+// Enhanced mock data with FAQ section
 const mockTemplates = [{
   id: 1,
   slug: 'nhs-gp-consultation-template',
@@ -75,7 +77,29 @@ PLAN:
 5. Patient education provided regarding expected course
 
 FOLLOW-UP: PRN or in 2 weeks if no improvement
-CODES: H05z.00 (Upper respiratory tract infection, unspecified)`
+CODES: H05z.00 (Upper respiratory tract infection, unspecified)`,
+  faqs: [
+    {
+      question: "How do I customize this template for my practice?",
+      answer: "This template can be easily customized by modifying the sections to match your specific practice needs. You can add or remove fields, adjust the clinical assessment criteria, and modify the coding sections to align with your local healthcare system requirements."
+    },
+    {
+      question: "Is this template compliant with NHS guidelines?",
+      answer: "Yes, this template has been designed to fully comply with current NHS documentation standards and clinical governance requirements. It includes all mandatory fields for GP consultations and follows the recommended SOAP note structure."
+    },
+    {
+      question: "Can I integrate this with my existing EMR system?",
+      answer: "Absolutely. This template is designed to be EMR-agnostic and can be integrated with most electronic medical record systems. The structured format makes it easy to map fields to your existing system's database schema."
+    },
+    {
+      question: "What training is needed to use this template effectively?",
+      answer: "Minimal training is required as the template follows standard clinical documentation practices. Most clinicians can start using it immediately, though we recommend a brief orientation session to familiarize users with the specific workflow and any customizations."
+    },
+    {
+      question: "How often is this template updated?",
+      answer: "This template is reviewed and updated quarterly to ensure compliance with the latest clinical guidelines and regulatory requirements. Users are automatically notified of any significant updates or changes."
+    }
+  ]
 }, {
   id: 2,
   slug: 'cardiology-assessment-template',
@@ -156,7 +180,29 @@ LIFESTYLE COUNSELING:
 - Regular moderate exercise program
 - Diabetes self-management education
 
-FOLLOW-UP: 2 weeks (medication tolerance), then 6 weeks with results`
+FOLLOW-UP: 2 weeks (medication tolerance), then 6 weeks with results`,
+  faqs: [
+    {
+      question: "What makes this cardiology template different from general templates?",
+      answer: "This template is specifically designed for cardiovascular assessments and includes specialized sections for cardiac risk stratification, ECG interpretation, and evidence-based cardiac treatment protocols that aren't found in general medical templates."
+    },
+    {
+      question: "How does the QRISK3 calculation work within this template?",
+      answer: "The template includes prompts for all QRISK3 risk factors and provides guidance on interpretation. While the actual calculation can be integrated via API, the template ensures all necessary data points are captured systematically."
+    },
+    {
+      question: "Can this template be used for both inpatient and outpatient cardiology?",
+      answer: "Yes, this template is designed to be flexible for both settings. The structure can be adapted based on the clinical context, with additional sections for inpatient-specific assessments like telemetry monitoring and acute cardiac markers."
+    },
+    {
+      question: "Is this template aligned with ESC/AHA guidelines?",
+      answer: "Absolutely. This template incorporates the latest European Society of Cardiology (ESC) and American Heart Association (AHA) guidelines for cardiovascular assessment and management, ensuring evidence-based clinical practice."
+    },
+    {
+      question: "How can I integrate cardiac imaging results into this template?",
+      answer: "The template includes dedicated sections for ECG, echocardiogram, and other cardiac imaging results. These can be enhanced with direct integration to PACS systems or imaging databases through our API framework."
+    }
+  ]
 }, {
   id: 3,
   slug: 'mental-health-assessment-template',
@@ -267,8 +313,31 @@ SAFETY PLAN:
 
 CAPACITY: Has capacity to make treatment decisions
 
-FOLLOW-UP: 2 weeks (medication review), 4 weeks (progress review)`
+FOLLOW-UP: 2 weeks (medication review), 4 weeks (progress review)`,
+  faqs: [
+    {
+      question: "How does this template ensure comprehensive mental health assessment?",
+      answer: "This template follows evidence-based psychiatric assessment protocols, incorporating DSM-5 criteria, standardized mental status examination components, and comprehensive risk assessment frameworks to ensure no critical areas are missed."
+    },
+    {
+      question: "What risk assessment tools are integrated into this template?",
+      answer: "The template includes structured risk assessment for suicide, self-harm, and risk to others, incorporating validated screening tools and safety planning protocols that align with clinical best practices and legal requirements."
+    },
+    {
+      question: "Can this template be customized for different mental health specialties?",
+      answer: "Yes, while designed as a comprehensive psychiatric assessment, the template can be adapted for various mental health specialties including psychology, counseling, and specialized services like addiction or forensic psychiatry."
+    },
+    {
+      question: "How does the template handle crisis situations and emergency protocols?",
+      answer: "The template includes dedicated sections for crisis assessment, safety planning, and emergency protocols. It prompts clinicians to document protective factors, warning signs, and emergency contacts systematically."
+    },
+    {
+      question: "What training is recommended before using this advanced template?",
+      answer: "This template is designed for qualified mental health professionals. Users should have appropriate clinical training in psychiatric assessment, risk evaluation, and crisis intervention before implementing this comprehensive assessment framework."
+    }
+  ]
 }];
+
 const Templates = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -276,6 +345,8 @@ const Templates = () => {
   const [selectedComplexity, setSelectedComplexity] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [templateContent, setTemplateContent] = useState('');
+  const [expandedFaq, setExpandedFaq] = useState(null);
   const templatesPerPage = 6;
 
   // Filter templates
@@ -299,6 +370,13 @@ const Templates = () => {
   React.useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
+
+  // Initialize template content when template is selected
+  React.useEffect(() => {
+    if (selectedTemplate) {
+      setTemplateContent(selectedTemplate.sampleContent);
+    }
+  }, [selectedTemplate]);
 
   // Get unique values for filters
   const specialties = [...new Set(mockTemplates.map(t => t.specialty))];
@@ -338,9 +416,34 @@ const Templates = () => {
     }
     return pages;
   };
+
+  // Template Detail View
   if (selectedTemplate) {
-    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+          {/* SEO-optimized structured data and meta information */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MedicalEntity",
+              "name": selectedTemplate.title,
+              "description": selectedTemplate.description,
+              "specialty": selectedTemplate.specialty,
+              "author": {
+                "@type": "Person",
+                "name": selectedTemplate.author,
+                "jobTitle": selectedTemplate.authorSpecialty
+              },
+              "dateModified": selectedTemplate.lastUpdated,
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": selectedTemplate.rating,
+                "ratingCount": selectedTemplate.uses
+              }
+            })}
+          </script>
+
           {/* Breadcrumb Navigation - Responsive */}
           <nav className="mb-4 sm:mb-6 text-xs sm:text-sm" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-1 sm:space-x-2 text-gray-600 overflow-x-auto">
@@ -377,7 +480,7 @@ const Templates = () => {
                 </div>
                 
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{selectedTemplate.title}</h1>
-                
+                <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 leading-relaxed">{selectedTemplate.description}</p>
                 
                 <div className="grid grid-cols-2 gap-2 sm:gap-4 text-white/80 text-xs sm:text-sm md:text-base">
                   <div className="flex items-center gap-1 sm:gap-2">
@@ -415,128 +518,156 @@ const Templates = () => {
             </div>
           </div>
 
-          {/* Template Content Grid - Responsive */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
-            {/* Left Column - About & Author */}
-            <div className="xl:col-span-1 space-y-6">
-              <Card className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#143151] flex items-center gap-2">
-                    <BookOpen className="w-5 h-5" />
-                    About This Template
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-700 leading-relaxed">{selectedTemplate.description}</p>
-                  
-                  <div className="border-t pt-6">
-                    <h4 className="font-semibold text-[#143151] mb-3">Clinical Benefits</h4>
-                    <ul className="space-y-2">
-                      {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span>{benefit}</span>
-                        </li>)}
-                    </ul>
-                  </div>
-                  
-                  <div className="border-t pt-6">
-                    <h4 className="font-semibold text-[#143151] mb-3">Created by</h4>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-12 h-12 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-sm">
-                        {selectedTemplate.author.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <p className="font-medium text-[#143151]">{selectedTemplate.author}</p>
-                        <p className="text-sm text-gray-600">{selectedTemplate.authorSpecialty}</p>
-                        <p className="text-xs text-gray-500">{selectedTemplate.authorCredentials}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Middle Column - Template Structure */}
-            <div className="xl:col-span-1">
-              <Card className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#143151] flex items-center gap-2">
-                    <FileText className="w-5 h-5" />
-                    Template Structure
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
-                        <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                          {index + 1}
-                        </div>
-                        <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
-                      </div>)}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column - Actions */}
-            <div className="xl:col-span-1">
-              <Card className="bg-gradient-to-br from-[#387E89]/5 to-[#143151]/5 border border-[#387E89]/20 shadow-sm sticky top-6">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#143151] flex items-center gap-2">
-                    <Eye className="w-5 h-5" />
-                    Quick Actions
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <Button className="w-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white transition-all">
-                    <Eye className="w-4 h-4 mr-2" />
-                    Use Template Now
-                  </Button>
-                  <Button variant="outline" className="w-full border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download PDF
-                  </Button>
-                  <Button variant="outline" className="w-full border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                    <Copy className="w-4 h-4 mr-2" />
-                    Copy to Clipboard
-                  </Button>
-                  <Button variant="outline" className="w-full border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Share Template
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Sample Content - Responsive */}
-          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-lg sm:text-xl md:text-2xl text-[#143151] flex items-center gap-2">
-                <FileText className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                Sample Clinical Note
-              </CardTitle>
-              <p className="text-sm sm:text-base text-gray-600 mt-2">Example of a completed clinical note using this template</p>
-            </CardHeader>
+          {/* Author Info */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-6 sm:mb-8">
             <CardContent className="p-4 sm:p-6">
-              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 md:p-6 border-l-4 border-[#387E89]">
-                <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
-                  {selectedTemplate.sampleContent}
-                </pre>
-              </div>
-              <div className="mt-3 sm:mt-4 text-xs text-gray-500">
-                * This is a sample note for demonstration purposes. Patient information is fictional.
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg">
+                  {selectedTemplate.author.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <h3 className="font-bold text-[#143151] text-lg sm:text-xl">{selectedTemplate.author}</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">{selectedTemplate.authorSpecialty}</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">{selectedTemplate.authorCredentials}</p>
+                </div>
               </div>
             </CardContent>
           </Card>
 
+          {/* Side-by-Side: Template Structure and Sample Clinical Notes */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            {/* Template Structure */}
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                  <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
+                  Template Structure
+                </CardTitle>
+                <p className="text-sm sm:text-base text-gray-600">Interactive template sections for clinical documentation</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 mb-6">
+                  {selectedTemplate.structure.map((section, index) => (
+                    <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
+                      <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                        {index + 1}
+                      </div>
+                      <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Interactive Template Area */}
+                <div className="border-t pt-6">
+                  <h4 className="font-semibold text-[#143151] mb-3">Your Template Content</h4>
+                  <Textarea
+                    placeholder="Start documenting using this template structure..."
+                    value={templateContent}
+                    onChange={(e) => setTemplateContent(e.target.value)}
+                    className="min-h-[300px] font-mono text-sm"
+                    data-api-endpoint="/api/templates/structure"
+                  />
+                  <div className="flex gap-2 mt-3">
+                    <Button size="sm" className="bg-[#387E89] hover:bg-[#306b75] text-white">
+                      <Download className="w-4 h-4 mr-2" />
+                      Export
+                    </Button>
+                    <Button size="sm" variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copy
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Sample Clinical Notes */}
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
+                  Sample Clinical Note
+                </CardTitle>
+                <p className="text-sm sm:text-base text-gray-600">Example of completed documentation using this template</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#387E89] mb-6">
+                  <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto max-h-[400px] overflow-y-auto">
+                    {selectedTemplate.sampleContent}
+                  </pre>
+                </div>
+                
+                {/* Clinical Benefits */}
+                <div className="border-t pt-6">
+                  <h4 className="font-semibold text-[#143151] mb-3">Clinical Benefits</h4>
+                  <ul className="space-y-2">
+                    {selectedTemplate.clinicalBenefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* FAQ Section */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
+                Frequently Asked Questions
+              </CardTitle>
+              <p className="text-sm sm:text-base text-gray-600">Common questions about this template and its usage</p>
+            </CardHeader>
+            <CardContent className="space-y-4" data-api-endpoint="/api/templates/faqs">
+              {selectedTemplate.faqs.map((faq, index) => (
+                <Collapsible 
+                  key={index} 
+                  open={expandedFaq === index} 
+                  onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                >
+                  <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-[#143151] text-sm sm:text-base pr-4">{faq.question}</h4>
+                    {expandedFaq === index ? (
+                      <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />
+                    )}
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="px-4 py-3 text-sm sm:text-base text-gray-700 leading-relaxed">
+                    {faq.answer}
+                  </CollapsibleContent>
+                </Collapsible>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-12">
+            <Button className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white transition-all">
+              <Eye className="w-4 h-4 mr-2" />
+              Start Using This Template
+            </Button>
+            <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              <Download className="w-4 h-4 mr-2" />
+              Download PDF Guide
+            </Button>
+            <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              <Share2 className="w-4 h-4 mr-2" />
+              Share with Colleagues
+            </Button>
+          </div>
+
           {/* Call to Action */}
           <CallToAction />
         </div>
-      </div>;
+      </div>
+    );
   }
+
   return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section - Responsive */}
