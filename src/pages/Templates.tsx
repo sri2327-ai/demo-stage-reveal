@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, Download, Copy, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
-import { Textarea } from '@/components/ui/textarea';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { CallToAction } from '@/components/CallToAction';
 
@@ -326,7 +325,6 @@ const Templates = () => {
   const [selectedComplexity, setSelectedComplexity] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [templateContent, setTemplateContent] = useState('');
   const [expandedFaq, setExpandedFaq] = useState(null);
   const templatesPerPage = 6;
 
@@ -351,13 +349,6 @@ const Templates = () => {
   React.useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
-
-  // Initialize template content when template is selected
-  React.useEffect(() => {
-    if (selectedTemplate) {
-      setTemplateContent(selectedTemplate.sampleContent);
-    }
-  }, [selectedTemplate]);
 
   // Get unique values for filters
   const specialties = [...new Set(mockTemplates.map(t => t.specialty))];
@@ -523,28 +514,16 @@ const Templates = () => {
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
                   Template Structure
                 </CardTitle>
-                <p className="text-sm sm:text-base text-gray-600">Interactive template editor for clinical documentation</p>
+                <p className="text-sm sm:text-base text-gray-600">Organized sections for comprehensive clinical documentation</p>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3">
                   {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
                       <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
                       <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
                     </div>)}
-                </div>
-                
-                {/* Template Editor */}
-                <div className="border-t pt-6">
-                  <h4 className="font-semibold text-[#143151] mb-3">Template Editor</h4>
-                  <Textarea 
-                    placeholder="Start documenting using this template structure..." 
-                    value={templateContent} 
-                    onChange={e => setTemplateContent(e.target.value)} 
-                    className="min-h-[400px] font-mono text-sm" 
-                    data-api-endpoint="/api/templates/structure" 
-                  />
                 </div>
               </CardContent>
             </Card>
