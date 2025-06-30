@@ -643,10 +643,7 @@ const Templates = () => {
                 {categories.map(category => <option key={category} value={category}>{category}</option>)}
               </select>
 
-              <select value={selectedComplexity} onChange={e => setSelectedComplexity(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by complexity level">
-                <option value="">All Levels</option>
-                {complexities.map(complexity => <option key={complexity} value={complexity}>{complexity}</option>)}
-              </select>
+              
             </div>
           </div>
         </div>
@@ -683,9 +680,7 @@ const Templates = () => {
                           <Badge variant="outline" className="text-xs bg-[#143151]/10 text-[#143151] border-[#143151]/30">
                             {template.category}
                           </Badge>
-                          <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-                            {template.complexity}
-                          </Badge>
+                          
                         </div>
                         <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200 flex-shrink-0" />
                       </div>
