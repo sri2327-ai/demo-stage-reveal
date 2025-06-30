@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { CallToAction } from '@/components/CallToAction';
+import { generateTemplateMetrics } from '@/utils/templateMetrics';
 
 // Enhanced mock data with FAQ section
 const mockTemplates = [{
@@ -17,14 +18,10 @@ const mockTemplates = [{
   description: "Comprehensive tool designed for General Practitioners to document patient consultations effectively following NHS guidelines and best practices.",
   specialty: "General Practice",
   category: "Consultation",
-  uses: 3275,
-  rating: 4.9,
-  lastUpdated: "2025-01-15",
   tags: ["GP", "NHS", "Consultation", "Primary Care", "SOAP Notes"],
   author: "Dr. Sarah Johnson",
   authorSpecialty: "General Practitioner",
   authorCredentials: "MBBS, MRCGP",
-  estimatedTime: "5-10 minutes",
   complexity: "Beginner",
   structure: ["Patient Demographics & Registration", "Chief Complaint & Presenting Problem", "History of Present Illness (HPI)", "Past Medical History & Medications", "Social & Family History", "Review of Systems", "Physical Examination Findings", "Clinical Assessment & Differential", "Investigation & Management Plan", "Patient Education & Follow-up", "Coding & Administrative Notes"],
   clinicalBenefits: ["Reduces documentation time by 40%", "Ensures comprehensive patient history capture", "Improves clinical decision-making workflow", "Maintains NHS coding compliance"],
@@ -100,14 +97,10 @@ CODES: H05z.00 (Upper respiratory tract infection, unspecified)`,
   description: "Specialized template for cardiovascular examinations, risk stratification, and evidence-based treatment planning for cardiac patients.",
   specialty: "Cardiology",
   category: "Assessment",
-  uses: 1842,
-  rating: 4.8,
-  lastUpdated: "2025-01-10",
   tags: ["Cardiology", "Heart Disease", "Risk Assessment", "ECG", "Echocardiogram"],
   author: "Dr. Michael Chen",
   authorSpecialty: "Consultant Cardiologist",
   authorCredentials: "MD, FACC, FESC",
-  estimatedTime: "15-20 minutes",
   complexity: "Intermediate",
   structure: ["Cardiovascular History Taking", "Chest Pain Characterization", "Cardiovascular Risk Factor Assessment", "Functional Capacity Evaluation", "Physical Examination Protocol", "ECG Interpretation Framework", "Diagnostic Test Planning", "Risk Stratification Tools", "Evidence-Based Treatment Plan", "Patient Education & Lifestyle", "Follow-up & Monitoring Plan"],
   clinicalBenefits: ["Standardizes cardiac risk assessment", "Improves diagnostic accuracy", "Ensures guideline-compliant care", "Facilitates MDT communication"],
@@ -197,14 +190,10 @@ FOLLOW-UP: 2 weeks (medication tolerance), then 6 weeks with results`,
   description: "Comprehensive psychiatric evaluation template for mental health professionals, including risk assessment and treatment planning frameworks.",
   specialty: "Psychiatry",
   category: "Assessment",
-  uses: 2156,
-  rating: 4.7,
-  lastUpdated: "2025-01-08",
   tags: ["Mental Health", "Psychiatry", "Risk Assessment", "DSM-5", "Therapy Planning"],
   author: "Dr. Lisa Rodriguez",
   authorSpecialty: "Consultant Psychiatrist",
   authorCredentials: "MD, MRCPsych",
-  estimatedTime: "30-45 minutes",
   complexity: "Advanced",
   structure: ["Mental Status Examination", "Psychiatric History Taking", "Risk Assessment Protocol", "Substance Use Screening", "Cognitive Assessment", "Psychosocial Formulation", "DSM-5 Diagnostic Criteria", "Treatment Planning Framework", "Safety Planning Protocol", "Capacity Assessment", "Discharge Planning"],
   clinicalBenefits: ["Standardizes mental health assessments", "Improves risk identification", "Ensures comprehensive evaluation", "Facilitates treatment planning"],
@@ -318,6 +307,7 @@ FOLLOW-UP: 2 weeks (medication review), 4 weeks (progress review)`,
     answer: "This template is designed for qualified mental health professionals. Users should have appropriate clinical training in psychiatric assessment, risk evaluation, and crisis intervention before implementing this comprehensive assessment framework."
   }]
 }];
+
 const Templates = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -328,16 +318,28 @@ const Templates = () => {
   const [expandedFaq, setExpandedFaq] = useState(null);
   const templatesPerPage = 6;
 
-  // Filter templates
+  // Get metrics for each template
+  const templatesWithMetrics = useMemo(() => {
+    return mockTemplates.map(template => ({
+      ...template,
+      ...generateTemplateMetrics(template.id)
+    }));
+  }, []);
+
+  // Filter templates (update to use templatesWithMetrics)
   const filteredTemplates = useMemo(() => {
-    return mockTemplates.filter(template => {
-      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) || template.description.toLowerCase().includes(searchTerm.toLowerCase()) || template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) || template.author.toLowerCase().includes(searchTerm.toLowerCase()) || template.specialty.toLowerCase().includes(searchTerm.toLowerCase());
+    return templatesWithMetrics.filter(template => {
+      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        template.description.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        template.author.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        template.specialty.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesSpecialty = selectedSpecialty ? template.specialty === selectedSpecialty : true;
       const matchesCategory = selectedCategory ? template.category === selectedCategory : true;
       const matchesComplexity = selectedComplexity ? template.complexity === selectedComplexity : true;
       return matchesSearch && matchesSpecialty && matchesCategory && matchesComplexity;
     });
-  }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity]);
+  }, [searchTerm, selectedSpecialty, selectedCategory, selectedComplexity, templatesWithMetrics]);
 
   // Pagination calculations
   const totalPages = Math.ceil(filteredTemplates.length / templatesPerPage);
@@ -391,6 +393,8 @@ const Templates = () => {
 
   // Template Detail View
   if (selectedTemplate) {
+    const templateWithMetrics = templatesWithMetrics.find(t => t.id === selectedTemplate.id) || selectedTemplate;
+    
     return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
           {/* SEO-optimized structured data and meta information */}
@@ -398,19 +402,19 @@ const Templates = () => {
             {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "MedicalEntity",
-            "name": selectedTemplate.title,
-            "description": selectedTemplate.description,
-            "specialty": selectedTemplate.specialty,
+            "name": templateWithMetrics.title,
+            "description": templateWithMetrics.description,
+            "specialty": templateWithMetrics.specialty,
             "author": {
               "@type": "Person",
-              "name": selectedTemplate.author,
-              "jobTitle": selectedTemplate.authorSpecialty
+              "name": templateWithMetrics.author,
+              "jobTitle": templateWithMetrics.authorSpecialty
             },
-            "dateModified": selectedTemplate.lastUpdated,
+            "dateModified": templateWithMetrics.lastUpdated,
             "aggregateRating": {
               "@type": "AggregateRating",
-              "ratingValue": selectedTemplate.rating,
-              "ratingCount": selectedTemplate.uses
+              "ratingValue": templateWithMetrics.rating,
+              "ratingCount": templateWithMetrics.uses
             }
           })}
           </script>
@@ -422,7 +426,7 @@ const Templates = () => {
               <li className="mx-1 sm:mx-2">/</li>
               <li><button onClick={() => setSelectedTemplate(null)} className="hover:text-[#387E89] transition-colors whitespace-nowrap">Templates</button></li>
               <li className="mx-1 sm:mx-2">/</li>
-              <li className="text-[#143151] font-medium truncate">{selectedTemplate.title}</li>
+              <li className="text-[#143151] font-medium truncate">{templateWithMetrics.title}</li>
             </ol>
           </nav>
 
@@ -438,29 +442,29 @@ const Templates = () => {
                 <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
                   <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <Stethoscope className="w-3 h-3 mr-1" />
-                    {selectedTemplate.specialty}
+                    {templateWithMetrics.specialty}
                   </Badge>
                   <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <FileText className="w-3 h-3 mr-1" />
-                    {selectedTemplate.category}
+                    {templateWithMetrics.category}
                   </Badge>
                   <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                     <Clock className="w-3 h-3 mr-1" />
-                    {selectedTemplate.estimatedTime}
+                    {templateWithMetrics.estimatedTime}
                   </Badge>
                 </div>
                 
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{selectedTemplate.title}</h1>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 leading-relaxed">{selectedTemplate.description}</p>
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{templateWithMetrics.title}</h1>
+                <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 leading-relaxed">{templateWithMetrics.description}</p>
                 
                 <div className="grid grid-cols-2 gap-2 sm:gap-4 text-white/80 text-xs sm:text-sm md:text-base">
                   <div className="flex items-center gap-1 sm:gap-2">
                     <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="truncate">{selectedTemplate.uses.toLocaleString()} uses</span>
+                    <span className="truncate">{templateWithMetrics.uses.toLocaleString()} uses</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2">
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
-                    <span>{selectedTemplate.rating}/5.0</span>
+                    <span>{templateWithMetrics.rating}/5.0</span>
                   </div>
                   
                   
@@ -488,12 +492,12 @@ const Templates = () => {
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg">
-                  {selectedTemplate.author.split(' ').map(n => n[0]).join('')}
+                  {templateWithMetrics.author.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#143151] text-lg sm:text-xl">{selectedTemplate.author}</h3>
-                  <p className="text-gray-600 text-sm sm:text-base">{selectedTemplate.authorSpecialty}</p>
-                  <p className="text-gray-500 text-xs sm:text-sm">{selectedTemplate.authorCredentials}</p>
+                  <h3 className="font-bold text-[#143151] text-lg sm:text-xl">{templateWithMetrics.author}</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">{templateWithMetrics.authorSpecialty}</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">{templateWithMetrics.authorCredentials}</p>
                 </div>
               </div>
             </CardContent>
@@ -512,7 +516,7 @@ const Templates = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
+                  {templateWithMetrics.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
                       <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
@@ -534,7 +538,7 @@ const Templates = () => {
               <CardContent>
                 <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#387E89]">
                   <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
-                    {selectedTemplate.sampleContent}
+                    {templateWithMetrics.sampleContent}
                   </pre>
                 </div>
               </CardContent>
@@ -552,7 +556,7 @@ const Templates = () => {
             </CardHeader>
             <CardContent>
               <ul className="space-y-3">
-                {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-gray-700">
+                {templateWithMetrics.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-gray-700">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                     <span>{benefit}</span>
                   </li>)}
@@ -570,7 +574,7 @@ const Templates = () => {
               <p className="text-sm sm:text-base text-gray-600">Common questions about this template and its usage</p>
             </CardHeader>
             <CardContent className="space-y-4" data-api-endpoint="/api/templates/faqs">
-              {selectedTemplate.faqs.map((faq, index) => <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+              {templateWithMetrics.faqs.map((faq, index) => <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                   <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <h4 className="font-medium text-[#143151] text-sm sm:text-base pr-4">{faq.question}</h4>
                     {expandedFaq === index ? <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" /> : <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />}
