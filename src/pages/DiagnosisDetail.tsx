@@ -151,7 +151,7 @@ const DiagnosisDetail = () => {
                   </Button>
                 </Link>
                 <Link to="/icd10-codes">
-                  <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base">
+                  <Button variant="outline" className="w-full sm:w-auto border-white text-black hover:bg-white/10 font-semibold px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base">
                     Browse ICD-10 Codes
                   </Button>
                 </Link>
