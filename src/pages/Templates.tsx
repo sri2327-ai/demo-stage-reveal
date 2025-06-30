@@ -676,6 +676,210 @@ const Templates = () => {
           </div>
         </div>
       </div>
+    );
+  }
+
+  // Main Templates Listing Page
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-gray-100">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-7xl">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6">
+            Templates
+          </h2>
+          <div className="flex items-center gap-4">
+            <Input 
+              type="text" 
+              placeholder="Search templates..." 
+              value={searchTerm} 
+              onChange={(e) => setSearchTerm(e.target.value)} 
+              className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
+            />
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-gray-600" />
+              <select 
+                value={selectedSpecialty} 
+                onChange={(e) => setSelectedSpecialty(e.target.value)} 
+                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
+              >
+                <option value="">All Specialties</option>
+                {specialties.map(specialty => (
+                  <option key={specialty} value={specialty}>{specialty}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-gray-600" />
+              <select 
+                value={selectedCategory} 
+                onChange={(e) => setSelectedCategory(e.target.value)} 
+                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
+              >
+                <option value="">All Categories</option>
+                {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-gray-600" />
+              <select 
+                value={selectedComplexity} 
+                onChange={(e) => setSelectedComplexity(e.target.value)} 
+                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
+              >
+                <option value="">All Complexities</option>
+                {complexities.map(complexity => (
+                  <option key={complexity} value={complexity}>{complexity}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Templates Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+          {currentTemplates.map(template => (
+            <Card key={template.id} className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
+                  <div className="w-10 h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
+                    <FileText className="w-5 h-5 text-[#387E89]" />
+                  </div>
+                  {template.title}
+                </CardTitle>
+                <p className="text-gray-600 leading-relaxed">Comprehensive template for {template.category}</p>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    <span className="text-sm sm:text-base font-medium">{template.uses.toLocaleString()} uses</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 fill-current text-yellow-400" />
+                    <span className="text-sm sm:text-base font-medium">{template.rating}/5.0</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4" />
+                    <span className="text-sm sm:text-base font-medium">{template.complexity}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-sm sm:text-base font-medium">Updated {new Date(template.lastUpdated).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex items-center justify-center mt-8 sm:mt-12">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis disabled={currentPage === 1} />
+              </PaginationItem>
+              {getPageNumbers().map(page => {
+                if (page === 'ellipsis') {
+                  return <PaginationEllipsis key={page} />;
+                }
+                return (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      onClick={() => setCurrentPage(page)}
+                      className={currentPage === page ? 'bg-[#143151] text-white' : 'text-gray-600 hover:bg-[#143151]/10'}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              <PaginationItem>
+                <PaginationEllipsis disabled={currentPage === totalPages} />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+
+        {/* Enhanced Call to Action for Main Templates Page */}
+        <div className="bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white shadow-2xl relative overflow-hidden mt-16 sm:mt-20 lg:mt-24">
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="absolute top-0 right-0 w-72 h-72 bg-white/5 rounded-full -translate-y-36 translate-x-36"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-32 -translate-x-32"></div>
+          <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-white/3 rounded-full -translate-x-24 -translate-y-24"></div>
+          
+          <div className="relative z-10">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8">
+              <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+            </div>
+            
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              Transform Your Clinical Documentation Today
+            </h2>
+            
+            <p className="text-white/90 mb-8 sm:mb-10 max-w-3xl mx-auto text-base sm:text-lg lg:text-xl leading-relaxed">
+              Join thousands of clinicians already using S10.AI to reduce administrative burden by 60% 
+              and improve patient care. Access our comprehensive template library and experience the future of medical documentation.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10">
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <Users className="w-4 h-4" />
+                <span className="text-sm sm:text-base font-medium">10,000+ Users</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <FileText className="w-4 h-4" />
+                <span className="text-sm sm:text-base font-medium">500+ Templates</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <Clock className="w-4 h-4" />
+                <span className="text-sm sm:text-base font-medium">60% Time Saved</span>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-10 sm:mb-12">
+              <Button className="bg-white text-[#143151] hover:bg-gray-100 transition-all font-bold shadow-lg hover:shadow-xl hover:scale-105 transform duration-200 group text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform" />
+                Start Free 30-Day Trial
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all group text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
+                Browse All Templates
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+                <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto" />
+                <h3 className="font-bold text-base sm:text-lg mb-2">No Credit Card Required</h3>
+                <p className="text-white/80 text-xs sm:text-sm">Cancel anytime, no strings attached</p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+                <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto" />
+                <h3 className="font-bold text-base sm:text-lg mb-2">Setup in 5 Minutes</h3>
+                <p className="text-white/80 text-xs sm:text-sm">Get started instantly with guided onboarding</p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+                <Star className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto fill-current" />
+                <h3 className="font-bold text-base sm:text-lg mb-2">24/7 Expert Support</h3>
+                <p className="text-white/80 text-xs sm:text-sm">Award-winning customer success team</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
