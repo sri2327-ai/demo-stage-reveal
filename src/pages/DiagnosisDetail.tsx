@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Code, BookOpen, HelpCircle, FileCheck, ChevronRight, Stethoscope } from 'lucide-react';
@@ -52,6 +51,61 @@ const DiagnosisDetail = () => {
       description: "Hypertensive chronic kidney disease",
       whenToUse: "Use when hypertension is documented with CKD.",
       keyDocumentation: ["Diagnosis of hypertension and CKD"]
+    }
+  ];
+
+  // Enhanced documentation and coding risks data
+  const documentationRisks = [
+    {
+      category: "Documentation Errors",
+      items: [
+        {
+          title: "Incomplete organism identification",
+          description: "Not specifying the exact organism when culture results are available",
+          impact: "Leads to use of unspecified codes, reducing reimbursement accuracy and clinical specificity",
+          mitigation: "Always document specific organism from culture results and include antibiotic sensitivity when available"
+        },
+        {
+          title: "Missing severity indicators",
+          description: "Failing to document severity of sepsis or complications",
+          impact: "Undercoding of condition severity affects risk stratification and quality metrics",
+          mitigation: "Include SOFA scores, organ dysfunction indicators, and hemodynamic status in documentation"
+        }
+      ]
+    },
+    {
+      category: "Coding Pitfalls",
+      items: [
+        {
+          title: "Using unspecified codes when specific codes exist",
+          description: "Defaulting to general sepsis codes when organism-specific codes are available",
+          impact: "Reduced reimbursement, poor data quality, and missed opportunities for targeted quality improvement",
+          mitigation: "Review culture results and laboratory data before code assignment, use coding resources to identify specific codes"
+        },
+        {
+          title: "Incorrect sequencing of codes",
+          description: "Not following proper sequencing rules for sepsis and underlying conditions",
+          impact: "Claim denials, audit flags, and incorrect DRG assignment affecting reimbursement",
+          mitigation: "Follow ICD-10-CM coding guidelines for sepsis sequencing, code sepsis first when it's the reason for admission"
+        }
+      ]
+    },
+    {
+      category: "Audit Risk Areas",
+      items: [
+        {
+          title: "Inconsistent documentation across providers",
+          description: "Different providers documenting conflicting information about the same condition",
+          impact: "Audit scrutiny, potential compliance issues, and delayed reimbursement",
+          mitigation: "Implement standardized documentation templates and regular provider education on coding requirements"
+        },
+        {
+          title: "Lack of supporting clinical evidence",
+          description: "Coded diagnoses not supported by clinical indicators or test results",
+          impact: "High risk for audit takebacks, compliance violations, and potential fraud allegations",
+          mitigation: "Ensure all coded diagnoses have supporting clinical documentation, laboratory results, or imaging studies"
+        }
+      ]
     }
   ];
 
@@ -361,7 +415,7 @@ const DiagnosisDetail = () => {
           </Card>
         </div>
 
-        {/* Risks Section */}
+        {/* Enhanced Risks Section */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-500/10 rounded-full flex items-center justify-center">
@@ -372,14 +426,44 @@ const DiagnosisDetail = () => {
           
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardContent className="p-4 sm:p-6 lg:p-8">
-              <div className="grid gap-4 sm:gap-6">
-                {diagnosis.details.risks.map((risk, index) => (
-                  <div key={index} className="border-l-4 border-amber-500 bg-amber-50 p-3 sm:p-4 lg:p-6 rounded-r-lg">
-                    <h4 className="font-bold text-[#143151] mb-1 sm:mb-2 text-sm sm:text-base lg:text-lg flex items-center">
-                      <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 mr-1.5 sm:mr-2" />
-                      {risk.title}
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed text-xs sm:text-sm lg:text-base">{risk.description}</p>
+              <div className="space-y-8 sm:space-y-10">
+                {documentationRisks.map((riskCategory, categoryIndex) => (
+                  <div key={categoryIndex}>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] mb-4 sm:mb-6 flex items-center">
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full mr-3"></div>
+                      {riskCategory.category}
+                    </h3>
+                    <div className="grid gap-4 sm:gap-6">
+                      {riskCategory.items.map((risk, riskIndex) => (
+                        <div key={riskIndex} className="border rounded-lg sm:rounded-xl p-4 sm:p-6 bg-gradient-to-r from-red-50/50 to-orange-50/30 border-red-200/40">
+                          <div className="mb-4">
+                            <h4 className="font-bold text-[#143151] mb-2 text-base sm:text-lg flex items-center">
+                              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mr-2" />
+                              {risk.title}
+                            </h4>
+                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{risk.description}</p>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                            <div className="bg-red-100/60 p-3 sm:p-4 rounded-lg border border-red-200/60">
+                              <h5 className="font-semibold text-red-700 mb-2 text-sm sm:text-base flex items-center">
+                                <XCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5" />
+                                Impact
+                              </h5>
+                              <p className="text-red-600 text-xs sm:text-sm leading-relaxed">{risk.impact}</p>
+                            </div>
+                            
+                            <div className="bg-green-100/60 p-3 sm:p-4 rounded-lg border border-green-200/60">
+                              <h5 className="font-semibold text-green-700 mb-2 text-sm sm:text-base flex items-center">
+                                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5" />
+                                Mitigation Strategy
+                              </h5>
+                              <p className="text-green-600 text-xs sm:text-sm leading-relaxed">{risk.mitigation}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
