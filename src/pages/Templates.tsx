@@ -1,12 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, BookOpen, Stethoscope, ChevronDown, ChevronUp, Sparkles, Zap, TrendingUp } from 'lucide-react';
+import { Search, Filter, FileText, Users, Calendar, Share2, Eye, ArrowRight, CheckCircle, Clock, Star, BookOpen, Stethoscope, ChevronDown, ChevronUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { CallToAction } from '@/components/CallToAction';
 
 // Enhanced mock data with FAQ section
 const mockTemplates = [{
@@ -390,171 +391,149 @@ const Templates = () => {
 
   // Template Detail View
   if (selectedTemplate) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
-          {/* SEO and structured data - keep existing */}
+    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+          {/* SEO-optimized structured data and meta information */}
           <script type="application/ld+json">
             {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MedicalEntity",
-              "name": selectedTemplate.title,
-              "description": selectedTemplate.description,
-              "specialty": selectedTemplate.specialty,
-              "author": {
-                "@type": "Person",
-                "name": selectedTemplate.author,
-                "jobTitle": selectedTemplate.authorSpecialty
-              },
-              "dateModified": selectedTemplate.lastUpdated,
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": selectedTemplate.rating,
-                "ratingCount": selectedTemplate.uses
-              }
-            })}
+            "@context": "https://schema.org",
+            "@type": "MedicalEntity",
+            "name": selectedTemplate.title,
+            "description": selectedTemplate.description,
+            "specialty": selectedTemplate.specialty,
+            "author": {
+              "@type": "Person",
+              "name": selectedTemplate.author,
+              "jobTitle": selectedTemplate.authorSpecialty
+            },
+            "dateModified": selectedTemplate.lastUpdated,
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": selectedTemplate.rating,
+              "ratingCount": selectedTemplate.uses
+            }
+          })}
           </script>
 
-          {/* Enhanced Breadcrumb Navigation */}
-          <nav className="mb-6 sm:mb-8" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-sm text-gray-600 bg-white/60 backdrop-blur-sm rounded-lg px-4 py-2 border border-gray-200/50">
-              <li><Link to="/" className="hover:text-[#387E89] transition-colors font-medium">Home</Link></li>
-              <li className="text-gray-400">/</li>
-              <li><button onClick={() => setSelectedTemplate(null)} className="hover:text-[#387E89] transition-colors font-medium">Templates</button></li>
-              <li className="text-gray-400">/</li>
-              <li className="text-[#143151] font-semibold truncate max-w-xs sm:max-w-none">{selectedTemplate.title}</li>
+          {/* Breadcrumb Navigation - Responsive */}
+          <nav className="mb-4 sm:mb-6 text-xs sm:text-sm" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-1 sm:space-x-2 text-gray-600 overflow-x-auto">
+              <li><Link to="/" className="hover:text-[#387E89] transition-colors whitespace-nowrap">Home</Link></li>
+              <li className="mx-1 sm:mx-2">/</li>
+              <li><button onClick={() => setSelectedTemplate(null)} className="hover:text-[#387E89] transition-colors whitespace-nowrap">Templates</button></li>
+              <li className="mx-1 sm:mx-2">/</li>
+              <li className="text-[#143151] font-medium truncate">{selectedTemplate.title}</li>
             </ol>
           </nav>
 
-          {/* Enhanced Back Button */}
-          <Button 
-            variant="ghost" 
-            onClick={() => setSelectedTemplate(null)} 
-            className="mb-6 sm:mb-8 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all group"
-          >
-            <ArrowRight className="w-4 h-4 mr-2 rotate-180 group-hover:-translate-x-1 transition-transform" />
-            Back to Templates
+          {/* Back Button - Responsive */}
+          <Button variant="ghost" onClick={() => setSelectedTemplate(null)} className="mb-4 sm:mb-6 text-[#143151] hover:bg-[#387E89]/10 hover:text-[#387E89] transition-all text-sm sm:text-base">
+            ← Back to Templates
           </Button>
 
-          {/* Enhanced Template Header */}
-          <div className="bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] text-white rounded-2xl p-6 sm:p-8 lg:p-12 mb-8 sm:mb-12 shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
-            <div className="relative z-10">
-              <div className="flex flex-col xl:flex-row xl:items-start justify-between gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
-                      <Stethoscope className="w-3 h-3 mr-1.5" />
-                      {selectedTemplate.specialty}
-                    </Badge>
-                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
-                      <FileText className="w-3 h-3 mr-1.5" />
-                      {selectedTemplate.category}
-                    </Badge>
-                    <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
-                      <Clock className="w-3 h-3 mr-1.5" />
-                      {selectedTemplate.estimatedTime}
-                    </Badge>
-                  </div>
-                  
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">{selectedTemplate.title}</h1>
-                  <p className="text-white/90 text-base sm:text-lg lg:text-xl mb-6 leading-relaxed max-w-4xl">{selectedTemplate.description}</p>
-                  
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-white/80">
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base font-medium">{selectedTemplate.uses.toLocaleString()} uses</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-current text-yellow-400" />
-                      <span className="text-sm sm:text-base font-medium">{selectedTemplate.rating}/5.0</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base font-medium">{selectedTemplate.complexity}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base font-medium">Updated {new Date(selectedTemplate.lastUpdated).toLocaleDateString()}</span>
-                    </div>
-                  </div>
+          {/* Template Header - Responsive */}
+          <div className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 shadow-lg">
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6">
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
+                    <Stethoscope className="w-3 h-3 mr-1" />
+                    {selectedTemplate.specialty}
+                  </Badge>
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
+                    <FileText className="w-3 h-3 mr-1" />
+                    {selectedTemplate.category}
+                  </Badge>
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {selectedTemplate.estimatedTime}
+                  </Badge>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row xl:flex-col gap-3 xl:min-w-[200px]">
-                  <Button 
-                    variant="secondary" 
-                    className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 transition-all group"
-                  >
-                    <Share2 className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Share Template
-                  </Button>
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{selectedTemplate.title}</h1>
+                <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 leading-relaxed">{selectedTemplate.description}</p>
+                
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 text-white/80 text-xs sm:text-sm md:text-base">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="truncate">{selectedTemplate.uses.toLocaleString()} uses</span>
+                  </div>
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
+                    <span>{selectedTemplate.rating}/5.0</span>
+                  </div>
                   
-                  <Button className="bg-white text-[#143151] hover:bg-gray-100 transition-all font-semibold group shadow-lg">
-                    <Eye className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Use Template
-                  </Button>
+                  
                 </div>
+              </div>
+              
+              <div className="flex flex-row lg:flex-col gap-2 sm:gap-3 lg:min-w-[180px] xl:min-w-[200px]">
+                <Button variant="secondary" className="bg-white text-[#143151] hover:bg-gray-100 transition-all text-xs sm:text-sm flex-1 lg:flex-none">
+                  <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Share Template</span>
+                  <span className="sm:hidden">Share</span>
+                </Button>
+                
+                <Button className="bg-[#387E89] hover:bg-[#306b75] text-white transition-all text-xs sm:text-sm flex-1 lg:flex-none lg:w-full">
+                  <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Use Template</span>
+                  <span className="sm:hidden">Use</span>
+                </Button>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Author Info */}
-          <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg mb-8 sm:mb-12">
-            <CardContent className="p-6 sm:p-8">
-              <div className="flex items-center gap-4 sm:gap-6">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg">
+          {/* Author Info */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-6 sm:mb-8">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg">
                   {selectedTemplate.author.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#143151] text-xl sm:text-2xl">{selectedTemplate.author}</h3>
-                  <p className="text-gray-600 text-base sm:text-lg">{selectedTemplate.authorSpecialty}</p>
-                  <p className="text-gray-500 text-sm sm:text-base">{selectedTemplate.authorCredentials}</p>
+                  <h3 className="font-bold text-[#143151] text-lg sm:text-xl">{selectedTemplate.author}</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">{selectedTemplate.authorSpecialty}</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">{selectedTemplate.authorCredentials}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Enhanced Side-by-Side Layout */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16">
+          {/* Side-by-Side: Template Structure and Sample Clinical Notes */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {/* Template Structure */}
-            <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-[#387E89]" />
-                  </div>
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                  <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
                   Template Structure
                 </CardTitle>
-                <p className="text-gray-600 leading-relaxed">Organized sections for comprehensive clinical documentation</p>
+                <p className="text-sm sm:text-base text-gray-600">Organized sections for comprehensive clinical documentation</p>
               </CardHeader>
-              <CardContent className="pt-0">
+              <CardContent>
                 <div className="space-y-3">
-                  {selectedTemplate.structure.map((section, index) => (
-                    <div key={index} className="flex items-start gap-3 p-4 bg-gradient-to-r from-gray-50 to-blue-50/30 rounded-xl hover:from-[#387E89]/5 hover:to-[#143151]/5 transition-all duration-200 border border-gray-200/50">
-                      <div className="w-7 h-7 bg-gradient-to-r from-[#387E89] to-[#143151] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-md">
+                  {selectedTemplate.structure.map((section, index) => <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-[#387E89]/5 transition-colors">
+                      <div className="w-6 h-6 bg-[#387E89] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="font-medium text-[#143151] text-sm sm:text-base leading-relaxed">{section}</span>
-                    </div>
-                  ))}
+                      <span className="font-medium text-[#143151] text-sm leading-relaxed">{section}</span>
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
 
             {/* Sample Clinical Notes */}
-            <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-green-600" />
-                  </div>
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
                   Sample Clinical Note
                 </CardTitle>
-                <p className="text-gray-600 leading-relaxed">Example of completed documentation using this template</p>
+                <p className="text-sm sm:text-base text-gray-600">Example of completed documentation using this template</p>
               </CardHeader>
-              <CardContent className="pt-0">
-                <div className="bg-gray-900 rounded-xl p-4 sm:p-6 border-l-4 border-[#387E89] shadow-inner">
-                  <pre className="whitespace-pre-wrap text-xs sm:text-sm text-green-400 font-mono leading-relaxed overflow-x-auto max-h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+              <CardContent>
+                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#387E89]">
+                  <pre className="whitespace-pre-wrap text-xs sm:text-sm text-gray-800 font-mono leading-relaxed overflow-x-auto">
                     {selectedTemplate.sampleContent}
                   </pre>
                 </div>
@@ -562,326 +541,253 @@ const Templates = () => {
             </Card>
           </div>
 
-          {/* Enhanced Clinical Benefits Section */}
-          <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg mb-12 sm:mb-16">
+          {/* Clinical Benefits Section */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
             <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                </div>
+              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                 Clinical Benefits
               </CardTitle>
-              <p className="text-gray-600 leading-relaxed">Key advantages of using this template in clinical practice</p>
+              <p className="text-sm sm:text-base text-gray-600">Key advantages of using this template in clinical practice</p>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {selectedTemplate.clinicalBenefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50/50 rounded-xl border border-green-200/50 hover:shadow-md transition-all duration-200">
+              <ul className="space-y-3">
+                {selectedTemplate.clinicalBenefits.map((benefit, index) => <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-gray-700">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700 font-medium leading-relaxed">{benefit}</span>
-                  </div>
-                ))}
-              </div>
+                    <span>{benefit}</span>
+                  </li>)}
+              </ul>
             </CardContent>
           </Card>
 
-          {/* Enhanced FAQ Section */}
-          <Card className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg mb-12 sm:mb-16">
+          {/* FAQ Section */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8 sm:mb-12">
             <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
-                <div className="w-10 h-10 bg-indigo-500/10 rounded-full flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-indigo-600" />
-                </div>
+              <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-2">
+                <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
                 Frequently Asked Questions
               </CardTitle>
-              <p className="text-gray-600 leading-relaxed">Common questions about this template and its usage</p>
+              <p className="text-sm sm:text-base text-gray-600">Common questions about this template and its usage</p>
             </CardHeader>
             <CardContent className="space-y-4" data-api-endpoint="/api/templates/faqs">
-              {selectedTemplate.faqs.map((faq, index) => (
-                <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full p-4 sm:p-5 text-left bg-gradient-to-r from-gray-50 to-blue-50/30 rounded-xl hover:from-gray-100 hover:to-blue-100/50 transition-all duration-200 border border-gray-200/50">
-                    <h4 className="font-semibold text-[#143151] pr-4 leading-relaxed">{faq.question}</h4>
-                    {expandedFaq === index ? (
-                      <ChevronUp className="w-5 h-5 text-[#387E89] flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-[#387E89] flex-shrink-0" />
-                    )}
+              {selectedTemplate.faqs.map((faq, index) => <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-[#143151] text-sm sm:text-base pr-4">{faq.question}</h4>
+                    {expandedFaq === index ? <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" /> : <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89] flex-shrink-0" />}
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="px-5 py-4 text-gray-700 leading-relaxed bg-white/50 rounded-b-xl border-x border-b border-gray-200/50">
+                  <CollapsibleContent className="px-4 py-3 text-sm sm:text-base text-gray-700 leading-relaxed">
                     {faq.answer}
                   </CollapsibleContent>
-                </Collapsible>
-              ))}
+                </Collapsible>)}
             </CardContent>
           </Card>
 
-          {/* Enhanced Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-16 sm:mb-20">
-            <Button className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white transition-all shadow-lg hover:shadow-xl hover:scale-105 transform duration-200 group text-lg px-8 py-3">
-              <Eye className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-12">
+            <Button className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white transition-all">
+              <Eye className="w-4 h-4 mr-2" />
               Start Using This Template
             </Button>
             
-            <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89] transition-all group text-lg px-8 py-3">
-              <Share2 className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+            <Button variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              <Share2 className="w-4 h-4 mr-2" />
               Share with Colleagues
             </Button>
           </div>
 
-          {/* Enhanced Call to Action for Individual Template */}
-          <div className="bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-48 translate-x-48"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-32 -translate-x-32"></div>
-            
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-10 h-10 text-white" />
-              </div>
-              
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
-                Ready to Streamline Your Documentation?
-              </h2>
-              <p className="text-white/90 mb-8 sm:mb-10 max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed">
-                Join over 10,000+ healthcare professionals who trust S10.AI to reduce documentation time by 60% while improving accuracy and compliance. Get started with this template today.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-10 sm:mb-12">
-                <Button className="bg-white text-[#143151] hover:bg-gray-100 transition-all font-bold shadow-lg hover:shadow-xl hover:scale-105 transform duration-200 group text-lg px-8 py-4">
-                  <Zap className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Get Started Free
-                </Button>
-                
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all group text-lg px-8 py-4">
-                  <Eye className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Watch Demo
-                </Button>
-              </div>
-              
-              <div className="flex flex-wrap justify-center gap-6 sm:gap-8 text-white/80 text-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>30-day free trial</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>No credit card required</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Setup in 5 minutes</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Call to Action */}
+          <CallToAction />
         </div>
-      </div>
-    );
+      </div>;
   }
+  return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-12 max-w-7xl">
+        {/* Hero Section - Responsive */}
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-[#387E89]/20">
+            <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            Professional Medical Documentation
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
+            Clinical Templates & Documentation
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-3 sm:px-4 mb-6 sm:mb-8">
+            Professional medical documentation templates created by healthcare experts. Streamline your clinical workflow with structured, comprehensive templates for every specialty and use case. Trusted by over 1,000+ clinicians worldwide.
+          </p>
+        </div>
 
-  // Main Templates Listing Page
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-7xl">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6">
-            Templates
-          </h2>
-          <div className="flex items-center gap-4">
-            <Input 
-              type="text" 
-              placeholder="Search templates..." 
-              value={searchTerm} 
-              onChange={(e) => setSearchTerm(e.target.value)} 
-              className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
-            />
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-600" />
-              <select 
-                value={selectedSpecialty} 
-                onChange={(e) => setSelectedSpecialty(e.target.value)} 
-                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
-              >
+        {/* Search and Filters - Responsive */}
+        <div className="mb-8 sm:mb-12 md:mb-16">
+          <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
+            {/* Main Search Bar - Responsive */}
+            <div className="relative group">
+              <Search className="absolute left-4 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5 group-focus-within:text-[#387E89] transition-colors" />
+              <Input type="text" placeholder="Search templates by specialty, condition, author..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 sm:pl-12 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 shadow-lg transition-all duration-200 text-gray-900 placeholder:text-gray-500" aria-label="Search medical templates" />
+            </div>
+
+            {/* Filter Controls - Responsive */}
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center items-center">
+              <div className="flex items-center gap-1 sm:gap-2 text-gray-700 text-xs sm:text-sm">
+                <Filter className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="font-medium hidden sm:inline">Filter by:</span>
+                <span className="font-medium sm:hidden">Filter:</span>
+              </div>
+              
+              <select value={selectedSpecialty} onChange={e => setSelectedSpecialty(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by medical specialty">
                 <option value="">All Specialties</option>
-                {specialties.map(specialty => (
-                  <option key={specialty} value={specialty}>{specialty}</option>
-                ))}
+                {specialties.map(specialty => <option key={specialty} value={specialty}>{specialty}</option>)}
               </select>
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-600" />
-              <select 
-                value={selectedCategory} 
-                onChange={(e) => setSelectedCategory(e.target.value)} 
-                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
-              >
+
+              <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="px-2 sm:px-4 py-1 sm:py-2 border border-gray-200 rounded-lg focus:border-[#387E89] focus:ring-2 focus:ring-[#387E89]/20 text-xs sm:text-sm bg-white transition-all min-w-0 flex-shrink" aria-label="Filter by template category">
                 <option value="">All Categories</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
+                {categories.map(category => <option key={category} value={category}>{category}</option>)}
               </select>
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-600" />
-              <select 
-                value={selectedComplexity} 
-                onChange={(e) => setSelectedComplexity(e.target.value)} 
-                className="bg-white/80 backdrop-blur-sm border border-gray-200/60 rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:border-gray-400"
-              >
-                <option value="">All Complexities</option>
-                {complexities.map(complexity => (
-                  <option key={complexity} value={complexity}>{complexity}</option>
-                ))}
-              </select>
+
+              
             </div>
           </div>
         </div>
 
-        {/* Templates Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
-          {currentTemplates.map(template => (
-            <Card key={template.id} className="bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl sm:text-2xl text-[#143151] flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-[#387E89]" />
-                  </div>
-                  {template.title}
-                </CardTitle>
-                <p className="text-gray-600 leading-relaxed">Comprehensive template for {template.category}</p>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    <span className="text-sm sm:text-base font-medium">{template.uses.toLocaleString()} uses</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 fill-current text-yellow-400" />
-                    <span className="text-sm sm:text-base font-medium">{template.rating}/5.0</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm sm:text-base font-medium">{template.complexity}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm sm:text-base font-medium">Updated {new Date(template.lastUpdated).toLocaleDateString()}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Pagination */}
-        <div className="flex items-center justify-center mt-8 sm:mt-12">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis disabled={currentPage === 1} />
-              </PaginationItem>
-              {getPageNumbers().map(page => {
-                if (page === 'ellipsis') {
-                  return <PaginationEllipsis key={page} />;
-                }
-                return (
-                  <PaginationItem key={page}>
-                    <PaginationLink
-                      onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? 'bg-[#143151] text-white' : 'text-gray-600 hover:bg-[#143151]/10'}
-                    >
-                      {page}
-                    </PaginationLink>
-                  </PaginationItem>
-                );
-              })}
-              <PaginationItem>
-                <PaginationEllipsis disabled={currentPage === totalPages} />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
-
-        {/* Enhanced Call to Action for Main Templates Page */}
-        <div className="bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white shadow-2xl relative overflow-hidden mt-16 sm:mt-20 lg:mt-24">
-          <div className="absolute inset-0 bg-black/10"></div>
-          <div className="absolute top-0 right-0 w-72 h-72 bg-white/5 rounded-full -translate-y-36 translate-x-36"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-32 -translate-x-32"></div>
-          <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-white/3 rounded-full -translate-x-24 -translate-y-24"></div>
-          
-          <div className="relative z-10">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8">
-              <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-              Transform Your Clinical Documentation Today
+        {/* Results Section - Responsive */}
+        <div className="mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-3 sm:gap-4 px-2 sm:px-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#143151]">
+              Available Templates
             </h2>
-            
-            <p className="text-white/90 mb-8 sm:mb-10 max-w-3xl mx-auto text-base sm:text-lg lg:text-xl leading-relaxed">
-              Join thousands of clinicians already using S10.AI to reduce administrative burden by 60% 
-              and improve patient care. Access our comprehensive template library and experience the future of medical documentation.
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <Users className="w-4 h-4" />
-                <span className="text-sm sm:text-base font-medium">10,000+ Users</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+              <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
+                {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <FileText className="w-4 h-4" />
-                <span className="text-sm sm:text-base font-medium">500+ Templates</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <Clock className="w-4 h-4" />
-                <span className="text-sm sm:text-base font-medium">60% Time Saved</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-10 sm:mb-12">
-              <Button className="bg-white text-[#143151] hover:bg-gray-100 transition-all font-bold shadow-lg hover:shadow-xl hover:scale-105 transform duration-200 group text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
-                <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Start Free 30-Day Trial
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              
-              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all group text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
-                Browse All Templates
-              </Button>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto" />
-                <h3 className="font-bold text-base sm:text-lg mb-2">No Credit Card Required</h3>
-                <p className="text-white/80 text-xs sm:text-sm">Cancel anytime, no strings attached</p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto" />
-                <h3 className="font-bold text-base sm:text-lg mb-2">Setup in 5 Minutes</h3>
-                <p className="text-white/80 text-xs sm:text-sm">Get started instantly with guided onboarding</p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <Star className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-3 mx-auto fill-current" />
-                <h3 className="font-bold text-base sm:text-lg mb-2">24/7 Expert Support</h3>
-                <p className="text-white/80 text-xs sm:text-sm">Award-winning customer success team</p>
-              </div>
+              {totalPages > 1 && <div className="text-xs sm:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-gray-200 shadow-sm">
+                  Page {currentPage} of {totalPages}
+                </div>}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
+          {currentTemplates.length > 0 ? <>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 px-2 sm:px-0">
+                {currentTemplates.map(template => <Card key={template.id} className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30 cursor-pointer group" onClick={() => setSelectedTemplate(template)} role="button" tabIndex={0} onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setSelectedTemplate(template);
+              }
+            }} aria-label={`View ${template.title} template details`}>
+                    <CardHeader className="pb-3 sm:pb-4 p-4 sm:p-6">
+                      <div className="flex items-start justify-between mb-2 sm:mb-3">
+                        <div className="flex flex-wrap gap-1 sm:gap-2 flex-1 mr-2">
+                          <Badge variant="outline" className="text-xs bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
+                            {template.specialty}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs bg-[#143151]/10 text-[#143151] border-[#143151]/30">
+                            {template.category}
+                          </Badge>
+                          
+                        </div>
+                        <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 group-hover:text-[#387E89] group-hover:translate-x-1 transition-all duration-200 flex-shrink-0" />
+                      </div>
+                      <CardTitle className="text-base sm:text-lg md:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors line-clamp-2 leading-tight">
+                        {template.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0 flex flex-col h-full p-4 sm:p-6">
+                      <p className="text-gray-600 mb-3 sm:mb-4 line-clamp-3 leading-relaxed text-xs sm:text-sm md:text-base flex-grow">
+                        {template.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <div className="flex items-center gap-1">
+                            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="hidden sm:inline">{template.uses.toLocaleString()}</span>
+                            <span className="sm:hidden">{template.uses > 1000 ? `${Math.floor(template.uses / 1000)}k` : template.uses}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-yellow-500" />
+                            <span>{template.rating}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="hidden sm:inline">{template.estimatedTime}</span>
+                            <span className="sm:hidden">{template.estimatedTime.split(' ')[0]}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200 mt-auto">
+                        <div>
+                          <span className="text-xs text-gray-500 font-medium block truncate">
+                            By {template.author}
+                          </span>
+                          <p className="text-xs text-gray-400 truncate">
+                            {template.authorSpecialty}
+                          </p>
+                        </div>
+                        <div className="flex items-center text-[#387E89] text-xs sm:text-sm font-medium group-hover:text-[#143151] transition-colors">
+                          <span className="hidden sm:inline">View Details</span>
+                          <span className="sm:hidden">View</span>
+                          <ArrowRight className="ml-1 h-3 w-3" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>)}
+              </div>
+
+              {/* Pagination - Responsive */}
+              {totalPages > 1 && <div className="flex justify-center px-2 sm:px-0">
+                  <Pagination>
+                    <PaginationContent className="flex-wrap gap-1 sm:gap-2">
+                      <PaginationItem>
+                        <PaginationPrevious href="#" onClick={e => {
+                    e.preventDefault();
+                    if (currentPage > 1) {
+                      setCurrentPage(currentPage - 1);
+                    }
+                  }} className={`${currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`} />
+                      </PaginationItem>
+                      
+                      {getPageNumbers().map((page, index) => <PaginationItem key={index}>
+                          {page === 'ellipsis' ? <PaginationEllipsis className="text-xs sm:text-sm" /> : <PaginationLink href="#" onClick={e => {
+                    e.preventDefault();
+                    setCurrentPage(page);
+                  }} isActive={currentPage === page} className="cursor-pointer text-xs sm:text-sm w-8 h-8 sm:w-9 sm:h-9">
+                              {page}
+                            </PaginationLink>}
+                        </PaginationItem>)}
+                      
+                      <PaginationItem>
+                        <PaginationNext href="#" onClick={e => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) {
+                      setCurrentPage(currentPage + 1);
+                    }
+                  }} className={`${currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'} text-xs sm:text-sm px-2 sm:px-3`} />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>}
+            </> : <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 shadow-sm mx-2 sm:mx-0">
+              <CardContent className="p-6 sm:p-8 md:p-16 text-center">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#387E89]/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Search className="w-6 h-6 sm:w-8 sm:h-8 text-[#387E89]" />
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#143151] mb-2">No templates found</h3>
+                <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
+                  Try adjusting your search terms or filters to find relevant templates.
+                </p>
+                <Button variant="outline" onClick={() => {
+              setSearchTerm('');
+              setSelectedSpecialty('');
+              setSelectedCategory('');
+              setSelectedComplexity('');
+            }} className="bg-transparent border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white transition-all text-sm sm:text-base">
+                  Clear All Filters
+                </Button>
+              </CardContent>
+            </Card>}
+        </div>
+
+        {/* Call to Action */}
+        <CallToAction />
+      </div>
+    </div>;
+};
 export default Templates;
