@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Code, BookOpen, HelpCircle, FileCheck, ChevronRight, Stethoscope } from 'lucide-react';
+import { ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Code, BookOpen, HelpCircle, FileCheck, ChevronRight, Stethoscope, Copy } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -108,6 +108,15 @@ const DiagnosisDetail = () => {
       ]
     }
   ];
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      // You could add a toast notification here if needed
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
 
   if (!diagnosis) {
     return (
@@ -517,8 +526,18 @@ const DiagnosisDetail = () => {
                         {template.specialty}
                       </Badge>
                     </div>
-                    <div className="bg-gray-900 p-3 sm:p-4 lg:p-6 rounded-lg font-mono text-xs sm:text-sm text-green-400 overflow-x-auto border border-gray-700">
-                      <pre className="whitespace-pre-wrap">{template.template}</pre>
+                    <div className="relative">
+                      <div className="bg-gray-900 p-3 sm:p-4 lg:p-6 rounded-lg font-mono text-xs sm:text-sm text-green-400 overflow-x-auto border border-gray-700">
+                        <pre className="whitespace-pre-wrap">{template.template}</pre>
+                      </div>
+                      <Button
+                        onClick={() => copyToClipboard(template.template)}
+                        variant="outline"
+                        size="sm"
+                        className="absolute top-2 right-2 bg-gray-800 hover:bg-gray-700 border-gray-600 text-gray-300 hover:text-white"
+                      >
+                        <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
+                      </Button>
                     </div>
                   </div>
                 ))}
