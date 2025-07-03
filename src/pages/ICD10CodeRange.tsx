@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, ChevronRight, Info, HelpCircle, Copy, Check } from 'lucide-react';
@@ -44,7 +45,11 @@ const codeRangeData: {
               'A01.02': {
                 'd': 'Typhoid fever with heart involvement',
                 'b': true
-              }
+              },
+              'A01.03': 'Typhoid pneumonia',
+              'A01.04': 'Typhoid arthritis',
+              'A01.05': 'Typhoid osteomyelitis',
+              'A01.09': 'Typhoid fever with other complications'
             }
           },
           'A01.1': 'Paratyphoid fever A',
@@ -60,7 +65,7 @@ const codeRangeData: {
         'd': 'Other salmonella infections',
         'b': false,
         'c': {
-          'A02.0': 'Salmonella enteritidis',
+          'A02.0': 'Salmonella enteritis',
           'A02.1': 'Salmonella sepsis',
           'A02.2': {
             'd': 'Localized salmonella infections',
@@ -68,12 +73,145 @@ const codeRangeData: {
             'c': {
               'A02.20': 'Localized salmonella infection, unspecified',
               'A02.21': 'Salmonella meningitis',
-              'A02.22': 'Salmonella pneumonia'
+              'A02.22': 'Salmonella pneumonia',
+              'A02.23': 'Salmonella arthritis',
+              'A02.24': 'Salmonella osteomyelitis',
+              'A02.25': 'Salmonella pyelonephritis',
+              'A02.29': 'Salmonella with other localized infection'
             }
-          }
+          },
+          'A02.8': 'Other specified salmonella infections',
+          'A02.9': 'Salmonella infection, unspecified'
         }
       },
-      'A09': 'Infectious gastroenteritis and colitis, unspecified'
+      'A03': {
+        'd': 'Shigellosis',
+        'b': false,
+        'c': {
+          'A03.0': 'Shigellosis due to Shigella dysenteriae',
+          'A03.1': 'Shigellosis due to Shigella flexneri',
+          'A03.2': 'Shigellosis due to Shigella boydii',
+          'A03.3': 'Shigellosis due to Shigella sonnei',
+          'A03.8': 'Other shigellosis',
+          'A03.9': 'Shigellosis, unspecified'
+        }
+      },
+      'A04': {
+        'd': 'Other bacterial intestinal infections',
+        'b': false,
+        'c': {
+          'A04.0': 'Enteropathogenic Escherichia coli infection',
+          'A04.1': 'Enterotoxigenic Escherichia coli infection',
+          'A04.2': 'Enteroinvasive Escherichia coli infection',
+          'A04.3': 'Enterohemorrhagic Escherichia coli infection',
+          'A04.4': 'Other intestinal Escherichia coli infections',
+          'A04.5': 'Campylobacter enteritis',
+          'A04.6': 'Enteritis due to Yersinia enterocolitica',
+          'A04.7': {
+            'd': 'Enterocolitis due to Clostridium difficile',
+            'b': false,
+            'c': {
+              'A04.71': 'Enterocolitis due to Clostridium difficile, recurrent',
+              'A04.72': 'Enterocolitis due to Clostridium difficile, not specified as recurrent'
+            }
+          },
+          'A04.8': 'Other specified bacterial intestinal infections',
+          'A04.9': 'Bacterial intestinal infection, unspecified'
+        }
+      },
+      'A05': {
+        'd': 'Other bacterial foodborne intoxications, not elsewhere classified',
+        'b': false,
+        'c': {
+          'A05.0': 'Foodborne staphylococcal intoxication',
+          'A05.1': 'Botulism food poisoning',
+          'A05.2': 'Foodborne Clostridium perfringens [Clostridium welchii] intoxication',
+          'A05.3': 'Foodborne Vibrio parahaemolyticus intoxication',
+          'A05.4': 'Foodborne Bacillus cereus intoxication',
+          'A05.5': 'Foodborne Vibrio vulnificus intoxication',
+          'A05.8': 'Other specified bacterial foodborne intoxications',
+          'A05.9': 'Bacterial foodborne intoxication, unspecified'
+        }
+      },
+      'A06': {
+        'd': 'Amebiasis',
+        'b': false,
+        'c': {
+          'A06.0': 'Acute amebic dysentery',
+          'A06.1': 'Chronic intestinal amebiasis',
+          'A06.2': 'Amebic nondysenteric colitis',
+          'A06.3': 'Ameboma of intestine',
+          'A06.4': 'Amebic liver abscess',
+          'A06.5': {
+            'd': 'Amebic lung abscess',
+            'b': false,
+            'c': {
+              'A06.51': 'Amebic lung abscess with liver abscess',
+              'A06.52': 'Amebic lung abscess without liver abscess'
+            }
+          },
+          'A06.6': 'Amebic brain abscess',
+          'A06.7': 'Cutaneous amebiasis',
+          'A06.8': {
+            'd': 'Amebic infection of other sites',
+            'b': false,
+            'c': {
+              'A06.81': 'Amebic cystitis',
+              'A06.82': 'Other amebic genitourinary infections',
+              'A06.89': 'Other amebic infections'
+            }
+          },
+          'A06.9': 'Amebiasis, unspecified'
+        }
+      },
+      'A07': {
+        'd': 'Other protozoal intestinal diseases',
+        'b': false,
+        'c': {
+          'A07.0': 'Balantidiasis',
+          'A07.1': 'Giardiasis [lambliasis]',
+          'A07.2': 'Cryptosporidiosis',
+          'A07.3': 'Isosporiasis',
+          'A07.4': 'Cyclosporiasis',
+          'A07.8': 'Other specified protozoal intestinal diseases',
+          'A07.9': 'Protozoal intestinal disease, unspecified'
+        }
+      },
+      'A08': {
+        'd': 'Viral and other specified intestinal infections',
+        'b': false,
+        'c': {
+          'A08.0': 'Rotaviral enteritis',
+          'A08.1': {
+            'd': 'Acute gastroenteropathy due to Norwalk agent and other small round viruses',
+            'b': false,
+            'c': {
+              'A08.11': 'Acute gastroenteropathy due to Norwalk agent',
+              'A08.19': 'Acute gastroenteropathy due to other small round viruses'
+            }
+          },
+          'A08.2': 'Adenoviral enteritis',
+          'A08.3': {
+            'd': 'Other viral enteritis',
+            'b': false,
+            'c': {
+              'A08.31': 'Calicivirus enteritis',
+              'A08.32': 'Astrovirus enteritis',
+              'A08.39': 'Other viral enteritis'
+            }
+          },
+          'A08.4': 'Viral intestinal infection, unspecified',
+          'A08.8': 'Other specified intestinal infections'
+        }
+      },
+      'A09': {
+        'd': 'Infectious gastroenteritis and colitis, unspecified',
+        'b': false,
+        'c': {
+          'A09.0': 'Other and unspecified gastroenteritis and colitis of infectious origin',
+          'A09.9': 'Gastroenteritis and colitis of unspecified origin'
+        }
+      }
     },
     faqs: [{
       question: 'When should I use codes from the A00-A09 range?',
