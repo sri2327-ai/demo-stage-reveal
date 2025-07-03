@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
-// Mock data for code ranges with detailed code information
+// Updated data structure to match the new format
 const codeRangeData: {
   [key: string]: any;
 } = {
@@ -20,71 +20,61 @@ const codeRangeData: {
     billableCodes: 79,
     nonBillableCodes: 15,
     chaptersCount: 1,
-    aboutRange: {}, // Removed clinical use and documentation requirements
-    codes: [{
-      code: 'A00',
-      title: 'Cholera',
-      codeCount: 3,
-      subcodes: [{
-        code: 'A00.0',
-        title: 'Cholera due to Vibrio cholerae 01, biovar cholerae',
-        billable: true
-      }, {
-        code: 'A00.1',
-        title: 'Cholera due to Vibrio cholerae 01, biovar eltor',
-        billable: true
-      }, {
-        code: 'A00.9',
-        title: 'Cholera, unspecified',
-        billable: true
-      }]
-    }, {
-      code: 'A01',
-      title: 'Typhoid and paratyphoid fevers',
-      codeCount: 5,
-      subcodes: []
-    }, {
-      code: 'A02',
-      title: 'Other salmonella infections',
-      codeCount: 5,
-      subcodes: []
-    }, {
-      code: 'A03',
-      title: 'Shigellosis',
-      codeCount: 6,
-      subcodes: []
-    }, {
-      code: 'A04',
-      title: 'Other bacterial intestinal infections',
-      codeCount: 10,
-      subcodes: []
-    }, {
-      code: 'A05',
-      title: 'Other bacterial foodborne intoxications, not elsewhere classified',
-      codeCount: 8,
-      subcodes: []
-    }, {
-      code: 'A06',
-      title: 'Amebiasis',
-      codeCount: 10,
-      subcodes: []
-    }, {
-      code: 'A07',
-      title: 'Other protozoal intestinal diseases',
-      codeCount: 7,
-      subcodes: []
-    }, {
-      code: 'A08',
-      title: 'Viral and other specified intestinal infections',
-      codeCount: 6,
-      subcodes: []
-    }, {
-      code: 'A09',
-      title: 'Infectious gastroenteritis and colitis, unspecified',
-      codeCount: 1,
-      billable: true,
-      subcodes: []
-    }],
+    aboutRange: {},
+    codes: {
+      'A00': {
+        'd': 'Cholera',
+        'b': false,
+        'c': {
+          'A00.0': 'Cholera due to Vibrio cholerae 01, biovar cholerae',
+          'A00.1': 'Cholera due to Vibrio cholerae 01, biovar eltor',
+          'A00.9': 'Cholera, unspecified'
+        }
+      },
+      'A01': {
+        'd': 'Typhoid and paratyphoid fevers',
+        'b': false,
+        'c': {
+          'A01.0': {
+            'd': 'Typhoid fever',
+            'b': false,
+            'c': {
+              'A01.00': 'Typhoid fever, unspecified',
+              'A01.01': 'Typhoid meningitis',
+              'A01.02': {
+                'd': 'Typhoid fever with heart involvement',
+                'b': true
+              }
+            }
+          },
+          'A01.1': 'Paratyphoid fever A',
+          'A01.2': 'Paratyphoid fever B',
+          'A01.3': 'Paratyphoid fever C',
+          'A01.4': {
+            'd': 'Paratyphoid fever, unspecified',
+            'b': true
+          }
+        }
+      },
+      'A02': {
+        'd': 'Other salmonella infections',
+        'b': false,
+        'c': {
+          'A02.0': 'Salmonella enteritidis',
+          'A02.1': 'Salmonella sepsis',
+          'A02.2': {
+            'd': 'Localized salmonella infections',
+            'b': false,
+            'c': {
+              'A02.20': 'Localized salmonella infection, unspecified',
+              'A02.21': 'Salmonella meningitis',
+              'A02.22': 'Salmonella pneumonia'
+            }
+          }
+        }
+      },
+      'A09': 'Infectious gastroenteritis and colitis, unspecified'
+    },
     faqs: [{
       question: 'When should I use codes from the A00-A09 range?',
       answer: 'Use these codes when documenting intestinal infectious diseases caused by specific organisms or when the clinical presentation suggests an infectious gastroenteritis.'
@@ -98,16 +88,120 @@ const codeRangeData: {
   }
 };
 
+// Recursive component to render nested codes
+const CodeRenderer = ({ code, codeData, level = 0 }: { code: string; codeData: any; level?: number }) => {
+  const { toast } = useToast();
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const copyToClipboard = async (codeText: string) => {
+    try {
+      await navigator.clipboard.writeText(codeText);
+      setCopiedCode(codeText);
+      toast({
+        title: "Code copied!",
+        description: `${codeText} has been copied to your clipboard.`
+      });
+      setTimeout(() => setCopiedCode(null), 2000);
+    } catch (err) {
+      toast({
+        title: "Copy failed",
+        description: "Could not copy code to clipboard.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  // Handle string format (leaf nodes)
+  if (typeof codeData === 'string') {
+    return (
+      <div 
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 bg-white rounded border border-gray-100`}
+        style={{ marginLeft: `${level * 20}px` }}
+      >
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <Badge variant="outline" className="font-mono text-xs bg-gray-50 text-gray-700 border-gray-200 flex-shrink-0">
+            {code}
+          </Badge>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => copyToClipboard(code)} 
+            className="h-6 w-6 p-0 hover:bg-gray-100 flex-shrink-0"
+          >
+            {copiedCode === code ? 
+              <Check className="h-3 w-3 text-green-600" /> : 
+              <Copy className="h-3 w-3 text-gray-500" />
+            }
+          </Button>
+          <span className="text-xs sm:text-sm text-gray-700 truncate">
+            {codeData}
+          </span>
+        </div>
+        <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 flex-shrink-0">
+          Billable
+        </Badge>
+      </div>
+    );
+  }
+
+  // Handle object format
+  const description = codeData.d || '';
+  const isBillable = codeData.b;
+  const children = codeData.c;
+
+  return (
+    <div className="space-y-2">
+      <div 
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 ${level === 0 ? 'bg-gray-50' : 'bg-white'} rounded border border-gray-100`}
+        style={{ marginLeft: `${level * 20}px` }}
+      >
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <Badge variant="outline" className={`font-mono text-xs ${level === 0 ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-700 border-gray-200'} flex-shrink-0`}>
+            {code}
+          </Badge>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => copyToClipboard(code)} 
+            className="h-6 w-6 p-0 hover:bg-gray-100 flex-shrink-0"
+          >
+            {copiedCode === code ? 
+              <Check className="h-3 w-3 text-green-600" /> : 
+              <Copy className="h-3 w-3 text-gray-500" />
+            }
+          </Button>
+          <span className="text-xs sm:text-sm text-gray-700 truncate">
+            {description}
+          </span>
+        </div>
+        {isBillable && (
+          <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 flex-shrink-0">
+            Billable
+          </Badge>
+        )}
+      </div>
+      
+      {/* Render children recursively */}
+      {children && (
+        <div className="space-y-2">
+          {Object.entries(children).map(([childCode, childData]) => (
+            <CodeRenderer 
+              key={childCode} 
+              code={childCode} 
+              codeData={childData} 
+              level={level + 1} 
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ICD10CodeRange = () => {
-  const {
-    range
-  } = useParams<{
-    range: string;
-  }>();
+  const { range } = useParams<{ range: string }>();
   const data = range ? codeRangeData[range] : null;
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const copyToClipboard = async (code: string) => {
     try {
@@ -127,7 +221,8 @@ const ICD10CodeRange = () => {
     }
   };
   if (!data) {
-    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
         <Card className="max-w-md mx-auto">
           <CardContent className="p-6 sm:p-8 text-center">
             <h1 className="text-xl sm:text-2xl font-bold text-[#143151] mb-4">Code Range Not Found</h1>
@@ -139,9 +234,12 @@ const ICD10CodeRange = () => {
             </Link>
           </CardContent>
         </Card>
-      </div>;
+      </div>
+    );
   }
-  return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
@@ -161,10 +259,6 @@ const ICD10CodeRange = () => {
             <Badge variant="outline" className="text-base sm:text-lg font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 px-3 py-1.5 sm:px-4 sm:py-2 w-fit">
               {data.range}
             </Badge>
-            <div className="flex flex-wrap gap-2">
-              
-              
-            </div>
           </div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-3 sm:mb-4 leading-tight">
             {data.title}
@@ -221,50 +315,11 @@ const ICD10CodeRange = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 sm:space-y-6">
-                {data.codes.map((codeGroup: any, index: number) => <div key={codeGroup.code} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <div className="bg-gray-50 p-3 sm:p-4 border-b border-gray-200">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="outline" className="font-mono bg-blue-50 text-blue-700 border-blue-200 text-sm">
-                            {codeGroup.code}
-                          </Badge>
-                          <Button variant="ghost" size="sm" onClick={() => copyToClipboard(codeGroup.code)} className="h-6 w-6 p-0 hover:bg-blue-100">
-                            {copiedCode === codeGroup.code ? <Check className="h-3 w-3 text-green-600" /> : <Copy className="h-3 w-3 text-gray-500" />}
-                          </Button>
-                        </div>
-                        <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-500 w-fit">
-                          {codeGroup.codeCount} codes
-                        </Badge>
-                      </div>
-                      <h3 className="text-sm sm:text-base font-semibold text-[#143151] mt-2">
-                        {codeGroup.title}
-                      </h3>
-                      {codeGroup.billable && <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 mt-2">
-                          Billable
-                        </Badge>}
-                    </div>
-                    
-                    {codeGroup.subcodes && codeGroup.subcodes.length > 0 && <div className="p-3 sm:p-4">
-                        <div className="space-y-3">
-                          {codeGroup.subcodes.map((subcode: any) => <div key={subcode.code} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 bg-white rounded border border-gray-100">
-                              <div className="flex items-center gap-3 min-w-0 flex-1">
-                                <Badge variant="outline" className="font-mono text-xs bg-gray-50 text-gray-700 border-gray-200 flex-shrink-0">
-                                  {subcode.code}
-                                </Badge>
-                                <Button variant="ghost" size="sm" onClick={() => copyToClipboard(subcode.code)} className="h-6 w-6 p-0 hover:bg-gray-100 flex-shrink-0">
-                                  {copiedCode === subcode.code ? <Check className="h-3 w-3 text-green-600" /> : <Copy className="h-3 w-3 text-gray-500" />}
-                                </Button>
-                                <span className="text-xs sm:text-sm text-gray-700 truncate">
-                                  {subcode.title}
-                                </span>
-                              </div>
-                              {subcode.billable && <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 flex-shrink-0">
-                                  Billable
-                                </Badge>}
-                            </div>)}
-                        </div>
-                      </div>}
-                  </div>)}
+                {Object.entries(data.codes).map(([code, codeData]) => (
+                  <div key={code} className="border border-gray-200 rounded-lg overflow-hidden p-4">
+                    <CodeRenderer code={code} codeData={codeData} level={0} />
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -309,20 +364,23 @@ const ICD10CodeRange = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 sm:space-y-6">
-                {data.faqs.map((faq: any, index: number) => <div key={index} className="border-b border-gray-200 last:border-b-0 pb-4 sm:pb-6 last:pb-0">
+                {data.faqs.map((faq: any, index: number) => (
+                  <div key={index} className="border-b border-gray-200 last:border-b-0 pb-4 sm:pb-6 last:pb-0">
                     <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2 sm:mb-3">
                       {faq.question}
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       {faq.answer}
                     </p>
-                  </div>)}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default ICD10CodeRange;
