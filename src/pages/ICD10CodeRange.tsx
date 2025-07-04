@@ -253,33 +253,31 @@ const CodeRenderer = ({ code, codeData, level = 0 }: { code: string; codeData: a
   if (typeof codeData === 'string') {
     return (
       <div 
-        className={`flex items-start gap-2 p-2 sm:p-3 bg-white rounded border border-gray-100`}
-        style={{ marginLeft: `${Math.min(level * 12, 48)}px` }}
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 bg-white rounded border border-gray-100`}
+        style={{ marginLeft: `${level * 20}px` }}
       >
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <Badge variant="outline" className="font-mono text-xs bg-gray-50 text-gray-700 border-gray-200">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <Badge variant="outline" className="font-mono text-xs bg-gray-50 text-gray-700 border-gray-200 flex-shrink-0">
             {code}
           </Badge>
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => copyToClipboard(code)} 
-            className="h-6 w-6 p-0 hover:bg-gray-100"
+            className="h-6 w-6 p-0 hover:bg-gray-100 flex-shrink-0"
           >
             {copiedCode === code ? 
               <Check className="h-3 w-3 text-green-600" /> : 
               <Copy className="h-3 w-3 text-gray-500" />
             }
           </Button>
-        </div>
-        <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <span className="text-xs sm:text-sm text-gray-700 break-words leading-tight">
+          <span className="text-xs sm:text-sm text-gray-700 truncate">
             {codeData}
           </span>
-          <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 self-start sm:self-center flex-shrink-0">
-            Billable
-          </Badge>
         </div>
+        <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 flex-shrink-0">
+          Billable
+        </Badge>
       </div>
     );
   }
@@ -290,42 +288,40 @@ const CodeRenderer = ({ code, codeData, level = 0 }: { code: string; codeData: a
   const children = codeData.c;
 
   return (
-    <div className="space-y-1 sm:space-y-2">
+    <div className="space-y-2">
       <div 
-        className={`flex items-start gap-2 p-2 sm:p-3 ${level === 0 ? 'bg-gray-50' : 'bg-white'} rounded border border-gray-100`}
-        style={{ marginLeft: `${Math.min(level * 12, 48)}px` }}
+        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 ${level === 0 ? 'bg-gray-50' : 'bg-white'} rounded border border-gray-100`}
+        style={{ marginLeft: `${level * 20}px` }}
       >
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <Badge variant="outline" className={`font-mono text-xs ${level === 0 ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-700 border-gray-200'}`}>
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <Badge variant="outline" className={`font-mono text-xs ${level === 0 ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-700 border-gray-200'} flex-shrink-0`}>
             {code}
           </Badge>
           <Button 
             variant="ghost" 
             size="sm" 
             onClick={() => copyToClipboard(code)} 
-            className="h-6 w-6 p-0 hover:bg-gray-100"
+            className="h-6 w-6 p-0 hover:bg-gray-100 flex-shrink-0"
           >
             {copiedCode === code ? 
               <Check className="h-3 w-3 text-green-600" /> : 
               <Copy className="h-3 w-3 text-gray-500" />
             }
           </Button>
-        </div>
-        <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <span className="text-xs sm:text-sm text-gray-700 break-words leading-tight">
+          <span className="text-xs sm:text-sm text-gray-700 truncate">
             {description}
           </span>
-          {isBillable && (
-            <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 self-start sm:self-center flex-shrink-0">
-              Billable
-            </Badge>
-          )}
         </div>
+        {isBillable && (
+          <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 flex-shrink-0">
+            Billable
+          </Badge>
+        )}
       </div>
       
       {/* Render children recursively */}
       {children && (
-        <div className="space-y-1 sm:space-y-2">
+        <div className="space-y-2">
           {Object.entries(children).map(([childCode, childData]) => (
             <CodeRenderer 
               key={childCode} 
@@ -345,7 +341,6 @@ const ICD10CodeRange = () => {
   const data = range ? codeRangeData[range] : null;
   const { toast } = useToast();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  
   const copyToClipboard = async (code: string) => {
     try {
       await navigator.clipboard.writeText(code);
@@ -363,7 +358,6 @@ const ICD10CodeRange = () => {
       });
     }
   };
-
   if (!data) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
@@ -384,60 +378,60 @@ const ICD10CodeRange = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
         {/* Navigation */}
-        <div className="mb-4 sm:mb-6">
-          <Link to="/icd10-codes" className="inline-flex items-center text-[#387E89] hover:text-[#143151] transition-colors text-sm">
+        <div className="mb-6 sm:mb-8">
+          <Link to="/icd10-codes" className="inline-flex items-center text-[#387E89] hover:text-[#143151] transition-colors text-sm sm:text-base">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to ICD-10 Codes
           </Link>
         </div>
 
         {/* Header */}
-        <div className="mb-6 sm:mb-8 lg:mb-10">
-          <div className="inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-xs font-medium mb-3 sm:mb-4 border border-blue-200/40">
-            <BookOpen className="w-3 h-3 mr-1.5" />
-            <span className="truncate">{data.chapter}</span>
+        <div className="mb-8 sm:mb-12">
+          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-200/40">
+            <BookOpen className="w-3 h-3 mr-1.5 sm:mr-2" />
+            {data.chapter}
           </div>
-          <div className="flex flex-col gap-2 sm:gap-3 mb-3 sm:mb-4">
-            <Badge variant="outline" className="text-sm sm:text-base font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 px-2.5 py-1 sm:px-3 sm:py-1.5 w-fit">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <Badge variant="outline" className="text-base sm:text-lg font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 px-3 py-1.5 sm:px-4 sm:py-2 w-fit">
               {data.range}
             </Badge>
           </div>
-          <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151] mb-3 sm:mb-4 leading-tight break-words">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-3 sm:mb-4 leading-tight">
             {data.title}
           </h1>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-4xl">
             {data.description}
           </p>
         </div>
 
         {/* About This Range */}
-        <div className="mb-6 sm:mb-8" data-api-section="about-range">
+        <div className="mb-8 sm:mb-12" data-api-section="about-range">
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="pb-3 sm:pb-4">
-              <CardTitle className="flex items-center text-lg sm:text-xl font-bold text-[#143151]">
-                <Info className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-[#387E89] flex-shrink-0" />
-                <span className="break-words">About This Range</span>
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl sm:text-2xl font-bold text-[#143151]">
+                <Info className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-[#387E89]" />
+                About This Range
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 bg-blue-50/50 rounded-lg border border-blue-200/30">
+            <CardContent className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-blue-50/50 rounded-lg border border-blue-200/30">
                 <div className="text-center">
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">{data.totalCodes}+</div>
-                  <div className="text-xs text-gray-600">Total codes</div>
+                  <div className="text-xl sm:text-2xl font-bold text-[#143151]">{data.totalCodes}+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Total codes</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-green-600">{data.billableCodes}+</div>
-                  <div className="text-xs text-gray-600">Billable codes</div>
+                  <div className="text-xl sm:text-2xl font-bold text-green-600">{data.billableCodes}+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Billable codes</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-600">{data.nonBillableCodes}+</div>
-                  <div className="text-xs text-gray-600">Non-billable codes</div>
+                  <div className="text-xl sm:text-2xl font-bold text-gray-600">{data.nonBillableCodes}+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Non-billable codes</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#387E89]">{data.chaptersCount}</div>
-                  <div className="text-xs text-gray-600">Chapters</div>
+                  <div className="text-xl sm:text-2xl font-bold text-[#387E89]">{data.chaptersCount}</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Chapters</div>
                 </div>
               </div>
             </CardContent>
@@ -445,21 +439,22 @@ const ICD10CodeRange = () => {
         </div>
 
         {/* Codes in This Range */}
-        <div className="mb-6 sm:mb-8" data-api-section="codes-in-range">
+        <div className="mb-8 sm:mb-12" data-api-section="codes-in-range">
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="pb-3 sm:pb-4">
-              <CardTitle className="text-lg sm:text-xl font-bold text-[#143151] break-words">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl font-bold text-[#143151]">
                 Codes in this Range ({data.totalCodes}+)
               </CardTitle>
-              <div className="flex flex-col gap-1 text-xs sm:text-sm text-gray-600">
-                <span className="break-words">{data.chapter}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm sm:text-base text-gray-600">
+                <span>{data.chapter}</span>
+                <span className="hidden sm:inline">•</span>
                 <span>Range: {data.chapterRange}</span>
               </div>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="space-y-3 sm:space-y-4 max-h-[70vh] overflow-y-auto">
+            <CardContent>
+              <div className="space-y-4 sm:space-y-6">
                 {Object.entries(data.codes).map(([code, codeData]) => (
-                  <div key={code} className="border border-gray-200 rounded-lg overflow-hidden p-2 sm:p-3">
+                  <div key={code} className="border border-gray-200 rounded-lg overflow-hidden p-4">
                     <CodeRenderer code={code} codeData={codeData} level={0} />
                   </div>
                 ))}
@@ -469,25 +464,25 @@ const ICD10CodeRange = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-8 sm:mb-12">
           <Card className="bg-gradient-to-br from-[#143151] to-[#387E89] border-0 shadow-xl overflow-hidden">
-            <CardContent className="p-4 sm:p-6 lg:p-8 text-center">
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 break-words">
+            <CardContent className="p-6 sm:p-8 lg:p-12 text-center">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4">
                 Start Coding with S10.AI
               </h2>
-              <p className="text-blue-100 mb-4 sm:mb-5 text-xs sm:text-sm leading-relaxed">
+              <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
                 Let S10.AI help you select the most accurate ICD-10 codes for your documentation. 
                 Our AI-powered assistant ensures compliance and reduces coding errors.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <Link to="/demo">
-                  <Button className="w-full sm:w-auto bg-white text-[#143151] hover:bg-gray-50 font-semibold px-4 sm:px-6 py-2 shadow-lg text-sm">
+                  <Button className="bg-white text-[#143151] hover:bg-gray-50 font-semibold px-6 sm:px-8 py-2.5 sm:py-3 shadow-lg text-sm sm:text-base">
                     Try S10.AI Now
-                    <ChevronRight className="ml-2 h-4 w-4" />
+                    <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </Link>
                 <Link to="/diagnoses">
-                  <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-4 sm:px-6 py-2 text-sm">
+                  <Button variant="outline" className="border-white text-black hover:bg-white/10 font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base">
                     Browse Medical Diagnoses
                   </Button>
                 </Link>
@@ -499,20 +494,20 @@ const ICD10CodeRange = () => {
         {/* FAQs */}
         <div data-api-section="faqs">
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="pb-3 sm:pb-4">
-              <CardTitle className="flex items-center text-lg sm:text-xl font-bold text-[#143151]">
-                <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-[#387E89] flex-shrink-0" />
-                <span className="break-words">Frequently Asked Questions</span>
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl sm:text-2xl font-bold text-[#143151]">
+                <HelpCircle className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-[#387E89]" />
+                Frequently Asked Questions
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="space-y-3 sm:space-y-4">
+            <CardContent>
+              <div className="space-y-4 sm:space-y-6">
                 {data.faqs.map((faq: any, index: number) => (
-                  <div key={index} className="border-b border-gray-200 last:border-b-0 pb-3 sm:pb-4 last:pb-0">
-                    <h3 className="text-sm sm:text-base font-semibold text-[#143151] mb-2 break-words">
+                  <div key={index} className="border-b border-gray-200 last:border-b-0 pb-4 sm:pb-6 last:pb-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-[#143151] mb-2 sm:mb-3">
                       {faq.question}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
