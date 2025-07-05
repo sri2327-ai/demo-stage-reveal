@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+
 const icd10Chapters = [{
   id: 'a00-b99',
   range: 'A00-B99',
@@ -1207,11 +1208,13 @@ const icd10Chapters = [{
     codeCount: 12
   }]
 }];
+
 const ICD10Codes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const chaptersPerPage = 1;
+
   const filteredChapters = icd10Chapters.map(chapter => ({
     ...chapter,
     subcategories: chapter.subcategories.filter(sub => sub.title.toLowerCase().includes(searchTerm.toLowerCase()) || sub.range.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -1220,10 +1223,12 @@ const ICD10Codes = () => {
     const matchesSelectedChapter = selectedChapter ? chapter.id === selectedChapter : true;
     return hasMatchingSubcategories && matchesSelectedChapter;
   });
+
   const totalPages = Math.ceil(filteredChapters.length / chaptersPerPage);
   const startIndex = (currentPage - 1) * chaptersPerPage;
   const endIndex = startIndex + chaptersPerPage;
   const currentChapters = filteredChapters.slice(startIndex, endIndex);
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({
@@ -1231,10 +1236,12 @@ const ICD10Codes = () => {
       behavior: 'smooth'
     });
   };
+
   const handleChapterFilter = (chapterId: string | null) => {
     setSelectedChapter(chapterId);
     setCurrentPage(1);
   };
+
   const scrollToChapter = (chapterId: string) => {
     const element = document.querySelector(`[data-api-chapters="icd10-chapters"] [data-chapter-id="${chapterId}"]`);
     if (element) {
@@ -1244,6 +1251,7 @@ const ICD10Codes = () => {
       });
     }
   };
+
   return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section */}
@@ -1274,30 +1282,35 @@ const ICD10Codes = () => {
         {/* Chapter Filter Section */}
         <div className="mb-8 sm:mb-12">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center gap-3 mb-4">
-              <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89]" />
-              <h2 className="text-lg sm:text-xl font-semibold text-[#143151]">Quick Chapter Access</h2>
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89] flex-shrink-0" />
+              <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-[#143151]">Quick Chapter Access</h2>
             </div>
             
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
-              
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 mb-4 sm:mb-6">
               {icd10Chapters.map(chapter => <Button key={chapter.id} variant={selectedChapter === chapter.id ? "default" : "outline"} size="sm" onClick={() => {
               if (selectedChapter === chapter.id) {
                 scrollToChapter(chapter.id);
               } else {
                 handleChapterFilter(chapter.id);
               }
-            }} className="text-xs sm:text-sm hover:bg-[#387E89] hover:text-white transition-colors" title={chapter.title}>
-                  <span className="font-mono mr-1">{chapter.range}</span>
-                  <span className="hidden sm:inline">- Ch. {chapter.chapter.split(' ')[1]}</span>
+            }} className="text-xs sm:text-sm hover:bg-[#387E89] hover:text-white transition-colors p-2 sm:p-3 h-auto min-h-[2.5rem] sm:min-h-[3rem] flex flex-col items-center justify-center" title={chapter.title}>
+                  <span className="font-mono text-xs sm:text-sm font-semibold">{chapter.range}</span>
+                  <span className="text-[10px] sm:text-xs text-center leading-tight mt-1 opacity-75">
+                    Ch. {chapter.chapter.split(' ')[1]}
+                  </span>
                 </Button>)}
             </div>
             
-            {selectedChapter && <div className="text-sm text-gray-600 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200">
-                <strong>Filtered by:</strong> {icd10Chapters.find(ch => ch.id === selectedChapter)?.title}
-                <Button variant="ghost" size="sm" onClick={() => handleChapterFilter(null)} className="ml-2 h-6 px-2 text-xs">
-                  Clear
-                </Button>
+            {selectedChapter && <div className="text-xs sm:text-sm text-gray-600 bg-blue-50 px-3 py-2 sm:px-4 sm:py-3 rounded-lg border border-blue-200">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <span className="font-medium">
+                    <strong>Filtered by:</strong> {icd10Chapters.find(ch => ch.id === selectedChapter)?.title}
+                  </span>
+                  <Button variant="ghost" size="sm" onClick={() => handleChapterFilter(null)} className="h-6 px-2 text-xs self-start sm:self-auto">
+                    Clear Filter
+                  </Button>
+                </div>
               </div>}
           </div>
         </div>
@@ -1427,4 +1440,5 @@ const ICD10Codes = () => {
       </div>
     </div>;
 };
+
 export default ICD10Codes;
