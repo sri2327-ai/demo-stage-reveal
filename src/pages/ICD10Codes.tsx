@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, BookOpen, ChevronRight, Filter, Info } from 'lucide-react';
@@ -1287,16 +1288,16 @@ const ICD10Codes = () => {
               <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-[#143151]">Quick Chapter Access</h2>
             </div>
             
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-3 mb-4 sm:mb-6">
               {icd10Chapters.map(chapter => <Button key={chapter.id} variant={selectedChapter === chapter.id ? "default" : "outline"} size="sm" onClick={() => {
               if (selectedChapter === chapter.id) {
                 scrollToChapter(chapter.id);
               } else {
                 handleChapterFilter(chapter.id);
               }
-            }} className="text-xs sm:text-sm hover:bg-[#387E89] hover:text-white transition-colors p-2 sm:p-3 h-auto min-h-[2.5rem] sm:min-h-[3rem] flex flex-col items-center justify-center" title={chapter.title}>
-                  <span className="font-mono text-xs sm:text-sm font-semibold">{chapter.range}</span>
-                  <span className="text-[10px] sm:text-xs text-center leading-tight mt-1 opacity-75">
+            }} className="text-xs hover:bg-[#387E89] hover:text-white transition-colors p-2 h-auto min-h-[2.5rem] flex flex-col items-center justify-center" title={chapter.title}>
+                  <span className="font-mono text-xs font-semibold">{chapter.range}</span>
+                  <span className="text-[10px] text-center leading-tight mt-1 opacity-75">
                     Ch. {chapter.chapter.split(' ')[1]}
                   </span>
                 </Button>)}
