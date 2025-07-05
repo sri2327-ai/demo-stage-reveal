@@ -5,6 +5,7 @@ import { Search, BookOpen, ChevronRight, Filter, Info } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { 
   Pagination, 
   PaginationContent, 
@@ -463,6 +464,7 @@ const icd10Chapters = [
 const ICD10Codes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const chaptersPerPage = 1;
 
   const filteredChapters = icd10Chapters.map(chapter => ({
@@ -471,7 +473,11 @@ const ICD10Codes = () => {
       sub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       sub.range.toLowerCase().includes(searchTerm.toLowerCase())
     )
-  })).filter(chapter => chapter.subcategories.length > 0);
+  })).filter(chapter => {
+    const hasMatchingSubcategories = chapter.subcategories.length > 0;
+    const matchesSelectedChapter = selectedChapter ? chapter.id === selectedChapter : true;
+    return hasMatchingSubcategories && matchesSelectedChapter;
+  });
 
   const totalPages = Math.ceil(filteredChapters.length / chaptersPerPage);
   const startIndex = (currentPage - 1) * chaptersPerPage;
@@ -481,6 +487,18 @@ const ICD10Codes = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleChapterFilter = (chapterId: string | null) => {
+    setSelectedChapter(chapterId);
+    setCurrentPage(1);
+  };
+
+  const scrollToChapter = (chapterId: string) => {
+    const element = document.querySelector(`[data-api-chapters="icd10-chapters"] [data-chapter-id="${chapterId}"]`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
@@ -518,10 +536,64 @@ const ICD10Codes = () => {
           </div>
         </div>
 
+        {/* Chapter Filter Section */}
+        <div className="mb-8 sm:mb-12">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="flex items-center gap-3 mb-4">
+              <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89]" />
+              <h2 className="text-lg sm:text-xl font-semibold text-[#143151]">Quick Chapter Access</h2>
+            </div>
+            
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
+              <Button
+                variant={selectedChapter === null ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleChapterFilter(null)}
+                className="text-xs sm:text-sm"
+              >
+                All Chapters
+              </Button>
+              {icd10Chapters.map((chapter) => (
+                <Button
+                  key={chapter.id}
+                  variant={selectedChapter === chapter.id ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => {
+                    if (selectedChapter === chapter.id) {
+                      scrollToChapter(chapter.id);
+                    } else {
+                      handleChapterFilter(chapter.id);
+                    }
+                  }}
+                  className="text-xs sm:text-sm hover:bg-[#387E89] hover:text-white transition-colors"
+                  title={chapter.title}
+                >
+                  <span className="font-mono mr-1">{chapter.range}</span>
+                  <span className="hidden sm:inline">- Ch. {chapter.chapter.split(' ')[1]}</span>
+                </Button>
+              ))}
+            </div>
+            
+            {selectedChapter && (
+              <div className="text-sm text-gray-600 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200">
+                <strong>Filtered by:</strong> {icd10Chapters.find(ch => ch.id === selectedChapter)?.title}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleChapterFilter(null)}
+                  className="ml-2 h-6 px-2 text-xs"
+                >
+                  Clear
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Chapters Grid */}
         <div className="space-y-8 sm:space-y-12 mb-8 sm:mb-12" data-api-chapters="icd10-chapters">
           {currentChapters.map((chapter) => (
-            <Card key={chapter.id} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm overflow-hidden">
+            <Card key={chapter.id} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm overflow-hidden" data-chapter-id={chapter.id}>
               <CardHeader className="pb-4 sm:pb-6">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <Badge variant="outline" className="text-xs sm:text-sm font-mono bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 w-fit">
