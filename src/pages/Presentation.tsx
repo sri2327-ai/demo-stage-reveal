@@ -4,10 +4,11 @@ import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Play, ChevronDown, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile } from 'lucide-react';
+import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Play, ChevronDown, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile, Settings, Award, BarChart3, Workflow, Timer, FileCheck, Building, Sparkles } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
+
 const CountUp = ({
   end,
   duration = 2
@@ -40,6 +41,7 @@ const CountUp = ({
   }, [isInView, end, duration, hasStarted]);
   return <span ref={ref}>{count}</span>;
 };
+
 const AnimatedStat = ({
   icon: Icon,
   value,
@@ -82,6 +84,7 @@ const AnimatedStat = ({
       <div className="text-sm text-gray-600">{label}</div>
     </motion.div>;
 };
+
 const TestimonialCard = ({
   name,
   role,
@@ -149,6 +152,7 @@ const LogoMarquee = () => {
       </div>
     </div>;
 };
+
 export default function Presentation() {
   const {
     scrollYProgress
