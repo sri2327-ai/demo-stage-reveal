@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useInView, useAnimation, useMotionTemplate, useMotionValue, animate } from 'framer-motion';
 import { Stars } from "@react-three/drei";
@@ -156,7 +155,7 @@ export default function Presentation() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      {/* Hero Section - Redesigned */}
       <motion.section
         style={{
           backgroundImage,
@@ -169,63 +168,33 @@ export default function Presentation() {
           </Canvas>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <motion.div
-            className="mb-4 sm:mb-6"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 sm:px-4 py-2 inline-flex items-center gap-2">
-              <Zap className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-white text-sm font-medium">AI-Powered Clinical Excellence</span>
-            </Card>
-          </motion.div>
-
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <motion.h1
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight max-w-4xl"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
           >
-            The AI That Charts & Staffs — So You Don't Have To
+            The AI medical scribe
+            <br />
+            <span className="text-white/90">for all clinicians</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-10 md:mb-12 max-w-2xl leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-lg sm:text-xl text-white/80 mb-12 max-w-2xl leading-relaxed"
           >
             Transform your practice with AI that handles documentation and staffing, 
             so you can focus on what matters most - your patients.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto"
-          >
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
-              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm text-white/90">75% faster charting</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
-              <Shield className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm text-white/90">7,000+ app integrations</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
-              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm text-white/90">HIPAA compliant</span>
-            </div>
-          </motion.div>
-
-          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <motion.button
               style={{
@@ -233,16 +202,37 @@ export default function Presentation() {
                 boxShadow,
               }}
               whileHover={{
-                scale: 1.015,
+                scale: 1.05,
               }}
               whileTap={{
-                scale: 0.985,
+                scale: 0.95,
               }}
-              className="group relative flex items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 text-white transition-colors hover:bg-white/20 text-sm sm:text-base font-semibold w-full sm:w-auto"
+              className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20"
             >
-              Book a 15 minute consultation
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+              Try S10.AI - it's free
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
+          </motion.div>
+
+          {/* Subtle feature indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+            className="flex items-center justify-center gap-8 mt-16 text-white/60 text-sm"
+          >
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span>99.9% Accurate</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4" />
+              <span>HIPAA Compliant</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>Under 60 Seconds</span>
+            </div>
           </motion.div>
         </div>
       </motion.section>
