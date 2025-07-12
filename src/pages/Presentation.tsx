@@ -157,7 +157,7 @@ export default function Presentation() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - Redesigned */}
+      {/* Hero Section - Enhanced */}
       <motion.section
         style={{
           backgroundImage,
@@ -170,23 +170,23 @@ export default function Presentation() {
           </Canvas>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 sm:mb-8 leading-tight max-w-5xl"
           >
             The AI That Charts & Staffs
             <br />
-            <span className="text-white/90">— So You Don't Have To</span>
+            <span className="text-white/90 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">— So You Don't Have To</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg sm:text-xl text-white/80 mb-12 max-w-2xl leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-white/80 mb-8 sm:mb-12 max-w-4xl leading-relaxed px-4"
           >
             Transform your practice with AI that handles documentation and staffing, 
             so you can focus on what matters most - your patients.
@@ -196,7 +196,7 @@ export default function Presentation() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16"
           >
             <motion.button
               style={{
@@ -209,53 +209,69 @@ export default function Presentation() {
               whileTap={{
                 scale: 0.95,
               }}
-              className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20"
+              className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20 w-full sm:w-auto"
             >
               Try S10.AI
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
           </motion.div>
 
-          {/* Subtle feature indicators */}
+          {/* Enhanced feature indicators - Better responsive */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.4 }}
-            className="flex items-center justify-center gap-8 mt-16 text-white/60 text-sm"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-white/60 text-sm max-w-2xl mx-auto"
           >
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" />
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <CheckCircle className="w-4 h-4 flex-shrink-0" />
               <span>99.9% Accurate</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4" />
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <Shield className="w-4 h-4 flex-shrink-0" />
               <span>HIPAA Compliant</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:col-span-1 col-span-1">
+              <Clock className="w-4 h-4 flex-shrink-0" />
               <span>Under 60 Seconds</span>
             </div>
           </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 2 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/60"
+          >
+            <ChevronDown className="w-6 h-6" />
+          </motion.div>
+        </motion.div>
       </motion.section>
 
-      {/* The Burnout is Real */}
+      {/* The Burnout is Real - Enhanced */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        {/* Enhanced Background decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          {/* Flowing S-curve similar to reference image */}
+        {/* Enhanced Background decorative elements with more visible colors */}
+        <div className="absolute inset-0 opacity-20">
+          {/* Flowing S-curves with better visibility */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 600" preserveAspectRatio="none">
             <path
               d="M100,50 Q200,100 150,200 T250,350 Q300,400 200,500 T100,550"
               stroke="url(#gradient1)"
-              strokeWidth="2"
+              strokeWidth="3"
               fill="none"
               className="animate-pulse"
             />
             <path
               d="M50,100 Q150,150 100,250 T200,400 Q250,450 150,550"
               stroke="url(#gradient2)"
-              strokeWidth="1.5"
+              strokeWidth="2.5"
               fill="none"
               className="animate-pulse"
               style={{ animationDelay: '1s' }}
@@ -263,34 +279,38 @@ export default function Presentation() {
             <path
               d="M300,80 Q200,130 250,230 T150,380 Q100,430 200,530"
               stroke="url(#gradient3)"
-              strokeWidth="1"
+              strokeWidth="2"
               fill="none"
               className="animate-pulse"
               style={{ animationDelay: '2s' }}
             />
             <defs>
               <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#387E89" stopOpacity="0.6" />
-                <stop offset="50%" stopColor="#143151" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#387E89" stopOpacity="0.2" />
+                <stop offset="0%" stopColor="#387E89" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#143151" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#387E89" stopOpacity="0.4" />
               </linearGradient>
               <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#143151" stopOpacity="0.5" />
-                <stop offset="50%" stopColor="#387E89" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#143151" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#143151" stopOpacity="0.7" />
+                <stop offset="50%" stopColor="#387E89" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#143151" stopOpacity="0.3" />
               </linearGradient>
               <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#387E89" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#143151" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#387E89" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#143151" stopOpacity="0.2" />
               </linearGradient>
             </defs>
           </svg>
           
-          {/* Additional floating elements */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-[#387E89]/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-[#143151]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#387E89]/3 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute top-1/3 right-1/3 w-36 h-36 bg-[#143151]/3 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
+          {/* Enhanced floating elements with better visibility */}
+          <div className="absolute top-20 left-10 w-40 h-40 bg-[#387E89]/15 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#143151]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#387E89]/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-1/3 right-1/3 w-44 h-44 bg-[#143151]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
+          
+          {/* Additional geometric shapes */}
+          <div className="absolute top-1/4 left-1/2 w-6 h-6 bg-[#387E89]/20 rotate-45 animate-spin" style={{ animationDuration: '20s' }}></div>
+          <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-[#143151]/25 rounded-full animate-bounce" style={{ animationDelay: '4s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -299,18 +319,18 @@ export default function Presentation() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
               The Burnout is Real
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
               While you're saving lives, administrative burden is draining yours.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
-            {/* Video Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16">
+            {/* Enhanced Video Section */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -318,23 +338,31 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="order-2 lg:order-1"
             >
-              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white">
-                {/* YouTube Video Embed */}
-                <div className="aspect-video relative">
+              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white group">
+                {/* Native-looking video container */}
+                <div className="aspect-video relative bg-black rounded-t-2xl overflow-hidden">
                   <iframe
-                    src="https://www.youtube.com/embed/sYNhYsNnR74"
+                    src="https://www.youtube.com/embed/sYNhYsNnR74?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&playlist=sYNhYsNnR74"
                     title="Dr. Lauren Mitchell: A Day in Internal Medicine"
-                    className="w-full h-full rounded-t-2xl"
+                    className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
+                  
+                  {/* Custom play overlay (hidden when playing) */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white ml-1" />
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Video description below */}
+                {/* Enhanced video description */}
                 <div className="p-6 bg-white">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-3 h-3 bg-[#387E89] rounded-full animate-pulse"></div>
-                    <span className="text-sm font-semibold text-[#143151]">Real insights from Internal Medicine practice</span>
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-semibold text-[#143151]">Live from Internal Medicine practice</span>
+                    <div className="ml-auto text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">4:32</div>
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed">
                     Follow Dr. Lauren Mitchell through her daily challenges with patient care, documentation, 
@@ -344,7 +372,7 @@ export default function Presentation() {
               </div>
             </motion.div>
 
-            {/* Stats Section */}
+            {/* Enhanced Stats Section with better responsive design */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -352,20 +380,20 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="order-1 lg:order-2"
             >
-              <div className="grid grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Clock className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
-                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
                   </div>
                 </motion.div>
 
@@ -374,14 +402,14 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <TrendingDown className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TrendingDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
-                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
                   </div>
                 </motion.div>
 
@@ -390,14 +418,14 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Users className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
-                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
                   </div>
                 </motion.div>
 
@@ -406,34 +434,34 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
+                  className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-4 sm:p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
                 >
-                  {/* Subtle background pattern */}
+                  {/* Enhanced background pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#143151]/5 to-transparent opacity-50"></div>
                   <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
                   
                   <div className="relative text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <FastForward className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <FastForward className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <div className="text-xs font-bold text-[#387E89] mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
-                    <div className="text-sm font-bold text-[#143151] leading-tight tracking-wide group-hover:text-[#387E89] transition-colors duration-300">
+                    <div className="text-xs font-bold text-[#387E89] mb-2 sm:mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
+                    <div className="text-xs sm:text-sm font-bold text-[#143151] leading-tight tracking-wide group-hover:text-[#387E89] transition-colors duration-300">
                       Understaffed, Overwhelmed, Underpaid
                     </div>
-                    <div className="mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
+                    <div className="mt-2 sm:mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
                   </div>
                 </motion.div>
               </div>
 
-              {/* Quote card */}
+              {/* Enhanced quote card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-8 rounded-2xl border border-gray-200/60 mb-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-6 sm:p-8 rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <blockquote className="text-gray-700 italic text-xl mb-4 font-medium leading-relaxed">
+                <blockquote className="text-gray-700 italic text-lg sm:text-xl mb-4 font-medium leading-relaxed">
                   "It's 10 PM and I'm still finishing charts from this morning..."
                 </blockquote>
                 <div className="text-sm text-gray-600 font-semibold">- Dr. Lauren Mitchell, Internal Medicine</div>
@@ -448,7 +476,7 @@ export default function Presentation() {
               >
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-12 py-6 text-lg font-semibold rounded-xl border-0"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl border-0 w-full sm:w-auto"
                 >
                   Run Your Burnout Score →
                 </Button>
