@@ -236,24 +236,25 @@ export default function Presentation() {
       </motion.section>
 
       {/* The Burnout is Real */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-red-50/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#143151] mb-6 leading-tight">
               The Burnout is Real
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
               While you're saving lives, administrative burden is draining yours.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Stats Section */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -261,57 +262,117 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <AnimatedStat
-                icon={Clock}
-                value={4}
-                suffix="+"
-                label="hours daily on EHR documentation"
-              />
-              <AnimatedStat
-                icon={Users}
-                value={50}
-                suffix="%"
-                label="of doctors experiencing burnout"
-              />
-              <AnimatedStat
-                icon={TrendingUp}
-                value={30}
-                suffix="%"
-                label="patient no-show rate"
-              />
+              <div className="grid grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                >
+                  <div className="text-4xl font-bold text-red-600 mb-2">4+</div>
+                  <div className="text-sm text-gray-600">hours/day on EHRs</div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                >
+                  <div className="text-4xl font-bold text-red-600 mb-2">1 in 2</div>
+                  <div className="text-sm text-gray-600">clinicians face burnout</div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                >
+                  <div className="text-4xl font-bold text-red-600 mb-2">30%</div>
+                  <div className="text-sm text-gray-600">no-show rates</div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                >
+                  <div className="text-xs font-semibold text-red-600 mb-2 uppercase tracking-wide">The Reality</div>
+                  <div className="text-sm text-gray-600">Understaffed, overwhelmed, underpaid</div>
+                </motion.div>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
+                className="text-center"
               >
                 <Button 
-                  variant="outline" 
                   size="lg"
-                  className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
+                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg hover:shadow-xl transition-all px-8 py-4"
                 >
-                  <Target className="w-5 h-5 mr-2" />
-                  Run Your Burnout Score
+                  🩺 Run Your Burnout Score →
                 </Button>
               </motion.div>
             </motion.div>
 
+            {/* Visual Section */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="relative"
             >
-              <Card className="bg-white border border-blue-100 shadow-lg p-8">
-                <div className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-red-50 to-red-100 rounded-full flex items-center justify-center">
-                    <Clock className="w-12 h-12 text-red-600" />
+              <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-0 shadow-2xl p-8 text-white relative overflow-hidden">
+                {/* Background elements */}
+                <div className="absolute top-4 right-4 text-white/20 text-6xl font-bold">10:00</div>
+                <div className="absolute bottom-4 left-4 text-white/10 text-sm">PM</div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mr-4">
+                      <FileText className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-white/60 mb-1">Still working...</div>
+                      <div className="text-lg font-semibold">Charts from this morning</div>
+                    </div>
                   </div>
-                  <blockquote className="text-gray-600 italic text-lg mb-4">
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Patient #1 - SOAP notes</span>
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                      </div>
+                    </div>
+                    <div className="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Patient #2 - Documentation</span>
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                      </div>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 backdrop-blur-sm opacity-50">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Patient #3 - Pending...</span>
+                        <Clock className="w-4 h-4 text-white/40" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <blockquote className="text-white/90 italic text-lg border-l-4 border-white/20 pl-4">
                     "It's 10 PM and I'm still finishing charts from this morning..."
                   </blockquote>
-                  <div className="text-sm text-gray-500">- Dr. Sarah M., Family Medicine</div>
+                  <div className="text-sm text-white/60 mt-3">- Dr. Sarah M., Family Medicine</div>
                 </div>
               </Card>
             </motion.div>
