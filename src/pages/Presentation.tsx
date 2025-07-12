@@ -8,7 +8,6 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
-
 const CountUp = ({
   end,
   duration = 2
@@ -1222,11 +1221,9 @@ export default function Presentation() {
                   <div className="text-base font-semibold text-[#143151]">100% Compliant</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {['HIPAA', 'GDPR', 'PIPEDA', 'ISO 27001'].map((standard) => (
-                    <div key={standard} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-md">
+                  {['HIPAA', 'GDPR', 'PIPEDA', 'ISO 27001'].map(standard => <div key={standard} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-md">
                       {standard}
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </Card>
             </motion.div>
@@ -1330,148 +1327,7 @@ export default function Presentation() {
       </section>
 
       {/* ROI & Impact - Matching existing ROISection style */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
-              Measurable ROI for Clinicians
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              S10.AI delivers quantifiable returns for healthcare providers without disrupting existing workflows.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.1
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
-                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
-                  <Zap className="w-10 h-10 text-[#143151]" />
-                </div>
-                <div className="text-3xl font-bold text-[#143151] mb-2">
-                  <CountUp end={75} />%
-                </div>
-                <div className="text-sm text-gray-600">faster charting</div>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
-                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
-                  <DollarSign className="w-10 h-10 text-[#143151]" />
-                </div>
-                <div className="text-3xl font-bold text-[#143151] mb-2">
-                  $<CountUp end={150} />K
-                </div>
-                <div className="text-sm text-gray-600">average annual savings</div>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.3
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
-                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
-                  <Clock className="w-10 h-10 text-[#143151]" />
-                </div>
-                <div className="text-3xl font-bold text-[#143151] mb-2">
-                  <CountUp end={15} /> hrs
-                </div>
-                <div className="text-sm text-gray-600">weekly time savings</div>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.4
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
-                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
-                  <TrendingUp className="w-10 h-10 text-[#143151]" />
-                </div>
-                <div className="text-3xl font-bold text-[#143151] mb-2">
-                  <CountUp end={40} />%
-                </div>
-                <div className="text-sm text-gray-600">productivity increase</div>
-              </Card>
-            </motion.div>
-          </div>
-
-          <motion.div className="bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl p-8 text-white shadow-xl" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          delay: 0.5,
-          duration: 0.5
-        }} viewport={{
-          once: true
-        }}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Calculate Your Practice's ROI</h3>
-                <p className="text-white/80">
-                  See how much time and money your practice could save with S10.AI
-                </p>
-              </div>
-              <Button className="bg-white text-[#143151] hover:bg-blue-50 shadow-lg" size="lg">
-                <Target className="w-5 h-5 mr-2" />
-                Use ROI Calculator
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* Social Proof */}
       <section className="py-16 sm:py-24 bg-white">
