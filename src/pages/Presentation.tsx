@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useInView, useAnimation } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, useAnimation, useMotionTemplate, useMotionValue, animate } from 'framer-motion';
+import { Stars } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { 
@@ -124,15 +126,35 @@ export default function Presentation() {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const isMobile = useIsMobile();
 
+  // Aurora background animation with green colors
+  const color = useMotionValue("#387E89");
+
+  useEffect(() => {
+    animate(color, ["#387E89", "#143151", "#4A9B8E", "#2F6B78"], {
+      ease: "easeInOut",
+      duration: 10,
+      repeat: Infinity,
+      repeatType: "mirror",
+    });
+  }, [color]);
+
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const border = useMotionTemplate`1px solid ${color}`;
+  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Elements - matching Hero component style */}
+      <motion.section
+        style={{
+          backgroundImage,
+        }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950"
+      >
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-20 w-48 md:w-64 h-48 md:h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
-          <div className="absolute bottom-20 left-20 w-56 md:w-72 h-56 md:h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
-          <div className="absolute top-1/2 left-1/3 w-28 md:w-40 h-28 md:h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
+          <Canvas>
+            <Stars radius={50} count={2500} factor={4} fade speed={2} />
+          </Canvas>
         </div>
 
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
@@ -142,9 +164,9 @@ export default function Presentation() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 mb-6">
-              <Zap className="w-4 h-4 text-black flex-shrink-0" />
-              <span className="text-black text-sm font-medium">AI-Powered Clinical Excellence</span>
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 mb-6">
+              <Zap className="w-4 h-4 text-white flex-shrink-0" />
+              <span className="text-white text-sm font-medium">AI-Powered Clinical Excellence</span>
             </Card>
           </motion.div>
 
@@ -152,10 +174,10 @@ export default function Presentation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
           >
             The AI That Charts & Staffs —{' '}
-            <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
               So You Don't Have To
             </span>
           </motion.h1>
@@ -166,18 +188,27 @@ export default function Presentation() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto"
           >
-            <div className="flex items-center justify-center space-x-2 bg-white/50 backdrop-blur-sm rounded-lg p-3">
-              <Zap className="w-5 h-5 text-[#387E89]" />
-              <span className="text-sm font-semibold text-black">75% faster charting</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 bg-white/50 backdrop-blur-sm rounded-lg p-3">
-              <Shield className="w-5 h-5 text-[#387E89]" />
-              <span className="text-sm font-semibold text-black">7,000+ app integrations</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 bg-white/50 backdrop-blur-sm rounded-lg p-3">
-              <CheckCircle className="w-5 h-5 text-[#387E89]" />
-              <span className="text-sm font-semibold text-black">HIPAA compliant</span>
-            </div>
+            <motion.div 
+              style={{ border, boxShadow }}
+              className="flex items-center justify-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg p-3"
+            >
+              <Zap className="w-5 h-5 text-emerald-400" />
+              <span className="text-sm font-semibold text-white">75% faster charting</span>
+            </motion.div>
+            <motion.div 
+              style={{ border, boxShadow }}
+              className="flex items-center justify-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg p-3"
+            >
+              <Shield className="w-5 h-5 text-emerald-400" />
+              <span className="text-sm font-semibold text-white">7,000+ app integrations</span>
+            </motion.div>
+            <motion.div 
+              style={{ border, boxShadow }}
+              className="flex items-center justify-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg p-3"
+            >
+              <CheckCircle className="w-5 h-5 text-emerald-400" />
+              <span className="text-sm font-semibold text-white">HIPAA compliant</span>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -186,13 +217,22 @@ export default function Presentation() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button 
-              size={isMobile ? "default" : "lg"}
-              className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+            <motion.button
+              style={{
+                border,
+                boxShadow,
+              }}
+              whileHover={{
+                scale: 1.015,
+              }}
+              whileTap={{
+                scale: 0.985,
+              }}
+              className="group relative flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-6 py-3 text-white transition-colors hover:bg-white/20 text-lg font-medium"
             >
-              <Calendar className="w-5 h-5 mr-2" />
+              <Calendar className="w-5 h-5" />
               Book a 15-Minute Consultation
-            </Button>
+            </motion.button>
           </motion.div>
 
           <motion.div
@@ -201,10 +241,10 @@ export default function Presentation() {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-12"
           >
-            <ChevronDown className="w-6 h-6 mx-auto text-gray-400 animate-bounce" />
+            <ChevronDown className="w-6 h-6 mx-auto text-gray-200 animate-bounce" />
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* The Burnout is Real */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
