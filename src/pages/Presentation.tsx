@@ -1409,23 +1409,23 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Board Advisor Testimonial Section */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      {/* Board Advisor Testimonial Section - Compact */}
+      <section className="py-12 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-2">
               Trusted by Advisors Who've Seen It All
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Leaders from the most innovative healthcare technology companies back S10.AI
+            <p className="text-lg text-gray-600">
+              Leaders from innovative healthcare technology companies back S10.AI
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 lg:p-8">
+            <div className="flex flex-col lg:flex-row items-center gap-6">
               {/* Image */}
               <div className="flex-shrink-0">
-                <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-3 border-white shadow-md">
                   <img 
                     src="/lovable-uploads/df7934ec-611f-45ea-a427-7d8c306fb983.png" 
                     alt="John Reece, CEO WISPR Systems" 
@@ -1437,43 +1437,21 @@ export default function Presentation() {
               {/* Content */}
               <div className="flex-1 text-center lg:text-left">
                 {/* Quote */}
-                <blockquote className="text-xl lg:text-2xl text-gray-700 mb-6 leading-relaxed italic">
-                  "S10.AI represents the future of healthcare documentation. Having evaluated countless health tech solutions, I can confidently say their approach to AI-powered clinical workflows is revolutionary. This is the kind of innovation that transforms entire industries."
+                <blockquote className="text-lg text-gray-700 mb-4 leading-relaxed italic">
+                  "S10.AI represents the future of healthcare documentation. Having evaluated countless health tech solutions, I can confidently say their AI-powered clinical workflows are revolutionary."
                 </blockquote>
 
                 {/* Attribution */}
-                <div className="mb-6">
-                  <div className="text-xl font-bold text-[#143151] mb-1">John Reece</div>
-                  <div className="text-lg text-[#387E89] font-semibold mb-2">CEO, WISPR Systems</div>
-                  <div className="text-sm text-gray-600">Board Advisor, S10.AI</div>
+                <div className="mb-4">
+                  <div className="text-lg font-bold text-[#143151]">John Reece</div>
+                  <div className="text-[#387E89] font-semibold text-sm">CEO, WISPR Systems • Board Advisor</div>
                 </div>
 
                 {/* Credentials */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <div className="bg-blue-50 px-4 py-2 rounded-full">
-                    <span className="text-sm font-medium text-blue-700">Healthcare Innovation Leader</span>
-                  </div>
-                  <div className="bg-green-50 px-4 py-2 rounded-full">
-                    <span className="text-sm font-medium text-green-700">20+ Years Healthcare Tech</span>
-                  </div>
-                  <div className="bg-purple-50 px-4 py-2 rounded-full">
-                    <span className="text-sm font-medium text-purple-700">Board Advisor</span>
-                  </div>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+                  <span className="bg-blue-50 px-3 py-1 rounded-full text-xs font-medium text-blue-700">Healthcare Innovation</span>
+                  <span className="bg-green-50 px-3 py-1 rounded-full text-xs font-medium text-green-700">20+ Years Experience</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Company Logo/Badge */}
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <div className="flex items-center justify-center lg:justify-start gap-4 text-gray-500">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">W</span>
-                  </div>
-                  <span className="font-medium">WISPR Systems</span>
-                </div>
-                <span className="text-sm">•</span>
-                <span className="text-sm">Healthcare Technology Solutions</span>
               </div>
             </div>
           </div>
