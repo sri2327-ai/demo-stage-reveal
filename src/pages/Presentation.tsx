@@ -159,6 +159,7 @@ export default function Presentation() {
   
   // Voice over state
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   // Page summary for voice over
@@ -179,6 +180,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       setIsPlaying(false);
       return;
     }
+
+    if (isLoading) return; // Prevent multiple clicks while loading
+
+    setIsLoading(true);
 
     try {
       const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
@@ -206,19 +211,23 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         newAudio.onended = () => {
           setIsPlaying(false);
           setAudio(null);
+          setIsLoading(false);
           URL.revokeObjectURL(audioUrl);
         };
         
         setAudio(newAudio);
         setIsPlaying(true);
+        setIsLoading(false);
         newAudio.play();
       } else {
         console.error('Failed to generate speech');
         alert('Failed to generate voice over. Please try again.');
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error generating speech:', error);
       alert('Error generating voice over. Please check your connection.');
+      setIsLoading(false);
     }
   };
 
@@ -247,11 +256,12 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <div className="flex items-center">
               <button
                 onClick={handleVoiceOver}
-                className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20"
-                title={isPlaying ? "Stop voice over" : "Play page summary"}
+                disabled={isLoading}
+                className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}
               >
-                {isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                <span className="hidden sm:inline">{isPlaying ? "Stop" : "Listen"}</span>
+                {isLoading ? <Volume2 className="w-5 h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                <span className="hidden sm:inline">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
               </button>
             </div>
           </div>
