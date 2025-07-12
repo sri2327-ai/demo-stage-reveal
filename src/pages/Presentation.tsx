@@ -1489,5 +1489,69 @@ export default function Presentation() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-3">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600">
+              Quick answers to common questions from clinicians
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                question: "How long does setup take?",
+                answer: "Under 5 minutes. S10.AI is cloud-based with zero installations required. Simply log in and start using it immediately with your existing EHR."
+              },
+              {
+                question: "Will it work with my specialty?",
+                answer: "Yes. S10.AI supports 50+ medical specialties including cardiology, neurology, psychiatry, internal medicine, pediatrics, and emergency medicine with specialty-specific templates."
+              },
+              {
+                question: "How accurate is the AI documentation?",
+                answer: "99.9% accuracy rate. Our AI understands medical terminology, context, and nuances across all specialties, reducing documentation errors significantly."
+              },
+              {
+                question: "Does it integrate with my current EHR?",
+                answer: "Absolutely. S10.AI works with 100+ EHR systems including Epic, Cerner, Athena, and more. No API setup required—it integrates seamlessly."
+              },
+              {
+                question: "What's the ROI timeline?",
+                answer: "Most practices see ROI within 30 days. Clinicians save 3+ hours daily on documentation, allowing 30-40% more patient volume without additional staff."
+              },
+              {
+                question: "Is my patient data secure?",
+                answer: "100% compliant with HIPAA, GDPR, PIPEDA, and ISO 27001 standards. All data is encrypted and processed securely in the cloud."
+              }
+            ].map((faq, index) => (
+              <div key={index} className="bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
+                <details className="group">
+                  <summary className="flex items-center justify-between p-4 cursor-pointer list-none">
+                    <span className="font-semibold text-[#143151] text-sm sm:text-base">{faq.question}</span>
+                    <ChevronDown className="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-4 pb-4">
+                    <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
+                  </div>
+                </details>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-gray-600 text-sm">
+              Have more questions? 
+              <Button variant="link" className="text-[#387E89] hover:text-[#306b75] p-0 ml-1 h-auto font-semibold">
+                Contact our team →
+              </Button>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>;
 }
