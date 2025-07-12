@@ -175,29 +175,14 @@ export default function Presentation() {
       {/* Hero Section */}
       <motion.section style={{
       backgroundImage
-    }} className="relative min-h-screen flex flex-col overflow-hidden bg-gray-950">
-        {/* Transparent Header */}
-        <div className="relative z-20 w-full">
-          <div className="flex justify-end items-center p-4 sm:p-6 lg:p-8">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/c5eb57a8-1804-4193-bd6d-95b89db326a9.png" 
-                alt="S10.AI Logo" 
-                className="h-8 sm:h-10 lg:h-12 w-auto"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Background Stars */}
+    }} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
         <div className="absolute inset-0 z-0">
           <Canvas>
             <Stars radius={50} count={2500} factor={4} fade speed={2} />
           </Canvas>
         </div>
 
-        {/* Main Content */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <motion.h1 initial={{
           opacity: 0,
           y: 30
@@ -207,10 +192,10 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 0.2
-        }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium text-white mb-8 leading-tight">
+        }} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight max-w-5xl">
             The AI That Charts & Staffs
             <br />
-            <span className="text-white/90 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light">So You Don't Have To</span>
+            <span className="text-white/90 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium">So You Don't Have To</span>
           </motion.h1>
 
           <motion.div initial={{
@@ -222,7 +207,7 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 1.0
-        }} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12">
+        }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <motion.button style={{
             border,
             boxShadow
@@ -230,9 +215,9 @@ export default function Presentation() {
             scale: 1.05
           }} whileTap={{
             scale: 0.95
-          }} className="group relative flex items-center justify-center gap-2 sm:gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 text-white transition-all hover:bg-white/20 text-base sm:text-lg font-semibold border-white/20 w-full sm:w-auto max-w-xs sm:max-w-none">
+          }} className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20 w-full sm:w-auto">
               Try S10.AI
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
           </motion.div>
 
@@ -244,42 +229,20 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 1.4
-        }} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-white/60 text-sm max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-2.5 sm:p-3">
-              <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span className="text-xs sm:text-sm">99.9% Accurate</span>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        duration: 0.8,
-        delay: 2.0
-      }} className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <motion.div animate={{
-          y: [0, 10, 0]
-        }} transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }} className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-white/60 rounded-full mt-2"></div>
-          </motion.div>
-        </motion.div>
-      </motion.section>
-            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-2.5 sm:p-3">
-              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span className="text-xs sm:text-sm">HIPAA Compliant</span>
+        }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white/60 text-sm max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <CheckCircle className="w-4 h-4 flex-shrink-0" />
+              <span>99.9% Accurate</span>
             </div>
-            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-2.5 sm:p-3">
-              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span className="text-xs sm:text-sm">Under 60 Seconds</span>
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <Shield className="w-4 h-4 flex-shrink-0" />
+              <span>HIPAA Compliant</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <Clock className="w-4 h-4 flex-shrink-0" />
+              <span>Under 60 Seconds</span>
             </div>
           </motion.div>
-        </div>
         </div>
 
         {/* Scroll indicator */}
