@@ -471,65 +471,87 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Meet Your AI Teammates */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Meet Your AI Teammates - Enhanced */}
+      <section className="py-20 sm:py-32 bg-gradient-to-b from-white via-blue-50/30 to-green-50/30 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50/20 to-transparent"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-l from-[#143151]/5 to-[#387E89]/5 rounded-full blur-3xl"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-20"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6">
-              Meet Your AI Teammates
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 rounded-full px-6 py-3 mb-6 border border-[#387E89]/20"
+            >
+              <Sparkles className="w-5 h-5 text-[#387E89]" />
+              <span className="text-sm font-semibold text-[#143151] uppercase tracking-wide">AI-Powered Solutions</span>
+            </motion.div>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 sm:mb-8 leading-tight">
+              Meet Your AI{' '}
+              <span className="bg-gradient-to-r from-[#387E89] to-[#143151] bg-clip-text text-transparent">
+                Teammates
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              CRUSH and BRAVO work 24/7 so you can focus on what matters most - your patients.
+            <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              CRUSH and BRAVO work 24/7 so you can focus on what matters most{' '}
+              <span className="font-semibold text-[#143151]">— your patients.</span>
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 mb-16 sm:mb-20">
             {/* CRUSH - AI Medical Scribe */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative group"
             >
-              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40 group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-[#387E89]/20 to-[#143151]/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+              
+              <Card className="relative p-6 sm:p-8 lg:p-10 border-2 border-[#387E89]/20 shadow-2xl hover:shadow-3xl transition-all duration-500 h-full bg-gradient-to-br from-white via-blue-50/20 to-white hover:border-[#387E89]/40 group-hover:-translate-y-2 backdrop-blur-sm">
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-center mb-8 sm:mb-10">
                   <motion.div 
-                    className="relative mb-6"
-                    whileHover={{ scale: 1.05 }}
+                    className="relative mb-8"
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <AnimatedCRUSH />
+                    <div className="mx-auto max-w-sm">
+                      <AnimatedCRUSH />
+                    </div>
                   </motion.div>
-                  <motion.h3 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300"
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    viewport={{ once: true }}
                   >
-                    CRUSH
-                  </motion.h3>
-                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                    className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold"
-                  >
-                    <CheckCircle className="w-4 h-4" />
-                    99.9% Accurate • HIPAA Compliant
+                    <h3 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-colors duration-300">
+                      CRUSH
+                    </h3>
+                    <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold border border-green-200">
+                      <CheckCircle className="w-4 h-4" />
+                      99.9% Accurate • HIPAA Compliant
+                    </div>
                   </motion.div>
                 </div>
 
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {/* Key Features Grid - Improved responsive */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
                   {[
                     { icon: Clock, title: "Under 60 Seconds", desc: "Real-time documentation", color: "blue" },
                     { icon: Languages, title: "60+ Languages", desc: "Understands accents & context", color: "green" },
@@ -541,22 +563,23 @@ export default function Presentation() {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md"
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      viewport={{ once: true }}
+                      className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-xl border border-blue-100 hover:bg-white hover:shadow-lg transition-all duration-300"
                     >
                       <div className="flex items-center gap-3 mb-2">
-                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        <div className={`w-10 h-10 bg-${feature.color}-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                          <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base">{feature.title}</span>
                       </div>
-                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-3">
+                <div className="space-y-4 sm:space-y-5">
                   {[
                     { title: "Smart Medical Understanding", desc: "Understands medical language and context—no second-guessing, no errors" },
                     { title: "Clinical Intelligence", desc: "HCC tracking, quality alerts, and preventive care prompts built-in" },
@@ -567,12 +590,13 @@ export default function Presentation() {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8 + index * 0.1 }}
-                      className="flex items-start gap-3"
+                      viewport={{ once: true }}
+                      className="flex items-start gap-4 p-3 rounded-lg hover:bg-blue-50/50 transition-colors duration-300"
                     >
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
-                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base block mb-1">{feature.title}</span>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -582,44 +606,46 @@ export default function Presentation() {
 
             {/* BRAVO - AI Staffing Agent */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative group"
             >
-              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40 group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-[#143151]/20 to-[#387E89]/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+              
+              <Card className="relative p-6 sm:p-8 lg:p-10 border-2 border-[#143151]/20 shadow-2xl hover:shadow-3xl transition-all duration-500 h-full bg-gradient-to-br from-white via-green-50/20 to-white hover:border-[#143151]/40 group-hover:-translate-y-2 backdrop-blur-sm">
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-center mb-8 sm:mb-10">
                   <motion.div 
-                    className="relative mb-6"
-                    whileHover={{ scale: 1.05 }}
+                    className="relative mb-8"
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <AnimatedBRAVO />
+                    <div className="mx-auto max-w-sm">
+                      <AnimatedBRAVO />
+                    </div>
                   </motion.div>
-                  <motion.h3 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300"
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    viewport={{ once: true }}
                   >
-                    BRAVO
-                  </motion.h3>
-                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                    className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold"
-                  >
-                    <UserCheck className="w-4 h-4" />
-                    Automates Your Front Office
+                    <h3 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-colors duration-300">
+                      BRAVO
+                    </h3>
+                    <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-sky-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold border border-blue-200">
+                      <UserCheck className="w-4 h-4" />
+                      Automates Your Front Office
+                    </div>
                   </motion.div>
                 </div>
 
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {/* Key Features Grid - Improved responsive */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
                   {[
                     { icon: Phone, title: "AI Chat & Calls", desc: "Connects with patients 24/7", color: "blue" },
                     { icon: Calendar, title: "Smart Scheduling", desc: "Books & manages appointments", color: "green" },
@@ -631,22 +657,23 @@ export default function Presentation() {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md"
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      viewport={{ once: true }}
+                      className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-xl border border-green-100 hover:bg-white hover:shadow-lg transition-all duration-300"
                     >
                       <div className="flex items-center gap-3 mb-2">
-                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        <div className={`w-10 h-10 bg-${feature.color}-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                          <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base">{feature.title}</span>
                       </div>
-                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-3">
+                <div className="space-y-4 sm:space-y-5">
                   {[
                     { title: "Reduce No-Shows", desc: "Automated reminders and confirmations through multiple channels" },
                     { title: "Patient Experience", desc: "Elevated support with instant responses and personalized care" },
@@ -657,12 +684,13 @@ export default function Presentation() {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8 + index * 0.1 }}
-                      className="flex items-start gap-3"
+                      viewport={{ once: true }}
+                      className="flex items-start gap-4 p-3 rounded-lg hover:bg-green-50/50 transition-colors duration-300"
                     >
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
-                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base block mb-1">{feature.title}</span>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -671,9 +699,9 @@ export default function Presentation() {
             </motion.div>
           </div>
 
-          {/* CTA Section */}
+          {/* Enhanced CTA Section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
@@ -682,34 +710,41 @@ export default function Presentation() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300"
+              className="relative bg-gradient-to-r from-white via-blue-50/30 to-white rounded-3xl p-8 sm:p-12 lg:p-16 border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 shadow-xl hover:shadow-2xl overflow-hidden"
             >
-              <h3 className="text-2xl font-bold text-[#143151] mb-4">
-                Ready to Meet Your AI Teammates?
-              </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button 
-                    size="lg"
-                    className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <DollarSign className="w-5 h-5 mr-2" />
-                    Calculate Your ROI
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button 
-                    variant="outline"
-                    size="lg"
-                    className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
-                  >
-                    <Play className="w-5 h-5 mr-2" />
-                    Watch Demo
-                  </Button>
-                </motion.div>
+              {/* Background decorative elements */}
+              <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-[#387E89]/10 to-transparent rounded-full blur-2xl"></div>
+              <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-[#143151]/10 to-transparent rounded-full blur-2xl"></div>
+              
+              <div className="relative">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-4 sm:mb-6">
+                  Ready to Meet Your AI Teammates?
+                </h3>
+                <p className="text-gray-600 text-lg sm:text-xl mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
+                  See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      size="lg"
+                      className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-8 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl w-full sm:w-auto"
+                    >
+                      <DollarSign className="w-5 h-5 mr-2" />
+                      Calculate Your ROI
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="outline"
+                      size="lg"
+                      className="border-2 border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 hover:border-[#387E89]/50 px-8 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl w-full sm:w-auto transition-all duration-300"
+                    >
+                      <Play className="w-5 h-5 mr-2" />
+                      Watch Demo
+                    </Button>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
