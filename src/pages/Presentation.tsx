@@ -201,8 +201,6 @@ export default function Presentation() {
             <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">So You Don't Have To</span>
           </motion.h1>
 
-          
-
           <motion.div initial={{
           opacity: 0,
           y: 20
@@ -273,41 +271,21 @@ export default function Presentation() {
       {/* Logo Marquee Section */}
       <LogoMarquee />
 
-      {/* The Burnout is Real - Background elements removed */}
+      {/* The Burnout is Real - Animations Removed */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
               The Burnout is Real
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
               While you're saving lives, administrative burden is draining yours.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16">
             {/* Enhanced Video Section */}
-            <motion.div initial={{
-            opacity: 0,
-            x: -50
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8
-          }} viewport={{
-            once: true
-          }} className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1">
               <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white group">
                 {/* Native-looking video container */}
                 <div className="aspect-video relative bg-black rounded-t-2xl overflow-hidden">
@@ -334,33 +312,12 @@ export default function Presentation() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Enhanced Stats Section with better responsive design */}
-            <motion.div initial={{
-            opacity: 0,
-            x: 50
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8
-          }} viewport={{
-            once: true
-          }} className="order-1 lg:order-2">
+            {/* Enhanced Stats Section with basic hover effects */}
+            <div className="order-1 lg:order-2">
               <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.6,
-                delay: 0.1
-              }} viewport={{
-                once: true
-              }} className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -368,20 +325,9 @@ export default function Presentation() {
                     <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.6,
-                delay: 0.2
-              }} viewport={{
-                once: true
-              }} className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <TrendingDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -389,20 +335,9 @@ export default function Presentation() {
                     <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.6,
-                delay: 0.3
-              }} viewport={{
-                once: true
-              }} className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -410,20 +345,9 @@ export default function Presentation() {
                     <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.6,
-                delay: 0.4
-              }} viewport={{
-                once: true
-              }} className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-4 sm:p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden">
+                <div className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-4 sm:p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden">
                   {/* Enhanced background pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#143151]/5 to-transparent opacity-50"></div>
                   <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
@@ -438,115 +362,56 @@ export default function Presentation() {
                     </div>
                     <div className="mt-2 sm:mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Enhanced quote card */}
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.6,
-              delay: 0.5
-            }} viewport={{
-              once: true
-            }} className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-6 sm:p-8 rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-6 sm:p-8 rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300">
                 <blockquote className="text-gray-700 italic text-lg sm:text-xl mb-4 font-medium leading-relaxed">
                   "It's 10 PM and I'm still finishing charts from this morning..."
                 </blockquote>
                 <div className="text-sm text-gray-600 font-semibold">- Dr. Lauren Mitchell, Internal Medicine</div>
-              </motion.div>
+              </div>
 
-              <motion.div initial={{
-              opacity: 0
-            }} whileInView={{
-              opacity: 1
-            }} transition={{
-              duration: 0.6,
-              delay: 0.6
-            }} viewport={{
-              once: true
-            }} className="text-center">
+              <div className="text-center">
                 <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl border-0 w-full sm:w-auto">
                   Run Your Burnout Score →
                 </Button>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Meet Your AI Teammates */}
+      {/* Meet Your AI Teammates - Animations Removed */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6">
               Meet Your AI Teammates
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               CRUSH and BRAVO work 24/7 so you can focus on what matters most - your patients.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* CRUSH - AI Medical Scribe */}
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }} viewport={{
-            once: true
-          }} className="relative">
+            <div className="relative">
               <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40 group">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <motion.div className="relative mb-6" whileHover={{
-                  scale: 1.05
-                }} transition={{
-                  duration: 0.3
-                }}>
+                  <div className="relative mb-6 hover:scale-105 transition-transform duration-300">
                     <AnimatedCRUSH />
-                  </motion.div>
-                  <motion.h3 initial={{
-                  opacity: 0
-                }} whileInView={{
-                  opacity: 1
-                }} transition={{
-                  delay: 0.3
-                }} className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  </div>
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     CRUSH
-                  </motion.h3>
+                  </h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
-                  <motion.div initial={{
-                  scale: 0
-                }} whileInView={{
-                  scale: 1
-                }} transition={{
-                  delay: 0.5,
-                  type: "spring",
-                  stiffness: 200
-                }} className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
                     <CheckCircle className="w-4 h-4" />
                     99.9% Accurate • HIPAA Compliant
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Key Features Grid */}
@@ -571,18 +436,7 @@ export default function Presentation() {
                   title: "50+ Specialties",
                   desc: "Tailored workflows",
                   color: "orange"
-                }].map((feature, index) => <motion.div key={feature.title} initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.6 + index * 0.1
-                }} whileHover={{
-                  scale: 1.02,
-                  y: -2
-                }} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md">
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
                       <div className="flex items-center gap-3 mb-2">
                         <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
                           <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
@@ -590,7 +444,7 @@ export default function Presentation() {
                         <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
-                    </motion.div>)}
+                    </div>)}
                 </div>
 
                 {/* Detailed Features */}
@@ -604,70 +458,33 @@ export default function Presentation() {
                 }, {
                   title: "Complete Automation",
                   desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
-                }].map((feature, index) => <motion.div key={feature.title} initial={{
-                  opacity: 0,
-                  x: -20
-                }} whileInView={{
-                  opacity: 1,
-                  x: 0
-                }} transition={{
-                  delay: 0.8 + index * 0.1
-                }} className="flex items-start gap-3">
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                         <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
                       </div>
-                    </motion.div>)}
+                    </div>)}
                 </div>
               </Card>
-            </motion.div>
+            </div>
 
             {/* BRAVO - AI Staffing Agent */}
-            <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.4
-          }} viewport={{
-            once: true
-          }} className="relative">
+            <div className="relative">
               <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40 group">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <motion.div className="relative mb-6" whileHover={{
-                  scale: 1.05
-                }} transition={{
-                  duration: 0.3
-                }}>
+                  <div className="relative mb-6 hover:scale-105 transition-transform duration-300">
                     <AnimatedBRAVO />
-                  </motion.div>
-                  <motion.h3 initial={{
-                  opacity: 0
-                }} whileInView={{
-                  opacity: 1
-                }} transition={{
-                  delay: 0.3
-                }} className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  </div>
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     BRAVO
-                  </motion.h3>
+                  </h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
-                  <motion.div initial={{
-                  scale: 0
-                }} whileInView={{
-                  scale: 1
-                }} transition={{
-                  delay: 0.5,
-                  type: "spring",
-                  stiffness: 200
-                }} className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
                     <UserCheck className="w-4 h-4" />
                     Automates Your Front Office
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Key Features Grid */}
@@ -692,18 +509,7 @@ export default function Presentation() {
                   title: "Pre-visit Intake",
                   desc: "Handles questionnaires",
                   color: "orange"
-                }].map((feature, index) => <motion.div key={feature.title} initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.6 + index * 0.1
-                }} whileHover={{
-                  scale: 1.02,
-                  y: -2
-                }} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md">
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
                       <div className="flex items-center gap-3 mb-2">
                         <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
                           <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
@@ -711,7 +517,7 @@ export default function Presentation() {
                         <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
-                    </motion.div>)}
+                    </div>)}
                 </div>
 
                 {/* Detailed Features */}
@@ -725,44 +531,21 @@ export default function Presentation() {
                 }, {
                   title: "Complete Integration",
                   desc: "Seamlessly works with your existing practice management systems"
-                }].map((feature, index) => <motion.div key={feature.title} initial={{
-                  opacity: 0,
-                  x: -20
-                }} whileInView={{
-                  opacity: 1,
-                  x: 0
-                }} transition={{
-                  delay: 0.8 + index * 0.1
-                }} className="flex items-start gap-3">
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                         <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
                       </div>
-                    </motion.div>)}
+                    </div>)}
                 </div>
               </Card>
-            </motion.div>
+            </div>
           </div>
 
           {/* CTA Section */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.6
-        }} viewport={{
-          once: true
-        }} className="text-center">
-            <motion.div whileHover={{
-            scale: 1.02
-          }} transition={{
-            duration: 0.3
-          }} className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300">
+          <div className="text-center">
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300 hover:scale-105">
               <h3 className="text-2xl font-bold text-[#143151] mb-4">
                 Ready to Meet Your AI Teammates?
               </h3>
@@ -770,29 +553,21 @@ export default function Presentation() {
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.div whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }}>
+                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                   <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
                     <DollarSign className="w-5 h-5 mr-2" />
                     Calculate Your ROI
                   </Button>
-                </motion.div>
-                <motion.div whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }}>
+                </div>
+                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                   <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
                     <Play className="w-5 h-5 mr-2" />
                     Watch Demo
                   </Button>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
