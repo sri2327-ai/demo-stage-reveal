@@ -180,85 +180,45 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       return;
     }
 
-    // Check if audio file already exists locally
-    const localAudioPath = '/presentation-voiceover.mp3';
-    
     try {
-      // Try to load from local file first
-      const localAudio = new Audio(localAudioPath);
-      
-      localAudio.oncanplaythrough = () => {
-        localAudio.onended = () => {
+      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': 'sk_ea806c16d1ab6b905a17338ebc0c9b63daa26b793bbbf0d2'
+        },
+        body: JSON.stringify({
+          text: pageSummary,
+          model_id: 'eleven_multilingual_v2',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.5
+          }
+        })
+      });
+
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const newAudio = new Audio(audioUrl);
+        
+        newAudio.onended = () => {
           setIsPlaying(false);
           setAudio(null);
+          URL.revokeObjectURL(audioUrl);
         };
         
-        setAudio(localAudio);
+        setAudio(newAudio);
         setIsPlaying(true);
-        localAudio.play();
-      };
-      
-      localAudio.onerror = async () => {
-        // If local file doesn't exist, generate and save it
-        try {
-          const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
-            method: 'POST',
-            headers: {
-              'Accept': 'audio/mpeg',
-              'Content-Type': 'application/json',
-              'xi-api-key': 'sk_ea806c16d1ab6b905a17338ebc0c9b63daa26b793bbbf0d2'
-            },
-            body: JSON.stringify({
-              text: pageSummary,
-              model_id: 'eleven_multilingual_v2',
-              voice_settings: {
-                stability: 0.5,
-                similarity_boost: 0.5
-              }
-            })
-          });
-
-          if (response.ok) {
-            const audioBlob = await response.blob();
-            
-            // Create a download link to save the file locally
-            const downloadUrl = URL.createObjectURL(audioBlob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = downloadUrl;
-            downloadLink.download = 'presentation-voiceover.mp3';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-            
-            // Play the audio
-            const newAudio = new Audio(downloadUrl);
-            newAudio.onended = () => {
-              setIsPlaying(false);
-              setAudio(null);
-            };
-            
-            setAudio(newAudio);
-            setIsPlaying(true);
-            newAudio.play();
-            
-            // Clean up the blob URL after a delay
-            setTimeout(() => URL.revokeObjectURL(downloadUrl), 10000);
-          } else {
-            console.error('Failed to generate speech');
-            alert('Failed to generate voice over. Please try again.');
-          }
-        } catch (error) {
-          console.error('Error generating speech:', error);
-          alert('Error generating voice over. Please check your connection.');
-        }
-      };
-      
-      // Load the local file
-      localAudio.load();
-      
+        newAudio.play();
+      } else {
+        console.error('Failed to generate speech');
+        alert('Failed to generate voice over. Please try again.');
+      }
     } catch (error) {
-      console.error('Error with voice over:', error);
-      alert('Error with voice over functionality.');
+      console.error('Error generating speech:', error);
+      alert('Error generating voice over. Please check your connection.');
     }
   };
 
