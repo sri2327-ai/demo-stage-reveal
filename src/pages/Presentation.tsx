@@ -268,40 +268,27 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="order-2 lg:order-1"
             >
-              <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-2xl shadow-2xl overflow-hidden">
-                {/* Video placeholder with play button */}
-                <div className="aspect-video relative bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  
-                  {/* Simulated video thumbnail */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 to-orange-900/20"></div>
-                  <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-2 py-1 rounded">LIVE</div>
-                  
-                  {/* Play button */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="relative z-10 w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/30 hover:bg-white/30 transition-all group"
-                  >
-                    <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
-                  </motion.button>
-                  
-                  {/* Video title overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="font-semibold text-lg mb-1">Dr. Sarah's Reality: 10 PM Chart Marathon</h3>
-                    <p className="text-sm text-white/80">See what burnout looks like in real healthcare</p>
-                  </div>
+              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white">
+                {/* YouTube Video Embed */}
+                <div className="aspect-video relative">
+                  <iframe
+                    src="https://www.youtube.com/embed/sYNhYsNnR74"
+                    title="Dr. Lauren Mitchell: A Day in Internal Medicine"
+                    className="w-full h-full rounded-t-2xl"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
                 
                 {/* Video description below */}
                 <div className="p-6 bg-white">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-semibold text-gray-900">Real footage from a family practice clinic</span>
+                    <div className="w-3 h-3 bg-[#387E89] rounded-full animate-pulse"></div>
+                    <span className="text-sm font-semibold text-[#143151]">Real insights from Internal Medicine practice</span>
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Watch as Dr. Sarah works late into the night, struggling with EHR documentation 
-                    that should have taken minutes, not hours.
+                    Follow Dr. Lauren Mitchell through her daily challenges with patient care, documentation, 
+                    and the administrative burden that keeps her working long into the evening.
                   </p>
                 </div>
               </div>
@@ -360,11 +347,21 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5 p-8 rounded-2xl border border-[#387E89]/20 shadow-lg hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 group"
+                  className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
                 >
-                  <div className="text-center">
+                  {/* Subtle background pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#143151]/5 to-transparent opacity-50"></div>
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
+                  
+                  <div className="relative text-center">
+                    <div className="inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
                     <div className="text-xs font-bold text-[#387E89] mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
-                    <div className="text-sm font-bold text-[#143151] leading-tight uppercase tracking-wide">Understaffed, overwhelmed, underpaid</div>
+                    <div className="text-sm font-bold text-[#143151] leading-tight tracking-wide group-hover:text-[#387E89] transition-colors duration-300">
+                      Understaffed, Overwhelmed, Underpaid
+                    </div>
+                    <div className="mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
                   </div>
                 </motion.div>
               </div>
@@ -380,7 +377,7 @@ export default function Presentation() {
                 <blockquote className="text-gray-700 italic text-xl mb-4 font-medium leading-relaxed">
                   "It's 10 PM and I'm still finishing charts from this morning..."
                 </blockquote>
-                <div className="text-sm text-gray-600 font-semibold">- Dr. Sarah M., Family Medicine</div>
+                <div className="text-sm text-gray-600 font-semibold">- Dr. Lauren Mitchell, Internal Medicine</div>
               </motion.div>
 
               <motion.div
