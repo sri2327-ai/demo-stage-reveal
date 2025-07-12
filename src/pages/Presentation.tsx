@@ -4,7 +4,7 @@ import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Play, ChevronDown, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile, Settings, Award, BarChart3, Workflow, Timer, FileCheck, Building, Sparkles } from 'lucide-react';
+import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Play, ChevronDown, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile, Settings, Award, BarChart3, Workflow, Timer, FileCheck, Building, Sparkles, Volume2, VolumeX } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
@@ -156,6 +156,71 @@ export default function Presentation() {
   } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const isMobile = useIsMobile();
+  
+  // Voice over state
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  // Page summary for voice over
+  const pageSummary = `Welcome to S10.AI - The AI That Charts and Staffs So You Don't Have To. 
+
+Healthcare burnout is real. Clinicians spend over 4 hours daily on electronic health records, with 1 in 2 facing burnout and 30% patient no-show rates leaving staff understaffed, overwhelmed, and underpaid.
+
+Meet your AI teammates: CRUSH, our Clinical Documentation AI that generates comprehensive SOAP notes in under 60 seconds with 99.9% accuracy, and BRAVO, our Patient Engagement AI that handles appointment scheduling, follow-ups, and reduces no-shows by 40%.
+
+Our solution delivers real ROI: 2-3 hours saved per clinician daily, 40% reduction in no-shows, 95% patient satisfaction, and streamlined workflows that let you focus on what matters most - patient care.
+
+Join leading healthcare organizations who trust S10.AI to transform their practice. Your next step is easy - try S10.AI today and reclaim your time to focus on healing.`;
+
+  // Voice over functionality
+  const handleVoiceOver = async () => {
+    if (isPlaying && audio) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    try {
+      // Replace 'YOUR_API_KEY' with actual API key
+      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': 'YOUR_ELEVENLABS_API_KEY' // User needs to provide this
+        },
+        body: JSON.stringify({
+          text: pageSummary,
+          model_id: 'eleven_multilingual_v2',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.5
+          }
+        })
+      });
+
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const newAudio = new Audio(audioUrl);
+        
+        newAudio.onended = () => {
+          setIsPlaying(false);
+          setAudio(null);
+        };
+        
+        setAudio(newAudio);
+        setIsPlaying(true);
+        newAudio.play();
+      } else {
+        console.error('Failed to generate speech');
+        alert('Please add your ElevenLabs API key to enable voice over functionality');
+      }
+    } catch (error) {
+      console.error('Error generating speech:', error);
+      alert('Please add your ElevenLabs API key to enable voice over functionality');
+    }
+  };
 
   // Aurora background animation with green colors
   const color = useMotionValue("#387E89");
@@ -179,12 +244,16 @@ export default function Presentation() {
             <div className="flex items-center">
               <h1 className="text-white text-xl font-semibold">S10.AI</h1>
             </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#features" className="text-white/80 hover:text-white transition-colors">Features</a>
-              <a href="#testimonials" className="text-white/80 hover:text-white transition-colors">Testimonials</a>
-              <a href="#pricing" className="text-white/80 hover:text-white transition-colors">Pricing</a>
-              <a href="#contact" className="text-white/80 hover:text-white transition-colors">Contact</a>
-            </nav>
+            <div className="flex items-center">
+              <button
+                onClick={handleVoiceOver}
+                className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20"
+                title={isPlaying ? "Stop voice over" : "Play page summary"}
+              >
+                {isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                <span className="hidden sm:inline">{isPlaying ? "Stop" : "Listen"}</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
