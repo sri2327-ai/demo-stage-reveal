@@ -404,8 +404,8 @@ export default function Presentation() {
                        <AnimatedCRUSH />
                      </div>
                      
-                     {/* Hover overlay positioned to not overlap text below */}
-                     <div className="absolute top-0 left-0 right-0 bottom-4 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 flex items-end justify-center pb-4">
+                     {/* Hover overlay positioned to avoid footer content */}
+                     <div className="absolute top-0 left-0 right-0 bottom-12 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
                        <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
                          <span className="text-xs sm:text-sm font-semibold text-[#387E89] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                            <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
@@ -491,8 +491,8 @@ export default function Presentation() {
                        <AnimatedBRAVO />
                      </div>
                      
-                     {/* Hover overlay positioned to not overlap text below */}
-                     <div className="absolute top-0 left-0 right-0 bottom-4 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 flex items-end justify-center pb-4">
+                     {/* Hover overlay positioned to avoid footer content */}
+                     <div className="absolute top-0 left-0 right-0 bottom-12 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
                        <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
                          <span className="text-xs sm:text-sm font-semibold text-[#143151] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                            <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
