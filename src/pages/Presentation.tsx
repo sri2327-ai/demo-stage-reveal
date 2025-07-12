@@ -38,6 +38,8 @@ import {
   FastForward
 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
+import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
 
 const CountUp = ({ end, duration = 2 }: { end: number; duration?: number }) => {
   const [count, setCount] = useState(0);
@@ -496,91 +498,84 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="relative"
             >
-              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
+              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40 group">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 mx-auto bg-gradient-to-r from-[#143151] to-[#387E89] rounded-2xl flex items-center justify-center shadow-lg">
-                      <FileText className="w-12 h-12 text-white" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-3xl font-bold text-[#143151] mb-2">CRUSH</h3>
+                  <motion.div 
+                    className="relative mb-6"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <AnimatedCRUSH />
+                  </motion.div>
+                  <motion.h3 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300"
+                  >
+                    CRUSH
+                  </motion.h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
-                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold"
+                  >
                     <CheckCircle className="w-4 h-4" />
                     99.9% Accurate • HIPAA Compliant
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Key Features Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Clock className="w-4 h-4 text-[#387E89]" />
+                  {[
+                    { icon: Clock, title: "Under 60 Seconds", desc: "Real-time documentation", color: "blue" },
+                    { icon: Languages, title: "60+ Languages", desc: "Understands accents & context", color: "green" },
+                    { icon: Database, title: "100+ EHRs", desc: "No API needed", color: "purple" },
+                    { icon: Stethoscope, title: "50+ Specialties", desc: "Tailored workflows", color: "orange" }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        </div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
-                      <span className="font-semibold text-[#143151] text-sm">Under 60 Seconds</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Real-time documentation</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                        <Languages className="w-4 h-4 text-green-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">60+ Languages</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Understands accents & context</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Database className="w-4 h-4 text-purple-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">100+ EHRs</span>
-                    </div>
-                    <p className="text-xs text-gray-600">No API needed</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                        <Stethoscope className="w-4 h-4 text-orange-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">50+ Specialties</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Tailored workflows</p>
-                  </div>
+                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                    </motion.div>
+                  ))}
                 </div>
 
                 {/* Detailed Features */}
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Smart Medical Understanding</span>
-                      <p className="text-xs text-gray-600 mt-1">Understands medical language and context—no second-guessing, no errors</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Clinical Intelligence</span>
-                      <p className="text-xs text-gray-600 mt-1">HCC tracking, quality alerts, and preventive care prompts built-in</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Complete Automation</span>
-                      <p className="text-xs text-gray-600 mt-1">Prescriptions, referrals, labs, and follow-ups—all handled automatically</p>
-                    </div>
-                  </div>
+                  {[
+                    { title: "Smart Medical Understanding", desc: "Understands medical language and context—no second-guessing, no errors" },
+                    { title: "Clinical Intelligence", desc: "HCC tracking, quality alerts, and preventive care prompts built-in" },
+                    { title: "Complete Automation", desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically" }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </Card>
             </motion.div>
@@ -593,91 +588,84 @@ export default function Presentation() {
               viewport={{ once: true }}
               className="relative"
             >
-              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
+              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40 group">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 mx-auto bg-gradient-to-r from-[#387E89] to-[#143151] rounded-2xl flex items-center justify-center shadow-lg">
-                      <Users className="w-12 h-12 text-white" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                      <Brain className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-3xl font-bold text-[#143151] mb-2">BRAVO</h3>
+                  <motion.div 
+                    className="relative mb-6"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <AnimatedBRAVO />
+                  </motion.div>
+                  <motion.h3 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300"
+                  >
+                    BRAVO
+                  </motion.h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
-                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold"
+                  >
                     <UserCheck className="w-4 h-4" />
                     Automates Your Front Office
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Key Features Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Phone className="w-4 h-4 text-blue-600" />
+                  {[
+                    { icon: Phone, title: "AI Chat & Calls", desc: "Connects with patients 24/7", color: "blue" },
+                    { icon: Calendar, title: "Smart Scheduling", desc: "Books & manages appointments", color: "green" },
+                    { icon: Bell, title: "Auto Follow-ups", desc: "Multi-channel reminders", color: "purple" },
+                    { icon: ClipboardList, title: "Pre-visit Intake", desc: "Handles questionnaires", color: "orange" }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        </div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
-                      <span className="font-semibold text-[#143151] text-sm">AI Chat & Calls</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Connects with patients 24/7</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                        <Calendar className="w-4 h-4 text-green-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">Smart Scheduling</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Books & manages appointments</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Bell className="w-4 h-4 text-purple-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">Auto Follow-ups</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Multi-channel reminders</p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                        <ClipboardList className="w-4 h-4 text-orange-600" />
-                      </div>
-                      <span className="font-semibold text-[#143151] text-sm">Pre-visit Intake</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Handles questionnaires</p>
-                  </div>
+                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                    </motion.div>
+                  ))}
                 </div>
 
                 {/* Detailed Features */}
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Reduce No-Shows</span>
-                      <p className="text-xs text-gray-600 mt-1">Automated reminders and confirmations through multiple channels</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Patient Experience</span>
-                      <p className="text-xs text-gray-600 mt-1">Elevated support with instant responses and personalized care</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-[#143151] text-sm">Complete Integration</span>
-                      <p className="text-xs text-gray-600 mt-1">Seamlessly works with your existing practice management systems</p>
-                    </div>
-                  </div>
+                  {[
+                    { title: "Reduce No-Shows", desc: "Automated reminders and confirmations through multiple channels" },
+                    { title: "Patient Experience", desc: "Elevated support with instant responses and personalized care" },
+                    { title: "Complete Integration", desc: "Seamlessly works with your existing practice management systems" }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </Card>
             </motion.div>
@@ -691,7 +679,11 @@ export default function Presentation() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300"
+            >
               <h3 className="text-2xl font-bold text-[#143151] mb-4">
                 Ready to Meet Your AI Teammates?
               </h3>
@@ -699,23 +691,27 @@ export default function Presentation() {
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <DollarSign className="w-5 h-5 mr-2" />
-                  Calculate Your ROI
-                </Button>
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
-                >
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch Demo
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    size="lg"
+                    className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <DollarSign className="w-5 h-5 mr-2" />
+                    Calculate Your ROI
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
+                  >
+                    <Play className="w-5 h-5 mr-2" />
+                    Watch Demo
+                  </Button>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
