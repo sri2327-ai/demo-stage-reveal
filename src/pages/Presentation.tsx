@@ -321,12 +321,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="relative overflow-hidden bg-gradient-to-br from-white via-red-50/50 to-red-100/80 p-8 rounded-3xl shadow-xl border border-red-100/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 group backdrop-blur-sm"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-full blur-2xl"></div>
-                  <div className="relative text-center">
-                    <div className="text-5xl font-black bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent mb-3 group-hover:from-red-700 group-hover:via-red-800 group-hover:to-red-900 transition-all duration-300">4+</div>
-                    <div className="text-sm text-gray-700 font-bold uppercase tracking-wider">hours/day on EHRs</div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
+                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
                   </div>
                 </motion.div>
 
@@ -335,12 +334,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="relative overflow-hidden bg-gradient-to-br from-white via-orange-50/50 to-red-100/80 p-8 rounded-3xl shadow-xl border border-orange-100/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 group backdrop-blur-sm"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-full blur-2xl"></div>
-                  <div className="relative text-center">
-                    <div className="text-5xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-red-700 bg-clip-text text-transparent mb-3 group-hover:from-orange-700 group-hover:via-red-700 group-hover:to-red-800 transition-all duration-300">1 in 2</div>
-                    <div className="text-sm text-gray-700 font-bold uppercase tracking-wider">clinicians face burnout</div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
+                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
                   </div>
                 </motion.div>
 
@@ -349,12 +347,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="relative overflow-hidden bg-gradient-to-br from-white via-rose-50/50 to-red-100/80 p-8 rounded-3xl shadow-xl border border-rose-100/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 group backdrop-blur-sm"
+                  className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-rose-500/10 to-red-500/10 rounded-full blur-2xl"></div>
-                  <div className="relative text-center">
-                    <div className="text-5xl font-black bg-gradient-to-r from-rose-600 via-red-600 to-red-700 bg-clip-text text-transparent mb-3 group-hover:from-rose-700 group-hover:via-red-700 group-hover:to-red-800 transition-all duration-300">30%</div>
-                    <div className="text-sm text-gray-700 font-bold uppercase tracking-wider">no-show rates</div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
+                    <div className="text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
                   </div>
                 </motion.div>
 
@@ -363,12 +360,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="relative overflow-hidden bg-gradient-to-br from-white via-amber-50/30 to-orange-50/50 p-8 rounded-3xl shadow-xl border-2 border-gradient-to-r from-amber-200/50 to-red-200/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 group backdrop-blur-sm"
+                  className="bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5 p-8 rounded-2xl border border-[#387E89]/20 shadow-lg hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 group"
                 >
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-full blur-2xl"></div>
-                  <div className="relative text-center">
-                    <div className="text-xs font-black bg-gradient-to-r from-amber-700 via-orange-700 to-red-700 bg-clip-text text-transparent mb-3 uppercase tracking-widest group-hover:from-amber-800 group-hover:via-orange-800 group-hover:to-red-800 transition-all duration-300">Reality Check</div>
-                    <div className="text-sm font-black bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 bg-clip-text text-transparent leading-tight uppercase tracking-wide">Understaffed, overwhelmed, underpaid</div>
+                  <div className="text-center">
+                    <div className="text-xs font-bold text-[#387E89] mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
+                    <div className="text-sm font-bold text-[#143151] leading-tight uppercase tracking-wide">Understaffed, overwhelmed, underpaid</div>
                   </div>
                 </motion.div>
               </div>
@@ -379,15 +375,12 @@ export default function Presentation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-gray-100/60 p-8 rounded-3xl border border-slate-200/50 mb-8 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+                className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-8 rounded-2xl border border-gray-200/60 mb-8 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
-                <div className="relative">
-                  <blockquote className="text-gray-800 italic text-xl mb-4 font-semibold leading-relaxed">
-                    "It's 10 PM and I'm still finishing charts from this morning..."
-                  </blockquote>
-                  <div className="text-sm text-gray-600 font-bold">- Dr. Sarah M., Family Medicine</div>
-                </div>
+                <blockquote className="text-gray-700 italic text-xl mb-4 font-medium leading-relaxed">
+                  "It's 10 PM and I'm still finishing charts from this morning..."
+                </blockquote>
+                <div className="text-sm text-gray-600 font-semibold">- Dr. Sarah M., Family Medicine</div>
               </motion.div>
 
               <motion.div
@@ -399,13 +392,9 @@ export default function Presentation() {
               >
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-[#143151] via-[#387E89] to-[#4A9B8E] hover:from-[#112a46] hover:via-[#306b75] hover:to-[#3d8071] text-white shadow-2xl hover:shadow-3xl transition-all duration-500 px-12 py-6 text-lg font-bold rounded-2xl border-2 border-[#387E89]/20 hover:scale-110 hover:border-[#387E89]/40 relative overflow-hidden group"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-12 py-6 text-lg font-semibold rounded-xl border-0"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center gap-3">
-                    🩺 Run Your Burnout Score
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-                  </span>
+                  🩺 Run Your Burnout Score →
                 </Button>
               </motion.div>
             </motion.div>
