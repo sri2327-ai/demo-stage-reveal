@@ -255,62 +255,97 @@ export default function Presentation() {
         </motion.div>
       </motion.section>
 
-      {/* The Burnout is Real - Enhanced */}
+      {/* The Burnout is Real - Enhanced with better decorative elements */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        {/* Enhanced Background decorative elements with more visible colors */}
-        <div className="absolute inset-0 opacity-20">
-          {/* Flowing S-curves with better visibility */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 600" preserveAspectRatio="none">
-            <path
-              d="M100,50 Q200,100 150,200 T250,350 Q300,400 200,500 T100,550"
-              stroke="url(#gradient1)"
-              strokeWidth="3"
-              fill="none"
-              className="animate-pulse"
-            />
-            <path
-              d="M50,100 Q150,150 100,250 T200,400 Q250,450 150,550"
-              stroke="url(#gradient2)"
-              strokeWidth="2.5"
-              fill="none"
-              className="animate-pulse"
-              style={{ animationDelay: '1s' }}
-            />
-            <path
-              d="M300,80 Q200,130 250,230 T150,380 Q100,430 200,530"
-              stroke="url(#gradient3)"
-              strokeWidth="2"
-              fill="none"
-              className="animate-pulse"
-              style={{ animationDelay: '2s' }}
-            />
+        {/* Enhanced Background decorative elements with sophisticated corner placement */}
+        <div className="absolute inset-0 opacity-30">
+          {/* Top Left Corner - Elegant flowing design */}
+          <svg className="absolute top-0 left-0 w-80 h-80" viewBox="0 0 300 300" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#387E89" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#143151" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#387E89" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#143151" stopOpacity="0.7" />
-                <stop offset="50%" stopColor="#387E89" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#143151" stopOpacity="0.3" />
-              </linearGradient>
-              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="topLeftGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#387E89" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#143151" stopOpacity="0.2" />
+                <stop offset="50%" stopColor="#143151" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#387E89" stopOpacity="0.2" />
               </linearGradient>
             </defs>
+            <path
+              d="M0,50 Q50,20 100,40 T200,60 Q250,80 300,40 L300,0 L0,0 Z"
+              fill="url(#topLeftGradient)"
+              className="animate-pulse"
+            />
+            <path
+              d="M0,100 Q60,70 120,90 T240,110 Q280,130 300,90 L300,0 L0,0 Z"
+              fill="url(#topLeftGradient)"
+              className="animate-pulse"
+              style={{ animationDelay: '1s', animationDuration: '3s' }}
+            />
           </svg>
           
-          {/* Enhanced floating elements with better visibility */}
-          <div className="absolute top-20 left-10 w-40 h-40 bg-[#387E89]/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#143151]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
-          <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#387E89]/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute top-1/3 right-1/3 w-44 h-44 bg-[#143151]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
+          {/* Top Right Corner - Mirror design */}
+          <svg className="absolute top-0 right-0 w-80 h-80 transform scale-x-[-1]" viewBox="0 0 300 300" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="topRightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#143151" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#387E89" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#143151" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,70 Q70,30 140,60 T280,80 Q320,100 300,60 L300,0 L0,0 Z"
+              fill="url(#topRightGradient)"
+              className="animate-pulse"
+              style={{ animationDelay: '2s', animationDuration: '4s' }}
+            />
+          </svg>
+
+          {/* Bottom Left Corner - Sophisticated wave pattern */}
+          <svg className="absolute bottom-0 left-0 w-72 h-72 transform rotate-180" viewBox="0 0 300 300" preserveAspectRatio="none">
+            <defs>
+              <radialGradient id="bottomLeftGradient" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#387E89" stopOpacity="0.4" />
+                <stop offset="70%" stopColor="#143151" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#387E89" stopOpacity="0.1" />
+              </radialGradient>
+            </defs>
+            <path
+              d="M0,200 Q100,150 200,180 T300,200 L300,300 L0,300 Z"
+              fill="url(#bottomLeftGradient)"
+              className="animate-pulse"
+              style={{ animationDelay: '0.5s', animationDuration: '5s' }}
+            />
+          </svg>
+
+          {/* Bottom Right Corner - Geometric accent */}
+          <svg className="absolute bottom-0 right-0 w-64 h-64" viewBox="0 0 200 200" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="bottomRightGradient" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#143151" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#387E89" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <circle
+              cx="150" cy="150" r="80"
+              fill="url(#bottomRightGradient)"
+              className="animate-pulse"
+              style={{ animationDelay: '1.5s', animationDuration: '6s' }}
+            />
+            <circle
+              cx="170" cy="130" r="40"
+              fill="url(#bottomRightGradient)"
+              opacity="0.5"
+              className="animate-pulse"
+              style={{ animationDelay: '3s', animationDuration: '4s' }}
+            />
+          </svg>
           
-          {/* Additional geometric shapes */}
-          <div className="absolute top-1/4 left-1/2 w-6 h-6 bg-[#387E89]/20 rotate-45 animate-spin" style={{ animationDuration: '20s' }}></div>
-          <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-[#143151]/25 rounded-full animate-bounce" style={{ animationDelay: '4s' }}></div>
+          {/* Central floating elements - refined */}
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-[#387E89]/20 to-[#143151]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+          <div className="absolute top-2/3 right-1/3 w-40 h-40 bg-gradient-to-tl from-[#143151]/15 to-[#387E89]/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s', animationDuration: '10s' }}></div>
+          
+          {/* Subtle geometric accents */}
+          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-[#387E89]/30 rounded-full animate-pulse" style={{ animationDelay: '6s' }}></div>
+          <div className="absolute bottom-1/3 left-1/5 w-2 h-2 bg-[#143151]/40 rotate-45 animate-pulse" style={{ animationDelay: '7s' }}></div>
+          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-[#387E89]/50 rounded-full animate-pulse" style={{ animationDelay: '8s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -726,7 +761,7 @@ export default function Presentation() {
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border-[#387E89] text-[#143151] hover:bg-[#387E89]/10"
+                  className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10"
                 >
                   <Play className="w-5 h-5 mr-2" />
                   Watch Demo
