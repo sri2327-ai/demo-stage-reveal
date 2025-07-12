@@ -192,10 +192,10 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 0.2
-        }} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight max-w-5xl">
+        }} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium text-white mb-4 sm:mb-6 leading-tight max-w-4xl">
             The AI That Charts & Staffs
             <br />
-            <span className="text-white/90 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium">So You Don't Have To</span>
+            <span className="text-white/90 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light">So You Don't Have To</span>
           </motion.h1>
 
           <motion.div initial={{
