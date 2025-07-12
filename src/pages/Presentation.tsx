@@ -1102,86 +1102,86 @@ export default function Presentation() {
           </div>
 
           {/* Featured Testimonials */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
             {/* Featured Card 1 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img 
                     src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
                     alt="Dr. Mitchell" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="flex mb-4">
+                <div className="flex mb-3 sm:mb-4">
                   {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                   )}
                 </div>
-                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "Cut my documentation time by 70%. I actually get to go home on time now."
                 </blockquote>
-                <div className="mb-4">
-                  <div className="font-semibold text-[#143151]">Dr. Robert Mitchell</div>
-                  <div className="text-[#387E89] text-sm">Emergency Medicine</div>
+                <div className="mb-3 sm:mb-4">
+                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Robert Mitchell</div>
+                  <div className="text-[#387E89] text-sm sm:text-base">Emergency Medicine</div>
                 </div>
-                <div className="bg-blue-50 px-4 py-2 rounded-full">
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-2 rounded-full border border-blue-200">
                   <span className="text-sm font-medium text-blue-700">Saves 3+ hours daily</span>
                 </div>
               </div>
             </div>
 
             {/* Featured Card 2 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img 
                     src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
                     alt="Dr. Johnson" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="flex mb-4">
+                <div className="flex mb-3 sm:mb-4">
                   {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                   )}
                 </div>
-                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "The AI templates are incredibly accurate. Like having a brilliant scribe who never gets tired."
                 </blockquote>
-                <div className="mb-4">
-                  <div className="font-semibold text-[#143151]">Dr. Sarah Johnson</div>
-                  <div className="text-[#387E89] text-sm">Family Medicine</div>
+                <div className="mb-3 sm:mb-4">
+                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Sarah Johnson</div>
+                  <div className="text-[#387E89] text-sm sm:text-base">Family Medicine</div>
                 </div>
-                <div className="bg-green-50 px-4 py-2 rounded-full">
+                <div className="bg-gradient-to-r from-green-50 to-green-100 px-4 py-2 rounded-full border border-green-200">
                   <span className="text-sm font-medium text-green-700">99.9% accuracy</span>
                 </div>
               </div>
             </div>
 
             {/* Featured Card 3 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img 
                     src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" 
                     alt="Dr. Gonzalez" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="flex mb-4">
+                <div className="flex mb-3 sm:mb-4">
                   {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                   )}
                 </div>
-                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "BRAVO handles all our scheduling. Patient no-shows dropped 40% immediately."
                 </blockquote>
-                <div className="mb-4">
-                  <div className="font-semibold text-[#143151]">Dr. Maria Gonzalez</div>
-                  <div className="text-[#387E89] text-sm">Internal Medicine</div>
+                <div className="mb-3 sm:mb-4">
+                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Maria Gonzalez</div>
+                  <div className="text-[#387E89] text-sm sm:text-base">Internal Medicine</div>
                 </div>
-                <div className="bg-purple-50 px-4 py-2 rounded-full">
+                <div className="bg-gradient-to-r from-purple-50 to-purple-100 px-4 py-2 rounded-full border border-purple-200">
                   <span className="text-sm font-medium text-purple-700">40% less no-shows</span>
                 </div>
               </div>
@@ -1189,7 +1189,7 @@ export default function Presentation() {
           </div>
 
           {/* Additional Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {[
               {
                 image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
@@ -1220,30 +1220,30 @@ export default function Presentation() {
                 highlight: "Works anywhere"
               }
             ].map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+              <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#387E89]/20 hover:ring-[#387E89]/40 transition-all duration-300">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="flex mb-2">
                       {[1, 2, 3, 4, 5].map(star => 
-                        <Star key={star} className="w-3 h-3 text-yellow-400 fill-current" />
+                        <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
                       )}
                     </div>
-                    <blockquote className="text-gray-700 mb-3 leading-relaxed">
+                    <blockquote className="text-gray-700 mb-3 text-sm sm:text-base leading-relaxed">
                       "{testimonial.quote}"
                     </blockquote>
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
-                        <div className="font-medium text-[#143151]">{testimonial.name}</div>
-                        <div className="text-[#387E89] text-sm">{testimonial.specialty}</div>
+                        <div className="font-medium text-[#143151] text-sm sm:text-base">{testimonial.name}</div>
+                        <div className="text-[#387E89] text-xs sm:text-sm">{testimonial.specialty}</div>
                       </div>
-                      <div className="bg-white px-3 py-1 rounded-full border">
+                      <div className="bg-white px-2 sm:px-3 py-1 rounded-full border border-gray-300 shadow-sm">
                         <span className="text-xs font-medium text-gray-700">{testimonial.highlight}</span>
                       </div>
                     </div>
