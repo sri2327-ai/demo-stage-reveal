@@ -381,7 +381,7 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Meet Your AI Teammates - Enhanced with Hover Interactions */}
+      {/* Meet Your AI Teammates - Redesigned with Separated Layout */}
       <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
@@ -393,179 +393,193 @@ export default function Presentation() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
-            {/* CRUSH - AI Medical Scribe */}
-            <div className="relative group">
-              <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
-                {/* Header */}
-                <div className="text-center mb-6 sm:mb-8">
-                   <div className="relative mb-6 sm:mb-8 lg:mb-10">
-                     {/* Animation container */}
-                     <div className="group-hover:scale-105 transition-transform duration-300">
-                       <AnimatedCRUSH />
-                     </div>
-                     
-                     {/* Hover overlay positioned to avoid footer content */}
-                     <div className="absolute top-0 left-0 right-0 bottom-8 sm:bottom-12 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
-                       <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
-                         <span className="text-xs sm:text-sm font-semibold text-[#387E89] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
-                           <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                           <span className="hidden sm:inline">See CRUSH in Action</span>
-                           <span className="sm:hidden">CRUSH Demo</span>
-                         </span>
-                       </div>
-                     </div>
-                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+          {/* CRUSH Section */}
+          <div className="mb-16 sm:mb-20 lg:mb-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Animation Side */}
+              <div className="order-2 lg:order-1">
+                <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
+                  <div className="group-hover:scale-105 transition-transform duration-300">
+                    <AnimatedCRUSH />
+                  </div>
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
+                    <div className="bg-white/95 backdrop-blur-sm px-4 sm:px-6 py-3 rounded-full shadow-xl border border-white/50">
+                      <span className="text-sm sm:text-base font-semibold text-[#387E89] flex items-center gap-2">
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                        See CRUSH in Action
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Features Side */}
+              <div className="order-1 lg:order-2">
+                <div className="mb-6 sm:mb-8">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
                     CRUSH
                   </h3>
-                  <p className="text-base sm:text-lg text-[#387E89] font-semibold mb-3 sm:mb-4">Your AI Medical Scribe</p>
-                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold">
-                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 sm:mb-6">Your AI Medical Scribe</p>
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-6 sm:mb-8">
+                    <CheckCircle className="w-4 h-4" />
                     99.9% Accurate • HIPAA Compliant
                   </div>
                 </div>
 
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                {/* Key Stats Grid */}
+                <div className="grid grid-cols-2 gap-4 mb-6 sm:mb-8">
                   {[{
-                  icon: Clock,
-                  title: "Under 60 Seconds",
-                  desc: "Real-time documentation",
-                  color: "blue"
-                }, {
-                  icon: Languages,
-                  title: "60+ Languages",
-                  desc: "Understands accents & context",
-                  color: "green"
-                }, {
-                  icon: Database,
-                  title: "100+ EHRs",
-                  desc: "No API needed",
-                  color: "purple"
-                }, {
-                  icon: Stethoscope,
-                  title: "50+ Specialties",
-                  desc: "Tailored workflows",
-                  color: "orange"
-                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
-                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
-                        <div className={`w-6 h-6 sm:w-8 sm:h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-3 h-3 sm:w-4 sm:h-4 text-${feature.color}-600`} />
+                    icon: Clock,
+                    title: "Under 60 Seconds",
+                    desc: "Real-time documentation",
+                    color: "blue"
+                  }, {
+                    icon: Languages,
+                    title: "60+ Languages",
+                    desc: "Understands accents & context",
+                    color: "green"
+                  }, {
+                    icon: Database,
+                    title: "100+ EHRs",
+                    desc: "No API needed",
+                    color: "purple"
+                  }, {
+                    icon: Stethoscope,
+                    title: "50+ Specialties",
+                    desc: "Tailored workflows",
+                    color: "orange"
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="bg-white p-4 rounded-xl border border-blue-100 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[{
-                  title: "Smart Medical Understanding",
-                  desc: "Understands medical language and context—no second-guessing, no errors"
-                }, {
-                  title: "Clinical Intelligence",
-                  desc: "HCC tracking, quality alerts, and preventive care prompts built-in"
-                }, {
-                  title: "Complete Automation",
-                  desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
-                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-2 sm:gap-3">
-                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    title: "Smart Medical Understanding",
+                    desc: "Understands medical language and context—no second-guessing, no errors"
+                  }, {
+                    title: "Clinical Intelligence",
+                    desc: "HCC tracking, quality alerts, and preventive care prompts built-in"
+                  }, {
+                    title: "Complete Automation",
+                    desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
-                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base">{feature.title}</span>
+                        <p className="text-sm text-gray-600 mt-1">{feature.desc}</p>
                       </div>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
-              </Card>
+              </div>
             </div>
+          </div>
 
-            {/* BRAVO - AI Staffing Agent */}
-            <div className="relative group">
-              <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
-                {/* Header */}
-                <div className="text-center mb-6 sm:mb-8">
-                   <div className="relative mb-6 sm:mb-8 lg:mb-10">
-                     {/* Animation container */}
-                     <div className="group-hover:scale-105 transition-transform duration-300">
-                       <AnimatedBRAVO />
-                     </div>
-                     
-                     {/* Hover overlay positioned to avoid footer content */}
-                     <div className="absolute top-0 left-0 right-0 bottom-8 sm:bottom-12 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
-                       <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
-                         <span className="text-xs sm:text-sm font-semibold text-[#143151] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
-                           <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                           <span className="hidden sm:inline">See BRAVO in Action</span>
-                           <span className="sm:hidden">BRAVO Demo</span>
-                         </span>
-                       </div>
-                     </div>
-                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+          {/* BRAVO Section */}
+          <div className="mb-8 sm:mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Features Side */}
+              <div className="order-1">
+                <div className="mb-6 sm:mb-8">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
                     BRAVO
                   </h3>
-                  <p className="text-base sm:text-lg text-[#387E89] font-semibold mb-3 sm:mb-4">Your AI Front Office Agent</p>
-                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold">
-                    <UserCheck className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 sm:mb-6">Your AI Front Office Agent</p>
+                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6 sm:mb-8">
+                    <UserCheck className="w-4 h-4" />
                     Automates Your Front Office
                   </div>
                 </div>
 
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                {/* Key Stats Grid */}
+                <div className="grid grid-cols-2 gap-4 mb-6 sm:mb-8">
                   {[{
-                  icon: Phone,
-                  title: "AI Chat & Calls",
-                  desc: "Connects with patients 24/7",
-                  color: "blue"
-                }, {
-                  icon: Calendar,
-                  title: "Smart Scheduling",
-                  desc: "Books & manages appointments",
-                  color: "green"
-                }, {
-                  icon: Bell,
-                  title: "Auto Follow-ups",
-                  desc: "Multi-channel reminders",
-                  color: "purple"
-                }, {
-                  icon: ClipboardList,
-                  title: "Pre-visit Intake",
-                  desc: "Handles questionnaires",
-                  color: "orange"
-                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
-                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
-                        <div className={`w-6 h-6 sm:w-8 sm:h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-3 h-3 sm:w-4 sm:h-4 text-${feature.color}-600`} />
+                    icon: Phone,
+                    title: "AI Chat & Calls",
+                    desc: "Connects with patients 24/7",
+                    color: "blue"
+                  }, {
+                    icon: Calendar,
+                    title: "Smart Scheduling",
+                    desc: "Books & manages appointments",
+                    color: "green"
+                  }, {
+                    icon: Bell,
+                    title: "Auto Follow-ups",
+                    desc: "Multi-channel reminders",
+                    color: "purple"
+                  }, {
+                    icon: ClipboardList,
+                    title: "Pre-visit Intake",
+                    desc: "Handles questionnaires",
+                    color: "orange"
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="bg-white p-4 rounded-xl border border-green-100 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[{
-                  title: "Reduce No-Shows",
-                  desc: "Automated reminders and confirmations through multiple channels"
-                }, {
-                  title: "Patient Experience",
-                  desc: "Elevated support with instant responses and personalized care"
-                }, {
-                  title: "Complete Integration",
-                  desc: "Seamlessly works with your existing practice management systems"
-                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-2 sm:gap-3">
-                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    title: "Reduce No-Shows",
+                    desc: "Automated reminders and confirmations through multiple channels"
+                  }, {
+                    title: "Patient Experience",
+                    desc: "Elevated support with instant responses and personalized care"
+                  }, {
+                    title: "Complete Integration",
+                    desc: "Seamlessly works with your existing practice management systems"
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
-                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                        <span className="font-semibold text-[#143151] text-sm sm:text-base">{feature.title}</span>
+                        <p className="text-sm text-gray-600 mt-1">{feature.desc}</p>
                       </div>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
-              </Card>
+              </div>
+
+              {/* Animation Side */}
+              <div className="order-2">
+                <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
+                  <div className="group-hover:scale-105 transition-transform duration-300">
+                    <AnimatedBRAVO />
+                  </div>
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
+                    <div className="bg-white/95 backdrop-blur-sm px-4 sm:px-6 py-3 rounded-full shadow-xl border border-white/50">
+                      <span className="text-sm sm:text-base font-semibold text-[#143151] flex items-center gap-2">
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                        See BRAVO in Action
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
