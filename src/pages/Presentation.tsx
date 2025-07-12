@@ -1090,379 +1090,218 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Redesigned Social Proof with Clinician Images */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-white to-gray-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
-              Trusted by Clinicians Worldwide
+      {/* Clean Social Proof Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#143151] mb-4">
+              Trusted by 10,000+ Clinicians
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real doctors, real results. See what clinicians are saying about S10.AI.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Real results from real doctors using S10.AI every day
             </p>
-          </motion.div>
-
-          {/* Main featured testimonials with large images */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* Featured Testimonial 1 */}
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.1
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="p-8 border-2 border-blue-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-blue-50/30 h-full">
-                <div className="flex flex-col items-center text-center">
-                   {/* Large clinician image */}
-                   <div className="relative mb-6">
-                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                       <img 
-                         src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
-                         alt="Dr. Mitchell" 
-                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                       />
-                     </div>
-                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                       <CheckCircle className="w-5 h-5 text-white" />
-                     </div>
-                   </div>
-                  
-                  {/* Stars */}
-                  <div className="flex mb-4">
-                    {[1, 2, 3, 4, 5].map(star => 
-                      <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
-                    )}
-                  </div>
-                  
-                  {/* Quote */}
-                  <blockquote className="text-gray-700 mb-6 italic text-lg leading-relaxed">
-                    "S10.AI cut my documentation time by 70%. I actually get to go home on time now and spend quality time with my family."
-                  </blockquote>
-                  
-                  {/* Doctor info */}
-                  <div className="mb-4">
-                    <div className="font-bold text-[#143151] text-lg">Dr. Robert Mitchell</div>
-                    <div className="text-[#387E89] font-medium">Emergency Medicine</div>
-                    <div className="text-sm text-gray-500">15+ years experience</div>
-                  </div>
-
-                  {/* Key benefit highlight */}
-                  <div className="bg-blue-50 px-4 py-2 rounded-full">
-                    <span className="text-sm font-semibold text-blue-700">Saves 3+ hours daily</span>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-
-            {/* Featured Testimonial 2 */}
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="p-8 border-2 border-green-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-green-50/30 h-full">
-                <div className="flex flex-col items-center text-center">
-                   {/* Large clinician image */}
-                   <div className="relative mb-6">
-                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                       <img 
-                         src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
-                         alt="Dr. Sarah Johnson" 
-                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                       />
-                     </div>
-                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                       <Heart className="w-5 h-5 text-white" />
-                     </div>
-                   </div>
-                  
-                  {/* Stars */}
-                  <div className="flex mb-4">
-                    {[1, 2, 3, 4, 5].map(star => 
-                      <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
-                    )}
-                  </div>
-                  
-                  {/* Quote */}
-                  <blockquote className="text-gray-700 mb-6 italic text-lg leading-relaxed">
-                    "The AI templates are incredibly accurate. It's like having a brilliant scribe who never gets tired or makes mistakes."
-                  </blockquote>
-                  
-                  {/* Doctor info */}
-                  <div className="mb-4">
-                    <div className="font-bold text-[#143151] text-lg">Dr. Sarah Johnson</div>
-                    <div className="text-[#387E89] font-medium">Family Medicine</div>
-                    <div className="text-sm text-gray-500">12+ years experience</div>
-                  </div>
-
-                  {/* Key benefit highlight */}
-                  <div className="bg-green-50 px-4 py-2 rounded-full">
-                    <span className="text-sm font-semibold text-green-700">99.9% accuracy rate</span>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
           </div>
 
-          {/* Grid of smaller testimonial cards with images */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {/* Small testimonial cards */}
+          {/* Featured Testimonials */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* Featured Card 1 */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                  <img 
+                    src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
+                    alt="Dr. Mitchell" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex mb-4">
+                  {[1, 2, 3, 4, 5].map(star => 
+                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                  )}
+                </div>
+                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                  "Cut my documentation time by 70%. I actually get to go home on time now."
+                </blockquote>
+                <div className="mb-4">
+                  <div className="font-semibold text-[#143151]">Dr. Robert Mitchell</div>
+                  <div className="text-[#387E89] text-sm">Emergency Medicine</div>
+                </div>
+                <div className="bg-blue-50 px-4 py-2 rounded-full">
+                  <span className="text-sm font-medium text-blue-700">Saves 3+ hours daily</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured Card 2 */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                  <img 
+                    src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
+                    alt="Dr. Johnson" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex mb-4">
+                  {[1, 2, 3, 4, 5].map(star => 
+                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                  )}
+                </div>
+                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                  "The AI templates are incredibly accurate. Like having a brilliant scribe who never gets tired."
+                </blockquote>
+                <div className="mb-4">
+                  <div className="font-semibold text-[#143151]">Dr. Sarah Johnson</div>
+                  <div className="text-[#387E89] text-sm">Family Medicine</div>
+                </div>
+                <div className="bg-green-50 px-4 py-2 rounded-full">
+                  <span className="text-sm font-medium text-green-700">99.9% accuracy</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured Card 3 */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-6">
+                  <img 
+                    src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" 
+                    alt="Dr. Gonzalez" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex mb-4">
+                  {[1, 2, 3, 4, 5].map(star => 
+                    <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                  )}
+                </div>
+                <blockquote className="text-gray-700 mb-6 text-lg leading-relaxed">
+                  "BRAVO handles all our scheduling. Patient no-shows dropped 40% immediately."
+                </blockquote>
+                <div className="mb-4">
+                  <div className="font-semibold text-[#143151]">Dr. Maria Gonzalez</div>
+                  <div className="text-[#387E89] text-sm">Internal Medicine</div>
+                </div>
+                <div className="bg-purple-50 px-4 py-2 rounded-full">
+                  <span className="text-sm font-medium text-purple-700">40% less no-shows</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Testimonials Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {[
-              {
-                image: "/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png",
-                name: "Dr. Maria Gonzalez",
-                specialty: "Internal Medicine",
-                quote: "My staff loves BRAVO. Patient scheduling runs itself now.",
-                highlight: "40% less no-shows"
-              },
               {
                 image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
                 name: "Dr. Jennifer Walsh",
                 specialty: "Pediatrics",
-                quote: "Finally, I can focus on my patients instead of paperwork.",
-                highlight: "Work-life balance"
+                quote: "Finally can focus on patients instead of paperwork. Work-life balance restored.",
+                highlight: "Better work-life balance"
               },
               {
                 image: "/lovable-uploads/6ae429b1-f16f-4432-865d-4602f85e5701.png",
                 name: "Dr. Raj Patel",
                 specialty: "Cardiology", 
-                quote: "S10.AI understands medical terminology perfectly.",
-                highlight: "50+ specialties"
+                quote: "S10.AI understands medical terminology perfectly across all specialties.",
+                highlight: "50+ specialties supported"
               },
               {
                 image: "/lovable-uploads/081c19bb-5cba-42ca-9e09-703a44940a01.png",
                 name: "Dr. Michael Chen",
                 specialty: "Orthopedics",
-                quote: "Setup took 5 minutes. Results were immediate.",
-                highlight: "Instant setup"
-              }
-            ].map((testimonial, index) => (
-              <motion.div key={index} initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.5,
-              delay: 0.1 + index * 0.1
-            }} viewport={{
-              once: true
-            }}>
-                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white/90 backdrop-blur-sm h-full">
-                  <div className="text-center">
-                     {/* Clinician image */}
-                     <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white shadow-lg mx-auto mb-4">
-                       <img 
-                         src={testimonial.image} 
-                         alt={testimonial.name} 
-                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                       />
-                     </div>
-                    
-                    {/* Stars */}
-                    <div className="flex justify-center mb-3">
-                      {[1, 2, 3, 4, 5].map(star => 
-                        <Star key={star} className="w-3 h-3 text-yellow-400 fill-current" />
-                      )}
-                    </div>
-                    
-                    {/* Quote */}
-                    <blockquote className="text-gray-600 text-sm italic mb-4 leading-relaxed">
-                      "{testimonial.quote}"
-                    </blockquote>
-                    
-                    {/* Doctor info */}
-                    <div className="mb-3">
-                      <div className="font-semibold text-[#143151] text-sm">{testimonial.name}</div>
-                      <div className="text-[#387E89] text-xs font-medium">{testimonial.specialty}</div>
-                    </div>
-
-                    {/* Highlight */}
-                    <div className="bg-blue-50 px-3 py-1 rounded-full">
-                      <span className="text-xs font-medium text-blue-700">{testimonial.highlight}</span>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Additional testimonial row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-            {[
+                quote: "Setup was 5 minutes. Results were immediate. No IT headaches.",
+                highlight: "5-minute setup"
+              },
               {
                 image: "/lovable-uploads/b9b4bd49-9bf0-41d3-9eae-51ed07de5c66.png",
                 name: "Dr. David Wilson",
                 specialty: "Emergency Medicine",
-                quote: "The voice recognition works perfectly even in noisy ER environments. Game changer for our workflow.",
-                highlight: "Works in any environment"
-              },
-              {
-                image: "/lovable-uploads/4fa1bcbe-2d39-4582-9611-7df779c3e784.png",
-                name: "Dr. James Miller",
-                specialty: "Family Practice",
-                quote: "Reduced our administrative costs by 60% while improving patient satisfaction scores significantly.",
-                highlight: "$150K+ annual savings"
+                quote: "Voice recognition works perfectly even in our noisy ER environment.",
+                highlight: "Works anywhere"
               }
             ].map((testimonial, index) => (
-              <motion.div key={index} initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.5,
-              delay: 0.2 + index * 0.1
-            }} viewport={{
-              once: true
-            }}>
-                <Card className="p-8 border border-gray-200/60 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white/90 backdrop-blur-sm">
-                  <div className="flex items-start gap-4">
-                     {/* Clinician image */}
-                     <div className="w-18 h-18 rounded-full overflow-hidden border-3 border-white shadow-lg flex-shrink-0">
-                       <img 
-                         src={testimonial.image} 
-                         alt={testimonial.name} 
-                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                       />
-                     </div>
-                    
-                    <div className="flex-1">
-                      {/* Stars */}
-                      <div className="flex mb-2">
-                        {[1, 2, 3, 4, 5].map(star => 
-                          <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
-                        )}
+              <div key={index} className="bg-gray-50 rounded-xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex mb-2">
+                      {[1, 2, 3, 4, 5].map(star => 
+                        <Star key={star} className="w-3 h-3 text-yellow-400 fill-current" />
+                      )}
+                    </div>
+                    <blockquote className="text-gray-700 mb-3 leading-relaxed">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-[#143151]">{testimonial.name}</div>
+                        <div className="text-[#387E89] text-sm">{testimonial.specialty}</div>
                       </div>
-                      
-                      {/* Quote */}
-                      <blockquote className="text-gray-600 italic mb-3 leading-relaxed">
-                        "{testimonial.quote}"
-                      </blockquote>
-                      
-                      {/* Doctor info and highlight */}
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-semibold text-[#143151]">{testimonial.name}</div>
-                          <div className="text-[#387E89] text-sm font-medium">{testimonial.specialty}</div>
-                        </div>
-                        <div className="bg-green-50 px-3 py-1 rounded-full">
-                          <span className="text-xs font-medium text-green-700">{testimonial.highlight}</span>
-                        </div>
+                      <div className="bg-white px-3 py-1 rounded-full border">
+                        <span className="text-xs font-medium text-gray-700">{testimonial.highlight}</span>
                       </div>
                     </div>
                   </div>
-                </Card>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.6
-        }} viewport={{
-          once: true
-        }} className="text-center">
-            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold text-[#143151] mb-4">
-                Join 10,000+ Satisfied Clinicians
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Experience the transformation that's revolutionizing healthcare documentation and practice management.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  Read More Success Stories
-                </Button>
-                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch Video Testimonials
-                </Button>
+          {/* Trust Indicators */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-8 bg-gray-50 rounded-2xl px-8 py-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#143151]">10,000+</div>
+                <div className="text-sm text-gray-600">Active Clinicians</div>
+              </div>
+              <div className="w-px h-12 bg-gray-300"></div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#143151]">99.9%</div>
+                <div className="text-sm text-gray-600">Accuracy Rate</div>
+              </div>
+              <div className="w-px h-12 bg-gray-300"></div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#143151]">50+</div>
+                <div className="text-sm text-gray-600">Medical Specialties</div>
+              </div>
+              <div className="w-px h-12 bg-gray-300"></div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#143151]">HIPAA</div>
+                <div className="text-sm text-gray-600">Compliant</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Final CTA Section - Matching CallToAction component style */}
+      {/* Logo Marquee */}
+      <LogoMarquee />
+
+      {/* Final CTA */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
-              Ready to transform your practice?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join thousands of clinicians who've already transformed their practice with S10.AI.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm font-medium text-gray-700">Free demo</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm font-medium text-gray-700">Custom plan</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm font-medium text-gray-700">No setup fees</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                <Calendar className="w-5 h-5 mr-2" />
-                Book Your Demo Now
-              </Button>
-              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                Try Risk-Free for 30 Days
-              </Button>
-            </div>
-          </motion.div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+            Ready to transform your practice?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Join thousands of clinicians who've already transformed their practice with S10.AI.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
+              <Calendar className="w-5 h-5 mr-2" />
+              Book Your Demo Now
+            </Button>
+            <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              Try Risk-Free for 30 Days
+            </Button>
+          </div>
         </div>
       </section>
     </div>;
