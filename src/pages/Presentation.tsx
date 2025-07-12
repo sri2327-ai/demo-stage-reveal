@@ -315,7 +315,7 @@ export default function Presentation() {
                   className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
@@ -331,7 +331,7 @@ export default function Presentation() {
                   className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <TrendingDown className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
@@ -347,7 +347,7 @@ export default function Presentation() {
                   className="bg-gradient-to-br from-white to-gray-50/50 p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group"
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Users className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-5xl font-bold text-[#143151] mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
@@ -367,7 +367,7 @@ export default function Presentation() {
                   <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
                   
                   <div className="relative text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <FastForward className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-xs font-bold text-[#387E89] mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
