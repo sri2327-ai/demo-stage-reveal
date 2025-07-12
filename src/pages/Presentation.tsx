@@ -578,12 +578,12 @@ export default function Presentation() {
               <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto">
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+                <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base w-full sm:w-auto">
                   <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Calculate Your ROI
                 </Button>
-                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm sm:text-base">
+                <Button variant="outline" size={isMobile ? "default" : "lg"} className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm sm:text-base w-full sm:w-auto">
                   <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Watch Demo
                 </Button>
@@ -769,12 +769,12 @@ export default function Presentation() {
                 Join thousands of clinicians who've transformed their practice workflow.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="default" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-md hover:shadow-lg transition-all duration-300 text-sm">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-md hover:shadow-lg transition-all duration-300 text-sm w-full sm:w-auto">
                   <Play className="w-4 h-4 mr-2" />
                   See the Transformation
                 </Button>
-                <Button variant="outline" size="default" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm">
+                <Button variant="outline" size={isMobile ? "default" : "lg"} className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm w-full sm:w-auto">
                   <DollarSign className="w-4 h-4 mr-2" />
                   Calculate Savings
                 </Button>
@@ -1075,14 +1075,14 @@ export default function Presentation() {
         }} viewport={{
           once: true
         }} className="text-center">
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-3 text-sm font-semibold rounded-lg">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center px-4">
+              <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold rounded-lg w-full sm:w-auto">
                 <Target className="w-4 h-4 mr-2" />
-                See your numbers in seconds → Try the ROI Calculator
+                {isMobile ? "Try ROI Calculator" : "See your numbers in seconds → Try the ROI Calculator"}
               </Button>
-              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-6 py-3 text-sm font-semibold rounded-lg">
+              <Button variant="outline" size={isMobile ? "default" : "lg"} className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold rounded-lg w-full sm:w-auto">
                 <Settings className="w-4 h-4 mr-2" />
-                Ready for a tailored plan? → Get your custom setup
+                {isMobile ? "Get Custom Setup" : "Ready for a tailored plan? → Get your custom setup"}
               </Button>
             </div>
           </motion.div>
@@ -1390,14 +1390,14 @@ export default function Presentation() {
 
           {/* Compact CTAs */}
           <div className="text-center">
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="outline" size="sm" className="bg-transparent border-white/30 text-white hover:bg-white/10 text-sm">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center px-4">
+              <Button variant="outline" size={isMobile ? "default" : "sm"} className="bg-transparent border-white/30 text-white hover:bg-white/10 text-xs sm:text-sm w-full sm:w-auto">
                 <Target className="w-4 h-4 mr-2" />
-                Explore specialty features →
+                {isMobile ? "Specialty Features" : "Explore specialty features →"}
               </Button>
-              <Button variant="outline" size="sm" className="bg-transparent border-white/30 text-white hover:bg-white/10 text-sm">
+              <Button variant="outline" size={isMobile ? "default" : "sm"} className="bg-transparent border-white/30 text-white hover:bg-white/10 text-xs sm:text-sm w-full sm:w-auto">
                 <CheckCircle className="w-4 h-4 mr-2" />
-                Test compatibility →
+                {isMobile ? "Test Compatibility" : "Test compatibility →"}
               </Button>
             </div>
           </div>
@@ -1477,8 +1477,8 @@ export default function Presentation() {
           </div>
 
           {/* CTA Button */}
-          <div className="flex justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-lg px-8 py-4">
+          <div className="flex justify-center px-4">
+            <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto">
               Book Your Demo Now →
             </Button>
           </div>
