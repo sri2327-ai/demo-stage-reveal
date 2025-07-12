@@ -1311,8 +1311,8 @@ export default function Presentation() {
             {/* Left Column - Specialties */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-blue-400 rounded-xl flex items-center justify-center">
-                  <Stethoscope className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
+                  <Stethoscope className="w-6 h-6 text-white/90" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">50+ Medical Specialties</h3>
               </div>
@@ -1342,8 +1342,8 @@ export default function Presentation() {
             {/* Right Column - Compatibility */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-green-400 rounded-xl flex items-center justify-center">
-                  <Database className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
+                  <Database className="w-6 h-6 text-white/90" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Universal Compatibility</h3>
               </div>
@@ -1355,20 +1355,20 @@ export default function Presentation() {
               {/* Compatibility icons */}
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-2">
-                    <Building className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
+                    <Building className="w-6 h-6 text-white/80" />
                   </div>
                   <span className="text-sm text-blue-200">All EHRs</span>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-2">
-                    <Phone className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
+                    <Phone className="w-6 h-6 text-white/80" />
                   </div>
                   <span className="text-sm text-blue-200">VOIP Systems</span>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-2">
-                    <Settings className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
+                    <Settings className="w-6 h-6 text-white/80" />
                   </div>
                   <span className="text-sm text-blue-200">PMS Platforms</span>
                 </div>
@@ -1385,8 +1385,8 @@ export default function Presentation() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Smart Adaptation */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-purple-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Sparkles className="w-6 h-6 text-white/80" />
               </div>
               <h4 className="text-lg font-semibold text-white mb-2">Smart Clinical Prompts</h4>
               <p className="text-blue-200 text-sm">
@@ -1396,8 +1396,8 @@ export default function Presentation() {
 
             {/* Zero Setup */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-orange-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Zap className="w-6 h-6 text-white/80" />
               </div>
               <h4 className="text-lg font-semibold text-white mb-2">Zero Setup Required</h4>
               <p className="text-blue-200 text-sm">
@@ -1407,8 +1407,8 @@ export default function Presentation() {
 
             {/* Instant Results */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-emerald-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Timer className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Timer className="w-6 h-6 text-white/80" />
               </div>
               <h4 className="text-lg font-semibold text-white mb-2">Instant Results</h4>
               <p className="text-blue-200 text-sm">
