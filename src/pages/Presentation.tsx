@@ -1453,34 +1453,115 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-8">
-            Your Next Step Is Easy
-          </h2>
-          
-          {/* Benefits List */}
-          <div className="space-y-4 mb-10">
-            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
-              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-              <span>Free 15-minute consultation</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
-              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-              <span>Custom plan, zero setup fees</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
-              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-              <span>No contracts, no surprises</span>
-            </div>
-          </div>
+      {/* Final CTA - Enhanced */}
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#387E89]/5 via-transparent to-[#143151]/5"></div>
+        </div>
+        
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            {/* Enhanced Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-8 sm:mb-12"
+            >
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
+                Your Next Step Is Easy
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Join thousands of clinicians who've already transformed their practice with S10.AI
+              </p>
+            </motion.div>
+            
+            {/* Enhanced Benefits Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12"
+            >
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-green-100 to-green-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-green-600" />
+                  </div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base mb-1 sm:mb-2">Free Consultation</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">15-minute personalized demo</p>
+                </div>
+              </div>
 
-          {/* CTA Button */}
-          <div className="flex justify-center px-4">
-            <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto">
-              Book Your Demo Now →
-            </Button>
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600" />
+                  </div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base mb-1 sm:mb-2">Zero Setup Fees</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Custom plan, ready in 5 minutes</p>
+                </div>
+              </div>
+
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-100 to-purple-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-purple-600" />
+                  </div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base mb-1 sm:mb-2">No Contracts</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Cancel anytime, no surprises</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Enhanced CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4"
+            >
+              <Button 
+                size={isMobile ? "default" : "lg"} 
+                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-xl w-full sm:w-auto group"
+              >
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                Book Your Demo Now →
+              </Button>
+              
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span>Usually responds in under 2 hours</span>
+              </div>
+            </motion.div>
+
+            {/* Trust indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200/60"
+            >
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-gray-500">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-green-500" />
+                  <span>HIPAA Compliant</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-blue-500" />
+                  <span>10,000+ Active Users</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <span>4.9/5 Rating</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
