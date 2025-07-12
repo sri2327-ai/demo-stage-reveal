@@ -1438,7 +1438,7 @@ export default function Presentation() {
               <div className="flex-1 text-center lg:text-left">
                 {/* Quote */}
                 <blockquote className="text-lg text-gray-700 mb-4 leading-relaxed italic">
-                  "S10.AI represents the future of healthcare documentation. Having evaluated countless health tech solutions, I can confidently say their AI-powered clinical workflows are revolutionary."
+                  "S10.AI isn't just another AI tool—it's solving a real problem clinicians face every day. The team deeply understands healthcare workflows, and the product fits seamlessly into existing systems. I've seen firsthand how quickly it delivers ROI and how much time it gives back to providers. This is the kind of impact-driven innovation healthcare needs right now."
                 </blockquote>
 
                 {/* Attribution */}
