@@ -1129,19 +1129,19 @@ export default function Presentation() {
           }}>
               <Card className="p-8 border-2 border-blue-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-blue-50/30 h-full">
                 <div className="flex flex-col items-center text-center">
-                  {/* Large clinician image */}
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                      <img 
-                        src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
-                        alt="Dr. Mitchell" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
+                   {/* Large clinician image */}
+                   <div className="relative mb-6">
+                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                       <img 
+                         src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
+                         alt="Dr. Mitchell" 
+                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                       />
+                     </div>
+                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                       <CheckCircle className="w-5 h-5 text-white" />
+                     </div>
+                   </div>
                   
                   {/* Stars */}
                   <div className="flex mb-4">
@@ -1185,19 +1185,19 @@ export default function Presentation() {
           }}>
               <Card className="p-8 border-2 border-green-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-green-50/30 h-full">
                 <div className="flex flex-col items-center text-center">
-                  {/* Large clinician image */}
-                  <div className="relative mb-6">
-                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                      <img 
-                        src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
-                        alt="Dr. Sarah Johnson" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                      <Heart className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
+                   {/* Large clinician image */}
+                   <div className="relative mb-6">
+                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                       <img 
+                         src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
+                         alt="Dr. Sarah Johnson" 
+                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                       />
+                     </div>
+                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                       <Heart className="w-5 h-5 text-white" />
+                     </div>
+                   </div>
                   
                   {/* Stars */}
                   <div className="flex mb-4">
@@ -1272,16 +1272,16 @@ export default function Presentation() {
             }} viewport={{
               once: true
             }}>
-                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm h-full">
+                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white/90 backdrop-blur-sm h-full">
                   <div className="text-center">
-                    {/* Clinician image */}
-                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mx-auto mb-4">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                     {/* Clinician image */}
+                     <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white shadow-lg mx-auto mb-4">
+                       <img 
+                         src={testimonial.image} 
+                         alt={testimonial.name} 
+                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                       />
+                     </div>
                     
                     {/* Stars */}
                     <div className="flex justify-center mb-3">
@@ -1341,16 +1341,16 @@ export default function Presentation() {
             }} viewport={{
               once: true
             }}>
-                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm">
+                <Card className="p-8 border border-gray-200/60 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white/90 backdrop-blur-sm">
                   <div className="flex items-start gap-4">
-                    {/* Clinician image */}
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                     {/* Clinician image */}
+                     <div className="w-18 h-18 rounded-full overflow-hidden border-3 border-white shadow-lg flex-shrink-0">
+                       <img 
+                         src={testimonial.image} 
+                         alt={testimonial.name} 
+                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                       />
+                     </div>
                     
                     <div className="flex-1">
                       {/* Stars */}
