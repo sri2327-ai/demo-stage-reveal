@@ -1484,7 +1484,7 @@ export default function Presentation() {
           {/* CTA Button */}
           <div className="flex justify-center">
             <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-lg px-8 py-4">
-              🎯 Book Your Demo Now →
+              Book Your Demo Now →
             </Button>
           </div>
         </div>
