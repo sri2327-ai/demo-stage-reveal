@@ -1460,20 +1460,31 @@ export default function Presentation() {
 
       {/* Final CTA */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
-            Ready to transform your practice?
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-8">
+            Your Next Step Is Easy
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Join thousands of clinicians who've already transformed their practice with S10.AI.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-              <Calendar className="w-5 h-5 mr-2" />
-              Book Your Demo Now
-            </Button>
-            <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-              Try Risk-Free for 30 Days
+          
+          {/* Benefits List */}
+          <div className="space-y-4 mb-10">
+            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
+              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+              <span>Free 15-minute consultation</span>
+            </div>
+            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
+              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+              <span>Custom plan, zero setup fees</span>
+            </div>
+            <div className="flex items-center justify-center gap-3 text-lg text-gray-700">
+              <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+              <span>No contracts, no surprises</span>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="flex justify-center">
+            <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-lg px-8 py-4">
+              🎯 Book Your Demo Now →
             </Button>
           </div>
         </div>
