@@ -398,15 +398,15 @@ export default function Presentation() {
               <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
                 {/* Header */}
                 <div className="text-center mb-8">
-                   <div className="relative mb-8">
-                     {/* Animation container - only animates on hover */}
+                   <div className="relative mb-10">
+                     {/* Animation container */}
                      <div className="group-hover:scale-105 transition-transform duration-300">
                        <AnimatedCRUSH />
                      </div>
                      
-                     {/* Hover overlay for animation trigger - positioned outside container */}
-                     <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 flex items-center justify-center px-2">
-                       <div className="bg-white/90 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg transform translate-y-8 group-hover:translate-y-4 transition-transform duration-300 max-w-[90%] sm:max-w-none">
+                     {/* Hover overlay positioned to not overlap text below */}
+                     <div className="absolute top-0 left-0 right-0 bottom-4 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 flex items-end justify-center pb-4">
+                       <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
                          <span className="text-xs sm:text-sm font-semibold text-[#387E89] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                            <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                            <span className="hidden xs:inline">See CRUSH in Action</span>
@@ -485,22 +485,23 @@ export default function Presentation() {
               <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <div className="relative mb-6">
-                    {/* Hover overlay for animation trigger */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-10 flex items-center justify-center">
-                      <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span className="text-sm font-semibold text-[#143151] flex items-center gap-2">
-                          <Play className="w-4 h-4" />
-                          See BRAVO in Action
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Animation container - only animates on hover */}
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <AnimatedBRAVO />
-                    </div>
-                  </div>
+                   <div className="relative mb-10">
+                     {/* Animation container */}
+                     <div className="group-hover:scale-105 transition-transform duration-300">
+                       <AnimatedBRAVO />
+                     </div>
+                     
+                     {/* Hover overlay positioned to not overlap text below */}
+                     <div className="absolute top-0 left-0 right-0 bottom-4 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 flex items-end justify-center pb-4">
+                       <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
+                         <span className="text-xs sm:text-sm font-semibold text-[#143151] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+                           <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                           <span className="hidden xs:inline">See BRAVO in Action</span>
+                           <span className="xs:hidden">BRAVO Demo</span>
+                         </span>
+                       </div>
+                     </div>
+                   </div>
                   <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     BRAVO
                   </h3>
