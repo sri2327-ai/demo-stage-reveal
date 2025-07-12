@@ -382,52 +382,52 @@ export default function Presentation() {
       </section>
 
       {/* Meet Your AI Teammates - Enhanced with Hover Interactions */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50/30">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 sm:mb-6">
               Meet Your AI Teammates
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
               CRUSH and BRAVO work 24/7 so you can focus on what matters most - your patients.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
             {/* CRUSH - AI Medical Scribe */}
             <div className="relative group">
-              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
+              <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
                 {/* Header */}
-                <div className="text-center mb-8">
-                   <div className="relative mb-10">
+                <div className="text-center mb-6 sm:mb-8">
+                   <div className="relative mb-6 sm:mb-8 lg:mb-10">
                      {/* Animation container */}
                      <div className="group-hover:scale-105 transition-transform duration-300">
                        <AnimatedCRUSH />
                      </div>
                      
                      {/* Hover overlay positioned to avoid footer content */}
-                     <div className="absolute top-0 left-0 right-0 bottom-12 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
+                     <div className="absolute top-0 left-0 right-0 bottom-8 sm:bottom-12 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
                        <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
                          <span className="text-xs sm:text-sm font-semibold text-[#387E89] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                            <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                           <span className="hidden xs:inline">See CRUSH in Action</span>
-                           <span className="xs:hidden">CRUSH Demo</span>
+                           <span className="hidden sm:inline">See CRUSH in Action</span>
+                           <span className="sm:hidden">CRUSH Demo</span>
                          </span>
                        </div>
                      </div>
                    </div>
-                  <h3 className="text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     CRUSH
                   </h3>
-                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
-                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
-                    <CheckCircle className="w-4 h-4" />
+                  <p className="text-base sm:text-lg text-[#387E89] font-semibold mb-3 sm:mb-4">Your AI Medical Scribe</p>
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold">
+                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                     99.9% Accurate • HIPAA Compliant
                   </div>
                 </div>
 
                 {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                   {[{
                   icon: Clock,
                   title: "Under 60 Seconds",
@@ -448,12 +448,12 @@ export default function Presentation() {
                   title: "50+ Specialties",
                   desc: "Tailored workflows",
                   color: "orange"
-                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                        <div className={`w-6 h-6 sm:w-8 sm:h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-3 h-3 sm:w-4 sm:h-4 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
                     </div>)}
@@ -470,10 +470,10 @@ export default function Presentation() {
                 }, {
                   title: "Complete Automation",
                   desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
-                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
                         <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
                       </div>
                     </div>)}
@@ -483,38 +483,38 @@ export default function Presentation() {
 
             {/* BRAVO - AI Staffing Agent */}
             <div className="relative group">
-              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
+              <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
                 {/* Header */}
-                <div className="text-center mb-8">
-                   <div className="relative mb-10">
+                <div className="text-center mb-6 sm:mb-8">
+                   <div className="relative mb-6 sm:mb-8 lg:mb-10">
                      {/* Animation container */}
                      <div className="group-hover:scale-105 transition-transform duration-300">
                        <AnimatedBRAVO />
                      </div>
                      
                      {/* Hover overlay positioned to avoid footer content */}
-                     <div className="absolute top-0 left-0 right-0 bottom-12 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
+                     <div className="absolute top-0 left-0 right-0 bottom-8 sm:bottom-12 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl z-20 flex items-center justify-center">
                        <div className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-xl border border-white/50">
                          <span className="text-xs sm:text-sm font-semibold text-[#143151] flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                            <Play className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                           <span className="hidden xs:inline">See BRAVO in Action</span>
-                           <span className="xs:hidden">BRAVO Demo</span>
+                           <span className="hidden sm:inline">See BRAVO in Action</span>
+                           <span className="sm:hidden">BRAVO Demo</span>
                          </span>
                        </div>
                      </div>
                    </div>
-                  <h3 className="text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     BRAVO
                   </h3>
-                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
-                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
-                    <UserCheck className="w-4 h-4" />
+                  <p className="text-base sm:text-lg text-[#387E89] font-semibold mb-3 sm:mb-4">Your AI Front Office Agent</p>
+                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold">
+                    <UserCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                     Automates Your Front Office
                   </div>
                 </div>
 
                 {/* Key Features Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                   {[{
                   icon: Phone,
                   title: "AI Chat & Calls",
@@ -535,12 +535,12 @@ export default function Presentation() {
                   title: "Pre-visit Intake",
                   desc: "Handles questionnaires",
                   color: "orange"
-                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
-                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                        <div className={`w-6 h-6 sm:w-8 sm:h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-3 h-3 sm:w-4 sm:h-4 text-${feature.color}-600`} />
                         </div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
                       </div>
                       <p className="text-xs text-gray-600">{feature.desc}</p>
                     </div>)}
@@ -557,10 +557,10 @@ export default function Presentation() {
                 }, {
                   title: "Complete Integration",
                   desc: "Seamlessly works with your existing practice management systems"
-                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <span className="font-semibold text-[#143151] text-xs sm:text-sm">{feature.title}</span>
                         <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
                       </div>
                     </div>)}
@@ -571,20 +571,20 @@ export default function Presentation() {
 
           {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300">
-              <h3 className="text-2xl font-bold text-[#143151] mb-4">
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-3 sm:mb-4">
                 Ready to Meet Your AI Teammates?
               </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto">
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                  <DollarSign className="w-5 h-5 mr-2" />
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base">
+                  <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Calculate Your ROI
                 </Button>
-                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                  <Play className="w-5 h-5 mr-2" />
+                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm sm:text-base">
+                  <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Watch Demo
                 </Button>
               </div>
