@@ -320,7 +320,7 @@ export const AnimatedBRAVO = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4">
         <div className="flex items-center justify-between">
@@ -341,14 +341,14 @@ export const AnimatedBRAVO = () => {
       </div>
 
       {/* Content Area */}
-      <div className="p-6 h-80">
+      <div className="p-6 h-80 flex-1 flex flex-col">
         <AnimatePresence mode="wait">
           {renderCurrentScreen()}
         </AnimatePresence>
       </div>
 
-      {/* Footer */}
-      <div className="bg-gray-50 px-6 py-3 border-t">
+      {/* Footer - Fixed positioning */}
+      <div className="bg-gray-50 px-6 py-2 border-t mt-auto flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-xs text-gray-500">
             <div className="flex items-center gap-1">
