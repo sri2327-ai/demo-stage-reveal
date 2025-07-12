@@ -268,42 +268,43 @@ export default function Presentation() {
       {/* Logo Marquee Section */}
       <LogoMarquee />
 
-      {/* The Burnout is Real - Animations Removed */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
+      {/* The Burnout is Real - Responsive Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
               The Burnout is Real
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto">
               While you're saving lives, administrative burden is draining yours.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16">
-            {/* Enhanced Video Section */}
-            <div className="order-2 lg:order-1">
-              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white group">
+          {/* Mobile/Tablet: Video First, Desktop: Video larger with stats below */}
+          <div className="lg:max-w-4xl xl:max-w-5xl mx-auto">
+            {/* Enhanced Video Section - First on mobile/tablet, larger on desktop */}
+            <div className="mb-8 sm:mb-12 lg:mb-16">
+              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white group max-w-none lg:max-w-4xl mx-auto">
                 {/* Native-looking video container */}
                 <div className="aspect-video relative bg-black rounded-t-2xl overflow-hidden">
                   <iframe src="https://www.youtube.com/embed/sYNhYsNnR74?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&playlist=sYNhYsNnR74" title="Dr. Lauren Mitchell: A Day in Internal Medicine" className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   
                   {/* Custom play overlay (hidden when playing) */}
                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <Play className="w-8 h-8 text-white ml-1" />
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white ml-1" />
                     </div>
                   </div>
                 </div>
                 
                 {/* Enhanced video description */}
-                <div className="p-6 bg-white">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-semibold text-[#143151]">Live from Internal Medicine practice</span>
+                <div className="p-4 sm:p-6 bg-white">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs sm:text-sm font-semibold text-[#143151]">Live from Internal Medicine practice</span>
                     <div className="ml-auto text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">4:32</div>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                     Follow Dr. Lauren Mitchell through her daily challenges with patient care, documentation, 
                     and the administrative burden that keeps her working long into the evening.
                   </p>
@@ -311,67 +312,67 @@ export default function Presentation() {
               </div>
             </div>
 
-            {/* Enhanced Stats Section with basic hover effects */}
-            <div className="order-1 lg:order-2">
-              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+            {/* Enhanced Stats Section */}
+            <div className="mb-8 sm:mb-12">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mx-auto mb-2 sm:mb-3 lg:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
-                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
+                    <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151] mb-1 sm:mb-2 group-hover:text-[#387E89] transition-all duration-300">4+</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <TrendingDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mx-auto mb-2 sm:mb-3 lg:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TrendingDown className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
-                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
+                    <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151] mb-1 sm:mb-2 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
                   <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mx-auto mb-2 sm:mb-3 lg:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
-                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
+                    <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#143151] mb-1 sm:mb-2 group-hover:text-[#387E89] transition-all duration-300">30%</div>
                     <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
                   </div>
                 </div>
 
-                <div className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-4 sm:p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden">
+                <div className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden col-span-2 lg:col-span-1">
                   {/* Enhanced background pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#143151]/5 to-transparent opacity-50"></div>
-                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 sm:w-16 sm:h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
                   
                   <div className="relative text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <FastForward className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mx-auto mb-2 sm:mb-3 lg:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <FastForward className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
-                    <div className="text-xs font-bold text-[#387E89] mb-2 sm:mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
+                    <div className="text-xs font-bold text-[#387E89] mb-1 sm:mb-2 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
                     <div className="text-xs sm:text-sm font-bold text-[#143151] leading-tight tracking-wide group-hover:text-[#387E89] transition-colors duration-300">
                       Understaffed, Overwhelmed, Underpaid
                     </div>
-                    <div className="mt-2 sm:mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
+                    <div className="mt-2 sm:mt-3 w-8 sm:w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-12 sm:group-hover:w-16 transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
 
               {/* Enhanced quote card */}
-              <div className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-6 sm:p-8 rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <blockquote className="text-gray-700 italic text-lg sm:text-xl mb-4 font-medium leading-relaxed">
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300 max-w-2xl mx-auto">
+                <blockquote className="text-gray-700 italic text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 font-medium leading-relaxed text-center">
                   "It's 10 PM and I'm still finishing charts from this morning..."
                 </blockquote>
-                <div className="text-sm text-gray-600 font-semibold">- Dr. Lauren Mitchell, Internal Medicine</div>
+                <div className="text-xs sm:text-sm text-gray-600 font-semibold text-center">- Dr. Lauren Mitchell, Internal Medicine</div>
               </div>
 
               <div className="text-center">
-                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl border-0 w-full sm:w-auto">
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-6 text-sm sm:text-base lg:text-lg font-semibold rounded-xl border-0 w-full sm:w-auto">
                   Run Your Burnout Score →
                 </Button>
               </div>
