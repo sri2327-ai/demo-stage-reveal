@@ -172,7 +172,7 @@ export default function Presentation() {
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return <div className="min-h-screen bg-white">
-      {/* Hero Section - Enhanced */}
+      {/* Hero Section */}
       <motion.section style={{
       backgroundImage
     }} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
@@ -192,10 +192,10 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 0.2
-        }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white mb-6 sm:mb-8 leading-tight max-w-5xl">
+        }} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight max-w-5xl">
             The AI That Charts & Staffs
             <br />
-            <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">So You Don't Have To</span>
+            <span className="text-white/90 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium">So You Don't Have To</span>
           </motion.h1>
 
           <motion.div initial={{
@@ -207,7 +207,7 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 1.0
-        }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16">
+        }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <motion.button style={{
             border,
             boxShadow
@@ -221,7 +221,7 @@ export default function Presentation() {
             </motion.button>
           </motion.div>
 
-          {/* Enhanced feature indicators - Better responsive */}
+          {/* Feature indicators */}
           <motion.div initial={{
           opacity: 0
         }} animate={{
@@ -229,7 +229,7 @@ export default function Presentation() {
         }} transition={{
           duration: 0.8,
           delay: 1.4
-        }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-white/60 text-sm max-w-2xl mx-auto">
+        }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white/60 text-sm max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
               <CheckCircle className="w-4 h-4 flex-shrink-0" />
               <span>99.9% Accurate</span>
@@ -238,7 +238,7 @@ export default function Presentation() {
               <Shield className="w-4 h-4 flex-shrink-0" />
               <span>HIPAA Compliant</span>
             </div>
-            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:col-span-1 col-span-1">
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
               <Clock className="w-4 h-4 flex-shrink-0" />
               <span>Under 60 Seconds</span>
             </div>
@@ -415,7 +415,7 @@ export default function Presentation() {
                        </div>
                      </div>
                    </div>
-                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     CRUSH
                   </h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
@@ -502,7 +502,7 @@ export default function Presentation() {
                        </div>
                      </div>
                    </div>
-                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-2xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     BRAVO
                   </h3>
                   <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
@@ -570,7 +570,7 @@ export default function Presentation() {
 
           {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300 hover:scale-105">
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300">
               <h3 className="text-2xl font-bold text-[#143151] mb-4">
                 Ready to Meet Your AI Teammates?
               </h3>
@@ -578,18 +578,14 @@ export default function Presentation() {
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                  <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                    <DollarSign className="w-5 h-5 mr-2" />
-                    Calculate Your ROI
-                  </Button>
-                </div>
-                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                  <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-                    <Play className="w-5 h-5 mr-2" />
-                    Watch Demo
-                  </Button>
-                </div>
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                  <DollarSign className="w-5 h-5 mr-2" />
+                  Calculate Your ROI
+                </Button>
+                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+                  <Play className="w-5 h-5 mr-2" />
+                  Watch Demo
+                </Button>
               </div>
             </div>
           </div>
@@ -1092,11 +1088,11 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Clean Social Proof Section */}
+      {/* Social Proof Section */}
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#143151] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
               Trusted by 10,000+ Clinicians
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -1286,18 +1282,16 @@ export default function Presentation() {
       {/* Logo Marquee */}
       <LogoMarquee />
 
-      {/* Built for Your Practice Section - Compact */}
-      <section className="py-12 bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] relative overflow-hidden">
-        {/* Background decorative elements */}
+      {/* Built for Your Practice Section */}
+      <section className="py-16 bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-24 h-24 bg-white rounded-full blur-2xl"></div>
           <div className="absolute bottom-10 right-10 w-32 h-32 bg-white rounded-full blur-2xl"></div>
         </div>
         
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Built for Your Practice. <span className="text-blue-200">Ready on Day One.</span>
             </h2>
             <p className="text-lg text-blue-100 max-w-2xl mx-auto">
@@ -1412,8 +1406,8 @@ export default function Presentation() {
       {/* Board Advisor Testimonial Section - Compact */}
       <section className="py-12 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-2">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
               Trusted by Advisors Who've Seen It All
             </h2>
             <p className="text-lg text-gray-600">
@@ -1493,11 +1487,11 @@ export default function Presentation() {
       {/* FAQ Section */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-3">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600">
+            <p className="text-lg text-gray-600">
               Quick answers to common questions from clinicians
             </p>
           </div>
