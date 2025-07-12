@@ -1,698 +1,1202 @@
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useInView, useAnimation, useMotionTemplate, useMotionValue, animate } from 'framer-motion';
+import { Stars } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Award, Play, ChevronDown, BarChart3, FileText, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, Globe, Lock, Sparkles, Brain, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
+import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
 
-import React, { useState } from 'react';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { 
-  ArrowRight,
-  Clock,
-  Users,
-  DollarSign,
-  TrendingUp,
-  Shield,
-  Zap,
-  Heart,
-  Brain,
-  ChevronRight,
-  Play,
-  CheckCircle,
-  Star,
-  Award,
-  Target,
-  BarChart3
-} from 'lucide-react';
-import { AnimatedCRUSH } from '../components/AnimatedCRUSH';
-import { AnimatedBRAVO } from '../components/AnimatedBRAVO';
-import { useIsMobile } from '../hooks/use-mobile';
+const CountUp = ({
+  end,
+  duration = 2
+}: {
+  end: number;
+  duration?: number;
+}) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true
+  });
+  useEffect(() => {
+    if (isInView && !hasStarted) {
+      setHasStarted(true);
+      let startTime: number;
+      let animationId: number;
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+        setCount(Math.floor(progress * end));
+        if (progress < 1) {
+          animationId = requestAnimationFrame(animate);
+        }
+      };
+      animationId = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(animationId);
+    }
+  }, [isInView, end, duration, hasStarted]);
+  return <span ref={ref}>{count}</span>;
+};
 
-const Presentation = () => {
-  const [activeTeammate, setActiveTeammate] = useState<string | null>(null);
+const AnimatedStat = ({
+  icon: Icon,
+  value,
+  label,
+  suffix = ""
+}: {
+  icon: any;
+  value: number;
+  label: string;
+  suffix?: string;
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true
+  });
+  return <motion.div ref={ref} initial={{
+    opacity: 0,
+    y: 20
+  }} animate={isInView ? {
+    opacity: 1,
+    y: 0
+  } : {}} transition={{
+    duration: 0.6,
+    delay: 0.2
+  }} className="text-center">
+      <motion.div initial={{
+      scale: 0
+    }} animate={isInView ? {
+      scale: 1
+    } : {}} transition={{
+      duration: 0.5,
+      delay: 0.4,
+      type: "spring"
+    }} className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center">
+        <Icon className="w-8 h-8 text-white" />
+      </motion.div>
+      <div className="text-3xl sm:text-4xl font-bold text-[#143151] mb-2">
+        <CountUp end={value} />{suffix}
+      </div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </motion.div>;
+};
+
+const TestimonialCard = ({
+  name,
+  role,
+  quote,
+  delay = 0
+}: {
+  name: string;
+  role: string;
+  quote: string;
+  delay?: number;
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true
+  });
+  return <motion.div ref={ref} initial={{
+    opacity: 0,
+    y: 20
+  }} animate={isInView ? {
+    opacity: 1,
+    y: 0
+  } : {}} transition={{
+    duration: 0.6,
+    delay
+  }} className="bg-white p-6 rounded-xl shadow-lg border border-blue-100 hover:shadow-xl transition-shadow">
+      <div className="flex mb-4">
+        {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />)}
+      </div>
+      <blockquote className="text-gray-700 mb-4 italic">"{quote}"</blockquote>
+      <div>
+        <div className="font-semibold text-[#143151]">{name}</div>
+        <div className="text-sm text-gray-500">{role}</div>
+      </div>
+    </motion.div>;
+};
+
+// Logo Marquee Component
+const LogoMarquee = () => {
+  const logos = [{
+    name: "Apunipima",
+    text: "apunipima"
+  }, {
+    name: "LIPS Healthcare",
+    text: "LIPS HEALTHCARE"
+  }, {
+    name: "Asante",
+    text: "ASANTE"
+  }, {
+    name: "NYC Health + Hospitals",
+    text: "NYC HEALTH+ HOSPITALS"
+  }, {
+    name: "Family Doctors Tuggerah",
+    text: "Family Doctors Tuggerah"
+  }, {
+    name: "Doctors.net.uk",
+    text: "Doctors.net.uk"
+  }];
+  return <div className="w-full overflow-hidden bg-white py-8 border-t border-b border-gray-100">
+      <div className="flex animate-marquee whitespace-nowrap">
+        {[...logos, ...logos].map((logo, index) => <div key={index} className="mx-8 flex items-center justify-center min-w-[200px] h-16">
+            <span className={`text-gray-400 font-medium text-sm ${logo.name === "Apunipima" ? "text-xs lowercase tracking-wide" : logo.name === "LIPS Healthcare" ? "text-xs uppercase tracking-widest font-light" : logo.name === "Asante" ? "text-lg font-bold tracking-wide" : logo.name === "NYC Health + Hospitals" ? "text-xs uppercase tracking-wide font-bold" : logo.name === "Family Doctors Tuggerah" ? "text-xs" : "text-sm"}`}>
+              {logo.text}
+            </span>
+          </div>)}
+      </div>
+    </div>;
+};
+
+export default function Presentation() {
+  const {
+    scrollYProgress
+  } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const isMobile = useIsMobile();
 
-  const painPoints = [
-    {
-      icon: Clock,
-      title: "Administrative Overload",
-      description: "Physicians spend 2+ hours daily on documentation, reducing patient care time",
-      stat: "2+ hours daily"
-    },
-    {
-      icon: Users,
-      title: "Staff Shortages",
-      description: "Front office staff overwhelmed with calls, scheduling, and patient inquiries",
-      stat: "40% understaffed"
-    },
-    {
-      icon: DollarSign,
-      title: "Revenue Loss",
-      description: "No-shows and scheduling inefficiencies cost practices thousands monthly",
-      stat: "$150K+ annually"
-    }
-  ];
+  // Aurora background animation with green colors
+  const color = useMotionValue("#387E89");
+  useEffect(() => {
+    animate(color, ["#387E89", "#143151", "#4A9B8E", "#2F6B78"], {
+      ease: "easeInOut",
+      duration: 10,
+      repeat: Infinity,
+      repeatType: "mirror"
+    });
+  }, [color]);
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const border = useMotionTemplate`1px solid ${color}`;
+  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
-  const benefits = [
-    {
-      icon: TrendingUp,
-      title: "Increased Revenue",
-      description: "Reduce no-shows by 35% and optimize scheduling efficiency",
-      value: "$150K+",
-      metric: "Annual savings"
-    },
-    {
-      icon: Clock,
-      title: "Time Savings",
-      description: "Free up 2+ hours daily for physicians to focus on patient care",
-      value: "2+ hours",
-      metric: "Daily savings"
-    },
-    {
-      icon: Users,
-      title: "Staff Efficiency",
-      description: "Automate 80% of routine administrative tasks",
-      value: "80%",
-      metric: "Task automation"
-    },
-    {
-      icon: Heart,
-      title: "Patient Satisfaction",
-      description: "24/7 availability and faster response times improve patient experience",
-      value: "95%",
-      metric: "Satisfaction rate"
-    }
-  ];
+  return <div className="min-h-screen bg-white">
+      {/* Hero Section - Enhanced */}
+      <motion.section style={{
+      backgroundImage
+    }} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
+        <div className="absolute inset-0 z-0">
+          <Canvas>
+            <Stars radius={50} count={2500} factor={4} fade speed={2} />
+          </Canvas>
+        </div>
 
-  const testimonials = [
-    {
-      name: "Dr. Sarah Chen",
-      role: "Family Medicine Physician",
-      practice: "Westside Medical Group",
-      quote: "CRUSH has transformed my practice. I now spend 2 more hours daily with patients instead of documentation.",
-      rating: 5,
-      avatar: "SC"
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "Practice Manager",
-      practice: "Downtown Health Center",
-      quote: "BRAVO handles 90% of our scheduling calls. Our staff can finally focus on patient care.",
-      rating: 5,
-      avatar: "MR"
-    },
-    {
-      name: "Dr. Jennifer Park",
-      role: "Internal Medicine",
-      practice: "Park Medical Associates",
-      quote: "The accuracy and speed of documentation is incredible. It's like having a perfect medical assistant.",
-      rating: 5,
-      avatar: "JP"
-    }
-  ];
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <motion.h1 initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.2
+        }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white mb-6 sm:mb-8 leading-tight max-w-5xl">
+            The AI That Charts & Staffs
+            <br />
+            <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">So You Don't Have To</span>
+          </motion.h1>
 
-  const features = [
-    {
-      category: "CRUSH - AI Medical Scribe",
-      items: [
-        "Real-time medical transcription with 99.9% accuracy",
-        "Automatic SOAP note generation",
-        "Direct EHR integration with major systems",
-        "HIPAA-compliant secure processing",
-        "Multi-specialty medical terminology support",
-        "Voice command recognition and response"
-      ]
-    },
-    {
-      category: "BRAVO - AI Front Office Agent",
-      items: [
-        "24/7 automated phone answering and routing",
-        "Intelligent appointment scheduling and rescheduling",
-        "Patient reminder system via SMS and email",
-        "Insurance verification and pre-authorization",
-        "Prescription refill request handling",
-        "Multi-language patient communication support"
-      ]
-    }
-  ];
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 1.0
+        }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16">
+            <motion.button style={{
+            border,
+            boxShadow
+          }} whileHover={{
+            scale: 1.05
+          }} whileTap={{
+            scale: 0.95
+          }} className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20 w-full sm:w-auto">
+              Try S10.AI
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+          </motion.div>
 
-  const stats = [
-    { value: "99.9%", label: "Documentation Accuracy", icon: Target },
-    { value: "2+ hrs", label: "Daily Time Savings", icon: Clock },
-    { value: "35%", label: "Reduction in No-Shows", icon: TrendingUp },
-    { value: "24/7", label: "Patient Support", icon: Users },
-    { value: "$150K+", label: "Annual Cost Savings", icon: DollarSign },
-    { value: "95%", label: "Patient Satisfaction", icon: Heart }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white">
-      {/* Hero Section */}
-      <section className="relative py-12 sm:py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#143151] via-[#387E89] to-[#143151] opacity-95"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-6 sm:mb-8">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full text-white/90 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-              <Zap className="w-3 h-3 sm:w-4 sm:h-4" />
-              Revolutionary AI Healthcare Technology
+          {/* Enhanced feature indicators - Better responsive */}
+          <motion.div initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          duration: 0.8,
+          delay: 1.4
+        }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-white/60 text-sm max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <CheckCircle className="w-4 h-4 flex-shrink-0" />
+              <span>99.9% Accurate</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-              Meet Your New
-              <span className="block bg-gradient-to-r from-blue-200 to-green-200 bg-clip-text text-transparent">
-                AI Healthcare Team
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed px-4">
-              CRUSH and BRAVO work 24/7 to eliminate administrative burden, 
-              so you can focus on what matters most - your patients.
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-12">
-            <Button 
-              size="lg" 
-              className="bg-white text-[#143151] hover:bg-white/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
-            >
-              See Live Demo
-              <Play className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#143151] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 w-full sm:w-auto"
-            >
-              Schedule Consultation
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto">
-            {stats.slice(0, 4).map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/80">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3">
+              <Shield className="w-4 h-4 flex-shrink-0" />
+              <span>HIPAA Compliant</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:col-span-1 col-span-1">
+              <Clock className="w-4 h-4 flex-shrink-0" />
+              <span>Under 60 Seconds</span>
+            </div>
+          </motion.div>
         </div>
-      </section>
 
-      {/* Problem Statement */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-white">
+        {/* Scroll indicator */}
+        <motion.div initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} transition={{
+        duration: 0.8,
+        delay: 2
+      }} className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <motion.div animate={{
+          y: [0, 10, 0]
+        }} transition={{
+          duration: 2,
+          repeat: Infinity
+        }} className="text-white/60">
+            <ChevronDown className="w-6 h-6" />
+          </motion.div>
+        </motion.div>
+      </motion.section>
+
+      {/* Logo Marquee Section */}
+      <LogoMarquee />
+
+      {/* The Burnout is Real - Animations Removed */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-              Healthcare's Administrative Crisis
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
+              The Burnout is Real
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              Medical practices are drowning in paperwork while patients wait for care
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
+              While you're saving lives, administrative burden is draining yours.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {painPoints.map((point, index) => (
-              <Card key={index} className="p-4 sm:p-6 lg:p-8 text-center border-2 border-red-100 hover:border-red-200 transition-colors duration-300 bg-gradient-to-b from-white to-red-50/30">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                  <point.icon className="w-6 h-6 sm:w-8 sm:h-8 text-red-600" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16">
+            {/* Enhanced Video Section */}
+            <div className="order-2 lg:order-1">
+              <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-white group">
+                {/* Native-looking video container */}
+                <div className="aspect-video relative bg-black rounded-t-2xl overflow-hidden">
+                  <iframe src="https://www.youtube.com/embed/sYNhYsNnR74?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&playlist=sYNhYsNnR74" title="Dr. Lauren Mitchell: A Day in Internal Medicine" className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                  
+                  {/* Custom play overlay (hidden when playing) */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white ml-1" />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#143151] mb-2 sm:mb-3">
-                  {point.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed">
-                  {point.description}
-                </p>
-                <div className="text-xl sm:text-2xl font-bold text-red-600">
-                  {point.stat}
+                
+                {/* Enhanced video description */}
+                <div className="p-6 bg-white">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-semibold text-[#143151]">Live from Internal Medicine practice</span>
+                    <div className="ml-auto text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">4:32</div>
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Follow Dr. Lauren Mitchell through her daily challenges with patient care, documentation, 
+                    and the administrative burden that keeps her working long into the evening.
+                  </p>
                 </div>
-              </Card>
-            ))}
+              </div>
+            </div>
+
+            {/* Enhanced Stats Section with basic hover effects */}
+            <div className="order-1 lg:order-2">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                  <div className="text-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">4+</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">hours/day on EHRs</div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                  <div className="text-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TrendingDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">1 in 2</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">clinicians face burnout</div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-white to-gray-50/50 p-4 sm:p-8 rounded-2xl shadow-lg border border-gray-200/60 hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30 group">
+                  <div className="text-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="text-3xl sm:text-5xl font-bold text-[#143151] mb-2 sm:mb-3 group-hover:text-[#387E89] transition-all duration-300">30%</div>
+                    <div className="text-xs sm:text-sm text-gray-700 font-medium uppercase tracking-wide">no-show rates</div>
+                  </div>
+                </div>
+
+                <div className="relative bg-gradient-to-br from-[#387E89]/10 via-[#143151]/5 to-[#387E89]/5 p-4 sm:p-8 rounded-2xl border-2 border-[#387E89]/30 shadow-xl hover:shadow-2xl hover:shadow-[#387E89]/20 transition-all duration-500 hover:-translate-y-2 group overflow-hidden">
+                  {/* Enhanced background pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#143151]/5 to-transparent opacity-50"></div>
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#387E89]/10 rounded-full blur-2xl group-hover:bg-[#387E89]/20 transition-colors duration-500"></div>
+                  
+                  <div className="relative text-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <FastForward className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="text-xs font-bold text-[#387E89] mb-2 sm:mb-3 uppercase tracking-widest group-hover:text-[#143151] transition-all duration-300">Reality Check</div>
+                    <div className="text-xs sm:text-sm font-bold text-[#143151] leading-tight tracking-wide group-hover:text-[#387E89] transition-colors duration-300">
+                      Understaffed, Overwhelmed, Underpaid
+                    </div>
+                    <div className="mt-2 sm:mt-3 w-12 h-1 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full mx-auto group-hover:w-16 transition-all duration-300"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Enhanced quote card */}
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50/30 p-6 sm:p-8 rounded-2xl border border-gray-200/60 mb-6 sm:mb-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <blockquote className="text-gray-700 italic text-lg sm:text-xl mb-4 font-medium leading-relaxed">
+                  "It's 10 PM and I'm still finishing charts from this morning..."
+                </blockquote>
+                <div className="text-sm text-gray-600 font-semibold">- Dr. Lauren Mitchell, Internal Medicine</div>
+              </div>
+
+              <div className="text-center">
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl border-0 w-full sm:w-auto">
+                  Run Your Burnout Score →
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Solution Overview */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-blue-50/30 to-white">
+      {/* Meet Your AI Teammates - Enhanced with Hover Interactions */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-              The AI Solution Your Practice Needs
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              Two powerful AI agents working together to transform your practice operations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-            <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-colors duration-300 bg-gradient-to-br from-white to-blue-50/30">
-              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#387E89]/10 rounded-lg flex items-center justify-center">
-                  <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-[#387E89]" />
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151]">CRUSH</h3>
-                  <p className="text-sm sm:text-base text-[#387E89] font-semibold">AI Medical Scribe</p>
-                </div>
-              </div>
-              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                Real-time medical documentation that listens to patient encounters and generates 
-                perfect clinical notes with 99.9% accuracy, integrating seamlessly with your EHR.
-              </p>
-              <ul className="space-y-2 sm:space-y-3">
-                {[
-                  "Real-time transcription during patient visits",
-                  "Automatic SOAP note generation",
-                  "Direct EHR integration",
-                  "HIPAA-compliant processing"
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card className="p-4 sm:p-6 lg:p-8 border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-colors duration-300 bg-gradient-to-br from-white to-green-50/30">
-              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#143151]/10 rounded-lg flex items-center justify-center">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-[#143151]" />
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#143151]">BRAVO</h3>
-                  <p className="text-sm sm:text-base text-[#143151] font-semibold">AI Front Office Agent</p>
-                </div>
-              </div>
-              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                24/7 patient engagement handling phone calls, appointment scheduling, and administrative 
-                tasks with natural conversation and human-like empathy.
-              </p>
-              <ul className="space-y-2 sm:space-y-3">
-                {[
-                  "24/7 automated phone answering",
-                  "Intelligent appointment scheduling",
-                  "Patient reminders and follow-ups",
-                  "Insurance verification support"
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Meet Your AI Teammates - Enhanced with Responsive Hover Interactions */}
-      <section className="py-8 sm:py-16 lg:py-24 bg-gradient-to-b from-white to-blue-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6">
               Meet Your AI Teammates
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Powerful AI agents that work alongside your team to eliminate administrative burden
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              CRUSH and BRAVO work 24/7 so you can focus on what matters most - your patients.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* CRUSH - AI Medical Scribe */}
             <div className="relative group">
-              <Card 
-                className="p-4 sm:p-6 lg:p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40 cursor-pointer"
-                onClick={() => isMobile && setActiveTeammate(activeTeammate === 'crush' ? null : 'crush')}
-              >
+              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
                 {/* Header */}
-                <div className="text-center mb-6 sm:mb-8">
-                  <div className="relative mb-4 sm:mb-6">
-                    {/* Desktop Hover overlay */}
-                    <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-10 flex items-center justify-center">
-                      <div className="bg-white/90 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span className="text-xs sm:text-sm font-semibold text-[#387E89] flex items-center gap-2">
-                          <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                <div className="text-center mb-8">
+                  <div className="relative mb-6">
+                    {/* Hover overlay for animation trigger */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-10 flex items-center justify-center">
+                      <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <span className="text-sm font-semibold text-[#387E89] flex items-center gap-2">
+                          <Play className="w-4 h-4" />
                           See CRUSH in Action
                         </span>
                       </div>
                     </div>
-
-                    {/* Mobile tap indicator */}
-                    {isMobile && (
-                      <div className="absolute top-2 right-2 z-10">
-                        <div className="bg-[#387E89]/10 rounded-full p-2 animate-pulse">
-                          <Play className="w-4 h-4 text-[#387E89]" />
-                        </div>
-                      </div>
-                    )}
                     
-                    {/* Animation container - responsive scaling */}
-                    <div className={`transition-transform duration-300 ${
-                      isMobile 
-                        ? (activeTeammate === 'crush' ? 'scale-105' : 'scale-100')
-                        : 'group-hover:scale-105'
-                    }`}>
-                      <div className="w-full max-w-xs sm:max-w-sm mx-auto">
-                        <AnimatedCRUSH />
-                      </div>
+                    {/* Animation container - only animates on hover */}
+                    <div className="group-hover:scale-105 transition-transform duration-300">
+                      <AnimatedCRUSH />
                     </div>
                   </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     CRUSH
                   </h3>
-                  <p className="text-sm sm:text-base text-[#387E89] font-semibold mb-3 sm:mb-4">
-                    AI Medical Scribe
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Real-time medical documentation that captures every detail of patient encounters with 99.9% accuracy
-                  </p>
+                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                    <CheckCircle className="w-4 h-4" />
+                    99.9% Accurate • HIPAA Compliant
+                  </div>
                 </div>
 
-                {/* Features Grid - Responsive */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                  {[
-                    { icon: Clock, text: "Real-time transcription", color: "text-blue-600" },
-                    { icon: Shield, text: "HIPAA compliant", color: "text-green-600" },
-                    { icon: Brain, text: "AI-powered insights", color: "text-purple-600" },
-                    { icon: Zap, text: "Instant EHR integration", color: "text-orange-600" }
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white/50 rounded-lg hover:bg-white/80 transition-colors duration-200">
-                      <div className={`p-1.5 sm:p-2 rounded-lg bg-gray-50 ${feature.color}`}>
-                        <feature.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {/* Key Features Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {[{
+                  icon: Clock,
+                  title: "Under 60 Seconds",
+                  desc: "Real-time documentation",
+                  color: "blue"
+                }, {
+                  icon: Languages,
+                  title: "60+ Languages",
+                  desc: "Understands accents & context",
+                  color: "green"
+                }, {
+                  icon: Database,
+                  title: "100+ EHRs",
+                  desc: "No API needed",
+                  color: "purple"
+                }, {
+                  icon: Stethoscope,
+                  title: "50+ Specialties",
+                  desc: "Tailored workflows",
+                  color: "orange"
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        </div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
-                      <span className="text-xs sm:text-sm font-medium text-gray-700">{feature.text}</span>
-                    </div>
-                  ))}
+                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                    </div>)}
                 </div>
 
-                {/* Stats - Responsive */}
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
-                  <div className="text-center">
-                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#387E89] mb-1">99.9%</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Accuracy</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#387E89] mb-1">2hrs</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Time Saved</div>
-                  </div>
+                {/* Detailed Features */}
+                <div className="space-y-3">
+                  {[{
+                  title: "Smart Medical Understanding",
+                  desc: "Understands medical language and context—no second-guessing, no errors"
+                }, {
+                  title: "Clinical Intelligence",
+                  desc: "HCC tracking, quality alerts, and preventive care prompts built-in"
+                }, {
+                  title: "Complete Automation",
+                  desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                      </div>
+                    </div>)}
                 </div>
               </Card>
             </div>
 
             {/* BRAVO - AI Staffing Agent */}
             <div className="relative group">
-              <Card 
-                className="p-4 sm:p-6 lg:p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40 cursor-pointer"
-                onClick={() => isMobile && setActiveTeammate(activeTeammate === 'bravo' ? null : 'bravo')}
-              >
+              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
                 {/* Header */}
-                <div className="text-center mb-6 sm:mb-8">
-                  <div className="relative mb-4 sm:mb-6">
-                    {/* Desktop Hover overlay */}
-                    <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-10 flex items-center justify-center">
-                      <div className="bg-white/90 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <span className="text-xs sm:text-sm font-semibold text-[#143151] flex items-center gap-2">
-                          <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                <div className="text-center mb-8">
+                  <div className="relative mb-6">
+                    {/* Hover overlay for animation trigger */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-10 flex items-center justify-center">
+                      <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <span className="text-sm font-semibold text-[#143151] flex items-center gap-2">
+                          <Play className="w-4 h-4" />
                           See BRAVO in Action
                         </span>
                       </div>
                     </div>
-
-                    {/* Mobile tap indicator */}
-                    {isMobile && (
-                      <div className="absolute top-2 right-2 z-10">
-                        <div className="bg-[#143151]/10 rounded-full p-2 animate-pulse">
-                          <Play className="w-4 h-4 text-[#143151]" />
-                        </div>
-                      </div>
-                    )}
                     
-                    {/* Animation container - responsive scaling */}
-                    <div className={`transition-transform duration-300 ${
-                      isMobile 
-                        ? (activeTeammate === 'bravo' ? 'scale-105' : 'scale-100')
-                        : 'group-hover:scale-105'
-                    }`}>
-                      <div className="w-full max-w-xs sm:max-w-sm mx-auto">
-                        <AnimatedBRAVO />
-                      </div>
+                    {/* Animation container - only animates on hover */}
+                    <div className="group-hover:scale-105 transition-transform duration-300">
+                      <AnimatedBRAVO />
                     </div>
                   </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors duration-300">
                     BRAVO
                   </h3>
-                  <p className="text-sm sm:text-base text-[#143151] font-semibold mb-3 sm:mb-4">
-                    AI Front Office Agent
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    24/7 patient engagement handling calls, scheduling, and administrative tasks with human-like conversation
-                  </p>
+                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
+                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                    <UserCheck className="w-4 h-4" />
+                    Automates Your Front Office
+                  </div>
                 </div>
 
-                {/* Features Grid - Responsive */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                  {[
-                    { icon: Users, text: "24/7 availability", color: "text-blue-600" },
-                    { icon: Heart, text: "Patient-first approach", color: "text-red-600" },
-                    { icon: TrendingUp, text: "Smart scheduling", color: "text-green-600" },
-                    { icon: Shield, text: "Secure & compliant", color: "text-purple-600" }
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white/50 rounded-lg hover:bg-white/80 transition-colors duration-200">
-                      <div className={`p-1.5 sm:p-2 rounded-lg bg-gray-50 ${feature.color}`}>
-                        <feature.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {/* Key Features Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {[{
+                  icon: Phone,
+                  title: "AI Chat & Calls",
+                  desc: "Connects with patients 24/7",
+                  color: "blue"
+                }, {
+                  icon: Calendar,
+                  title: "Smart Scheduling",
+                  desc: "Books & manages appointments",
+                  color: "green"
+                }, {
+                  icon: Bell,
+                  title: "Auto Follow-ups",
+                  desc: "Multi-channel reminders",
+                  color: "purple"
+                }, {
+                  icon: ClipboardList,
+                  title: "Pre-visit Intake",
+                  desc: "Handles questionnaires",
+                  color: "orange"
+                }].map((feature, index) => <div key={feature.title} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-all duration-300 hover:shadow-md hover:scale-105 hover:-translate-y-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-8 h-8 bg-${feature.color}-100 rounded-lg flex items-center justify-center`}>
+                          <feature.icon className={`w-4 h-4 text-${feature.color}-600`} />
+                        </div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
                       </div>
-                      <span className="text-xs sm:text-sm font-medium text-gray-700">{feature.text}</span>
-                    </div>
-                  ))}
+                      <p className="text-xs text-gray-600">{feature.desc}</p>
+                    </div>)}
                 </div>
 
-                {/* Stats - Responsive */}
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
-                  <div className="text-center">
-                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] mb-1">35%</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Fewer No-Shows</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] mb-1">24/7</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Coverage</div>
-                  </div>
+                {/* Detailed Features */}
+                <div className="space-y-3">
+                  {[{
+                  title: "Reduce No-Shows",
+                  desc: "Automated reminders and confirmations through multiple channels"
+                }, {
+                  title: "Patient Experience",
+                  desc: "Elevated support with instant responses and personalized care"
+                }, {
+                  title: "Complete Integration",
+                  desc: "Seamlessly works with your existing practice management systems"
+                }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-[#143151] text-sm">{feature.title}</span>
+                        <p className="text-xs text-gray-600 mt-1">{feature.desc}</p>
+                      </div>
+                    </div>)}
                 </div>
               </Card>
             </div>
           </div>
 
-          {/* Mobile Instructions */}
-          {isMobile && (
-            <div className="text-center mb-8 p-4 bg-blue-50/50 rounded-lg">
-              <p className="text-sm text-gray-600">
-                Tap on each card to see the AI teammates in action
-              </p>
-            </div>
-          )}
-
+          {/* CTA Section */}
           <div className="text-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
-            >
-              Start Your Free Trial
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-              Transform Your Practice Today
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              See immediate improvements in efficiency, revenue, and patient satisfaction
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {benefits.map((benefit, index) => (
-              <Card key={index} className="p-4 sm:p-6 text-center border-2 border-green-100 hover:border-green-200 transition-all duration-300 bg-gradient-to-b from-white to-green-50/30 hover:shadow-lg">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                  <benefit.icon className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300 hover:scale-105">
+              <h3 className="text-2xl font-bold text-[#143151] mb-4">
+                Ready to Meet Your AI Teammates?
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                  <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                    <DollarSign className="w-5 h-5 mr-2" />
+                    Calculate Your ROI
+                  </Button>
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-1 sm:mb-2">
-                  {benefit.value}
-                </div>
-                <div className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
-                  {benefit.metric}
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#143151] mb-2 sm:mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Features */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-blue-50/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-              Complete Feature Set
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to modernize your practice operations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-            {features.map((category, index) => (
-              <Card key={index} className="p-4 sm:p-6 lg:p-8 border-2 border-gray-100 hover:border-gray-200 transition-colors duration-300">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] mb-4 sm:mb-6">
-                  {category.category}
-                </h3>
-                <ul className="space-y-3 sm:space-y-4">
-                  {category.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-2 sm:gap-3">
-                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-              Trusted by Healthcare Professionals
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              See what doctors and practice managers are saying about their AI teammates
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-4 sm:p-6 border-2 border-blue-100 hover:border-blue-200 transition-colors duration-300 bg-gradient-to-b from-white to-blue-50/30">
-                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#387E89] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#143151] text-sm sm:text-base">{testimonial.name}</h4>
-                    <p className="text-xs sm:text-sm text-gray-600">{testimonial.role}</p>
-                    <p className="text-xs text-gray-500">{testimonial.practice}</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-3 sm:mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-sm sm:text-base text-gray-700 italic leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-r from-[#143151] to-[#387E89]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
-              Proven Results Across Practices
-            </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto">
-              Real metrics from healthcare practices using CRUSH and BRAVO
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                  <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/80">
-                  {stat.label}
+                <div className="hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                  <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+                    <Play className="w-5 h-5 mr-2" />
+                    Watch Demo
+                  </Button>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-blue-50/30 to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-6 sm:mb-8">
-            <div className="inline-flex items-center gap-2 bg-green-100 px-3 sm:px-4 py-2 rounded-full text-green-800 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-              <Award className="w-3 h-3 sm:w-4 sm:h-4" />
-              Limited Time: 30-Day Free Trial
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-4 sm:mb-6">
-              Ready to Transform Your Practice?
+      {/* Before vs After - Enhanced */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/50 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-red-100 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-100 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-50 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-red-50 to-green-50 px-6 py-3 rounded-full border border-gray-200 mb-6"
+            >
+              <Frown className="w-5 h-5 text-red-500" />
+              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <Smile className="w-5 h-5 text-green-500" />
+              <span className="text-sm font-medium text-gray-700">The Transformation</span>
+            </motion.div>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight">
+              Before vs After{' '}
+              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                S10.AI
+              </span>
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-              Join hundreds of healthcare practices already saving time and improving patient care with AI teammates. 
-              Start your free trial today - no credit card required.
+            <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              See the dramatic transformation in your daily workflow and quality of life
             </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+            {/* BEFORE Card - Enhanced */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50, rotateY: -15 }} 
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }} 
+              transition={{ duration: 0.8, delay: 0.2 }} 
+              viewport={{ once: true }}
+              className="perspective-1000"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02, rotateX: 5 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-red-50 via-orange-50/50 to-red-100/30 border-2 border-red-200/60 p-8 h-full shadow-2xl hover:shadow-red-200/50 transition-all duration-500 relative overflow-hidden">
+                  {/* Background pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-300 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-300 rounded-full blur-2xl"></div>
+                  </div>
+                  
+                  {/* Header */}
+                  <div className="relative z-10 text-center mb-8">
+                    <motion.div
+                      animate={{ rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+                      className="inline-flex items-center justify-center w-16 h-16 bg-red-500/20 rounded-full mb-4"
+                    >
+                      <AlertTriangle className="w-8 h-8 text-red-600" />
+                    </motion.div>
+                    <h3 className="text-3xl font-bold text-red-700 mb-2">BEFORE</h3>
+                    <p className="text-red-600/80 font-medium">The Daily Struggle</p>
+                  </div>
+
+                  {/* Problems List */}
+                  <div className="relative z-10 space-y-5">
+                    {[
+                      { icon: Clock, text: "4+ hours daily on documentation", delay: 0.1 },
+                      { icon: Bell, text: "Constant interruptions for scheduling", delay: 0.2 },
+                      { icon: Coffee, text: "Weekend chart catch-up sessions", delay: 0.3 },
+                      { icon: TrendingDown, text: "High staff turnover rates", delay: 0.4 },
+                      { icon: Frown, text: "Burnout and exhaustion", delay: 0.5 }
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: item.delay, duration: 0.5 }}
+                        whileHover={{ x: 5, scale: 1.02 }}
+                        className="flex items-start gap-4 p-4 rounded-xl bg-white/40 backdrop-blur-sm border border-red-200/30 hover:bg-white/60 transition-all duration-300"
+                      >
+                        <div className="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                          <X className="w-3 h-3 text-red-600" />
+                        </div>
+                        <div className="flex items-center gap-3 flex-1">
+                          <item.icon className="w-5 h-5 text-red-500 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">{item.text}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Bottom Stats */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
+                    className="relative z-10 mt-8 p-4 bg-red-100/50 rounded-xl border border-red-200/50"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-red-700 mb-1">😰 Stress Level: HIGH</div>
+                      <div className="text-sm text-red-600">Work-life balance: Non-existent</div>
+                    </div>
+                  </motion.div>
+                </Card>
+              </motion.div>
+            </motion.div>
+
+            {/* AFTER Card - Enhanced */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50, rotateY: 15 }} 
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }} 
+              transition={{ duration: 0.8, delay: 0.4 }} 
+              viewport={{ once: true }}
+              className="perspective-1000"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02, rotateX: -5 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-green-100/30 border-2 border-green-200/60 p-8 h-full shadow-2xl hover:shadow-green-200/50 transition-all duration-500 relative overflow-hidden">
+                  {/* Background pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-green-300 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-emerald-300 rounded-full blur-2xl"></div>
+                  </div>
+                  
+                  {/* Header */}
+                  <div className="relative z-10 text-center mb-8">
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        boxShadow: [
+                          "0px 0px 0px rgba(34, 197, 94, 0)",
+                          "0px 0px 20px rgba(34, 197, 94, 0.3)",
+                          "0px 0px 0px rgba(34, 197, 94, 0)"
+                        ]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                      className="inline-flex items-center justify-center w-16 h-16 bg-green-500/20 rounded-full mb-4"
+                    >
+                      <CheckCircle className="w-8 h-8 text-green-600" />
+                    </motion.div>
+                    <h3 className="text-3xl font-bold text-green-700 mb-2">AFTER</h3>
+                    <p className="text-green-600/80 font-medium">The S10.AI Advantage</p>
+                  </div>
+
+                  {/* Solutions List */}
+                  <div className="relative z-10 space-y-5">
+                    {[
+                      { icon: Zap, text: "75% faster documentation", delay: 0.1 },
+                      { icon: Users, text: "Automated scheduling & follow-ups", delay: 0.2 },
+                      { icon: Heart, text: "Work-life balance restored", delay: 0.3 },
+                      { icon: TrendingUp, text: "Happy, efficient staff", delay: 0.4 },
+                      { icon: Smile, text: "Focus on patient care", delay: 0.5 }
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: item.delay, duration: 0.5 }}
+                        whileHover={{ x: -5, scale: 1.02 }}
+                        className="flex items-start gap-4 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-green-200/30 hover:bg-white/80 transition-all duration-300"
+                      >
+                        <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-3 h-3 text-green-600" />
+                        </div>
+                        <div className="flex items-center gap-3 flex-1">
+                          <item.icon className="w-5 h-5 text-green-500 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">{item.text}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Bottom Stats */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
+                    className="relative z-10 mt-8 p-4 bg-green-100/50 rounded-xl border border-green-200/50"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-green-700 mb-1">😊 Stress Level: LOW</div>
+                      <div className="text-sm text-green-600">Work-life balance: Achieved</div>
+                    </div>
+                  </motion.div>
+                </Card>
+              </motion.div>
+            </motion.div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-6 sm:mb-8">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
+          {/* Transformation Arrow - Enhanced */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              animate={{ 
+                x: [0, 10, 0],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                repeatDelay: 1
+              }}
+              className="inline-flex items-center gap-4 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 px-8 py-4 rounded-2xl border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300"
             >
-              Start Free 30-Day Trial
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-2 border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 w-full sm:w-auto"
-            >
-              Schedule Demo
-              <Play className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-          </div>
+              <div className="text-2xl font-bold text-[#143151]">Transform Your Practice</div>
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowRight className="w-8 h-8 text-[#387E89]" />
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-            <div className="flex items-center justify-center gap-2 text-sm sm:text-base text-gray-600">
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-              <span>No setup fees</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-sm sm:text-base text-gray-600">
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-              <span>Cancel anytime</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-sm sm:text-base text-gray-600">
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-              <span>24/7 support</span>
-            </div>
-          </div>
+          {/* CTA Section - Enhanced */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8, delay: 0.8 }} 
+            viewport={{ once: true }} 
+            className="text-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-r from-white via-blue-50/50 to-white p-8 rounded-2xl border border-blue-200/50 shadow-xl hover:shadow-2xl transition-all duration-500 max-w-2xl mx-auto"
+            >
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-4">
+                Ready for Your Transformation?
+              </h3>
+              <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                Join thousands of clinicians who've already transformed their practice workflow and reclaimed their time.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    size="lg" 
+                    className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-xl"
+                  >
+                    <Play className="w-5 h-5 mr-2" />
+                    See the Transformation
+                  </Button>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-8 py-6 text-lg font-semibold rounded-xl"
+                  >
+                    <DollarSign className="w-5 h-5 mr-2" />
+                    Calculate Your Savings
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
-    </div>
-  );
-};
 
-export default Presentation;
+      {/* Proof & Templates */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} viewport={{
+          once: true
+        }} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+              Proven Templates & Community
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Join thousands of clinicians using our battle-tested documentation templates.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[{
+            title: "Family Medicine",
+            count: "1,250+ templates",
+            icon: Heart
+          }, {
+            title: "Emergency Medicine",
+            count: "890+ templates",
+            icon: Zap
+          }, {
+            title: "Internal Medicine",
+            count: "2,100+ templates",
+            icon: Users
+          }].map((specialty, index) => <motion.div key={specialty.title} initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: index * 0.2
+          }} viewport={{
+            once: true
+          }}>
+                <Card className="bg-white border border-blue-100 shadow-lg hover:shadow-xl transition-shadow p-6 text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-lg flex items-center justify-center">
+                    <specialty.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#143151] mb-2">{specialty.title}</h3>
+                  <p className="text-gray-600">{specialty.count}</p>
+                </Card>
+              </motion.div>)}
+          </div>
+
+          <motion.div initial={{
+          opacity: 0
+        }} whileInView={{
+          opacity: 1
+        }} transition={{
+          duration: 0.8,
+          delay: 0.6
+        }} viewport={{
+          once: true
+        }} className="text-center">
+            <Button size="lg" variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              <ArrowRight className="w-5 h-5 mr-2" />
+              Explore Templates
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ROI & Impact - Matching existing ROISection style */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} viewport={{
+          once: true
+        }} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+              Measurable ROI for Clinicians
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              S10.AI delivers quantifiable returns for healthcare providers without disrupting existing workflows.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
+                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
+                  <Zap className="w-10 h-10 text-[#143151]" />
+                </div>
+                <div className="text-3xl font-bold text-[#143151] mb-2">
+                  <CountUp end={75} />%
+                </div>
+                <div className="text-sm text-gray-600">faster charting</div>
+              </Card>
+            </motion.div>
+
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
+                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
+                  <DollarSign className="w-10 h-10 text-[#143151]" />
+                </div>
+                <div className="text-3xl font-bold text-[#143151] mb-2">
+                  $<CountUp end={150} />K
+                </div>
+                <div className="text-sm text-gray-600">average annual savings</div>
+              </Card>
+            </motion.div>
+
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.3
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
+                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
+                  <Clock className="w-10 h-10 text-[#143151]" />
+                </div>
+                <div className="text-3xl font-bold text-[#143151] mb-2">
+                  <CountUp end={15} /> hrs
+                </div>
+                <div className="text-sm text-gray-600">weekly time savings</div>
+              </Card>
+            </motion.div>
+
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.4
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full p-6 text-center">
+                <div className="bg-blue-50 p-4 rounded-full w-max mx-auto mb-4">
+                  <TrendingUp className="w-10 h-10 text-[#143151]" />
+                </div>
+                <div className="text-3xl font-bold text-[#143151] mb-2">
+                  <CountUp end={40} />%
+                </div>
+                <div className="text-sm text-gray-600">productivity increase</div>
+              </Card>
+            </motion.div>
+          </div>
+
+          <motion.div className="bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl p-8 text-white shadow-xl" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: 0.5,
+          duration: 0.5
+        }} viewport={{
+          once: true
+        }}>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Calculate Your Practice's ROI</h3>
+                <p className="text-white/80">
+                  See how much time and money your practice could save with S10.AI
+                </p>
+              </div>
+              <Button className="bg-white text-[#143151] hover:bg-blue-50 shadow-lg" size="lg">
+                <Target className="w-5 h-5 mr-2" />
+                Use ROI Calculator
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Social Proof */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} viewport={{
+          once: true
+        }} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+              What Clinicians Are Saying
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Real feedback from real doctors using S10.AI every day.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <TestimonialCard name="Dr. Willem Chen" role="Emergency Medicine Physician" quote="S10.AI cut my documentation time by 70%. I actually get to go home on time now." delay={0.2} />
+            <TestimonialCard name="Dr. Smriti Patel" role="Family Medicine" quote="The AI templates are incredibly accurate. It's like having a brilliant scribe who never gets tired." delay={0.4} />
+            <TestimonialCard name="Dr. Lisbeth Rodriguez" role="Internal Medicine" quote="My staff loves BRAVO. Patient scheduling runs itself now, and our no-show rate dropped 40%." delay={0.6} />
+          </div>
+
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.8
+        }} viewport={{
+          once: true
+        }} className="text-center mt-12">
+            <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+              <MessageSquare className="w-5 h-5 mr-2" />
+              See More Success Stories
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA Section - Matching CallToAction component style */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} viewport={{
+          once: true
+        }}>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+              Ready to transform your practice?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Join thousands of clinicians who've already transformed their practice with S10.AI.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium text-gray-700">Free demo</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium text-gray-700">Custom plan</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg p-3">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium text-gray-700">No setup fees</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto">
+                <Calendar className="w-5 h-5 mr-2" />
+                Book Your Demo Now
+              </Button>
+              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 w-full sm:w-auto">
+                Try Risk-Free for 30 Days
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>;
+}
