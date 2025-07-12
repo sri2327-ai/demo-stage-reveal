@@ -1284,144 +1284,124 @@ export default function Presentation() {
       {/* Logo Marquee */}
       <LogoMarquee />
 
-      {/* Built for Your Practice Section */}
-      <section className="py-20 bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] relative overflow-hidden">
+      {/* Built for Your Practice Section - Compact */}
+      <section className="py-12 bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] relative overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white rounded-full blur-3xl opacity-5"></div>
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-24 h-24 bg-white rounded-full blur-2xl"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 bg-white rounded-full blur-2xl"></div>
         </div>
         
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Built for Your Practice.
-              <br />
-              <span className="text-blue-200">Ready on Day One.</span>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+              Built for Your Practice. <span className="text-blue-200">Ready on Day One.</span>
             </h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              S10.AI adapts to your unique workflow with smart clinical prompts and context-aware documentation across every specialty.
+            <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+              S10.AI supports 50+ specialties with smart clinical prompts and universal compatibility.
             </p>
           </div>
 
-          {/* Main Features Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {/* Left Column - Specialties */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
-                  <Stethoscope className="w-6 h-6 text-white/90" />
+          {/* Compact Features Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Left - Specialties */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center border border-white/20">
+                  <Stethoscope className="w-5 h-5 text-white/90" />
                 </div>
-                <h3 className="text-2xl font-bold text-white">50+ Medical Specialties</h3>
+                <h3 className="text-xl font-bold text-white">50+ Medical Specialties</h3>
               </div>
               
-              <p className="text-blue-100 mb-6 leading-relaxed">
-                From cardiology to neurology, psychiatry to internal medicine—S10.AI understands the nuances of your specialty.
+              <p className="text-blue-100 mb-4 text-sm">
+                Cardiology, neurology, psychiatry, internal medicine, and more—all supported.
               </p>
               
-              {/* Specialty tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {['Cardiology', 'Neurology', 'Psychiatry', 'Internal Medicine', 'Pediatrics', 'Emergency Medicine'].map((specialty) => (
-                  <span key={specialty} className="px-3 py-1 bg-white/20 text-white text-sm rounded-full border border-white/30">
+              <div className="flex flex-wrap gap-2">
+                {['Cardiology', 'Neurology', 'Psychiatry', 'Internal Med'].map((specialty) => (
+                  <span key={specialty} className="px-2 py-1 bg-white/15 text-white text-xs rounded-md border border-white/20">
                     {specialty}
                   </span>
                 ))}
-                <span className="px-3 py-1 bg-blue-400/30 text-blue-200 text-sm rounded-full border border-blue-300/50 font-medium">
-                  +44 more
+                <span className="px-2 py-1 bg-blue-400/20 text-blue-200 text-xs rounded-md border border-blue-300/30 font-medium">
+                  +46 more
                 </span>
               </div>
+            </div>
+
+            {/* Right - Compatibility */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center border border-white/20">
+                  <Database className="w-5 h-5 text-white/90" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Universal Compatibility</h3>
+              </div>
               
-              <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300">
+              <p className="text-blue-100 mb-4 text-sm">
+                All major EHRs, VOIP, and PMS platforms. Cloud-based, zero installs.
+              </p>
+              
+              <div className="grid grid-cols-3 gap-3">
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-1">
+                    <Building className="w-4 h-4 text-white/80" />
+                  </div>
+                  <span className="text-xs text-blue-200">EHRs</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-1">
+                    <Phone className="w-4 h-4 text-white/80" />
+                  </div>
+                  <span className="text-xs text-blue-200">VOIP</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-1">
+                    <Settings className="w-4 h-4 text-white/80" />
+                  </div>
+                  <span className="text-xs text-blue-200">PMS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Features Row - Compact */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 text-center">
+              <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-2">
+                <Sparkles className="w-4 h-4 text-white/80" />
+              </div>
+              <h4 className="text-sm font-semibold text-white mb-1">Smart Prompts</h4>
+              <p className="text-blue-200 text-xs">Context-aware documentation</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 text-center">
+              <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-2">
+                <Zap className="w-4 h-4 text-white/80" />
+              </div>
+              <h4 className="text-sm font-semibold text-white mb-1">Zero Setup</h4>
+              <p className="text-blue-200 text-xs">Ready in under 5 minutes</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 text-center">
+              <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mx-auto mb-2">
+                <Timer className="w-4 h-4 text-white/80" />
+              </div>
+              <h4 className="text-sm font-semibold text-white mb-1">Instant Results</h4>
+              <p className="text-blue-200 text-xs">Benefits from day one</p>
+            </div>
+          </div>
+
+          {/* Compact CTAs */}
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button variant="outline" size="sm" className="bg-transparent border-white/30 text-white hover:bg-white/10 text-sm">
                 <Target className="w-4 h-4 mr-2" />
                 Explore specialty features →
               </Button>
-            </div>
-
-            {/* Right Column - Compatibility */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
-                  <Database className="w-6 h-6 text-white/90" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Universal Compatibility</h3>
-              </div>
-              
-              <p className="text-blue-100 mb-6 leading-relaxed">
-                Fully compatible with all major EHRs, VOIP, and PMS platforms. Cloud-based, zero installs, no delays.
-              </p>
-              
-              {/* Compatibility icons */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
-                    <Building className="w-6 h-6 text-white/80" />
-                  </div>
-                  <span className="text-sm text-blue-200">All EHRs</span>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
-                    <Phone className="w-6 h-6 text-white/80" />
-                  </div>
-                  <span className="text-sm text-blue-200">VOIP Systems</span>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-2 border border-white/20">
-                    <Settings className="w-6 h-6 text-white/80" />
-                  </div>
-                  <span className="text-sm text-blue-200">PMS Platforms</span>
-                </div>
-              </div>
-              
-              <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300">
+              <Button variant="outline" size="sm" className="bg-transparent border-white/30 text-white hover:bg-white/10 text-sm">
                 <CheckCircle className="w-4 h-4 mr-2" />
-                Test your compatibility →
+                Test compatibility →
               </Button>
-            </div>
-          </div>
-
-          {/* Bottom Features Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Smart Adaptation */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
-                <Sparkles className="w-6 h-6 text-white/80" />
-              </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Smart Clinical Prompts</h4>
-              <p className="text-blue-200 text-sm">
-                Context-aware documentation that adapts to your workflow automatically
-              </p>
-            </div>
-
-            {/* Zero Setup */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
-                <Zap className="w-6 h-6 text-white/80" />
-              </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Zero Setup Required</h4>
-              <p className="text-blue-200 text-sm">
-                Cloud-based solution with no installs, no delays—it just works
-              </p>
-            </div>
-
-            {/* Instant Results */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="w-12 h-12 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-4 border border-white/20">
-                <Timer className="w-6 h-6 text-white/80" />
-              </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Instant Results</h4>
-              <p className="text-blue-200 text-sm">
-                Start seeing benefits from day one with immediate workflow integration
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom CTA */}
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
-              <CheckCircle className="w-5 h-5 text-green-400" />
-              <span className="text-white font-medium">Ready to deploy in under 5 minutes</span>
             </div>
           </div>
         </div>
