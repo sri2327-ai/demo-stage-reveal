@@ -296,7 +296,7 @@ export default function Presentation() {
       {/* Logo Marquee Section */}
       <LogoMarquee />
 
-      {/* The Burnout is Real - Background elements removed */}
+      {/* The Burnout is Real */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -306,7 +306,7 @@ export default function Presentation() {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#143151] mb-4 sm:mb-6 leading-tight">
               The Burnout is Real
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
