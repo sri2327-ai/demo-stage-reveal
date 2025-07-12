@@ -241,10 +241,56 @@ export default function Presentation() {
 
       {/* The Burnout is Real */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-red-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-orange-500 rounded-full blur-3xl"></div>
+        {/* Enhanced Background decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          {/* Flowing S-curve similar to reference image */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 600" preserveAspectRatio="none">
+            <path
+              d="M100,50 Q200,100 150,200 T250,350 Q300,400 200,500 T100,550"
+              stroke="url(#gradient1)"
+              strokeWidth="2"
+              fill="none"
+              className="animate-pulse"
+            />
+            <path
+              d="M50,100 Q150,150 100,250 T200,400 Q250,450 150,550"
+              stroke="url(#gradient2)"
+              strokeWidth="1.5"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDelay: '1s' }}
+            />
+            <path
+              d="M300,80 Q200,130 250,230 T150,380 Q100,430 200,530"
+              stroke="url(#gradient3)"
+              strokeWidth="1"
+              fill="none"
+              className="animate-pulse"
+              style={{ animationDelay: '2s' }}
+            />
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#387E89" stopOpacity="0.6" />
+                <stop offset="50%" stopColor="#143151" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#387E89" stopOpacity="0.2" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#143151" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#387E89" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#143151" stopOpacity="0.1" />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#387E89" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#143151" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+          </svg>
+          
+          {/* Additional floating elements */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-[#387E89]/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-[#143151]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#387E89]/3 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-1/3 right-1/3 w-36 h-36 bg-[#143151]/3 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -404,7 +450,7 @@ export default function Presentation() {
                   size="lg"
                   className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-12 py-6 text-lg font-semibold rounded-xl border-0"
                 >
-                  🩺 Run Your Burnout Score →
+                  Run Your Burnout Score →
                 </Button>
               </motion.div>
             </motion.div>
