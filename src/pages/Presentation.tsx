@@ -1425,7 +1425,7 @@ export default function Presentation() {
             <div className="flex flex-col lg:flex-row items-center gap-6">
               {/* Image */}
               <div className="flex-shrink-0">
-                <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-3 border-white shadow-md">
+                <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-3 border-white shadow-md">
                   <img 
                     src="/lovable-uploads/df7934ec-611f-45ea-a427-7d8c306fb983.png" 
                     alt="John Reece, CEO WISPR Systems" 
