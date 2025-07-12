@@ -128,60 +128,11 @@ export default function Presentation() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Medical-themed Background Elements */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Heartbeat line animation */}
-          <svg className="absolute top-1/4 left-0 w-full h-1 opacity-20" viewBox="0 0 1000 20">
-            <motion.path
-              d="M0,10 L200,10 L220,5 L240,15 L260,2 L280,18 L300,10 L1000,10"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-          
-          {/* EHR interface elements */}
-          <div className="absolute top-16 right-16 w-32 h-20 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm">
-            <div className="p-2 space-y-1">
-              <div className="h-1 bg-[#387E89]/30 rounded w-full"></div>
-              <div className="h-1 bg-[#387E89]/20 rounded w-3/4"></div>
-              <div className="h-1 bg-[#387E89]/15 rounded w-1/2"></div>
-            </div>
-          </div>
-          
-          {/* Medical chart grid */}
-          <div className="absolute bottom-24 left-12 w-24 h-16 grid grid-cols-8 gap-1 opacity-10">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="bg-[#143151] rounded-sm"
-                style={{ height: `${Math.random() * 100}%` }}
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-              />
-            ))}
-          </div>
-          
-          {/* Floating medical icons */}
-          <motion.div
-            className="absolute top-1/3 right-1/3 opacity-10"
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <Heart className="w-8 h-8 text-[#387E89]" />
-          </motion.div>
-          
-          <motion.div
-            className="absolute bottom-1/3 left-1/4 opacity-10"
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <Shield className="w-6 h-6 text-[#143151]" />
-          </motion.div>
+        {/* Background Elements - matching Hero component style */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-20 right-20 w-48 md:w-64 h-48 md:h-64 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
+          <div className="absolute bottom-20 left-20 w-56 md:w-72 h-56 md:h-72 bg-purple-100 rounded-full blur-3xl opacity-70"></div>
+          <div className="absolute top-1/2 left-1/3 w-28 md:w-40 h-28 md:h-40 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
         </div>
 
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
