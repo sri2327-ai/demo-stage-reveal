@@ -157,14 +157,14 @@ export default function Presentation() {
           </Canvas>
         </div>
 
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
           <motion.div
-            className="inline-block mb-4"
+            className="mb-6"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 mb-6">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 inline-flex items-center gap-2">
               <Zap className="w-4 h-4 text-white flex-shrink-0" />
               <span className="text-white text-sm font-medium">AI-Powered Clinical Excellence</span>
             </Card>
@@ -174,7 +174,7 @@ export default function Presentation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-4xl"
           >
             The AI That Charts & Staffs —{' '}
             <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
@@ -182,11 +182,21 @@ export default function Presentation() {
             </span>
           </motion.h1>
 
-          <motion.div
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto"
+            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed"
+          >
+            Transform your practice with AI that handles documentation and staffing, 
+            so you can focus on what matters most - your patients.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <motion.div 
               style={{ border, boxShadow }}
@@ -228,20 +238,11 @@ export default function Presentation() {
               whileTap={{
                 scale: 0.985,
               }}
-              className="group relative flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-6 py-3 text-white transition-colors hover:bg-white/20 text-lg font-medium"
+              className="group relative flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-colors hover:bg-white/20 text-lg font-medium"
             >
-              <Calendar className="w-5 h-5" />
-              Book a 15-Minute Consultation
+              Book a 15 minute consultation
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="mt-12"
-          >
-            <ChevronDown className="w-6 h-6 mx-auto text-gray-200 animate-bounce" />
           </motion.div>
         </div>
       </motion.section>
