@@ -399,8 +399,10 @@ export default function Presentation() {
               {/* Animation Side */}
               <div className="order-2 lg:order-1">
                 <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
-                  <div className="group-hover:scale-105 transition-transform duration-300">
-                    <AnimatedCRUSH />
+                  <div className="w-full h-64 sm:h-72 lg:h-80 flex items-center justify-center overflow-hidden">
+                    <div className="group-hover:scale-105 transition-transform duration-300 w-full h-full flex items-center justify-center">
+                      <AnimatedCRUSH />
+                    </div>
                   </div>
                   
                   {/* Hover overlay */}
@@ -565,8 +567,10 @@ export default function Presentation() {
               {/* Animation Side */}
               <div className="order-2">
                 <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
-                  <div className="group-hover:scale-105 transition-transform duration-300">
-                    <AnimatedBRAVO />
+                  <div className="w-full h-64 sm:h-72 lg:h-80 flex items-center justify-center overflow-hidden">
+                    <div className="group-hover:scale-105 transition-transform duration-300 w-full h-full flex items-center justify-center">
+                      <AnimatedBRAVO />
+                    </div>
                   </div>
                   
                   {/* Hover overlay */}
