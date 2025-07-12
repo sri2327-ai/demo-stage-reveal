@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useInView, useAnimation, useMotionTemplate, useMotionValue, animate } from 'framer-motion';
 import { Stars } from "@react-three/drei";
@@ -22,7 +23,18 @@ import {
   ChevronDown,
   BarChart3,
   FileText,
-  MessageSquare
+  MessageSquare,
+  Languages,
+  Database,
+  Stethoscope,
+  Phone,
+  Bell,
+  ClipboardList,
+  Globe,
+  Lock,
+  Sparkles,
+  Brain,
+  UserCheck
 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -400,16 +412,16 @@ export default function Presentation() {
       </section>
 
       {/* Meet Your AI Teammates */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6">
               Meet Your AI Teammates
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -417,66 +429,235 @@ export default function Presentation() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            {/* CRUSH - AI Medical Scribe */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
+              className="relative"
             >
-              <Card className="p-8 border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full">
-                <div className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center">
-                    <FileText className="w-10 h-10 text-white" />
+              <Card className="p-8 border-2 border-[#387E89]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-blue-50/30 hover:border-[#387E89]/40">
+                {/* Header */}
+                <div className="text-center mb-8">
+                  <div className="relative mb-6">
+                    <div className="w-24 h-24 mx-auto bg-gradient-to-r from-[#143151] to-[#387E89] rounded-2xl flex items-center justify-center shadow-lg">
+                      <FileText className="w-12 h-12 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#143151] mb-4">CRUSH</h3>
-                  <p className="text-gray-600 mb-6">Your AI Medical Scribe</p>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Real-time documentation</li>
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> SOAP note generation</li>
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> ICD-10 coding assistance</li>
-                  </ul>
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2">CRUSH</h3>
+                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Medical Scribe</p>
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+                    <CheckCircle className="w-4 h-4" />
+                    99.9% Accurate • HIPAA Compliant
+                  </div>
+                </div>
+
+                {/* Key Features Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <Clock className="w-4 h-4 text-[#387E89]" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">Under 60 Seconds</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Real-time documentation</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                        <Languages className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">60+ Languages</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Understands accents & context</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <Database className="w-4 h-4 text-purple-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">100+ EHRs</span>
+                    </div>
+                    <p className="text-xs text-gray-600">No API needed</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <Stethoscope className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">50+ Specialties</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Tailored workflows</p>
+                  </div>
+                </div>
+
+                {/* Detailed Features */}
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Smart Medical Understanding</span>
+                      <p className="text-xs text-gray-600 mt-1">Understands medical language and context—no second-guessing, no errors</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Clinical Intelligence</span>
+                      <p className="text-xs text-gray-600 mt-1">HCC tracking, quality alerts, and preventive care prompts built-in</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Complete Automation</span>
+                      <p className="text-xs text-gray-600 mt-1">Prescriptions, referrals, labs, and follow-ups—all handled automatically</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
             </motion.div>
 
+            {/* BRAVO - AI Staffing Agent */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
+              className="relative"
             >
-              <Card className="p-8 border border-blue-100 shadow-lg hover:shadow-xl transition-shadow h-full">
-                <div className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-[#387E89] to-[#143151] rounded-full flex items-center justify-center">
-                    <Users className="w-10 h-10 text-white" />
+              <Card className="p-8 border-2 border-[#143151]/20 shadow-xl hover:shadow-2xl transition-all duration-500 h-full bg-gradient-to-br from-white to-green-50/30 hover:border-[#143151]/40">
+                {/* Header */}
+                <div className="text-center mb-8">
+                  <div className="relative mb-6">
+                    <div className="w-24 h-24 mx-auto bg-gradient-to-r from-[#387E89] to-[#143151] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Users className="w-12 h-12 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <Brain className="w-4 h-4 text-white" />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#143151] mb-4">BRAVO</h3>
-                  <p className="text-gray-600 mb-6">Your AI Staffing Agent</p>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Patient scheduling</li>
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Appointment confirmations</li>
-                    <li className="flex items-center justify-center"><CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Follow-up coordination</li>
-                  </ul>
+                  <h3 className="text-3xl font-bold text-[#143151] mb-2">BRAVO</h3>
+                  <p className="text-lg text-[#387E89] font-semibold mb-4">Your AI Front Office Agent</p>
+                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                    <UserCheck className="w-4 h-4" />
+                    Automates Your Front Office
+                  </div>
+                </div>
+
+                {/* Key Features Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <Phone className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">AI Chat & Calls</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Connects with patients 24/7</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                        <Calendar className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">Smart Scheduling</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Books & manages appointments</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <Bell className="w-4 h-4 text-purple-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">Auto Follow-ups</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Multi-channel reminders</p>
+                  </div>
+
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-green-100 hover:bg-white transition-colors">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <ClipboardList className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="font-semibold text-[#143151] text-sm">Pre-visit Intake</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Handles questionnaires</p>
+                  </div>
+                </div>
+
+                {/* Detailed Features */}
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Reduce No-Shows</span>
+                      <p className="text-xs text-gray-600 mt-1">Automated reminders and confirmations through multiple channels</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Patient Experience</span>
+                      <p className="text-xs text-gray-600 mt-1">Elevated support with instant responses and personalized care</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-[#143151] text-sm">Complete Integration</span>
+                      <p className="text-xs text-gray-600 mt-1">Seamlessly works with your existing practice management systems</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
             </motion.div>
           </div>
 
+          {/* CTA Section */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
             className="text-center"
           >
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all"
-            >
-              <DollarSign className="w-5 h-5 mr-2" />
-              Calculate Your ROI
-            </Button>
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20">
+              <h3 className="text-2xl font-bold text-[#143151] mb-4">
+                Ready to Meet Your AI Teammates?
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <DollarSign className="w-5 h-5 mr-2" />
+                  Calculate Your ROI
+                </Button>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="border-[#387E89] text-[#143151] hover:bg-[#387E89]/10"
+                >
+                  <Play className="w-5 h-5 mr-2" />
+                  Watch Demo
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
