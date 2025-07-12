@@ -236,8 +236,14 @@ export default function Presentation() {
       </motion.section>
 
       {/* The Burnout is Real */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-red-50/30">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-red-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-orange-500 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -245,33 +251,82 @@ export default function Presentation() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-[#143151] mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight">
               The Burnout is Real
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               While you're saving lives, administrative burden is draining yours.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Stats Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+            {/* Video Section */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-8"
+              className="order-2 lg:order-1"
             >
-              <div className="grid grid-cols-2 gap-6">
+              <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-2xl shadow-2xl overflow-hidden">
+                {/* Video placeholder with play button */}
+                <div className="aspect-video relative bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  
+                  {/* Simulated video thumbnail */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 to-orange-900/20"></div>
+                  <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-2 py-1 rounded">LIVE</div>
+                  
+                  {/* Play button */}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative z-10 w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/30 hover:bg-white/30 transition-all group"
+                  >
+                    <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
+                  </motion.button>
+                  
+                  {/* Video title overlay */}
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="font-semibold text-lg mb-1">Dr. Sarah's Reality: 10 PM Chart Marathon</h3>
+                    <p className="text-sm text-white/80">See what burnout looks like in real healthcare</p>
+                  </div>
+                </div>
+                
+                {/* Video description below */}
+                <div className="p-6 bg-white">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-semibold text-gray-900">Real footage from a family practice clinic</span>
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Watch as Dr. Sarah works late into the night, struggling with EHR documentation 
+                    that should have taken minutes, not hours.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Stats Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <div className="grid grid-cols-2 gap-4 mb-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
                 >
-                  <div className="text-4xl font-bold text-red-600 mb-2">4+</div>
-                  <div className="text-sm text-gray-600">hours/day on EHRs</div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-red-600 mb-2">4+</div>
+                    <div className="text-sm text-gray-600 font-medium">hours/day on EHRs</div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -279,10 +334,12 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
                 >
-                  <div className="text-4xl font-bold text-red-600 mb-2">1 in 2</div>
-                  <div className="text-sm text-gray-600">clinicians face burnout</div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-red-600 mb-2">1 in 2</div>
+                    <div className="text-sm text-gray-600 font-medium">clinicians face burnout</div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -290,10 +347,12 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
                 >
-                  <div className="text-4xl font-bold text-red-600 mb-2">30%</div>
-                  <div className="text-sm text-gray-600">no-show rates</div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-red-600 mb-2">30%</div>
+                    <div className="text-sm text-gray-600 font-medium">no-show rates</div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -301,12 +360,28 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-red-100"
+                  className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border border-red-200 hover:shadow-lg transition-all"
                 >
-                  <div className="text-xs font-semibold text-red-600 mb-2 uppercase tracking-wide">The Reality</div>
-                  <div className="text-sm text-gray-600">Understaffed, overwhelmed, underpaid</div>
+                  <div className="text-center">
+                    <div className="text-xs font-bold text-red-700 mb-2 uppercase tracking-wide">Reality Check</div>
+                    <div className="text-sm text-gray-700 font-semibold leading-tight">Understaffed, overwhelmed, underpaid</div>
+                  </div>
                 </motion.div>
               </div>
+
+              {/* Quote card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200 mb-6"
+              >
+                <blockquote className="text-gray-700 italic text-lg mb-3">
+                  "It's 10 PM and I'm still finishing charts from this morning..."
+                </blockquote>
+                <div className="text-sm text-gray-500">- Dr. Sarah M., Family Medicine</div>
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0 }}
@@ -317,64 +392,11 @@ export default function Presentation() {
               >
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg hover:shadow-xl transition-all px-8 py-4"
+                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg hover:shadow-xl transition-all px-8 py-4 text-base font-semibold"
                 >
                   🩺 Run Your Burnout Score →
                 </Button>
               </motion.div>
-            </motion.div>
-
-            {/* Visual Section */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-0 shadow-2xl p-8 text-white relative overflow-hidden">
-                {/* Background elements */}
-                <div className="absolute top-4 right-4 text-white/20 text-6xl font-bold">10:00</div>
-                <div className="absolute bottom-4 left-4 text-white/10 text-sm">PM</div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mr-4">
-                      <FileText className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-white/60 mb-1">Still working...</div>
-                      <div className="text-lg font-semibold">Charts from this morning</div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3 mb-6">
-                    <div className="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Patient #1 - SOAP notes</span>
-                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                      </div>
-                    </div>
-                    <div className="bg-white/10 rounded-lg p-3 backdrop-blur-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Patient #2 - Documentation</span>
-                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-lg p-3 backdrop-blur-sm opacity-50">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Patient #3 - Pending...</span>
-                        <Clock className="w-4 h-4 text-white/40" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <blockquote className="text-white/90 italic text-lg border-l-4 border-white/20 pl-4">
-                    "It's 10 PM and I'm still finishing charts from this morning..."
-                  </blockquote>
-                  <div className="text-sm text-white/60 mt-3">- Dr. Sarah M., Family Medicine</div>
-                </div>
-              </Card>
             </motion.div>
           </div>
         </div>
