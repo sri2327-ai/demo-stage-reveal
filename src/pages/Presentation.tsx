@@ -172,6 +172,23 @@ export default function Presentation() {
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return <div className="min-h-screen bg-white">
+      {/* Transparent Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <h1 className="text-white text-xl font-semibold">S10.AI</h1>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <a href="#features" className="text-white/80 hover:text-white transition-colors">Features</a>
+              <a href="#testimonials" className="text-white/80 hover:text-white transition-colors">Testimonials</a>
+              <a href="#pricing" className="text-white/80 hover:text-white transition-colors">Pricing</a>
+              <a href="#contact" className="text-white/80 hover:text-white transition-colors">Contact</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <motion.section style={{
       backgroundImage
