@@ -8,6 +8,7 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
+
 const CountUp = ({
   end,
   duration = 2
@@ -169,6 +170,7 @@ export default function Presentation() {
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
+
   return <div className="min-h-screen bg-white">
       {/* Hero Section - Enhanced */}
       <motion.section style={{
@@ -592,425 +594,192 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Before vs After - Enhanced Modern Design */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/50 to-blue-50/30 relative overflow-hidden">
-        {/* Enhanced Background Elements */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-red-100/80 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-100/80 rounded-full blur-3xl animate-pulse" style={{
-          animationDelay: '1s'
-        }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-50/60 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 right-1/4 w-24 h-24 bg-purple-100/60 rounded-full blur-2xl" style={{
-          animationDelay: '2s'
-        }}></div>
+      {/* Before vs After - Compact & Subtle Design */}
+      <section className="py-12 sm:py-16 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/20 relative overflow-hidden">
+        {/* Subtle background elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-24 h-24 bg-red-100/60 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 bg-green-100/60 rounded-full blur-2xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-50/40 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Enhanced Header Section */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Compact header */}
           <motion.div initial={{
           opacity: 0,
-          y: 30
+          y: 20
         }} whileInView={{
           opacity: 1,
           y: 0
         }} transition={{
-          duration: 0.8
+          duration: 0.6
         }} viewport={{
           once: true
-        }} className="text-center mb-16 lg:mb-20">
-            <motion.div initial={{
-            scale: 0.9,
-            opacity: 0
-          }} whileInView={{
-            scale: 1,
-            opacity: 1
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }} className="inline-flex items-center gap-3 bg-gradient-to-r from-red-50 via-white to-green-50 px-6 py-3 rounded-full border border-gray-200/80 shadow-sm mb-6 backdrop-blur-sm">
+        }} className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-50 via-white to-green-50 px-4 py-2 rounded-full border border-gray-200/60 shadow-sm mb-4 backdrop-blur-sm">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
-                  <Frown className="w-4 h-4 text-red-500" />
-                  <span className="text-xs font-medium text-red-600">Stressed</span>
+                  <TrendingDown className="w-3 h-3 text-red-500" />
+                  <span className="text-xs font-medium text-red-600">Before</span>
                 </div>
-                <motion.div animate={{
-                x: [0, 5, 0]
-              }} transition={{
-                duration: 2,
-                repeat: Infinity
-              }} className="text-gray-400">
-                  <ArrowRight className="w-4 h-4" />
-                </motion.div>
+                <ArrowRight className="w-3 h-3 text-gray-400" />
                 <div className="flex items-center gap-1">
-                  <Smile className="w-4 h-4 text-green-500" />
-                  <span className="text-xs font-medium text-green-600">Thriving</span>
+                  <TrendingUp className="w-3 h-3 text-green-500" />
+                  <span className="text-xs font-medium text-green-600">After</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#143151] mb-6 leading-[1.1]">
-              Before vs After{' '}
-              <span className="bg-gradient-to-r from-[#143151] via-[#387E89] to-[#4A9B8E] bg-clip-text text-transparent">
-                S10.AI
-              </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-3 leading-tight">
+              Before vs After S10.AI
             </h2>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed font-light">
-              See the dramatic transformation in your daily workflow and quality of life
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
+              See the transformation in your daily workflow
             </p>
           </motion.div>
 
-          {/* Enhanced Cards Section with Improved Layout */}
-          <div className="relative mb-16 lg:mb-20">
-            {/* Connection Line - Hidden on Mobile */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-              <motion.div initial={{
-              scaleX: 0,
-              opacity: 0
-            }} whileInView={{
-              scaleX: 1,
-              opacity: 1
-            }} transition={{
-              duration: 1,
-              delay: 0.5
-            }} className="w-24 h-0.5 bg-gradient-to-r from-red-300 via-gray-300 to-green-300" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-              {/* BEFORE Card - Enhanced */}
-              <motion.div initial={{
-              opacity: 0,
-              x: -50
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.2
-            }} viewport={{
-              once: true
-            }} className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-                
-                <Card className="relative bg-gradient-to-br from-red-50/90 via-orange-50/80 to-red-100/70 backdrop-blur-sm border-2 border-red-200/60 p-6 sm:p-8 lg:p-10 h-full shadow-2xl hover:shadow-red-200/50 transition-all duration-500 rounded-3xl overflow-hidden">
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-red-300/20 rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-300/20 rounded-full blur-2xl" />
-                  
-                  {/* Header */}
-                  <div className="relative z-10 text-center mb-8">
-                    <motion.div animate={{
-                    rotate: [0, -3, 3, 0],
-                    scale: [1, 1.05, 1]
-                  }} transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatDelay: 2
-                  }} className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-red-500/20 rounded-2xl mb-6 backdrop-blur-sm">
-                      <AlertTriangle className="w-8 h-8 sm:w-10 sm:h-10 text-red-600" />
-                    </motion.div>
-                    <h3 className="text-3xl sm:text-4xl font-bold text-red-700 mb-3">BEFORE</h3>
-                    <p className="text-red-600/80 font-medium text-lg">The Daily Struggle</p>
-                    <div className="mt-4 w-16 h-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-full mx-auto" />
+          {/* Compact comparison cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            {/* BEFORE Card - Compact */}
+            <motion.div initial={{
+            opacity: 0,
+            x: -30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="bg-gradient-to-br from-red-50/60 to-orange-50/40 border border-red-200/40 p-6 h-full shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl">
+                {/* Compact header */}
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center justify-center w-10 h-10 bg-red-500/15 rounded-xl mb-3">
+                    <AlertTriangle className="w-5 h-5 text-red-600" />
                   </div>
+                  <h3 className="text-xl font-bold text-red-700 mb-1">BEFORE</h3>
+                  <p className="text-red-600/70 text-sm">The Daily Struggle</p>
+                </div>
 
-                  {/* Problems List - Enhanced */}
-                  <div className="relative z-10 space-y-4 mb-8">
-                    {[{
-                    icon: Clock,
-                    text: "4+ hours daily on documentation",
-                    impact: "High"
-                  }, {
-                    icon: Bell,
-                    text: "Constant interruptions for scheduling",
-                    impact: "Medium"
-                  }, {
-                    icon: Coffee,
-                    text: "Weekend chart catch-up sessions",
-                    impact: "High"
-                  }, {
-                    icon: TrendingDown,
-                    text: "High staff turnover rates",
-                    impact: "Critical"
-                  }, {
-                    icon: Frown,
-                    text: "Burnout and exhaustion",
-                    impact: "Critical"
-                  }].map((item, index) => <motion.div key={index} initial={{
-                    opacity: 0,
-                    x: -20
-                  }} whileInView={{
-                    opacity: 1,
-                    x: 0
-                  }} transition={{
-                    delay: item.impact === 'Critical' ? 0.1 + index * 0.1 : 0.2 + index * 0.1,
-                    duration: 0.5
-                  }} whileHover={{
-                    x: 5,
-                    scale: 1.02
-                  }} className={`flex items-start gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-sm border transition-all duration-300 hover:bg-white/80 hover:shadow-lg ${item.impact === 'Critical' ? 'border-red-300/50 shadow-red-100/50' : 'border-red-200/30'}`}>
-                        <div className="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                          <X className="w-3 h-3 text-red-600" />
-                        </div>
-                        <div className="flex items-center gap-3 flex-1">
-                          <item.icon className="w-5 h-5 text-red-500 flex-shrink-0" />
-                          <div className="flex-1">
-                            <span className="text-gray-700 font-medium text-sm sm:text-base">{item.text}</span>
-                            {item.impact === 'Critical' && <div className="text-xs text-red-500 font-medium mt-1">Critical Impact</div>}
-                          </div>
-                        </div>
-                      </motion.div>)}
-                  </div>
-
-                  {/* Bottom Impact Meter */}
-                  <motion.div initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.8,
-                  duration: 0.5
-                }} className="relative z-10 p-6 bg-red-100/60 rounded-2xl border border-red-200/50 backdrop-blur-sm">
-                    <div className="text-center">
-                      <div className="text-2xl sm:text-3xl font-bold text-red-700 mb-2 flex items-center justify-center gap-2">
-                        <span>😰</span>
-                        <span>Stress Level: HIGH</span>
+                {/* Compact problems list */}
+                <div className="space-y-3 mb-6">
+                  {[
+                    { icon: Clock, text: "4+ hours daily on documentation" },
+                    { icon: Bell, text: "Constant scheduling interruptions" },
+                    { icon: Coffee, text: "Weekend chart catch-up" },
+                    { icon: TrendingDown, text: "High staff turnover" }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/50 border border-red-200/30">
+                      <div className="w-4 h-4 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <X className="w-2 h-2 text-red-600" />
                       </div>
-                      <div className="text-red-600 mb-3">Work-life balance: Non-existent</div>
-                      <div className="w-full bg-red-200/50 rounded-full h-2 mb-2">
-                        <motion.div initial={{
-                        width: 0
-                      }} whileInView={{
-                        width: '85%'
-                      }} transition={{
-                        duration: 1,
-                        delay: 1
-                      }} className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full" />
-                      </div>
-                      <div className="text-xs text-red-600/70">85% burnout risk</div>
+                      <item.icon className="w-4 h-4 text-red-500 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{item.text}</span>
                     </div>
-                  </motion.div>
-                </Card>
-              </motion.div>
+                  ))}
+                </div>
 
-              {/* AFTER Card - Enhanced */}
-              <motion.div initial={{
-              opacity: 0,
-              x: 50
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.4
-            }} viewport={{
-              once: true
-            }} className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-                
-                <Card className="relative bg-gradient-to-br from-green-50/90 via-emerald-50/80 to-green-100/70 backdrop-blur-sm border-2 border-green-200/60 p-6 sm:p-8 lg:p-10 h-full shadow-2xl hover:shadow-green-200/50 transition-all duration-500 rounded-3xl overflow-hidden">
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-green-300/20 rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-emerald-300/20 rounded-full blur-2xl" />
-                  
-                  {/* Header */}
-                  <div className="relative z-10 text-center mb-8">
-                    <motion.div animate={{
-                    scale: [1, 1.1, 1],
-                    boxShadow: ["0px 0px 0px rgba(34, 197, 94, 0)", "0px 0px 20px rgba(34, 197, 94, 0.3)", "0px 0px 0px rgba(34, 197, 94, 0)"]
-                  }} transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatDelay: 1
-                  }} className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-green-500/20 rounded-2xl mb-6 backdrop-blur-sm">
-                      <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
-                    </motion.div>
-                    <h3 className="text-3xl sm:text-4xl font-bold text-green-700 mb-3">AFTER</h3>
-                    <p className="text-green-600/80 font-medium text-lg">The S10.AI Advantage</p>
-                    <div className="mt-4 w-16 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto" />
-                  </div>
-
-                  {/* Solutions List - Enhanced */}
-                  <div className="relative z-10 space-y-4 mb-8">
-                    {[{
-                    icon: Zap,
-                    text: "75% faster documentation",
-                    improvement: "Major"
-                  }, {
-                    icon: Users,
-                    text: "Automated scheduling & follow-ups",
-                    improvement: "High"
-                  }, {
-                    icon: Heart,
-                    text: "Work-life balance restored",
-                    improvement: "Major"
-                  }, {
-                    icon: TrendingUp,
-                    text: "Happy, efficient staff",
-                    improvement: "High"
-                  }, {
-                    icon: Smile,
-                    text: "Focus on patient care",
-                    improvement: "Major"
-                  }].map((item, index) => <motion.div key={index} initial={{
-                    opacity: 0,
-                    x: 20
-                  }} whileInView={{
-                    opacity: 1,
-                    x: 0
-                  }} transition={{
-                    delay: item.improvement === 'Major' ? 0.1 + index * 0.1 : 0.2 + index * 0.1,
-                    duration: 0.5
-                  }} whileHover={{
-                    x: -5,
-                    scale: 1.02
-                  }} className={`flex items-start gap-4 p-4 rounded-2xl bg-white/70 backdrop-blur-sm border transition-all duration-300 hover:bg-white/90 hover:shadow-lg ${item.improvement === 'Major' ? 'border-green-300/50 shadow-green-100/50' : 'border-green-200/30'}`}>
-                        <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <CheckCircle className="w-3 h-3 text-green-600" />
-                        </div>
-                        <div className="flex items-center gap-3 flex-1">
-                          <item.icon className="w-5 h-5 text-green-500 flex-shrink-0" />
-                          <div className="flex-1">
-                            <span className="text-gray-700 font-medium text-sm sm:text-base">{item.text}</span>
-                            {item.improvement === 'Major' && <div className="text-xs text-green-500 font-medium mt-1">Major Improvement</div>}
-                          </div>
-                        </div>
-                      </motion.div>)}
-                  </div>
-
-                  {/* Bottom Success Meter */}
-                  <motion.div initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.8,
-                  duration: 0.5
-                }} className="relative z-10 p-6 bg-green-100/60 rounded-2xl border border-green-200/50 backdrop-blur-sm">
-                    <div className="text-center">
-                      <div className="text-2xl sm:text-3xl font-bold text-green-700 mb-2 flex items-center justify-center gap-2">
-                        <span>😊</span>
-                        <span>Stress Level: LOW</span>
-                      </div>
-                      <div className="text-green-600 mb-3">Work-life balance: Achieved</div>
-                      <div className="w-full bg-green-200/50 rounded-full h-2 mb-2">
-                        <motion.div initial={{
-                        width: 0
-                      }} whileInView={{
-                        width: '92%'
-                      }} transition={{
-                        duration: 1,
-                        delay: 1.2
-                      }} className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" />
-                      </div>
-                      <div className="text-xs text-green-600/70">92% satisfaction rate</div>
+                {/* Compact impact meter */}
+                <div className="p-4 bg-red-100/40 rounded-xl border border-red-200/40">
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-red-700 mb-2">High Stress Level</div>
+                    <div className="w-full bg-red-200/50 rounded-full h-1.5 mb-2">
+                      <div className="bg-red-500 h-1.5 rounded-full" style={{ width: '85%' }}></div>
                     </div>
-                  </motion.div>
-                </Card>
-              </motion.div>
-            </div>
+                    <div className="text-xs text-red-600/70">85% burnout risk</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* AFTER Card - Compact */}
+            <motion.div initial={{
+            opacity: 0,
+            x: 30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="bg-gradient-to-br from-green-50/60 to-emerald-50/40 border border-green-200/40 p-6 h-full shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl">
+                {/* Compact header */}
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center justify-center w-10 h-10 bg-green-500/15 rounded-xl mb-3">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-green-700 mb-1">AFTER</h3>
+                  <p className="text-green-600/70 text-sm">The S10.AI Advantage</p>
+                </div>
+
+                {/* Compact solutions list */}
+                <div className="space-y-3 mb-6">
+                  {[
+                    { icon: Zap, text: "75% faster documentation" },
+                    { icon: Users, text: "Automated scheduling & follow-ups" },
+                    { icon: Heart, text: "Work-life balance restored" },
+                    { icon: Smile, text: "Focus on patient care" }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-green-200/30">
+                      <div className="w-4 h-4 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="w-2 h-2 text-green-600" />
+                      </div>
+                      <item.icon className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Compact success meter */}
+                <div className="p-4 bg-green-100/40 rounded-xl border border-green-200/40">
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-green-700 mb-2">Low Stress Level</div>
+                    <div className="w-full bg-green-200/50 rounded-full h-1.5 mb-2">
+                      <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '92%' }}></div>
+                    </div>
+                    <div className="text-xs text-green-600/70">92% satisfaction rate</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
           </div>
 
-          {/* Enhanced Transformation Arrow */}
+          {/* Compact CTA */}
           <motion.div initial={{
           opacity: 0,
-          scale: 0.5
-        }} whileInView={{
-          opacity: 1,
-          scale: 1
-        }} transition={{
-          duration: 0.8,
-          delay: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center mb-16 lg:mb-20">
-            
-          </motion.div>
-
-          {/* Enhanced CTA Section */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
+          y: 20
         }} whileInView={{
           opacity: 1,
           y: 0
         }} transition={{
-          duration: 0.8,
-          delay: 1.0
+          duration: 0.6,
+          delay: 0.3
         }} viewport={{
           once: true
         }} className="text-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#143151]/5 via-[#387E89]/5 to-[#143151]/5 rounded-3xl blur-xl" />
+            <div className="bg-gradient-to-r from-white/80 to-blue-50/60 backdrop-blur-sm p-6 rounded-2xl border border-blue-200/40 shadow-sm max-w-2xl mx-auto">
+              <h3 className="text-xl font-bold text-[#143151] mb-3">
+                Ready for Your Transformation?
+              </h3>
+              <p className="text-gray-600 mb-4 text-sm">
+                Join thousands of clinicians who've transformed their practice workflow.
+              </p>
               
-              <motion.div whileHover={{
-              scale: 1.02,
-              y: -5
-            }} transition={{
-              duration: 0.3
-            }} className="relative bg-gradient-to-r from-white/90 via-blue-50/70 to-white/90 backdrop-blur-sm p-8 sm:p-12 rounded-3xl border border-blue-200/50 shadow-2xl max-w-4xl mx-auto">
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-6 leading-tight">
-                  Ready for Your Transformation?
-                </h3>
-                <p className="text-gray-600 mb-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
-                  Join thousands of clinicians who've already transformed their practice workflow and reclaimed their time.
-                </p>
-                
-                {/* Feature Pills */}
-                <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-                  {[{
-                  icon: CheckCircle,
-                  text: "30-day free trial"
-                }, {
-                  icon: Shield,
-                  text: "HIPAA compliant"
-                }, {
-                  icon: Zap,
-                  text: "Setup in 5 minutes"
-                }].map((feature, index) => <motion.div key={index} initial={{
-                  opacity: 0,
-                  scale: 0.9
-                }} whileInView={{
-                  opacity: 1,
-                  scale: 1
-                }} transition={{
-                  delay: 1.2 + index * 0.1
-                }} className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50">
-                      <feature.icon className="w-4 h-4 text-green-500" />
-                      <span className="text-sm font-medium text-gray-700">{feature.text}</span>
-                    </motion.div>)}
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <motion.div whileHover={{
-                  scale: 1.05,
-                  y: -2
-                }} whileTap={{
-                  scale: 0.98
-                }}>
-                    <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-2xl border-0 min-w-[200px]">
-                      <Play className="w-5 h-5 mr-2" />
-                      See the Transformation
-                    </Button>
-                  </motion.div>
-                  
-                  <motion.div whileHover={{
-                  scale: 1.05,
-                  y: -2
-                }} whileTap={{
-                  scale: 0.98
-                }}>
-                    <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-8 py-6 text-lg font-semibold rounded-2xl backdrop-blur-sm bg-white/50 min-w-[200px]">
-                      <DollarSign className="w-5 h-5 mr-2" />
-                      Calculate Your Savings
-                    </Button>
-                  </motion.div>
-                </div>
-              </motion.div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button size="default" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-md hover:shadow-lg transition-all duration-300 text-sm">
+                  <Play className="w-4 h-4 mr-2" />
+                  See the Transformation
+                </Button>
+                <Button variant="outline" size="default" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm">
+                  <DollarSign className="w-4 h-4 mr-2" />
+                  Calculate Savings
+                </Button>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -1321,17 +1090,9 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Proof & Templates */}
-      <section className="py-16 sm:py-24 bg-white">
-        
-      </section>
-
-      {/* ROI & Impact - Matching existing ROISection style */}
-      
-
-      {/* Social Proof */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Redesigned Social Proof with Clinician Images */}
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-white to-gray-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -1344,19 +1105,284 @@ export default function Presentation() {
           once: true
         }} className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-6">
-              What Clinicians Are Saying
+              Trusted by Clinicians Worldwide
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real feedback from real doctors using S10.AI every day.
+              Real doctors, real results. See what clinicians are saying about S10.AI.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TestimonialCard name="Dr. Willem Chen" role="Emergency Medicine Physician" quote="S10.AI cut my documentation time by 70%. I actually get to go home on time now." delay={0.2} />
-            <TestimonialCard name="Dr. Smriti Patel" role="Family Medicine" quote="The AI templates are incredibly accurate. It's like having a brilliant scribe who never gets tired." delay={0.4} />
-            <TestimonialCard name="Dr. Lisbeth Rodriguez" role="Internal Medicine" quote="My staff loves BRAVO. Patient scheduling runs itself now, and our no-show rate dropped 40%." delay={0.6} />
+          {/* Main featured testimonials with large images */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            {/* Featured Testimonial 1 */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-8 border-2 border-blue-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-blue-50/30 h-full">
+                <div className="flex flex-col items-center text-center">
+                  {/* Large clinician image */}
+                  <div className="relative mb-6">
+                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                      <img 
+                        src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
+                        alt="Dr. Mitchell" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  
+                  {/* Stars */}
+                  <div className="flex mb-4">
+                    {[1, 2, 3, 4, 5].map(star => 
+                      <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
+                    )}
+                  </div>
+                  
+                  {/* Quote */}
+                  <blockquote className="text-gray-700 mb-6 italic text-lg leading-relaxed">
+                    "S10.AI cut my documentation time by 70%. I actually get to go home on time now and spend quality time with my family."
+                  </blockquote>
+                  
+                  {/* Doctor info */}
+                  <div className="mb-4">
+                    <div className="font-bold text-[#143151] text-lg">Dr. Robert Mitchell</div>
+                    <div className="text-[#387E89] font-medium">Emergency Medicine</div>
+                    <div className="text-sm text-gray-500">15+ years experience</div>
+                  </div>
+
+                  {/* Key benefit highlight */}
+                  <div className="bg-blue-50 px-4 py-2 rounded-full">
+                    <span className="text-sm font-semibold text-blue-700">Saves 3+ hours daily</span>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Featured Testimonial 2 */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-8 border-2 border-green-100/60 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-green-50/30 h-full">
+                <div className="flex flex-col items-center text-center">
+                  {/* Large clinician image */}
+                  <div className="relative mb-6">
+                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                      <img 
+                        src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
+                        alt="Dr. Sarah Johnson" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <Heart className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  
+                  {/* Stars */}
+                  <div className="flex mb-4">
+                    {[1, 2, 3, 4, 5].map(star => 
+                      <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
+                    )}
+                  </div>
+                  
+                  {/* Quote */}
+                  <blockquote className="text-gray-700 mb-6 italic text-lg leading-relaxed">
+                    "The AI templates are incredibly accurate. It's like having a brilliant scribe who never gets tired or makes mistakes."
+                  </blockquote>
+                  
+                  {/* Doctor info */}
+                  <div className="mb-4">
+                    <div className="font-bold text-[#143151] text-lg">Dr. Sarah Johnson</div>
+                    <div className="text-[#387E89] font-medium">Family Medicine</div>
+                    <div className="text-sm text-gray-500">12+ years experience</div>
+                  </div>
+
+                  {/* Key benefit highlight */}
+                  <div className="bg-green-50 px-4 py-2 rounded-full">
+                    <span className="text-sm font-semibold text-green-700">99.9% accuracy rate</span>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
           </div>
 
+          {/* Grid of smaller testimonial cards with images */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            {/* Small testimonial cards */}
+            {[
+              {
+                image: "/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png",
+                name: "Dr. Maria Gonzalez",
+                specialty: "Internal Medicine",
+                quote: "My staff loves BRAVO. Patient scheduling runs itself now.",
+                highlight: "40% less no-shows"
+              },
+              {
+                image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
+                name: "Dr. Jennifer Walsh",
+                specialty: "Pediatrics",
+                quote: "Finally, I can focus on my patients instead of paperwork.",
+                highlight: "Work-life balance"
+              },
+              {
+                image: "/lovable-uploads/6ae429b1-f16f-4432-865d-4602f85e5701.png",
+                name: "Dr. Raj Patel",
+                specialty: "Cardiology", 
+                quote: "S10.AI understands medical terminology perfectly.",
+                highlight: "50+ specialties"
+              },
+              {
+                image: "/lovable-uploads/081c19bb-5cba-42ca-9e09-703a44940a01.png",
+                name: "Dr. Michael Chen",
+                specialty: "Orthopedics",
+                quote: "Setup took 5 minutes. Results were immediate.",
+                highlight: "Instant setup"
+              }
+            ].map((testimonial, index) => (
+              <motion.div key={index} initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.5,
+              delay: 0.1 + index * 0.1
+            }} viewport={{
+              once: true
+            }}>
+                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm h-full">
+                  <div className="text-center">
+                    {/* Clinician image */}
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mx-auto mb-4">
+                      <img 
+                        src={testimonial.image} 
+                        alt={testimonial.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Stars */}
+                    <div className="flex justify-center mb-3">
+                      {[1, 2, 3, 4, 5].map(star => 
+                        <Star key={star} className="w-3 h-3 text-yellow-400 fill-current" />
+                      )}
+                    </div>
+                    
+                    {/* Quote */}
+                    <blockquote className="text-gray-600 text-sm italic mb-4 leading-relaxed">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    
+                    {/* Doctor info */}
+                    <div className="mb-3">
+                      <div className="font-semibold text-[#143151] text-sm">{testimonial.name}</div>
+                      <div className="text-[#387E89] text-xs font-medium">{testimonial.specialty}</div>
+                    </div>
+
+                    {/* Highlight */}
+                    <div className="bg-blue-50 px-3 py-1 rounded-full">
+                      <span className="text-xs font-medium text-blue-700">{testimonial.highlight}</span>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Additional testimonial row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+            {[
+              {
+                image: "/lovable-uploads/b9b4bd49-9bf0-41d3-9eae-51ed07de5c66.png",
+                name: "Dr. David Wilson",
+                specialty: "Emergency Medicine",
+                quote: "The voice recognition works perfectly even in noisy ER environments. Game changer for our workflow.",
+                highlight: "Works in any environment"
+              },
+              {
+                image: "/lovable-uploads/4fa1bcbe-2d39-4582-9611-7df779c3e784.png",
+                name: "Dr. James Miller",
+                specialty: "Family Practice",
+                quote: "Reduced our administrative costs by 60% while improving patient satisfaction scores significantly.",
+                highlight: "$150K+ annual savings"
+              }
+            ].map((testimonial, index) => (
+              <motion.div key={index} initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.5,
+              delay: 0.2 + index * 0.1
+            }} viewport={{
+              once: true
+            }}>
+                <Card className="p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    {/* Clinician image */}
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0">
+                      <img 
+                        src={testimonial.image} 
+                        alt={testimonial.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div className="flex-1">
+                      {/* Stars */}
+                      <div className="flex mb-2">
+                        {[1, 2, 3, 4, 5].map(star => 
+                          <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                        )}
+                      </div>
+                      
+                      {/* Quote */}
+                      <blockquote className="text-gray-600 italic mb-3 leading-relaxed">
+                        "{testimonial.quote}"
+                      </blockquote>
+                      
+                      {/* Doctor info and highlight */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-[#143151]">{testimonial.name}</div>
+                          <div className="text-[#387E89] text-sm font-medium">{testimonial.specialty}</div>
+                        </div>
+                        <div className="bg-green-50 px-3 py-1 rounded-full">
+                          <span className="text-xs font-medium text-green-700">{testimonial.highlight}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
           <motion.div initial={{
           opacity: 0,
           y: 20
@@ -1365,14 +1391,28 @@ export default function Presentation() {
           y: 0
         }} transition={{
           duration: 0.6,
-          delay: 0.8
+          delay: 0.6
         }} viewport={{
           once: true
-        }} className="text-center mt-12">
-            <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-              <MessageSquare className="w-5 h-5 mr-2" />
-              See More Success Stories
-            </Button>
+        }} className="text-center">
+            <div className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-2xl p-8 border border-[#387E89]/20 max-w-3xl mx-auto">
+              <h3 className="text-2xl font-bold text-[#143151] mb-4">
+                Join 10,000+ Satisfied Clinicians
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Experience the transformation that's revolutionizing healthcare documentation and practice management.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                  <MessageSquare className="w-5 h-5 mr-2" />
+                  Read More Success Stories
+                </Button>
+                <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
+                  <Play className="w-5 h-5 mr-2" />
+                  Watch Video Testimonials
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
