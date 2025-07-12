@@ -157,14 +157,14 @@ export default function Presentation() {
           </Canvas>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
           <motion.div
-            className="mb-8"
+            className="mb-4 sm:mb-6"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 inline-flex items-center gap-2">
+            <Card className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 sm:px-4 py-2 inline-flex items-center gap-2">
               <Zap className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <span className="text-white text-sm font-medium">AI-Powered Clinical Excellence</span>
             </Card>
@@ -174,7 +174,7 @@ export default function Presentation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-[1.1] max-w-5xl"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight max-w-4xl"
           >
             The AI That Charts & Staffs — So You Don't Have To
           </motion.h1>
@@ -183,7 +183,7 @@ export default function Presentation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl leading-relaxed font-light"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-10 md:mb-12 max-w-2xl leading-relaxed"
           >
             Transform your practice with AI that handles documentation and staffing, 
             so you can focus on what matters most - your patients.
@@ -193,19 +193,19 @@ export default function Presentation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto"
           >
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
               <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm font-normal text-white/90">75% faster charting</span>
+              <span className="text-sm text-white/90">75% faster charting</span>
             </div>
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
               <Shield className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm font-normal text-white/90">7,000+ app integrations</span>
+              <span className="text-sm text-white/90">7,000+ app integrations</span>
             </div>
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/5 backdrop-blur-sm rounded-xl py-2 sm:py-3 px-3 sm:px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
               <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm font-normal text-white/90">HIPAA compliant</span>
+              <span className="text-sm text-white/90">HIPAA compliant</span>
             </div>
           </motion.div>
 
@@ -213,7 +213,7 @@ export default function Presentation() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
           >
             <motion.button
               style={{
@@ -226,10 +226,10 @@ export default function Presentation() {
               whileTap={{
                 scale: 0.985,
               }}
-              className="group relative flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-colors hover:bg-white/20 text-lg font-medium"
+              className="group relative flex items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 text-white transition-colors hover:bg-white/20 text-sm sm:text-base font-semibold w-full sm:w-auto"
             >
               Book a 15 minute consultation
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
           </motion.div>
         </div>
