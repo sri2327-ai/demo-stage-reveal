@@ -321,11 +321,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
+                  className="bg-gradient-to-br from-red-50 via-orange-50 to-red-100 p-6 rounded-2xl shadow-lg border border-red-200 hover:shadow-xl hover:scale-105 transition-all duration-300 group"
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-red-600 mb-2">4+</div>
-                    <div className="text-sm text-gray-600 font-medium">hours/day on EHRs</div>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-2 group-hover:from-red-700 group-hover:to-red-800 transition-all">4+</div>
+                    <div className="text-sm text-gray-700 font-semibold">hours/day on EHRs</div>
                   </div>
                 </motion.div>
 
@@ -334,11 +334,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
+                  className="bg-gradient-to-br from-orange-50 via-red-50 to-orange-100 p-6 rounded-2xl shadow-lg border border-orange-200 hover:shadow-xl hover:scale-105 transition-all duration-300 group"
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-red-600 mb-2">1 in 2</div>
-                    <div className="text-sm text-gray-600 font-medium">clinicians face burnout</div>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 group-hover:from-orange-700 group-hover:to-red-700 transition-all">1 in 2</div>
+                    <div className="text-sm text-gray-700 font-semibold">clinicians face burnout</div>
                   </div>
                 </motion.div>
 
@@ -347,11 +347,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all"
+                  className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 p-6 rounded-2xl shadow-lg border border-red-200 hover:shadow-xl hover:scale-105 transition-all duration-300 group"
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-red-600 mb-2">30%</div>
-                    <div className="text-sm text-gray-600 font-medium">no-show rates</div>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-red-600 bg-clip-text text-transparent mb-2 group-hover:from-rose-700 group-hover:to-red-700 transition-all">30%</div>
+                    <div className="text-sm text-gray-700 font-semibold">no-show rates</div>
                   </div>
                 </motion.div>
 
@@ -360,11 +360,11 @@ export default function Presentation() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border border-red-200 hover:shadow-lg transition-all"
+                  className="bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 p-6 rounded-2xl border-2 border-gradient-to-r from-amber-200 to-red-200 hover:shadow-xl hover:scale-105 transition-all duration-300 group shadow-md"
                 >
                   <div className="text-center">
-                    <div className="text-xs font-bold text-red-700 mb-2 uppercase tracking-wide">Reality Check</div>
-                    <div className="text-sm text-gray-700 font-semibold leading-tight">Understaffed, overwhelmed, underpaid</div>
+                    <div className="text-xs font-bold bg-gradient-to-r from-amber-700 to-red-700 bg-clip-text text-transparent mb-2 uppercase tracking-wide group-hover:from-amber-800 group-hover:to-red-800 transition-all">Reality Check</div>
+                    <div className="text-sm font-bold bg-gradient-to-r from-gray-700 to-gray-800 bg-clip-text text-transparent leading-tight">Understaffed, overwhelmed, underpaid</div>
                   </div>
                 </motion.div>
               </div>
@@ -375,12 +375,12 @@ export default function Presentation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200 mb-6"
+                className="bg-gradient-to-r from-slate-50 via-gray-50 to-slate-100 p-6 rounded-2xl border border-slate-200 mb-6 shadow-sm hover:shadow-md transition-all"
               >
-                <blockquote className="text-gray-700 italic text-lg mb-3">
+                <blockquote className="text-gray-700 italic text-lg mb-3 font-medium">
                   "It's 10 PM and I'm still finishing charts from this morning..."
                 </blockquote>
-                <div className="text-sm text-gray-500">- Dr. Sarah M., Family Medicine</div>
+                <div className="text-sm text-gray-500 font-medium">- Dr. Sarah M., Family Medicine</div>
               </motion.div>
 
               <motion.div
@@ -392,7 +392,7 @@ export default function Presentation() {
               >
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg hover:shadow-xl transition-all px-8 py-4 text-base font-semibold"
+                  className="bg-gradient-to-r from-red-600 via-red-700 to-orange-600 hover:from-red-700 hover:via-red-800 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-10 py-5 text-base font-bold rounded-2xl border-2 border-red-500/20 hover:scale-105 hover:border-red-400/30"
                 >
                   🩺 Run Your Burnout Score →
                 </Button>
