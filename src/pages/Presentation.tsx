@@ -1016,6 +1016,313 @@ export default function Presentation() {
         </div>
       </section>
 
+      {/* What You Actually Get - Compact & Subtle Design */}
+      <section className="py-12 sm:py-16 bg-gradient-to-b from-blue-50/30 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }} viewport={{
+          once: true
+        }} className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-4">
+              What You Actually Get — and Why It Pays Off
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+              Real measurable outcomes that transform your practice economics and quality of life
+            </p>
+          </motion.div>
+
+          {/* Benefits Grid - Compact Design */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+            {/* Time Savings */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.1
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-blue-100/60 hover:border-blue-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Timer className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">75% less time on notes</div>
+                    <div className="text-sm text-gray-600">Automated documentation cuts charting time dramatically</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Admin Reduction */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.2
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-green-100/60 hover:border-green-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileCheck className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">85% less admin burden</div>
+                    <div className="text-sm text-gray-600">Automated scheduling, follow-ups, and patient management</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* EHR Integration */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.3
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-purple-100/60 hover:border-purple-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Database className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">Instant EHR sync</div>
+                    <div className="text-sm text-gray-600">Epic, Cerner, Athena & 100+ more systems</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Cost Savings */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.4
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-emerald-100/60 hover:border-emerald-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <DollarSign className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">$150K+ saved per clinician/year</div>
+                    <div className="text-sm text-gray-600">Reduced staffing costs and increased efficiency</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Revenue Growth */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.5
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-blue-100/60 hover:border-blue-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">40% revenue growth</div>
+                    <div className="text-sm text-gray-600">No extra staff needed—just better efficiency</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Patient Volume */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.6
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-4 sm:p-5 border border-indigo-100/60 hover:border-indigo-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Users className="w-4 h-4 text-indigo-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-lg font-semibold text-[#143151] mb-1">30% increase in patient volume</div>
+                    <div className="text-sm text-gray-600">See more patients without working longer hours</div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Compliance & Satisfaction Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-12">
+            {/* Compliance */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.7
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-5 sm:p-6 border border-gray-200/60 hover:border-gray-300/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-gray-600" />
+                  </div>
+                  <div className="text-lg font-semibold text-[#143151]">100% Compliant</div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['HIPAA', 'GDPR', 'PIPEDA', 'ISO 27001'].map((standard) => (
+                    <div key={standard} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-md">
+                      {standard}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Patient Satisfaction */}
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.8
+          }} viewport={{
+            once: true
+          }}>
+              <Card className="p-5 sm:p-6 border border-amber-100/60 hover:border-amber-200/80 transition-all duration-300 hover:shadow-md bg-white/70 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center">
+                    <Heart className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div className="text-lg font-semibold text-[#143151]">95% Patient Satisfaction</div>
+                </div>
+                <div className="text-sm text-gray-600">
+                  Patients love the improved care experience and shorter wait times
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Zero Friction Promise */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.9
+        }} viewport={{
+          once: true
+        }} className="bg-gradient-to-r from-[#143151]/5 to-[#387E89]/5 rounded-xl p-6 sm:p-8 border border-[#387E89]/20 mb-8">
+            <div className="text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#143151] mb-3">
+                Zero IT Setup. No Workflow Disruption.
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Up and running in minutes, not months. Your existing processes stay exactly the same.
+              </p>
+              
+              {/* Quick Stats */}
+              <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-[#387E89]">5 min</div>
+                  <div className="text-xs text-gray-600">Setup time</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-[#387E89]">0</div>
+                  <div className="text-xs text-gray-600">IT changes</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-[#387E89]">24/7</div>
+                  <div className="text-xs text-gray-600">Support</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 1.0
+        }} viewport={{
+          once: true
+        }} className="text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-3 text-base font-semibold rounded-xl">
+                <Target className="w-4 h-4 mr-2" />
+                See your numbers in seconds → Try the ROI Calculator
+              </Button>
+              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-6 py-3 text-base font-semibold rounded-xl">
+                <Settings className="w-4 h-4 mr-2" />
+                Ready for a tailored plan? → Get your custom setup
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Proof & Templates */}
       <section className="py-16 sm:py-24 bg-white">
         
@@ -1250,11 +1557,11 @@ export default function Presentation() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto">
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300">
                 <Calendar className="w-5 h-5 mr-2" />
                 Book Your Demo Now
               </Button>
-              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
                 Try Risk-Free for 30 Days
               </Button>
             </div>
