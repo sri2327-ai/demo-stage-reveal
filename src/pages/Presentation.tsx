@@ -174,7 +174,7 @@ export default function Presentation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-5xl"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-[1.1] max-w-5xl"
           >
             The AI That Charts & Staffs — So You Don't Have To
           </motion.h1>
@@ -183,7 +183,7 @@ export default function Presentation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-300 mb-10 max-w-3xl leading-relaxed"
+            className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl leading-relaxed font-light"
           >
             Transform your practice with AI that handles documentation and staffing, 
             so you can focus on what matters most - your patients.
@@ -193,19 +193,19 @@ export default function Presentation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 max-w-4xl mx-auto"
           >
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-              <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-              <span className="text-base font-medium text-white">75% faster charting</span>
+            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <span className="text-sm font-normal text-white/90">75% faster charting</span>
             </div>
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-              <Shield className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-              <span className="text-base font-medium text-white">7,000+ app integrations</span>
+            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+              <Shield className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <span className="text-sm font-normal text-white/90">7,000+ app integrations</span>
             </div>
-            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-              <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-              <span className="text-base font-medium text-white">HIPAA compliant</span>
+            <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm rounded-2xl py-3 px-4 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <span className="text-sm font-normal text-white/90">HIPAA compliant</span>
             </div>
           </motion.div>
 
