@@ -8,7 +8,6 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
-
 const CountUp = ({
   end,
   duration = 2
@@ -41,7 +40,6 @@ const CountUp = ({
   }, [isInView, end, duration, hasStarted]);
   return <span ref={ref}>{count}</span>;
 };
-
 const AnimatedStat = ({
   icon: Icon,
   value,
@@ -84,7 +82,6 @@ const AnimatedStat = ({
       <div className="text-sm text-gray-600">{label}</div>
     </motion.div>;
 };
-
 const TestimonialCard = ({
   name,
   role,
@@ -152,7 +149,6 @@ const LogoMarquee = () => {
       </div>
     </div>;
 };
-
 export default function Presentation() {
   const {
     scrollYProgress
@@ -932,27 +928,7 @@ export default function Presentation() {
         }} viewport={{
           once: true
         }} className="text-center mb-16 lg:mb-20">
-            <motion.div animate={{
-            x: [0, 10, 0],
-            scale: [1, 1.05, 1]
-          }} transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatDelay: 1
-          }} className="inline-flex items-center gap-6 bg-gradient-to-r from-white/80 via-blue-50/80 to-white/80 backdrop-blur-sm px-8 py-6 rounded-3xl border border-blue-200/30 shadow-xl hover:shadow-2xl transition-all duration-500">
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-[#143151] mb-1">Transform Your Practice</div>
-                <div className="text-sm text-gray-600">Join 10,000+ satisfied clinicians</div>
-              </div>
-              <motion.div animate={{
-              x: [0, 8, 0]
-            }} transition={{
-              duration: 2,
-              repeat: Infinity
-            }} className="text-[#387E89]">
-                <ArrowRight className="w-8 h-8" />
-              </motion.div>
-            </motion.div>
+            
           </motion.div>
 
           {/* Enhanced CTA Section */}
