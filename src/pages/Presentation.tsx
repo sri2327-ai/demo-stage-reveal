@@ -4,10 +4,11 @@ import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Award, Play, ChevronDown, BarChart3, FileText, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, Globe, Lock, Sparkles, Brain, UserCheck, TrendingDown, FastForward } from 'lucide-react';
+import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Star, Calendar, DollarSign, Target, Award, Play, ChevronDown, BarChart3, FileText, MessageSquare, Languages, Database, Stethoscope, Phone, Bell, ClipboardList, Globe, Lock, Sparkles, Brain, UserCheck, TrendingDown, FastForward, X, AlertTriangle, Coffee, Frown, Smile } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
+
 const CountUp = ({
   end,
   duration = 2
@@ -40,6 +41,7 @@ const CountUp = ({
   }, [isInView, end, duration, hasStarted]);
   return <span ref={ref}>{count}</span>;
 };
+
 const AnimatedStat = ({
   icon: Icon,
   value,
@@ -82,6 +84,7 @@ const AnimatedStat = ({
       <div className="text-sm text-gray-600">{label}</div>
     </motion.div>;
 };
+
 const TestimonialCard = ({
   name,
   role,
@@ -149,6 +152,7 @@ const LogoMarquee = () => {
       </div>
     </div>;
 };
+
 export default function Presentation() {
   const {
     scrollYProgress
@@ -169,6 +173,7 @@ export default function Presentation() {
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
+
   return <div className="min-h-screen bg-white">
       {/* Hero Section - Enhanced */}
       <motion.section style={{
@@ -791,117 +796,288 @@ export default function Presentation() {
         </div>
       </section>
 
-      {/* Before vs After */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-blue-50 to-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-3xl sm:text-4xl font-bold text-[#143151] text-center mb-12">
-            Before vs After S10.AI
-          </motion.h2>
+      {/* Before vs After - Enhanced */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/50 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-red-100 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-100 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-50 rounded-full blur-3xl"></div>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <motion.div initial={{
-            opacity: 0,
-            x: -50
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="bg-red-50 border border-red-200 p-8 h-full">
-                <h3 className="text-2xl font-bold text-red-700 mb-6 text-center">BEFORE</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                    <span className="text-gray-700">4+ hours daily on documentation</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-red-50 to-green-50 px-6 py-3 rounded-full border border-gray-200 mb-6"
+            >
+              <Frown className="w-5 h-5 text-red-500" />
+              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <Smile className="w-5 h-5 text-green-500" />
+              <span className="text-sm font-medium text-gray-700">The Transformation</span>
+            </motion.div>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#143151] mb-6 leading-tight">
+              Before vs After{' '}
+              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+                S10.AI
+              </span>
+            </h2>
+            <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              See the dramatic transformation in your daily workflow and quality of life
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+            {/* BEFORE Card - Enhanced */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50, rotateY: -15 }} 
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }} 
+              transition={{ duration: 0.8, delay: 0.2 }} 
+              viewport={{ once: true }}
+              className="perspective-1000"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02, rotateX: 5 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-red-50 via-orange-50/50 to-red-100/30 border-2 border-red-200/60 p-8 h-full shadow-2xl hover:shadow-red-200/50 transition-all duration-500 relative overflow-hidden">
+                  {/* Background pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-300 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-300 rounded-full blur-2xl"></div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                    <span className="text-gray-700">Constant interruptions for scheduling</span>
+                  
+                  {/* Header */}
+                  <div className="relative z-10 text-center mb-8">
+                    <motion.div
+                      animate={{ rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+                      className="inline-flex items-center justify-center w-16 h-16 bg-red-500/20 rounded-full mb-4"
+                    >
+                      <AlertTriangle className="w-8 h-8 text-red-600" />
+                    </motion.div>
+                    <h3 className="text-3xl font-bold text-red-700 mb-2">BEFORE</h3>
+                    <p className="text-red-600/80 font-medium">The Daily Struggle</p>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                    <span className="text-gray-700">Weekend chart catch-up</span>
+
+                  {/* Problems List */}
+                  <div className="relative z-10 space-y-5">
+                    {[
+                      { icon: Clock, text: "4+ hours daily on documentation", delay: 0.1 },
+                      { icon: Bell, text: "Constant interruptions for scheduling", delay: 0.2 },
+                      { icon: Coffee, text: "Weekend chart catch-up sessions", delay: 0.3 },
+                      { icon: TrendingDown, text: "High staff turnover rates", delay: 0.4 },
+                      { icon: Frown, text: "Burnout and exhaustion", delay: 0.5 }
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: item.delay, duration: 0.5 }}
+                        whileHover={{ x: 5, scale: 1.02 }}
+                        className="flex items-start gap-4 p-4 rounded-xl bg-white/40 backdrop-blur-sm border border-red-200/30 hover:bg-white/60 transition-all duration-300"
+                      >
+                        <div className="flex-shrink-0 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                          <X className="w-3 h-3 text-red-600" />
+                        </div>
+                        <div className="flex items-center gap-3 flex-1">
+                          <item.icon className="w-5 h-5 text-red-500 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">{item.text}</span>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                    <span className="text-gray-700">High staff turnover</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0" />
-                    <span className="text-gray-700">Burnout and exhaustion</span>
-                  </div>
-                </div>
-              </Card>
+
+                  {/* Bottom Stats */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
+                    className="relative z-10 mt-8 p-4 bg-red-100/50 rounded-xl border border-red-200/50"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-red-700 mb-1">😰 Stress Level: HIGH</div>
+                      <div className="text-sm text-red-600">Work-life balance: Non-existent</div>
+                    </div>
+                  </motion.div>
+                </Card>
+              </motion.div>
             </motion.div>
 
-            <motion.div initial={{
-            opacity: 0,
-            x: 50
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8
-          }} viewport={{
-            once: true
-          }}>
-              <Card className="bg-green-50 border border-green-200 p-8 h-full">
-                <h3 className="text-2xl font-bold text-green-700 mb-6 text-center">AFTER</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">75% faster documentation</span>
+            {/* AFTER Card - Enhanced */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50, rotateY: 15 }} 
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }} 
+              transition={{ duration: 0.8, delay: 0.4 }} 
+              viewport={{ once: true }}
+              className="perspective-1000"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02, rotateX: -5 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-green-50 via-emerald-50/50 to-green-100/30 border-2 border-green-200/60 p-8 h-full shadow-2xl hover:shadow-green-200/50 transition-all duration-500 relative overflow-hidden">
+                  {/* Background pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-green-300 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-emerald-300 rounded-full blur-2xl"></div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">Automated scheduling & follow-ups</span>
+                  
+                  {/* Header */}
+                  <div className="relative z-10 text-center mb-8">
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        boxShadow: [
+                          "0px 0px 0px rgba(34, 197, 94, 0)",
+                          "0px 0px 20px rgba(34, 197, 94, 0.3)",
+                          "0px 0px 0px rgba(34, 197, 94, 0)"
+                        ]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                      className="inline-flex items-center justify-center w-16 h-16 bg-green-500/20 rounded-full mb-4"
+                    >
+                      <CheckCircle className="w-8 h-8 text-green-600" />
+                    </motion.div>
+                    <h3 className="text-3xl font-bold text-green-700 mb-2">AFTER</h3>
+                    <p className="text-green-600/80 font-medium">The S10.AI Advantage</p>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">Work-life balance restored</span>
+
+                  {/* Solutions List */}
+                  <div className="relative z-10 space-y-5">
+                    {[
+                      { icon: Zap, text: "75% faster documentation", delay: 0.1 },
+                      { icon: Users, text: "Automated scheduling & follow-ups", delay: 0.2 },
+                      { icon: Heart, text: "Work-life balance restored", delay: 0.3 },
+                      { icon: TrendingUp, text: "Happy, efficient staff", delay: 0.4 },
+                      { icon: Smile, text: "Focus on patient care", delay: 0.5 }
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: item.delay, duration: 0.5 }}
+                        whileHover={{ x: -5, scale: 1.02 }}
+                        className="flex items-start gap-4 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-green-200/30 hover:bg-white/80 transition-all duration-300"
+                      >
+                        <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-3 h-3 text-green-600" />
+                        </div>
+                        <div className="flex items-center gap-3 flex-1">
+                          <item.icon className="w-5 h-5 text-green-500 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">{item.text}</span>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">Happy, efficient staff</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">Focus on patient care</span>
-                  </div>
-                </div>
-              </Card>
+
+                  {/* Bottom Stats */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
+                    className="relative z-10 mt-8 p-4 bg-green-100/50 rounded-xl border border-green-200/50"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-green-700 mb-1">😊 Stress Level: LOW</div>
+                      <div className="text-sm text-green-600">Work-life balance: Achieved</div>
+                    </div>
+                  </motion.div>
+                </Card>
+              </motion.div>
             </motion.div>
           </div>
 
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.4
-        }} viewport={{
-          once: true
-        }} className="text-center mt-12">
-            <Button size="lg" variant="outline" className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10">
-              <Play className="w-5 h-5 mr-2" />
-              See It In Action
-            </Button>
+          {/* Transformation Arrow - Enhanced */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              animate={{ 
+                x: [0, 10, 0],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                repeatDelay: 1
+              }}
+              className="inline-flex items-center gap-4 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 px-8 py-4 rounded-2xl border border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-300"
+            >
+              <div className="text-2xl font-bold text-[#143151]">Transform Your Practice</div>
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowRight className="w-8 h-8 text-[#387E89]" />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA Section - Enhanced */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8, delay: 0.8 }} 
+            viewport={{ once: true }} 
+            className="text-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-r from-white via-blue-50/50 to-white p-8 rounded-2xl border border-blue-200/50 shadow-xl hover:shadow-2xl transition-all duration-500 max-w-2xl mx-auto"
+            >
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#143151] mb-4">
+                Ready for Your Transformation?
+              </h3>
+              <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                Join thousands of clinicians who've already transformed their practice workflow and reclaimed their time.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    size="lg" 
+                    className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-xl"
+                  >
+                    <Play className="w-5 h-5 mr-2" />
+                    See the Transformation
+                  </Button>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 px-8 py-6 text-lg font-semibold rounded-xl"
+                  >
+                    <DollarSign className="w-5 h-5 mr-2" />
+                    Calculate Your Savings
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
