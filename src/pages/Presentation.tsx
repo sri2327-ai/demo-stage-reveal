@@ -175,9 +175,9 @@ export default function Presentation() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight"
           >
-            The AI medical scribe
+            The AI That Charts & Staffs
             <br />
-            <span className="text-white/90">for all clinicians</span>
+            <span className="text-white/90">— So You Don't Have To</span>
           </motion.h1>
 
           <motion.p
@@ -209,7 +209,7 @@ export default function Presentation() {
               }}
               className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20"
             >
-              Try S10.AI - it's free
+              Try S10.AI
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
           </motion.div>
