@@ -23,10 +23,10 @@ export const Hero: React.FC<HeroProps> = ({ currentSection }) => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-4xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-4xl mt-16 sm:mt-20 md:mt-24">
         {/* Enhanced Badge */}
         <motion.div
-          className="inline-block mb-8"
+          className="inline-block mb-12 sm:mb-16"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.7 }}
@@ -39,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ currentSection }) => {
         
         {/* Improved Typography Hierarchy */}
         <motion.h1 
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-[1.1] tracking-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 sm:mb-10 leading-[1.1] tracking-tight"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -52,7 +52,7 @@ export const Hero: React.FC<HeroProps> = ({ currentSection }) => {
         
         {/* Improved Description */}
         <motion.p 
-          className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-light"
+          className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-16 sm:mb-20 leading-relaxed font-light"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
