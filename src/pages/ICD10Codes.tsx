@@ -1288,16 +1288,16 @@ const ICD10Codes = () => {
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Quick Chapter Access</h2>
             </div>
             
-            <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {icd10Chapters.map(chapter => <Button key={chapter.id} variant={selectedChapter === chapter.id ? "default" : "outline"} size="lg" onClick={() => {
               if (selectedChapter === chapter.id) {
                 scrollToChapter(chapter.id);
               } else {
                 handleChapterFilter(chapter.id);
               }
-            }} className="hover:bg-[#387E89] hover:text-white transition-colors p-4 h-auto min-h-[4rem] sm:min-h-[5rem] flex flex-col items-center justify-center" title={chapter.title}>
-                  <span className="font-mono text-sm sm:text-base font-bold">{chapter.range}</span>
-                  <span className="text-xs sm:text-sm text-center leading-tight mt-2 opacity-80 font-medium">
+            }} className="hover:bg-[#387E89] hover:text-white hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 p-6 h-auto min-h-[6rem] sm:min-h-[7rem] flex flex-col items-center justify-center border-2 cursor-pointer group" title={chapter.title}>
+                  <span className="font-mono text-lg sm:text-xl font-bold group-hover:text-white">{chapter.range}</span>
+                  <span className="text-sm sm:text-base text-center leading-tight mt-3 opacity-80 font-medium group-hover:opacity-100">
                     Chapter {chapter.chapter.split(' ')[1]}
                   </span>
                 </Button>)}
