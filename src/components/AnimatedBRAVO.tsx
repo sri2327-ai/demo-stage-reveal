@@ -322,11 +322,11 @@ export const AnimatedBRAVO = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto px-4">
+    <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto px-4">
       {/* Main Animation */}
-      <div className="w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
+      <div className="w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col min-h-[520px]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4">
+        <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
@@ -345,14 +345,14 @@ export const AnimatedBRAVO = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-6 flex-1 flex flex-col min-h-[320px]">
+        <div className="p-8 flex-1 flex flex-col min-h-[320px]">
           <AnimatePresence mode="wait">
             {renderCurrentScreen()}
           </AnimatePresence>
         </div>
 
         {/* Footer - Fixed positioning */}
-        <div className="bg-gray-50 px-6 py-2 border-t mt-auto flex-shrink-0">
+        <div className="bg-gray-50 px-8 py-4 border-t mt-auto flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <div className="flex items-center gap-1">
@@ -372,63 +372,60 @@ export const AnimatedBRAVO = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-full bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-[#143151] mb-4">Automates Anything You Need</h3>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Zap className="w-4 h-4 text-blue-600" />
+      <div className="w-full bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+        <h3 className="text-xl font-bold text-[#143151] mb-6">Automates Anything You Need</h3>
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Zap className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">Smart Automation</h4>
-              <p className="text-sm text-gray-600">Handles patient calls, scheduling, reminders, and follow-ups automatically</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Smart Automation</h4>
+              <p className="text-gray-600 leading-relaxed">Handles patient calls, scheduling, reminders, and follow-ups automatically</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Calendar className="w-4 h-4 text-green-600" />
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Calendar className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">Intelligent Scheduling</h4>
-              <p className="text-sm text-gray-600">Understands context and preferences to book optimal appointments</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Intelligent Scheduling</h4>
+              <p className="text-gray-600 leading-relaxed">Understands context and preferences to book optimal appointments</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <MessageSquare className="w-4 h-4 text-purple-600" />
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <MessageSquare className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">Patient Communication</h4>
-              <p className="text-sm text-gray-600">Manages all patient interactions with natural, helpful responses</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Patient Communication</h4>
+              <p className="text-gray-600 leading-relaxed">Manages all patient interactions with natural, helpful responses</p>
             </div>
           </div>
         </div>
         
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Globe className="w-4 h-4 text-blue-600" />
-              <span className="font-medium text-blue-900 text-sm">Complete Feature Set</span>
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <Languages className="w-6 h-6 text-blue-600" />
+              <span className="font-bold text-blue-900 text-lg">Complete Feature Set</span>
             </div>
-            <ul className="text-xs text-blue-700 space-y-1">
-              <li>• 24/7 AI-Powered Patient Interaction</li>
-              <li>• AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability</li>
-              <li>• Seamless Scheduling</li>
-              <li>• AI-driven booking, rescheduling & reminders that never miss an inquiry</li>
-              <li>• Help Reduce No-Shows & Boost Revenue</li>
-              <li>• Smart reminders, follow-ups, and automated workflows minimize cancellations</li>
-              <li>• Revenue Protection</li>
-              <li>• Aims to reduce denials through improved data capture and RCM support</li>
-              <li>• Overcome Staffing Shortages</li>
-              <li>• AI task assignment with smart delegation to the right person or system</li>
-              <li>• Seamless Integration</li>
-              <li>• Connects with many common EHR, CRM, and PMS systems</li>
-              <li>• Smarter Referrals</li>
-              <li>• Automates aspects of triage & care coordination under clinical guidance</li>
-              <li className="font-medium text-green-800">• Multilingual Support (60+ Languages)</li>
-            </ul>
+            <div className="bg-white rounded-xl p-6 border border-blue-200">
+              <div className="flex items-center gap-3 mb-3">
+                <Globe className="w-5 h-5 text-green-600" />
+                <span className="font-semibold text-green-900">Multilingual Support</span>
+              </div>
+              <p className="text-green-700 mb-4 font-medium">Communicates fluently in 60+ languages including:</p>
+              <div className="flex flex-wrap gap-3">
+                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">English</span>
+                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Spanish</span>
+                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Mandarin</span>
+                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">French</span>
+                <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">+56 more</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -71,11 +71,11 @@ export const AnimatedCRUSH = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto px-4">
+    <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto px-4">
       {/* Main Animation */}
-      <div className="w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
+      <div className="w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col min-h-[520px]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-4">
+        <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
@@ -94,7 +94,7 @@ export const AnimatedCRUSH = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-6 flex-1 flex flex-col min-h-[320px]">
+        <div className="p-8 flex-1 flex flex-col min-h-[320px]">
           <AnimatePresence mode="wait">
             {currentStep === 0 && (
               <motion.div
@@ -274,7 +274,7 @@ export const AnimatedCRUSH = () => {
         </div>
 
         {/* Footer - Fixed positioning */}
-        <div className="bg-gray-50 px-6 py-2 border-t mt-auto flex-shrink-0">
+        <div className="bg-gray-50 px-8 py-4 border-t mt-auto flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <div className="flex items-center gap-1">
@@ -298,52 +298,52 @@ export const AnimatedCRUSH = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-full bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-[#143151] mb-4">How CRUSH Works</h3>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <User className="w-4 h-4 text-blue-600" />
+      <div className="w-full bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+        <h3 className="text-xl font-bold text-[#143151] mb-6">It works in 3 simple steps</h3>
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <User className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">1. Select Patient</h4>
-              <p className="text-sm text-gray-600">Choose patient from your system or create new encounter</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">1. Select Patient</h4>
+              <p className="text-gray-600 leading-relaxed">Choose patient from your system or create new encounter</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Mic className="w-4 h-4 text-green-600" />
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Mic className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">2. Record</h4>
-              <p className="text-sm text-gray-600">Speak naturally during patient encounter - AI listens and transcribes</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">2. Record</h4>
+              <p className="text-gray-600 leading-relaxed">Speak naturally during patient encounter - AI listens and transcribes</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Upload className="w-4 h-4 text-purple-600" />
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Upload className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-1">3. Push Notes to EHR</h4>
-              <p className="text-sm text-gray-600">Complete clinical notes automatically sent to any EHR system</p>
+              <h4 className="font-semibold text-gray-800 mb-2 text-lg">3. Push Notes to EHR</h4>
+              <p className="text-gray-600 leading-relaxed">Complete clinical notes automatically sent to any EHR system</p>
             </div>
           </div>
         </div>
         
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <div className="bg-blue-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Database className="w-4 h-4 text-blue-600" />
-              <span className="font-medium text-blue-900 text-sm">EHR Integration</span>
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <div className="bg-blue-50 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <Database className="w-5 h-5 text-blue-600" />
+              <span className="font-semibold text-blue-900">EHR Integration</span>
             </div>
-            <p className="text-xs text-blue-700 mb-2">Works with any EHR system:</p>
-            <div className="flex flex-wrap gap-1">
-              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Epic</span>
-              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Cerner</span>
-              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Allscripts</span>
-              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Any EHR</span>
+            <p className="text-blue-700 mb-4 font-medium">Works with any EHR system:</p>
+            <div className="flex flex-wrap gap-2">
+              <span className="bg-white text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Epic</span>
+              <span className="bg-white text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Cerner</span>
+              <span className="bg-white text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Allscripts</span>
+              <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Any EHR</span>
             </div>
           </div>
         </div>
