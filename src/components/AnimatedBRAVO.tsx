@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -11,7 +10,10 @@ import {
   Bell,
   Mail,
   ArrowRight,
-  Users
+  Users,
+  Zap,
+  Globe,
+  Languages
 } from 'lucide-react';
 
 export const AnimatedBRAVO = () => {
@@ -320,48 +322,116 @@ export const AnimatedBRAVO = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
+    <div className="flex gap-6 w-full max-w-4xl mx-auto">
+      {/* Main Animation */}
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <Users className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-white font-semibold">BRAVO AI Agent</h3>
+                <p className="text-white/80 text-sm">Front Office Automation</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-white font-semibold">BRAVO AI Agent</h3>
-              <p className="text-white/80 text-sm">Front Office Automation</p>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full" />
+              <span className="text-white/80 text-xs">Online</span>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full" />
-            <span className="text-white/80 text-xs">Online</span>
+        </div>
+
+        {/* Content Area */}
+        <div className="p-6 h-80 flex-1 flex flex-col">
+          <AnimatePresence mode="wait">
+            {renderCurrentScreen()}
+          </AnimatePresence>
+        </div>
+
+        {/* Footer - Fixed positioning */}
+        <div className="bg-gray-50 px-6 py-2 border-t mt-auto flex-shrink-0">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4 text-xs text-gray-500">
+              <div className="flex items-center gap-1">
+                <Phone className="w-3 h-3" />
+                <span>24/7 Available</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <CheckCircle className="w-3 h-3 text-green-500" />
+                <span>Auto-Scheduling</span>
+              </div>
+            </div>
+            <div className="text-xs text-gray-400">
+              Step {currentScreen + 1} of {screens.length}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="p-6 h-80 flex-1 flex flex-col">
-        <AnimatePresence mode="wait">
-          {renderCurrentScreen()}
-        </AnimatePresence>
-      </div>
-
-      {/* Footer - Fixed positioning */}
-      <div className="bg-gray-50 px-6 py-2 border-t mt-auto flex-shrink-0">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-xs text-gray-500">
-            <div className="flex items-center gap-1">
-              <Phone className="w-3 h-3" />
-              <span>24/7 Available</span>
+      {/* Side Information Panel */}
+      <div className="w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <h3 className="text-lg font-semibold text-[#143151] mb-4">Automates Anything You Need</h3>
+        <div className="space-y-4">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Zap className="w-4 h-4 text-blue-600" />
             </div>
-            <div className="flex items-center gap-1">
-              <CheckCircle className="w-3 h-3 text-green-500" />
-              <span>Auto-Scheduling</span>
+            <div>
+              <h4 className="font-medium text-gray-800 mb-1">Smart Automation</h4>
+              <p className="text-sm text-gray-600">Handles patient calls, scheduling, reminders, and follow-ups automatically</p>
             </div>
           </div>
-          <div className="text-xs text-gray-400">
-            Step {currentScreen + 1} of {screens.length}
+          
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Calendar className="w-4 h-4 text-green-600" />
+            </div>
+            <div>
+              <h4 className="font-medium text-gray-800 mb-1">Intelligent Scheduling</h4>
+              <p className="text-sm text-gray-600">Understands context and preferences to book optimal appointments</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <MessageSquare className="w-4 h-4 text-purple-600" />
+            </div>
+            <div>
+              <h4 className="font-medium text-gray-800 mb-1">Patient Communication</h4>
+              <p className="text-sm text-gray-600">Manages all patient interactions with natural, helpful responses</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Globe className="w-4 h-4 text-blue-600" />
+              <span className="font-medium text-blue-900 text-sm">Complete Feature Set</span>
+            </div>
+            <ul className="text-xs text-blue-700 space-y-1 mb-3">
+              <li>• 24/7 patient support</li>
+              <li>• Insurance verification</li>
+              <li>• Automated reminders</li>
+              <li>• No-show reduction</li>
+            </ul>
+            
+            <div className="bg-white rounded-lg p-3 border border-blue-200">
+              <div className="flex items-center gap-2 mb-2">
+                <Languages className="w-4 h-4 text-green-600" />
+                <span className="font-medium text-green-900 text-sm">Multilingual Support</span>
+              </div>
+              <p className="text-xs text-green-700 mb-2">Supports 60+ languages including:</p>
+              <div className="flex flex-wrap gap-1">
+                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">English</span>
+                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Spanish</span>
+                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">French</span>
+                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">+57 more</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
