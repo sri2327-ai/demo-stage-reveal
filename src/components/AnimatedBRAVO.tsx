@@ -322,9 +322,9 @@ export const AnimatedBRAVO = () => {
   };
 
   return (
-    <div className="flex gap-6 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-6xl mx-auto px-4">
       {/* Main Animation */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
+      <div className="w-full lg:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
         {/* Header */}
         <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4">
           <div className="flex items-center justify-between">
@@ -345,7 +345,7 @@ export const AnimatedBRAVO = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-6 h-80 flex-1 flex flex-col">
+        <div className="p-6 flex-1 flex flex-col min-h-[320px]">
           <AnimatePresence mode="wait">
             {renderCurrentScreen()}
           </AnimatePresence>
@@ -372,7 +372,7 @@ export const AnimatedBRAVO = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+      <div className="w-full lg:w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-[#143151] mb-4">Automates Anything You Need</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-3">
@@ -412,26 +412,23 @@ export const AnimatedBRAVO = () => {
               <Globe className="w-4 h-4 text-blue-600" />
               <span className="font-medium text-blue-900 text-sm">Complete Feature Set</span>
             </div>
-            <ul className="text-xs text-blue-700 space-y-1 mb-3">
-              <li>• 24/7 patient support</li>
-              <li>• Insurance verification</li>
-              <li>• Automated reminders</li>
-              <li>• No-show reduction</li>
+            <ul className="text-xs text-blue-700 space-y-1">
+              <li>• 24/7 AI-Powered Patient Interaction</li>
+              <li>• AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability</li>
+              <li>• Seamless Scheduling</li>
+              <li>• AI-driven booking, rescheduling & reminders that never miss an inquiry</li>
+              <li>• Help Reduce No-Shows & Boost Revenue</li>
+              <li>• Smart reminders, follow-ups, and automated workflows minimize cancellations</li>
+              <li>• Revenue Protection</li>
+              <li>• Aims to reduce denials through improved data capture and RCM support</li>
+              <li>• Overcome Staffing Shortages</li>
+              <li>• AI task assignment with smart delegation to the right person or system</li>
+              <li>• Seamless Integration</li>
+              <li>• Connects with many common EHR, CRM, and PMS systems</li>
+              <li>• Smarter Referrals</li>
+              <li>• Automates aspects of triage & care coordination under clinical guidance</li>
+              <li className="font-medium text-green-800">• Multilingual Support (60+ Languages)</li>
             </ul>
-            
-            <div className="bg-white rounded-lg p-3 border border-blue-200">
-              <div className="flex items-center gap-2 mb-2">
-                <Languages className="w-4 h-4 text-green-600" />
-                <span className="font-medium text-green-900 text-sm">Multilingual Support</span>
-              </div>
-              <p className="text-xs text-green-700 mb-2">Supports 60+ languages including:</p>
-              <div className="flex flex-wrap gap-1">
-                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">English</span>
-                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Spanish</span>
-                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">French</span>
-                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">+57 more</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

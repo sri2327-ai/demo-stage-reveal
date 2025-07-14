@@ -71,9 +71,9 @@ export const AnimatedCRUSH = () => {
   }, []);
 
   return (
-    <div className="flex gap-6 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-6xl mx-auto px-4">
       {/* Main Animation */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
+      <div className="w-full lg:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
         {/* Header */}
         <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-4">
           <div className="flex items-center justify-between">
@@ -94,7 +94,7 @@ export const AnimatedCRUSH = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-6 h-80 flex-1 flex flex-col">
+        <div className="p-6 flex-1 flex flex-col min-h-[320px]">
           <AnimatePresence mode="wait">
             {currentStep === 0 && (
               <motion.div
@@ -298,7 +298,7 @@ export const AnimatedCRUSH = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+      <div className="w-full lg:w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-[#143151] mb-4">How CRUSH Works</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-3">
@@ -327,7 +327,7 @@ export const AnimatedCRUSH = () => {
             </div>
             <div>
               <h4 className="font-medium text-gray-800 mb-1">3. Push Notes to EHR</h4>
-              <p className="text-sm text-gray-600">Complete clinical notes automatically sent to your EHR system</p>
+              <p className="text-sm text-gray-600">Complete clinical notes automatically sent to any EHR system</p>
             </div>
           </div>
         </div>
@@ -338,12 +338,12 @@ export const AnimatedCRUSH = () => {
               <Database className="w-4 h-4 text-blue-600" />
               <span className="font-medium text-blue-900 text-sm">EHR Integration</span>
             </div>
-            <p className="text-xs text-blue-700 mb-2">Seamlessly integrates with:</p>
+            <p className="text-xs text-blue-700 mb-2">Works with any EHR system:</p>
             <div className="flex flex-wrap gap-1">
               <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Epic</span>
               <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Cerner</span>
               <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Allscripts</span>
-              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">+50 more</span>
+              <span className="bg-white text-blue-800 px-2 py-1 rounded text-xs">Any EHR</span>
             </div>
           </div>
         </div>
