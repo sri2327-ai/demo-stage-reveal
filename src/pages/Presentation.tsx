@@ -565,8 +565,23 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     title: "Smart Medical Understanding",
                     desc: "Understands medical language and context—no second-guessing, no errors"
                   }, {
+                    title: "Advanced Coding Support",
+                    desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation"
+                  }, {
                     title: "Clinical Intelligence",
-                    desc: "HCC tracking, quality alerts, and preventive care prompts built-in"
+                    desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in"
+                  }, {
+                    title: "Pre-Visit Preparation",
+                    desc: "Smart visit prep with patient background, follow-up items, and last visit summary"
+                  }, {
+                    title: "Magic Edit & Natural Language",
+                    desc: "Make complex edits by dictating requests. Understands natural language like popular AIs"
+                  }, {
+                    title: "Patient Visit Summary",
+                    desc: "Automated patient instructions in plain language, ready to email instantly"
+                  }, {
+                    title: "100% Customizable",
+                    desc: "Learns your preferences and adapts to your unique workflow and documentation style"
                   }, {
                     title: "Complete Automation",
                     desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically"
