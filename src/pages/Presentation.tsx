@@ -491,32 +491,11 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* CRUSH Section */}
           <div className="mb-20 sm:mb-24 lg:mb-32">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
-              {/* Animation Side */}
-              <div className="order-2 xl:order-1 flex items-center justify-center min-h-[600px]">
-                <div className="w-full max-w-lg">
-                  <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-2xl">
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <AnimatedCRUSH />
-                    </div>
-                    
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
-                      <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-full shadow-2xl border border-white/50">
-                        <span className="text-base font-semibold text-[#387E89] flex items-center gap-3">
-                          <Play className="w-5 h-5" />
-                          See CRUSH in Action
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Features Side */}
-              <div className="order-1 xl:order-2 space-y-8 lg:space-y-10">
+            <div className="space-y-12 lg:space-y-16">
+              {/* Features Section */}
+              <div className="space-y-8 lg:space-y-10">
                 {/* Header Section */}
-                <div className="text-center xl:text-left">
+                <div className="text-center">
                   <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
                     CRUSH
                   </h3>
@@ -528,7 +507,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
 
                 {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
                   {[{
                     icon: Clock,
                     title: "Under 60 Seconds",
@@ -555,23 +534,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     gradient: "from-orange-50 to-orange-100"
                   }].map((feature, index) => (
                     <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm`}>
+                      <div className="text-center">
+                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
                           <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
                         </div>
-                        <div>
-                          <h4 className="font-bold text-[#143151] text-base">{feature.title}</h4>
-                          <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-                        </div>
+                        <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-6 lg:space-y-8">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
-                  <div className="grid grid-cols-1 gap-5">
+                <div className="space-y-6 lg:space-y-8 max-w-4xl mx-auto">
+                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[{
                       title: "Smart Medical Understanding",
                       desc: "Understands medical language and context—no second-guessing, no errors",
@@ -618,16 +595,37 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   </div>
                 </div>
               </div>
+
+              {/* Animation Section */}
+              <div className="flex justify-center">
+                <div className="w-full max-w-2xl">
+                  <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-2xl">
+                    <div className="group-hover:scale-105 transition-transform duration-300">
+                      <AnimatedCRUSH />
+                    </div>
+                    
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
+                      <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-full shadow-2xl border border-white/50">
+                        <span className="text-base font-semibold text-[#387E89] flex items-center gap-3">
+                          <Play className="w-5 h-5" />
+                          See CRUSH in Action
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* BRAVO Section */}
           <div className="mb-20 sm:mb-24">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
-              {/* Features Side */}
-              <div className="order-1 space-y-8 lg:space-y-10">
+            <div className="space-y-12 lg:space-y-16">
+              {/* Features Section */}
+              <div className="space-y-8 lg:space-y-10">
                 {/* Header Section */}
-                <div className="text-center xl:text-left">
+                <div className="text-center">
                   <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
                     BRAVO
                   </h3>
@@ -639,7 +637,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
 
                 {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
                   {[{
                     icon: Phone,
                     title: "AI Chat & Calls",
@@ -666,23 +664,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     gradient: "from-orange-50 to-orange-100"
                   }].map((feature, index) => (
                     <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm`}>
+                      <div className="text-center">
+                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
                           <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
                         </div>
-                        <div>
-                          <h4 className="font-bold text-[#143151] text-base">{feature.title}</h4>
-                          <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-                        </div>
+                        <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-6 lg:space-y-8">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
-                  <div className="grid grid-cols-1 gap-5">
+                <div className="space-y-6 lg:space-y-8 max-w-4xl mx-auto">
+                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[{
                       title: "24/7 AI-Powered Patient Interaction",
                       desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
@@ -726,9 +722,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
               </div>
 
-              {/* Animation Side */}
-              <div className="order-2 flex items-center justify-center min-h-[600px]">
-                <div className="w-full max-w-lg">
+              {/* Animation Section */}
+              <div className="flex justify-center">
+                <div className="w-full max-w-2xl">
                   <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-2xl">
                     <div className="group-hover:scale-105 transition-transform duration-300">
                       <AnimatedBRAVO />
