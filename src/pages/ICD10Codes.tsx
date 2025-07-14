@@ -1283,22 +1283,22 @@ const ICD10Codes = () => {
         {/* Chapter Filter Section */}
         <div className="mb-8 sm:mb-12">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-              <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89] flex-shrink-0" />
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-[#143151]">Quick Chapter Access</h2>
+            <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+              <Filter className="h-5 w-5 sm:h-6 sm:w-6 text-[#387E89] flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Quick Chapter Access</h2>
             </div>
             
-            <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-3 mb-4 sm:mb-6">
-              {icd10Chapters.map(chapter => <Button key={chapter.id} variant={selectedChapter === chapter.id ? "default" : "outline"} size="sm" onClick={() => {
+            <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-4 mb-6 sm:mb-8">
+              {icd10Chapters.map(chapter => <Button key={chapter.id} variant={selectedChapter === chapter.id ? "default" : "outline"} size="lg" onClick={() => {
               if (selectedChapter === chapter.id) {
                 scrollToChapter(chapter.id);
               } else {
                 handleChapterFilter(chapter.id);
               }
-            }} className="text-xs hover:bg-[#387E89] hover:text-white transition-colors p-2 h-auto min-h-[2.5rem] flex flex-col items-center justify-center" title={chapter.title}>
-                  <span className="font-mono text-xs font-semibold">{chapter.range}</span>
-                  <span className="text-[10px] text-center leading-tight mt-1 opacity-75">
-                    Ch. {chapter.chapter.split(' ')[1]}
+            }} className="hover:bg-[#387E89] hover:text-white transition-colors p-4 h-auto min-h-[4rem] sm:min-h-[5rem] flex flex-col items-center justify-center" title={chapter.title}>
+                  <span className="font-mono text-sm sm:text-base font-bold">{chapter.range}</span>
+                  <span className="text-xs sm:text-sm text-center leading-tight mt-2 opacity-80 font-medium">
+                    Chapter {chapter.chapter.split(' ')[1]}
                   </span>
                 </Button>)}
             </div>
