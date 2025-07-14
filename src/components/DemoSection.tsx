@@ -1,11 +1,12 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { DemoStage } from './DemoStage';
 import type { DemoStage as DemoStageType } from '../types/demo';
 import { useIsMobile } from '../hooks/use-mobile';
-import { MousePointerClick, Play, Info } from 'lucide-react';
+import { MousePointerClick, Play, Info, ChevronDown, ChevronUp } from 'lucide-react';
 import { clinicalAnimations } from '../lib/animation-utils';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 
 interface DemoSectionProps {
   isInViewport: boolean;
@@ -21,11 +22,70 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
   currentSection
 }) => {
   const isMobile = useIsMobile();
+  const [currentStage, setCurrentStage] = useState(0);
+  const [currentSubStep, setCurrentSubStep] = useState(0);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(true);
   
-  useEffect(() => {
-    console.log("DemoSection - currentSection:", currentSection);
-    console.log("DemoSection - isDemoSection value:", currentSection === 'demo');
-  }, [currentSection]);
+  // Mock data for step descriptions - in real app, this would come from props or context
+  const getStepDescription = (stage: number, step: number) => {
+    const descriptions = {
+      0: {
+        0: "Initial patient interaction begins with voice-activated AI greeting",
+        1: "Patient provides symptoms and medical history through natural conversation",
+        2: "Real-time transcription captures all spoken information accurately",
+        3: "AI processes symptoms and suggests preliminary assessments"
+      },
+      1: {
+        0: "Medical scribe AI begins real-time documentation of the encounter", 
+        1: "Automated note generation captures clinical observations",
+        2: "Structured medical templates populate with relevant data",
+        3: "Final review and verification of generated clinical notes"
+      },
+      2: {
+        0: "Administrative task automation begins processing",
+        1: "Insurance verification and billing code assignment",
+        2: "Appointment scheduling and follow-up coordination", 
+        3: "Regulatory compliance checks and documentation"
+      },
+      3: {
+        0: "Post-visit care instructions are automatically generated",
+        1: "Patient education materials are customized and delivered",
+        2: "Follow-up reminders and medication alerts are scheduled",
+        3: "Care coordination with other providers is initiated"
+      }
+    };
+    return descriptions[stage]?.[step] || "Step description not available";
+  };
+
+  const getStepTitle = (stage: number, step: number) => {
+    const titles = {
+      0: {
+        0: "Voice Recognition",
+        1: "Symptom Collection", 
+        2: "Real-time Transcription",
+        3: "AI Assessment"
+      },
+      1: {
+        0: "Live Documentation",
+        1: "Note Generation",
+        2: "Template Population", 
+        3: "Review & Verification"
+      },
+      2: {
+        0: "Task Processing",
+        1: "Insurance & Billing",
+        2: "Scheduling & Coordination",
+        3: "Compliance Checks"
+      },
+      3: {
+        0: "Care Instructions",
+        1: "Patient Education",
+        2: "Follow-up Planning", 
+        3: "Provider Coordination"
+      }
+    };
+    return titles[stage]?.[step] || `Stage ${stage + 1} - Step ${step + 1}`;
+  };
   
   return (
     <div className="px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 md:py-12 bg-gradient-to-b from-white to-gray-50 relative overflow-x-hidden">
@@ -149,16 +209,28 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
                   {stages.map((stage, index) => (
                     <motion.div
                       key={stage.id}
-                      className="group cursor-pointer"
+                      className={`group cursor-pointer ${currentStage === index ? 'bg-[#387E89]/5' : ''}`}
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
+                      onClick={() => {
+                        setCurrentStage(index);
+                        setCurrentSubStep(0); // Reset to first step when changing stage
+                      }}
                     >
                       <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#387E89]/5 transition-colors">
-                        <div className="w-8 h-8 rounded-full bg-[#387E89]/10 flex items-center justify-center text-sm font-medium text-[#387E89] group-hover:bg-[#387E89] group-hover:text-white transition-colors">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                          currentStage === index 
+                            ? 'bg-[#387E89] text-white' 
+                            : 'bg-[#387E89]/10 text-[#387E89] group-hover:bg-[#387E89] group-hover:text-white'
+                        }`}>
                           {index + 1}
                         </div>
                         <div>
-                          <h4 className="font-medium text-[#143151] group-hover:text-[#387E89] transition-colors">
+                          <h4 className={`font-medium transition-colors ${
+                            currentStage === index 
+                              ? 'text-[#387E89]' 
+                              : 'text-[#143151] group-hover:text-[#387E89]'
+                          }`}>
                             {stage.title}
                           </h4>
                           <p className="text-sm text-gray-600 line-clamp-2">
@@ -170,7 +242,64 @@ export const DemoSection: React.FC<DemoSectionProps> = ({
                   ))}
                 </div>
 
+                
+                {/* Current Step Description */}
                 <div className="mt-6 pt-6 border-t border-gray-200">
+                  <Collapsible open={isDescriptionOpen} onOpenChange={setIsDescriptionOpen}>
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-[#143151]">
+                        {getStepTitle(currentStage, currentSubStep)}
+                      </h4>
+                      <CollapsibleTrigger asChild>
+                        <motion.button
+                          className="p-2 rounded-full bg-[#387E89]/10 text-[#143151] hover:bg-[#387E89]/20 transition-colors"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          aria-label={isDescriptionOpen ? "Collapse description" : "Expand description"}
+                        >
+                          {isDescriptionOpen ? (
+                            <ChevronUp size={16} />
+                          ) : (
+                            <ChevronDown size={16} />
+                          )}
+                        </motion.button>
+                      </CollapsibleTrigger>
+                    </div>
+                    
+                    <CollapsibleContent>
+                      <motion.p 
+                        className="text-sm text-gray-700 leading-relaxed mb-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {getStepDescription(currentStage, currentSubStep)}
+                      </motion.p>
+                      
+                      {/* Step Navigation */}
+                      <div className="flex flex-wrap gap-2">
+                        {Array.from({ length: 4 }, (_, i) => (
+                          <motion.button
+                            key={i}
+                            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors
+                                        ${currentSubStep === i
+                                ? 'bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-md'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              }`}
+                            onClick={() => setCurrentSubStep(i)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            aria-label={`Go to step ${i + 1}`}
+                          >
+                            {i + 1}
+                          </motion.button>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-gray-200">
                   <div className="bg-[#387E89]/5 rounded-lg p-4">
                     <div className="flex items-center gap-2 text-sm text-[#143151] font-medium mb-2">
                       <Info size={16} className="text-[#387E89]" />
