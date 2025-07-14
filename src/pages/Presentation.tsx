@@ -574,7 +574,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     title: "Pre-Visit Preparation",
                     desc: "Smart visit prep with patient background, follow-up items, and last visit summary"
                   }, {
-                    title: "Magic Edit & Natural Language",
+                    title: "Smart Edit & Natural Language",
                     desc: "Make complex edits by dictating requests. Understands natural language like popular AIs"
                   }, {
                     title: "Patient Visit Summary",
