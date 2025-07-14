@@ -1270,7 +1270,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
-              Trusted by 10,000+ Clinicians
+              Trusted by 1,000+ Clinicians
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Real results from real doctors using S10.AI every day
@@ -1433,7 +1433,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           <div className="text-center">
             <div className="inline-flex items-center gap-8 bg-gray-50 rounded-2xl px-8 py-6">
               <div className="text-center">
-                <div className="text-2xl font-bold text-[#143151]">10,000+</div>
+                <div className="text-2xl font-bold text-[#143151]">1,000+</div>
                 <div className="text-sm text-gray-600">Active Clinicians</div>
               </div>
               <div className="w-px h-12 bg-gray-300"></div>
@@ -1730,7 +1730,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-500" />
-                  <span>10,000+ Active Users</span>
+                  <span>1,000+ Active Users</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
