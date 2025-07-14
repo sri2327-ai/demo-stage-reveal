@@ -712,12 +712,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     
                     {/* Hover overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
-                      <div className="bg-white/95 backdrop-blur-sm px-6 py-4 rounded-full shadow-2xl border border-white/50">
-                        <span className="text-base font-semibold text-[#143151] flex items-center gap-3">
-                          <Play className="w-5 h-5" />
-                          See BRAVO in Action
-                        </span>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
