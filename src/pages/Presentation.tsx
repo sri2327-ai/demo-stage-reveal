@@ -653,14 +653,26 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Detailed Features */}
                 <div className="space-y-4">
                   {[{
-                    title: "Reduce No-Shows",
-                    desc: "Automated reminders and confirmations through multiple channels"
+                    title: "24/7 AI-Powered Patient Interaction",
+                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability"
                   }, {
-                    title: "Patient Experience",
-                    desc: "Elevated support with instant responses and personalized care"
+                    title: "Seamless Scheduling",
+                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry"
                   }, {
-                    title: "Complete Integration",
-                    desc: "Seamlessly works with your existing practice management systems"
+                    title: "Help Reduce No-Shows & Boost Revenue",
+                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations"
+                  }, {
+                    title: "Revenue Protection",
+                    desc: "Aims to reduce denials through improved data capture and RCM support"
+                  }, {
+                    title: "Overcome Staffing Shortages",
+                    desc: "AI task assignment with smart delegation to the right person or system"
+                  }, {
+                    title: "Seamless Integration",
+                    desc: "Connects with many common EHR, CRM, and PMS systems"
+                  }, {
+                    title: "Smarter Referrals",
+                    desc: "Automates aspects of triage & care coordination under clinical guidance"
                   }].map((feature, index) => (
                     <div key={feature.title} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
