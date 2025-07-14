@@ -491,10 +491,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* CRUSH Section */}
           <div className="mb-20 sm:mb-24 lg:mb-32">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
               {/* Animation Side */}
-              <div className="order-2 xl:order-1">
-                <div className="sticky top-8">
+              <div className="order-2 xl:order-1 flex items-center justify-center min-h-[600px]">
+                <div className="w-full max-w-lg">
                   <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-2xl">
                     <div className="group-hover:scale-105 transition-transform duration-300">
                       <AnimatedCRUSH />
@@ -623,7 +623,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* BRAVO Section */}
           <div className="mb-20 sm:mb-24">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
               {/* Features Side */}
               <div className="order-1 space-y-8 lg:space-y-10">
                 {/* Header Section */}
@@ -727,8 +727,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
 
               {/* Animation Side */}
-              <div className="order-2">
-                <div className="sticky top-8">
+              <div className="order-2 flex items-center justify-center min-h-[600px]">
+                <div className="w-full max-w-lg">
                   <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-2xl">
                     <div className="group-hover:scale-105 transition-transform duration-300">
                       <AnimatedBRAVO />
@@ -767,10 +767,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Watch Demo
                 </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Before vs After - Compact & Subtle Design */}
