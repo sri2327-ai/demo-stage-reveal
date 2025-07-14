@@ -8,7 +8,6 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
-
 const CountUp = ({
   end,
   duration = 2
@@ -156,7 +155,7 @@ export default function Presentation() {
   } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const isMobile = useIsMobile();
-  
+
   // Voice over state
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -180,11 +179,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       setIsPlaying(false);
       return;
     }
-
     if (isLoading) return; // Prevent multiple clicks while loading
 
     setIsLoading(true);
-
     try {
       const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
         method: 'POST',
@@ -202,19 +199,16 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           }
         })
       });
-
       if (response.ok) {
         const audioBlob = await response.blob();
         const audioUrl = URL.createObjectURL(audioBlob);
         const newAudio = new Audio(audioUrl);
-        
         newAudio.onended = () => {
           setIsPlaying(false);
           setAudio(null);
           setIsLoading(false);
           URL.revokeObjectURL(audioUrl);
         };
-        
         setAudio(newAudio);
         setIsPlaying(true);
         setIsLoading(false);
@@ -244,7 +238,6 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
-
   return <div className="min-h-screen bg-white">
       {/* Transparent Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm border-b border-white/10">
@@ -254,12 +247,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <h1 className="text-white text-xl font-semibold">S10.AI</h1>
             </div>
             <div className="flex items-center">
-              <button
-                onClick={handleVoiceOver}
-                disabled={isLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}
-              >
+              <button onClick={handleVoiceOver} disabled={isLoading} className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed" title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}>
                 {isLoading ? <Volume2 className="w-5 h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 <span className="hidden sm:inline">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
               </button>
@@ -509,31 +497,30 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Key Stats Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
                   {[{
-                    icon: Clock,
-                    title: "Under 60 Seconds",
-                    desc: "Real-time documentation",
-                    color: "blue",
-                    gradient: "from-blue-50 to-blue-100"
-                  }, {
-                    icon: Languages,
-                    title: "60+ Languages",
-                    desc: "Understands accents & context",
-                    color: "green",
-                    gradient: "from-green-50 to-emerald-100"
-                  }, {
-                    icon: Database,
-                    title: "100+ EHRs",
-                    desc: "No API needed",
-                    color: "purple",
-                    gradient: "from-purple-50 to-purple-100"
-                  }, {
-                    icon: Stethoscope,
-                    title: "50+ Specialties",
-                    desc: "Tailored workflows",
-                    color: "orange",
-                    gradient: "from-orange-50 to-orange-100"
-                  }].map((feature, index) => (
-                    <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+                  icon: Clock,
+                  title: "Under 60 Seconds",
+                  desc: "Real-time documentation",
+                  color: "blue",
+                  gradient: "from-blue-50 to-blue-100"
+                }, {
+                  icon: Languages,
+                  title: "60+ Languages",
+                  desc: "Understands accents & context",
+                  color: "green",
+                  gradient: "from-green-50 to-emerald-100"
+                }, {
+                  icon: Database,
+                  title: "100+ EHRs",
+                  desc: "No API needed",
+                  color: "purple",
+                  gradient: "from-purple-50 to-purple-100"
+                }, {
+                  icon: Stethoscope,
+                  title: "50+ Specialties",
+                  desc: "Tailored workflows",
+                  color: "orange",
+                  gradient: "from-orange-50 to-orange-100"
+                }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
                       <div className="text-center">
                         <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
                           <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
@@ -541,8 +528,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                         <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
                         <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Detailed Features */}
@@ -550,39 +536,38 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[{
-                      title: "Smart Medical Understanding",
-                      desc: "Understands medical language and context—no second-guessing, no errors",
-                      icon: Brain
-                    }, {
-                      title: "Advanced Coding Support",
-                      desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
-                      icon: Code
-                    }, {
-                      title: "Clinical Intelligence",
-                      desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
-                      icon: Lightbulb
-                    }, {
-                      title: "Pre-Visit Preparation",
-                      desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
-                      icon: ClipboardList
-                    }, {
-                      title: "Smart Edit & Natural Language",
-                      desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
-                      icon: MessageSquare
-                    }, {
-                      title: "Patient Visit Summary",
-                      desc: "Automated patient instructions in plain language, ready to email instantly",
-                      icon: FileText
-                    }, {
-                      title: "100% Customizable",
-                      desc: "Learns your preferences and adapts to your unique workflow and documentation style",
-                      icon: Settings
-                    }, {
-                      title: "Complete Automation",
-                      desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
-                      icon: Zap
-                    }].map((feature, index) => (
-                      <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
+                    title: "Smart Medical Understanding",
+                    desc: "Understands medical language and context—no second-guessing, no errors",
+                    icon: Brain
+                  }, {
+                    title: "Advanced Coding Support",
+                    desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
+                    icon: Code
+                  }, {
+                    title: "Clinical Intelligence",
+                    desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
+                    icon: Lightbulb
+                  }, {
+                    title: "Pre-Visit Preparation",
+                    desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
+                    icon: ClipboardList
+                  }, {
+                    title: "Smart Edit & Natural Language",
+                    desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
+                    icon: MessageSquare
+                  }, {
+                    title: "Patient Visit Summary",
+                    desc: "Automated patient instructions in plain language, ready to email instantly",
+                    icon: FileText
+                  }, {
+                    title: "100% Customizable",
+                    desc: "Learns your preferences and adapts to your unique workflow and documentation style",
+                    icon: Settings
+                  }, {
+                    title: "Complete Automation",
+                    desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
+                    icon: Zap
+                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
                         <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                           <feature.icon className="w-4 h-4 text-green-600" />
                         </div>
@@ -590,8 +575,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                           <h5 className="font-semibold text-[#143151] text-base mb-2 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                           <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </div>
               </div>
@@ -639,31 +623,30 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Key Stats Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
                   {[{
-                    icon: Phone,
-                    title: "AI Chat & Calls",
-                    desc: "Connects with patients 24/7",
-                    color: "blue",
-                    gradient: "from-blue-50 to-blue-100"
-                  }, {
-                    icon: Calendar,
-                    title: "Smart Scheduling",
-                    desc: "Books & manages appointments",
-                    color: "green",
-                    gradient: "from-green-50 to-emerald-100"
-                  }, {
-                    icon: Bell,
-                    title: "Auto Follow-ups",
-                    desc: "Multi-channel reminders",
-                    color: "purple",
-                    gradient: "from-purple-50 to-purple-100"
-                  }, {
-                    icon: ClipboardList,
-                    title: "Pre-visit Intake",
-                    desc: "Handles questionnaires",
-                    color: "orange",
-                    gradient: "from-orange-50 to-orange-100"
-                  }].map((feature, index) => (
-                    <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+                  icon: Phone,
+                  title: "AI Chat & Calls",
+                  desc: "Connects with patients 24/7",
+                  color: "blue",
+                  gradient: "from-blue-50 to-blue-100"
+                }, {
+                  icon: Calendar,
+                  title: "Smart Scheduling",
+                  desc: "Books & manages appointments",
+                  color: "green",
+                  gradient: "from-green-50 to-emerald-100"
+                }, {
+                  icon: Bell,
+                  title: "Auto Follow-ups",
+                  desc: "Multi-channel reminders",
+                  color: "purple",
+                  gradient: "from-purple-50 to-purple-100"
+                }, {
+                  icon: ClipboardList,
+                  title: "Pre-visit Intake",
+                  desc: "Handles questionnaires",
+                  color: "orange",
+                  gradient: "from-orange-50 to-orange-100"
+                }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
                       <div className="text-center">
                         <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
                           <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
@@ -671,8 +654,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                         <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
                         <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Detailed Features */}
@@ -680,35 +662,34 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[{
-                      title: "24/7 AI-Powered Patient Interaction",
-                      desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
-                      icon: MessageCircle
-                    }, {
-                      title: "Seamless Scheduling",
-                      desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
-                      icon: Calendar
-                    }, {
-                      title: "Help Reduce No-Shows & Boost Revenue",
-                      desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
-                      icon: TrendingUp
-                    }, {
-                      title: "Revenue Protection",
-                      desc: "Aims to reduce denials through improved data capture and RCM support",
-                      icon: Shield
-                    }, {
-                      title: "Overcome Staffing Shortages",
-                      desc: "AI task assignment with smart delegation to the right person or system",
-                      icon: Users
-                    }, {
-                      title: "Seamless Integration",
-                      desc: "Connects with many common EHR, CRM, and PMS systems",
-                      icon: Plug
-                    }, {
-                      title: "Smarter Referrals",
-                      desc: "Automates aspects of triage & care coordination under clinical guidance",
-                      icon: ArrowRight
-                    }].map((feature, index) => (
-                      <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
+                    title: "24/7 AI-Powered Patient Interaction",
+                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
+                    icon: MessageCircle
+                  }, {
+                    title: "Seamless Scheduling",
+                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
+                    icon: Calendar
+                  }, {
+                    title: "Help Reduce No-Shows & Boost Revenue",
+                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
+                    icon: TrendingUp
+                  }, {
+                    title: "Revenue Protection",
+                    desc: "Aims to reduce denials through improved data capture and RCM support",
+                    icon: Shield
+                  }, {
+                    title: "Overcome Staffing Shortages",
+                    desc: "AI task assignment with smart delegation to the right person or system",
+                    icon: Users
+                  }, {
+                    title: "Seamless Integration",
+                    desc: "Connects with many common EHR, CRM, and PMS systems",
+                    icon: Plug
+                  }, {
+                    title: "Smarter Referrals",
+                    desc: "Automates aspects of triage & care coordination under clinical guidance",
+                    icon: ArrowRight
+                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
                         <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                           <feature.icon className="w-4 h-4 text-blue-600" />
                         </div>
@@ -716,8 +697,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                           <h5 className="font-semibold text-[#143151] text-base mb-2 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                           <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </div>
               </div>
@@ -840,20 +820,25 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Compact problems list */}
                 <div className="space-y-3 mb-6">
-                  {[
-                    { icon: Clock, text: "4+ hours daily on documentation" },
-                    { icon: Bell, text: "Constant scheduling interruptions" },
-                    { icon: Coffee, text: "Weekend chart catch-up" },
-                    { icon: TrendingDown, text: "High staff turnover" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/50 border border-red-200/30">
+                  {[{
+                  icon: Clock,
+                  text: "4+ hours daily on documentation"
+                }, {
+                  icon: Bell,
+                  text: "Constant scheduling interruptions"
+                }, {
+                  icon: Coffee,
+                  text: "Weekend chart catch-up"
+                }, {
+                  icon: TrendingDown,
+                  text: "High staff turnover"
+                }].map((item, index) => <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/50 border border-red-200/30">
                       <div className="w-4 h-4 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <X className="w-2 h-2 text-red-600" />
                       </div>
                       <item.icon className="w-4 h-4 text-red-500 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{item.text}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Compact impact meter */}
@@ -861,7 +846,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <div className="text-center">
                     <div className="text-lg font-bold text-red-700 mb-2">High Stress Level</div>
                     <div className="w-full bg-red-200/50 rounded-full h-1.5 mb-2">
-                      <div className="bg-red-500 h-1.5 rounded-full" style={{ width: '85%' }}></div>
+                      <div className="bg-red-500 h-1.5 rounded-full" style={{
+                      width: '85%'
+                    }}></div>
                     </div>
                     <div className="text-xs text-red-600/70">85% burnout risk</div>
                   </div>
@@ -894,20 +881,25 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Compact solutions list */}
                 <div className="space-y-3 mb-6">
-                  {[
-                    { icon: Zap, text: "75% faster documentation" },
-                    { icon: Users, text: "Automated scheduling & follow-ups" },
-                    { icon: Heart, text: "Work-life balance restored" },
-                    { icon: Smile, text: "Focus on patient care" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-green-200/30">
+                  {[{
+                  icon: Zap,
+                  text: "75% faster documentation"
+                }, {
+                  icon: Users,
+                  text: "Automated scheduling & follow-ups"
+                }, {
+                  icon: Heart,
+                  text: "Work-life balance restored"
+                }, {
+                  icon: Smile,
+                  text: "Focus on patient care"
+                }].map((item, index) => <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-green-200/30">
                       <div className="w-4 h-4 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <CheckCircle className="w-2 h-2 text-green-600" />
                       </div>
                       <item.icon className="w-4 h-4 text-green-500 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{item.text}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Compact success meter */}
@@ -915,7 +907,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <div className="text-center">
                     <div className="text-lg font-bold text-green-700 mb-2">Low Stress Level</div>
                     <div className="w-full bg-green-200/50 rounded-full h-1.5 mb-2">
-                      <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '92%' }}></div>
+                      <div className="bg-green-500 h-1.5 rounded-full" style={{
+                      width: '92%'
+                    }}></div>
                     </div>
                     <div className="text-xs text-green-600/70">92% satisfaction rate</div>
                   </div>
@@ -1283,16 +1277,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
-                  <img 
-                    src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" 
-                    alt="Dr. Mitchell" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" alt="Dr. Mitchell" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
-                  )}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
                 </div>
                 <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "Cut my documentation time by 70%. I actually get to go home on time now."
@@ -1311,16 +1299,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
-                  <img 
-                    src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
-                    alt="Dr. Johnson" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" alt="Dr. Johnson" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
-                  )}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
                 </div>
                 <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "The AI templates are incredibly accurate. Like having a brilliant scribe who never gets tired."
@@ -1339,16 +1321,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
-                  <img 
-                    src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" 
-                    alt="Dr. Gonzalez" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" alt="Dr. Gonzalez" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => 
-                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
-                  )}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
                 </div>
                 <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
                   "BRAVO handles all our scheduling. Patient no-shows dropped 40% immediately."
@@ -1366,50 +1342,38 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* Additional Testimonials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
-            {[
-              {
-                image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
-                name: "Dr. Jennifer Walsh",
-                specialty: "Pediatrics",
-                quote: "Finally can focus on patients instead of paperwork. Work-life balance restored.",
-                highlight: "Better work-life balance"
-              },
-              {
-                image: "/lovable-uploads/6ae429b1-f16f-4432-865d-4602f85e5701.png",
-                name: "Dr. Raj Patel",
-                specialty: "Cardiology", 
-                quote: "S10.AI understands medical terminology perfectly across all specialties.",
-                highlight: "50+ specialties supported"
-              },
-              {
-                image: "/lovable-uploads/081c19bb-5cba-42ca-9e09-703a44940a01.png",
-                name: "Dr. Michael Chen",
-                specialty: "Orthopedics",
-                quote: "Setup was 5 minutes. Results were immediate. No IT headaches.",
-                highlight: "5-minute setup"
-              },
-              {
-                image: "/lovable-uploads/b9b4bd49-9bf0-41d3-9eae-51ed07de5c66.png",
-                name: "Dr. David Wilson",
-                specialty: "Emergency Medicine",
-                quote: "Voice recognition works perfectly even in our noisy ER environment.",
-                highlight: "Works anywhere"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            {[{
+            image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
+            name: "Dr. Jennifer Walsh",
+            specialty: "Pediatrics",
+            quote: "Finally can focus on patients instead of paperwork. Work-life balance restored.",
+            highlight: "Better work-life balance"
+          }, {
+            image: "/lovable-uploads/6ae429b1-f16f-4432-865d-4602f85e5701.png",
+            name: "Dr. Raj Patel",
+            specialty: "Cardiology",
+            quote: "S10.AI understands medical terminology perfectly across all specialties.",
+            highlight: "50+ specialties supported"
+          }, {
+            image: "/lovable-uploads/081c19bb-5cba-42ca-9e09-703a44940a01.png",
+            name: "Dr. Michael Chen",
+            specialty: "Orthopedics",
+            quote: "Setup was 5 minutes. Results were immediate. No IT headaches.",
+            highlight: "5-minute setup"
+          }, {
+            image: "/lovable-uploads/b9b4bd49-9bf0-41d3-9eae-51ed07de5c66.png",
+            name: "Dr. David Wilson",
+            specialty: "Emergency Medicine",
+            quote: "Voice recognition works perfectly even in our noisy ER environment.",
+            highlight: "Works anywhere"
+          }].map((testimonial, index) => <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#387E89]/20 hover:ring-[#387E89]/40 transition-all duration-300">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name} 
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                    <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex mb-2">
-                      {[1, 2, 3, 4, 5].map(star => 
-                        <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
-                      )}
+                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />)}
                     </div>
                     <blockquote className="text-gray-700 mb-3 text-sm sm:text-base leading-relaxed">
                       "{testimonial.quote}"
@@ -1425,8 +1389,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* Trust Indicators */}
@@ -1492,11 +1455,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </p>
               
               <div className="flex flex-wrap gap-2">
-                {['Cardiology', 'Neurology', 'Psychiatry', 'Internal Med'].map((specialty) => (
-                  <span key={specialty} className="px-2 py-1 bg-white/15 text-white text-xs rounded-md border border-white/20">
+                {['Cardiology', 'Neurology', 'Psychiatry', 'Internal Med'].map(specialty => <span key={specialty} className="px-2 py-1 bg-white/15 text-white text-xs rounded-md border border-white/20">
                     {specialty}
-                  </span>
-                ))}
+                  </span>)}
                 <span className="px-2 py-1 bg-blue-400/20 text-blue-200 text-xs rounded-md border border-blue-300/30 font-medium">
                   +46 more
                 </span>
@@ -1597,11 +1558,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               {/* Image */}
               <div className="flex-shrink-0">
                 <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-3 border-white shadow-md">
-                  <img 
-                    src="/lovable-uploads/df7934ec-611f-45ea-a427-7d8c306fb983.png" 
-                    alt="John Reece, CEO WISPR Systems" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src="/lovable-uploads/df7934ec-611f-45ea-a427-7d8c306fb983.png" alt="John Reece, CEO WISPR Systems" className="w-full h-full object-cover" />
                 </div>
               </div>
 
@@ -1639,13 +1596,17 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* Enhanced Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mb-8 sm:mb-12"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }} className="mb-8 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#143151] mb-4 sm:mb-6 leading-tight">
                 Your Next Step Is Easy
               </h2>
@@ -1655,57 +1616,34 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </motion.div>
 
             {/* Practice Efficiency Assessment Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-12 sm:mb-16"
-            >
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-blue-200">
-                <div className="text-center max-w-3xl mx-auto">
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 sm:mb-8"
-                  >
-                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </motion.div>
-                  
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] mb-4 sm:mb-6">
-                    Practice Efficiency Assessment
-                  </h3>
-                  
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8">
-                    Discover how efficient your practice really is and unlock actionable insights to optimize your workflow with AI.
-                  </p>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <span>Assess Your Practice</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </motion.button>
-                </div>
-              </div>
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="mb-12 sm:mb-16">
+              
             </motion.div>
             
             {/* Enhanced Benefits Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
               <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/60 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-green-100 to-green-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -1738,17 +1676,19 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </motion.div>
 
             {/* Enhanced CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4"
-            >
-              <Button 
-                size={isMobile ? "default" : "lg"} 
-                className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-xl w-full sm:w-auto group"
-              >
+            <motion.div initial={{
+            opacity: 0,
+            scale: 0.95
+          }} whileInView={{
+            opacity: 1,
+            scale: 1
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.4
+          }} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
+              <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-xl w-full sm:w-auto group">
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                 Book Your Demo Now →
               </Button>
@@ -1760,13 +1700,16 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </motion.div>
 
             {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200/60"
-            >
+            <motion.div initial={{
+            opacity: 0
+          }} whileInView={{
+            opacity: 1
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.6
+          }} className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200/60">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-green-500" />
@@ -1799,33 +1742,25 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           <div className="space-y-4">
-            {[
-              {
-                question: "How long does setup take?",
-                answer: "Under 5 minutes. S10.AI is cloud-based with zero installations required. Simply log in and start using it immediately with your existing EHR."
-              },
-              {
-                question: "Will it work with my specialty?",
-                answer: "Yes. S10.AI supports 50+ medical specialties including cardiology, neurology, psychiatry, internal medicine, pediatrics, and emergency medicine with specialty-specific templates."
-              },
-              {
-                question: "How accurate is the AI documentation?",
-                answer: "99.9% accuracy rate. Our AI understands medical terminology, context, and nuances across all specialties, reducing documentation errors significantly."
-              },
-              {
-                question: "Does it integrate with my current EHR?",
-                answer: "Absolutely. S10.AI works with 100+ EHR systems including Epic, Cerner, Athena, and more. No API setup required—it integrates seamlessly."
-              },
-              {
-                question: "What's the ROI timeline?",
-                answer: "Most practices see ROI within 30 days. Clinicians save 3+ hours daily on documentation, allowing 30-40% more patient volume without additional staff."
-              },
-              {
-                question: "Is my patient data secure?",
-                answer: "100% compliant with HIPAA, GDPR, PIPEDA, and ISO 27001 standards. All data is encrypted and processed securely in the cloud."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
+            {[{
+            question: "How long does setup take?",
+            answer: "Under 5 minutes. S10.AI is cloud-based with zero installations required. Simply log in and start using it immediately with your existing EHR."
+          }, {
+            question: "Will it work with my specialty?",
+            answer: "Yes. S10.AI supports 50+ medical specialties including cardiology, neurology, psychiatry, internal medicine, pediatrics, and emergency medicine with specialty-specific templates."
+          }, {
+            question: "How accurate is the AI documentation?",
+            answer: "99.9% accuracy rate. Our AI understands medical terminology, context, and nuances across all specialties, reducing documentation errors significantly."
+          }, {
+            question: "Does it integrate with my current EHR?",
+            answer: "Absolutely. S10.AI works with 100+ EHR systems including Epic, Cerner, Athena, and more. No API setup required—it integrates seamlessly."
+          }, {
+            question: "What's the ROI timeline?",
+            answer: "Most practices see ROI within 30 days. Clinicians save 3+ hours daily on documentation, allowing 30-40% more patient volume without additional staff."
+          }, {
+            question: "Is my patient data secure?",
+            answer: "100% compliant with HIPAA, GDPR, PIPEDA, and ISO 27001 standards. All data is encrypted and processed securely in the cloud."
+          }].map((faq, index) => <div key={index} className="bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
                 <details className="group">
                   <summary className="flex items-center justify-between p-4 cursor-pointer list-none">
                     <span className="font-semibold text-[#143151] text-sm sm:text-base">{faq.question}</span>
@@ -1835,8 +1770,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
                   </div>
                 </details>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           <div className="text-center mt-8">
