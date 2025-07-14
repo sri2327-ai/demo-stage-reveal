@@ -322,22 +322,22 @@ export const AnimatedBRAVO = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto px-4">
+    <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 w-full max-w-4xl mx-auto px-2 sm:px-4">
       {/* Main Animation */}
-      <div className="w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col min-h-[520px]">
+      <div className="w-full bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col min-h-[400px] sm:min-h-[520px]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-6">
+        <div className="bg-gradient-to-r from-[#387E89] to-[#143151] p-4 sm:p-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                <Users className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-white font-semibold">BRAVO AI Agent</h3>
-                <p className="text-white/80 text-sm">Front Office Automation</p>
+                <h3 className="text-white font-semibold text-sm sm:text-base">BRAVO AI Agent</h3>
+                <p className="text-white/80 text-xs sm:text-sm">Front Office Automation</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <div className="w-2 h-2 bg-green-400 rounded-full" />
               <span className="text-white/80 text-xs">Online</span>
             </div>
@@ -345,23 +345,25 @@ export const AnimatedBRAVO = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-8 flex-1 flex flex-col min-h-[320px]">
+        <div className="p-4 sm:p-6 lg:p-8 flex-1 flex flex-col min-h-[280px] sm:min-h-[320px]">
           <AnimatePresence mode="wait">
             {renderCurrentScreen()}
           </AnimatePresence>
         </div>
 
         {/* Footer - Fixed positioning */}
-        <div className="bg-gray-50 px-8 py-4 border-t mt-auto flex-shrink-0">
+        <div className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 border-t mt-auto flex-shrink-0">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 text-xs text-gray-500">
+            <div className="flex items-center gap-2 sm:gap-4 text-xs text-gray-500">
               <div className="flex items-center gap-1">
                 <Phone className="w-3 h-3" />
-                <span>24/7 Available</span>
+                <span className="hidden sm:inline">24/7 Available</span>
+                <span className="sm:hidden">24/7</span>
               </div>
               <div className="flex items-center gap-1">
                 <CheckCircle className="w-3 h-3 text-green-500" />
-                <span>Auto-Scheduling</span>
+                <span className="hidden sm:inline">Auto-Scheduling</span>
+                <span className="sm:hidden">Auto</span>
               </div>
             </div>
             <div className="text-xs text-gray-400">
@@ -372,58 +374,58 @@ export const AnimatedBRAVO = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-full bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
-        <h3 className="text-xl font-bold text-[#143151] mb-6">Automates Anything You Need</h3>
-        <div className="space-y-6">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Zap className="w-5 h-5 text-blue-600" />
+      <div className="w-full bg-white rounded-2xl sm:rounded-3xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
+        <h3 className="text-lg sm:text-xl font-bold text-[#143151] mb-4 sm:mb-6">Automates Anything You Need</h3>
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Smart Automation</h4>
-              <p className="text-gray-600 leading-relaxed">Handles patient calls, scheduling, reminders, and follow-ups automatically</p>
+              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-base sm:text-lg">Smart Automation</h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">Handles patient calls, scheduling, reminders, and follow-ups automatically</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <Calendar className="w-5 h-5 text-green-600" />
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Intelligent Scheduling</h4>
-              <p className="text-gray-600 leading-relaxed">Understands context and preferences to book optimal appointments</p>
+              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-base sm:text-lg">Intelligent Scheduling</h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">Understands context and preferences to book optimal appointments</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <MessageSquare className="w-5 h-5 text-purple-600" />
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2 text-lg">Patient Communication</h4>
-              <p className="text-gray-600 leading-relaxed">Manages all patient interactions with natural, helpful responses</p>
+              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-base sm:text-lg">Patient Communication</h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">Manages all patient interactions with natural, helpful responses</p>
             </div>
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Languages className="w-6 h-6 text-blue-600" />
-              <span className="font-bold text-blue-900 text-lg">Complete Feature Set</span>
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              <span className="font-bold text-blue-900 text-base sm:text-lg">Complete Feature Set</span>
             </div>
-            <div className="bg-white rounded-xl p-6 border border-blue-200">
-              <div className="flex items-center gap-3 mb-3">
-                <Globe className="w-5 h-5 text-green-600" />
-                <span className="font-semibold text-green-900">Multilingual Support</span>
+            <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 border border-blue-200">
+              <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                <span className="font-semibold text-green-900 text-sm sm:text-base">Multilingual Support</span>
               </div>
-              <p className="text-green-700 mb-4 font-medium">Communicates fluently in 60+ languages including:</p>
-              <div className="flex flex-wrap gap-3">
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">English</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Spanish</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Mandarin</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">French</span>
-                <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">+56 more</span>
+              <p className="text-green-700 mb-3 sm:mb-4 font-medium text-sm sm:text-base">Communicates fluently in 60+ languages including:</p>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                <span className="bg-green-100 text-green-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium">English</span>
+                <span className="bg-green-100 text-green-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Spanish</span>
+                <span className="bg-green-100 text-green-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Mandarin</span>
+                <span className="bg-green-100 text-green-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium">French</span>
+                <span className="bg-blue-100 text-blue-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium">+56 more</span>
               </div>
             </div>
           </div>
