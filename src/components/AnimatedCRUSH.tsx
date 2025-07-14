@@ -71,9 +71,9 @@ export const AnimatedCRUSH = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-6xl mx-auto px-4">
+    <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto px-4">
       {/* Main Animation */}
-      <div className="w-full lg:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
+      <div className="w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col min-h-[500px]">
         {/* Header */}
         <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-4">
           <div className="flex items-center justify-between">
@@ -298,7 +298,7 @@ export const AnimatedCRUSH = () => {
       </div>
 
       {/* Side Information Panel */}
-      <div className="w-full lg:w-80 bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+      <div className="w-full bg-white rounded-xl shadow-lg border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-[#143151] mb-4">How CRUSH Works</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-3">
