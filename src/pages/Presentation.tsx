@@ -195,10 +195,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           }
         })
       });
-
       if (response.ok) {
         const audioBlob = await response.blob();
-        
+
         // Download the file
         const url = URL.createObjectURL(audioBlob);
         const a = document.createElement('a');
@@ -207,7 +206,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        
+
         // Also play it
         const newAudio = new Audio(url);
         newAudio.onended = () => {
@@ -215,11 +214,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           setAudio(null);
           URL.revokeObjectURL(url);
         };
-        
         setAudio(newAudio);
         setIsPlaying(true);
         newAudio.play();
-        
         alert('American voice over downloaded successfully as s10ai-liam-american-voiceover.mp3');
         return true;
       } else {
@@ -242,45 +239,36 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       return;
     }
     if (isLoading) return;
-
     setIsLoading(true);
-    
+
     // Try ElevenLabs API first if API key is provided
     if (elevenLabsApiKey) {
       const success = await generateAmericanVoiceOver(elevenLabsApiKey);
       setIsLoading(false);
       if (success) return;
     }
-    
+
     // Fallback to Web Speech API with American voice
     if ('speechSynthesis' in window) {
       const voices = speechSynthesis.getVoices();
-      const americanVoice = voices.find(voice => 
-        voice.lang.startsWith('en-US') && 
-        (voice.name.includes('Male') || voice.name.includes('David') || voice.name.includes('Mark'))
-      ) || voices.find(voice => voice.lang.startsWith('en-US'));
-      
+      const americanVoice = voices.find(voice => voice.lang.startsWith('en-US') && (voice.name.includes('Male') || voice.name.includes('David') || voice.name.includes('Mark'))) || voices.find(voice => voice.lang.startsWith('en-US'));
       const utterance = new SpeechSynthesisUtterance(pageSummary);
       utterance.voice = americanVoice || null;
       utterance.rate = 0.85;
       utterance.pitch = 0.9;
       utterance.volume = 0.8;
-      
       utterance.onstart = () => {
         setIsLoading(false);
         setIsPlaying(true);
       };
-      
       utterance.onend = () => {
         setIsPlaying(false);
       };
-      
       utterance.onerror = () => {
         setIsLoading(false);
         setIsPlaying(false);
         alert('Voice synthesis failed. Please try with ElevenLabs API key for better quality.');
       };
-      
       speechSynthesis.speak(utterance);
     } else {
       setIsLoading(false);
@@ -298,7 +286,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       repeatType: "mirror"
     });
   }, [color]);
-  
+
   // Load saved API key on component mount
   useEffect(() => {
     const savedApiKey = localStorage.getItem('elevenLabsApiKey');
@@ -318,15 +306,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <h1 className="text-white text-xl font-semibold">S10.AI</h1>
             </div>
             <div className="flex items-center gap-4">
-              {!elevenLabsApiKey && (
-                <button 
-                  onClick={() => setShowApiKeyInput(!showApiKeyInput)}
-                  className="px-3 py-1 text-sm bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded border border-white/20 transition-all"
-                  title="Add ElevenLabs API key for high-quality voice"
-                >
-                  🔑 API Key
-                </button>
-              )}
+              {!elevenLabsApiKey}
               <button onClick={handleVoiceOver} disabled={isLoading} className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed" title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}>
                 {isLoading ? <Volume2 className="w-5 h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 <span className="hidden sm:inline">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
@@ -335,35 +315,23 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
         </div>
         
-        {showApiKeyInput && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        {showApiKeyInput && <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
             <div className="p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
               <p className="text-white/80 text-sm mb-3">Enter your ElevenLabs API key for high-quality Liam's American voice:</p>
               <div className="flex gap-2">
-                <input
-                  type="password"
-                  placeholder="sk_..."
-                  value={elevenLabsApiKey}
-                  onChange={(e) => setElevenLabsApiKey(e.target.value)}
-                  className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-                <button
-                  onClick={() => {
-                    if (elevenLabsApiKey) {
-                      setShowApiKeyInput(false);
-                      localStorage.setItem('elevenLabsApiKey', elevenLabsApiKey);
-                    }
-                  }}
-                  disabled={!elevenLabsApiKey}
-                  className="px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                >
+                <input type="password" placeholder="sk_..." value={elevenLabsApiKey} onChange={e => setElevenLabsApiKey(e.target.value)} className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30" />
+                <button onClick={() => {
+              if (elevenLabsApiKey) {
+                setShowApiKeyInput(false);
+                localStorage.setItem('elevenLabsApiKey', elevenLabsApiKey);
+              }
+            }} disabled={!elevenLabsApiKey} className="px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                   Save
                 </button>
               </div>
               <p className="text-white/60 text-xs mt-2">Your API key is stored locally and used for generating high-quality voice over that will be downloaded.</p>
             </div>
-          </div>
-        )}
+          </div>}
       </header>
 
       {/* Hero Section */}
