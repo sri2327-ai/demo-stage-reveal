@@ -160,6 +160,8 @@ export default function Presentation() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [elevenLabsApiKey, setElevenLabsApiKey] = useState('');
+  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
 
   // Page summary for voice over
   const pageSummary = `Welcome to S10.AI - The AI That Charts and Staffs So You Don't Have To. 
@@ -171,6 +173,65 @@ Meet your AI teammates: CRUSH, our Clinical Documentation AI that generates comp
 Our solution delivers real ROI: 2-3 hours saved per clinician daily, 40% reduction in no-shows, 95% patient satisfaction, and streamlined workflows that let you focus on what matters most - patient care.
 
 Join leading healthcare organizations who trust S10.AI to transform their practice. Your next step is easy - try S10.AI today and reclaim your time to focus on healing.`;
+
+  // Generate and download American voice over
+  const generateAmericanVoiceOver = async (apiKey: string) => {
+    try {
+      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/TX3LPaxmHKxFdv7VOQHJ', {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': apiKey
+        },
+        body: JSON.stringify({
+          text: pageSummary,
+          model_id: 'eleven_multilingual_v2',
+          voice_settings: {
+            stability: 0.7,
+            similarity_boost: 0.8,
+            style: 0.3,
+            use_speaker_boost: true
+          }
+        })
+      });
+
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        
+        // Download the file
+        const url = URL.createObjectURL(audioBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 's10ai-liam-american-voiceover.mp3';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        // Also play it
+        const newAudio = new Audio(url);
+        newAudio.onended = () => {
+          setIsPlaying(false);
+          setAudio(null);
+          URL.revokeObjectURL(url);
+        };
+        
+        setAudio(newAudio);
+        setIsPlaying(true);
+        newAudio.play();
+        
+        alert('American voice over downloaded successfully as s10ai-liam-american-voiceover.mp3');
+        return true;
+      } else {
+        const errorData = await response.json();
+        console.error('ElevenLabs API Error:', errorData);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error generating voice over:', error);
+      return false;
+    }
+  };
 
   // Voice over functionality with American voice
   const handleVoiceOver = async () => {
@@ -184,62 +245,46 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
     setIsLoading(true);
     
-    try {
-      // Generate American voice over using ElevenLabs with Liam voice (American male)
-      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/TX3LPaxmHKxFdv7VOQHJ', {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': 'sk_ea806c16d1ab6b905a17338ebc0c9b63daa26b793bbbf0d2'
-        },
-        body: JSON.stringify({
-          text: pageSummary,
-          model_id: 'eleven_multilingual_v2',
-          voice_settings: {
-            stability: 0.7,        // More stable for professional tone
-            similarity_boost: 0.8, // Higher similarity for natural sound
-            style: 0.3,           // Slight style variation for more human feel
-            use_speaker_boost: true
-          }
-        })
-      });
-
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const newAudio = new Audio(audioUrl);
-        
-        newAudio.onended = () => {
-          setIsPlaying(false);
-          setAudio(null);
-          setIsLoading(false);
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        newAudio.oncanplaythrough = () => {
-          setIsLoading(false);
-          setIsPlaying(true);
-          newAudio.play();
-        };
-        
-        newAudio.onerror = () => {
-          console.error('Audio playback failed');
-          setIsLoading(false);
-          setIsPlaying(false);
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        setAudio(newAudio);
-      } else {
-        console.error('Failed to generate speech:', response.status);
-        setIsLoading(false);
-        alert('Failed to generate voice over. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error with voice over:', error);
+    // Try ElevenLabs API first if API key is provided
+    if (elevenLabsApiKey) {
+      const success = await generateAmericanVoiceOver(elevenLabsApiKey);
       setIsLoading(false);
-      alert('Error generating voice over. Please check your connection.');
+      if (success) return;
+    }
+    
+    // Fallback to Web Speech API with American voice
+    if ('speechSynthesis' in window) {
+      const voices = speechSynthesis.getVoices();
+      const americanVoice = voices.find(voice => 
+        voice.lang.startsWith('en-US') && 
+        (voice.name.includes('Male') || voice.name.includes('David') || voice.name.includes('Mark'))
+      ) || voices.find(voice => voice.lang.startsWith('en-US'));
+      
+      const utterance = new SpeechSynthesisUtterance(pageSummary);
+      utterance.voice = americanVoice || null;
+      utterance.rate = 0.85;
+      utterance.pitch = 0.9;
+      utterance.volume = 0.8;
+      
+      utterance.onstart = () => {
+        setIsLoading(false);
+        setIsPlaying(true);
+      };
+      
+      utterance.onend = () => {
+        setIsPlaying(false);
+      };
+      
+      utterance.onerror = () => {
+        setIsLoading(false);
+        setIsPlaying(false);
+        alert('Voice synthesis failed. Please try with ElevenLabs API key for better quality.');
+      };
+      
+      speechSynthesis.speak(utterance);
+    } else {
+      setIsLoading(false);
+      alert('Voice over not supported in this browser');
     }
   };
 
@@ -253,6 +298,14 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       repeatType: "mirror"
     });
   }, [color]);
+  
+  // Load saved API key on component mount
+  useEffect(() => {
+    const savedApiKey = localStorage.getItem('elevenLabsApiKey');
+    if (savedApiKey) {
+      setElevenLabsApiKey(savedApiKey);
+    }
+  }, []);
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
@@ -264,7 +317,16 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <div className="flex items-center">
               <h1 className="text-white text-xl font-semibold">S10.AI</h1>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
+              {!elevenLabsApiKey && (
+                <button 
+                  onClick={() => setShowApiKeyInput(!showApiKeyInput)}
+                  className="px-3 py-1 text-sm bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded border border-white/20 transition-all"
+                  title="Add ElevenLabs API key for high-quality voice"
+                >
+                  🔑 API Key
+                </button>
+              )}
               <button onClick={handleVoiceOver} disabled={isLoading} className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed" title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}>
                 {isLoading ? <Volume2 className="w-5 h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 <span className="hidden sm:inline">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
@@ -272,6 +334,36 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </div>
           </div>
         </div>
+        
+        {showApiKeyInput && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+            <div className="p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
+              <p className="text-white/80 text-sm mb-3">Enter your ElevenLabs API key for high-quality Liam's American voice:</p>
+              <div className="flex gap-2">
+                <input
+                  type="password"
+                  placeholder="sk_..."
+                  value={elevenLabsApiKey}
+                  onChange={(e) => setElevenLabsApiKey(e.target.value)}
+                  className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+                <button
+                  onClick={() => {
+                    if (elevenLabsApiKey) {
+                      setShowApiKeyInput(false);
+                      localStorage.setItem('elevenLabsApiKey', elevenLabsApiKey);
+                    }
+                  }}
+                  disabled={!elevenLabsApiKey}
+                  className="px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                  Save
+                </button>
+              </div>
+              <p className="text-white/60 text-xs mt-2">Your API key is stored locally and used for generating high-quality voice over that will be downloaded.</p>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
