@@ -172,55 +172,62 @@ Our solution delivers real ROI: 2-3 hours saved per clinician daily, 40% reducti
 
 Join leading healthcare organizations who trust S10.AI to transform their practice. Your next step is easy - try S10.AI today and reclaim your time to focus on healing.`;
 
-  // Voice over functionality
+  // Voice over functionality using Web Speech API as fallback
   const handleVoiceOver = async () => {
     if (isPlaying && audio) {
       audio.pause();
+      speechSynthesis.cancel();
       setIsPlaying(false);
       return;
     }
-    if (isLoading) return; // Prevent multiple clicks while loading
+    if (isLoading) return;
 
     setIsLoading(true);
+    
     try {
-      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': 'sk_ea806c16d1ab6b905a17338ebc0c9b63daa26b793bbbf0d2'
-        },
-        body: JSON.stringify({
-          text: pageSummary,
-          model_id: 'eleven_multilingual_v2',
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.5
-          }
-        })
-      });
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const newAudio = new Audio(audioUrl);
-        newAudio.onended = () => {
-          setIsPlaying(false);
-          setAudio(null);
-          setIsLoading(false);
-          URL.revokeObjectURL(audioUrl);
-        };
-        setAudio(newAudio);
+      // Try to load pre-recorded audio first
+      const newAudio = new Audio('/audio/page-summary-voiceover.mp3');
+      
+      newAudio.oncanplaythrough = () => {
+        setIsLoading(false);
         setIsPlaying(true);
-        setIsLoading(false);
+        setAudio(newAudio);
         newAudio.play();
-      } else {
-        console.error('Failed to generate speech');
-        alert('Failed to generate voice over. Please try again.');
-        setIsLoading(false);
-      }
+      };
+      
+      newAudio.onended = () => {
+        setIsPlaying(false);
+        setAudio(null);
+      };
+      
+      newAudio.onerror = () => {
+        console.log('Audio file not found, using Web Speech API fallback');
+        // Fallback to Web Speech API
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(pageSummary);
+          utterance.rate = 0.9;
+          utterance.pitch = 1;
+          utterance.volume = 0.8;
+          
+          utterance.onstart = () => {
+            setIsLoading(false);
+            setIsPlaying(true);
+          };
+          
+          utterance.onend = () => {
+            setIsPlaying(false);
+          };
+          
+          speechSynthesis.speak(utterance);
+        } else {
+          setIsLoading(false);
+          alert('Voice over not supported in this browser');
+        }
+      };
+      
+      newAudio.load();
     } catch (error) {
-      console.error('Error generating speech:', error);
-      alert('Error generating voice over. Please check your connection.');
+      console.error('Error with voice over:', error);
       setIsLoading(false);
     }
   };
