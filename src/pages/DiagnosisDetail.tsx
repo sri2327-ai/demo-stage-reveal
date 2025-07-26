@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Code, BookOpen, HelpCircle, FileCheck, ChevronRight, Stethoscope, Copy } from 'lucide-react';
+import { ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Code, BookOpen, HelpCircle, FileCheck, ChevronRight, Stethoscope, Copy, Download, Users, Shield, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,8 @@ import { mockDiagnoses, getDiagnosisById } from '@/data/mockDiagnoses';
 const DiagnosisDetail = () => {
   const { id } = useParams<{ id: string }>();
   const diagnosis = getDiagnosisById(id || '');
+  const [showMoreFaqs, setShowMoreFaqs] = useState(false);
+  const [expandedTree, setExpandedTree] = useState<Record<string, boolean>>({});
 
   // Mock data for the new sections - these should come from API
   const relatedCodeRanges = [
@@ -109,6 +111,152 @@ const DiagnosisDetail = () => {
     }
   ];
 
+  // Decision tree data
+  const decisionTree = {
+    id: "root",
+    question: "Is the patient diagnosed with sepsis?",
+    answerOptions: [
+      {
+        answer: "Yes",
+        next: {
+          id: "sepsis_yes",
+          question: "Does a blood test confirm Acinetobacter baumannii?",
+          answerOptions: [
+            {
+              answer: "Yes",
+              next: {
+                id: "culture_yes",
+                question: "Does the provider's note clearly state 'sepsis due to Acinetobacter baumannii'?",
+                answerOptions: [
+                  {
+                    answer: "Yes",
+                    result: "Use code A41.54 for sepsis due to Acinetobacter baumannii.",
+                    next: null
+                  },
+                  {
+                    answer: "No",
+                    result: "Ask the provider to clarify and confirm the bacteria in their note.",
+                    next: null
+                  }
+                ]
+              }
+            },
+            {
+              answer: "No",
+              result: "Use code A41.9 for sepsis with unspecified bacteria.",
+              next: null
+            }
+          ]
+        }
+      },
+      {
+        answer: "No",
+        result: "Do not use A41.54. Consider other diagnoses.",
+        next: null
+      }
+    ]
+  };
+
+  // FAQ data
+  const faqs = [
+    {
+      question: "Can I use A41.54 without a blood test?",
+      answer: "No, you need a blood test confirming Acinetobacter baumannii."
+    },
+    {
+      question: "How do I code severe sepsis?",
+      answer: "Add R65.20 for severe sepsis or R65.21 for septic shock if documented."
+    },
+    {
+      question: "What if the provider note doesn't specify the bacteria?",
+      answer: "Ask the provider to confirm the bacteria before coding."
+    }
+  ];
+
+  // Diagnosis snapshot data
+  const diagnosisSnapshot = {
+    keyFacts: [
+      {
+        label: "Definition",
+        value: "A serious infection caused by Acinetobacter baumannii bacteria, confirmed by blood tests, leading to sepsis."
+      },
+      {
+        label: "Clinical Signs", 
+        value: "High fever, low blood pressure, organ failure (SOFA score ≥2)."
+      },
+      {
+        label: "Common Settings",
+        value: "Often occurs in hospitals, especially in ICU or immunocompromised patients."
+      },
+      {
+        label: "Primary Code",
+        value: "A41.54 (Billable)."
+      }
+    ]
+  };
+
+  // Documentation checklist
+  const documentationChecklist = [
+    "Blood test confirming Acinetobacter baumannii.",
+    "Provider note clearly stating 'sepsis due to Acinetobacter baumannii.'", 
+    "Clinical symptoms like fever, low blood pressure, or organ failure.",
+    "Details of antibiotic treatment and infection timeline."
+  ];
+
+  // Coding risks
+  const codingRisks = [
+    {
+      title: "Unspecified Coding",
+      description: "Using A41.9 when Acinetobacter is confirmed can lower reimbursement."
+    },
+    {
+      title: "Missing Severity Details", 
+      description: "Not noting organ failure or SOFA score impacts quality metrics."
+    },
+    {
+      title: "Wrong Code Order",
+      description: "Listing other conditions before A41.54 may cause claim denials."
+    }
+  ];
+
+  // Mitigation tips
+  const mitigationTips = [
+    "Always check blood test results before coding A41.54.",
+    "Include SOFA score to support severe sepsis codes (e.g., R65.20).",
+    "List A41.54 first if sepsis is the main reason for admission.",
+    "Use consistent documentation templates across providers."
+  ];
+
+  // Clinical decision support checklist
+  const clinicalChecklist = [
+    "Verify blood test results for Acinetobacter baumannii.",
+    "Ensure provider note specifies the bacteria causing sepsis.",
+    "Check for severe symptoms like organ failure or septic shock."
+  ];
+
+  // Reimbursement impact
+  const reimbursementImpact = [
+    {
+      label: "Reimbursement",
+      value: "Using A41.54 ensures proper payment compared to A41.9 (unspecified)."
+    },
+    {
+      label: "Quality Metrics",
+      value: "Specific coding improves tracking of sepsis outcomes."
+    },
+    {
+      label: "Hospital Reporting", 
+      value: "Helps monitor hospital-acquired infections accurately."
+    }
+  ];
+
+  // Quick tips
+  const quickTips = [
+    "Ask for bacteria confirmation if the note is unclear.",
+    "Note antibiotic resistance for better documentation.", 
+    "Refer to ICD-10-CM guidelines for accuracy."
+  ];
+
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -116,6 +264,50 @@ const DiagnosisDetail = () => {
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }
+  };
+
+  const toggleTreeNode = (nodeId: string) => {
+    setExpandedTree(prev => ({
+      ...prev,
+      [nodeId]: !prev[nodeId]
+    }));
+  };
+
+  const renderDecisionTree = (node: any, depth: number = 0) => {
+    const isExpanded = expandedTree[node.id];
+    
+    return (
+      <div key={node.id} className={`ml-${depth * 4} p-3 border-l-4 border-[#387E89] bg-white rounded-r-lg mb-2`}>
+        <div className="flex items-start justify-between">
+          <p className="font-semibold text-[#143151] flex-1">{node.question}</p>
+          {node.answerOptions && (
+            <button
+              onClick={() => toggleTreeNode(node.id)}
+              className="ml-2 text-[#387E89] hover:text-[#143151] transition-colors"
+            >
+              {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </button>
+          )}
+        </div>
+        
+        {node.answerOptions && (isExpanded || depth === 0) && (
+          <ul className="mt-2 space-y-2">
+            {node.answerOptions.map((option: any, index: number) => (
+              <li key={index} className="flex items-start">
+                <span className="text-green-600 mr-2">→</span>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-700">{option.answer}</p>
+                  {option.result && (
+                    <p className="text-sm text-gray-600 mt-1">{option.result}</p>
+                  )}
+                  {option.next && renderDecisionTree(option.next, depth + 1)}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
   };
 
   if (!diagnosis) {
@@ -192,6 +384,242 @@ const DiagnosisDetail = () => {
           </Card>
         </div>
 
+        {/* Diagnosis Snapshot Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89]" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Diagnosis Snapshot</h2>
+          </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Key Facts</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-3 sm:space-y-4">
+                {diagnosisSnapshot.keyFacts.map((fact, index) => (
+                  <li key={index} className="flex items-start">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <strong className="text-[#143151]">{fact.label}</strong>: {fact.value}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Code-Specific Guidance Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
+              <Code className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code-Specific Guidance</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Decision Tree */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Decision Tree for A41.54</CardTitle>
+                <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code for sepsis due to Acinetobacter baumannii.</p>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="bg-gray-50 p-4 rounded border border-gray-300">
+                  {renderDecisionTree(decisionTree)}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Related Codes Table */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Related Codes</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-blue-100">
+                        <TableHead className="font-bold text-[#143151]">Code</TableHead>
+                        <TableHead className="font-bold text-[#143151]">Description</TableHead>
+                        <TableHead className="font-bold text-[#143151]">When to Use</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-mono font-bold text-[#387E89]">A41.54</TableCell>
+                        <TableCell>Sepsis due to Acinetobacter baumannii</TableCell>
+                        <TableCell className="text-sm">When blood tests confirm Acinetobacter baumannii and provider notes specify it.</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-mono font-bold text-[#387E89]">A41.9</TableCell>
+                        <TableCell>Sepsis, unspecified organism</TableCell>
+                        <TableCell className="text-sm">When no specific bacteria is identified.</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-mono font-bold text-[#387E89]">R65.20</TableCell>
+                        <TableCell>Severe sepsis without septic shock</TableCell>
+                        <TableCell className="text-sm">Add if organ failure is documented.</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Documentation Best Practices Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+              <FileCheck className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Documentation Best Practices</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Checklist */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Checklist</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <ul className="space-y-2">
+                  {documentationChecklist.map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Downloadable Template */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Downloadable Template</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <p className="mb-4 text-sm">Use this template for accurate documentation:</p>
+                <Button variant="outline" className="w-full mb-4 text-[#387E89] border-[#387E89] hover:bg-[#387E89]/10">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Sepsis Documentation Template (PDF)
+                </Button>
+                <p className="text-xs text-gray-600">
+                  <strong>Example:</strong> "Patient has sepsis due to Acinetobacter baumannii, confirmed by blood tests on [DATE]. Symptoms include fever and low blood pressure. Treated with [ANTIBIOTIC]."
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Coding and Audit Risks Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-500/10 rounded-full flex items-center justify-center">
+              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Coding and Audit Risks</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Common Risks */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Common Risks</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <ul className="space-y-3">
+                  {codingRisks.map((risk, index) => (
+                    <li key={index} className="border-l-4 border-red-500 pl-3">
+                      <strong className="text-red-700 text-sm">{risk.title}</strong>
+                      <p className="text-xs text-gray-600 mt-1">{risk.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Mitigation Tips */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Mitigation Tips</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <ul className="space-y-2">
+                  {mitigationTips.map((tip, index) => (
+                    <li key={index} className="flex items-start">
+                      <Shield className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Clinical Decision Support Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/10 rounded-full flex items-center justify-center">
+              <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Clinical Decision Support</h2>
+          </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Checklist</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-2">
+                {clinicalChecklist.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Reimbursement and Quality Metrics Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Reimbursement and Quality Metrics</h2>
+          </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Impact Summary</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-3">
+                {reimbursementImpact.map((impact, index) => (
+                  <li key={index} className="flex items-start">
+                    <TrendingUp className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <strong className="text-[#143151] text-sm">{impact.label}</strong>: <span className="text-sm text-gray-700">{impact.value}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Call to Action Section - Added for clinicians */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
           <Card className="bg-gradient-to-br from-[#143151] to-[#387E89] border-0 shadow-xl overflow-hidden">
@@ -214,7 +642,7 @@ const DiagnosisDetail = () => {
                   </Button>
                 </Link>
                 <Link to="/icd10-codes">
-                  <Button variant="outline" className="w-full sm:w-auto border-white text-black hover:bg-white/10 font-semibold px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base">
+                  <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base">
                     Browse ICD-10 Codes
                   </Button>
                 </Link>
@@ -480,29 +908,55 @@ const DiagnosisDetail = () => {
           </Card>
         </div>
 
-        {/* FAQ Section */}
+        {/* FAQs and Quick Tips Section */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-500/10 rounded-full flex items-center justify-center">
-              <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-500/10 rounded-full flex items-center justify-center">
+              <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Frequently Asked Questions</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">FAQs and Quick Tips</h2>
           </div>
           
-          <div className="grid gap-4 sm:gap-6">
-            {diagnosis.details.faq.map((item, index) => (
-              <Card key={index} className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-                <CardHeader className="p-4 sm:p-6">
-                  <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151] flex items-start">
-                    <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 mr-2 sm:mr-3 mt-1 flex-shrink-0" />
-                    {item.question}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-4 sm:p-6 pt-0">
-                  <p className="text-gray-600 leading-relaxed pl-6 sm:pl-8 text-xs sm:text-sm lg:text-base">{item.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Frequently Asked Questions */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Frequently Asked Questions</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="space-y-4">
+                  {faqs.slice(0, showMoreFaqs ? faqs.length : 2).map((faq, index) => (
+                    <div key={index}>
+                      <p className="font-semibold text-[#143151] text-sm">{faq.question}</p>
+                      <p className="text-gray-600 text-sm mt-1">{faq.answer}</p>
+                    </div>
+                  ))}
+                  <button 
+                    onClick={() => setShowMoreFaqs(!showMoreFaqs)}
+                    className="text-[#387E89] hover:text-[#143151] text-sm underline transition-colors"
+                  >
+                    {showMoreFaqs ? 'Hide FAQs' : 'Show More FAQs'}
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Tips */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Quick Tips</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <ul className="space-y-2">
+                  {quickTips.map((tip, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
