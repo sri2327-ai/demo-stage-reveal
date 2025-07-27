@@ -344,7 +344,7 @@ const DiagnosisDetail = () => {
             {/* Related Codes Table */}
             <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
               <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Related Codes</CardTitle>
+                <CardTitle className="text-base sm:text-lg text-[#143151]">Code Comparison: When to Use Each Code</CardTitle>
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <div className="overflow-x-auto">
