@@ -6,257 +6,193 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { mockDiagnoses, getDiagnosisById } from '@/data/mockDiagnoses';
-
 const DiagnosisDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const {
+    id
+  } = useParams<{
+    id: string;
+  }>();
   const diagnosis = getDiagnosisById(id || '');
   const [showMoreFaqs, setShowMoreFaqs] = useState(false);
   const [expandedTree, setExpandedTree] = useState<Record<string, boolean>>({});
 
   // Mock data for the new sections - these should come from API
-  const relatedCodeRanges = [
-    {
-      range: "A00-B99",
-      title: "Primary Range",
-      description: "Certain infectious and parasitic diseases",
-      details: "Includes codes for sepsis and specific infections like Acinetobacter baumannii."
-    },
-    {
-      range: "I10-I15",
-      title: "Hypertensive diseases",
-      description: "Covers hypertension-related conditions and their coding.",
-      details: ""
-    },
-    {
-      range: "E08-E13",
-      title: "Diabetes mellitus",
-      description: "Includes codes for diabetes and related complications.",
-      details: ""
-    },
-    {
-      range: "J45",
-      title: "Asthma",
-      description: "Covers asthma types and severity levels.",
-      details: ""
-    }
-  ];
-
-  const codeComparisons = [
-    {
-      code: "A41.54",
-      description: "Sepsis due to Acinetobacter baumannii",
-      whenToUse: "Use when sepsis is confirmed to be due to Acinetobacter baumannii.",
-      keyDocumentation: ["Blood culture confirming Acinetobacter", "Documentation of specific organism"]
-    },
-    {
-      code: "I12.9",
-      description: "Hypertensive chronic kidney disease",
-      whenToUse: "Use when hypertension is documented with CKD.",
-      keyDocumentation: ["Diagnosis of hypertension and CKD"]
-    }
-  ];
+  const relatedCodeRanges = [{
+    range: "A00-B99",
+    title: "Primary Range",
+    description: "Certain infectious and parasitic diseases",
+    details: "Includes codes for sepsis and specific infections like Acinetobacter baumannii."
+  }, {
+    range: "I10-I15",
+    title: "Hypertensive diseases",
+    description: "Covers hypertension-related conditions and their coding.",
+    details: ""
+  }, {
+    range: "E08-E13",
+    title: "Diabetes mellitus",
+    description: "Includes codes for diabetes and related complications.",
+    details: ""
+  }, {
+    range: "J45",
+    title: "Asthma",
+    description: "Covers asthma types and severity levels.",
+    details: ""
+  }];
+  const codeComparisons = [{
+    code: "A41.54",
+    description: "Sepsis due to Acinetobacter baumannii",
+    whenToUse: "Use when sepsis is confirmed to be due to Acinetobacter baumannii.",
+    keyDocumentation: ["Blood culture confirming Acinetobacter", "Documentation of specific organism"]
+  }, {
+    code: "I12.9",
+    description: "Hypertensive chronic kidney disease",
+    whenToUse: "Use when hypertension is documented with CKD.",
+    keyDocumentation: ["Diagnosis of hypertension and CKD"]
+  }];
 
   // Enhanced documentation and coding risks data
-  const documentationRisks = [
-    {
-      category: "Documentation Errors",
-      items: [
-        {
-          title: "Incomplete organism identification",
-          description: "Not specifying the exact organism when culture results are available",
-          impact: "Leads to use of unspecified codes, reducing reimbursement accuracy and clinical specificity",
-          mitigation: "Always document specific organism from culture results and include antibiotic sensitivity when available"
-        },
-        {
-          title: "Missing severity indicators",
-          description: "Failing to document severity of sepsis or complications",
-          impact: "Undercoding of condition severity affects risk stratification and quality metrics",
-          mitigation: "Include SOFA scores, organ dysfunction indicators, and hemodynamic status in documentation"
-        }
-      ]
-    },
-    {
-      category: "Coding Pitfalls",
-      items: [
-        {
-          title: "Using unspecified codes when specific codes exist",
-          description: "Defaulting to general sepsis codes when organism-specific codes are available",
-          impact: "Reduced reimbursement, poor data quality, and missed opportunities for targeted quality improvement",
-          mitigation: "Review culture results and laboratory data before code assignment, use coding resources to identify specific codes"
-        },
-        {
-          title: "Incorrect sequencing of codes",
-          description: "Not following proper sequencing rules for sepsis and underlying conditions",
-          impact: "Claim denials, audit flags, and incorrect DRG assignment affecting reimbursement",
-          mitigation: "Follow ICD-10-CM coding guidelines for sepsis sequencing, code sepsis first when it's the reason for admission"
-        }
-      ]
-    },
-    {
-      category: "Audit Risk Areas",
-      items: [
-        {
-          title: "Inconsistent documentation across providers",
-          description: "Different providers documenting conflicting information about the same condition",
-          impact: "Audit scrutiny, potential compliance issues, and delayed reimbursement",
-          mitigation: "Implement standardized documentation templates and regular provider education on coding requirements"
-        },
-        {
-          title: "Lack of supporting clinical evidence",
-          description: "Coded diagnoses not supported by clinical indicators or test results",
-          impact: "High risk for audit takebacks, compliance violations, and potential fraud allegations",
-          mitigation: "Ensure all coded diagnoses have supporting clinical documentation, laboratory results, or imaging studies"
-        }
-      ]
-    }
-  ];
+  const documentationRisks = [{
+    category: "Documentation Errors",
+    items: [{
+      title: "Incomplete organism identification",
+      description: "Not specifying the exact organism when culture results are available",
+      impact: "Leads to use of unspecified codes, reducing reimbursement accuracy and clinical specificity",
+      mitigation: "Always document specific organism from culture results and include antibiotic sensitivity when available"
+    }, {
+      title: "Missing severity indicators",
+      description: "Failing to document severity of sepsis or complications",
+      impact: "Undercoding of condition severity affects risk stratification and quality metrics",
+      mitigation: "Include SOFA scores, organ dysfunction indicators, and hemodynamic status in documentation"
+    }]
+  }, {
+    category: "Coding Pitfalls",
+    items: [{
+      title: "Using unspecified codes when specific codes exist",
+      description: "Defaulting to general sepsis codes when organism-specific codes are available",
+      impact: "Reduced reimbursement, poor data quality, and missed opportunities for targeted quality improvement",
+      mitigation: "Review culture results and laboratory data before code assignment, use coding resources to identify specific codes"
+    }, {
+      title: "Incorrect sequencing of codes",
+      description: "Not following proper sequencing rules for sepsis and underlying conditions",
+      impact: "Claim denials, audit flags, and incorrect DRG assignment affecting reimbursement",
+      mitigation: "Follow ICD-10-CM coding guidelines for sepsis sequencing, code sepsis first when it's the reason for admission"
+    }]
+  }, {
+    category: "Audit Risk Areas",
+    items: [{
+      title: "Inconsistent documentation across providers",
+      description: "Different providers documenting conflicting information about the same condition",
+      impact: "Audit scrutiny, potential compliance issues, and delayed reimbursement",
+      mitigation: "Implement standardized documentation templates and regular provider education on coding requirements"
+    }, {
+      title: "Lack of supporting clinical evidence",
+      description: "Coded diagnoses not supported by clinical indicators or test results",
+      impact: "High risk for audit takebacks, compliance violations, and potential fraud allegations",
+      mitigation: "Ensure all coded diagnoses have supporting clinical documentation, laboratory results, or imaging studies"
+    }]
+  }];
 
   // Decision tree data
   const decisionTree = {
     id: "root",
     question: "Is the patient diagnosed with sepsis?",
-    answerOptions: [
-      {
-        answer: "Yes",
-        next: {
-          id: "sepsis_yes",
-          question: "Does a blood test confirm Acinetobacter baumannii?",
-          answerOptions: [
-            {
+    answerOptions: [{
+      answer: "Yes",
+      next: {
+        id: "sepsis_yes",
+        question: "Does a blood test confirm Acinetobacter baumannii?",
+        answerOptions: [{
+          answer: "Yes",
+          next: {
+            id: "culture_yes",
+            question: "Does the provider's note clearly state 'sepsis due to Acinetobacter baumannii'?",
+            answerOptions: [{
               answer: "Yes",
-              next: {
-                id: "culture_yes",
-                question: "Does the provider's note clearly state 'sepsis due to Acinetobacter baumannii'?",
-                answerOptions: [
-                  {
-                    answer: "Yes",
-                    result: "Use code A41.54 for sepsis due to Acinetobacter baumannii.",
-                    next: null
-                  },
-                  {
-                    answer: "No",
-                    result: "Ask the provider to clarify and confirm the bacteria in their note.",
-                    next: null
-                  }
-                ]
-              }
-            },
-            {
-              answer: "No",
-              result: "Use code A41.9 for sepsis with unspecified bacteria.",
+              result: "Use code A41.54 for sepsis due to Acinetobacter baumannii.",
               next: null
-            }
-          ]
-        }
-      },
-      {
-        answer: "No",
-        result: "Do not use A41.54. Consider other diagnoses.",
-        next: null
+            }, {
+              answer: "No",
+              result: "Ask the provider to clarify and confirm the bacteria in their note.",
+              next: null
+            }]
+          }
+        }, {
+          answer: "No",
+          result: "Use code A41.9 for sepsis with unspecified bacteria.",
+          next: null
+        }]
       }
-    ]
+    }, {
+      answer: "No",
+      result: "Do not use A41.54. Consider other diagnoses.",
+      next: null
+    }]
   };
 
   // FAQ data
-  const faqs = [
-    {
-      question: "Can I use A41.54 without a blood test?",
-      answer: "No, you need a blood test confirming Acinetobacter baumannii."
-    },
-    {
-      question: "How do I code severe sepsis?",
-      answer: "Add R65.20 for severe sepsis or R65.21 for septic shock if documented."
-    },
-    {
-      question: "What if the provider note doesn't specify the bacteria?",
-      answer: "Ask the provider to confirm the bacteria before coding."
-    }
-  ];
+  const faqs = [{
+    question: "Can I use A41.54 without a blood test?",
+    answer: "No, you need a blood test confirming Acinetobacter baumannii."
+  }, {
+    question: "How do I code severe sepsis?",
+    answer: "Add R65.20 for severe sepsis or R65.21 for septic shock if documented."
+  }, {
+    question: "What if the provider note doesn't specify the bacteria?",
+    answer: "Ask the provider to confirm the bacteria before coding."
+  }];
 
   // Diagnosis snapshot data
   const diagnosisSnapshot = {
-    keyFacts: [
-      {
-        label: "Definition",
-        value: "A serious infection caused by Acinetobacter baumannii bacteria, confirmed by blood tests, leading to sepsis."
-      },
-      {
-        label: "Clinical Signs", 
-        value: "High fever, low blood pressure, organ failure (SOFA score ≥2)."
-      },
-      {
-        label: "Common Settings",
-        value: "Often occurs in hospitals, especially in ICU or immunocompromised patients."
-      },
-      {
-        label: "Primary Code",
-        value: "A41.54 (Billable)."
-      }
-    ]
+    keyFacts: [{
+      label: "Definition",
+      value: "A serious infection caused by Acinetobacter baumannii bacteria, confirmed by blood tests, leading to sepsis."
+    }, {
+      label: "Clinical Signs",
+      value: "High fever, low blood pressure, organ failure (SOFA score ≥2)."
+    }, {
+      label: "Common Settings",
+      value: "Often occurs in hospitals, especially in ICU or immunocompromised patients."
+    }, {
+      label: "Primary Code",
+      value: "A41.54 (Billable)."
+    }]
   };
 
   // Documentation checklist
-  const documentationChecklist = [
-    "Blood test confirming Acinetobacter baumannii.",
-    "Provider note clearly stating 'sepsis due to Acinetobacter baumannii.'", 
-    "Clinical symptoms like fever, low blood pressure, or organ failure.",
-    "Details of antibiotic treatment and infection timeline."
-  ];
+  const documentationChecklist = ["Blood test confirming Acinetobacter baumannii.", "Provider note clearly stating 'sepsis due to Acinetobacter baumannii.'", "Clinical symptoms like fever, low blood pressure, or organ failure.", "Details of antibiotic treatment and infection timeline."];
 
   // Coding risks
-  const codingRisks = [
-    {
-      title: "Unspecified Coding",
-      description: "Using A41.9 when Acinetobacter is confirmed can lower reimbursement."
-    },
-    {
-      title: "Missing Severity Details", 
-      description: "Not noting organ failure or SOFA score impacts quality metrics."
-    },
-    {
-      title: "Wrong Code Order",
-      description: "Listing other conditions before A41.54 may cause claim denials."
-    }
-  ];
+  const codingRisks = [{
+    title: "Unspecified Coding",
+    description: "Using A41.9 when Acinetobacter is confirmed can lower reimbursement."
+  }, {
+    title: "Missing Severity Details",
+    description: "Not noting organ failure or SOFA score impacts quality metrics."
+  }, {
+    title: "Wrong Code Order",
+    description: "Listing other conditions before A41.54 may cause claim denials."
+  }];
 
   // Mitigation tips
-  const mitigationTips = [
-    "Always check blood test results before coding A41.54.",
-    "Include SOFA score to support severe sepsis codes (e.g., R65.20).",
-    "List A41.54 first if sepsis is the main reason for admission.",
-    "Use consistent documentation templates across providers."
-  ];
+  const mitigationTips = ["Always check blood test results before coding A41.54.", "Include SOFA score to support severe sepsis codes (e.g., R65.20).", "List A41.54 first if sepsis is the main reason for admission.", "Use consistent documentation templates across providers."];
 
   // Clinical decision support checklist
-  const clinicalChecklist = [
-    "Verify blood test results for Acinetobacter baumannii.",
-    "Ensure provider note specifies the bacteria causing sepsis.",
-    "Check for severe symptoms like organ failure or septic shock."
-  ];
+  const clinicalChecklist = ["Verify blood test results for Acinetobacter baumannii.", "Ensure provider note specifies the bacteria causing sepsis.", "Check for severe symptoms like organ failure or septic shock."];
 
   // Reimbursement impact
-  const reimbursementImpact = [
-    {
-      label: "Reimbursement",
-      value: "Using A41.54 ensures proper payment compared to A41.9 (unspecified)."
-    },
-    {
-      label: "Quality Metrics",
-      value: "Specific coding improves tracking of sepsis outcomes."
-    },
-    {
-      label: "Hospital Reporting", 
-      value: "Helps monitor hospital-acquired infections accurately."
-    }
-  ];
+  const reimbursementImpact = [{
+    label: "Reimbursement",
+    value: "Using A41.54 ensures proper payment compared to A41.9 (unspecified)."
+  }, {
+    label: "Quality Metrics",
+    value: "Specific coding improves tracking of sepsis outcomes."
+  }, {
+    label: "Hospital Reporting",
+    value: "Helps monitor hospital-acquired infections accurately."
+  }];
 
   // Quick tips
-  const quickTips = [
-    "Ask for bacteria confirmation if the note is unclear.",
-    "Note antibiotic resistance for better documentation.", 
-    "Refer to ICD-10-CM guidelines for accuracy."
-  ];
-
+  const quickTips = ["Ask for bacteria confirmation if the note is unclear.", "Note antibiotic resistance for better documentation.", "Refer to ICD-10-CM guidelines for accuracy."];
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -265,54 +201,36 @@ const DiagnosisDetail = () => {
       console.error('Failed to copy text: ', err);
     }
   };
-
   const toggleTreeNode = (nodeId: string) => {
     setExpandedTree(prev => ({
       ...prev,
       [nodeId]: !prev[nodeId]
     }));
   };
-
   const renderDecisionTree = (node: any, depth: number = 0) => {
     const isExpanded = expandedTree[node.id];
-    
-    return (
-      <div key={node.id} className={`ml-${depth * 4} p-3 border-l-4 border-[#387E89] bg-white rounded-r-lg mb-2`}>
+    return <div key={node.id} className={`ml-${depth * 4} p-3 border-l-4 border-[#387E89] bg-white rounded-r-lg mb-2`}>
         <div className="flex items-start justify-between">
           <p className="font-semibold text-[#143151] flex-1">{node.question}</p>
-          {node.answerOptions && (
-            <button
-              onClick={() => toggleTreeNode(node.id)}
-              className="ml-2 text-[#387E89] hover:text-[#143151] transition-colors"
-            >
+          {node.answerOptions && <button onClick={() => toggleTreeNode(node.id)} className="ml-2 text-[#387E89] hover:text-[#143151] transition-colors">
               {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-            </button>
-          )}
+            </button>}
         </div>
         
-        {node.answerOptions && (isExpanded || depth === 0) && (
-          <ul className="mt-2 space-y-2">
-            {node.answerOptions.map((option: any, index: number) => (
-              <li key={index} className="flex items-start">
+        {node.answerOptions && (isExpanded || depth === 0) && <ul className="mt-2 space-y-2">
+            {node.answerOptions.map((option: any, index: number) => <li key={index} className="flex items-start">
                 <span className="text-green-600 mr-2">→</span>
                 <div className="flex-1">
                   <p className="font-medium text-gray-700">{option.answer}</p>
-                  {option.result && (
-                    <p className="text-sm text-gray-600 mt-1">{option.result}</p>
-                  )}
+                  {option.result && <p className="text-sm text-gray-600 mt-1">{option.result}</p>}
                   {option.next && renderDecisionTree(option.next, depth + 1)}
                 </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
+              </li>)}
+          </ul>}
+      </div>;
   };
-
   if (!diagnosis) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
+    return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4">
         <Card className="max-w-md mx-auto bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-xl">
           <CardContent className="p-6 sm:p-8 lg:p-12 text-center">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
@@ -328,19 +246,13 @@ const DiagnosisDetail = () => {
             </Link>
           </CardContent>
         </Card>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50" data-api-endpoint="/api/diagnoses">
+  return <div className="min-h-screen bg-gradient-to-b from-white to-gray-50" data-api-endpoint="/api/diagnoses">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 max-w-6xl">
         {/* Navigation */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <Link 
-            to="/diagnoses" 
-            className="inline-flex items-center text-[#387E89] hover:text-[#143151] transition-colors group text-sm sm:text-base"
-          >
+          <Link to="/diagnoses" className="inline-flex items-center text-[#387E89] hover:text-[#143151] transition-colors group text-sm sm:text-base">
             <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to All Diagnoses
           </Link>
@@ -366,18 +278,14 @@ const DiagnosisDetail = () => {
                   <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 leading-relaxed">
                     {diagnosis.description}
                   </p>
-                  {diagnosis.alsoKnownAs.length > 0 && (
-                    <div>
+                  {diagnosis.alsoKnownAs.length > 0 && <div>
                       <p className="text-xs sm:text-sm font-semibold text-gray-500 mb-2 sm:mb-3 uppercase tracking-wide">Also known as</p>
                       <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {diagnosis.alsoKnownAs.map((term, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs sm:text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200">
+                        {diagnosis.alsoKnownAs.map((term, index) => <Badge key={index} variant="secondary" className="text-xs sm:text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200">
                             {term}
-                          </Badge>
-                        ))}
+                          </Badge>)}
                       </div>
-                    </div>
-                  )}
+                    </div>}
                 </div>
               </div>
             </CardHeader>
@@ -399,14 +307,12 @@ const DiagnosisDetail = () => {
             </CardHeader>
             <CardContent className="p-4 sm:p-6 pt-0">
               <ul className="space-y-3 sm:space-y-4">
-                {diagnosisSnapshot.keyFacts.map((fact, index) => (
-                  <li key={index} className="flex items-start">
+                {diagnosisSnapshot.keyFacts.map((fact, index) => <li key={index} className="flex items-start">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                     <div>
                       <strong className="text-[#143151]">{fact.label}</strong>: {fact.value}
                     </div>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </CardContent>
           </Card>
@@ -491,32 +397,16 @@ const DiagnosisDetail = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <ul className="space-y-2">
-                  {documentationChecklist.map((item, index) => (
-                    <li key={index} className="flex items-start">
+                  {documentationChecklist.map((item, index) => <li key={index} className="flex items-start">
                       <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{item}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </CardContent>
             </Card>
 
             {/* Downloadable Template */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Downloadable Template</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <p className="mb-4 text-sm">Use this template for accurate documentation:</p>
-                <Button variant="outline" className="w-full mb-4 text-[#387E89] border-[#387E89] hover:bg-[#387E89]/10">
-                  <Download className="h-4 w-4 mr-2" />
-                  Download Sepsis Documentation Template (PDF)
-                </Button>
-                <p className="text-xs text-gray-600">
-                  <strong>Example:</strong> "Patient has sepsis due to Acinetobacter baumannii, confirmed by blood tests on [DATE]. Symptoms include fever and low blood pressure. Treated with [ANTIBIOTIC]."
-                </p>
-              </CardContent>
-            </Card>
+            
           </div>
         </div>
 
@@ -537,12 +427,10 @@ const DiagnosisDetail = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <ul className="space-y-3">
-                  {codingRisks.map((risk, index) => (
-                    <li key={index} className="border-l-4 border-red-500 pl-3">
+                  {codingRisks.map((risk, index) => <li key={index} className="border-l-4 border-red-500 pl-3">
                       <strong className="text-red-700 text-sm">{risk.title}</strong>
                       <p className="text-xs text-gray-600 mt-1">{risk.description}</p>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </CardContent>
             </Card>
@@ -554,12 +442,10 @@ const DiagnosisDetail = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <ul className="space-y-2">
-                  {mitigationTips.map((tip, index) => (
-                    <li key={index} className="flex items-start">
+                  {mitigationTips.map((tip, index) => <li key={index} className="flex items-start">
                       <Shield className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{tip}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </CardContent>
             </Card>
@@ -581,12 +467,10 @@ const DiagnosisDetail = () => {
             </CardHeader>
             <CardContent className="p-4 sm:p-6 pt-0">
               <ul className="space-y-2">
-                {clinicalChecklist.map((item, index) => (
-                  <li key={index} className="flex items-start">
+                {clinicalChecklist.map((item, index) => <li key={index} className="flex items-start">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                     <span className="text-sm">{item}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </CardContent>
           </Card>
@@ -607,14 +491,12 @@ const DiagnosisDetail = () => {
             </CardHeader>
             <CardContent className="p-4 sm:p-6 pt-0">
               <ul className="space-y-3">
-                {reimbursementImpact.map((impact, index) => (
-                  <li key={index} className="flex items-start">
+                {reimbursementImpact.map((impact, index) => <li key={index} className="flex items-start">
                     <TrendingUp className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                     <div>
                       <strong className="text-[#143151] text-sm">{impact.label}</strong>: <span className="text-sm text-gray-700">{impact.value}</span>
                     </div>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </CardContent>
           </Card>
@@ -652,261 +534,23 @@ const DiagnosisDetail = () => {
         </div>
 
         {/* Related ICD-10 Code Ranges Section */}
-        <div className="mb-6 sm:mb-8 lg:mb-12">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-500/10 rounded-full flex items-center justify-center">
-              <Code className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Related ICD-10 Code Ranges</h2>
-          </div>
-          
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Complete code families applicable to {diagnosis.name}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6" data-api-endpoint="/api/diagnoses/code-ranges">
-              {relatedCodeRanges.map((range, index) => (
-                <div key={index} className="border rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 bg-gradient-to-r from-gray-50 to-blue-50/30 border-gray-200/60">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                    <Badge variant="outline" className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 font-mono text-sm sm:text-base px-2 sm:px-3 py-1 w-fit">
-                      {range.range}
-                    </Badge>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-[#143151] text-base sm:text-lg mb-1 sm:mb-2">{range.title}</h4>
-                      <p className="text-gray-700 mb-1 sm:mb-2 text-sm sm:text-base">{range.description}</p>
-                      {range.details && (
-                        <p className="text-gray-600 text-xs sm:text-sm italic">{range.details}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </div>
+        
 
         {/* Code Comparison Section */}
-        <div className="mb-6 sm:mb-8 lg:mb-12">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code Comparison: When to Use Each Code</h2>
-          </div>
-          
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Compare key differences between these codes to ensure accurate selection</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6">
-              <div className="overflow-x-auto" data-api-endpoint="/api/diagnoses/code-comparisons">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-b-2 border-gray-200">
-                      <TableHead className="font-bold text-gray-700 text-xs sm:text-sm">Code</TableHead>
-                      <TableHead className="font-bold text-gray-700 text-xs sm:text-sm">Description</TableHead>
-                      <TableHead className="font-bold text-gray-700 text-xs sm:text-sm">When to Use</TableHead>
-                      <TableHead className="font-bold text-gray-700 text-xs sm:text-sm">Key Documentation</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {codeComparisons.map((comparison, index) => (
-                      <TableRow key={index} className="hover:bg-gray-50 border-b border-gray-100">
-                        <TableCell className="font-mono font-bold text-[#387E89] bg-[#387E89]/5 rounded text-xs sm:text-sm">
-                          {comparison.code}
-                        </TableCell>
-                        <TableCell className="font-medium text-[#143151] text-xs sm:text-sm">{comparison.description}</TableCell>
-                        <TableCell className="text-xs sm:text-sm text-gray-700">{comparison.whenToUse}</TableCell>
-                        <TableCell className="text-xs sm:text-sm text-gray-600">
-                          <ul className="space-y-1">
-                            {comparison.keyDocumentation.map((doc, docIndex) => (
-                              <li key={docIndex} className="flex items-start">
-                                <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-green-500 mr-1 mt-0.5 flex-shrink-0" />
-                                <span className="text-xs sm:text-sm">{doc}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
 
         {/* Overview Section */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#387E89]/10 rounded-full flex items-center justify-center">
-              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-[#387E89]" />
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Clinical Overview</h2>
-          </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-base sm:text-lg lg:text-xl text-[#143151]">
-                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 mr-2 sm:mr-3" />
-                  Key Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6 pt-0">
-                <div>
-                  <h4 className="font-bold text-[#143151] mb-2 sm:mb-3 text-sm sm:text-base">Primary Code Range</h4>
-                  <p className="text-gray-600 bg-gray-50 p-2 sm:p-3 rounded-lg border border-gray-200 text-xs sm:text-sm">{diagnosis.details.codeRange}</p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#143151] mb-2 sm:mb-3 text-sm sm:text-base">Clinical Criteria</h4>
-                  <ul className="space-y-1.5 sm:space-y-2">
-                    {diagnosis.details.clinicalCriteria.map((criteria, index) => (
-                      <li key={index} className="flex items-start">
-                        <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mr-1.5 sm:mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-600 text-xs sm:text-sm lg:text-base">{criteria}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-base sm:text-lg lg:text-xl text-[#143151]">
-                  <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500 mr-2 sm:mr-3" />
-                  Clinical Decision Support
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm lg:text-base">
-                  Always review the patient's clinical documentation thoroughly. When in doubt, 
-                  choose the more specific code and ensure documentation supports it.
-                </p>
-                <div className="bg-gradient-to-r from-[#387E89]/5 to-[#143151]/5 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl border border-[#387E89]/20">
-                  <h4 className="font-bold text-[#387E89] mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
-                    Best Practice
-                  </h4>
-                  <p className="text-gray-600 leading-relaxed text-xs sm:text-sm lg:text-base">
-                    {diagnosis.details.bestPractice}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          
+          
         </div>
 
         {/* Documentation Section */}
-        <div className="mb-6 sm:mb-8 lg:mb-12">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/10 rounded-full flex items-center justify-center">
-              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Documentation Requirements</h2>
-          </div>
-          
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardContent className="p-4 sm:p-6 lg:p-8">
-              <div className="space-y-6 sm:space-y-8">
-                <div>
-                  <h4 className="font-bold text-[#143151] mb-3 sm:mb-4 text-base sm:text-lg lg:text-xl">Required Elements</h4>
-                  <div className="grid gap-2 sm:gap-3">
-                    {diagnosis.details.documentationRequirements.map((req, index) => (
-                      <div key={index} className="flex items-start bg-green-50 p-3 sm:p-4 rounded-lg border border-green-200/60">
-                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">{req}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                  <div className="bg-gradient-to-br from-red-50 to-red-100/50 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl border border-red-200/60">
-                    <h4 className="font-bold text-red-600 mb-3 sm:mb-4 flex items-center text-sm sm:text-base lg:text-lg">
-                      <XCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                      Poor Documentation Example
-                    </h4>
-                    <div className="bg-white/80 p-3 sm:p-4 rounded-lg border border-red-200/60">
-                      <p className="text-red-700 italic font-medium text-xs sm:text-sm lg:text-base">
-                        "{diagnosis.details.examples.poor}"
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl border border-green-200/60">
-                    <h4 className="font-bold text-green-600 mb-3 sm:mb-4 flex items-center text-sm sm:text-base lg:text-lg">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                      Good Documentation Example
-                    </h4>
-                    <div className="bg-white/80 p-3 sm:p-4 rounded-lg border border-green-200/60">
-                      <p className="text-green-700 italic font-medium text-xs sm:text-sm lg:text-base">
-                        "{diagnosis.details.examples.good}"
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
 
         {/* Enhanced Risks Section */}
-        <div className="mb-6 sm:mb-8 lg:mb-12">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-500/10 rounded-full flex items-center justify-center">
-              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Documentation & Coding Risks</h2>
-          </div>
-          
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardContent className="p-4 sm:p-6 lg:p-8">
-              <div className="space-y-8 sm:space-y-10">
-                {documentationRisks.map((riskCategory, categoryIndex) => (
-                  <div key={categoryIndex}>
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] mb-4 sm:mb-6 flex items-center">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full mr-3"></div>
-                      {riskCategory.category}
-                    </h3>
-                    <div className="grid gap-4 sm:gap-6">
-                      {riskCategory.items.map((risk, riskIndex) => (
-                        <div key={riskIndex} className="border rounded-lg sm:rounded-xl p-4 sm:p-6 bg-gradient-to-r from-red-50/50 to-orange-50/30 border-red-200/40">
-                          <div className="mb-4">
-                            <h4 className="font-bold text-[#143151] mb-2 text-base sm:text-lg flex items-center">
-                              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mr-2" />
-                              {risk.title}
-                            </h4>
-                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{risk.description}</p>
-                          </div>
-                          
-                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                            <div className="bg-red-100/60 p-3 sm:p-4 rounded-lg border border-red-200/60">
-                              <h5 className="font-semibold text-red-700 mb-2 text-sm sm:text-base flex items-center">
-                                <XCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5" />
-                                Impact
-                              </h5>
-                              <p className="text-red-600 text-xs sm:text-sm leading-relaxed">{risk.impact}</p>
-                            </div>
-                            
-                            <div className="bg-green-100/60 p-3 sm:p-4 rounded-lg border border-green-200/60">
-                              <h5 className="font-semibold text-green-700 mb-2 text-sm sm:text-base flex items-center">
-                                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5" />
-                                Mitigation Strategy
-                              </h5>
-                              <p className="text-green-600 text-xs sm:text-sm leading-relaxed">{risk.mitigation}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
 
         {/* FAQs and Quick Tips Section */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
@@ -925,16 +569,11 @@ const DiagnosisDetail = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <div className="space-y-4">
-                  {faqs.slice(0, showMoreFaqs ? faqs.length : 2).map((faq, index) => (
-                    <div key={index}>
+                  {faqs.slice(0, showMoreFaqs ? faqs.length : 2).map((faq, index) => <div key={index}>
                       <p className="font-semibold text-[#143151] text-sm">{faq.question}</p>
                       <p className="text-gray-600 text-sm mt-1">{faq.answer}</p>
-                    </div>
-                  ))}
-                  <button 
-                    onClick={() => setShowMoreFaqs(!showMoreFaqs)}
-                    className="text-[#387E89] hover:text-[#143151] text-sm underline transition-colors"
-                  >
+                    </div>)}
+                  <button onClick={() => setShowMoreFaqs(!showMoreFaqs)} className="text-[#387E89] hover:text-[#143151] text-sm underline transition-colors">
                     {showMoreFaqs ? 'Hide FAQs' : 'Show More FAQs'}
                   </button>
                 </div>
@@ -948,12 +587,10 @@ const DiagnosisDetail = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <ul className="space-y-2">
-                  {quickTips.map((tip, index) => (
-                    <li key={index} className="flex items-start">
+                  {quickTips.map((tip, index) => <li key={index} className="flex items-start">
                       <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{tip}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </CardContent>
             </Card>
@@ -972,8 +609,7 @@ const DiagnosisDetail = () => {
           <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
             <CardContent className="p-4 sm:p-6 lg:p-8">
               <div className="space-y-6 sm:space-y-8">
-                {diagnosis.details.templates.map((template, index) => (
-                  <div key={index} className="border rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 bg-gradient-to-r from-gray-50 to-blue-50/30 border-gray-200/60">
+                {diagnosis.details.templates.map((template, index) => <div key={index} className="border rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 bg-gradient-to-r from-gray-50 to-blue-50/30 border-gray-200/60">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2">
                       <h4 className="font-bold text-[#143151] text-sm sm:text-base lg:text-lg">{template.title}</h4>
                       <Badge variant="outline" className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 w-fit text-xs sm:text-sm">
@@ -984,17 +620,11 @@ const DiagnosisDetail = () => {
                       <div className="bg-gray-900 p-3 sm:p-4 lg:p-6 rounded-lg font-mono text-xs sm:text-sm text-green-400 overflow-x-auto border border-gray-700">
                         <pre className="whitespace-pre-wrap">{template.template}</pre>
                       </div>
-                      <Button
-                        onClick={() => copyToClipboard(template.template)}
-                        variant="outline"
-                        size="sm"
-                        className="absolute top-2 right-2 bg-gray-800 hover:bg-gray-700 border-gray-600 text-gray-300 hover:text-white"
-                      >
+                      <Button onClick={() => copyToClipboard(template.template)} variant="outline" size="sm" className="absolute top-2 right-2 bg-gray-800 hover:bg-gray-700 border-gray-600 text-gray-300 hover:text-white">
                         <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
@@ -1002,18 +632,15 @@ const DiagnosisDetail = () => {
 
         {/* Back to Top */}
         <div className="text-center">
-          <Button 
-            variant="outline" 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="bg-white/80 hover:bg-[#387E89] border-gray-200 hover:border-[#387E89] text-gray-700 hover:text-white text-sm sm:text-base"
-          >
+          <Button variant="outline" onClick={() => window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })} className="bg-white/80 hover:bg-[#387E89] border-gray-200 hover:border-[#387E89] text-gray-700 hover:text-white text-sm sm:text-base">
             <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2 rotate-90" />
             Back to Top
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DiagnosisDetail;
