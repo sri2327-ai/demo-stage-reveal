@@ -439,50 +439,48 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code-Specific Guidance</h2>
           </div>
           
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            {/* Decision Tree */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-1">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
-                <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
-                  {renderDecisionTree(decisionTree)}
-                </div>
-              </CardContent>
-            </Card>
+          {/* Decision Tree */}
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm mb-6">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
+              <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
+                {renderDecisionTree(decisionTree)}
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Code Comparison Table */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-2">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Code Comparison</CardTitle>
-                <p className="text-sm text-gray-600">When to use each related code</p>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-blue-100">
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
+          {/* Code Comparison Table */}
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Code Comparison</CardTitle>
+              <p className="text-sm text-gray-600">When to use each related code</p>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-blue-100">
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {codeComparisons.map((comparison, index) => (
+                      <TableRow key={index} className="hover:bg-gray-50">
+                        <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
+                        <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
+                        <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {codeComparisons.map((comparison, index) => (
-                        <TableRow key={index} className="hover:bg-gray-50">
-                          <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
-                          <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
-                          <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Documentation Best Practices Section */}
