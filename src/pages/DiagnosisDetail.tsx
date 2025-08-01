@@ -69,19 +69,6 @@ const DiagnosisDetail = () => {
     quickTips: []
   };
 
-  // AI Prompts for generating each field:
-  const aiPrompts = {
-    diagnosisSnapshot: `Generate a diagnosis snapshot for ICD-10 code {code}. Include definition, clinical signs, common settings, and primary code information. Format as JSON with keyFacts array containing label-value pairs.`,
-    relatedCodeRanges: `Generate related ICD-10 code ranges for diagnosis {diagnosisName} with code {primaryCode}. Include primary range and 3-4 related ranges with their descriptions. Format as JSON array with range, title, description, and details fields.`,
-    decisionTree: `Create a clinical decision tree for proper coding of ICD-10 code {code} - {diagnosisName}. Include step-by-step questions leading to correct code selection. Format as nested JSON with id, question, answerOptions, and results.`,
-    codeComparisons: `Generate a comparison table for ICD-10 code {code} showing when to use this code vs related codes. Include code, description, when to use, and key documentation requirements. Format as JSON array.`,
-    documentationChecklist: `Create a documentation checklist for ICD-10 code {code} - {diagnosisName}. Include specific requirements for proper documentation to support this code. Format as JSON array of strings.`,
-    codingRisks: `Identify common coding and audit risks for ICD-10 code {code}. Include risk categories, specific items with titles, descriptions, impacts, and mitigation strategies. Format as JSON with categories and items arrays.`,
-    clinicalDecisionSupport: `Generate clinical decision support checklist for ICD-10 code {code} - {diagnosisName}. Include verification steps for proper code assignment. Format as JSON array.`,
-    reimbursementImpact: `Analyze reimbursement and quality metrics impact for ICD-10 code {code}. Include impact on payment, quality metrics, and reporting. Format as JSON array with label-value pairs.`,
-    faqs: `Generate frequently asked questions and answers for ICD-10 code {code} - {diagnosisName}. Include practical coding scenarios and clarifications. Format as JSON array with question-answer pairs.`,
-    quickTips: `Create quick coding tips for ICD-10 code {code} - {diagnosisName}. Include practical advice for accurate coding. Format as JSON array of strings.`
-  };
 
   // Mock data for the new sections - these should come from API
   const relatedCodeRanges = [{
@@ -368,7 +355,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Diagnosis Snapshot</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm" data-api-source="diagnosisSnapshot">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Key Facts</CardTitle>
             </CardHeader>
@@ -394,7 +381,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Related ICD-10 Code Ranges</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm" data-api-source="relatedCodeRanges">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Complete code families applicable to AAPC ICD-10-CM Coding</CardTitle>
             </CardHeader>
@@ -426,48 +413,55 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code-Specific Guidance</h2>
           </div>
           
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            {/* Decision Tree */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-1">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
-                <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
-                  {renderDecisionTree(decisionTree)}
-                </div>
-              </CardContent>
-            </Card>
+          {/* Decision Tree */}
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="codeGuidance.decisionTree">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
+              <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
+                {renderDecisionTree(decisionTree)}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Code Comparison Table */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-2">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Code Comparison</CardTitle>
-                <p className="text-sm text-gray-600">When to use each related code</p>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-blue-100">
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
-                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {codeComparisons.map((comparison, index) => <TableRow key={index} className="hover:bg-gray-50">
-                          <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
-                          <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
-                          <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
-                        </TableRow>)}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
+        {/* Code Comparison Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500/10 rounded-full flex items-center justify-center">
+              <Code className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code Comparison</h2>
           </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="codeGuidance.codeComparisons">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Related Codes Comparison</CardTitle>
+              <p className="text-sm text-gray-600">When to use each related code</p>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-blue-100">
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
+                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {codeComparisons.map((comparison, index) => <TableRow key={index} className="hover:bg-gray-50">
+                        <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
+                        <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
+                        <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
+                      </TableRow>)}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Documentation Best Practices Section */}
@@ -481,7 +475,7 @@ const DiagnosisDetail = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Checklist */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm" data-api-source="documentation.checklist">
               <CardHeader className="p-4 sm:p-6">
                 <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Documentation Checklist</CardTitle>
               </CardHeader>
@@ -509,7 +503,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Coding and Audit Risks</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="documentation.risks">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Common Risks</CardTitle>
             </CardHeader>
@@ -533,7 +527,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Mitigation Tips</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="documentation.mitigationTips">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Best Practices</CardTitle>
             </CardHeader>
@@ -557,7 +551,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Clinical Decision Support</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm" data-api-source="clinical.checklist">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Checklist</CardTitle>
             </CardHeader>
@@ -581,7 +575,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Reimbursement and Quality Metrics</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm" data-api-source="clinical.reimbursementImpact">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Impact Summary</CardTitle>
             </CardHeader>
@@ -657,7 +651,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Frequently Asked Questions</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="faqs">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Common Questions and Answers</CardTitle>
             </CardHeader>
@@ -684,7 +678,7 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Quick Tips</h2>
           </div>
           
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300" data-api-source="quickTips">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-[#143151]">Practical Coding Tips</CardTitle>
             </CardHeader>
