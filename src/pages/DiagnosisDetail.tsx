@@ -509,37 +509,43 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Coding and Audit Risks</h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {/* Common Risks */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Common Risks</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <ul className="space-y-3">
-                  {codingRisks.map((risk, index) => <li key={index} className="border-l-4 border-red-500 pl-3">
-                      <strong className="text-red-700 text-sm">{risk.title}</strong>
-                      <p className="text-xs text-gray-600 mt-1">{risk.description}</p>
-                    </li>)}
-                </ul>
-              </CardContent>
-            </Card>
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Common Risks</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-3">
+                {codingRisks.map((risk, index) => <li key={index} className="border-l-4 border-red-500 pl-3">
+                    <strong className="text-red-700 text-sm">{risk.title}</strong>
+                    <p className="text-xs text-gray-600 mt-1">{risk.description}</p>
+                  </li>)}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Mitigation Tips */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Mitigation Tips</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <ul className="space-y-2">
-                  {mitigationTips.map((tip, index) => <li key={index} className="flex items-start">
-                      <Shield className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{tip}</span>
-                    </li>)}
-                </ul>
-              </CardContent>
-            </Card>
+        {/* Mitigation Tips Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Mitigation Tips</h2>
           </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Best Practices</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-2">
+                {mitigationTips.map((tip, index) => <li key={index} className="flex items-start">
+                    <Shield className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">{tip}</span>
+                  </li>)}
+              </ul>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Clinical Decision Support Section */}
@@ -642,49 +648,55 @@ const DiagnosisDetail = () => {
         {/* Enhanced Risks Section */}
         
 
-        {/* FAQs and Quick Tips Section */}
+        {/* FAQs Section */}
         <div className="mb-6 sm:mb-8 lg:mb-12">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-500/10 rounded-full flex items-center justify-center">
               <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">FAQs and Quick Tips</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Frequently Asked Questions</h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {/* Frequently Asked Questions */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Frequently Asked Questions</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="space-y-4">
-                  {faqs.slice(0, showMoreFaqs ? faqs.length : 2).map((faq, index) => <div key={index}>
-                      <p className="font-semibold text-[#143151] text-sm">{faq.question}</p>
-                      <p className="text-gray-600 text-sm mt-1">{faq.answer}</p>
-                    </div>)}
-                  <button onClick={() => setShowMoreFaqs(!showMoreFaqs)} className="text-[#387E89] hover:text-[#143151] text-sm underline transition-colors">
-                    {showMoreFaqs ? 'Hide FAQs' : 'Show More FAQs'}
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Common Questions and Answers</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <div className="space-y-4">
+                {faqs.slice(0, showMoreFaqs ? faqs.length : 2).map((faq, index) => <div key={index} className="p-4 bg-orange-50/50 rounded-lg border border-orange-100">
+                    <p className="font-semibold text-orange-900 text-sm">Q: {faq.question}</p>
+                    <p className="text-orange-800 text-sm mt-1">A: {faq.answer}</p>
+                  </div>)}
+                <button onClick={() => setShowMoreFaqs(!showMoreFaqs)} className="text-[#387E89] hover:text-[#143151] text-sm underline transition-colors">
+                  {showMoreFaqs ? 'Hide FAQs' : 'Show More FAQs'}
+                </button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Quick Tips */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg text-[#143151]">Quick Tips</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <ul className="space-y-2">
-                  {quickTips.map((tip, index) => <li key={index} className="flex items-start">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{tip}</span>
-                    </li>)}
-                </ul>
-              </CardContent>
-            </Card>
+        {/* Quick Tips Section */}
+        <div className="mb-6 sm:mb-8 lg:mb-12">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/10 rounded-full flex items-center justify-center">
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Quick Tips</h2>
           </div>
+          
+          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-[#143151]">Practical Coding Tips</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6 pt-0">
+              <ul className="space-y-2">
+                {quickTips.map((tip, index) => <li key={index} className="flex items-start">
+                    <CheckCircle className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">{tip}</span>
+                  </li>)}
+              </ul>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Templates Section */}
