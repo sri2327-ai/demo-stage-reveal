@@ -30,7 +30,7 @@ const DiagnosisDetail = () => {
     },
     relatedCodeRanges: [{
       range: "",
-      title: "", 
+      title: "",
       description: "",
       details: ""
     }],
@@ -72,30 +72,21 @@ const DiagnosisDetail = () => {
   // AI Prompts for generating each field:
   const aiPrompts = {
     diagnosisSnapshot: `Generate a diagnosis snapshot for ICD-10 code {code}. Include definition, clinical signs, common settings, and primary code information. Format as JSON with keyFacts array containing label-value pairs.`,
-    
     relatedCodeRanges: `Generate related ICD-10 code ranges for diagnosis {diagnosisName} with code {primaryCode}. Include primary range and 3-4 related ranges with their descriptions. Format as JSON array with range, title, description, and details fields.`,
-    
     decisionTree: `Create a clinical decision tree for proper coding of ICD-10 code {code} - {diagnosisName}. Include step-by-step questions leading to correct code selection. Format as nested JSON with id, question, answerOptions, and results.`,
-    
     codeComparisons: `Generate a comparison table for ICD-10 code {code} showing when to use this code vs related codes. Include code, description, when to use, and key documentation requirements. Format as JSON array.`,
-    
     documentationChecklist: `Create a documentation checklist for ICD-10 code {code} - {diagnosisName}. Include specific requirements for proper documentation to support this code. Format as JSON array of strings.`,
-    
     codingRisks: `Identify common coding and audit risks for ICD-10 code {code}. Include risk categories, specific items with titles, descriptions, impacts, and mitigation strategies. Format as JSON with categories and items arrays.`,
-    
     clinicalDecisionSupport: `Generate clinical decision support checklist for ICD-10 code {code} - {diagnosisName}. Include verification steps for proper code assignment. Format as JSON array.`,
-    
     reimbursementImpact: `Analyze reimbursement and quality metrics impact for ICD-10 code {code}. Include impact on payment, quality metrics, and reporting. Format as JSON array with label-value pairs.`,
-    
     faqs: `Generate frequently asked questions and answers for ICD-10 code {code} - {diagnosisName}. Include practical coding scenarios and clarifications. Format as JSON array with question-answer pairs.`,
-    
     quickTips: `Create quick coding tips for ICD-10 code {code} - {diagnosisName}. Include practical advice for accurate coding. Format as JSON array of strings.`
   };
 
   // Mock data for the new sections - these should come from API
   const relatedCodeRanges = [{
     range: "A00-B99",
-    title: "Primary Range", 
+    title: "Primary Range",
     description: "Certain infectious and parasitic diseases",
     details: "Includes codes for sepsis and specific infections like Acinetobacter baumannii."
   }, {
@@ -104,13 +95,13 @@ const DiagnosisDetail = () => {
     description: "Covers hypertension-related conditions and their coding.",
     details: ""
   }, {
-    range: "E08-E13", 
+    range: "E08-E13",
     title: "Diabetes mellitus",
     description: "Includes codes for diabetes and related complications.",
     details: ""
   }, {
     range: "J45",
-    title: "Asthma", 
+    title: "Asthma",
     description: "Covers asthma types and severity levels.",
     details: ""
   }];
@@ -409,8 +400,7 @@ const DiagnosisDetail = () => {
             </CardHeader>
             <CardContent className="p-4 sm:p-6 pt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                {relatedCodeRanges.map((range, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 bg-white hover:shadow-md transition-shadow">
+                {relatedCodeRanges.map((range, index) => <div key={index} className="border border-gray-200 rounded-lg p-4 bg-white hover:shadow-md transition-shadow">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="outline" className="font-mono text-sm bg-indigo-50 text-indigo-700 border-indigo-200">
                         {range.range}
@@ -420,11 +410,8 @@ const DiagnosisDetail = () => {
                       </div>
                     </div>
                     <p className="text-gray-700 text-sm mb-2">{range.description}</p>
-                    {range.details && (
-                      <p className="text-xs text-gray-600 italic">{range.details}</p>
-                    )}
-                  </div>
-                ))}
+                    {range.details && <p className="text-xs text-gray-600 italic">{range.details}</p>}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
@@ -439,48 +426,48 @@ const DiagnosisDetail = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">Code-Specific Guidance</h2>
           </div>
           
-          {/* Decision Tree */}
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm mb-6">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
-              <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6 pt-0">
-              <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
-                {renderDecisionTree(decisionTree)}
-              </div>
-            </CardContent>
-          </Card>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+            {/* Decision Tree */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-1">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Decision Tree for {diagnosis.primaryCode}</CardTitle>
+                <p className="text-sm text-gray-600">Follow this step-by-step guide to choose the correct ICD-10 code.</p>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded border border-gray-300 max-h-96 overflow-y-auto">
+                  {renderDecisionTree(decisionTree)}
+                </div>
+              </CardContent>
+            </Card>
 
-          {/* Code Comparison Table */}
-          <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Code Comparison</CardTitle>
-              <p className="text-sm text-gray-600">When to use each related code</p>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6 pt-0">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="bg-blue-100">
-                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
-                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
-                      <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {codeComparisons.map((comparison, index) => (
-                      <TableRow key={index} className="hover:bg-gray-50">
-                        <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
-                        <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
-                        <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
+            {/* Code Comparison Table */}
+            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm order-2">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Code Comparison</CardTitle>
+                <p className="text-sm text-gray-600">When to use each related code</p>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-blue-100">
+                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Code</TableHead>
+                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm">Description</TableHead>
+                        <TableHead className="font-bold text-[#143151] text-xs sm:text-sm hidden lg:table-cell">When to Use</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+                    </TableHeader>
+                    <TableBody>
+                      {codeComparisons.map((comparison, index) => <TableRow key={index} className="hover:bg-gray-50">
+                          <TableCell className="font-mono font-bold text-[#387E89] text-xs sm:text-sm">{comparison.code}</TableCell>
+                          <TableCell className="text-xs sm:text-sm">{comparison.description}</TableCell>
+                          <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{comparison.whenToUse}</TableCell>
+                        </TableRow>)}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Documentation Best Practices Section */}
@@ -509,26 +496,7 @@ const DiagnosisDetail = () => {
             </Card>
 
             {/* Downloadable Template */}
-            <Card className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-base sm:text-lg lg:text-xl text-[#143151]">Downloadable Template</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="space-y-4">
-                  <p className="text-sm text-gray-600">Use this template for accurate documentation:</p>
-                  <Button variant="outline" className="w-full bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-700">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download Sepsis Documentation Template (PDF)
-                  </Button>
-                  <div className="bg-gray-50 p-3 rounded border border-gray-200">
-                    <p className="text-xs text-gray-600 italic">
-                      Example: "Patient has sepsis due to Acinetobacter baumannii, confirmed by blood tests on [DATE]. 
-                      Symptoms include fever and low blood pressure. Treated with [ANTIBIOTIC]."
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            
           </div>
         </div>
 
