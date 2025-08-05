@@ -15,6 +15,8 @@ import Templates from "./pages/Templates";
 import ICD10Codes from "./pages/ICD10Codes";
 import ICD10CodeRange from "./pages/ICD10CodeRange";
 import Presentation from "./pages/Presentation";
+import MedicalAbbreviations from "./pages/MedicalAbbreviations";
+import MedicalAbbreviationDetail from "./pages/MedicalAbbreviationDetail";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const App = () => (
           <Route path="/templates" element={<Templates />} />
           <Route path="/icd10-codes" element={<ICD10Codes />} />
           <Route path="/icd10-codes/:range" element={<ICD10CodeRange />} />
+          <Route path="/medical-abbreviations" element={<MedicalAbbreviations />} />
+          <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
           <Route path="/presentation" element={<Presentation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
