@@ -24,6 +24,9 @@ import ReduceBurnout from "./pages/ReduceBurnout";
 import PatientCenteredCare from "./pages/PatientCenteredCare";
 import IncreaseProfitability from "./pages/IncreaseProfitability";
 import { WelcomeForm } from "./components/WelcomeForm";
+import SpecialtyHub from "./pages/SpecialtyHub";
+import SpecialtyBlogList from "./pages/SpecialtyBlogList";
+import SpecialtyBlogPost from "./pages/SpecialtyBlogPost";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +57,9 @@ const App = () => (
             <Route path="/reduce-burnout" element={<ReduceBurnout />} />
             <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
             <Route path="/increase-profitability" element={<IncreaseProfitability />} />
+            <Route path="/specialties" element={<SpecialtyHub />} />
+            <Route path="/specialties/:slug" element={<SpecialtyBlogList />} />
+            <Route path="/specialties/:slug/:postSlug" element={<SpecialtyBlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
