@@ -100,7 +100,7 @@ const IncreaseProfitability = () => {
         {/* Hero Section */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-50/70 via-blue-50/70 to-indigo-50/70" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]" />
+          <div className="absolute inset-0 bg-checker-grid" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -113,7 +113,7 @@ const IncreaseProfitability = () => {
                 Practice Profitability
               </div>
               
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
                 Profitability follows intelligent automation
               </h1>
               
@@ -121,7 +121,7 @@ const IncreaseProfitability = () => {
                 Convert more visits, document faster, and capture compliant reimbursement with AI scribe + AI agents.
               </p>
               
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white hover:shadow-xl transition-all duration-300 group">
+              <Button size="lg" className="rounded-full px-8 bg-[#143151] bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-lg ring-1 ring-white/10 hover:shadow-2xl hover:translate-y-0.5 transition-all duration-300 group">
                 Calculate ROI
                 <TrendingUp className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>

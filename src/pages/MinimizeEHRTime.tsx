@@ -97,7 +97,7 @@ const MinimizeEHRTime = () => {
         {/* Hero Section */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-50/70 via-blue-50/70 to-indigo-50/70" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]" />
+          <div className="absolute inset-0 bg-checker-grid" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -110,7 +110,7 @@ const MinimizeEHRTime = () => {
                 EHR Efficiency
               </div>
               
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
                 Less time in the EHR, more time in care
               </h1>
               
@@ -160,9 +160,9 @@ const MinimizeEHRTime = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <div className="aspect-square bg-gradient-primary rounded-3xl p-8 glassmorphism">
-                  <div className="w-full h-full bg-background/10 rounded-2xl flex items-center justify-center">
-                    <Clock className="w-24 h-24 text-background/80" />
+                <div className="aspect-square rounded-3xl p-8 bg-gradient-to-br from-[#143151] to-[#387E89] ring-1 ring-[#387E89]/30 shadow-lg hover:-translate-y-1 hover:shadow-2xl transition-all">
+                  <div className="w-full h-full bg-white/10 rounded-2xl flex items-center justify-center">
+                    <Clock className="w-24 h-24 text-white/90" />
                   </div>
                 </div>
               </motion.div>
