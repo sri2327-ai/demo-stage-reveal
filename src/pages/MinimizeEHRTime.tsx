@@ -130,7 +130,7 @@ const MinimizeEHRTime = () => {
         {/* Key Features */}
         <section className="py-16 lg:py-24">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid gap-12 lg:gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
