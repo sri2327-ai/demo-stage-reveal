@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WhyS10AI from "./pages/WhyS10AI";
@@ -27,9 +27,19 @@ import { WelcomeForm } from "./components/WelcomeForm";
 import SpecialtyHub from "./pages/SpecialtyHub";
 import SpecialtyBlogList from "./pages/SpecialtyBlogList";
 import SpecialtyBlogPost from "./pages/SpecialtyBlogPost";
+import { specialties } from "@/data/specialties";
+
+const RedirectSpecialty = () => {
+  const { slug } = useParams();
+  return <Navigate to={`/${slug}`} replace />;
+};
+
+const RedirectPost = () => {
+  const { slug, postSlug } = useParams();
+  return <Navigate to={`/${slug}/${postSlug}`} replace />;
+};
 
 const queryClient = new QueryClient();
-
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -58,8 +68,20 @@ const App = () => (
             <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
             <Route path="/increase-profitability" element={<IncreaseProfitability />} />
             <Route path="/specialties" element={<SpecialtyHub />} />
-            <Route path="/specialties/:slug" element={<SpecialtyBlogList />} />
-            <Route path="/specialties/:slug/:postSlug" element={<SpecialtyBlogPost />} />
+            <Route path="/specialties/:slug" element={<RedirectSpecialty />} />
+            <Route path="/specialties/:slug/:postSlug" element={<RedirectPost />} />
+            {specialties.map((s) => (
+              <Route key={`top-${s.slug}`} path={`/${s.slug}`} element={<SpecialtyBlogList slug={s.slug} />} />
+            ))}
+            {specialties.flatMap((s) =>
+              s.posts.map((p) => (
+                <Route
+                  key={`top-${s.slug}-${p.slug}`}
+                  path={`/${s.slug}/${p.slug}`}
+                  element={<SpecialtyBlogPost slug={s.slug} postSlug={p.slug} />}
+                />
+              ))
+            )}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

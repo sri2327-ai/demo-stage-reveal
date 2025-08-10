@@ -38,7 +38,7 @@ export default function SpecialtyHub() {
                 <SpecialtyCombobox
                   items={specialties.map((s) => ({ label: s.name, value: s.slug }))}
                   value={null}
-                  onChange={(val) => val && navigate(`/specialties/${val}`)}
+                  onChange={(val) => val && navigate(`/${val}`)}
                   placeholder="Select a specialty"
                 />
               </div>
@@ -58,7 +58,7 @@ export default function SpecialtyHub() {
                       <span>{s.posts.length} posts</span>
                     </div>
                     <Button asChild className="premium-button rounded-full px-4">
-                      <Link to={`/specialties/${s.slug}`}>Explore posts</Link>
+                      <Link to={`/${s.slug}`}>Explore posts</Link>
                     </Button>
                   </CardContent>
                 </Card>

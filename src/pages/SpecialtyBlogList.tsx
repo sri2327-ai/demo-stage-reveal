@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { specialties } from "@/data/specialties";
 
-export default function SpecialtyBlogList() {
-  const { slug } = useParams();
-  const specialty = specialties.find(s => s.slug === slug);
+export default function SpecialtyBlogList(props: { slug?: string } = {}) {
+  const params = useParams();
+  const finalSlug = props.slug ?? params.slug;
+  const specialty = specialties.find(s => s.slug === finalSlug);
 
   if (!specialty) {
     return (
@@ -23,6 +24,7 @@ export default function SpecialtyBlogList() {
       <Helmet>
         <title>{`${specialty.name} Blogs: AI scribe & agents`}</title>
         <meta name="description" content={`Explore ${specialty.name} posts about AI medical scribe workflows, coding, and patient engagement.`} />
+        <link rel="canonical" href={`/${specialty.slug}`} />
       </Helmet>
       <div className="min-h-screen bg-gradient-subtle">
         <section className="py-20 lg:py-28 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-y border-white/20">
@@ -48,7 +50,7 @@ export default function SpecialtyBlogList() {
                       <span>•</span>
                       <span>{p.readingTime}</span>
                     </div>
-                    <Button asChild className="premium-button rounded-full px-4"><Link to={`/specialties/${specialty.slug}/${p.slug}`}>Read post</Link></Button>
+                    <Button asChild className="premium-button rounded-full px-4"><Link to={`/${specialty.slug}/${p.slug}`}>Read post</Link></Button>
                   </CardContent>
                 </Card>
               ))}

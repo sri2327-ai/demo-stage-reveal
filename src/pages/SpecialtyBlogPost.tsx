@@ -4,8 +4,10 @@ import { specialties } from "@/data/specialties";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 
-export default function SpecialtyBlogPost() {
-  const { slug, postSlug } = useParams();
+export default function SpecialtyBlogPost(props: { slug?: string; postSlug?: string } = {}) {
+  const params = useParams();
+  const slug = props.slug ?? params.slug;
+  const postSlug = props.postSlug ?? params.postSlug;
   const specialty = specialties.find(s => s.slug === slug);
   const post = specialty?.posts.find(p => p.slug === postSlug);
 
@@ -23,12 +25,13 @@ export default function SpecialtyBlogPost() {
       <Helmet>
         <title>{`${post.title} – ${specialty.name} Blog`}</title>
         <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`/${specialty.slug}/${post.slug}`} />
       </Helmet>
 
       <article className="min-h-screen bg-gradient-subtle">
         <header className="py-16 lg:py-24 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-y border-white/20">
           <div className="container max-w-3xl">
-            <p className="text-sm text-muted-foreground mb-2"><Link to={`/specialties/${specialty.slug}`} className="story-link">{specialty.name} Blog</Link></p>
+            <p className="text-sm text-muted-foreground mb-2"><Link to={`/${specialty.slug}`} className="story-link">{specialty.name} Blog</Link></p>
             <h1 className="text-4xl lg:text-5xl font-bold text-gradient mb-3">{post.title}</h1>
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
               <span>{new Date(post.date).toLocaleDateString()}</span>
@@ -45,7 +48,7 @@ export default function SpecialtyBlogPost() {
             ))}
 
             <div className="mt-8">
-              <Button variant="ghost" asChild><Link to={`/specialties/${specialty.slug}`}>← Back to {specialty.name} posts</Link></Button>
+              <Button variant="ghost" asChild><Link to={`/${specialty.slug}`}>← Back to {specialty.name} posts</Link></Button>
             </div>
           </div>
         </main>
