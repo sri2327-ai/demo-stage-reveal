@@ -3,6 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { specialties } from "@/data/specialties";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function SpecialtyBlogPost(props: { slug?: string; postSlug?: string } = {}) {
   const params = useParams();
@@ -38,14 +41,38 @@ export default function SpecialtyBlogPost(props: { slug?: string; postSlug?: str
               <span>•</span>
               <span>{post.readingTime}</span>
             </div>
+            {post.image && (
+              <div className="mt-6">
+                <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg">
+                  <img
+                    src={post.image}
+                    alt={post.imageAlt ?? `${post.title} – ${specialty.name}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                </AspectRatio>
+              </div>
+            )}
           </div>
         </header>
 
         <main className="py-12 lg:py-16">
           <div className="container max-w-3xl">
-            {post.content.split("\n\n").map((para, idx) => (
-              <p key={idx} className="mb-6 text-lg text-foreground/90 leading-relaxed">{para}</p>
-            ))}
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ node, ...props }) => (
+                  <img {...props} className="my-6 w-full rounded-md shadow-sm" loading="lazy" decoding="async" alt={props.alt || `${post.title} illustration`} />
+                ),
+                a: ({ node, ...props }) => (
+                  <a {...props} target="_blank" rel="noopener noreferrer" className="underline decoration-primary/50 hover:decoration-primary">{props.children}</a>
+                ),
+                h1: ({ ...p }) => <h2 {...p} />,
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
 
             <div className="mt-8">
               <Button variant="ghost" asChild><Link to={`/${specialty.slug}`}>← Back to {specialty.name} posts</Link></Button>

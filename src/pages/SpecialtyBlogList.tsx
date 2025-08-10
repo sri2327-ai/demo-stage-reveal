@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { specialties } from "@/data/specialties";
 
 export default function SpecialtyBlogList(props: { slug?: string } = {}) {
@@ -43,6 +44,19 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
               {specialty.posts.map(p => (
                 <Card key={p.slug} className="bg-card border hover:shadow-elegant transition-all duration-300">
                   <CardContent className="p-6">
+                    {p.image && (
+                      <div className="-mx-6 mb-4">
+                        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-t-lg">
+                          <img
+                            src={p.image}
+                            alt={p.imageAlt ?? `${p.title} – ${specialty.name}`}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover"
+                          />
+                        </AspectRatio>
+                      </div>
+                    )}
                     <h3 className="font-semibold text-xl mb-2">{p.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{p.excerpt}</p>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
