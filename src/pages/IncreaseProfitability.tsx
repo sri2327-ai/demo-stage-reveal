@@ -204,11 +204,6 @@ const IncreaseProfitability = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <div className="aspect-square bg-gradient-primary rounded-3xl p-8 glassmorphism">
-                  <div className="w-full h-full bg-background/10 rounded-2xl flex items-center justify-center">
-                    <TrendingUp className="w-24 h-24 text-background/80" />
-                  </div>
-                </div>
               </motion.div>
             </div>
           </div>
