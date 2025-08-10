@@ -80,8 +80,8 @@ const ReduceBurnout = () => {
 
       <div className="min-h-screen bg-gradient-subtle">
         {/* Hero Section */}
-        <section className="relative py-24 lg:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -89,12 +89,12 @@ const ReduceBurnout = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <Badge variant="secondary" className="mb-6 glassmorphism">
+              <Badge className="mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-4 py-2 md:px-6 md:py-3 text-[#143151]">
                 <Heart className="w-4 h-4 mr-2" />
                 Clinician Wellbeing
               </Badge>
               
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
                 Fight burnout by removing the admin burden
               </h1>
               
@@ -102,7 +102,7 @@ const ReduceBurnout = () => {
                 Reclaim time, focus, and energy with ambient documentation plus automated patient communications.
               </p>
               
-              <Button size="lg" className="premium-button group">
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white hover:shadow-xl transition-all duration-300 group">
                 Start Reducing Burnout
                 <Heart className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
@@ -250,8 +250,8 @@ const ReduceBurnout = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-primary relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <section className="py-16 lg:py-24 bg-gradient-to-r from-[#143151] to-[#387E89] relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-10" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -265,7 +265,7 @@ const ReduceBurnout = () => {
               <p className="text-xl text-background/80 mb-8">
                 Take the first step toward better work-life balance with intelligent automation.
               </p>
-              <Button size="lg" variant="secondary" className="hero-button group">
+              <Button size="lg" className="bg-white/20 text-white border border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group">
                 Get Automation Plan
                 <Shield className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
