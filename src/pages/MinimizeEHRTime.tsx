@@ -5,7 +5,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { Clock, FileText, Code, MessageSquare, Zap, Building2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { HeroBadge } from "@/components/ui/HeroBadge";
-import { EfficiencyHeroShowcase } from "@/components/ui/EfficiencyHeroShowcase";
+
 
 const MinimizeEHRTime = () => {
   const features = [
@@ -161,7 +161,7 @@ const MinimizeEHRTime = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <EfficiencyHeroShowcase />
+                
               </motion.div>
             </div>
           </div>
