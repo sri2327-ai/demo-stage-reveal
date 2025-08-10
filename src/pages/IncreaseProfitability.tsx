@@ -152,7 +152,7 @@ const IncreaseProfitability = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="glassmorphism border-0 h-full hover:shadow-elegant transition-all duration-300">
+                  <Card className="bg-card border h-full hover:shadow-elegant transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                         {driver.icon}
