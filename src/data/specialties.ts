@@ -23,7 +23,7 @@ export const specialties: Specialty[] = [
     slug: "cardiology",
     name: "Cardiology",
     description: "AI scribing and agents for heart care—accurate notes, codes, and patient follow-ups.",
-    tags: ["inpatient", "outpatient", "procedural"],
+    tags: [],
     posts: [
       {
         slug: "optimize-cath-lab-workflows",
@@ -57,7 +57,7 @@ export const specialties: Specialty[] = [
     slug: "dermatology",
     name: "Dermatology",
     description: "Document faster with visual cues, accurate lesion mapping, and patient education automation.",
-    tags: ["outpatient"],
+    tags: [],
     posts: [
       {
         slug: "derm-visit-efficiency",
@@ -77,7 +77,7 @@ export const specialties: Specialty[] = [
     slug: "behavioral-health",
     name: "Behavioral Health",
     description: "Maintain presence in sensitive conversations with accurate DAP/SOAP notes and coding.",
-    tags: ["outpatient", "telehealth"],
+    tags: [],
     posts: [
       {
         slug: "phq9-gad7-integrations",
