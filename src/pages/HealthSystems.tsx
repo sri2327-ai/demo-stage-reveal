@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
+import { FAQSection } from '../components/FAQSection';
 import { 
   Stethoscope, 
   Calendar, 
@@ -32,6 +33,29 @@ import {
 } from 'lucide-react';
 
 const HealthSystems = () => {
+  const healthSystemsFAQs = [
+    {
+      question: "How does S10.AI support patient-centered care at the health system level?",
+      answer: "S10.AI enables system-wide patient-centered care by providing consistent AI-powered documentation and administrative support across all departments. This ensures that every clinician has more time to focus on patients while maintaining standardized, high-quality care protocols throughout your organization."
+    },
+    {
+      question: "What security measures does S10.AI have in place for health systems?",
+      answer: "S10.AI is built with enterprise-grade security including HIPAA, GDPR, and ISO 27001 compliance. We provide end-to-end encryption, comprehensive audit trails, role-based access controls, and dedicated security assessments for each health system deployment."
+    },
+    {
+      question: "How does S10.AI integrate with existing EHR systems?",
+      answer: "S10.AI seamlessly integrates with all major EHR systems including Epic, Cerner, Allscripts, and others. Our platform is designed for universal EHR integration, ensuring smooth deployment across your entire health system without disrupting existing workflows."
+    },
+    {
+      question: "What is the expected ROI timeline for health systems implementing S10.AI?",
+      answer: "Health systems typically see immediate efficiency gains within the first month, with full ROI achieved within 6 months. Our platform delivers up to 40% revenue growth and 60% cost reduction through improved clinical productivity and administrative automation."
+    },
+    {
+      question: "How does S10.AI handle multi-departmental deployment and customization?",
+      answer: "S10.AI offers specialty-specific customization while maintaining system-wide standardization. Each department can configure workflows to their specific needs while ensuring consistent data governance, compliance, and reporting across the entire health system."
+    }
+  ];
+
   const unifiedPlatformBenefits = [
     {
       icon: <Brain className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#143151]" />,
@@ -584,6 +608,37 @@ const HealthSystems = () => {
                   </Button>
                 </div>
               </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          title="Questions & answers"
+          subtitle="Everything you need to know about S10.AI for health systems"
+          faqs={healthSystemsFAQs}
+        />
+
+        {/* Final CTA Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8 }} 
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4">
+                Ready to Transform Your Health System?
+              </h2>
+              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+                Schedule an executive briefing to see how S10.AI can accelerate revenue and reduce costs across your organization.
+              </p>
+              
+              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold">
+                Schedule Executive Briefing
+                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </motion.div>
           </div>
         </section>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
+import { FAQSection } from '../components/FAQSection';
 import { 
   Stethoscope, 
   Headphones, 
@@ -24,6 +25,29 @@ import {
 } from 'lucide-react';
 
 const PrivatePractice = () => {
+  const privatePracticeFAQs = [
+    {
+      question: "How does S10.AI support patient-centered care during consultations?",
+      answer: "S10.AI's CRUSH medical scribe listens to your patient conversations and generates comprehensive notes in real-time, allowing you to maintain eye contact and focus entirely on your patient. The AI captures medical history, symptoms, and treatment plans accurately, so you can be fully present during each consultation."
+    },
+    {
+      question: "Why is patient-centered care important for private practice providers?",
+      answer: "Patient-centered care leads to better health outcomes, increased patient satisfaction, and stronger patient-provider relationships. In private practice, this translates to higher patient retention, positive word-of-mouth referrals, and improved practice reputation. S10.AI helps you deliver this level of care by removing administrative burdens that take away from patient interaction."
+    },
+    {
+      question: "How does S10.AI help maintain continuity in patient-centered care?",
+      answer: "S10.AI maintains detailed, consistent documentation across all patient visits, ensuring that care plans and patient preferences are accurately tracked over time. BRAVO, our AI front-office assistant, also helps maintain continuity by managing follow-up appointments, medication refills, and patient communications seamlessly."
+    },
+    {
+      question: "Who is responsible for delivering patient-centered care with S10.AI?",
+      answer: "You, the healthcare provider, remain fully responsible for all medical decisions and patient care. S10.AI serves as your AI assistant, handling documentation and administrative tasks so you can focus on what matters most - providing excellent patient care. The AI supports your practice but never replaces your clinical expertise and judgment."
+    },
+    {
+      question: "How does S10.AI ensure accurate documentation of patient interactions?",
+      answer: "S10.AI uses advanced medical AI trained on millions of clinical encounters to accurately capture and document patient interactions. The system understands medical terminology, can differentiate between relevant clinical information and casual conversation, and generates notes that are both comprehensive and compliant with medical documentation standards."
+    }
+  ];
+
   const metrics = [
     {
       value: '$150,000+',
@@ -336,6 +360,13 @@ const PrivatePractice = () => {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          title="Questions & answers"
+          subtitle="Everything you need to know about S10.AI for private practices"
+          faqs={privatePracticeFAQs}
+        />
 
         {/* Final CTA Section */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
