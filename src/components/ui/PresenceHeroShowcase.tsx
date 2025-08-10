@@ -60,11 +60,11 @@ export const PresenceHeroShowcase: React.FC<PresenceHeroShowcaseProps> = ({ clas
       </svg>
 
       {/* Content */}
-      <div className="relative z-10 h-full w-full">
+      <div className="relative z-10 h-full w-full bg-gradient-to-br from-primary/5 to-secondary/5">
         {/* Left stack */}
         {leftPills.map((p, i) => (
           <div key={i} className="absolute left-3" style={{ top: `${p.y}%` }}>
-            <Pill>
+            <Pill className="bg-primary/10 text-primary border-primary/20">
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-primary/10 text-primary border border-primary/20">
                 {p.icon}
               </span>
@@ -78,12 +78,12 @@ export const PresenceHeroShowcase: React.FC<PresenceHeroShowcaseProps> = ({ clas
           className={cn(
             "absolute right-4 top-1/2 -translate-y-1/2",
             "w-[52%] h-[70%] rounded-2xl",
-            "bg-background/80 border border-foreground/10 backdrop-blur-xl shadow-elegant"
+            "bg-background/80 border border-primary/20 ring-1 ring-primary/10 backdrop-blur-xl shadow-elegant"
           )}
           aria-label="Generated clinical note preview"
         >
           {/* Header */}
-          <header className="flex items-center gap-2 p-4 border-b border-foreground/10">
+          <header className="flex items-center gap-2 p-4 border-b border-primary/10 bg-gradient-to-r from-primary/10 to-secondary/10">
             <div className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-primary text-primary-foreground shadow-sm">
               <FileText className="w-4 h-4" />
             </div>
@@ -92,18 +92,18 @@ export const PresenceHeroShowcase: React.FC<PresenceHeroShowcaseProps> = ({ clas
 
           {/* Note lines */}
           <div className="p-4 grid gap-2">
-            <div className="h-2 rounded bg-foreground/10 w-4/5" />
-            <div className="h-2 rounded bg-foreground/10 w-3/5" />
-            <div className="h-2 rounded bg-foreground/10 w-5/6" />
-            <div className="h-2 rounded bg-foreground/10 w-2/3" />
-            <div className="h-2 rounded bg-foreground/10 w-4/5" />
-            <div className="h-2 rounded bg-foreground/10 w-3/4" />
-            <div className="h-2 rounded bg-foreground/10 w-2/3" />
+            <div className="h-2 rounded bg-primary/15 w-4/5" />
+            <div className="h-2 rounded bg-primary/15 w-3/5" />
+            <div className="h-2 rounded bg-primary/15 w-5/6" />
+            <div className="h-2 rounded bg-primary/15 w-2/3" />
+            <div className="h-2 rounded bg-primary/15 w-4/5" />
+            <div className="h-2 rounded bg-primary/15 w-3/4" />
+            <div className="h-2 rounded bg-primary/15 w-2/3" />
           </div>
 
           {/* Bottom status bar */}
           <footer className="absolute bottom-3 left-3 right-3">
-            <div className="flex items-center justify-between rounded-xl px-3 py-2 bg-muted/40 border border-foreground/10">
+            <div className="flex items-center justify-between rounded-xl px-3 py-2 bg-primary/10 border border-primary/20">
               <div className="flex items-center gap-2 text-xs text-foreground/70">
                 <Mic className="w-3.5 h-3.5 text-primary" />
                 Ambient scribing active
