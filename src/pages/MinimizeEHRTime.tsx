@@ -5,7 +5,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { Clock, FileText, Code, MessageSquare, Zap, Building2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { HeroBadge } from "@/components/ui/HeroBadge";
-import { ShowcaseTile } from "@/components/ui/ShowcaseTile";
+import { EfficiencyHeroShowcase } from "@/components/ui/EfficiencyHeroShowcase";
 
 const MinimizeEHRTime = () => {
   const features = [
@@ -161,11 +161,7 @@ const MinimizeEHRTime = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <div className="aspect-square rounded-3xl p-8 bg-gradient-to-br from-[#143151] to-[#387E89] ring-1 ring-[#387E89]/30 shadow-lg hover:-translate-y-1 hover:shadow-2xl transition-all">
-                  <div className="w-full h-full bg-white/10 rounded-2xl flex items-center justify-center">
-                    <Clock className="w-24 h-24 text-white/90" />
-                  </div>
-                </div>
+                <EfficiencyHeroShowcase />
               </motion.div>
             </div>
           </div>
