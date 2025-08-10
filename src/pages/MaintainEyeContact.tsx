@@ -81,7 +81,7 @@ const MaintainEyeContact = () => {
                 The AI medical scribe handles the documentation—focus entirely on the person in front of you.
               </p>
               
-              <Button size="lg" className="rounded-full px-8 bg-[#143151] bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-lg ring-1 ring-white/10 hover:shadow-2xl hover:translate-y-0.5 transition-all duration-300 group">
+              <Button size="lg" className="rounded-full px-8 premium-button ring-1 ring-white/10 hover:translate-y-0.5 transition-all duration-300 group">
                 See Patient Presence in Action
                 <Eye className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
@@ -245,7 +245,7 @@ const MaintainEyeContact = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-r from-[#143151] to-[#387E89] relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-gradient-primary relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-10" />
           <div className="container relative z-10">
             <motion.div

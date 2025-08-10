@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { Heart, Users, Globe, FileText, MessageSquare, Activity } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-
+import { HeroBadge } from "@/components/ui/HeroBadge";
 const PatientCenteredCare = () => {
   const careFeatures = [
     {
@@ -105,10 +105,10 @@ const PatientCenteredCare = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <div className="inline-flex items-center rounded-full mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151] text-sm font-semibold">
+              <HeroBadge>
                 <Heart className="w-4 h-4 mr-2" />
                 Patient-Centered Care
-              </div>
+              </HeroBadge>
               
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
                 Patient-centered care, powered by presence and continuity
@@ -118,7 +118,7 @@ const PatientCenteredCare = () => {
                 Maintain eye contact in the visit—and maintain momentum between visits.
               </p>
               
-              <Button size="lg" className="rounded-full px-8 bg-[#143151] bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-lg ring-1 ring-white/10 hover:shadow-2xl hover:translate-y-0.5 transition-all duration-300 group">
+              <Button size="lg" className="rounded-full px-8 premium-button ring-1 ring-white/10 hover:translate-y-0.5 transition-all duration-300 group">
                 Empower Patient-Centered Care
                 <Heart className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
@@ -252,7 +252,7 @@ const PatientCenteredCare = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-r from-[#143151] to-[#387E89] relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-gradient-primary relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-10" />
           <div className="container relative z-10">
             <motion.div
