@@ -170,7 +170,7 @@ const IncreaseProfitability = () => {
         {/* Profit Levers Detail */}
         <section className="py-16 lg:py-24 bg-muted/30">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid gap-12 lg:gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -198,13 +198,6 @@ const IncreaseProfitability = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="relative"
-              >
-              </motion.div>
             </div>
           </div>
         </section>
