@@ -60,7 +60,7 @@ export const PresenceHeroShowcase: React.FC<PresenceHeroShowcaseProps> = ({ clas
       </svg>
 
       {/* Content */}
-      <div className="relative z-10 h-full w-full bg-gradient-to-br from-primary/30 via-secondary/20 to-primary/60">
+      <div className="relative z-10 h-full w-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20">
         {/* Left stack */}
         {leftPills.map((p, i) => (
           <div key={i} className="absolute left-3" style={{ top: `${p.y}%` }}>
