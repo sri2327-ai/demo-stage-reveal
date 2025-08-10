@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,7 @@ import { specialties } from "@/data/specialties";
 import { SpecialtyCombobox } from "@/components/ui/SpecialtyCombobox";
 
 export default function SpecialtyHub() {
-  const [selected, setSelected] = useState<string | null>(null);
-  const selectedSpecialty = selected ? specialties.find((s) => s.slug === selected) : null;
+  const navigate = useNavigate();
 
   return (
     <>
@@ -38,15 +37,10 @@ export default function SpecialtyHub() {
               <div className="mt-6 flex flex-wrap gap-3 justify-center">
                 <SpecialtyCombobox
                   items={specialties.map((s) => ({ label: s.name, value: s.slug }))}
-                  value={selected}
-                  onChange={(val) => setSelected(val)}
+                  value={null}
+                  onChange={(val) => val && navigate(`/specialties/${val}`)}
                   placeholder="Select a specialty"
                 />
-                {selected && (
-                  <Button size="sm" variant="ghost" onClick={() => setSelected(null)}>
-                    Clear selection
-                  </Button>
-                )}
               </div>
             </div>
           </div>
@@ -54,38 +48,22 @@ export default function SpecialtyHub() {
 
         <section className="py-16 lg:py-24">
           <div className="container">
-            {!selectedSpecialty ? (
-              <div className="text-center text-muted-foreground">
-                Select a specialty above to see relevant posts.
-              </div>
-            ) : (
-              <>
-                <h2 className="text-2xl font-semibold mb-6">{selectedSpecialty.name} Posts</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {selectedSpecialty.posts.map((p) => (
-                    <Card
-                      key={p.slug}
-                      className="bg-card border hover:shadow-elegant transition-all duration-300"
-                    >
-                      <CardContent className="p-6">
-                        <h3 className="font-semibold text-xl mb-2">{p.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{p.excerpt}</p>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
-                          <span>{new Date(p.date).toLocaleDateString()}</span>
-                          <span>•</span>
-                          <span>{p.readingTime}</span>
-                        </div>
-                        <Button asChild className="premium-button rounded-full px-4">
-                          <Link to={`/specialties/${selectedSpecialty.slug}/${p.slug}`}>
-                            Read post
-                          </Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </>
-            )}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {specialties.map((s) => (
+                <Card key={s.slug} className="bg-card border hover:shadow-elegant transition-all duration-300">
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold text-xl mb-2">{s.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{s.description}</p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+                      <span>{s.posts.length} posts</span>
+                    </div>
+                    <Button asChild className="premium-button rounded-full px-4">
+                      <Link to={`/specialties/${s.slug}`}>Explore posts</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </div>
