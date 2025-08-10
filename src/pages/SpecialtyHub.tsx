@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HeroBadge } from "@/components/ui/HeroBadge";
 import { specialties } from "@/data/specialties";
+import { SpecialtyCombobox } from "@/components/ui/SpecialtyCombobox";
 
 export default function SpecialtyHub() {
   const [selected, setSelected] = useState<string | null>(null);
@@ -34,18 +35,13 @@ export default function SpecialtyHub() {
                 Pick a specialty to instantly see relevant posts below.
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-2 justify-center">
-                {specialties.map((s) => (
-                  <Button
-                    key={s.slug}
-                    size="sm"
-                    variant={selected === s.slug ? "default" : "secondary"}
-                    className="rounded-full"
-                    onClick={() => setSelected(s.slug)}
-                  >
-                    {s.name}
-                  </Button>
-                ))}
+              <div className="mt-6 flex flex-wrap gap-3 justify-center">
+                <SpecialtyCombobox
+                  items={specialties.map((s) => ({ label: s.name, value: s.slug }))}
+                  value={selected}
+                  onChange={(val) => setSelected(val)}
+                  placeholder="Select a specialty"
+                />
                 {selected && (
                   <Button size="sm" variant="ghost" onClick={() => setSelected(null)}>
                     Clear selection
