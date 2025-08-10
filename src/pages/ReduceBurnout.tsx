@@ -181,7 +181,7 @@ const ReduceBurnout = () => {
 
         {/* Evidence Section */}
         <section className="py-16 lg:py-24">
-          <div className="container">
+          <div className="container max-w-none px-0">
             <div className="grid gap-12 lg:gap-16 items-center">
               <motion.div initial={{
               opacity: 0,
