@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { Eye, Users, FileText, Languages, Shield, Stethoscope } from "lucide-react";
 import { HeroBadge } from "@/components/ui/HeroBadge";
-import { ShowcaseTile } from "@/components/ui/ShowcaseTile";
+import { PresenceHeroShowcase } from "@/components/ui/PresenceHeroShowcase";
 
 const MaintainEyeContact = () => {
   const specialtySnapshots = [
@@ -151,7 +151,7 @@ const MaintainEyeContact = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <ShowcaseTile icon={Eye} ariaLabel="Eye icon" />
+                <PresenceHeroShowcase />
               </motion.div>
             </div>
           </div>
