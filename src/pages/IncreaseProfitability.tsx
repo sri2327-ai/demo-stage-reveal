@@ -107,7 +107,7 @@ const IncreaseProfitability = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <Badge className="mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-4 py-2 md:px-6 md:py-3 text-[#143151]">
+              <Badge className="mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151]">
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Practice Profitability
               </Badge>
