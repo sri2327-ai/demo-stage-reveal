@@ -5,6 +5,8 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { MouseTrackerProvider } from '../components/ui/cursor';
 import { FAQSection } from '../components/FAQSection';
+import PrivatePracticeTestimonial from '../components/PrivatePracticeTestimonial';
+import PrivatePracticeCaseStudies from '../components/PrivatePracticeCaseStudies';
 import { 
   Stethoscope, 
   Headphones, 
@@ -52,306 +54,247 @@ const PrivatePractice = () => {
     {
       value: '$150,000+',
       label: 'Annual Cost Savings',
-      icon: <PiggyBank className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#143151]" />
+      icon: <PiggyBank className="w-5 h-5 text-accent" />,
+      gradient: 'from-green-500 to-emerald-600'
     },
     {
       value: '-50%',
       label: 'Patient No-Shows',
-      icon: <Calendar className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#387E89]" />
+      icon: <Calendar className="w-5 h-5 text-accent" />,
+      gradient: 'from-blue-500 to-cyan-600'
     },
     {
       value: '+40%',
       label: 'Patient Face-Time',
-      icon: <Clock className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#143151]" />
+      icon: <Clock className="w-5 h-5 text-accent" />,
+      gradient: 'from-purple-500 to-indigo-600'
     },
     {
       value: '95%',
       label: 'Patient Satisfaction',
-      icon: <Heart className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#387E89]" />
+      icon: <Heart className="w-5 h-5 text-accent" />,
+      gradient: 'from-pink-500 to-rose-600'
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Functional Medicine Practice Cuts Charting Time from 60 to 15 Mins',
-      description: 'Learn how Dr. Martinez transformed her practice workflow and patient care quality.',
-      cta: 'Read Now'
-    },
-    {
-      title: 'Family Physician Saves 1.5 Hours Daily vs. Other AI Tools',
-      description: 'Discover why Dr. Johnson switched from his previous AI solution to S10.ai.',
-      cta: 'Read Now'
-    }
-  ];
 
   return (
     <MouseTrackerProvider disableCursor={false}>
-      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <div className="min-h-screen bg-[var(--gradient-secondary)]">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-          {/* Background Pattern */}
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 overflow-hidden">
+          {/* Enhanced Background Pattern */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-24 h-24 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-gradient-to-br from-[#143151]/10 to-[#387E89]/10 rounded-full blur-3xl opacity-80"></div>
-            <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-20 h-20 sm:w-24 sm:h-24 lg:w-48 lg:h-48 bg-gradient-to-br from-[#387E89]/10 to-[#143151]/10 rounded-full blur-3xl opacity-70"></div>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]"></div>
+            <div className="absolute top-10 right-10 w-72 h-72 bg-[var(--gradient-primary)] opacity-10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-conic from-primary/5 via-accent/5 to-primary/5 rounded-full blur-3xl opacity-70"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:32px_32px] opacity-40"></div>
           </div>
           
           <div className="relative z-10 max-w-5xl mx-auto text-center">
-            {/* Badge */}
+            {/* Modern Badge */}
             <motion.div 
-              className="mb-4 sm:mb-6" 
+              className="mb-6 sm:mb-8" 
               initial={{ scale: 0.8, opacity: 0 }} 
               animate={{ scale: 1, opacity: 1 }} 
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-foreground backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 inline-flex items-center gap-1.5 sm:gap-2 shadow-lg rounded-full">
-                <Target className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm lg:text-base font-semibold">For Private Practices</span>
+              <div className="bg-card/60 backdrop-blur-xl border border-border/50 px-4 py-2 sm:px-6 sm:py-3 inline-flex items-center gap-2 sm:gap-3 shadow-[var(--shadow-medium)] rounded-2xl group hover:shadow-[var(--shadow-large)] transition-all duration-300">
+                <div className="w-6 h-6 bg-[var(--gradient-primary)] rounded-full flex items-center justify-center">
+                  <Target className="w-3 h-3 text-white" />
+                </div>
+                <span className="text-sm sm:text-base font-semibold bg-[var(--gradient-primary)] bg-clip-text text-transparent">For Private Practices</span>
               </div>
             </motion.div>
             
-            {/* Main Headline */}
+            {/* Enhanced Main Headline */}
             <motion.h1 
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#143151] mb-3 sm:mb-4 lg:mb-6 leading-tight px-4" 
-              initial={{ opacity: 0, y: -20 }} 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-primary mb-4 sm:mb-6 lg:mb-8 leading-[1.1] px-4" 
+              initial={{ opacity: 0, y: -30 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               More Patients.<br />
-              <span className="bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent">
+              <span className="bg-[var(--gradient-primary)] bg-clip-text text-transparent">
                 Less Paperwork.
               </span>
             </motion.h1>
             
-            {/* Subtitle */}
+            {/* Enhanced Subtitle */}
             <motion.p 
-              className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 max-w-4xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4" 
-              initial={{ opacity: 0, y: -10 }} 
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4 font-medium" 
+              initial={{ opacity: 0, y: -20 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               The all-in-one AI team for private practices. Stop drowning in administrative work and get back to what you do best.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* Enhanced CTA Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 px-4"
-              initial={{ opacity: 0, y: 20 }} 
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-10 px-4"
+              initial={{ opacity: 0, y: 30 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold">
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mr-2" />
+              <Button size="lg" className="w-full sm:w-auto bg-[var(--gradient-primary)] hover:shadow-[var(--shadow-large)] hover:scale-105 text-white shadow-[var(--shadow-medium)] transition-all duration-300 group px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-2xl border-0">
+                <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-3 group-hover:scale-110 transition-transform" />
                 Watch a 5-Minute Demo
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="ghost" size="lg" className="w-full sm:w-auto text-[#143151] hover:bg-[#387E89]/10 px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base lg:text-lg font-semibold underline">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-primary/20 bg-card/80 backdrop-blur-sm hover:bg-card hover:border-primary/40 hover:shadow-[var(--shadow-soft)] text-primary px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-2xl transition-all duration-300">
                 See Pricing
               </Button>
             </motion.div>
 
-            <motion.p 
-              className="text-xs sm:text-sm lg:text-base text-gray-500 max-w-2xl mx-auto px-4"
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 0.8, duration: 0.6 }}
+            <motion.div 
+              className="flex flex-col items-center gap-4"
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Join thousands of practices already transforming their workflows with S10.ai
-            </motion.p>
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-4 font-medium">
+                Join thousands of practices already transforming their workflows with S10.ai
+              </p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background"></div>
+                  ))}
+                </div>
+                <span className="ml-2">2,500+ happy practices</span>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* All-in-One Solution Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="max-w-6xl mx-auto">
+        {/* Enhanced All-in-One Solution Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-background via-muted/30 to-background">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
+              initial={{ opacity: 0, y: 40 }} 
               whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }} 
+              transition={{ duration: 1 }} 
               viewport={{ once: true }} 
-              className="text-center mb-8 sm:mb-12 lg:mb-16"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
-                Your AI Team, Ready on Day One
+              <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Stethoscope className="w-4 h-4" />
+                Your AI Team
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-6 leading-tight">
+                Ready on Day One
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium">
                 S10.ai gives you a personal scribe and a front-office assistant in one simple platform.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-              {/* CRUSH Column */}
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+              {/* Enhanced CRUSH Card */}
               <motion.div 
-                initial={{ opacity: 0, x: -30 }} 
+                initial={{ opacity: 0, x: -50 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 transition={{ duration: 0.8, delay: 0.2 }} 
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
+                <Card className="p-8 lg:p-10 h-full bg-card/80 backdrop-blur-xl border border-border/50 hover:shadow-[var(--shadow-large)] hover:scale-[1.02] transition-all duration-500 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--gradient-primary)] opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-4 sm:gap-6 mb-6 lg:mb-8">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[var(--gradient-primary)] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-[var(--shadow-medium)]">
+                        <FileText className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight">CRUSH</h3>
+                        <p className="text-base sm:text-lg lg:text-xl text-accent font-semibold">Your AI Medical Scribe</p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">CRUSH</h3>
-                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">Your AI Medical Scribe</p>
-                    </div>
+                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-medium">
+                      Saves you 2+ hours on charting every day. Generates perfect, customized notes and codes them automatically. No more after-hours work.
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
-                    Saves you 2+ hours on charting every day. Generates perfect, customized notes and codes them automatically. No more after-hours work.
-                  </p>
                 </Card>
               </motion.div>
 
-              {/* BRAVO Column */}
+              {/* Enhanced BRAVO Card */}
               <motion.div 
-                initial={{ opacity: 0, x: 30 }} 
+                initial={{ opacity: 0, x: 50 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 transition={{ duration: 0.8, delay: 0.4 }} 
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="p-4 sm:p-6 lg:p-8 h-full bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200/40 hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Headphones className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white" />
+                <Card className="p-8 lg:p-10 h-full bg-card/80 backdrop-blur-xl border border-border/50 hover:shadow-[var(--shadow-large)] hover:scale-[1.02] transition-all duration-500 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full -translate-y-16 -translate-x-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-4 sm:gap-6 mb-6 lg:mb-8">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center flex-shrink-0 shadow-[var(--shadow-medium)]">
+                        <Headphones className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight">BRAVO</h3>
+                        <p className="text-base sm:text-lg lg:text-xl text-accent font-semibold">Your AI Front-Office Assistant</p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] leading-tight">BRAVO</h3>
-                      <p className="text-sm sm:text-base lg:text-lg text-gray-600">Your AI Front-Office Assistant</p>
-                    </div>
+                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-medium">
+                      Works 24/7 to automate scheduling, handle patient intake, and manage refills, reducing your staff's administrative burden.
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">
-                    Works 24/7 to automate scheduling, handle patient intake, and manage refills, reducing your staff's administrative burden.
-                  </p>
                 </Card>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Quantifiable Results Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-          <div className="max-w-6xl mx-auto">
+        {/* Enhanced Quantifiable Results Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-muted/20 via-accent/5 to-primary/5">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
+              initial={{ opacity: 0, y: 40 }} 
               whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }} 
+              transition={{ duration: 1 }} 
               viewport={{ once: true }} 
-              className="text-center mb-8 sm:mb-12 lg:mb-16"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
+              <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <TrendingUp className="w-4 h-4" />
+                Proven Results
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-6 leading-tight">
                 Run a More Profitable Practice
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                Our platform delivers an immediate return.
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium">
+                Our platform delivers an immediate return on investment.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {metrics.map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.15 }}
                   viewport={{ once: true }}
+                  className="group"
                 >
-                  <Card className="p-3 sm:p-4 lg:p-6 text-center bg-white/90 backdrop-blur-sm border border-slate-200/50 hover:shadow-xl transition-all duration-300">
-                    <div className="flex justify-center mb-2 sm:mb-3">
-                      {metric.icon}
-                    </div>
-                    <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-[#143151] mb-1 lg:mb-2">
-                      {metric.value}
-                    </div>
-                    <div className="text-xs sm:text-sm lg:text-sm text-gray-600 font-medium leading-tight">
-                      {metric.label}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonial Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="max-w-4xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }} 
-              viewport={{ once: true }}
-            >
-              <Card className="p-6 md:p-8 lg:p-12 bg-gradient-to-br from-[#143151] to-[#387E89] text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 md:w-32 md:h-32 bg-white/10 rounded-full -translate-y-10 md:-translate-y-16 translate-x-10 md:translate-x-16"></div>
-                <div className="absolute bottom-0 left-0 w-16 h-16 md:w-24 md:h-24 bg-white/10 rounded-full translate-y-8 md:translate-y-12 -translate-x-8 md:-translate-x-12"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center gap-1 md:gap-2 mb-4 md:mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 md:w-5 md:h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <blockquote className="text-lg md:text-xl lg:text-2xl leading-relaxed mb-4 md:mb-6 italic">
-                    "As a solo practitioner, S10.ai is the best hire I've ever made. CRUSH saves me 90 minutes a day, and BRAVO handles the scheduling headaches. My revenue is up, and my stress is down."
-                  </blockquote>
-                  
-                  <div className="flex items-center gap-2 md:gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
-                      <Stethoscope className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-base md:text-lg">Dr. Sarah Thompson</p>
-                      <p className="text-white/80 text-sm md:text-base">Family Medicine</p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Case Study Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-gradient-to-r from-gray-50 to-blue-50">
-          <div className="max-w-6xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }} 
-              viewport={{ once: true }} 
-              className="text-center mb-8 md:mb-12"
-            >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4">
-                See How We Help Practices Like Yours
-              </h2>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {caseStudies.map((study, index) => (
-                <motion.div
-                  key={study.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="p-6 md:p-8 h-full bg-white hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                    <div className="flex items-start gap-3 md:gap-4 mb-4">
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#143151]/10 to-[#387E89]/10 rounded-lg flex items-center justify-center group-hover:from-[#143151]/20 group-hover:to-[#387E89]/20 transition-all duration-300">
-                        <Award className="w-5 h-5 md:w-6 md:h-6 text-[#143151]" />
+                  <Card className="p-6 sm:p-8 text-center bg-card/80 backdrop-blur-xl border border-border/50 hover:shadow-[var(--shadow-large)] hover:scale-105 transition-all duration-500 relative overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${metric.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                    <div className="relative z-10">
+                      <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${metric.gradient} rounded-2xl flex items-center justify-center shadow-[var(--shadow-soft)]`}>
+                          <div className="text-white">
+                            {metric.icon}
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg md:text-xl font-bold text-[#143151] mb-2 group-hover:text-[#387E89] transition-colors">
-                          {study.title}
-                        </h3>
-                        <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
-                          {study.description}
-                        </p>
-                        <Button variant="ghost" className="text-[#387E89] hover:bg-[#387E89]/10 p-0 h-auto font-semibold group-hover:translate-x-1 transition-transform">
-                          {study.cta}
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
+                      <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary mb-2 sm:mb-3">
+                        {metric.value}
+                      </div>
+                      <div className="text-sm sm:text-base text-muted-foreground font-semibold leading-tight">
+                        {metric.label}
                       </div>
                     </div>
                   </Card>
@@ -360,6 +303,12 @@ const PrivatePractice = () => {
             </div>
           </div>
         </section>
+
+        {/* Enhanced Testimonial Section */}
+        <PrivatePracticeTestimonial />
+
+        {/* Enhanced Case Study Section */}
+        <PrivatePracticeCaseStudies />
 
         {/* FAQ Section */}
         <FAQSection
@@ -368,26 +317,42 @@ const PrivatePractice = () => {
           faqs={privatePracticeFAQs}
         />
 
-        {/* Final CTA Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="max-w-4xl mx-auto text-center">
+        {/* Enhanced Final CTA Section */}
+        <section className="relative px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-background">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
+              initial={{ opacity: 0, y: 40 }} 
               whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }} 
+              transition={{ duration: 1 }} 
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-8">
+                <CheckCircle className="w-4 h-4" />
+                Get Started Today
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-6 leading-tight">
                 Ready for a Smarter Practice?
               </h2>
-              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+              
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto mb-10 font-medium leading-relaxed">
                 See how S10.ai fits your workflow and budget. Setup is simple, and the results are immediate.
               </p>
               
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-2xl hover:shadow-3xl transition-all group px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold">
-                Get a 15-Minute Demo
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                <Button size="lg" className="w-full sm:w-auto bg-[var(--gradient-primary)] hover:shadow-[var(--shadow-large)] hover:scale-105 text-white shadow-[var(--shadow-medium)] transition-all duration-300 group px-8 py-4 lg:px-10 lg:py-5 text-lg lg:text-xl font-bold rounded-2xl">
+                  Get a 15-Minute Demo
+                  <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                
+                <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-primary/20 bg-card/80 backdrop-blur-sm hover:bg-card hover:border-primary/40 hover:shadow-[var(--shadow-soft)] text-primary px-8 py-4 lg:px-10 lg:py-5 text-lg lg:text-xl font-bold rounded-2xl transition-all duration-300">
+                  View Pricing
+                </Button>
+              </div>
+              
+              <p className="text-sm text-muted-foreground mt-8 font-medium">
+                No setup fees • Cancel anytime • 30-day money-back guarantee
+              </p>
             </motion.div>
           </div>
         </section>
