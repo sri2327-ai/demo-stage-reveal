@@ -39,7 +39,7 @@ export const EfficiencyHeroShowcase: React.FC<EfficiencyHeroShowcaseProps> = ({ 
       {...props}
     >
       {/* Brand gradient and glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#143151] to-[#387E89]" aria-hidden="true" />
       <div
         className="absolute inset-0"
         style={{
@@ -50,7 +50,7 @@ export const EfficiencyHeroShowcase: React.FC<EfficiencyHeroShowcaseProps> = ({ 
       />
 
       {/* Connectors */}
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 z-[5] text-primary/40">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 z-[5] text-white/60">
         {items.map((p, i) => (
           <path
             key={i}
@@ -88,8 +88,9 @@ export const EfficiencyHeroShowcase: React.FC<EfficiencyHeroShowcaseProps> = ({ 
               </div>
               <h3 className="text-sm font-semibold text-foreground">Draft Note</h3>
             </div>
-            <div className="inline-flex items-center gap-1 text-xs text-primary">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Ready to sign
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[10px] bg-white/70 border border-white/30 text-foreground/80"><Clock className="w-3.5 h-3.5 text-primary" /> 2h saved today</span>
+              <span className="inline-flex items-center gap-1 text-xs text-primary"><CheckCircle2 className="w-3.5 h-3.5" /> Ready to sign</span>
             </div>
           </header>
 
@@ -108,13 +109,13 @@ export const EfficiencyHeroShowcase: React.FC<EfficiencyHeroShowcaseProps> = ({ 
                 <div className="flex items-center gap-2 text-xs text-foreground/80">
                   <Code className="w-3.5 h-3.5 text-primary" /> Codes suggested
                 </div>
-                <span className="text-[10px] text-foreground/60">ICD‑10 / CPT</span>
+                <span className="text-[10px] text-foreground/60">ICD‑10 / CPT • 3 codes</span>
               </div>
               <div className="flex items-center justify-between rounded-xl px-3 py-2 bg-secondary/10 border border-secondary/20">
                 <div className="flex items-center gap-2 text-xs text-foreground/80">
                   <MessageSquare className="w-3.5 h-3.5 text-secondary" /> Inbox offloaded
                 </div>
-                <span className="text-[10px] text-foreground/60">Calls & chats</span>
+                <span className="text-[10px] text-foreground/60">Calls & chats • 12 deflected</span>
               </div>
               <div className="flex items-center justify-between rounded-xl px-3 py-2 bg-white/60 border border-white/30">
                 <div className="flex items-center gap-2 text-xs text-foreground/80">
