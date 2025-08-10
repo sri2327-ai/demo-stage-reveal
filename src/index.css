@@ -119,8 +119,29 @@
     background: var(--gradient-text);
   }
   
+  /* Text gradient (Safari-safe) */
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  
   .bg-grid-pattern {
     background-image: var(--grid-pattern);
+  }
+
+  /* Cross-browser checkered grid (safari-safe) */
+  .bg-checker-grid {
+    background-image:
+      linear-gradient(to right, #8080801F 1px, transparent 1px),
+      linear-gradient(to bottom, #8080801F 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: top left;
+  }
+  @media (min-width: 640px) {
+    .bg-checker-grid { background-size: 40px 40px; }
   }
 
   /* Enhanced shadows */

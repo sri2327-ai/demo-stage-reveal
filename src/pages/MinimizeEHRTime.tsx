@@ -95,8 +95,9 @@ const MinimizeEHRTime = () => {
 
       <div className="min-h-screen bg-gradient-subtle">
         {/* Hero Section */}
-        <section className="relative py-24 lg:py-32 overflow-hidden bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80" />
+        <section className="relative py-24 lg:py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/70 via-blue-50/70 to-indigo-50/70" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -117,7 +118,7 @@ const MinimizeEHRTime = () => {
                 Combine an AI medical scribe with AI phone/chat agents to cut charting and shrink inbox load.
               </p>
               
-              <Button size="lg" className="bg-gradient-to-r from-[#143151] to-[#387E89] text-white hover:shadow-xl transition-all duration-300 group">
+              <Button size="lg" className="rounded-full px-8 bg-gradient-to-r from-[#143151] to-[#387E89] text-white shadow-lg ring-1 ring-white/10 hover:shadow-2xl hover:translate-y-0.5 transition-all duration-300 group">
                 Cut EHR Time Now
                 <Clock className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
@@ -192,7 +193,7 @@ const MinimizeEHRTime = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="glassmorphism border-0 h-full">
+                  <Card className="h-full rounded-2xl border border-[#387E89]/30 bg-gradient-to-br from-blue-50 to-cyan-50 shadow-sm hover:shadow-md transition-all">
                     <CardContent className="p-6">
                       <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                         <span className="text-2xl font-bold text-primary">{index + 1}</span>

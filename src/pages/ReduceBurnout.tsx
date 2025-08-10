@@ -80,8 +80,9 @@ const ReduceBurnout = () => {
 
       <div className="min-h-screen bg-gradient-subtle">
         {/* Hero Section */}
-        <section className="relative py-24 lg:py-32 overflow-hidden bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80" />
+        <section className="relative py-24 lg:py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/70 via-blue-50/70 to-indigo-50/70" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px]" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
