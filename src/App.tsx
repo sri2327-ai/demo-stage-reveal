@@ -17,6 +17,11 @@ import ICD10CodeRange from "./pages/ICD10CodeRange";
 import Presentation from "./pages/Presentation";
 import MedicalAbbreviations from "./pages/MedicalAbbreviations";
 import MedicalAbbreviationDetail from "./pages/MedicalAbbreviationDetail";
+import MaintainEyeContact from "./pages/MaintainEyeContact";
+import MinimizeEHRTime from "./pages/MinimizeEHRTime";
+import ReduceBurnout from "./pages/ReduceBurnout";
+import PatientCenteredCare from "./pages/PatientCenteredCare";
+import IncreaseProfitability from "./pages/IncreaseProfitability";
 import { WelcomeForm } from "./components/WelcomeForm";
 
 const queryClient = new QueryClient();
@@ -42,6 +47,11 @@ const App = () => (
           <Route path="/medical-abbreviations" element={<MedicalAbbreviations />} />
           <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
           <Route path="/presentation" element={<Presentation />} />
+          <Route path="/maintain-eye-contact" element={<MaintainEyeContact />} />
+          <Route path="/minimize-ehr-time" element={<MinimizeEHRTime />} />
+          <Route path="/reduce-burnout" element={<ReduceBurnout />} />
+          <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
+          <Route path="/increase-profitability" element={<IncreaseProfitability />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
