@@ -1,55 +1,117 @@
 import * as React from "react";
-import { Mic, CheckCircle2, FileText, Eye } from "lucide-react";
+import { Mic, FileText, List, LayoutGrid, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface PresenceHeroShowcaseProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Chip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="inline-flex items-center gap-2 rounded-full bg-white/10 text-white border border-white/20 px-3 py-1 text-xs shadow-sm">
-    <CheckCircle2 className="w-3.5 h-3.5" /> {children}
-  </span>
+const Pill: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+  <div
+    className={cn(
+      "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs",
+      "bg-background/70 text-foreground/80 border border-foreground/10 backdrop-blur-md shadow-sm",
+      className
+    )}
+  >
+    {children}
+  </div>
 );
 
 export const PresenceHeroShowcase: React.FC<PresenceHeroShowcaseProps> = ({ className, ...props }) => {
+  const leftPills = [
+    { label: "Context", icon: <List className="w-3.5 h-3.5" />, y: 22 },
+    { label: "Transcript", icon: <Mic className="w-3.5 h-3.5" />, y: 42 },
+    { label: "Template", icon: <LayoutGrid className="w-3.5 h-3.5" />, y: 62 },
+    { label: "Style", icon: <Settings className="w-3.5 h-3.5" />, y: 82 }
+  ];
+
   return (
     <div
       className={cn(
-        "relative aspect-square rounded-3xl overflow-hidden ring-1 ring-[#387E89]/30 shadow-lg hover:-translate-y-1 hover:shadow-2xl transition-all bg-gradient-to-br from-[#143151] to-[#387E89]",
+        "relative aspect-square rounded-3xl overflow-hidden ring-1 ring-primary/15 shadow-lg",
+        "transition-all hover:-translate-y-0.5 hover:shadow-2xl",
+        // Soft Figma-like gradient background using semantic tokens
+        "bg-gradient-subtle",
         className
       )}
       {...props}
     >
-      {/* subtle grid overlay for visual richness */}
-      <div className="absolute inset-0 bg-checker-grid opacity-20" aria-hidden="true" />
+      {/* Radial glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(120% 120% at 90% 10%, hsl(var(--primary)/0.18) 0%, transparent 55%), radial-gradient(120% 120% at 0% 100%, hsl(var(--secondary)/0.18) 0%, transparent 60%)",
+        }}
+      />
 
-      <div className="relative z-10 h-full p-6 flex flex-col justify-between">
-        {/* Top pill */}
-        <div className="self-start inline-flex items-center gap-2 rounded-full bg-white/10 text-white border border-white/20 px-3 py-1 text-xs shadow">
-          <Mic className="w-3.5 h-3.5" /> Ambient AI Scribe
-        </div>
+      {/* Curved connectors (SVG for crisp lines) */}
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 z-[5] text-primary/40">
+        {leftPills.map((p, i) => (
+          <path
+            key={i}
+            d={`M 24 ${p.y} C 40 ${p.y}, 55 50, 72 50`}
+            fill="none"
+            className="stroke-current"
+            strokeWidth={1.6}
+            strokeLinecap="round"
+          />
+        ))}
+      </svg>
 
-        {/* Middle chips */}
-        <div className="space-y-3">
-          <Chip>Hands‑free, voice‑first</Chip>
-          <Chip>Maintain eye contact</Chip>
-          <Chip>EHR‑ready notes in minutes</Chip>
-        </div>
-
-        {/* Bottom mini-flow */}
-        <div className="mt-4">
-          <div className="flex items-center gap-3 text-white/90">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 border border-white/20"><Mic className="w-4 h-4" /></div>
-            <div className="flex-1 h-px bg-white/30" />
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 border border-white/20"><FileText className="w-4 h-4" /></div>
-            <div className="flex-1 h-px bg-white/30" />
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 border border-white/20"><Eye className="w-4 h-4" /></div>
+      {/* Content */}
+      <div className="relative z-10 h-full w-full">
+        {/* Left stack */}
+        {leftPills.map((p, i) => (
+          <div key={i} className="absolute left-3" style={{ top: `${p.y}%` }}>
+            <Pill>
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-primary/10 text-primary border border-primary/20">
+                {p.icon}
+              </span>
+              <span className="text-[11px] font-medium">{p.label}</span>
+            </Pill>
           </div>
-          <div className="flex justify-between text-[10px] text-white/80 mt-1">
-            <span>Capture</span>
-            <span>Structure</span>
-            <span>Review</span>
+        ))}
+
+        {/* Main Note card */}
+        <article
+          className={cn(
+            "absolute right-4 top-1/2 -translate-y-1/2",
+            "w-[52%] h-[70%] rounded-2xl",
+            "bg-background/80 border border-foreground/10 backdrop-blur-xl shadow-elegant"
+          )}
+          aria-label="Generated clinical note preview"
+        >
+          {/* Header */}
+          <header className="flex items-center gap-2 p-4 border-b border-foreground/10">
+            <div className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-primary text-primary-foreground shadow-sm">
+              <FileText className="w-4 h-4" />
+            </div>
+            <h3 className="text-sm font-semibold text-foreground">Note</h3>
+          </header>
+
+          {/* Note lines */}
+          <div className="p-4 grid gap-2">
+            <div className="h-2 rounded bg-foreground/10 w-4/5" />
+            <div className="h-2 rounded bg-foreground/10 w-3/5" />
+            <div className="h-2 rounded bg-foreground/10 w-5/6" />
+            <div className="h-2 rounded bg-foreground/10 w-2/3" />
+            <div className="h-2 rounded bg-foreground/10 w-4/5" />
+            <div className="h-2 rounded bg-foreground/10 w-3/4" />
+            <div className="h-2 rounded bg-foreground/10 w-2/3" />
           </div>
-        </div>
+
+          {/* Bottom status bar */}
+          <footer className="absolute bottom-3 left-3 right-3">
+            <div className="flex items-center justify-between rounded-xl px-3 py-2 bg-muted/40 border border-foreground/10">
+              <div className="flex items-center gap-2 text-xs text-foreground/70">
+                <Mic className="w-3.5 h-3.5 text-primary" />
+                Ambient scribing active
+              </div>
+              <div className="text-[10px] text-foreground/50">EHR‑ready</div>
+            </div>
+          </footer>
+        </article>
       </div>
     </div>
   );
