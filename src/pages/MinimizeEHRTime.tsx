@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { Clock, FileText, Code, MessageSquare, Zap, Building2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { HeroBadge } from "@/components/ui/HeroBadge";
+import { ShowcaseTile } from "@/components/ui/ShowcaseTile";
 
 const MinimizeEHRTime = () => {
   const features = [
@@ -105,10 +106,10 @@ const MinimizeEHRTime = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <div className="inline-flex items-center rounded-full mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151] text-sm font-semibold">
+              <HeroBadge>
                 <Clock className="w-4 h-4 mr-2" />
                 EHR Efficiency
-              </div>
+              </HeroBadge>
               
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
                 Less time in the EHR, more time in care

@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { Eye, Users, FileText, Languages, Shield, Stethoscope } from "lucide-react";
+import { HeroBadge } from "@/components/ui/HeroBadge";
+import { ShowcaseTile } from "@/components/ui/ShowcaseTile";
 
 const MaintainEyeContact = () => {
   const specialtySnapshots = [
@@ -67,10 +68,10 @@ const MaintainEyeContact = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <div className="inline-flex items-center rounded-full mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151] text-sm font-semibold">
+              <HeroBadge>
                 <Eye className="w-4 h-4 mr-2" />
                 Patient Connection
-              </div>
+              </HeroBadge>
               
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
                 Make eye contact, not screen contact
@@ -150,11 +151,7 @@ const MaintainEyeContact = () => {
                 transition={{ duration: 0.6 }}
                 className="relative"
               >
-                <div className="aspect-square bg-gradient-primary rounded-3xl p-8 glassmorphism">
-                  <div className="w-full h-full bg-background/10 rounded-2xl flex items-center justify-center">
-                    <Eye className="w-24 h-24 text-background/80" />
-                  </div>
-                </div>
+                <ShowcaseTile icon={Eye} ariaLabel="Eye icon" />
               </motion.div>
             </div>
           </div>
