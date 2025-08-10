@@ -127,7 +127,7 @@ const PatientCenteredCare = () => {
         </section>
 
         {/* Care Features */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-y border-white/20">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -130,7 +130,7 @@ const IncreaseProfitability = () => {
         </section>
 
         {/* Profit Drivers */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-y border-white/20">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -170,7 +170,7 @@ const IncreaseProfitability = () => {
         {/* Profit Levers Detail */}
         <section className="py-16 lg:py-24 bg-muted/30">
           <div className="container max-w-none px-0">
-            <div className="grid gap-12 lg:gap-16 items-center">
+            <div className="grid gap-12 lg:gap-16 items-center max-w-6xl mx-auto px-4 sm:px-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
