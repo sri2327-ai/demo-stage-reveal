@@ -107,10 +107,10 @@ const IncreaseProfitability = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <Badge className="mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151]">
+              <div className="inline-flex items-center rounded-full mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 text-[#143151] text-sm font-semibold">
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Practice Profitability
-              </Badge>
+              </div>
               
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
                 Profitability follows intelligent automation
