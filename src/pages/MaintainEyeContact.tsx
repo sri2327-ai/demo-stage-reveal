@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { Eye, Users, FileText, Languages, Shield, Stethoscope } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 
 const MaintainEyeContact = () => {
   const specialtySnapshots = [
@@ -56,16 +55,7 @@ const MaintainEyeContact = () => {
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>Maintain patient eye-contact with an AI medical scribe | Ambient, hands-free notes</title>
-        <meta 
-          name="description" 
-          content="Keep eyes on the patient—not the screen. An AI medical scribe captures, structures, and codes the consult in real time so clinicians stay fully present and finish accurate notes faster."
-        />
-      </Helmet>
-
-      <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-gradient-subtle">
         {/* Hero Section */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
@@ -280,8 +270,7 @@ const MaintainEyeContact = () => {
           </div>
         </section>
       </div>
-    </>
-  );
+    );
 };
 
 export default MaintainEyeContact;
