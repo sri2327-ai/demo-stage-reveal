@@ -17,8 +17,6 @@ import {
   ShieldCheck,
   Upload,
   FileText,
-  Play,
-  Pause,
   CircleStop,
 } from "lucide-react";
 import {
@@ -34,6 +32,7 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import "./scribeai.css";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -218,67 +217,49 @@ const ProductWalkthrough: React.FC = () => {
         </script>
       </Helmet>
 
-      <header className="w-full border-b">
-        <div className="mx-auto max-w-7xl px-4 py-6 md:py-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="scribeai-layout">
+        <aside className="left-nav">
+          <div className="nav-brand">
+            <span className="nav-brand-icon">S</span>
+            <span className="nav-brand-text">ScribeAI</span>
+          </div>
+          <ul className="nav-list">
+            {sections.map((s) => (
+              <li key={s.id} className="nav-item">
+                <button
+                  className={`nav-button ${active === s.id ? "active" : ""}`}
+                  onClick={() => onNavClick(s.id)}
+                  aria-current={active === s.id ? "step" : undefined}
+                  data-screen={s.id}
+                >
+                  <span className="nav-text">{s.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        <div className="main-content">
+          <div className="top-nav">
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">AI Medical Scribe</h1>
-              <p className="text-sm opacity-80 mt-1">ScribeAI • End-to-end clinical documentation workflow</p>
+              <h1 className="text-base md:text-lg font-semibold">AI Medical Scribe</h1>
+              <p className="text-xs opacity-80">ScribeAI • End-to-end clinical documentation workflow</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 rounded-full px-3 py-1 border" aria-label="Clinician">
                 <div className="h-6 w-6 rounded-full grid place-items-center text-xs font-medium border" aria-hidden>
                   SM
                 </div>
-                <span className="text-sm">Dr. Sarah Mitchell</span>
+                <span className="text-sm hidden md:inline">Dr. Sarah Mitchell</span>
               </div>
               <Button asChild className="rounded-full">
                 <Link to="/welcome">Get started</Link>
               </Button>
             </div>
           </div>
-        </div>
-      </header>
 
-      <main ref={containerRef} className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px,1fr]">
-          <aside className="lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] lg:overflow-auto">
-            {/* Mobile nav */}
-            <div className="lg:hidden -mx-4 overflow-x-auto">
-              <div className="flex items-center gap-2 px-4 pb-2">
-                {sections.map((s) => (
-                  <Button
-                    key={s.id}
-                    variant={active === s.id ? "default" : "outline"}
-                    className="whitespace-nowrap rounded-full"
-                    onClick={() => onNavClick(s.id)}
-                    aria-current={active === s.id ? "step" : undefined}
-                  >
-                    {s.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-            {/* Desktop nav */}
-            <nav className="hidden lg:block">
-              <div className="space-y-1">
-                {sections.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => onNavClick(s.id)}
-                    className={`w-full text-left px-4 py-2 rounded-md border transition ${
-                      active === s.id ? "bg-primary/5 border-primary/30" : "hover:bg-muted"
-                    }`}
-                    aria-current={active === s.id ? "step" : undefined}
-                  >
-                    {s.label}
-                  </button>
-                ))}
-              </div>
-            </nav>
-          </aside>
-
-          <article className="space-y-14">
+          <main ref={containerRef} className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-10">
+            <article className="space-y-14">
             {/* Setup */}
             <section id="setup" className="scroll-mt-24">
               <div className="flex items-start justify-between gap-4">
@@ -747,9 +728,10 @@ const ProductWalkthrough: React.FC = () => {
                 </Button>
               </div>
             </section>
-          </article>
+            </article>
+          </main>
         </div>
-      </main>
+      </div>
     </>
   );
 };
