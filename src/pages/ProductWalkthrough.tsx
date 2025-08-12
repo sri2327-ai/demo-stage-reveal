@@ -51,6 +51,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { specialties } from "@/data/specialties";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -138,6 +140,56 @@ const ProductWalkthrough: React.FC = () => {
 
   // AI Agent toggles (UI only)
   const [agent, setAgent] = useState({ followups: true, inbound: true, outreach: true, support: false });
+
+  // Template headers and UX state for Note Style
+  const defaultHeaders = [
+    "Chief Complaint",
+    "History of Present Illness",
+    "Review of Systems",
+    "Past Medical History",
+    "Medications",
+    "Allergies",
+    "Physical Exam",
+    "Assessment",
+    "Plan",
+  ];
+
+  const headersBySpecialty: Record<string, string[]> = {
+    cardiology: [
+      "Chief Complaint",
+      "HPI",
+      "Cardiac Risk Factors",
+      "Medications",
+      "Exam",
+      "ECG",
+      "Echocardiogram",
+      "Assessment",
+      "Plan",
+    ],
+    dermatology: [
+      "Chief Complaint",
+      "HPI",
+      "Lesion Description",
+      "Location & Distribution",
+      "Exam",
+      "Assessment",
+      "Plan",
+    ],
+    "behavioral-health": [
+      "Chief Complaint",
+      "Subjective",
+      "Objective",
+      "Assessment",
+      "Plan",
+      "Safety/Risk",
+    ],
+  };
+
+  const [previousNote, setPreviousNote] = useState("");
+  const [selectedSpecialtySlug, setSelectedSpecialtySlug] = useState<string | null>(null);
+  const [liveHeaders, setLiveHeaders] = useState<string[]>(defaultHeaders);
+  const [scratchSections, setScratchSections] = useState<string[]>(["Chief Complaint", "HPI", "Exam", "Assessment", "Plan"]);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   // Single-panel mode: highlight active via state
@@ -242,8 +294,7 @@ const ProductWalkthrough: React.FC = () => {
       <div className="scribeai-layout">
         <aside className="left-nav">
           <div className="nav-brand">
-            <span className="nav-brand-icon">S</span>
-            <span className="nav-brand-text">ScribeAI</span>
+            <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
           <ul className="nav-list">
             {sections.map((s) => {
@@ -355,16 +406,31 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="previous" className="space-y-3">
                           <div className="text-sm font-medium">Paste Previous Note</div>
-                          <div className="rounded-lg border p-3 text-sm opacity-80 min-h-[160px]">Paste your previous note here…</div>
-                          <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template</Button>
+                          <Textarea
+                            value={previousNote}
+                            onChange={(e) => setPreviousNote(e.target.value)}
+                            placeholder="Paste your previous note here…"
+                            className="min-h-[220px]"
+                          />
+                          <Button className="rounded-full" onClick={() => setLiveHeaders(defaultHeaders)}>
+                            <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
+                          </Button>
                         </TabsContent>
 
                         <TabsContent value="library" className="space-y-3">
                           <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid sm:grid-cols-2 gap-3">
-                            {["Cardiology","Emergency Medicine","Family Medicine","Dermatology","Psychiatry"].map((s) => (
-                              <button key={s} className="rounded-xl border px-4 py-5 text-left hover:bg-muted">
-                                <div className="font-semibold">{s}</div>
+                          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            {specialties.map((spec) => (
+                              <button
+                                key={spec.slug}
+                                onClick={() => {
+                                  setSelectedSpecialtySlug(spec.slug);
+                                  setLiveHeaders(headersBySpecialty[spec.slug] || defaultHeaders);
+                                }}
+                                className={`rounded-xl border px-4 py-5 text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
+                                aria-pressed={selectedSpecialtySlug === spec.slug}
+                              >
+                                <div className="font-semibold">{spec.name}</div>
                                 <div className="text-xs opacity-70">Preset</div>
                               </button>
                             ))}
@@ -385,7 +451,50 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="scratch" className="grid gap-3">
                           <div className="text-sm font-medium">Build Template from Scratch</div>
-                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[160px]">Drag sections here to build your template…</div>
+                          <div className="grid gap-4 md:grid-cols-3">
+                            <div className="rounded-lg border p-3">
+                              <div className="text-xs font-medium mb-2">Section Palette</div>
+                              <div className="flex flex-wrap gap-2">
+                                {defaultHeaders.map((h) => (
+                                  <button key={h} type="button" onClick={() => setScratchSections((s) => [...s, h])} className="px-2 py-1 rounded-full border text-xs hover:bg-muted">
+                                    + {h}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="md:col-span-2 rounded-lg border p-3 min-h-[220px]">
+                              {scratchSections.map((h, i) => (
+                                <div
+                                  key={`${h}-${i}`}
+                                  draggable
+                                  onDragStart={() => setDragIndex(i)}
+                                  onDragOver={(e) => e.preventDefault()}
+                                  onDrop={() => {
+                                    if (dragIndex === null || dragIndex === i) return;
+                                    setScratchSections((arr) => {
+                                      const copy = [...arr];
+                                      const [moved] = copy.splice(dragIndex, 1);
+                                      copy.splice(i, 0, moved);
+                                      return copy;
+                                    });
+                                    setDragIndex(null);
+                                  }}
+                                  className="rounded-md border p-2 bg-card my-2 cursor-move"
+                                >
+                                  <div className="flex justify-between items-center">
+                                    <span className="font-medium">{h}</span>
+                                    <button type="button" className="text-xs underline" onClick={() => setScratchSections((arr) => arr.filter((_, idx) => idx !== i))}>Remove</button>
+                                  </div>
+                                </div>
+                              ))}
+                              <div className="pt-2">
+                                <Button variant="outline" className="rounded-full" onClick={() => {
+                                  const name = window.prompt('New section name');
+                                  if (name) setScratchSections((s) => [...s, name]);
+                                }}>Add section</Button>
+                              </div>
+                            </div>
+                          </div>
                         </TabsContent>
 
                         <TabsContent value="prompt" className="space-y-2">
@@ -409,18 +518,7 @@ const ProductWalkthrough: React.FC = () => {
                       <CardTitle>Live Preview</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm space-y-3">
-                      {[
-                        "Chief Complaint",
-                        "History of Present Illness",
-                        "Cardiac Risk Factors",
-                        "Past Medical History",
-                        "Medications",
-                        "Physical Exam",
-                        "ECG Interpretation",
-                        "Echocardiogram Results",
-                        "Assessment",
-                        "Plan",
-                      ].map((s) => (
+                      {liveHeaders.map((s) => (
                         <div key={s}>
                           <div className="font-medium">{s}</div>
                           <div className="opacity-70">[Content will be generated here]</div>
