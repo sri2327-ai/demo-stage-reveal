@@ -19,6 +19,7 @@ import Presentation from "./pages/Presentation";
 import MedicalAbbreviations from "./pages/MedicalAbbreviations";
 import MedicalAbbreviationDetail from "./pages/MedicalAbbreviationDetail";
 import MaintainEyeContact from "./pages/MaintainEyeContact";
+import CutAdminTasks from "./pages/CutAdminTasks";
 import MinimizeEHRTime from "./pages/MinimizeEHRTime";
 import ReduceBurnout from "./pages/ReduceBurnout";
 import PatientCenteredCare from "./pages/PatientCenteredCare";
@@ -63,6 +64,7 @@ const App = () => (
             <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
             <Route path="/presentation" element={<Presentation />} />
             <Route path="/maintain-eye-contact" element={<MaintainEyeContact />} />
+            <Route path="/cut-admin-tasks" element={<CutAdminTasks />} />
             <Route path="/minimize-ehr-time" element={<MinimizeEHRTime />} />
             <Route path="/reduce-burnout" element={<ReduceBurnout />} />
             <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
