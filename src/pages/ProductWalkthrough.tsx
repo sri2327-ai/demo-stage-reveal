@@ -33,6 +33,19 @@ import {
   Legend,
 } from "recharts";
 import "./scribeai.css";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -101,8 +114,10 @@ const ProductWalkthrough: React.FC = () => {
     ] as { label: string; ok: boolean }[]
   );
 
+  const [sendDialogOpen, setSendDialogOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const { toast } = useToast();
   const containerRef = useRef<HTMLDivElement>(null);
-
   // Single-panel mode: highlight active via state
   // (scrollspy disabled)
 
@@ -267,50 +282,71 @@ const ProductWalkthrough: React.FC = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Previous note",
-                        "Template library",
-                        "Import template",
-                        "Paste template",
-                        "Build from scratch",
-                        "Build by prompt",
-                      ].map((label) => (
-                        <Button key={label} variant="outline" className="rounded-full">{label}</Button>
-                      ))}
-                    </div>
+                    <Tabs defaultValue="previous" className="w-full">
+                      <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
+                        <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
+                        <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
+                        <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import</TabsTrigger>
+                        <TabsTrigger value="paste" className="rounded-full px-3 py-1.5 text-sm">Paste</TabsTrigger>
+                        <TabsTrigger value="scratch" className="rounded-full px-3 py-1.5 text-sm">From scratch</TabsTrigger>
+                        <TabsTrigger value="prompt" className="rounded-full px-3 py-1.5 text-sm">Build by prompt</TabsTrigger>
+                      </TabsList>
 
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <div className="space-y-3">
-                        <div className="text-sm font-medium">Import Template File</div>
-                        <button className="aspect-video grid place-items-center rounded-lg border text-sm opacity-80">
-                          <Upload className="h-5 w-5 mr-2" /> Drop file or click to browse
-                        </button>
-                      </div>
-                      <div className="space-y-3">
+                      <TabsContent value="previous" className="space-y-3">
+                        <div className="rounded-lg border p-3 text-sm opacity-80">Select a recent note to use as a starting template…</div>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          {["DOE, John - 06/12", "SMITH, Jane - 06/10", "JONES, Peter - 06/05", "LEE, Maria - 06/01"].map((n) => (
+                            <button key={n} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">{n}</button>
+                          ))}
+                        </div>
+                      </TabsContent>
+
+                      <TabsContent value="library" className="space-y-3">
+                        <div className="text-sm font-medium">Choose a specialty style</div>
+                        <div className="grid sm:grid-cols-3 gap-2">
+                          {["Primary Care","Cardiology","Orthopedics","Pediatrics","Dermatology","Neurology"].map((s) => (
+                            <button key={s} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">{s}</button>
+                          ))}
+                        </div>
+                      </TabsContent>
+
+                      <TabsContent value="import" className="grid gap-3 md:grid-cols-2">
+                        <div className="space-y-2">
+                          <div className="text-sm font-medium">Import Template File</div>
+                          <button className="aspect-video grid place-items-center rounded-lg border text-sm opacity-80">
+                            <Upload className="h-5 w-5 mr-2" /> Drop file or click to browse
+                          </button>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="text-sm font-medium">Supported</div>
+                          <div className="rounded-lg border p-3 text-sm opacity-80">.docx, .rtf, .txt</div>
+                        </div>
+                      </TabsContent>
+
+                      <TabsContent value="paste" className="space-y-2">
                         <div className="text-sm font-medium">Paste Template Content</div>
                         <div className="rounded-lg border p-3 text-sm opacity-80">Paste here…</div>
-                      </div>
-                    </div>
+                      </TabsContent>
 
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium">Build Template by AI Prompt</div>
-                      <div className="rounded-lg border p-3 text-sm opacity-80">Describe your ideal template…</div>
-                      <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Generate Template</Button>
-                    </div>
+                      <TabsContent value="scratch" className="grid gap-3 md:grid-cols-2">
+                        <div>
+                          <div className="text-sm font-medium mb-2">Your Template Structure</div>
+                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Drag sections here…</div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium mb-2">Live Preview</div>
+                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Your template preview will appear here…</div>
+                        </div>
+                      </TabsContent>
+
+                      <TabsContent value="prompt" className="space-y-2">
+                        <div className="text-sm font-medium">Build Template by AI Prompt</div>
+                        <div className="rounded-lg border p-3 text-sm opacity-80">Describe your ideal template…</div>
+                        <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Generate Template</Button>
+                      </TabsContent>
+                    </Tabs>
 
                     <Separator />
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <div>
-                        <div className="text-sm font-medium mb-2">Your Template Structure</div>
-                        <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Drag sections here…</div>
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium mb-2">Live Preview</div>
-                        <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Your template preview will appear here…</div>
-                      </div>
-                    </div>
-
                     <div className="flex flex-wrap gap-3">
                       <Button variant="outline" className="rounded-full">Save as My Default</Button>
                       <Button onClick={() => onNavClick("schedule")} className="rounded-full">Next: Connect EHR</Button>
@@ -521,44 +557,195 @@ const ProductWalkthrough: React.FC = () => {
               </h2>
               <p className="mt-2 opacity-80">Preview the clinical note and structured fields before sending to the EHR.</p>
 
-              <div className="mt-4 grid gap-6 lg:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Clinical Note Preview</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-90">
-                      Chief Complaint: Follow-up for diabetes and hypertension…
-                      <br />
-                      HPI: 45-year-old male returns for routine follow-up…
-                      <br />
-                      A/P: Continue current medications. RTC in 3 months.
+              <div className="mt-4">
+                {isSending && (
+                  <div className="fixed inset-0 z-40 grid place-items-center bg-background/60 backdrop-blur-sm">
+                    <div className="rounded-lg border bg-card p-6 shadow-lg">
+                      <div className="text-sm font-medium">Sending to EHR…</div>
+                      <div className="text-xs opacity-70 mt-1">Writing note and structured fields</div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                )}
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Structured Fields</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-sm space-y-2">
-                    {[
-                      ["Chief Complaint", "Follow-up for diabetes"],
-                      ["Primary Diagnosis", "Type 2 Diabetes (E11.9)"],
-                      ["Secondary Diagnosis", "Essential Hypertension (I10)"],
-                      ["Encounter Type", "Office Visit (99213)"],
-                    ].map(([k, v]) => (
-                      <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
-                        <div className="font-medium">{k}</div>
-                        <div className="opacity-80">{v}</div>
-                      </div>
-                    ))}
-                    <div className="flex gap-3 pt-2">
-                      <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back to Coding</Button>
-                      <Button className="rounded-full">Send to EHR</Button>
+                <Tabs defaultValue="note" className="w-full">
+                  <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
+                    <TabsTrigger value="note" className="rounded-full px-3 py-1.5 text-sm">Note Preview</TabsTrigger>
+                    <TabsTrigger value="orders" className="rounded-full px-3 py-1.5 text-sm">Orders</TabsTrigger>
+                    <TabsTrigger value="referrals" className="rounded-full px-3 py-1.5 text-sm">Referrals</TabsTrigger>
+                    <TabsTrigger value="rx" className="rounded-full px-3 py-1.5 text-sm">Prescriptions</TabsTrigger>
+                    <TabsTrigger value="followup" className="rounded-full px-3 py-1.5 text-sm">Follow-up</TabsTrigger>
+                    <TabsTrigger value="mapping" className="rounded-full px-3 py-1.5 text-sm">Field Mapping</TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="note" className="mt-4">
+                    <div className="grid gap-6 lg:grid-cols-2">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Clinical Note Preview</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-90">
+                            Chief Complaint: Follow-up for diabetes and hypertension…
+                            <br />
+                            HPI: 45-year-old male returns for routine follow-up…
+                            <br />
+                            A/P: Continue current medications. RTC in 3 months.
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Structured Fields</CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-sm space-y-2">
+                          {[
+                            ["Chief Complaint", "Follow-up for diabetes"],
+                            ["Primary Diagnosis", "Type 2 Diabetes (E11.9)"],
+                            ["Secondary Diagnosis", "Essential Hypertension (I10)"],
+                            ["Encounter Type", "Office Visit (99213)"],
+                          ].map(([k, v]) => (
+                            <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
+                              <div className="font-medium">{k}</div>
+                              <div className="opacity-80">{v}</div>
+                            </div>
+                          ))}
+
+                          <div className="flex gap-3 pt-2">
+                            <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back to Coding</Button>
+                            <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </div>
-                  </CardContent>
-                </Card>
+                  </TabsContent>
+
+                  <TabsContent value="orders" className="mt-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Orders</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3 text-sm">
+                        {[
+                          "HbA1c",
+                          "CMP",
+                          "Lipid Panel",
+                          "Microalbumin/Creatinine Ratio",
+                        ].map((o) => (
+                          <label key={o} className="flex items-center gap-2">
+                            <Checkbox defaultChecked />
+                            <span>{o}</span>
+                          </label>
+                        ))}
+                        <div className="flex gap-3 pt-2">
+                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
+                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="referrals" className="mt-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Referrals</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <label className="flex items-center gap-2">
+                          <Checkbox />
+                          <span>Endocrinology</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                          <Checkbox />
+                          <span>Diabetes Education</span>
+                        </label>
+                        <div className="flex gap-3 pt-2">
+                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
+                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="rx" className="mt-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Prescriptions</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <div className="rounded-lg border p-3">Metformin 1000mg BID — 90 days</div>
+                        <div className="rounded-lg border p-3">Lisinopril 10mg QD — 90 days</div>
+                        <div className="flex gap-3 pt-2">
+                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
+                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="followup" className="mt-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Follow-up</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <div className="rounded-lg border p-3">Return in 3 months for diabetes follow-up</div>
+                        <div className="rounded-lg border p-3">Nurse call in 2 weeks to check SMBG</div>
+                        <div className="flex gap-3 pt-2">
+                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
+                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="mapping" className="mt-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Field Mapping</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        {[
+                          ["Chief Complaint", "note.sections.cc"],
+                          ["HPI", "note.sections.hpi"],
+                          ["A/P", "note.sections.ap"],
+                          ["Primary Dx", "icd10.primary"],
+                        ].map(([k, v]) => (
+                          <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
+                            <div className="font-medium">{k}</div>
+                            <div className="opacity-80">{v}</div>
+                          </div>
+                        ))}
+                        <div className="flex gap-3 pt-2">
+                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
+                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+
+                <AlertDialog open={sendDialogOpen} onOpenChange={setSendDialogOpen}>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Send to EHR?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        We will write back the note and selected structured fields to your connected EHR.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="rounded-full">Cancel</AlertDialogCancel>
+                      <AlertDialogAction className="rounded-full" onClick={() => {
+                        setSendDialogOpen(false)
+                        setIsSending(true)
+                        setTimeout(() => {
+                          setIsSending(false)
+                          toast({ title: "Sent to EHR", description: "Note and orders successfully written back." })
+                        }, 1400)
+                      }}>Confirm Send</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </section>
 
