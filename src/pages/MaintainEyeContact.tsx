@@ -5,6 +5,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { Eye, Users, FileText, Languages, Shield, Stethoscope } from "lucide-react";
 import { HeroBadge } from "@/components/ui/HeroBadge";
 import { PresenceHeroShowcase } from "@/components/ui/PresenceHeroShowcase";
+import { Link } from "react-router-dom";
 
 const MaintainEyeContact = () => {
   const specialtySnapshots = [
@@ -229,6 +230,11 @@ const MaintainEyeContact = () => {
                   </Card>
                 </motion.div>
               ))}
+            </div>
+            <div className="text-center mt-10">
+              <Button asChild size="lg" className="rounded-full px-8 premium-button">
+                <Link to="/specialties">See more specialty details</Link>
+              </Button>
             </div>
           </div>
         </section>
