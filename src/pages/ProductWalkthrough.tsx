@@ -52,7 +52,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { specialties } from "@/data/specialties";
+import { specialtyTemplates } from "@/data/specialtyTemplates";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -393,9 +393,9 @@ const ProductWalkthrough: React.FC = () => {
                         <FileText className="h-5 w-5" /> Set Your Note Style
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="flex flex-col gap-4">
                       <Tabs defaultValue="previous" className="w-full">
-                        <TabsList className="flex gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-md">
+                        <TabsList className="flex gap-2 sm:gap-2 flex-wrap md:flex-nowrap overflow-x-auto bg-muted p-1 rounded-md">
                           <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
                           <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
                           <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
@@ -419,13 +419,13 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="library" className="space-y-3">
                           <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-                            {specialties.map((spec) => (
+                          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                            {specialtyTemplates.map((spec) => (
                               <button
                                 key={spec.slug}
                                 onClick={() => {
                                   setSelectedSpecialtySlug(spec.slug);
-                                  setLiveHeaders(headersBySpecialty[spec.slug] || defaultHeaders);
+                                  setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
                                 }}
                                 className={`rounded-xl border px-4 py-5 text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
                                 aria-pressed={selectedSpecialtySlug === spec.slug}
