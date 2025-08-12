@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Upload,
   FileText,
+  Server,
   CircleStop,
 } from "lucide-react";
 import {
@@ -113,6 +114,8 @@ const ProductWalkthrough: React.FC = () => {
       { label: "Physical examination incomplete", ok: false },
     ] as { label: string; ok: boolean }[]
   );
+
+  const [setupStep, setSetupStep] = useState<"landing" | "note" | "ehr">("landing");
 
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -262,141 +265,201 @@ const ProductWalkthrough: React.FC = () => {
             <article className="space-y-14">
             {/* Setup */}
             <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"} scroll-mt-24`}>
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <Settings className="h-5 w-5" aria-hidden /> Setup
-                  </h2>
-                  <p className="mt-2 opacity-80">Get set up in 2 minutes. Choose your note format and connect securely to your EHR.</p>
+              <div>
+                <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                  <Settings className="h-5 w-5" aria-hidden /> Get set up in 2 minutes
+                </h2>
+                <p className="mt-2 opacity-80">Choose your note format and connect securely to your EHR.</p>
+
+                {/* Stepper */}
+                <div className="mt-4 flex items-center gap-4 text-sm">
+                  <div className={`flex items-center gap-2 ${setupStep !== 'ehr' ? 'text-primary' : ''}`}>
+                    <div className="h-7 w-7 rounded-full grid place-items-center border font-medium">1</div>
+                    <span>Set Note Style</span>
+                  </div>
+                  <div className="flex-1 h-px bg-border" />
+                  <div className={`flex items-center gap-2 ${setupStep === 'ehr' ? 'text-primary' : ''}`}>
+                    <div className="h-7 w-7 rounded-full grid place-items-center border font-medium">2</div>
+                    <span>Connect EHR</span>
+                  </div>
                 </div>
-                <Button onClick={() => onNavClick("schedule")} className="rounded-full hidden md:inline-flex">
-                  Next: Schedule
-                </Button>
               </div>
 
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <FileText className="h-5 w-5" /> Set Note Style
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <Tabs defaultValue="previous" className="w-full">
-                      <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
-                        <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
-                        <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
-                        <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import</TabsTrigger>
-                        <TabsTrigger value="paste" className="rounded-full px-3 py-1.5 text-sm">Paste</TabsTrigger>
-                        <TabsTrigger value="scratch" className="rounded-full px-3 py-1.5 text-sm">From scratch</TabsTrigger>
-                        <TabsTrigger value="prompt" className="rounded-full px-3 py-1.5 text-sm">Build by prompt</TabsTrigger>
-                      </TabsList>
+              {/* Landing choices */}
+              {setupStep === 'landing' && (
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  <button onClick={() => setSetupStep('note')} className="rounded-xl border p-6 text-left hover:bg-muted transition">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg grid place-items-center border"><FileText className="h-5 w-5" /></div>
+                      <div>
+                        <div className="text-lg font-semibold">Set your note style</div>
+                        <div className="text-sm opacity-80">Import, paste, or build a template for your clinical notes.</div>
+                      </div>
+                    </div>
+                  </button>
 
-                      <TabsContent value="previous" className="space-y-3">
-                        <div className="rounded-lg border p-3 text-sm opacity-80">Select a recent note to use as a starting template…</div>
-                        <div className="grid sm:grid-cols-2 gap-2">
-                          {["DOE, John - 06/12", "SMITH, Jane - 06/10", "JONES, Peter - 06/05", "LEE, Maria - 06/01"].map((n) => (
-                            <button key={n} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">{n}</button>
-                          ))}
-                        </div>
-                      </TabsContent>
+                  <button onClick={() => setSetupStep('ehr')} className="rounded-xl border p-6 text-left hover:bg-muted transition">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg grid place-items-center border"><Server className="h-5 w-5" /></div>
+                      <div>
+                        <div className="text-lg font-semibold">Connect to your EHR(s)</div>
+                        <div className="text-sm opacity-80">Securely link to Epic, Cerner, and more for a seamless workflow.</div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              )}
 
-                      <TabsContent value="library" className="space-y-3">
-                        <div className="text-sm font-medium">Choose a specialty style</div>
-                        <div className="grid sm:grid-cols-3 gap-2">
-                          {["Primary Care","Cardiology","Orthopedics","Pediatrics","Dermatology","Neurology"].map((s) => (
-                            <button key={s} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">{s}</button>
-                          ))}
-                        </div>
-                      </TabsContent>
+              {/* Note style flow */}
+              {setupStep === 'note' && (
+                <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <FileText className="h-5 w-5" /> Set Your Note Style
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <Tabs defaultValue="previous" className="w-full">
+                        <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
+                          <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
+                          <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
+                          <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
+                          <TabsTrigger value="paste" className="rounded-full px-3 py-1.5 text-sm">Paste template</TabsTrigger>
+                          <TabsTrigger value="scratch" className="rounded-full px-3 py-1.5 text-sm">Build from scratch</TabsTrigger>
+                          <TabsTrigger value="prompt" className="rounded-full px-3 py-1.5 text-sm">Build by prompt</TabsTrigger>
+                        </TabsList>
 
-                      <TabsContent value="import" className="grid gap-3 md:grid-cols-2">
-                        <div className="space-y-2">
+                        <TabsContent value="previous" className="space-y-3">
+                          <div className="text-sm font-medium">Paste Previous Note</div>
+                          <div className="rounded-lg border p-3 text-sm opacity-80 min-h-[160px]">Paste your previous note here…</div>
+                          <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template</Button>
+                        </TabsContent>
+
+                        <TabsContent value="library" className="space-y-3">
+                          <div className="text-sm font-medium">Select Specialty Template</div>
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            {["Cardiology","Emergency Medicine","Family Medicine","Dermatology","Psychiatry"].map((s) => (
+                              <button key={s} className="rounded-xl border px-4 py-5 text-left hover:bg-muted">
+                                <div className="font-semibold">{s}</div>
+                                <div className="text-xs opacity-70">Preset</div>
+                              </button>
+                            ))}
+                          </div>
+                        </TabsContent>
+
+                        <TabsContent value="import" className="space-y-3">
                           <div className="text-sm font-medium">Import Template File</div>
                           <button className="aspect-video grid place-items-center rounded-lg border text-sm opacity-80">
                             <Upload className="h-5 w-5 mr-2" /> Drop file or click to browse
                           </button>
+                        </TabsContent>
+
+                        <TabsContent value="paste" className="space-y-2">
+                          <div className="text-sm font-medium">Paste Template Content</div>
+                          <div className="rounded-lg border p-3 text-sm opacity-80 min-h-[160px]">Paste your template content here…</div>
+                        </TabsContent>
+
+                        <TabsContent value="scratch" className="grid gap-3">
+                          <div className="text-sm font-medium">Build Template from Scratch</div>
+                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[160px]">Drag sections here to build your template…</div>
+                        </TabsContent>
+
+                        <TabsContent value="prompt" className="space-y-2">
+                          <div className="text-sm font-medium">Build Template by AI Prompt</div>
+                          <div className="rounded-lg border p-3 text-sm opacity-80">Describe your ideal note template…</div>
+                          <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Generate Template</Button>
+                        </TabsContent>
+                      </Tabs>
+
+                      <Separator />
+                      <div className="flex flex-wrap gap-3">
+                        <Button variant="outline" className="rounded-full" onClick={() => setSetupStep('landing')}>Back</Button>
+                        <Button variant="outline" className="rounded-full">Save as My Default</Button>
+                        <Button onClick={() => setSetupStep('ehr')} className="rounded-full">Next: Connect EHR</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Live Preview</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm space-y-3">
+                      {[
+                        "Chief Complaint",
+                        "History of Present Illness",
+                        "Cardiac Risk Factors",
+                        "Past Medical History",
+                        "Medications",
+                        "Physical Exam",
+                        "ECG Interpretation",
+                        "Echocardiogram Results",
+                        "Assessment",
+                        "Plan",
+                      ].map((s) => (
+                        <div key={s}>
+                          <div className="font-medium">{s}</div>
+                          <div className="opacity-70">[Content will be generated here]</div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="text-sm font-medium">Supported</div>
-                          <div className="rounded-lg border p-3 text-sm opacity-80">.docx, .rtf, .txt</div>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="paste" className="space-y-2">
-                        <div className="text-sm font-medium">Paste Template Content</div>
-                        <div className="rounded-lg border p-3 text-sm opacity-80">Paste here…</div>
-                      </TabsContent>
-
-                      <TabsContent value="scratch" className="grid gap-3 md:grid-cols-2">
-                        <div>
-                          <div className="text-sm font-medium mb-2">Your Template Structure</div>
-                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Drag sections here…</div>
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium mb-2">Live Preview</div>
-                          <div className="rounded-lg border p-4 text-sm opacity-80 min-h-[120px]">Your template preview will appear here…</div>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="prompt" className="space-y-2">
-                        <div className="text-sm font-medium">Build Template by AI Prompt</div>
-                        <div className="rounded-lg border p-3 text-sm opacity-80">Describe your ideal template…</div>
-                        <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Generate Template</Button>
-                      </TabsContent>
-                    </Tabs>
-
-                    <Separator />
-                    <div className="flex flex-wrap gap-3">
-                      <Button variant="outline" className="rounded-full">Save as My Default</Button>
-                      <Button onClick={() => onNavClick("schedule")} className="rounded-full">Next: Connect EHR</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5" /> Connect EHR
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {["Epic", "Cerner", "AthenaHealth", "eClinicalWorks", "NextGen", "Allscripts"].map((ehr) => (
-                        <button
-                          key={ehr}
-                          onClick={() => setSelectedEhr(ehr)}
-                          className={`rounded-lg border px-3 py-2 text-left hover:bg-muted transition ${
-                            selectedEhr === ehr ? "ring-2 ring-primary/50" : ""
-                          }`}
-                        >
-                          <div className="text-sm font-medium">{ehr}</div>
-                          <div className="text-xs opacity-70">Major EHR</div>
-                        </button>
                       ))}
-                    </div>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {["SMART on FHIR/OAuth", "API Key"].map((m) => (
-                        <button key={m} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">
-                          <div className="text-sm font-medium">{m}</div>
-                          <div className="text-xs opacity-70">Connection Method</div>
-                        </button>
-                      ))}
-                    </div>
-                    <ul className="text-sm space-y-2">
-                      {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((f) => (
-                        <li key={f} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {f}</li>
-                      ))}
-                    </ul>
-                    <div className="flex gap-3">
-                      <Button variant="outline" className="rounded-full">Skip for now</Button>
-                      <Button onClick={handleConnect} disabled={!selectedEhr || connecting} className="rounded-full">
-                        {connecting ? "Connecting…" : selectedEhr ? `Connect ${selectedEhr}` : "Connect"}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
+
+              {/* EHR connection flow */}
+              {setupStep === 'ehr' && (
+                <div className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <ShieldCheck className="h-5 w-5" /> Connect to Your EHR
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid gap-3 sm:grid-cols-3 md:grid-cols-6">
+                        {["Epic", "Cerner", "Athena", "eCW", "NextGen", "Allscripts"].map((ehr) => (
+                          <button
+                            key={ehr}
+                            onClick={() => setSelectedEhr(ehr)}
+                            className={`rounded-lg border px-3 py-4 text-center hover:bg-muted transition ${selectedEhr === ehr ? 'ring-2 ring-primary/50' : ''}`}
+                          >
+                            <div className="text-base font-semibold">{ehr}</div>
+                            <div className="text-xs opacity-70">{ehr === 'Cerner' ? 'Cerner Oracle Health' : ehr}</div>
+                          </button>
+                        ))}
+                      </div>
+
+                      <div>
+                        <div className="text-sm font-medium mb-2">Connection Method</div>
+                        <div className="rounded-lg border p-4 flex items-center gap-6">
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="radio" name="conn" defaultChecked /> SMART on FHIR/OAuth
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="radio" name="conn" /> API Key
+                          </label>
+                        </div>
+                      </div>
+
+                      <ul className="text-sm flex flex-wrap gap-6">
+                        {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((f) => (
+                          <li key={f} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {f}</li>
+                        ))}
+                      </ul>
+
+                      <div className="flex flex-wrap gap-3">
+                        <Button variant="outline" className="rounded-full" onClick={() => setSetupStep('landing')}>Back</Button>
+                        <Button variant="outline" className="rounded-full">Skip for now</Button>
+                        <Button onClick={handleConnect} disabled={!selectedEhr || connecting} className="rounded-full">
+                          {connecting ? 'Connecting…' : selectedEhr ? `Connect ${selectedEhr}` : 'Connect'}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </section>
 
             {/* Schedule */}
