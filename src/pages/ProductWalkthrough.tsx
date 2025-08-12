@@ -4,7 +4,36 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText } from "lucide-react";
+import {
+  CheckCircle2,
+  Settings,
+  CalendarDays,
+  Mic,
+  ClipboardList,
+  Send,
+  Wand2,
+  Bot,
+  BarChart3,
+  ShieldCheck,
+  Upload,
+  FileText,
+  Play,
+  Pause,
+  CircleStop,
+} from "lucide-react";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+} from "recharts";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -17,15 +46,66 @@ const sections = [
   { id: "dashboard", label: "Dashboard" },
 ];
 
+type Appointment = {
+  name: string;
+  mrn: string;
+  age: string;
+  visit: string;
+  lang: string;
+  flags: string;
+  src: string;
+};
+
+const defaultAppointments: Appointment[] = [
+  { name: "John Doe", mrn: "12345", age: "45/M", visit: "Follow-up", lang: "English", flags: "", src: "Epic" },
+  { name: "Jane Smith", mrn: "67890", age: "32/F", visit: "New Patient", lang: "Spanish", flags: "Interpreter", src: "Cerner" },
+  { name: "Peter Jones", mrn: "54321", age: "68/M", visit: "Annual Physical", lang: "English", flags: "Refill", src: "Athena" },
+];
+
+const visitData = [
+  { day: "Mon", value: 12 },
+  { day: "Tue", value: 19 },
+  { day: "Wed", value: 15 },
+  { day: "Thu", value: 17 },
+  { day: "Fri", value: 22 },
+  { day: "Sat", value: 8 },
+  { day: "Sun", value: 14 },
+];
+
+const agentMix = [
+  { name: "Automated", value: 75, color: "#16a34a" },
+  { name: "Transferred", value: 15, color: "#fb923c" },
+  { name: "Voicemail", value: 10, color: "#64748b" },
+];
+
 const ProductWalkthrough: React.FC = () => {
   const [active, setActive] = useState<string>(sections[0].id);
+  const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
+  const [connecting, setConnecting] = useState(false);
+  const [appointments] = useState<Appointment[]>(defaultAppointments);
+  const [selectedPatient, setSelectedPatient] = useState<Appointment | null>(null);
+  const [patientContext, setPatientContext] = useState<string>("");
+
+  const [isRecording, setIsRecording] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [transcript, setTranscript] = useState("");
+  const recordTimerRef = useRef<number | null>(null);
+  const transcriptTimerRef = useRef<number | null>(null);
+
+  const [checks, setChecks] = useState(
+    [
+      { label: "Chief Complaint documented", ok: true },
+      { label: "History of Present Illness complete", ok: true },
+      { label: "Assessment and Plan complete", ok: true },
+      { label: "Review of Systems needs attention", ok: false },
+      { label: "Physical examination incomplete", ok: false },
+    ] as { label: string; ok: boolean }[]
+  );
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Scrollspy for active section highlighting
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
     const headings = sections
       .map((s) => document.getElementById(s.id))
       .filter(Boolean) as HTMLElement[];
@@ -43,12 +123,82 @@ const ProductWalkthrough: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Recording timers
+  useEffect(() => {
+    if (isRecording) {
+      // Clock timer
+      recordTimerRef.current = window.setInterval(() => setSeconds((s) => s + 1), 1000);
+      // Simulated transcription
+      const lines = [
+        "Patient presents for follow-up of diabetes and hypertension.",
+        "\n\nCHIEF COMPLAINT: Blood sugars trending higher over the last few weeks.",
+        "\n\nHPI: Checks sugars twice daily. Morning 140–160, evening 180–200. No hypoglycemia.",
+        "\n\nEXAM: BP 138/82, HR 76. Lungs clear. No edema.",
+        "\n\nA/P: Increase Metformin to 1000mg BID. RTC in 3 months.",
+      ];
+      let i = 0;
+      transcriptTimerRef.current = window.setInterval(() => {
+        setTranscript((t) => (i < lines.length ? t + lines[i++] : t));
+        if (i >= lines.length && transcriptTimerRef.current) {
+          window.clearInterval(transcriptTimerRef.current);
+          transcriptTimerRef.current = null;
+        }
+      }, 2500);
+    }
+    return () => {
+      if (recordTimerRef.current) window.clearInterval(recordTimerRef.current);
+      if (transcriptTimerRef.current) window.clearInterval(transcriptTimerRef.current);
+      recordTimerRef.current = null;
+      transcriptTimerRef.current = null;
+    };
+  }, [isRecording]);
+
   const onNavClick = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const pageTitle = "ScribeAI Product Walkthrough";
-  const description = "Set up, schedule, capture, code, and send to EHR with ScribeAI.";
+  const pageTitle = "ScribeAI Product Walkthrough | AI Medical Scribe";
+  const description = "ScribeAI walkthrough: setup, schedule, capture, coding, send to EHR, automations, AI agent, dashboard.";
+
+  const timeStr = useMemo(() => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  }, [seconds]);
+
+  const handleConnect = () => {
+    if (!selectedEhr || connecting) return;
+    setConnecting(true);
+    setTimeout(() => {
+      setConnecting(false);
+      onNavClick("schedule");
+    }, 1600);
+  };
+
+  const handleOpenAppointment = (appt: Appointment) => {
+    setSelectedPatient(appt);
+    setPatientContext("");
+    onNavClick("capture");
+    setTimeout(() => {
+      setPatientContext(
+        `Patient Summary\n${appt.name} (${appt.age})\nMRN: ${appt.mrn}\nVisit Type: ${appt.visit}\n\nActive Problems\n• Type 2 Diabetes\n• Hypertension\n• Hyperlipidemia\n\nCurrent Medications\n• Metformin 500mg BID\n• Lisinopril 10mg daily\n• Atorvastatin 20mg daily\n\nAllergies\n• Penicillin (rash)\n\nRecent Labs\n• HbA1c: 8.2% (3 months ago)\n• Creatinine: 1.1 mg/dL\n• LDL: 95 mg/dL\n\nAlert: HbA1c above target. Consider medication adjustment.`
+      );
+    }, 600);
+  };
+
+  const toggleRecording = () => {
+    setIsRecording((r) => !r);
+    if (!isRecording) {
+      setSeconds(0);
+      setTranscript("");
+    }
+  };
+
+  const markFix = (idx: number) => {
+    setChecks((arr) => arr.map((c, i) => (i === idx ? { ...c, ok: true } : c)));
+  };
 
   return (
     <>
@@ -56,6 +206,16 @@ const ProductWalkthrough: React.FC = () => {
         <title>{pageTitle}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/scribeai"} />
+        {/* Structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "ScribeAI",
+            description,
+            brand: { "@type": "Brand", name: "S10AI" },
+          })}
+        </script>
       </Helmet>
 
       <header className="w-full border-b">
@@ -81,7 +241,6 @@ const ProductWalkthrough: React.FC = () => {
       </header>
 
       <main ref={containerRef} className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-10">
-        {/* Sticky Step Navigation */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px,1fr]">
           <aside className="lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] lg:overflow-auto">
             {/* Mobile nav */}
@@ -129,8 +288,8 @@ const ProductWalkthrough: React.FC = () => {
                   </h2>
                   <p className="mt-2 opacity-80">Get set up in 2 minutes. Choose your note format and connect securely to your EHR.</p>
                 </div>
-                <Button asChild className="rounded-full hidden md:inline-flex">
-                  <Link to="#schedule">Next: Schedule</Link>
+                <Button onClick={() => onNavClick("schedule")} className="rounded-full hidden md:inline-flex">
+                  Next: Schedule
                 </Button>
               </div>
 
@@ -187,12 +346,8 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                      <Button variant="outline" asChild className="rounded-full">
-                        <Link to="#send">Save as My Default</Link>
-                      </Button>
-                      <Button asChild className="rounded-full">
-                        <Link to="#schedule">Next: Connect EHR</Link>
-                      </Button>
+                      <Button variant="outline" className="rounded-full">Save as My Default</Button>
+                      <Button onClick={() => onNavClick("schedule")} className="rounded-full">Next: Connect EHR</Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -205,15 +360,14 @@ const ProductWalkthrough: React.FC = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid gap-3 sm:grid-cols-2">
-                      {[
-                        "Epic",
-                        "Cerner",
-                        "AthenaHealth",
-                        "eClinicalWorks",
-                        "NextGen",
-                        "Allscripts",
-                      ].map((ehr) => (
-                        <button key={ehr} className="rounded-lg border px-3 py-2 text-left hover:bg-muted">
+                      {["Epic", "Cerner", "AthenaHealth", "eClinicalWorks", "NextGen", "Allscripts"].map((ehr) => (
+                        <button
+                          key={ehr}
+                          onClick={() => setSelectedEhr(ehr)}
+                          className={`rounded-lg border px-3 py-2 text-left hover:bg-muted transition ${
+                            selectedEhr === ehr ? "ring-2 ring-primary/50" : ""
+                          }`}
+                        >
                           <div className="text-sm font-medium">{ehr}</div>
                           <div className="text-xs opacity-70">Major EHR</div>
                         </button>
@@ -228,17 +382,15 @@ const ProductWalkthrough: React.FC = () => {
                       ))}
                     </div>
                     <ul className="text-sm space-y-2">
-                      {[
-                        "BAA Covered",
-                        "End-to-End Encryption",
-                        "HIPAA Compliant",
-                      ].map((f) => (
+                      {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((f) => (
                         <li key={f} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {f}</li>
                       ))}
                     </ul>
                     <div className="flex gap-3">
                       <Button variant="outline" className="rounded-full">Skip for now</Button>
-                      <Button className="rounded-full">Connect</Button>
+                      <Button onClick={handleConnect} disabled={!selectedEhr || connecting} className="rounded-full">
+                        {connecting ? "Connecting…" : selectedEhr ? `Connect ${selectedEhr}` : "Connect"}
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -267,11 +419,7 @@ const ProductWalkthrough: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {[
-                        { name: "John Doe", mrn: "12345", age: "45/M", visit: "Follow-up", lang: "English", flags: "", src: "Epic" },
-                        { name: "Jane Smith", mrn: "67890", age: "32/F", visit: "New Patient", lang: "Spanish", flags: "Interpreter", src: "Cerner" },
-                        { name: "Peter Jones", mrn: "54321", age: "68/M", visit: "Annual Physical", lang: "English", flags: "Refill", src: "Athena" },
-                      ].map((r) => (
+                      {appointments.map((r) => (
                         <tr key={r.mrn} className="border-b last:border-0">
                           <td className="px-4 py-3">{r.name}</td>
                           <td className="px-4 py-3">{r.mrn}</td>
@@ -280,7 +428,7 @@ const ProductWalkthrough: React.FC = () => {
                           <td className="px-4 py-3">{r.lang}</td>
                           <td className="px-4 py-3">{r.flags}</td>
                           <td className="px-4 py-3">{r.src}</td>
-                          <td className="px-4 py-3"><Button size="sm" className="rounded-full">Open</Button></td>
+                          <td className="px-4 py-3"><Button size="sm" onClick={() => handleOpenAppointment(r)} className="rounded-full">Open</Button></td>
                         </tr>
                       ))}
                     </tbody>
@@ -303,8 +451,18 @@ const ProductWalkthrough: React.FC = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <Button className="rounded-full"><Mic className="h-4 w-4 mr-2" /> Start Recording</Button>
-                      <div className="text-sm opacity-70">00:00</div>
+                      <Button onClick={toggleRecording} className="rounded-full">
+                        {isRecording ? (
+                          <>
+                            <CircleStop className="h-4 w-4 mr-2" /> Stop Recording
+                          </>
+                        ) : (
+                          <>
+                            <Mic className="h-4 w-4 mr-2" /> Start Recording
+                          </>
+                        )}
+                      </Button>
+                      <div className="text-sm opacity-70">{timeStr}</div>
                     </div>
                     <div className="flex gap-3">
                       <Button variant="outline" className="rounded-full">Pause</Button>
@@ -319,7 +477,9 @@ const ProductWalkthrough: React.FC = () => {
                     <CardTitle>AI-Generated Note</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-80">Live transcription and drafting will appear here…</div>
+                    <div className="rounded-lg border p-4 min-h-[160px] text-sm whitespace-pre-wrap opacity-90">
+                      {transcript || "Live transcription and drafting will appear here…"}
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -328,7 +488,9 @@ const ProductWalkthrough: React.FC = () => {
                     <CardTitle>Patient Context</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[120px] text-sm opacity-80">Loading patient data…</div>
+                    <div className="rounded-lg border p-4 min-h-[140px] text-sm whitespace-pre-wrap opacity-90">
+                      {selectedPatient ? patientContext || "Loading patient data…" : "Open a patient from Schedule to load context."}
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -347,20 +509,16 @@ const ProductWalkthrough: React.FC = () => {
                     <CardTitle>Documentation Review</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-sm">
-                    {[
-                      { label: "Chief Complaint documented", ok: true },
-                      { label: "History of Present Illness complete", ok: true },
-                      { label: "Assessment and Plan complete", ok: true },
-                      { label: "Review of Systems needs attention", ok: false },
-                      { label: "Physical examination incomplete", ok: false },
-                    ].map((i) => (
+                    {checks.map((i, idx) => (
                       <div key={i.label} className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className={`h-4 w-4 ${i.ok ? "" : "opacity-40"}`} />
+                          <CheckCircle2 className={`h-4 w-4 ${i.ok ? "text-green-600" : "opacity-40"}`} />
                           <span>{i.label}</span>
                         </div>
                         {!i.ok && (
-                          <Button size="sm" variant="outline" className="rounded-full">Fix</Button>
+                          <Button size="sm" variant="outline" className="rounded-full" onClick={() => markFix(idx)}>
+                            Fix
+                          </Button>
                         )}
                       </div>
                     ))}
@@ -383,9 +541,7 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     <div className="flex gap-3">
                       <Button variant="outline" className="rounded-full">Back to Edit</Button>
-                      <Button className="rounded-full" asChild>
-                        <Link to="#send">Continue to EHR</Link>
-                      </Button>
+                      <Button className="rounded-full" onClick={() => onNavClick("send")}>Continue to EHR</Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -405,7 +561,7 @@ const ProductWalkthrough: React.FC = () => {
                     <CardTitle>Clinical Note Preview</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-80">
+                    <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-90">
                       Chief Complaint: Follow-up for diabetes and hypertension…
                       <br />
                       HPI: 45-year-old male returns for routine follow-up…
@@ -426,13 +582,13 @@ const ProductWalkthrough: React.FC = () => {
                       ["Secondary Diagnosis", "Essential Hypertension (I10)"],
                       ["Encounter Type", "Office Visit (99213)"],
                     ].map(([k, v]) => (
-                      <div key={k} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
+                      <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
                         <div className="font-medium">{k}</div>
                         <div className="opacity-80">{v}</div>
                       </div>
                     ))}
                     <div className="flex gap-3 pt-2">
-                      <Button variant="outline" className="rounded-full">Back to Coding</Button>
+                      <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back to Coding</Button>
                       <Button className="rounded-full">Send to EHR</Button>
                     </div>
                   </CardContent>
@@ -486,7 +642,7 @@ const ProductWalkthrough: React.FC = () => {
                       ["Patient Outreach", "Improves satisfaction by 35%"],
                       ["24/7 Patient Support", "Increases preventive care compliance by 50%"],
                     ].map(([k, v]) => (
-                      <div key={k} className="flex items-center justify-between gap-4">
+                      <div key={k as string} className="flex items-center justify-between gap-4">
                         <div className="font-medium">{k}</div>
                         <div className="opacity-80">{v}</div>
                       </div>
@@ -536,13 +692,50 @@ const ProductWalkthrough: React.FC = () => {
                   ["AI Agent Calls", "47 Today"],
                   ["Patient Messages", "5 New"],
                 ].map(([k, v]) => (
-                  <Card key={k}>
+                  <Card key={k as string}>
                     <CardHeader>
                       <CardTitle className="text-base">{k}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm opacity-80">{v}</CardContent>
                   </Card>
                 ))}
+              </div>
+
+              <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                <Card className="h-[300px]">
+                  <CardHeader>
+                    <CardTitle>Daily Visit Volume</CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[220px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={visitData} margin={{ left: 4, right: 12 }}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="day" />
+                        <YAxis allowDecimals={false} />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={2} dot={false} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+                <Card className="h-[300px]">
+                  <CardHeader>
+                    <CardTitle>AI Agent Performance</CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[220px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie dataKey="value" data={agentMix} cx="50%" cy="50%" outerRadius={80} label>
+                          {agentMix.map((e, i) => (
+                            <Cell key={`c-${i}`} fill={e.color} />
+                          ))}
+                        </Pie>
+                        <Legend />
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
               </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
