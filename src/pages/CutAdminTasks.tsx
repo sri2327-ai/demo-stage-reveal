@@ -272,6 +272,11 @@ const CutAdminTasks = () => {
               </motion.div>
             ))}
           </div>
+          <div className="text-center mt-10">
+            <Button asChild size="lg" className="rounded-full px-8 premium-button">
+              <Link to="/specialties">See more specialty details</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
