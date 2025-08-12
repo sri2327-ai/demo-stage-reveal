@@ -6,6 +6,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { Heart, Users, Globe, FileText, MessageSquare, Activity } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { HeroBadge } from "@/components/ui/HeroBadge";
+import { Link } from "react-router-dom";
 const PatientCenteredCare = () => {
   const careFeatures = [
     {
@@ -236,6 +237,11 @@ const PatientCenteredCare = () => {
                   </Card>
                 </motion.div>
               ))}
+            </div>
+            <div className="text-center mt-10">
+              <Button asChild size="lg" className="rounded-full px-8 premium-button">
+                <Link to="/specialties">See more specialty-specific use cases</Link>
+              </Button>
             </div>
           </div>
         </section>
