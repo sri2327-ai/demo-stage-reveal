@@ -103,24 +103,8 @@ const ProductWalkthrough: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scrollspy for active section highlighting
-  useEffect(() => {
-    const headings = sections
-      .map((s) => document.getElementById(s.id))
-      .filter(Boolean) as HTMLElement[];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
-    );
-
-    headings.forEach((h) => observer.observe(h));
-    return () => observer.disconnect();
-  }, []);
+  // Single-panel mode: highlight active via state
+  // (scrollspy disabled)
 
   // Recording timers
   useEffect(() => {
@@ -153,7 +137,8 @@ const ProductWalkthrough: React.FC = () => {
   }, [isRecording]);
 
   const onNavClick = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActive(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const pageTitle = "ScribeAI Product Walkthrough | AI Medical Scribe";
@@ -261,7 +246,7 @@ const ProductWalkthrough: React.FC = () => {
           <main ref={containerRef} className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-10">
             <article className="space-y-14">
             {/* Setup */}
-            <section id="setup" className="scroll-mt-24">
+            <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"} scroll-mt-24`}>
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
@@ -379,7 +364,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Schedule */}
-            <section id="schedule" className="scroll-mt-24">
+            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <CalendarDays className="h-5 w-5" aria-hidden /> Unified Schedule
               </h2>
@@ -419,7 +404,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Capture */}
-            <section id="capture" className="scroll-mt-24">
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <Mic className="h-5 w-5" aria-hidden /> Audio Capture
               </h2>
@@ -478,7 +463,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Coding */}
-            <section id="coding" className="scroll-mt-24">
+            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <ClipboardList className="h-5 w-5" aria-hidden /> Coding & Compliance Review
               </h2>
@@ -530,7 +515,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Send to EHR */}
-            <section id="send" className="scroll-mt-24">
+            <section id="send" className={`screen ${active === "send" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <Send className="h-5 w-5" aria-hidden /> Send to EHR (Write-back Preview)
               </h2>
@@ -578,7 +563,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Automations */}
-            <section id="automations" className="scroll-mt-24">
+            <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <Wand2 className="h-5 w-5" aria-hidden /> Patient-Facing Automations
               </h2>
@@ -605,7 +590,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* AI Agent */}
-            <section id="agent" className="scroll-mt-24">
+            <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <Bot className="h-5 w-5" aria-hidden /> AI Call & Chat Agent
               </h2>
@@ -660,7 +645,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Dashboard */}
-            <section id="dashboard" className="scroll-mt-24">
+            <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"} scroll-mt-24`}>
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" aria-hidden /> Post-Visit Operations Dashboard
               </h2>
