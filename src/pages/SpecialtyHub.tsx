@@ -58,7 +58,7 @@ export default function SpecialtyHub() {
                       <span>{s.posts.length} posts</span>
                     </div>
                     <Button asChild className="premium-button rounded-full px-4">
-                      <Link to={`/${s.slug}`}>Explore posts</Link>
+                      <Link to={`/${s.slug}`}>See more details</Link>
                     </Button>
                   </CardContent>
                 </Card>
