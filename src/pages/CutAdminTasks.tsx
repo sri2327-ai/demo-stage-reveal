@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { HeroBadge } from "@/components/ui/HeroBadge";
-import { EfficiencyHeroShowcase } from "@/components/ui/EfficiencyHeroShowcase";
+
 import { Link } from "react-router-dom";
 import {
   FileText,
@@ -170,7 +170,7 @@ const CutAdminTasks = () => {
       {/* Key Benefits */}
       <section className="py-16 lg:py-24">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -195,14 +195,6 @@ const CutAdminTasks = () => {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <EfficiencyHeroShowcase />
-            </motion.div>
           </div>
         </div>
       </section>
