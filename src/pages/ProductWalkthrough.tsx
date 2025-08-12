@@ -47,6 +47,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const sections = [
   { id: "setup", label: "Setup" },
@@ -131,6 +135,10 @@ const ProductWalkthrough: React.FC = () => {
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const { toast } = useToast();
+
+  // AI Agent toggles (UI only)
+  const [agent, setAgent] = useState({ followups: true, inbound: true, outreach: true, support: false });
+
   const containerRef = useRef<HTMLDivElement>(null);
   // Single-panel mode: highlight active via state
   // (scrollspy disabled)
@@ -396,7 +404,7 @@ const ProductWalkthrough: React.FC = () => {
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className="lg:sticky lg:top-24 h-fit">
                     <CardHeader>
                       <CardTitle>Live Preview</CardTitle>
                     </CardHeader>
@@ -881,44 +889,109 @@ const ProductWalkthrough: React.FC = () => {
               </h2>
               <p className="mt-2 opacity-80">Automate patient communication with intelligent escalation to on-call providers.</p>
 
-              <div className="mt-4 grid gap-6 lg:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Benefits</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2 text-sm">
-                    {[
-                      ["Schedule Follow-up Calls", "Reduces no-shows by 40%"],
-                      ["Inbound Call Management", "Automates 80% of routine calls"],
-                      ["Patient Outreach", "Improves satisfaction by 35%"],
-                      ["24/7 Patient Support", "Increases preventive care compliance by 50%"],
-                    ].map(([k, v]) => (
-                      <div key={k as string} className="flex items-center justify-between gap-4">
-                        <div className="font-medium">{k}</div>
-                        <div className="opacity-80">{v}</div>
+              <div className="mt-4 grid gap-6 lg:grid-cols-3">
+                {/* Left: Features */}
+                <div className="lg:col-span-2 space-y-4">
+                  {/* Feature 1 */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Schedule Follow-up Calls</span>
+                        <Switch checked={agent.followups} onCheckedChange={(v) => setAgent((p) => ({ ...p, followups: v }))} />
+                      </CardTitle>
+                      <p className="text-sm opacity-80">AI automatically schedules and conducts follow-up calls for reminders and care coordination.</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
+                        Reduces no-shows by 40%
                       </div>
-                    ))}
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
 
-                <Card>
+                  {/* Feature 2 */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Inbound Call Management</span>
+                        <Switch checked={agent.inbound} onCheckedChange={(v) => setAgent((p) => ({ ...p, inbound: v }))} />
+                      </CardTitle>
+                      <p className="text-sm opacity-80">Handle routine patient inquiries, scheduling, and basic medical questions 24/7.</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
+                        Automates 80% of routine calls
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Feature 3 */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Patient Outreach</span>
+                        <Switch checked={agent.outreach} onCheckedChange={(v) => setAgent((p) => ({ ...p, outreach: v }))} />
+                      </CardTitle>
+                      <p className="text-sm opacity-80">Proactive reminders for preventive care, medication adherence, and wellness check-ins.</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
+                        Improves patient satisfaction by 35%
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Feature 4 */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>24/7 Patient Support</span>
+                        <Switch checked={agent.support} onCheckedChange={(v) => setAgent((p) => ({ ...p, support: v }))} />
+                      </CardTitle>
+                      <p className="text-sm opacity-80">Round-the-clock availability with intelligent escalation to on-call providers.</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
+                        Increases preventive care compliance by 50%
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Right: Configuration */}
+                <Card className="h-fit">
                   <CardHeader>
                     <CardTitle>Configuration</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3 text-sm">
-                    <div className="grid sm:grid-cols-2 gap-3">
-                      <div className="rounded-lg border p-3">
-                        <div className="font-medium mb-1">Business Hours</div>
-                        <div className="opacity-80">9:00 AM — 5:00 PM</div>
-                      </div>
-                      <div className="rounded-lg border p-3">
-                        <div className="font-medium mb-1">Primary Language</div>
-                        <div className="opacity-80">English • Spanish • Multilingual</div>
+                  <CardContent className="space-y-4 text-sm">
+                    <div>
+                      <div className="font-medium mb-2">Business Hours</div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <Label htmlFor="bh-start">Start</Label>
+                          <Input id="bh-start" type="time" defaultValue="08:00" />
+                        </div>
+                        <div>
+                          <Label htmlFor="bh-end">End</Label>
+                          <Input id="bh-end" type="time" defaultValue="17:00" />
+                        </div>
                       </div>
                     </div>
-                    <div className="rounded-lg border p-3">
-                      <div className="font-medium mb-1">Escalation Phone</div>
-                      <div className="opacity-80">(555) 123-4567</div>
+                    <div>
+                      <Label className="mb-1 block">Primary Language</Label>
+                      <Select defaultValue="english">
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select language" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="spanish">Spanish</SelectItem>
+                          <SelectItem value="multilingual">Multilingual</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="escalation" className="mb-1 block">Escalation Phone</Label>
+                      <Input id="escalation" placeholder="On-call provider number" />
                     </div>
                     <div className="flex gap-3 pt-1">
                       <Button variant="outline" className="rounded-full">Skip AI Agent</Button>
