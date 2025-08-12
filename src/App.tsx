@@ -28,6 +28,7 @@ import { WelcomeForm } from "./components/WelcomeForm";
 import SpecialtyHub from "./pages/SpecialtyHub";
 import SpecialtyBlogList from "./pages/SpecialtyBlogList";
 import SpecialtyBlogPost from "./pages/SpecialtyBlogPost";
+import ProductWalkthrough from "./pages/ProductWalkthrough";
 import { specialties } from "@/data/specialties";
 
 const RedirectSpecialty = () => {
@@ -63,6 +64,7 @@ const App = () => (
             <Route path="/medical-abbreviations" element={<MedicalAbbreviations />} />
             <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
             <Route path="/presentation" element={<Presentation />} />
+            <Route path="/scribeai" element={<ProductWalkthrough />} />
             <Route path="/maintain-eye-contact" element={<MaintainEyeContact />} />
             <Route path="/cut-admin-tasks" element={<CutAdminTasks />} />
             <Route path="/minimize-ehr-time" element={<MinimizeEHRTime />} />
