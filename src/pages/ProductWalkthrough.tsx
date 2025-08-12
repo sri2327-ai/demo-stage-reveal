@@ -59,6 +59,17 @@ const sections = [
   { id: "dashboard", label: "Dashboard" },
 ];
 
+const iconById: Record<string, React.ComponentType<any>> = {
+  setup: Settings,
+  schedule: CalendarDays,
+  capture: Mic,
+  coding: ClipboardList,
+  send: Send,
+  automations: Wand2,
+  agent: Bot,
+  dashboard: BarChart3,
+};
+
 type Appointment = {
   name: string;
   mrn: string;
@@ -227,18 +238,22 @@ const ProductWalkthrough: React.FC = () => {
             <span className="nav-brand-text">ScribeAI</span>
           </div>
           <ul className="nav-list">
-            {sections.map((s) => (
-              <li key={s.id} className="nav-item">
-                <button
-                  className={`nav-button ${active === s.id ? "active" : ""}`}
-                  onClick={() => onNavClick(s.id)}
-                  aria-current={active === s.id ? "step" : undefined}
-                  data-screen={s.id}
-                >
-                  <span className="nav-text">{s.label}</span>
-                </button>
-              </li>
-            ))}
+            {sections.map((s) => {
+              const Icon = iconById[s.id];
+              return (
+                <li key={s.id} className="nav-item">
+                  <button
+                    className={`nav-button ${active === s.id ? "active" : ""}`}
+                    onClick={() => onNavClick(s.id)}
+                    aria-current={active === s.id ? "step" : undefined}
+                    data-screen={s.id}
+                  >
+                    {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
+                    <span className="nav-text">{s.label}</span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </aside>
 
@@ -321,7 +336,7 @@ const ProductWalkthrough: React.FC = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <Tabs defaultValue="previous" className="w-full">
-                        <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
+                        <TabsList className="flex gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-md">
                           <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
                           <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
                           <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
@@ -509,14 +524,15 @@ const ProductWalkthrough: React.FC = () => {
               </h2>
               <p className="mt-2 opacity-80">Record the visit and watch notes generate in real time.</p>
 
-              <div className="mt-4 grid gap-6 md:grid-cols-2">
-                <Card>
+              <div className="mt-4 grid gap-6 lg:grid-cols-12">
+                {/* Left: Controls */}
+                <Card className="lg:col-span-3">
                   <CardHeader>
-                    <CardTitle>Capture Controls</CardTitle>
+                    <CardTitle>Audio Capture</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Button onClick={toggleRecording} className="rounded-full">
+                  <CardContent className="space-y-5">
+                    <div>
+                      <Button onClick={toggleRecording} className="rounded-full" variant={isRecording ? "destructive" : "default"}>
                         {isRecording ? (
                           <>
                             <CircleStop className="h-4 w-4 mr-2" /> Stop Recording
@@ -527,37 +543,56 @@ const ProductWalkthrough: React.FC = () => {
                           </>
                         )}
                       </Button>
-                      <div className="text-sm opacity-70">{timeStr}</div>
+                      <div className="mt-3 flex items-center gap-2 text-sm opacity-80">
+                        <span className={`h-2.5 w-2.5 rounded-full ${isRecording ? 'bg-destructive' : 'bg-muted-foreground/50'}`} />
+                        <span>{timeStr}</span>
+                      </div>
                     </div>
+
+                    {/* Simple waveform */}
+                    <div className="flex items-end gap-1 h-16">
+                      {[8,14,20,12,18,10,16,22,12,15].map((h, i) => (
+                        <div key={i} className="w-1.5 rounded bg-primary/70" style={{ height: `${h}px` }} />
+                      ))}
+                    </div>
+
                     <div className="flex gap-3">
-                      <Button variant="outline" className="rounded-full">Pause</Button>
+                      <Button variant="outline" className="rounded-full">Pause Session</Button>
                       <Button variant="outline" className="rounded-full">Discard</Button>
-                      <Button className="rounded-full">Finalize Visit</Button>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                {/* Mid: AI Note */}
+                <Card className="lg:col-span-6">
                   <CardHeader>
                     <CardTitle>AI-Generated Note</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[160px] text-sm whitespace-pre-wrap opacity-90">
-                      {transcript || "Live transcription and drafting will appear here…"}
+                    <div className="rounded-lg border p-4 min-h-[360px] text-sm whitespace-pre-wrap">
+                      {transcript || "Patient presents today for follow-up of diabetes and hypertension.\n\nCHIEF COMPLAINT: [content will be generated]"}
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="md:col-span-2">
+                {/* Right: Patient Context */}
+                <Card className="lg:col-span-3">
                   <CardHeader>
                     <CardTitle>Patient Context</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[140px] text-sm whitespace-pre-wrap opacity-90">
+                    <div className="rounded-lg border p-4 min-h-[360px] text-sm whitespace-pre-wrap opacity-90">
                       {selectedPatient ? patientContext || "Loading patient data…" : "Open a patient from Schedule to load context."}
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Footer actions */}
+                <div className="lg:col-span-12 flex flex-wrap gap-3">
+                  <Button variant="outline" className="rounded-full">Discard</Button>
+                  <Button variant="outline" className="rounded-full">Pause Session</Button>
+                  <Button className="rounded-full" onClick={() => onNavClick('coding')}>Finalize Visit</Button>
+                </div>
               </div>
             </section>
 
@@ -631,7 +666,7 @@ const ProductWalkthrough: React.FC = () => {
                 )}
 
                 <Tabs defaultValue="note" className="w-full">
-                  <TabsList className="flex flex-wrap gap-2 bg-muted p-1 rounded-md">
+                  <TabsList className="flex gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-md">
                     <TabsTrigger value="note" className="rounded-full px-3 py-1.5 text-sm">Note Preview</TabsTrigger>
                     <TabsTrigger value="orders" className="rounded-full px-3 py-1.5 text-sm">Orders</TabsTrigger>
                     <TabsTrigger value="referrals" className="rounded-full px-3 py-1.5 text-sm">Referrals</TabsTrigger>
