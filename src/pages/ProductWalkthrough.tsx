@@ -141,6 +141,12 @@ const ProductWalkthrough: React.FC = () => {
   // AI Agent toggles (UI only)
   const [agent, setAgent] = useState({ followups: true, inbound: true, outreach: true, support: false });
 
+  // Demo states for interactive functionality
+  const [analyzing, setAnalyzing] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   // Template headers and UX state for Note Style
   const defaultHeaders = [
     "Chief Complaint",
@@ -428,23 +434,23 @@ const ProductWalkthrough: React.FC = () => {
                         {/* Main content area with controlled height */}
                         <div className="flex-1 min-h-0">
                           <Tabs defaultValue="previous" className="h-full flex flex-col">
-                            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 h-11 mb-6 rounded-xl">
-                              <TabsTrigger value="previous" className="rounded-lg text-xs font-medium">
+                            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto sm:h-11 p-1 mb-6 rounded-xl bg-muted">
+                              <TabsTrigger value="previous" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Previous Note
                               </TabsTrigger>
-                              <TabsTrigger value="library" className="rounded-lg text-xs font-medium">
+                              <TabsTrigger value="library" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Library
                               </TabsTrigger>
-                              <TabsTrigger value="import" className="rounded-lg text-xs font-medium">
+                              <TabsTrigger value="import" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Import
                               </TabsTrigger>
-                              <TabsTrigger value="paste" className="rounded-lg text-xs font-medium">
+                              <TabsTrigger value="paste" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Paste
                               </TabsTrigger>
-                              <TabsTrigger value="scratch" className="rounded-lg text-xs font-medium">
+                              <TabsTrigger value="scratch" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Build
                               </TabsTrigger>
-                              <TabsTrigger value="prompt" className="rounded-lg text-xs font-medium">
+                              <TabsTrigger value="prompt" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 AI Prompt
                               </TabsTrigger>
                             </TabsList>
@@ -459,8 +465,40 @@ const ProductWalkthrough: React.FC = () => {
                                     placeholder="Paste your previous note here and we'll extract the template structure for you..."
                                     className="flex-1 min-h-[200px] resize-none"
                                   />
-                                  <Button className="rounded-full w-fit" onClick={() => setLiveHeaders(defaultHeaders)}>
-                                    <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
+                                  <Button 
+                                    className="rounded-full w-fit animate-fade-in" 
+                                    disabled={analyzing || !previousNote.trim()}
+                                    onClick={() => {
+                                      if (!previousNote.trim()) {
+                                        toast({ title: "Please paste a note first", variant: "destructive" });
+                                        return;
+                                      }
+                                      setAnalyzing(true);
+                                      setProgress(0);
+                                      const interval = setInterval(() => {
+                                        setProgress(p => {
+                                          if (p >= 100) {
+                                            clearInterval(interval);
+                                            setAnalyzing(false);
+                                            setLiveHeaders(defaultHeaders);
+                                            toast({ title: "Template extracted successfully!", description: "Headers have been generated from your note." });
+                                            return 100;
+                                          }
+                                          return p + 20;
+                                        });
+                                      }, 300);
+                                    }}
+                                  >
+                                    {analyzing ? (
+                                      <>
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                        Analyzing... {progress}%
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
+                                      </>
+                                    )}
                                   </Button>
                                 </div>
                               </TabsContent>
@@ -469,24 +507,28 @@ const ProductWalkthrough: React.FC = () => {
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Select Specialty Template</div>
                                   <div className="flex-1 min-h-0 overflow-y-auto pr-2">
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
+                                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
                                       {specialtyTemplates.map((spec) => (
                                         <button
                                           key={spec.slug}
                                           onClick={() => {
                                             setSelectedSpecialtySlug(spec.slug);
                                             setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
+                                            toast({ 
+                                              title: `${spec.name} template selected`, 
+                                              description: "Template structure updated in preview" 
+                                            });
                                           }}
-                                          className={`group rounded-xl border-2 hover:border-primary/50 p-4 text-left transition-all duration-200 hover:shadow-md hover:scale-105 ${
-                                            selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5 shadow-md' : 'hover:bg-muted/30'
+                                          className={`group rounded-xl border-2 hover:border-primary/50 p-3 sm:p-4 text-left transition-all duration-200 hover:shadow-md hover:scale-105 animate-fade-in ${
+                                            selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5 shadow-md scale-105' : 'hover:bg-muted/30'
                                           }`}
                                           aria-pressed={selectedSpecialtySlug === spec.slug}
                                         >
-                                          <div className="font-semibold text-sm mb-1">{spec.name}</div>
-                                          <div className="text-xs text-muted-foreground">Preset Template</div>
+                                          <div className="font-semibold text-xs sm:text-sm mb-1 line-clamp-2">{spec.name}</div>
+                                          <div className="text-[10px] sm:text-xs text-muted-foreground">Preset Template</div>
                                           {selectedSpecialtySlug === spec.slug && (
-                                            <div className="mt-2 h-1 w-full bg-primary/20 rounded-full">
-                                              <div className="h-1 w-full bg-primary rounded-full" />
+                                            <div className="mt-2 h-1 w-full bg-primary/20 rounded-full overflow-hidden">
+                                              <div className="h-1 w-full bg-primary rounded-full animate-scale-in" />
                                             </div>
                                           )}
                                         </button>
@@ -500,10 +542,39 @@ const ProductWalkthrough: React.FC = () => {
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Import Template File</div>
                                   <div className="flex-1 flex items-center justify-center">
-                                    <button className="group aspect-video max-w-md flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-all duration-200 w-full hover:bg-primary/5">
-                                      <Upload className="h-10 w-10 text-muted-foreground mb-3 group-hover:text-primary transition-colors" />
-                                      <div className="text-sm font-medium">Drop file or click to browse</div>
-                                      <div className="text-xs text-muted-foreground mt-2">Supports .docx, .txt, .pdf</div>
+                                    <button 
+                                      onClick={() => {
+                                        setImporting(true);
+                                        setProgress(0);
+                                        const interval = setInterval(() => {
+                                          setProgress(p => {
+                                            if (p >= 100) {
+                                              clearInterval(interval);
+                                              setImporting(false);
+                                              setLiveHeaders(["Chief Complaint", "History", "Assessment", "Plan"]);
+                                              toast({ title: "File imported successfully!", description: "Template structure extracted from uploaded file." });
+                                              return 100;
+                                            }
+                                            return p + 25;
+                                          });
+                                        }, 400);
+                                      }}
+                                      disabled={importing}
+                                      className="group aspect-video max-w-md flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-all duration-200 w-full hover:bg-primary/5 disabled:opacity-50 animate-fade-in"
+                                    >
+                                      {importing ? (
+                                        <>
+                                          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-3" />
+                                          <div className="text-sm font-medium">Importing... {progress}%</div>
+                                          <div className="text-xs text-muted-foreground mt-2">Processing file...</div>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <Upload className="h-8 sm:h-10 w-8 sm:w-10 text-muted-foreground mb-3 group-hover:text-primary transition-colors" />
+                                          <div className="text-xs sm:text-sm font-medium px-2 text-center">Drop file or click to browse</div>
+                                          <div className="text-[10px] sm:text-xs text-muted-foreground mt-2 text-center">Supports .docx, .txt, .pdf</div>
+                                        </>
+                                      )}
                                     </button>
                                   </div>
                                 </div>
@@ -516,8 +587,28 @@ const ProductWalkthrough: React.FC = () => {
                                     placeholder="Paste your template content here and we'll extract the structure..." 
                                     className="flex-1 min-h-[200px] resize-none" 
                                   />
-                                  <Button className="rounded-full w-fit">
-                                    <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
+                                  <Button 
+                                    className="rounded-full w-fit animate-fade-in"
+                                    onClick={() => {
+                                      setAnalyzing(true);
+                                      setTimeout(() => {
+                                        setAnalyzing(false);
+                                        setLiveHeaders(["Chief Complaint", "HPI", "Physical Exam", "Assessment", "Plan"]);
+                                        toast({ title: "Headers extracted!", description: "Template structure identified from pasted content." });
+                                      }, 2000);
+                                    }}
+                                    disabled={analyzing}
+                                  >
+                                    {analyzing ? (
+                                      <>
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                        Analyzing...
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
+                                      </>
+                                    )}
                                   </Button>
                                 </div>
                               </TabsContent>
@@ -526,24 +617,27 @@ const ProductWalkthrough: React.FC = () => {
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Build Template from Scratch</div>
                                   <div className="flex-1 grid gap-4 lg:grid-cols-5 min-h-0">
-                                    <div className="lg:col-span-2 rounded-xl border-2 p-4 bg-muted/30">
-                                      <div className="text-sm font-semibold mb-3 text-center">Section Library</div>
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
+                                    <div className="lg:col-span-2 rounded-xl border-2 p-3 sm:p-4 bg-muted/30 animate-fade-in">
+                                      <div className="text-xs sm:text-sm font-semibold mb-3 text-center">Section Library</div>
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2 max-h-40 sm:max-h-60 overflow-y-auto">
                                         {defaultHeaders.map((h) => (
                                           <button 
                                             key={h} 
                                             type="button" 
-                                            onClick={() => setScratchSections((s) => [...s, h])} 
-                                            className="px-3 py-2 rounded-lg border hover:border-primary/50 text-xs font-medium transition-all hover:bg-primary/10 text-left"
+                                            onClick={() => {
+                                              setScratchSections((s) => [...s, h]);
+                                              toast({ title: "Section added", description: `"${h}" added to template` });
+                                            }}
+                                            className="px-2 sm:px-3 py-2 rounded-lg border hover:border-primary/50 text-[10px] sm:text-xs font-medium transition-all hover:bg-primary/10 hover:scale-105 text-left animate-fade-in"
                                           >
                                             + {h}
                                           </button>
                                         ))}
                                       </div>
                                     </div>
-                                    <div className="lg:col-span-3 rounded-xl border-2 p-4 bg-background">
-                                      <div className="text-sm font-semibold mb-3 text-center">Your Template Structure</div>
-                                      <div className="space-y-2 max-h-60 overflow-y-auto">
+                                    <div className="lg:col-span-3 rounded-xl border-2 p-3 sm:p-4 bg-background animate-fade-in">
+                                      <div className="text-xs sm:text-sm font-semibold mb-3 text-center">Your Template Structure</div>
+                                      <div className="space-y-2 max-h-40 sm:max-h-60 overflow-y-auto">
                                         {scratchSections.map((h, i) => (
                                           <div
                                             key={`${h}-${i}`}
@@ -559,17 +653,19 @@ const ProductWalkthrough: React.FC = () => {
                                                 return copy;
                                               });
                                               setDragIndex(null);
+                                              toast({ title: "Section reordered", description: "Template structure updated" });
                                             }}
-                                            className="group rounded-lg border-2 bg-card p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-sm"
+                                            className="group rounded-lg border-2 bg-card p-2 sm:p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-sm hover:scale-105 animate-scale-in"
                                           >
                                             <div className="flex justify-between items-center">
-                                              <span className="font-medium text-sm">{h}</span>
+                                              <span className="font-medium text-xs sm:text-sm line-clamp-1">{h}</span>
                                               <button 
                                                 type="button" 
-                                                className="text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-opacity" 
+                                                className="text-[10px] sm:text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-all ml-2 flex-shrink-0" 
                                                 onClick={(e) => {
                                                   e.stopPropagation();
                                                   setScratchSections((arr) => arr.filter((_, idx) => idx !== i));
+                                                  toast({ title: "Section removed", description: `"${h}" removed from template` });
                                                 }}
                                               >
                                                 Remove
@@ -579,10 +675,14 @@ const ProductWalkthrough: React.FC = () => {
                                         ))}
                                         <Button 
                                           variant="outline" 
-                                          className="w-full rounded-lg border-dashed hover:bg-primary/5" 
+                                          size="sm"
+                                          className="w-full rounded-lg border-dashed hover:bg-primary/5 transition-all hover:scale-105" 
                                           onClick={() => {
                                             const name = window.prompt('New section name');
-                                            if (name) setScratchSections((s) => [...s, name]);
+                                            if (name) {
+                                              setScratchSections((s) => [...s, name]);
+                                              toast({ title: "Custom section added", description: `"${name}" added to template` });
+                                            }
                                           }}
                                         >
                                           + Add Custom Section
@@ -600,8 +700,36 @@ const ProductWalkthrough: React.FC = () => {
                                     placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" 
                                     className="flex-1 min-h-[200px] resize-none"
                                   />
-                                  <Button className="rounded-full w-fit">
-                                    <Wand2 className="h-4 w-4 mr-2" /> Generate Template
+                                  <Button 
+                                    className="rounded-full w-fit animate-fade-in"
+                                    onClick={() => {
+                                      setGenerating(true);
+                                      setProgress(0);
+                                      const interval = setInterval(() => {
+                                        setProgress(p => {
+                                          if (p >= 100) {
+                                            clearInterval(interval);
+                                            setGenerating(false);
+                                            setLiveHeaders(["Chief Complaint", "HPI", "Assessment", "Plan", "Follow-up"]);
+                                            toast({ title: "AI Template generated!", description: "Custom template created based on your prompt." });
+                                            return 100;
+                                          }
+                                          return p + 10;
+                                        });
+                                      }, 200);
+                                    }}
+                                    disabled={generating}
+                                  >
+                                    {generating ? (
+                                      <>
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                        Generating... {progress}%
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Wand2 className="h-4 w-4 mr-2" /> Generate Template
+                                      </>
+                                    )}
                                   </Button>
                                 </div>
                               </TabsContent>
