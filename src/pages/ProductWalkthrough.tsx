@@ -409,179 +409,204 @@ const ProductWalkthrough: React.FC = () => {
                           Set Your Note Style
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-6">
-                        <Tabs defaultValue="previous" className="w-full">
-                          <div className="overflow-x-auto">
-                            <TabsList className="inline-flex h-12 items-center justify-center rounded-xl bg-muted p-1 text-muted-foreground w-max">
-                              <TabsTrigger value="previous" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Paste previous note
+                      <CardContent className="flex flex-col h-full">
+                        {/* Action buttons - always visible at top */}
+                        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b mb-6">
+                          <Button variant="outline" size="sm" className="rounded-full" onClick={() => setSetupStep('landing')}>
+                            ← Back
+                          </Button>
+                          <div className="flex gap-2">
+                            <Button variant="outline" size="sm" className="rounded-full">
+                              Save as Default
+                            </Button>
+                            <Button onClick={() => setSetupStep('ehr')} size="sm" className="rounded-full">
+                              Next: Connect EHR →
+                            </Button>
+                          </div>
+                        </div>
+
+                        {/* Main content area with controlled height */}
+                        <div className="flex-1 min-h-0">
+                          <Tabs defaultValue="previous" className="h-full flex flex-col">
+                            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 h-11 mb-6 rounded-xl">
+                              <TabsTrigger value="previous" className="rounded-lg text-xs font-medium">
+                                Previous Note
                               </TabsTrigger>
-                              <TabsTrigger value="library" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Template library
+                              <TabsTrigger value="library" className="rounded-lg text-xs font-medium">
+                                Library
                               </TabsTrigger>
-                              <TabsTrigger value="import" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Import template
+                              <TabsTrigger value="import" className="rounded-lg text-xs font-medium">
+                                Import
                               </TabsTrigger>
-                              <TabsTrigger value="paste" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Paste template
+                              <TabsTrigger value="paste" className="rounded-lg text-xs font-medium">
+                                Paste
                               </TabsTrigger>
-                              <TabsTrigger value="scratch" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Build from scratch
+                              <TabsTrigger value="scratch" className="rounded-lg text-xs font-medium">
+                                Build
                               </TabsTrigger>
-                              <TabsTrigger value="prompt" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
-                                Build by prompt
+                              <TabsTrigger value="prompt" className="rounded-lg text-xs font-medium">
+                                AI Prompt
                               </TabsTrigger>
                             </TabsList>
-                          </div>
 
-                          <div className="mt-6">
-                            <TabsContent value="previous" className="space-y-4">
-                              <div className="text-sm font-semibold">Paste Previous Note</div>
-                              <Textarea
-                                value={previousNote}
-                                onChange={(e) => setPreviousNote(e.target.value)}
-                                placeholder="Paste your previous note here and we'll extract the template structure for you..."
-                                className="min-h-[280px] resize-none"
-                              />
-                              <Button className="rounded-lg" onClick={() => setLiveHeaders(defaultHeaders)}>
-                                <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
-                              </Button>
-                            </TabsContent>
+                            <div className="flex-1 min-h-0">
+                              <TabsContent value="previous" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Paste Previous Note</div>
+                                  <Textarea
+                                    value={previousNote}
+                                    onChange={(e) => setPreviousNote(e.target.value)}
+                                    placeholder="Paste your previous note here and we'll extract the template structure for you..."
+                                    className="flex-1 min-h-[200px] resize-none"
+                                  />
+                                  <Button className="rounded-full w-fit" onClick={() => setLiveHeaders(defaultHeaders)}>
+                                    <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
+                                  </Button>
+                                </div>
+                              </TabsContent>
 
-                            <TabsContent value="library" className="space-y-4">
-                              <div className="text-sm font-semibold">Select Specialty Template</div>
-                              <div className="max-h-[400px] overflow-y-auto pr-2">
-                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
-                                  {specialtyTemplates.map((spec) => (
-                                    <button
-                                      key={spec.slug}
-                                      onClick={() => {
-                                        setSelectedSpecialtySlug(spec.slug);
-                                        setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
-                                      }}
-                                      className={`rounded-xl border-2 hover:border-primary/50 p-4 text-left transition-all duration-200 hover:shadow-md ${
-                                        selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5' : ''
-                                      }`}
-                                      aria-pressed={selectedSpecialtySlug === spec.slug}
-                                    >
-                                      <div className="font-semibold text-sm">{spec.name}</div>
-                                      <div className="text-xs text-muted-foreground mt-1">Preset Template</div>
+                              <TabsContent value="library" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Select Specialty Template</div>
+                                  <div className="flex-1 min-h-0 overflow-y-auto pr-2">
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
+                                      {specialtyTemplates.map((spec) => (
+                                        <button
+                                          key={spec.slug}
+                                          onClick={() => {
+                                            setSelectedSpecialtySlug(spec.slug);
+                                            setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
+                                          }}
+                                          className={`group rounded-xl border-2 hover:border-primary/50 p-4 text-left transition-all duration-200 hover:shadow-md hover:scale-105 ${
+                                            selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5 shadow-md' : 'hover:bg-muted/30'
+                                          }`}
+                                          aria-pressed={selectedSpecialtySlug === spec.slug}
+                                        >
+                                          <div className="font-semibold text-sm mb-1">{spec.name}</div>
+                                          <div className="text-xs text-muted-foreground">Preset Template</div>
+                                          {selectedSpecialtySlug === spec.slug && (
+                                            <div className="mt-2 h-1 w-full bg-primary/20 rounded-full">
+                                              <div className="h-1 w-full bg-primary rounded-full" />
+                                            </div>
+                                          )}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </TabsContent>
+
+                              <TabsContent value="import" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Import Template File</div>
+                                  <div className="flex-1 flex items-center justify-center">
+                                    <button className="group aspect-video max-w-md flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-all duration-200 w-full hover:bg-primary/5">
+                                      <Upload className="h-10 w-10 text-muted-foreground mb-3 group-hover:text-primary transition-colors" />
+                                      <div className="text-sm font-medium">Drop file or click to browse</div>
+                                      <div className="text-xs text-muted-foreground mt-2">Supports .docx, .txt, .pdf</div>
                                     </button>
-                                  ))}
-                                </div>
-                              </div>
-                            </TabsContent>
-
-                            <TabsContent value="import" className="space-y-4">
-                              <div className="text-sm font-semibold">Import Template File</div>
-                              <button className="aspect-video flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-colors w-full">
-                                <Upload className="h-8 w-8 text-muted-foreground mb-2" />
-                                <div className="text-sm font-medium">Drop file or click to browse</div>
-                                <div className="text-xs text-muted-foreground mt-1">Supports .docx, .txt, .pdf</div>
-                              </button>
-                            </TabsContent>
-
-                            <TabsContent value="paste" className="space-y-4">
-                              <div className="text-sm font-semibold">Paste Template Content</div>
-                              <Textarea 
-                                placeholder="Paste your template content here and we'll extract the structure..." 
-                                className="min-h-[280px] resize-none" 
-                              />
-                              <Button className="rounded-lg">
-                                <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
-                              </Button>
-                            </TabsContent>
-
-                            <TabsContent value="scratch" className="space-y-4">
-                              <div className="text-sm font-semibold">Build Template from Scratch</div>
-                              <div className="grid gap-6 lg:grid-cols-5">
-                                <div className="lg:col-span-2 rounded-xl border-2 p-4">
-                                  <div className="text-sm font-semibold mb-3">Section Library</div>
-                                  <div className="grid grid-cols-2 gap-2">
-                                    {defaultHeaders.map((h) => (
-                                      <button 
-                                        key={h} 
-                                        type="button" 
-                                        onClick={() => setScratchSections((s) => [...s, h])} 
-                                        className="px-3 py-2 rounded-lg border hover:border-primary/50 text-xs font-medium transition-colors"
-                                      >
-                                        + {h}
-                                      </button>
-                                    ))}
                                   </div>
                                 </div>
-                                <div className="lg:col-span-3 rounded-xl border-2 p-4 min-h-[300px]">
-                                  <div className="text-sm font-semibold mb-3">Your Template Structure</div>
-                                  <div className="space-y-2">
-                                    {scratchSections.map((h, i) => (
-                                      <div
-                                        key={`${h}-${i}`}
-                                        draggable
-                                        onDragStart={() => setDragIndex(i)}
-                                        onDragOver={(e) => e.preventDefault()}
-                                        onDrop={() => {
-                                          if (dragIndex === null || dragIndex === i) return;
-                                          setScratchSections((arr) => {
-                                            const copy = [...arr];
-                                            const [moved] = copy.splice(dragIndex, 1);
-                                            copy.splice(i, 0, moved);
-                                            return copy;
-                                          });
-                                          setDragIndex(null);
-                                        }}
-                                        className="rounded-lg border-2 bg-card p-3 cursor-move hover:border-primary/50 transition-colors"
-                                      >
-                                        <div className="flex justify-between items-center">
-                                          <span className="font-medium text-sm">{h}</span>
+                              </TabsContent>
+
+                              <TabsContent value="paste" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Paste Template Content</div>
+                                  <Textarea 
+                                    placeholder="Paste your template content here and we'll extract the structure..." 
+                                    className="flex-1 min-h-[200px] resize-none" 
+                                  />
+                                  <Button className="rounded-full w-fit">
+                                    <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
+                                  </Button>
+                                </div>
+                              </TabsContent>
+
+                              <TabsContent value="scratch" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Build Template from Scratch</div>
+                                  <div className="flex-1 grid gap-4 lg:grid-cols-5 min-h-0">
+                                    <div className="lg:col-span-2 rounded-xl border-2 p-4 bg-muted/30">
+                                      <div className="text-sm font-semibold mb-3 text-center">Section Library</div>
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
+                                        {defaultHeaders.map((h) => (
                                           <button 
+                                            key={h} 
                                             type="button" 
-                                            className="text-xs text-destructive hover:underline" 
-                                            onClick={() => setScratchSections((arr) => arr.filter((_, idx) => idx !== i))}
+                                            onClick={() => setScratchSections((s) => [...s, h])} 
+                                            className="px-3 py-2 rounded-lg border hover:border-primary/50 text-xs font-medium transition-all hover:bg-primary/10 text-left"
                                           >
-                                            Remove
+                                            + {h}
                                           </button>
-                                        </div>
+                                        ))}
                                       </div>
-                                    ))}
-                                    <Button 
-                                      variant="outline" 
-                                      className="w-full rounded-lg border-dashed" 
-                                      onClick={() => {
-                                        const name = window.prompt('New section name');
-                                        if (name) setScratchSections((s) => [...s, name]);
-                                      }}
-                                    >
-                                      + Add Custom Section
-                                    </Button>
+                                    </div>
+                                    <div className="lg:col-span-3 rounded-xl border-2 p-4 bg-background">
+                                      <div className="text-sm font-semibold mb-3 text-center">Your Template Structure</div>
+                                      <div className="space-y-2 max-h-60 overflow-y-auto">
+                                        {scratchSections.map((h, i) => (
+                                          <div
+                                            key={`${h}-${i}`}
+                                            draggable
+                                            onDragStart={() => setDragIndex(i)}
+                                            onDragOver={(e) => e.preventDefault()}
+                                            onDrop={() => {
+                                              if (dragIndex === null || dragIndex === i) return;
+                                              setScratchSections((arr) => {
+                                                const copy = [...arr];
+                                                const [moved] = copy.splice(dragIndex, 1);
+                                                copy.splice(i, 0, moved);
+                                                return copy;
+                                              });
+                                              setDragIndex(null);
+                                            }}
+                                            className="group rounded-lg border-2 bg-card p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-sm"
+                                          >
+                                            <div className="flex justify-between items-center">
+                                              <span className="font-medium text-sm">{h}</span>
+                                              <button 
+                                                type="button" 
+                                                className="text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-opacity" 
+                                                onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  setScratchSections((arr) => arr.filter((_, idx) => idx !== i));
+                                                }}
+                                              >
+                                                Remove
+                                              </button>
+                                            </div>
+                                          </div>
+                                        ))}
+                                        <Button 
+                                          variant="outline" 
+                                          className="w-full rounded-lg border-dashed hover:bg-primary/5" 
+                                          onClick={() => {
+                                            const name = window.prompt('New section name');
+                                            if (name) setScratchSections((s) => [...s, name]);
+                                          }}
+                                        >
+                                          + Add Custom Section
+                                        </Button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </TabsContent>
+                              </TabsContent>
 
-                            <TabsContent value="prompt" className="space-y-4">
-                              <div className="text-sm font-semibold">Build Template by AI Prompt</div>
-                              <Textarea 
-                                placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" 
-                                className="min-h-[200px] resize-none"
-                              />
-                              <Button className="rounded-lg">
-                                <Wand2 className="h-4 w-4 mr-2" /> Generate Template
-                              </Button>
-                            </TabsContent>
-                          </div>
-                        </Tabs>
-
-                        <Separator className="my-6" />
-                        <div className="flex flex-wrap gap-3">
-                          <Button variant="outline" className="rounded-lg" onClick={() => setSetupStep('landing')}>
-                            Back
-                          </Button>
-                          <Button variant="outline" className="rounded-lg">
-                            Save as My Default
-                          </Button>
-                          <Button onClick={() => setSetupStep('ehr')} className="rounded-lg">
-                            Next: Connect EHR
-                          </Button>
+                              <TabsContent value="prompt" className="h-full m-0">
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="text-sm font-semibold">Build Template by AI Prompt</div>
+                                  <Textarea 
+                                    placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" 
+                                    className="flex-1 min-h-[200px] resize-none"
+                                  />
+                                  <Button className="rounded-full w-fit">
+                                    <Wand2 className="h-4 w-4 mr-2" /> Generate Template
+                                  </Button>
+                                </div>
+                              </TabsContent>
+                            </div>
+                          </Tabs>
                         </div>
                       </CardContent>
                     </Card>
