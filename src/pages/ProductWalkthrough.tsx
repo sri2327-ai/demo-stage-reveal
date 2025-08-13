@@ -159,6 +159,14 @@ const ProductWalkthrough: React.FC = () => {
 
   // AI Agent toggles (UI only)
   const [agent, setAgent] = useState({ followups: true, inbound: true, outreach: true, support: false });
+  
+  // Automation toggles  
+  const [automations, setAutomations] = useState({
+    patientInstructions: true,
+    followupReminders: true, 
+    labOrders: false,
+    prescriptionRefills: true
+  });
 
   // Demo states for interactive functionality
   const [analyzing, setAnalyzing] = useState(false);
@@ -2460,31 +2468,36 @@ const ProductWalkthrough: React.FC = () => {
                 <div className="grid gap-6 lg:grid-cols-2">
                   {[
                     {
+                      key: "patientInstructions",
                       title: "Auto-Generate Patient Instructions",
                       description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
-                      enabled: true,
-                      color: "green"
+                      enabled: automations.patientInstructions,
+                      color: "green",
+                      options: ["Email to Patient", "Send to Patient Portal", "Print Instructions"]
                     },
                     {
+                      key: "followupReminders", 
                       title: "Schedule Follow-up Reminders",
                       description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
-                      enabled: true,
+                      enabled: automations.followupReminders,
                       color: "blue"
                     },
                     {
+                      key: "labOrders",
                       title: "Lab Order Processing", 
                       description: "Automatically process and track lab orders mentioned in visit notes.",
-                      enabled: false,
+                      enabled: automations.labOrders,
                       color: "gray"
                     },
                     {
+                      key: "prescriptionRefills",
                       title: "Prescription Refill Alerts",
                       description: "Alert when patients are due for prescription refills based on their medication history.",
-                      enabled: true,
+                      enabled: automations.prescriptionRefills,
                       color: "orange"
                     }
                   ].map((automation, index) => (
-                    <Card key={index} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-shadow">
+                    <Card key={automation.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-shadow">
                       <CardHeader className="pb-4">
                         <div className="flex items-start justify-between">
                           <div className="flex items-start gap-3">
@@ -2502,11 +2515,22 @@ const ProductWalkthrough: React.FC = () => {
                             <div>
                               <CardTitle className="text-lg text-gray-900">{automation.title}</CardTitle>
                               <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
+                              {automation.options && automation.enabled && (
+                                <div className="mt-2 flex flex-wrap gap-1">
+                                  {automation.options.map((option, idx) => (
+                                    <span key={idx} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                                      {option}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
                             </div>
                           </div>
                           <Switch 
                             checked={automation.enabled} 
-                            onCheckedChange={() => {}} 
+                            onCheckedChange={(checked) => 
+                              setAutomations(prev => ({ ...prev, [automation.key]: checked }))
+                            }
                           />
                         </div>
                       </CardHeader>
@@ -2577,10 +2601,10 @@ const ProductWalkthrough: React.FC = () => {
                     {
                       key: 'followups',
                       title: "Follow-up Call Automation",
-                      description: "AI agent makes post-visit follow-up calls to check on patient recovery and medication adherence.",
+                      description: "AI agent makes post-visit follow-up calls to check on patient recovery, medication adherence, reduce no-shows, and confirm upcoming appointments.",
                       enabled: agent.followups,
                       icon: "phone",
-                      stats: "150+ calls/month"
+                      stats: "150+ calls/month • 40% reduction in no-shows"
                     },
                     {
                       key: 'inbound', 
