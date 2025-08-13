@@ -290,10 +290,49 @@ const ProductWalkthrough: React.FC = () => {
   };
 
   const toggleRecording = () => {
-    setIsRecording((r) => !r);
-    if (!isRecording) {
+    const newRecordingState = !isRecording;
+    setIsRecording(newRecordingState);
+    
+    if (newRecordingState) {
+      // Starting recording
       setSeconds(0);
       setTranscript("");
+      // Start the timer
+      recordTimerRef.current = window.setInterval(() => {
+        setSeconds(prev => prev + 1);
+      }, 1000);
+      // Start simulating transcript
+      setTimeout(() => {
+        transcriptTimerRef.current = window.setInterval(() => {
+          setTranscript(prev => {
+            const words = [
+              "Patient reports increased blood sugar levels over the past two weeks.",
+              "Morning readings ranging from 140 to 160 milligrams per deciliter.",
+              "Evening readings between 180 and 200 milligrams per deciliter.",
+              "No episodes of hypoglycemia reported.",
+              "Patient continues current medication regimen as prescribed.",
+              "Blood pressure appears well controlled on current therapy.",
+              "Physical examination reveals no acute distress."
+            ];
+            const currentWords = prev.split(' ').filter(w => w.length > 0);
+            if (currentWords.length < words.join(' ').split(' ').length) {
+              const nextWord = words.join(' ').split(' ')[currentWords.length];
+              return prev + (prev ? ' ' : '') + nextWord;
+            }
+            return prev;
+          });
+        }, 500);
+      }, 1000);
+    } else {
+      // Stopping recording
+      if (recordTimerRef.current) {
+        clearInterval(recordTimerRef.current);
+        recordTimerRef.current = null;
+      }
+      if (transcriptTimerRef.current) {
+        clearInterval(transcriptTimerRef.current);
+        transcriptTimerRef.current = null;
+      }
     }
   };
 
@@ -1814,7 +1853,7 @@ const ProductWalkthrough: React.FC = () => {
                             <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
                             <span className="font-medium text-blue-700">Real-time transcription and structuring active</span>
                           </div>
-                          <div className="text-xs text-blue-600 mt-1 flex items-center gap-4">
+                          <div className="text-xs text-blue-600 mt-1 flex flex-wrap items-center gap-3">
                             <span>• Medical terminology detection</span>
                             <span>• Grammar correction</span>
                             <span>• Clinical structure formatting</span>
@@ -1853,6 +1892,120 @@ const ProductWalkthrough: React.FC = () => {
                             Continue to Coding
                           </Button>
                         </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Patient Summary Snapshot - Right Side */}
+                  <div className="xl:col-span-3">
+                    <Card className="h-full border-2 bg-gradient-to-br from-blue-50/50 to-background">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="flex items-center gap-2 text-blue-900">
+                          <div className="h-6 w-6 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                          </div>
+                          Patient Summary Snapshot
+                        </CardTitle>
+                        <p className="text-xs text-blue-700/70">Medical history and previous visit details</p>
+                      </CardHeader>
+                      <CardContent>
+                        {selectedPatient ? (
+                          <div className="space-y-4">
+                            {/* Patient Header */}
+                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                              <div className="flex items-center gap-3">
+                                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-blue-700">
+                                  {selectedPatient.name.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-blue-900">{selectedPatient.name}</div>
+                                  <div className="text-sm text-blue-700">MRN: {selectedPatient.mrn}</div>
+                                  <div className="text-sm text-blue-600">{selectedPatient.age} • {selectedPatient.visit}</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Previous Visit Summary */}
+                            <div className="space-y-3">
+                              <div className="text-sm font-semibold text-blue-900 flex items-center gap-2">
+                                <svg className="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Last Visit: March 15, 2024
+                              </div>
+                              <div className="p-3 bg-gradient-to-r from-green-50 to-green-50/50 rounded-lg border border-green-200 text-xs">
+                                <div className="font-medium text-green-800 mb-1">Visit Summary</div>
+                                <div className="text-green-700 space-y-1">
+                                  <div>• Diabetes follow-up - HbA1c improved to 7.8%</div>
+                                  <div>• Blood pressure well controlled</div>
+                                  <div>• Renewed prescriptions</div>
+                                  <div>• Scheduled for 3-month follow-up</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Clinical Context */}
+                            <div className="h-[300px] max-h-[400px] overflow-y-auto custom-scrollbar">
+                              <div className="text-sm space-y-4">
+                                {patientContext ? (
+                                  <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
+                                    {patientContext}
+                                  </div>
+                                ) : (
+                                  <div className="space-y-4">
+                                    <div className="animate-pulse space-y-3">
+                                      <div className="h-4 bg-blue-100 rounded w-3/4"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-1/2"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-5/6"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
+                                    </div>
+                                    <div className="text-blue-600 text-center py-4">
+                                      Loading patient medical history...
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Quick Actions */}
+                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                Full History
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                Lab Results
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Allergies
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="h-full flex items-center justify-center text-center">
+                            <div className="space-y-3">
+                              <div className="text-4xl opacity-30">👤</div>
+                              <div className="text-sm font-medium text-blue-800">No Patient Selected</div>
+                              <div className="text-xs text-blue-600 leading-relaxed max-w-sm">
+                                Select a patient from the Schedule to load their medical history and context for this visit.
+                              </div>
+                              <Button variant="outline" size="sm" onClick={() => onNavClick('schedule')} className="text-blue-700 border-blue-200">
+                                Go to Schedule
+                              </Button>
+                            </div>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </div>
