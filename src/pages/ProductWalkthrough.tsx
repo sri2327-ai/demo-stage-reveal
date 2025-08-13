@@ -146,6 +146,10 @@ const ProductWalkthrough: React.FC = () => {
   const [importing, setImporting] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  
+  // Capture section states
+  const [captureMode, setCaptureMode] = useState<'audio' | 'type'>('audio');
+  const [typeNotes, setTypeNotes] = useState("");
 
   // Template headers and UX state for Note Style
   const defaultHeaders = [
@@ -1301,74 +1305,296 @@ const ProductWalkthrough: React.FC = () => {
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Mic className="h-5 w-5 text-primary" aria-hidden />
                     </div>
-                    Audio Capture
+                    Clinical Documentation
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Record the visit and watch notes generate in real time.</p>
+                  <p className="mt-3 text-muted-foreground text-lg">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
                 </div>
 
-                <div className="grid gap-8 xl:grid-cols-12">
-                  <Card className="xl:col-span-3">
-                    <CardHeader>
-                      <CardTitle>Audio Capture</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div>
-                        <Button onClick={toggleRecording} className="w-full rounded-lg" variant={isRecording ? "destructive" : "default"}>
-                          {isRecording ? (
-                            <>
-                              <CircleStop className="h-4 w-4 mr-2" /> Stop Recording
-                            </>
-                          ) : (
-                            <>
-                              <Mic className="h-4 w-4 mr-2" /> Start Recording
-                            </>
-                          )}
-                        </Button>
-                        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                          <span className={`h-2.5 w-2.5 rounded-full ${isRecording ? 'bg-destructive animate-pulse' : 'bg-muted-foreground/50'}`} />
-                          <span className="font-mono">{timeStr}</span>
+                {/* Enhanced Responsive Grid Layout */}
+                <div className="grid gap-6 lg:gap-8 xl:grid-cols-12">
+                  
+                  {/* Input Methods - Enhanced with Audio/Type Toggle */}
+                  <div className="xl:col-span-4 space-y-6">
+                    <Card className="border-2">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="flex items-center gap-2">
+                          <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                            {captureMode === 'audio' ? <Mic className="h-3 w-3 text-primary" /> : <FileText className="h-3 w-3 text-primary" />}
+                          </div>
+                          Input Method
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-6">
+                        
+                        {/* Mode Toggle */}
+                        <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
+                          <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="audio" className="flex items-center gap-2">
+                              <Mic className="h-4 w-4" />
+                              <span className="hidden sm:inline">Audio</span>
+                            </TabsTrigger>
+                            <TabsTrigger value="type" className="flex items-center gap-2">
+                              <FileText className="h-4 w-4" />
+                              <span className="hidden sm:inline">Type</span>
+                            </TabsTrigger>
+                          </TabsList>
+                          
+                          {/* Audio Capture Tab */}
+                          <TabsContent value="audio" className="mt-4 space-y-4">
+                            <div className="space-y-4">
+                              <Button 
+                                onClick={toggleRecording} 
+                                className="w-full rounded-lg h-12 font-semibold" 
+                                variant={isRecording ? "destructive" : "default"}
+                              >
+                                {isRecording ? (
+                                  <>
+                                    <CircleStop className="h-5 w-5 mr-2" /> Stop Recording
+                                  </>
+                                ) : (
+                                  <>
+                                    <Mic className="h-5 w-5 mr-2" /> Start Recording
+                                  </>
+                                )}
+                              </Button>
+                              
+                              {/* Recording Status */}
+                              <div className="flex items-center justify-center gap-2 text-sm">
+                                <span className={`h-3 w-3 rounded-full ${isRecording ? 'bg-destructive animate-pulse' : 'bg-muted-foreground/50'}`} />
+                                <span className="font-mono text-lg">{timeStr}</span>
+                                <span className="text-muted-foreground">
+                                  {isRecording ? 'Recording...' : 'Ready to record'}
+                                </span>
+                              </div>
+
+                              {/* Audio Visualizer */}
+                              <div className="flex items-end justify-center gap-1 h-16 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
+                                {[8,14,20,12,18,10,16,22,12,15,19,8,16,25,11].map((h, i) => (
+                                  <div 
+                                    key={i} 
+                                    className={`w-2 rounded transition-all duration-300 ${
+                                      isRecording ? 'bg-primary animate-pulse' : 'bg-primary/30'
+                                    }`} 
+                                    style={{ 
+                                      height: `${isRecording ? h : h * 0.3}px`,
+                                      animationDelay: `${i * 100}ms`
+                                    }} 
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </TabsContent>
+                          
+                          {/* Type Input Tab */}
+                          <TabsContent value="type" className="mt-4">
+                            <div className="space-y-4">
+                              <div className="text-sm font-medium text-muted-foreground">
+                                Type your clinical notes directly
+                              </div>
+                              <Textarea 
+                                placeholder="Begin typing your clinical notes here. AI will assist with structuring and formatting as you type..."
+                                value={typeNotes}
+                                onChange={(e) => setTypeNotes(e.target.value)}
+                                className="min-h-[200px] resize-none text-sm"
+                              />
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  onClick={() => {
+                                    setTypeNotes("");
+                                    toast({ title: "Notes cleared", description: "Ready for new input" });
+                                  }}
+                                >
+                                  Clear
+                                </Button>
+                                <Button 
+                                  size="sm"
+                                  onClick={() => {
+                                    if (typeNotes.trim()) {
+                                      setTranscript(typeNotes);
+                                      toast({ title: "Notes processed", description: "AI is structuring your notes" });
+                                    }
+                                  }}
+                                  disabled={!typeNotes.trim()}
+                                >
+                                  <Wand2 className="h-4 w-4 mr-2" />
+                                  Process Notes
+                                </Button>
+                              </div>
+                            </div>
+                          </TabsContent>
+                        </Tabs>
+
+                        {/* Common Controls */}
+                        <div className="flex flex-col gap-2 pt-4 border-t">
+                          <Button variant="outline" className="rounded-lg">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Pause Session
+                          </Button>
+                          <Button variant="outline" className="rounded-lg text-destructive hover:text-destructive">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Discard Session
+                          </Button>
                         </div>
-                      </div>
+                      </CardContent>
+                    </Card>
+                  </div>
 
-                      <div className="flex items-end gap-1 h-20 p-4 bg-muted/30 rounded-lg">
-                        {[8,14,20,12,18,10,16,22,12,15,19,8,16].map((h, i) => (
-                          <div key={i} className="w-2 rounded bg-primary/70 transition-all" style={{ height: `${h}px` }} />
-                        ))}
-                      </div>
+                  {/* AI-Generated Note - Enhanced */}
+                  <div className="xl:col-span-5">
+                    <Card className="h-full border-2">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <Bot className="h-3 w-3 text-primary" />
+                            </div>
+                            AI-Generated Clinical Note
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span className="text-xs text-muted-foreground">Live Processing</span>
+                          </div>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="rounded-lg border bg-gradient-to-br from-background to-muted/10 p-6 min-h-[500px] max-h-[600px] overflow-y-auto custom-scrollbar">
+                          <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                            {transcript || typeNotes || `${selectedPatient ? `Patient: ${selectedPatient.name}\nMRN: ${selectedPatient.mrn}\nVisit: ${selectedPatient.visit}\n\n` : ""}CLINICAL NOTE\n\n${captureMode === 'audio' ? 'Begin recording' : 'Start typing'} to generate structured clinical documentation...\n\nThe AI will automatically organize content into:\n• Chief Complaint\n• History of Present Illness\n• Physical Examination\n• Assessment\n• Plan\n\nReal-time processing ensures accurate medical terminology and proper clinical structure.`}
+                          </div>
+                        </div>
+                        
+                        {/* Note Actions */}
+                        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+                          <Button variant="outline" size="sm" className="rounded-lg">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Edit
+                          </Button>
+                          <Button variant="outline" size="sm" className="rounded-lg">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                            Copy
+                          </Button>
+                          <Button variant="outline" size="sm" className="rounded-lg">
+                            <Wand2 className="h-4 w-4 mr-2" />
+                            Enhance with AI
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
 
-                      <div className="flex flex-col gap-2">
-                        <Button variant="outline" className="rounded-lg">Pause Session</Button>
-                        <Button variant="outline" className="rounded-lg">Discard</Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Enhanced Patient Context - Right Side */}
+                  <div className="xl:col-span-3">
+                    <Card className="h-full border-2 bg-gradient-to-br from-blue-50/50 to-background">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="flex items-center gap-2 text-blue-900">
+                          <div className="h-6 w-6 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                          </div>
+                          Patient Summary Snapshot
+                        </CardTitle>
+                        <p className="text-xs text-blue-700/70">Previous medical history and context</p>
+                      </CardHeader>
+                      <CardContent>
+                        {selectedPatient ? (
+                          <div className="space-y-4">
+                            {/* Patient Header */}
+                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                              <div className="flex items-center gap-3">
+                                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-blue-700">
+                                  {selectedPatient.name.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-blue-900">{selectedPatient.name}</div>
+                                  <div className="text-sm text-blue-700">MRN: {selectedPatient.mrn}</div>
+                                  <div className="text-sm text-blue-600">{selectedPatient.age} • {selectedPatient.visit}</div>
+                                </div>
+                              </div>
+                            </div>
 
-                  <Card className="xl:col-span-6">
-                    <CardHeader>
-                      <CardTitle>AI-Generated Note</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-lg border p-6 min-h-[400px] text-sm whitespace-pre-wrap">
-                        {transcript || "Patient presents today for follow-up of diabetes and hypertension.\n\nCHIEF COMPLAINT: [content will be generated]"}
-                      </div>
-                    </CardContent>
-                  </Card>
+                            {/* Clinical Context */}
+                            <div className="h-[400px] max-h-[500px] overflow-y-auto custom-scrollbar">
+                              <div className="text-sm space-y-4">
+                                {patientContext ? (
+                                  <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
+                                    {patientContext}
+                                  </div>
+                                ) : (
+                                  <div className="space-y-4">
+                                    <div className="animate-pulse space-y-3">
+                                      <div className="h-4 bg-blue-100 rounded w-3/4"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-1/2"></div>
+                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
+                                    </div>
+                                    <div className="text-blue-600 text-center py-4">
+                                      Loading patient medical history...
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
 
-                  <Card className="xl:col-span-3">
-                    <CardHeader>
-                      <CardTitle>Patient Context</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-lg border p-4 min-h-[400px] text-sm whitespace-pre-wrap text-muted-foreground">
-                        {selectedPatient ? patientContext || "Loading patient data…" : "Open a patient from Schedule to load context."}
-                      </div>
-                    </CardContent>
-                  </Card>
+                            {/* Quick Actions */}
+                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50">
+                                View Full History
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50">
+                                Lab Results
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="h-full flex items-center justify-center text-center">
+                            <div className="space-y-3">
+                              <div className="text-4xl opacity-30">👤</div>
+                              <div className="text-sm font-medium text-blue-800">No Patient Selected</div>
+                              <div className="text-xs text-blue-600 leading-relaxed max-w-sm">
+                                Select a patient from the Schedule to load their medical history and context for this visit.
+                              </div>
+                              <Button variant="outline" size="sm" onClick={() => onNavClick('schedule')} className="text-blue-700 border-blue-200">
+                                Go to Schedule
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
 
-                  <div className="xl:col-span-12 flex flex-wrap gap-3">
-                    <Button variant="outline" className="rounded-lg">Discard</Button>
-                    <Button variant="outline" className="rounded-lg">Pause Session</Button>
-                    <Button className="rounded-lg" onClick={() => onNavClick('coding')}>Finalize Visit</Button>
+                  {/* Session Actions - Full Width */}
+                  <div className="xl:col-span-12 flex flex-col sm:flex-row flex-wrap gap-3 pt-4 border-t">
+                    <Button variant="outline" className="rounded-lg">
+                      <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      Save Draft
+                    </Button>
+                    <Button variant="outline" className="rounded-lg">
+                      <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                      </svg>
+                      Share with Team
+                    </Button>
+                    <div className="flex-1"></div>
+                    <Button 
+                      className="rounded-lg font-semibold px-8 shadow-lg" 
+                      onClick={() => onNavClick('coding')}
+                    >
+                      <CheckCircle2 className="h-4 w-4 mr-2" />
+                      Finalize Visit & Review Coding
+                    </Button>
                   </div>
                 </div>
               </div>
