@@ -395,8 +395,8 @@ const ProductWalkthrough: React.FC = () => {
                     </CardHeader>
                     <CardContent className="flex flex-col gap-4">
                       <Tabs defaultValue="previous" className="w-full">
-                        <TabsList className="flex gap-2 sm:gap-2 flex-wrap md:flex-nowrap overflow-x-auto bg-muted p-1 rounded-md">
-                          <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Previous note</TabsTrigger>
+                        <TabsList className="w-full inline-flex gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-xl">
+                          <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Paste previous note</TabsTrigger>
                           <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
                           <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
                           <TabsTrigger value="paste" className="rounded-full px-3 py-1.5 text-sm">Paste template</TabsTrigger>
@@ -419,7 +419,7 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="library" className="space-y-3">
                           <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
                             {specialtyTemplates.map((spec) => (
                               <button
                                 key={spec.slug}
@@ -427,7 +427,7 @@ const ProductWalkthrough: React.FC = () => {
                                   setSelectedSpecialtySlug(spec.slug);
                                   setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
                                 }}
-                                className={`rounded-xl border px-4 py-5 text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
+                                className={`rounded-xl border px-4 py-5 h-24 text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
                                 aria-pressed={selectedSpecialtySlug === spec.slug}
                               >
                                 <div className="font-semibold">{spec.name}</div>
@@ -444,10 +444,11 @@ const ProductWalkthrough: React.FC = () => {
                           </button>
                         </TabsContent>
 
-                        <TabsContent value="paste" className="space-y-2">
-                          <div className="text-sm font-medium">Paste Template Content</div>
-                          <div className="rounded-lg border p-3 text-sm opacity-80 min-h-[160px]">Paste your template content here…</div>
-                        </TabsContent>
+                          <TabsContent value="paste" className="space-y-3">
+                            <div className="text-sm font-medium">Paste Template Content</div>
+                            <Textarea placeholder="Paste your template content here…" className="min-h-[200px]" />
+                            <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers</Button>
+                          </TabsContent>
 
                         <TabsContent value="scratch" className="grid gap-3">
                           <div className="text-sm font-medium">Build Template from Scratch</div>
