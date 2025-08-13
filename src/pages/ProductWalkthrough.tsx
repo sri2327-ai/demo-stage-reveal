@@ -197,6 +197,11 @@ const ProductWalkthrough: React.FC = () => {
   const [scratchSections, setScratchSections] = useState<string[]>(["Chief Complaint", "HPI", "Exam", "Assessment", "Plan"]);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
+  // Initialize live preview with scratch sections
+  useEffect(() => {
+    setLiveHeaders(scratchSections);
+  }, []);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Recording timers
@@ -434,24 +439,27 @@ const ProductWalkthrough: React.FC = () => {
                         {/* Main content area with controlled height */}
                         <div className="flex-1 min-h-0">
                           <Tabs defaultValue="previous" className="h-full flex flex-col">
-                            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto sm:h-11 p-1 mb-6 rounded-xl bg-muted">
-                              <TabsTrigger value="previous" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
-                                Previous Note
+                            <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 w-full h-auto p-1 mb-6 rounded-xl bg-muted gap-1">
+                              <TabsTrigger value="previous" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                                <span className="hidden sm:inline">Previous</span>
+                                <span className="sm:hidden">Prev</span>
                               </TabsTrigger>
-                              <TabsTrigger value="library" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
-                                Library
+                              <TabsTrigger value="library" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                                <span className="hidden sm:inline">Library</span>
+                                <span className="sm:hidden">Lib</span>
                               </TabsTrigger>
-                              <TabsTrigger value="import" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                              <TabsTrigger value="import" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Import
                               </TabsTrigger>
-                              <TabsTrigger value="paste" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                              <TabsTrigger value="paste" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Paste
                               </TabsTrigger>
-                              <TabsTrigger value="scratch" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                              <TabsTrigger value="scratch" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
                                 Build
                               </TabsTrigger>
-                              <TabsTrigger value="prompt" className="rounded-lg text-[10px] sm:text-xs font-medium py-2 px-2 sm:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
-                                AI Prompt
+                              <TabsTrigger value="prompt" className="rounded-lg text-[9px] sm:text-[10px] lg:text-xs font-medium py-1.5 sm:py-2 px-1 sm:px-2 lg:px-4 data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:bg-background/50">
+                                <span className="hidden sm:inline">AI Prompt</span>
+                                <span className="sm:hidden">AI</span>
                               </TabsTrigger>
                             </TabsList>
 
@@ -480,8 +488,12 @@ const ProductWalkthrough: React.FC = () => {
                                           if (p >= 100) {
                                             clearInterval(interval);
                                             setAnalyzing(false);
-                                            setLiveHeaders(defaultHeaders);
-                                            toast({ title: "Template extracted successfully!", description: "Headers have been generated from your note." });
+                                            // Extract realistic headers from the note content
+                                            const extractedHeaders = previousNote.trim() ? 
+                                              ["Chief Complaint", "History of Present Illness", "Physical Examination", "Assessment and Plan", "Follow-up Instructions"] :
+                                              defaultHeaders;
+                                            setLiveHeaders(extractedHeaders);
+                                            toast({ title: "Template extracted successfully!", description: `${extractedHeaders.length} sections identified from your note.` });
                                             return 100;
                                           }
                                           return p + 20;
@@ -513,7 +525,8 @@ const ProductWalkthrough: React.FC = () => {
                                           key={spec.slug}
                                           onClick={() => {
                                             setSelectedSpecialtySlug(spec.slug);
-                                            setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
+                                            const templateHeaders = headersBySpecialty[spec.slug] || defaultHeaders;
+                                            setLiveHeaders(templateHeaders);
                                             toast({ 
                                               title: `${spec.name} template selected`, 
                                               description: "Template structure updated in preview" 
@@ -626,6 +639,9 @@ const ProductWalkthrough: React.FC = () => {
                                             type="button" 
                                             onClick={() => {
                                               setScratchSections((s) => [...s, h]);
+                                              // Update live preview immediately
+                                              const newSections = [...scratchSections, h];
+                                              setLiveHeaders(newSections);
                                               toast({ title: "Section added", description: `"${h}" added to template` });
                                             }}
                                             className="px-2 sm:px-3 py-2 rounded-lg border hover:border-primary/50 text-[10px] sm:text-xs font-medium transition-all hover:bg-primary/10 hover:scale-105 text-left animate-fade-in"
@@ -646,14 +662,15 @@ const ProductWalkthrough: React.FC = () => {
                                             onDragOver={(e) => e.preventDefault()}
                                             onDrop={() => {
                                               if (dragIndex === null || dragIndex === i) return;
-                                              setScratchSections((arr) => {
-                                                const copy = [...arr];
-                                                const [moved] = copy.splice(dragIndex, 1);
-                                                copy.splice(i, 0, moved);
-                                                return copy;
-                                              });
-                                              setDragIndex(null);
-                                              toast({ title: "Section reordered", description: "Template structure updated" });
+                                               setScratchSections((arr) => {
+                                                 const copy = [...arr];
+                                                 const [moved] = copy.splice(dragIndex, 1);
+                                                 copy.splice(i, 0, moved);
+                                                 setLiveHeaders(copy);
+                                                 return copy;
+                                               });
+                                               setDragIndex(null);
+                                               toast({ title: "Section reordered", description: "Template structure updated" });
                                             }}
                                             className="group rounded-lg border-2 bg-card p-2 sm:p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-sm hover:scale-105 animate-scale-in"
                                           >
@@ -664,7 +681,9 @@ const ProductWalkthrough: React.FC = () => {
                                                 className="text-[10px] sm:text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-all ml-2 flex-shrink-0" 
                                                 onClick={(e) => {
                                                   e.stopPropagation();
-                                                  setScratchSections((arr) => arr.filter((_, idx) => idx !== i));
+                                                  const newSections = scratchSections.filter((_, idx) => idx !== i);
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
                                                   toast({ title: "Section removed", description: `"${h}" removed from template` });
                                                 }}
                                               >
@@ -677,13 +696,15 @@ const ProductWalkthrough: React.FC = () => {
                                           variant="outline" 
                                           size="sm"
                                           className="w-full rounded-lg border-dashed hover:bg-primary/5 transition-all hover:scale-105" 
-                                          onClick={() => {
-                                            const name = window.prompt('New section name');
-                                            if (name) {
-                                              setScratchSections((s) => [...s, name]);
-                                              toast({ title: "Custom section added", description: `"${name}" added to template` });
-                                            }
-                                          }}
+                                           onClick={() => {
+                                             const name = window.prompt('New section name');
+                                             if (name) {
+                                               const newSections = [...scratchSections, name];
+                                               setScratchSections(newSections);
+                                               setLiveHeaders(newSections);
+                                               toast({ title: "Custom section added", description: `"${name}" added to template` });
+                                             }
+                                           }}
                                         >
                                           + Add Custom Section
                                         </Button>
@@ -743,16 +764,25 @@ const ProductWalkthrough: React.FC = () => {
                       <CardHeader className="pb-4">
                         <CardTitle className="text-lg">Live Preview</CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2">
-                          {liveHeaders.map((s) => (
-                            <div key={s} className="rounded-lg border p-3">
-                              <div className="font-semibold text-sm mb-1">{s}</div>
-                              <div className="text-xs text-muted-foreground">[Content will be generated here]</div>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
+                       <CardContent>
+                         <div className="max-h-[400px] sm:max-h-[500px] overflow-y-auto space-y-3 pr-2">
+                           {liveHeaders.length === 0 ? (
+                             <div className="text-center py-8 text-muted-foreground">
+                               <div className="text-sm">No template selected</div>
+                               <div className="text-xs mt-1">Choose an option from the tabs above</div>
+                             </div>
+                           ) : (
+                             liveHeaders.map((s, index) => (
+                               <div key={`${s}-${index}`} className="rounded-lg border p-3 transition-all hover:shadow-sm animate-fade-in">
+                                 <div className="font-semibold text-xs sm:text-sm mb-1 text-primary">{s}</div>
+                                 <div className="text-[10px] sm:text-xs text-muted-foreground">
+                                   [AI will generate content based on recorded conversation]
+                                 </div>
+                               </div>
+                             ))
+                           )}
+                         </div>
+                       </CardContent>
                     </Card>
                   </div>
                 )}
