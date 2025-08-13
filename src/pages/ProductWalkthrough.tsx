@@ -518,8 +518,8 @@ const ProductWalkthrough: React.FC = () => {
                               <TabsContent value="library" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Select Specialty Template</div>
-                                  <div className="flex-1 min-h-0 overflow-y-auto pr-2">
-                                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
+                                  <div className="flex-1 min-h-0 overflow-y-auto">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-1">
                                       {specialtyTemplates.map((spec) => (
                                         <button
                                           key={spec.slug}
@@ -532,18 +532,34 @@ const ProductWalkthrough: React.FC = () => {
                                               description: "Template structure updated in preview" 
                                             });
                                           }}
-                                          className={`group rounded-xl border-2 hover:border-primary/50 p-3 sm:p-4 text-left transition-all duration-200 hover:shadow-md hover:scale-105 animate-fade-in ${
-                                            selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5 shadow-md scale-105' : 'hover:bg-muted/30'
+                                          className={`group relative rounded-xl border-2 p-3 sm:p-4 text-left transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                                            selectedSpecialtySlug === spec.slug 
+                                              ? 'border-primary bg-primary/5 shadow-lg transform -translate-y-1' 
+                                              : 'border-border hover:border-primary/50 hover:bg-muted/50'
                                           }`}
                                           aria-pressed={selectedSpecialtySlug === spec.slug}
                                         >
-                                          <div className="font-semibold text-xs sm:text-sm mb-1 line-clamp-2">{spec.name}</div>
-                                          <div className="text-[10px] sm:text-xs text-muted-foreground">Preset Template</div>
-                                          {selectedSpecialtySlug === spec.slug && (
-                                            <div className="mt-2 h-1 w-full bg-primary/20 rounded-full overflow-hidden">
-                                              <div className="h-1 w-full bg-primary rounded-full animate-scale-in" />
+                                          <div className="space-y-2">
+                                            <div className="font-semibold text-sm sm:text-base leading-tight">{spec.name}</div>
+                                            <div className="text-xs text-muted-foreground">
+                                              Specialized template with {(headersBySpecialty[spec.slug] || defaultHeaders).length} sections
                                             </div>
-                                          )}
+                                            {selectedSpecialtySlug === spec.slug && (
+                                              <div className="absolute top-2 right-2">
+                                                <CheckCircle2 className="h-4 w-4 text-primary" />
+                                              </div>
+                                            )}
+                                          </div>
+                                          <div className={`mt-3 h-1 w-full bg-muted rounded-full overflow-hidden transition-all duration-300 ${
+                                            selectedSpecialtySlug === spec.slug ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
+                                          }`}>
+                                            <div 
+                                              className="h-full bg-primary rounded-full transition-all duration-500" 
+                                              style={{ 
+                                                width: selectedSpecialtySlug === spec.slug ? '100%' : '0%' 
+                                              }}
+                                            />
+                                          </div>
                                         </button>
                                       ))}
                                     </div>
@@ -629,85 +645,124 @@ const ProductWalkthrough: React.FC = () => {
                               <TabsContent value="scratch" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Build Template from Scratch</div>
-                                  <div className="flex-1 grid gap-4 lg:grid-cols-5 min-h-0">
-                                    <div className="lg:col-span-2 rounded-xl border-2 p-3 sm:p-4 bg-muted/30 animate-fade-in">
-                                      <div className="text-xs sm:text-sm font-semibold mb-3 text-center">Section Library</div>
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2 max-h-40 sm:max-h-60 overflow-y-auto">
-                                        {defaultHeaders.map((h) => (
-                                          <button 
-                                            key={h} 
-                                            type="button" 
-                                            onClick={() => {
-                                              setScratchSections((s) => [...s, h]);
-                                              // Update live preview immediately
-                                              const newSections = [...scratchSections, h];
-                                              setLiveHeaders(newSections);
-                                              toast({ title: "Section added", description: `"${h}" added to template` });
-                                            }}
-                                            className="px-2 sm:px-3 py-2 rounded-lg border hover:border-primary/50 text-[10px] sm:text-xs font-medium transition-all hover:bg-primary/10 hover:scale-105 text-left animate-fade-in"
-                                          >
-                                            + {h}
-                                          </button>
-                                        ))}
-                                      </div>
-                                    </div>
-                                    <div className="lg:col-span-3 rounded-xl border-2 p-3 sm:p-4 bg-background animate-fade-in">
-                                      <div className="text-xs sm:text-sm font-semibold mb-3 text-center">Your Template Structure</div>
-                                      <div className="space-y-2 max-h-40 sm:max-h-60 overflow-y-auto">
-                                        {scratchSections.map((h, i) => (
-                                          <div
-                                            key={`${h}-${i}`}
-                                            draggable
-                                            onDragStart={() => setDragIndex(i)}
-                                            onDragOver={(e) => e.preventDefault()}
-                                            onDrop={() => {
-                                              if (dragIndex === null || dragIndex === i) return;
-                                               setScratchSections((arr) => {
-                                                 const copy = [...arr];
-                                                 const [moved] = copy.splice(dragIndex, 1);
-                                                 copy.splice(i, 0, moved);
-                                                 setLiveHeaders(copy);
-                                                 return copy;
-                                               });
-                                               setDragIndex(null);
-                                               toast({ title: "Section reordered", description: "Template structure updated" });
-                                            }}
-                                            className="group rounded-lg border-2 bg-card p-2 sm:p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-sm hover:scale-105 animate-scale-in"
-                                          >
-                                            <div className="flex justify-between items-center">
-                                              <span className="font-medium text-xs sm:text-sm line-clamp-1">{h}</span>
-                                              <button 
-                                                type="button" 
-                                                className="text-[10px] sm:text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-all ml-2 flex-shrink-0" 
-                                                onClick={(e) => {
-                                                  e.stopPropagation();
-                                                  const newSections = scratchSections.filter((_, idx) => idx !== i);
-                                                  setScratchSections(newSections);
-                                                  setLiveHeaders(newSections);
-                                                  toast({ title: "Section removed", description: `"${h}" removed from template` });
-                                                }}
-                                              >
-                                                Remove
-                                              </button>
+                                  <div className="flex-1 min-h-0">
+                                    <div className="grid gap-4 h-full lg:grid-cols-5">
+                                      {/* Section Library - Left Side */}
+                                      <div className="lg:col-span-2 order-2 lg:order-1">
+                                        <div className="rounded-xl border-2 p-4 bg-muted/30 h-full flex flex-col">
+                                          <div className="text-sm font-semibold mb-3 text-center flex items-center justify-center gap-2">
+                                            <div className="h-2 w-2 rounded-full bg-primary/60" />
+                                            Section Library
+                                          </div>
+                                          <div className="flex-1 overflow-y-auto">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                                              {defaultHeaders.map((h, index) => (
+                                                <button 
+                                                  key={h} 
+                                                  type="button" 
+                                                  onClick={() => {
+                                                    setScratchSections((s) => [...s, h]);
+                                                    const newSections = [...scratchSections, h];
+                                                    setLiveHeaders(newSections);
+                                                    toast({ title: "Section added", description: `"${h}" added to template` });
+                                                  }}
+                                                  className="group px-3 py-2.5 rounded-lg border hover:border-primary/50 text-xs sm:text-sm font-medium transition-all hover:bg-primary/5 hover:scale-105 text-left hover:shadow-sm"
+                                                  style={{ animationDelay: `${index * 50}ms` }}
+                                                >
+                                                  <div className="flex items-center gap-2">
+                                                    <span className="text-primary opacity-60 group-hover:opacity-100 transition-opacity">+</span>
+                                                    <span className="line-clamp-1">{h}</span>
+                                                  </div>
+                                                </button>
+                                              ))}
                                             </div>
                                           </div>
-                                        ))}
-                                        <Button 
-                                          variant="outline" 
-                                          size="sm"
-                                          className="w-full rounded-lg border-dashed hover:bg-primary/5 transition-all hover:scale-105" 
-                                           onClick={() => {
-                                             const name = window.prompt('New section name');
-                                             if (name) {
-                                               const newSections = [...scratchSections, name];
-                                               setScratchSections(newSections);
-                                               setLiveHeaders(newSections);
-                                               toast({ title: "Custom section added", description: `"${name}" added to template` });
-                                             }
-                                           }}
-                                        >
-                                          + Add Custom Section
-                                        </Button>
+                                        </div>
+                                      </div>
+
+                                      {/* Template Structure - Right Side */}
+                                      <div className="lg:col-span-3 order-1 lg:order-2">
+                                        <div className="rounded-xl border-2 p-4 bg-background h-full flex flex-col">
+                                          <div className="text-sm font-semibold mb-3 text-center flex items-center justify-center gap-2">
+                                            <div className="h-2 w-2 rounded-full bg-green-500" />
+                                            Your Template Structure
+                                          </div>
+                                          <div className="flex-1 overflow-y-auto">
+                                            <div className="space-y-2 min-h-[200px]">
+                                              {scratchSections.length === 0 ? (
+                                                <div className="flex flex-col items-center justify-center py-8 text-center">
+                                                  <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-3">
+                                                    <ClipboardList className="h-6 w-6 text-muted-foreground" />
+                                                  </div>
+                                                  <div className="text-sm text-muted-foreground mb-1">No sections added yet</div>
+                                                  <div className="text-xs text-muted-foreground">Click sections from the library to add them</div>
+                                                </div>
+                                              ) : (
+                                                scratchSections.map((h, i) => (
+                                                  <div
+                                                    key={`${h}-${i}`}
+                                                    draggable
+                                                    onDragStart={() => setDragIndex(i)}
+                                                    onDragOver={(e) => e.preventDefault()}
+                                                    onDrop={() => {
+                                                      if (dragIndex === null || dragIndex === i) return;
+                                                      setScratchSections((arr) => {
+                                                        const copy = [...arr];
+                                                        const [moved] = copy.splice(dragIndex, 1);
+                                                        copy.splice(i, 0, moved);
+                                                        setLiveHeaders(copy);
+                                                        return copy;
+                                                      });
+                                                      setDragIndex(null);
+                                                      toast({ title: "Section reordered", description: "Template structure updated" });
+                                                    }}
+                                                    className="group relative rounded-lg border-2 bg-card p-3 cursor-move hover:border-primary/50 transition-all hover:shadow-md"
+                                                    style={{ animationDelay: `${i * 100}ms` }}
+                                                  >
+                                                    <div className="flex items-center justify-between gap-3">
+                                                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                                                        <div className="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                                                        <span className="font-medium text-sm truncate">{h}</span>
+                                                      </div>
+                                                      <button 
+                                                        type="button" 
+                                                        className="text-xs text-destructive hover:underline opacity-0 group-hover:opacity-100 transition-all px-2 py-1 rounded hover:bg-destructive/10 flex-shrink-0" 
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          const newSections = scratchSections.filter((_, idx) => idx !== i);
+                                                          setScratchSections(newSections);
+                                                          setLiveHeaders(newSections);
+                                                          toast({ title: "Section removed", description: `"${h}" removed from template` });
+                                                        }}
+                                                      >
+                                                        Remove
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                                ))
+                                              )}
+                                              <Button 
+                                                variant="outline" 
+                                                size="sm"
+                                                className="w-full rounded-lg border-dashed hover:bg-primary/5 transition-all hover:scale-105 py-6" 
+                                                onClick={() => {
+                                                  const name = window.prompt('New section name');
+                                                  if (name) {
+                                                    const newSections = [...scratchSections, name];
+                                                    setScratchSections(newSections);
+                                                    setLiveHeaders(newSections);
+                                                    toast({ title: "Custom section added", description: `"${name}" added to template` });
+                                                  }
+                                                }}
+                                              >
+                                                <div className="flex flex-col items-center gap-1">
+                                                  <span className="text-lg">+</span>
+                                                  <span className="text-xs">Add Custom Section</span>
+                                                </div>
+                                              </Button>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
