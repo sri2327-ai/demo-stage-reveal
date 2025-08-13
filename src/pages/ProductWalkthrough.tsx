@@ -161,34 +161,20 @@ const ProductWalkthrough: React.FC = () => {
   ];
 
   const headersBySpecialty: Record<string, string[]> = {
-    cardiology: [
-      "Chief Complaint",
-      "HPI",
-      "Cardiac Risk Factors",
-      "Medications",
-      "Exam",
-      "ECG",
-      "Echocardiogram",
-      "Assessment",
-      "Plan",
-    ],
-    dermatology: [
-      "Chief Complaint",
-      "HPI",
-      "Lesion Description",
-      "Location & Distribution",
-      "Exam",
-      "Assessment",
-      "Plan",
-    ],
-    "behavioral-health": [
-      "Chief Complaint",
-      "Subjective",
-      "Objective",
-      "Assessment",
-      "Plan",
-      "Safety/Risk",
-    ],
+    "allergy-immunology": ["Chief Complaint","HPI","Allergy History","Environmental Triggers","Physical Exam","Skin Testing","Assessment","Treatment Plan"],
+    "anesthesiology": ["Pre-op Assessment","Airway Evaluation","ASA Classification","Anesthetic Plan","Intra-op Course","Post-op Care"],
+    "cardiology": ["Chief Complaint","HPI","Cardiac Risk Factors","Medications","Exam","ECG","Echocardiogram","Assessment","Plan"],
+    "dermatology": ["Chief Complaint","HPI","Lesion Description","Location & Distribution","Exam","Assessment","Plan"],
+    "behavioral-health": ["Chief Complaint","Subjective","Objective","Assessment","Plan","Safety/Risk"],
+    "emergency-medicine": ["Chief Complaint","HPI","Triage Assessment","Physical Exam","Diagnostic Studies","ED Course","Disposition"],
+    "family-medicine": ["Chief Complaint","HPI","Review of Systems","Physical Exam","Assessment","Plan","Health Maintenance"],
+    "internal-medicine": ["Chief Complaint","HPI","Review of Systems","Physical Exam","Assessment","Plan","Follow-up"],
+    "pediatrics": ["Chief Complaint","HPI","Development","Growth Charts","Physical Exam","Assessment","Plan","Parent Education"],
+    "psychiatry": ["Chief Complaint","HPI","Mental Status Exam","Risk Assessment","Medication Review","Assessment","Treatment Plan"],
+    "orthopedics": ["Chief Complaint","HPI","Injury Mechanism","Physical Exam","Range of Motion","Imaging","Assessment","Treatment Plan"],
+    "oncology": ["Chief Complaint","HPI","Performance Status","Physical Exam","Staging","Treatment Response","Plan"],
+    "neurology": ["Chief Complaint","HPI","Neurological Exam","Mental Status","Imaging Review","Assessment","Treatment Plan"],
+    // Add more as needed - all templates now have headers defined
   };
 
   const [previousNote, setPreviousNote] = useState("");
@@ -196,6 +182,16 @@ const ProductWalkthrough: React.FC = () => {
   const [liveHeaders, setLiveHeaders] = useState<string[]>(defaultHeaders);
   const [scratchSections, setScratchSections] = useState<string[]>(["Chief Complaint", "HPI", "Exam", "Assessment", "Plan"]);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [customSectionName, setCustomSectionName] = useState("");
+  
+  // Filter templates based on search
+  const filteredTemplates = useMemo(() => {
+    if (!searchTerm.trim()) return specialtyTemplates;
+    return specialtyTemplates.filter(template => 
+      template.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   // Initialize live preview with scratch sections
   useEffect(() => {
@@ -516,72 +512,90 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="library" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-6">
-                                  <div className="text-sm font-semibold">Select Specialty Template</div>
-                                  
-                                  {/* Enhanced scrollable area with better styling */}
-                                  <div className="flex-1 min-h-0 overflow-y-auto pr-2 custom-scrollbar">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-                                      {specialtyTemplates.map((spec, index) => (
-                                        <button
-                                          key={spec.slug}
-                                          onClick={() => {
-                                            setSelectedSpecialtySlug(spec.slug);
-                                            const templateHeaders = headersBySpecialty[spec.slug] || defaultHeaders;
-                                            setLiveHeaders(templateHeaders);
-                                            toast({ 
-                                              title: `${spec.name} template selected`, 
-                                              description: "Template structure updated in preview" 
-                                            });
-                                          }}
-                                          className={`group relative rounded-2xl border-2 hover:border-primary/60 p-5 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-in ${
-                                            selectedSpecialtySlug === spec.slug 
-                                              ? 'border-primary bg-gradient-to-br from-primary/10 to-primary/5 shadow-lg shadow-primary/20 -translate-y-1' 
-                                              : 'hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30 border-border'
-                                          }`}
-                                          style={{ animationDelay: `${index * 50}ms` }}
-                                          aria-pressed={selectedSpecialtySlug === spec.slug}
-                                        >
-                                          {/* Selection indicator */}
-                                          {selectedSpecialtySlug === spec.slug && (
-                                            <div className="absolute top-3 right-3 h-6 w-6 rounded-full bg-primary flex items-center justify-center animate-scale-in">
-                                              <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
-                                            </div>
-                                          )}
-                                          
-                                          <div className="space-y-3">
-                                            <div className="font-semibold text-sm leading-tight text-foreground line-clamp-2 min-h-[2.5rem] flex items-center">
-                                              {spec.name}
-                                            </div>
-                                            <div className="text-xs text-muted-foreground font-medium">
-                                              Specialty Template
-                                            </div>
-                                          </div>
-                                          
-                                          {/* Progress bar animation */}
-                                          {selectedSpecialtySlug === spec.slug && (
-                                            <div className="mt-4 h-1.5 w-full bg-primary/20 rounded-full overflow-hidden">
-                                              <div className="h-full w-full bg-gradient-to-r from-primary to-primary/80 rounded-full animate-slide-in-right" />
-                                            </div>
-                                          )}
-                                          
-                                          {/* Hover effect overlay */}
-                                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                                        </button>
-                                      ))}
+                                <div className="h-full flex flex-col gap-4">
+                                  <div className="flex items-center justify-between">
+                                    <div className="text-sm font-semibold">Select Specialty Template</div>
+                                    <div className="text-xs text-muted-foreground">
+                                      {specialtyTemplates.length} templates available
                                     </div>
                                   </div>
                                   
-                                  {/* Empty state for better UX */}
-                                  {specialtyTemplates.length === 0 && (
-                                    <div className="flex-1 flex items-center justify-center text-center py-12">
-                                      <div className="space-y-3">
-                                        <div className="text-4xl opacity-20">📋</div>
-                                        <div className="text-sm font-medium text-muted-foreground">No templates available</div>
-                                        <div className="text-xs text-muted-foreground">Templates will appear here</div>
+                                  {/* Search functionality */}
+                                  <div className="relative">
+                                    <Input 
+                                      placeholder="Search specialties..." 
+                                      className="h-9"
+                                      value={searchTerm}
+                                      onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
+                                  </div>
+                                  
+                                  {/* Fixed height scrollable container for templates */}
+                                  <div className="flex-1 min-h-0">
+                                    <div className="h-[350px] overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-4">
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                                        {filteredTemplates.map((spec, index) => (
+                                          <button
+                                            key={spec.slug}
+                                            onClick={() => {
+                                              setSelectedSpecialtySlug(spec.slug);
+                                              const templateHeaders = spec.headers || headersBySpecialty[spec.slug] || defaultHeaders;
+                                              setLiveHeaders(templateHeaders);
+                                              toast({ 
+                                                title: `${spec.name} template selected`, 
+                                                description: `${templateHeaders.length} sections loaded` 
+                                              });
+                                            }}
+                                            className={`group relative rounded-2xl border-2 hover:border-primary/60 p-4 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-in ${
+                                              selectedSpecialtySlug === spec.slug 
+                                                ? 'border-primary bg-gradient-to-br from-primary/10 to-primary/5 shadow-lg shadow-primary/20 -translate-y-1' 
+                                                : 'hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30 border-border bg-background'
+                                            }`}
+                                            style={{ animationDelay: `${index * 30}ms` }}
+                                            aria-pressed={selectedSpecialtySlug === spec.slug}
+                                          >
+                                            {/* Selection indicator */}
+                                            {selectedSpecialtySlug === spec.slug && (
+                                              <div className="absolute top-3 right-3 h-6 w-6 rounded-full bg-primary flex items-center justify-center animate-scale-in">
+                                                <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
+                                              </div>
+                                            )}
+                                            
+                                            <div className="space-y-3">
+                                              <div className="font-semibold text-sm leading-tight text-foreground line-clamp-2 min-h-[2.5rem] flex items-center pr-8">
+                                                {spec.name}
+                                              </div>
+                                              <div className="text-xs text-muted-foreground font-medium flex items-center gap-2">
+                                                <ClipboardList className="h-3 w-3" />
+                                                {(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders).length} sections
+                                              </div>
+                                            </div>
+                                            
+                                            {/* Progress bar animation */}
+                                            {selectedSpecialtySlug === spec.slug && (
+                                              <div className="mt-3 h-1.5 w-full bg-primary/20 rounded-full overflow-hidden">
+                                                <div className="h-full w-full bg-gradient-to-r from-primary to-primary/80 rounded-full animate-slide-in-right" />
+                                              </div>
+                                            )}
+                                            
+                                            {/* Hover effect overlay */}
+                                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                          </button>
+                                        ))}
                                       </div>
+                                      
+                                      {/* No results state */}
+                                      {filteredTemplates.length === 0 && (
+                                        <div className="h-full flex items-center justify-center text-center">
+                                          <div className="space-y-3">
+                                            <div className="text-4xl opacity-20">🔍</div>
+                                            <div className="text-sm font-medium text-muted-foreground">No templates found</div>
+                                            <div className="text-xs text-muted-foreground">Try adjusting your search terms</div>
+                                          </div>
+                                        </div>
+                                      )}
                                     </div>
-                                  )}
+                                  </div>
                                 </div>
                               </TabsContent>
 
@@ -662,7 +676,21 @@ const ProductWalkthrough: React.FC = () => {
 
                               <TabsContent value="scratch" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-6">
-                                  <div className="text-sm font-semibold">Build Template from Scratch</div>
+                                  <div className="flex items-center justify-between">
+                                    <div className="text-sm font-semibold">Build Template from Scratch</div>
+                                    <Button 
+                                      variant="outline" 
+                                      size="sm"
+                                      onClick={() => {
+                                        setScratchSections([]);
+                                        setLiveHeaders([]);
+                                        toast({ title: "Template cleared", description: "Start building your custom template" });
+                                      }}
+                                      className="text-xs h-8"
+                                    >
+                                      Clear All
+                                    </Button>
+                                  </div>
                                   
                                   {/* Responsive layout with improved mobile experience */}
                                   <div className="flex-1 grid gap-6 lg:grid-cols-2 xl:grid-cols-5 min-h-0">
@@ -679,32 +707,125 @@ const ProductWalkthrough: React.FC = () => {
                                           </CardTitle>
                                         </CardHeader>
                                         <CardContent className="pt-0 h-full pb-6">
-                                          <div className="h-full max-h-[300px] lg:max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-                                              {defaultHeaders.map((h, index) => (
-                                                <button 
-                                                  key={h} 
-                                                  type="button" 
-                                                  onClick={() => {
-                                                    setScratchSections((s) => [...s, h]);
-                                                    const newSections = [...scratchSections, h];
-                                                    setLiveHeaders(newSections);
-                                                    toast({ title: "Section added", description: `"${h}" added to template` });
-                                                  }}
-                                                  className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-primary/60 text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in"
-                                                  style={{ animationDelay: `${index * 30}ms` }}
-                                                >
-                                                  <div className="h-8 w-8 rounded-lg bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
-                                                    <span className="text-primary text-sm">+</span>
-                                                  </div>
-                                                  <span className="flex-1">{h}</span>
-                                                  <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    <div className="text-xs text-primary">Add</div>
-                                                  </div>
-                                                </button>
-                                              ))}
-                                            </div>
-                                          </div>
+                                          {/* Categories */}
+                                          <Tabs defaultValue="common" className="h-full">
+                                            <TabsList className="grid w-full grid-cols-3 mb-4">
+                                              <TabsTrigger value="common" className="text-xs">Common</TabsTrigger>
+                                              <TabsTrigger value="specialty" className="text-xs">Specialty</TabsTrigger>
+                                              <TabsTrigger value="custom" className="text-xs">Custom</TabsTrigger>
+                                            </TabsList>
+                                            
+                                            <TabsContent value="common" className="h-[280px] m-0">
+                                              <div className="h-full overflow-y-auto custom-scrollbar pr-2">
+                                                <div className="grid grid-cols-1 gap-2">
+                                                  {defaultHeaders.map((h, index) => (
+                                                    <button 
+                                                      key={h} 
+                                                      type="button" 
+                                                      onClick={() => {
+                                                        if (!scratchSections.includes(h)) {
+                                                          const newSections = [...scratchSections, h];
+                                                          setScratchSections(newSections);
+                                                          setLiveHeaders(newSections);
+                                                          toast({ title: "Section added", description: `"${h}" added to template` });
+                                                        } else {
+                                                          toast({ title: "Already added", description: `"${h}" is already in your template` });
+                                                        }
+                                                      }}
+                                                      disabled={scratchSections.includes(h)}
+                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-primary/60 text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
+                                                      style={{ animationDelay: `${index * 20}ms` }}
+                                                    >
+                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-primary/10 group-hover:bg-primary/20 text-primary'}`}>
+                                                        {scratchSections.includes(h) ? (
+                                                          <CheckCircle2 className="h-4 w-4" />
+                                                        ) : (
+                                                          <span className="text-sm">+</span>
+                                                        )}
+                                                      </div>
+                                                      <span className="flex-1">{h}</span>
+                                                    </button>
+                                                  ))}
+                                                </div>
+                                              </div>
+                                            </TabsContent>
+                                            
+                                            <TabsContent value="specialty" className="h-[280px] m-0">
+                                              <div className="h-full overflow-y-auto custom-scrollbar pr-2">
+                                                <div className="grid grid-cols-1 gap-2">
+                                                  {["Vital Signs", "Allergies", "Current Medications", "Past Medical History", "Social History", "Family History", "Surgical History", "Imaging Results", "Lab Results", "Procedures", "Consultation Notes", "Discharge Instructions"].map((h, index) => (
+                                                    <button 
+                                                      key={h} 
+                                                      type="button" 
+                                                      onClick={() => {
+                                                        if (!scratchSections.includes(h)) {
+                                                          const newSections = [...scratchSections, h];
+                                                          setScratchSections(newSections);
+                                                          setLiveHeaders(newSections);
+                                                          toast({ title: "Section added", description: `"${h}" added to template` });
+                                                        }
+                                                      }}
+                                                      disabled={scratchSections.includes(h)}
+                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-primary/60 text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
+                                                      style={{ animationDelay: `${index * 20}ms` }}
+                                                    >
+                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-primary/10 group-hover:bg-primary/20 text-primary'}`}>
+                                                        {scratchSections.includes(h) ? (
+                                                          <CheckCircle2 className="h-4 w-4" />
+                                                        ) : (
+                                                          <span className="text-sm">+</span>
+                                                        )}
+                                                      </div>
+                                                      <span className="flex-1">{h}</span>
+                                                    </button>
+                                                  ))}
+                                                </div>
+                                              </div>
+                                            </TabsContent>
+                                            
+                                            <TabsContent value="custom" className="h-[280px] m-0">
+                                              <div className="h-full flex flex-col gap-4">
+                                                <div className="text-center text-sm text-muted-foreground">
+                                                  Create your own custom sections
+                                                </div>
+                                                <div className="flex gap-2">
+                                                  <Input 
+                                                    placeholder="Enter section name..."
+                                                    value={customSectionName}
+                                                    onChange={(e) => setCustomSectionName(e.target.value)}
+                                                    onKeyPress={(e) => {
+                                                      if (e.key === 'Enter' && customSectionName.trim()) {
+                                                        const newSections = [...scratchSections, customSectionName.trim()];
+                                                        setScratchSections(newSections);
+                                                        setLiveHeaders(newSections);
+                                                        setCustomSectionName('');
+                                                        toast({ title: "Custom section added", description: `"${customSectionName.trim()}" added to template` });
+                                                      }
+                                                    }}
+                                                    className="text-sm"
+                                                  />
+                                                  <Button 
+                                                    size="sm"
+                                                    onClick={() => {
+                                                      if (customSectionName.trim()) {
+                                                        const newSections = [...scratchSections, customSectionName.trim()];
+                                                        setScratchSections(newSections);
+                                                        setLiveHeaders(newSections);
+                                                        setCustomSectionName('');
+                                                        toast({ title: "Custom section added", description: `"${customSectionName.trim()}" added to template` });
+                                                      }
+                                                    }}
+                                                    disabled={!customSectionName.trim()}
+                                                  >
+                                                    Add
+                                                  </Button>
+                                                </div>
+                                                <div className="text-xs text-muted-foreground text-center">
+                                                  Press Enter or click Add to create a custom section
+                                                </div>
+                                              </div>
+                                            </TabsContent>
+                                          </Tabs>
                                         </CardContent>
                                       </Card>
                                     </div>
@@ -717,7 +838,7 @@ const ProductWalkthrough: React.FC = () => {
                                             <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
                                               <FileText className="h-3 w-3 text-primary" />
                                             </div>
-                                            Your Template Structure
+                                            Your Template Structure ({scratchSections.length})
                                           </CardTitle>
                                         </CardHeader>
                                         <CardContent className="pt-0 h-full pb-6">
@@ -736,7 +857,7 @@ const ProductWalkthrough: React.FC = () => {
                                               </div>
                                             </div>
                                           ) : (
-                                            <div className="space-y-3 h-full max-h-[300px] lg:max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+                                            <div className="space-y-3 h-[320px] overflow-y-auto custom-scrollbar pr-2">
                                               {scratchSections.map((h, i) => (
                                                 <div
                                                   key={`${h}-${i}`}
@@ -764,19 +885,53 @@ const ProductWalkthrough: React.FC = () => {
                                                       </div>
                                                       <span className="font-medium text-sm">{h}</span>
                                                     </div>
-                                                    <button 
-                                                      type="button" 
-                                                      className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-destructive hover:text-destructive/80 hover:underline px-2 py-1 rounded-md hover:bg-destructive/10" 
-                                                      onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        const newSections = scratchSections.filter((_, idx) => idx !== i);
-                                                        setScratchSections(newSections);
-                                                        setLiveHeaders(newSections);
-                                                        toast({ title: "Section removed", description: `"${h}" removed from template` });
-                                                      }}
-                                                    >
-                                                      Remove
-                                                    </button>
+                                                    <div className="flex items-center gap-2">
+                                                      <button 
+                                                        type="button" 
+                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" 
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          if (i > 0) {
+                                                            const newSections = [...scratchSections];
+                                                            [newSections[i], newSections[i-1]] = [newSections[i-1], newSections[i]];
+                                                            setScratchSections(newSections);
+                                                            setLiveHeaders(newSections);
+                                                          }
+                                                        }}
+                                                        disabled={i === 0}
+                                                      >
+                                                        ↑
+                                                      </button>
+                                                      <button 
+                                                        type="button" 
+                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" 
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          if (i < scratchSections.length - 1) {
+                                                            const newSections = [...scratchSections];
+                                                            [newSections[i], newSections[i+1]] = [newSections[i+1], newSections[i]];
+                                                            setScratchSections(newSections);
+                                                            setLiveHeaders(newSections);
+                                                          }
+                                                        }}
+                                                        disabled={i === scratchSections.length - 1}
+                                                      >
+                                                        ↓
+                                                      </button>
+                                                      <button 
+                                                        type="button" 
+                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-destructive hover:text-destructive/80 hover:underline px-2 py-1 rounded-md hover:bg-destructive/10" 
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          const newSections = scratchSections.filter((_, idx) => idx !== i);
+                                                          setScratchSections(newSections);
+                                                          setLiveHeaders(newSections);
+                                                          toast({ title: "Section removed", description: `"${h}" removed from template` });
+                                                        }}
+                                                      >
+                                                        Remove
+                                                      </button>
+                                                    </div>
                                                   </div>
                                                   
                                                   {/* Drag indicator */}
@@ -789,29 +944,6 @@ const ProductWalkthrough: React.FC = () => {
                                                   </div>
                                                 </div>
                                               ))}
-                                              
-                                              {/* Add custom section button */}
-                                              <Button 
-                                                variant="outline" 
-                                                size="sm"
-                                                className="w-full rounded-xl border-2 border-dashed hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 hover:-translate-y-0.5 py-6" 
-                                                onClick={() => {
-                                                  const name = window.prompt('Enter custom section name:');
-                                                  if (name && name.trim()) {
-                                                    const newSections = [...scratchSections, name.trim()];
-                                                    setScratchSections(newSections);
-                                                    setLiveHeaders(newSections);
-                                                    toast({ title: "Custom section added", description: `"${name.trim()}" added to template` });
-                                                  }
-                                                }}
-                                              >
-                                                <div className="flex items-center gap-3">
-                                                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                                                    <span className="text-primary text-lg">+</span>
-                                                  </div>
-                                                  <span className="font-medium">Add Custom Section</span>
-                                                </div>
-                                              </Button>
                                             </div>
                                           )}
                                         </CardContent>
