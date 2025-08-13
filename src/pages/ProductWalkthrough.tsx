@@ -2432,29 +2432,12 @@ const ProductWalkthrough: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                      <Wand2 className="h-5 w-5 text-purple-600" aria-hidden />
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Wand2 className="h-5 w-5 text-primary" aria-hidden />
                     </div>
-                    <span className="text-purple-900">Workflow Automations</span>
+                    Workflow Automations
                   </h2>
                   <p className="mt-3 text-muted-foreground text-lg">Configure automatic workflows to streamline your practice operations.</p>
-                  
-                  {/* Status Bar */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-purple-50/50 rounded-xl border border-purple-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-purple-600" />
-                        <div>
-                          <div className="font-medium text-purple-800">Automation Engine Active</div>
-                          <div className="text-sm text-purple-600">4 workflows configured • Processing 850+ tasks/month</div>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-purple-700">
-                        <div className="h-2 w-2 rounded-full bg-purple-500 animate-pulse"></div>
-                        <span>Real-time monitoring</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-2">
@@ -2462,47 +2445,30 @@ const ProductWalkthrough: React.FC = () => {
                     {
                       title: "Auto-Generate Patient Instructions",
                       description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
-                      enabled: true,
-                      color: "green"
+                      enabled: true
                     },
                     {
                       title: "Schedule Follow-up Reminders",
                       description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
-                      enabled: true,
-                      color: "blue"
+                      enabled: true
                     },
                     {
                       title: "Lab Order Processing", 
                       description: "Automatically process and track lab orders mentioned in visit notes.",
-                      enabled: false,
-                      color: "gray"
+                      enabled: false
                     },
                     {
                       title: "Prescription Refill Alerts",
                       description: "Alert when patients are due for prescription refills based on their medication history.",
-                      enabled: true,
-                      color: "orange"
+                      enabled: true
                     }
                   ].map((automation, index) => (
-                    <Card key={index} className="border-2 bg-gradient-to-br from-background to-purple-50/20 hover:shadow-lg transition-shadow">
-                      <CardHeader className="pb-4">
+                    <Card key={index}>
+                      <CardHeader>
                         <div className="flex items-start justify-between">
-                          <div className="flex items-start gap-3">
-                            <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${
-                              automation.enabled 
-                                ? `bg-${automation.color}-100` 
-                                : 'bg-gray-100'
-                            }`}>
-                              <div className={`h-3 w-3 rounded-full ${
-                                automation.enabled 
-                                  ? `bg-${automation.color}-500` 
-                                  : 'bg-gray-400'
-                              }`}></div>
-                            </div>
-                            <div>
-                              <CardTitle className="text-lg text-purple-900">{automation.title}</CardTitle>
-                              <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
-                            </div>
+                          <div>
+                            <CardTitle className="text-lg">{automation.title}</CardTitle>
+                            <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
                           </div>
                           <Switch 
                             checked={automation.enabled} 
@@ -2510,30 +2476,15 @@ const ProductWalkthrough: React.FC = () => {
                           />
                         </div>
                       </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="flex items-center justify-between">
-                          <Button variant="outline" size="sm" className="rounded-lg border-purple-200 text-purple-700 hover:bg-purple-50">
-                            <Settings className="h-3 w-3 mr-2" />
-                            Configure
-                          </Button>
-                          {automation.enabled && (
-                            <div className="text-xs text-green-600 flex items-center gap-1">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Active
-                            </div>
-                          )}
-                        </div>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="rounded-lg">Configure</Button>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
 
-                <div className="mt-8 flex justify-between items-center">
-                  <div className="text-sm text-muted-foreground">
-                    Configure additional automations in settings
-                  </div>
-                  <Button className="rounded-lg bg-purple-600 hover:bg-purple-700" onClick={() => onNavClick('agent')}>
-                    <Bot className="h-4 w-4 mr-2" />
+                <div className="mt-8">
+                  <Button className="rounded-lg" onClick={() => onNavClick('agent')}>
                     Continue to AI Agent Setup
                   </Button>
                 </div>
@@ -2545,31 +2496,12 @@ const ProductWalkthrough: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-teal-100 flex items-center justify-center">
-                      <Bot className="h-5 w-5 text-teal-600" aria-hidden />
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Bot className="h-5 w-5 text-primary" aria-hidden />
                     </div>
-                    <span className="text-teal-900">AI Agent Configuration</span>
+                    AI Agent Configuration
                   </h2>
                   <p className="mt-3 text-muted-foreground text-lg">Configure your AI agent to handle patient communications and administrative tasks.</p>
-                  
-                  {/* Agent Status */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-teal-50 to-teal-50/50 rounded-xl border border-teal-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="h-12 w-12 rounded-full bg-teal-100 flex items-center justify-center">
-                          <Bot className="h-6 w-6 text-teal-600" />
-                        </div>
-                        <div>
-                          <div className="font-medium text-teal-800">AI Agent "MedAssist" Ready</div>
-                          <div className="text-sm text-teal-600">Trained on medical protocols • 24/7 availability • Multi-language support</div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium text-teal-800">Performance Score</div>
-                        <div className="text-2xl font-bold text-teal-600">95%</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-2">
@@ -2578,54 +2510,33 @@ const ProductWalkthrough: React.FC = () => {
                       key: 'followups',
                       title: "Follow-up Call Automation",
                       description: "AI agent makes post-visit follow-up calls to check on patient recovery and medication adherence.",
-                      enabled: agent.followups,
-                      icon: "phone",
-                      stats: "150+ calls/month"
+                      enabled: agent.followups
                     },
                     {
                       key: 'inbound', 
                       title: "Inbound Call Screening",
                       description: "Screen and triage incoming patient calls, handling routine questions and scheduling requests.",
-                      enabled: agent.inbound,
-                      icon: "phone-incoming",
-                      stats: "85% automation rate"
+                      enabled: agent.inbound
                     },
                     {
                       key: 'outreach',
                       title: "Patient Outreach Campaigns", 
                       description: "Proactive outreach for preventive care reminders, wellness checks, and health education.",
-                      enabled: agent.outreach,
-                      icon: "megaphone",
-                      stats: "300+ patients/month"
+                      enabled: agent.outreach
                     },
                     {
                       key: 'support',
                       title: "24/7 Patient Support",
                       description: "Round-the-clock AI support for urgent patient questions and basic medical guidance.",
-                      enabled: agent.support,
-                      icon: "clock",
-                      stats: "24/7 availability"
+                      enabled: agent.support
                     }
-                  ].map((feature, index) => (
-                    <Card key={feature.key} className="border-2 bg-gradient-to-br from-background to-teal-50/20 hover:shadow-lg transition-all duration-300">
-                      <CardHeader className="pb-4">
+                  ].map((feature) => (
+                    <Card key={feature.key}>
+                      <CardHeader>
                         <div className="flex items-start justify-between">
-                          <div className="flex items-start gap-3">
-                            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${
-                              feature.enabled 
-                                ? 'bg-teal-100 border-2 border-teal-200' 
-                                : 'bg-gray-100 border-2 border-gray-200'
-                            }`}>
-                              {feature.icon === 'phone' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-teal-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
-                              {feature.icon === 'phone-incoming' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-teal-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
-                              {feature.icon === 'megaphone' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-teal-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>}
-                              {feature.icon === 'clock' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-teal-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
-                            </div>
-                            <div>
-                              <CardTitle className="text-lg text-teal-900">{feature.title}</CardTitle>
-                              <p className="text-sm text-muted-foreground mt-1">{feature.description}</p>
-                              <div className="mt-2 text-xs text-teal-600 font-medium">{feature.stats}</div>
-                            </div>
+                          <div>
+                            <CardTitle className="text-lg">{feature.title}</CardTitle>
+                            <p className="text-sm text-muted-foreground mt-1">{feature.description}</p>
                           </div>
                           <Switch 
                             checked={feature.enabled}
@@ -2635,35 +2546,15 @@ const ProductWalkthrough: React.FC = () => {
                           />
                         </div>
                       </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="flex items-center justify-between">
-                          <Button variant="outline" size="sm" className="rounded-lg border-teal-200 text-teal-700 hover:bg-teal-50">
-                            <Settings className="h-3 w-3 mr-2" />
-                            Configure Agent
-                          </Button>
-                          {feature.enabled ? (
-                            <div className="text-xs text-green-600 flex items-center gap-1">
-                              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                              Online
-                            </div>
-                          ) : (
-                            <div className="text-xs text-gray-500 flex items-center gap-1">
-                              <div className="h-2 w-2 rounded-full bg-gray-400"></div>
-                              Offline
-                            </div>
-                          )}
-                        </div>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="rounded-lg">Configure</Button>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
 
-                <div className="mt-8 flex justify-between items-center">
-                  <div className="text-sm text-muted-foreground">
-                    Advanced agent training available in settings
-                  </div>
-                  <Button className="rounded-lg bg-teal-600 hover:bg-teal-700" onClick={() => onNavClick('dashboard')}>
-                    <BarChart3 className="h-4 w-4 mr-2" />
+                <div className="mt-8">
+                  <Button className="rounded-lg" onClick={() => onNavClick('dashboard')}>
                     View Analytics Dashboard
                   </Button>
                 </div>
