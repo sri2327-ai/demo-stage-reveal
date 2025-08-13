@@ -804,70 +804,74 @@ const ProductWalkthrough: React.FC = () => {
                           <CheckCircle2 className="h-4 w-4 text-green-600" />
                           Integrates with 200+ EHR systems including all major platforms
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
-                          {[
-                            { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
-                            { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
-                            { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
-                            { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
-                            { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
-                            { name: "Allscripts", logo: "🩺", subtitle: "Allscripts Healthcare" },
-                            { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
-                            { name: "Greenway", logo: "🌱", subtitle: "Greenway Health" },
-                            { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
-                            { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
-                            { name: "CureMD", logo: "💉", subtitle: "CureMD Healthcare" },
-                            { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono EHR" },
-                            { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
-                            { name: "Kareo", logo: "💼", subtitle: "Tebra (Kareo)" },
-                            { name: "ChartLogic", logo: "📈", subtitle: "ChartLogic" },
-                            { name: "ModMed", logo: "🏥", subtitle: "Modernizing Medicine" },
-                            { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
-                            { name: "WRS Health", logo: "💻", subtitle: "WRS Health" },
-                            { name: "Aprima", logo: "⚕️", subtitle: "Aprima Medical" },
-                            { name: "HealthFusion", logo: "🔄", subtitle: "HealthFusion MediTouch" },
-                            { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
-                            { name: "TherapyNotes", logo: "📝", subtitle: "TherapyNotes" },
-                            { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
-                            { name: "TheraNest", logo: "🏠", subtitle: "TheraNest" },
-                            { name: "WebPT", logo: "💪", subtitle: "WebPT" },
-                            { name: "Therabill", logo: "📋", subtitle: "Therabill" },
-                            { name: "InSync", logo: "🔄", subtitle: "InSync Healthcare" },
-                            { name: "Valant", logo: "🧭", subtitle: "Valant EHR" },
-                            { name: "ICANotes", logo: "📄", subtitle: "ICANotes" },
-                            { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
-                            { name: "Sevocity", logo: "🌐", subtitle: "Sevocity" },
-                            { name: "Azalea Health", logo: "🌸", subtitle: "Azalea Health" },
-                            { name: "Netsmart", logo: "🌐", subtitle: "Netsmart myEvolv" },
-                            { name: "PointClickCare", logo: "👆", subtitle: "PointClickCare" },
-                            { name: "MatrixCare", logo: "🏥", subtitle: "MatrixCare" },
-                            { name: "CareVoyant", logo: "🚀", subtitle: "CareVoyant" },
-                            { name: "Brightree", logo: "🌳", subtitle: "Brightree by ResMed" },
-                            { name: "CompuGroup", logo: "💼", subtitle: "CompuGroup Medical" },
-                            { name: "Office Practicum", logo: "🏢", subtitle: "Office Practicum" },
-                            { name: "PrimeSuite", logo: "👑", subtitle: "Greenway PrimeSuite" },
-                            { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
-                          ].map((ehr) => (
-                            <button
-                              key={ehr.name}
-                              onClick={() => setSelectedEhr(ehr.name)}
-                              className={`rounded-xl border-2 hover:border-primary/50 p-3 text-center transition-all duration-200 hover:shadow-md ${
-                                selectedEhr === ehr.name ? 'border-primary bg-primary/5 ring-2 ring-primary/20' : ''
-                              } ${ehr.name === 'Any EHR' ? 'border-dashed border-primary/30 bg-primary/5' : ''}`}
-                            >
-                              <div className="text-xl mb-1">{ehr.logo}</div>
-                              <div className="font-semibold text-xs">{ehr.name}</div>
-                              <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
-                                {ehr.subtitle}
-                              </div>
-                            </button>
-                          ))}
+                        
+                        {/* Scrollable EHR Grid Container */}
+                        <div className="h-80 overflow-y-auto border rounded-lg p-4 bg-gray-50/50">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                            {[
+                              { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
+                              { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
+                              { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
+                              { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
+                              { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
+                              { name: "Allscripts", logo: "🩺", subtitle: "Allscripts Healthcare" },
+                              { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
+                              { name: "Greenway", logo: "🌱", subtitle: "Greenway Health" },
+                              { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
+                              { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
+                              { name: "CureMD", logo: "💉", subtitle: "CureMD Healthcare" },
+                              { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono EHR" },
+                              { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
+                              { name: "Kareo", logo: "💼", subtitle: "Tebra (Kareo)" },
+                              { name: "ChartLogic", logo: "📈", subtitle: "ChartLogic" },
+                              { name: "ModMed", logo: "🏥", subtitle: "Modernizing Medicine" },
+                              { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
+                              { name: "WRS Health", logo: "💻", subtitle: "WRS Health" },
+                              { name: "Aprima", logo: "⚕️", subtitle: "Aprima Medical" },
+                              { name: "HealthFusion", logo: "🔄", subtitle: "HealthFusion MediTouch" },
+                              { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
+                              { name: "TherapyNotes", logo: "📝", subtitle: "TherapyNotes" },
+                              { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
+                              { name: "TheraNest", logo: "🏠", subtitle: "TheraNest" },
+                              { name: "WebPT", logo: "💪", subtitle: "WebPT" },
+                              { name: "Therabill", logo: "📋", subtitle: "Therabill" },
+                              { name: "InSync", logo: "🔄", subtitle: "InSync Healthcare" },
+                              { name: "Valant", logo: "🧭", subtitle: "Valant EHR" },
+                              { name: "ICANotes", logo: "📄", subtitle: "ICANotes" },
+                              { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
+                              { name: "Sevocity", logo: "🌐", subtitle: "Sevocity" },
+                              { name: "Azalea Health", logo: "🌸", subtitle: "Azalea Health" },
+                              { name: "Netsmart", logo: "🌐", subtitle: "Netsmart myEvolv" },
+                              { name: "PointClickCare", logo: "👆", subtitle: "PointClickCare" },
+                              { name: "MatrixCare", logo: "🏥", subtitle: "MatrixCare" },
+                              { name: "CareVoyant", logo: "🚀", subtitle: "CareVoyant" },
+                              { name: "Brightree", logo: "🌳", subtitle: "Brightree by ResMed" },
+                              { name: "CompuGroup", logo: "💼", subtitle: "CompuGroup Medical" },
+                              { name: "Office Practicum", logo: "🏢", subtitle: "Office Practicum" },
+                              { name: "PrimeSuite", logo: "👑", subtitle: "Greenway PrimeSuite" },
+                              { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
+                            ].map((ehr) => (
+                              <button
+                                key={ehr.name}
+                                onClick={() => setSelectedEhr(ehr.name)}
+                                className={`rounded-xl border-2 hover:border-primary/50 p-3 text-center transition-all duration-200 hover:shadow-md ${
+                                  selectedEhr === ehr.name ? 'border-primary bg-primary/5 ring-2 ring-primary/20' : ''
+                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-primary/30 bg-primary/5' : ''}`}
+                              >
+                                <div className="text-xl mb-1">{ehr.logo}</div>
+                                <div className="font-semibold text-xs">{ehr.name}</div>
+                                <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
+                                  {ehr.subtitle}
+                                </div>
+                              </button>
+                            ))}
+                          </div>
                         </div>
+                        
                         <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
                           <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
                           <div className="text-xs text-blue-700">
-                            Our AI agents can integrate with any EHR system through secure APIs, HL7 FHIR, or custom protocols. 
-                            We support legacy systems, specialty-specific platforms, and emerging technologies.
+                            Our AI agents can integrate with any EHR system through custom protocols. We support legacy systems, specialty-specific platforms, and emerging technologies.
                           </div>
                         </div>
                       </div>
