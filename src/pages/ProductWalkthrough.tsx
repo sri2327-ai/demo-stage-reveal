@@ -192,8 +192,6 @@ const ProductWalkthrough: React.FC = () => {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  // Single-panel mode: highlight active via state
-  // (scrollspy disabled)
 
   // Recording timers
   useEffect(() => {
@@ -279,7 +277,6 @@ const ProductWalkthrough: React.FC = () => {
         <title>{pageTitle}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/scribeai"} />
-        {/* Structured data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -335,844 +332,927 @@ const ProductWalkthrough: React.FC = () => {
             </div>
           </div>
 
-          <main ref={containerRef} className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-10">
-            <article className="space-y-14">
-            {/* Setup */}
-            <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"} scroll-mt-24`}>
-              <div>
-                <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                  <Settings className="h-5 w-5" aria-hidden /> Get set up in 2 minutes
-                </h2>
-                <p className="mt-2 opacity-80">Choose your note format and connect securely to your EHR.</p>
+          <main ref={containerRef} className="w-full h-full">
+            {/* Setup Section */}
+            <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Settings className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Get set up in 2 minutes
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Choose your note format and connect securely to your EHR.</p>
 
-                {/* Stepper */}
-                <div className="mt-4 flex items-center gap-4 text-sm">
-                  <div className={`flex items-center gap-2 ${setupStep !== 'ehr' ? 'text-primary' : ''}`}>
-                    <div className="h-7 w-7 rounded-full grid place-items-center border font-medium">1</div>
-                    <span>Set Note Style</span>
-                  </div>
-                  <div className="flex-1 h-px bg-border" />
-                  <div className={`flex items-center gap-2 ${setupStep === 'ehr' ? 'text-primary' : ''}`}>
-                    <div className="h-7 w-7 rounded-full grid place-items-center border font-medium">2</div>
-                    <span>Connect EHR</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Landing choices */}
-              {setupStep === 'landing' && (
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  <button onClick={() => setSetupStep('note')} className="rounded-xl border p-6 text-left hover:bg-muted transition">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg grid place-items-center border"><FileText className="h-5 w-5" /></div>
-                      <div>
-                        <div className="text-lg font-semibold">Set your note style</div>
-                        <div className="text-sm opacity-80">Import, paste, or build a template for your clinical notes.</div>
+                  <div className="mt-6 relative">
+                    <div className="flex items-center justify-between max-w-md">
+                      <div className={`flex items-center gap-3 ${setupStep !== 'ehr' ? 'text-primary' : 'text-muted-foreground'}`}>
+                        <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
+                          setupStep !== 'ehr' ? 'bg-primary text-primary-foreground' : 'border-2'
+                        }`}>1</div>
+                        <span className="font-medium">Set Note Style</span>
+                      </div>
+                      <div className="flex-1 h-0.5 bg-border mx-4" />
+                      <div className={`flex items-center gap-3 ${setupStep === 'ehr' ? 'text-primary' : 'text-muted-foreground'}`}>
+                        <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
+                          setupStep === 'ehr' ? 'bg-primary text-primary-foreground' : 'border-2'
+                        }`}>2</div>
+                        <span className="font-medium">Connect EHR</span>
                       </div>
                     </div>
-                  </button>
-
-                  <button onClick={() => setSetupStep('ehr')} className="rounded-xl border p-6 text-left hover:bg-muted transition">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg grid place-items-center border"><Server className="h-5 w-5" /></div>
-                      <div>
-                        <div className="text-lg font-semibold">Connect to your EHR(s)</div>
-                        <div className="text-sm opacity-80">Securely link to Epic, Cerner, and more for a seamless workflow.</div>
-                      </div>
-                    </div>
-                  </button>
+                  </div>
                 </div>
-              )}
 
-              {/* Note style flow */}
-              {setupStep === 'note' && (
-                <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <FileText className="h-5 w-5" /> Set Your Note Style
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-4">
-                      <Tabs defaultValue="previous" className="w-full">
-                        <TabsList className="w-full inline-flex gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-xl h-auto min-h-[40px]">
-                          <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Paste previous note</TabsTrigger>
-                          <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
-                          <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
-                          <TabsTrigger value="paste" className="rounded-full px-3 py-1.5 text-sm">Paste template</TabsTrigger>
-                          <TabsTrigger value="scratch" className="rounded-full px-3 py-1.5 text-sm">Build from scratch</TabsTrigger>
-                          <TabsTrigger value="prompt" className="rounded-full px-3 py-1.5 text-sm">Build by prompt</TabsTrigger>
-                        </TabsList>
+                {setupStep === 'landing' && (
+                  <div className="grid gap-6 md:gap-8 lg:grid-cols-2 max-w-4xl">
+                    <button 
+                      onClick={() => setSetupStep('note')} 
+                      className="group rounded-2xl border-2 hover:border-primary/50 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-primary/10"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 grid place-items-center transition-colors">
+                          <FileText className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-xl font-semibold mb-2">Set your note style</div>
+                          <div className="text-muted-foreground">Import, paste, or build a template for your clinical notes.</div>
+                        </div>
+                      </div>
+                    </button>
 
-                        <TabsContent value="previous" className="space-y-3">
-                          <div className="text-sm font-medium">Paste Previous Note</div>
-                          <Textarea
-                            value={previousNote}
-                            onChange={(e) => setPreviousNote(e.target.value)}
-                            placeholder="Paste your previous note here…"
-                            className="min-h-[220px]"
-                          />
-                          <Button className="rounded-full" onClick={() => setLiveHeaders(defaultHeaders)}>
-                            <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
-                          </Button>
-                        </TabsContent>
+                    <button 
+                      onClick={() => setSetupStep('ehr')} 
+                      className="group rounded-2xl border-2 hover:border-primary/50 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-primary/10"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 grid place-items-center transition-colors">
+                          <Server className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-xl font-semibold mb-2">Connect to your EHR(s)</div>
+                          <div className="text-muted-foreground">Securely link to Epic, Cerner, and more for a seamless workflow.</div>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                )}
 
-                        <TabsContent value="library" className="space-y-3">
-                          <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(180px,1fr))]">
-                            {specialtyTemplates.map((spec) => (
-                              <button
-                                key={spec.slug}
-                                onClick={() => {
-                                  setSelectedSpecialtySlug(spec.slug);
-                                  setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
-                                }}
-                                className={`rounded-xl border px-4 py-5 min-h-[88px] text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
-                                aria-pressed={selectedSpecialtySlug === spec.slug}
-                              >
-                                <div className="font-semibold">{spec.name}</div>
-                                <div className="text-xs opacity-70">Preset</div>
-                              </button>
-                            ))}
+                {setupStep === 'note' && (
+                  <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5">
+                    <Card className="xl:col-span-2 2xl:col-span-3">
+                      <CardHeader className="pb-6">
+                        <CardTitle className="flex items-center gap-3 text-xl">
+                          <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <FileText className="h-4 w-4 text-primary" />
                           </div>
-                        </TabsContent>
+                          Set Your Note Style
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-6">
+                        <Tabs defaultValue="previous" className="w-full">
+                          <div className="overflow-x-auto">
+                            <TabsList className="inline-flex h-12 items-center justify-center rounded-xl bg-muted p-1 text-muted-foreground w-max">
+                              <TabsTrigger value="previous" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Paste previous note
+                              </TabsTrigger>
+                              <TabsTrigger value="library" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Template library
+                              </TabsTrigger>
+                              <TabsTrigger value="import" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Import template
+                              </TabsTrigger>
+                              <TabsTrigger value="paste" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Paste template
+                              </TabsTrigger>
+                              <TabsTrigger value="scratch" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Build from scratch
+                              </TabsTrigger>
+                              <TabsTrigger value="prompt" className="rounded-lg px-4 py-2 text-sm font-medium transition-all">
+                                Build by prompt
+                              </TabsTrigger>
+                            </TabsList>
+                          </div>
 
-                        <TabsContent value="import" className="space-y-3">
-                          <div className="text-sm font-medium">Import Template File</div>
-                          <button className="aspect-video grid place-items-center rounded-lg border text-sm opacity-80">
-                            <Upload className="h-5 w-5 mr-2" /> Drop file or click to browse
-                          </button>
-                        </TabsContent>
+                          <div className="mt-6">
+                            <TabsContent value="previous" className="space-y-4">
+                              <div className="text-sm font-semibold">Paste Previous Note</div>
+                              <Textarea
+                                value={previousNote}
+                                onChange={(e) => setPreviousNote(e.target.value)}
+                                placeholder="Paste your previous note here and we'll extract the template structure for you..."
+                                className="min-h-[280px] resize-none"
+                              />
+                              <Button className="rounded-lg" onClick={() => setLiveHeaders(defaultHeaders)}>
+                                <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
+                              </Button>
+                            </TabsContent>
 
-                          <TabsContent value="paste" className="space-y-3">
-                            <div className="text-sm font-medium">Paste Template Content</div>
-                            <Textarea placeholder="Paste your template content here…" className="min-h-[200px]" />
-                            <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers</Button>
-                          </TabsContent>
-
-                        <TabsContent value="scratch" className="grid gap-3">
-                          <div className="text-sm font-medium">Build Template from Scratch</div>
-                          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                            <div className="rounded-lg border p-3">
-                              <div className="text-xs font-medium mb-2">Section Palette</div>
-                              <div className="flex flex-wrap gap-2">
-                                {defaultHeaders.map((h) => (
-                                  <button key={h} type="button" onClick={() => setScratchSections((s) => [...s, h])} className="px-2 py-1 rounded-full border text-xs hover:bg-muted">
-                                    + {h}
-                                  </button>
-                                ))}
+                            <TabsContent value="library" className="space-y-4">
+                              <div className="text-sm font-semibold">Select Specialty Template</div>
+                              <div className="max-h-[400px] overflow-y-auto pr-2">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+                                  {specialtyTemplates.map((spec) => (
+                                    <button
+                                      key={spec.slug}
+                                      onClick={() => {
+                                        setSelectedSpecialtySlug(spec.slug);
+                                        setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
+                                      }}
+                                      className={`rounded-xl border-2 hover:border-primary/50 p-4 text-left transition-all duration-200 hover:shadow-md ${
+                                        selectedSpecialtySlug === spec.slug ? 'border-primary bg-primary/5' : ''
+                                      }`}
+                                      aria-pressed={selectedSpecialtySlug === spec.slug}
+                                    >
+                                      <div className="font-semibold text-sm">{spec.name}</div>
+                                      <div className="text-xs text-muted-foreground mt-1">Preset Template</div>
+                                    </button>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                            <div className="lg:col-span-2 rounded-lg border p-3 min-h-[220px]">
-                              {scratchSections.map((h, i) => (
-                                <div
-                                  key={`${h}-${i}`}
-                                  draggable
-                                  onDragStart={() => setDragIndex(i)}
-                                  onDragOver={(e) => e.preventDefault()}
-                                  onDrop={() => {
-                                    if (dragIndex === null || dragIndex === i) return;
-                                    setScratchSections((arr) => {
-                                      const copy = [...arr];
-                                      const [moved] = copy.splice(dragIndex, 1);
-                                      copy.splice(i, 0, moved);
-                                      return copy;
-                                    });
-                                    setDragIndex(null);
-                                  }}
-                                  className="rounded-md border p-2 bg-card my-2 cursor-move"
-                                >
-                                  <div className="flex justify-between items-center">
-                                    <span className="font-medium">{h}</span>
-                                    <button type="button" className="text-xs underline" onClick={() => setScratchSections((arr) => arr.filter((_, idx) => idx !== i))}>Remove</button>
+                            </TabsContent>
+
+                            <TabsContent value="import" className="space-y-4">
+                              <div className="text-sm font-semibold">Import Template File</div>
+                              <button className="aspect-video flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-colors w-full">
+                                <Upload className="h-8 w-8 text-muted-foreground mb-2" />
+                                <div className="text-sm font-medium">Drop file or click to browse</div>
+                                <div className="text-xs text-muted-foreground mt-1">Supports .docx, .txt, .pdf</div>
+                              </button>
+                            </TabsContent>
+
+                            <TabsContent value="paste" className="space-y-4">
+                              <div className="text-sm font-semibold">Paste Template Content</div>
+                              <Textarea 
+                                placeholder="Paste your template content here and we'll extract the structure..." 
+                                className="min-h-[280px] resize-none" 
+                              />
+                              <Button className="rounded-lg">
+                                <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
+                              </Button>
+                            </TabsContent>
+
+                            <TabsContent value="scratch" className="space-y-4">
+                              <div className="text-sm font-semibold">Build Template from Scratch</div>
+                              <div className="grid gap-6 lg:grid-cols-5">
+                                <div className="lg:col-span-2 rounded-xl border-2 p-4">
+                                  <div className="text-sm font-semibold mb-3">Section Library</div>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {defaultHeaders.map((h) => (
+                                      <button 
+                                        key={h} 
+                                        type="button" 
+                                        onClick={() => setScratchSections((s) => [...s, h])} 
+                                        className="px-3 py-2 rounded-lg border hover:border-primary/50 text-xs font-medium transition-colors"
+                                      >
+                                        + {h}
+                                      </button>
+                                    ))}
                                   </div>
                                 </div>
-                              ))}
-                              <div className="pt-2">
-                                <Button variant="outline" className="rounded-full" onClick={() => {
-                                  const name = window.prompt('New section name');
-                                  if (name) setScratchSections((s) => [...s, name]);
-                                }}>Add section</Button>
+                                <div className="lg:col-span-3 rounded-xl border-2 p-4 min-h-[300px]">
+                                  <div className="text-sm font-semibold mb-3">Your Template Structure</div>
+                                  <div className="space-y-2">
+                                    {scratchSections.map((h, i) => (
+                                      <div
+                                        key={`${h}-${i}`}
+                                        draggable
+                                        onDragStart={() => setDragIndex(i)}
+                                        onDragOver={(e) => e.preventDefault()}
+                                        onDrop={() => {
+                                          if (dragIndex === null || dragIndex === i) return;
+                                          setScratchSections((arr) => {
+                                            const copy = [...arr];
+                                            const [moved] = copy.splice(dragIndex, 1);
+                                            copy.splice(i, 0, moved);
+                                            return copy;
+                                          });
+                                          setDragIndex(null);
+                                        }}
+                                        className="rounded-lg border-2 bg-card p-3 cursor-move hover:border-primary/50 transition-colors"
+                                      >
+                                        <div className="flex justify-between items-center">
+                                          <span className="font-medium text-sm">{h}</span>
+                                          <button 
+                                            type="button" 
+                                            className="text-xs text-destructive hover:underline" 
+                                            onClick={() => setScratchSections((arr) => arr.filter((_, idx) => idx !== i))}
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      </div>
+                                    ))}
+                                    <Button 
+                                      variant="outline" 
+                                      className="w-full rounded-lg border-dashed" 
+                                      onClick={() => {
+                                        const name = window.prompt('New section name');
+                                        if (name) setScratchSections((s) => [...s, name]);
+                                      }}
+                                    >
+                                      + Add Custom Section
+                                    </Button>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
+                            </TabsContent>
+
+                            <TabsContent value="prompt" className="space-y-4">
+                              <div className="text-sm font-semibold">Build Template by AI Prompt</div>
+                              <Textarea 
+                                placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" 
+                                className="min-h-[200px] resize-none"
+                              />
+                              <Button className="rounded-lg">
+                                <Wand2 className="h-4 w-4 mr-2" /> Generate Template
+                              </Button>
+                            </TabsContent>
                           </div>
-                        </TabsContent>
+                        </Tabs>
 
-                        <TabsContent value="prompt" className="space-y-2">
-                          <div className="text-sm font-medium">Build Template by AI Prompt</div>
-                          <div className="rounded-lg border p-3 text-sm opacity-80">Describe your ideal note template…</div>
-                          <Button className="rounded-full"><Wand2 className="h-4 w-4 mr-2" /> Generate Template</Button>
-                        </TabsContent>
-                      </Tabs>
-
-                      <Separator />
-                      <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-full" onClick={() => setSetupStep('landing')}>Back</Button>
-                        <Button variant="outline" className="rounded-full">Save as My Default</Button>
-                        <Button onClick={() => setSetupStep('ehr')} className="rounded-full">Next: Connect EHR</Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="lg:sticky lg:top-24 h-fit">
-                    <CardHeader>
-                      <CardTitle>Live Preview</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-sm space-y-3">
-                      {liveHeaders.map((s) => (
-                        <div key={s}>
-                          <div className="font-medium">{s}</div>
-                          <div className="opacity-70">[Content will be generated here]</div>
+                        <Separator className="my-6" />
+                        <div className="flex flex-wrap gap-3">
+                          <Button variant="outline" className="rounded-lg" onClick={() => setSetupStep('landing')}>
+                            Back
+                          </Button>
+                          <Button variant="outline" className="rounded-lg">
+                            Save as My Default
+                          </Button>
+                          <Button onClick={() => setSetupStep('ehr')} className="rounded-lg">
+                            Next: Connect EHR
+                          </Button>
                         </div>
-                      ))}
-                    </CardContent>
-                  </Card>
-                </div>
-              )}
+                      </CardContent>
+                    </Card>
 
-              {/* EHR connection flow */}
-              {setupStep === 'ehr' && (
-                <div className="mt-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <ShieldCheck className="h-5 w-5" /> Connect to Your EHR
+                    <Card className="xl:col-span-1 2xl:col-span-2 h-fit">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="text-lg">Live Preview</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2">
+                          {liveHeaders.map((s) => (
+                            <div key={s} className="rounded-lg border p-3">
+                              <div className="font-semibold text-sm mb-1">{s}</div>
+                              <div className="text-xs text-muted-foreground">[Content will be generated here]</div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+
+                {setupStep === 'ehr' && (
+                  <Card className="max-w-4xl">
+                    <CardHeader className="pb-6">
+                      <CardTitle className="flex items-center gap-3 text-xl">
+                        <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <ShieldCheck className="h-4 w-4 text-primary" />
+                        </div>
+                        Connect to Your EHR
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid gap-3 sm:grid-cols-3 md:grid-cols-6">
-                        {["Epic", "Cerner", "Athena", "eCW", "NextGen", "Allscripts"].map((ehr) => (
-                          <button
-                            key={ehr}
-                            onClick={() => setSelectedEhr(ehr)}
-                            className={`rounded-lg border px-3 py-4 text-center hover:bg-muted transition ${selectedEhr === ehr ? 'ring-2 ring-primary/50' : ''}`}
-                          >
-                            <div className="text-base font-semibold">{ehr}</div>
-                            <div className="text-xs opacity-70">{ehr === 'Cerner' ? 'Cerner Oracle Health' : ehr}</div>
-                          </button>
-                        ))}
+                    <CardContent className="space-y-6">
+                      <div>
+                        <div className="text-sm font-semibold mb-4">Select your EHR system</div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                          {["Epic", "Cerner", "Athena", "eCW", "NextGen", "Allscripts"].map((ehr) => (
+                            <button
+                              key={ehr}
+                              onClick={() => setSelectedEhr(ehr)}
+                              className={`rounded-xl border-2 hover:border-primary/50 p-4 text-center transition-all duration-200 hover:shadow-md ${
+                                selectedEhr === ehr ? 'border-primary bg-primary/5' : ''
+                              }`}
+                            >
+                              <div className="font-semibold">{ehr}</div>
+                              <div className="text-xs text-muted-foreground mt-1">
+                                {ehr === 'Cerner' ? 'Oracle Health' : 'EHR System'}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
                       </div>
 
                       <div>
-                        <div className="text-sm font-medium mb-2">Connection Method</div>
-                        <div className="rounded-lg border p-4 flex items-center gap-6">
-                          <label className="flex items-center gap-2 text-sm">
-                            <input type="radio" name="conn" defaultChecked /> SMART on FHIR/OAuth
+                        <div className="text-sm font-semibold mb-3">Connection Method</div>
+                        <div className="rounded-xl border p-4 space-y-3">
+                          <label className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
+                            <input type="radio" name="conn" defaultChecked className="scale-110" />
+                            <div>
+                              <div className="font-medium">SMART on FHIR/OAuth</div>
+                              <div className="text-sm text-muted-foreground">Secure, standardized connection (Recommended)</div>
+                            </div>
                           </label>
-                          <label className="flex items-center gap-2 text-sm">
-                            <input type="radio" name="conn" /> API Key
+                          <label className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
+                            <input type="radio" name="conn" className="scale-110" />
+                            <div>
+                              <div className="font-medium">API Key</div>
+                              <div className="text-sm text-muted-foreground">Direct API integration</div>
+                            </div>
                           </label>
                         </div>
                       </div>
 
-                      <ul className="text-sm flex flex-wrap gap-6">
-                        {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((f) => (
-                          <li key={f} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> {f}</li>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 bg-muted/30 rounded-xl">
+                        {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((feature) => (
+                          <div key={feature} className="flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            <span className="text-sm font-medium">{feature}</span>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
 
                       <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-full" onClick={() => setSetupStep('landing')}>Back</Button>
-                        <Button variant="outline" className="rounded-full">Skip for now</Button>
-                        <Button onClick={handleConnect} disabled={!selectedEhr || connecting} className="rounded-full">
-                          {connecting ? 'Connecting…' : selectedEhr ? `Connect ${selectedEhr}` : 'Connect'}
+                        <Button variant="outline" className="rounded-lg" onClick={() => setSetupStep('landing')}>
+                          Back
+                        </Button>
+                        <Button variant="outline" className="rounded-lg">
+                          Skip for now
+                        </Button>
+                        <Button 
+                          onClick={handleConnect} 
+                          disabled={!selectedEhr || connecting} 
+                          className="rounded-lg"
+                        >
+                          {connecting ? 'Connecting…' : selectedEhr ? `Connect ${selectedEhr}` : 'Select EHR to Connect'}
                         </Button>
                       </div>
                     </CardContent>
                   </Card>
-                </div>
-              )}
-            </section>
-
-            {/* Schedule */}
-            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <CalendarDays className="h-5 w-5" aria-hidden /> Unified Schedule
-              </h2>
-              <p className="mt-2 opacity-80">Schedule imported from multiple EHR systems and practice management platforms.</p>
-
-              <div className="mt-4 rounded-lg border overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-2 border-b">
-                  <div className="text-sm">Epic: Synced 2 min ago · Cerner: Synced 5 min ago · AthenaHealth: Syncing…</div>
-                  <Button variant="outline" className="rounded-full">Sync Now</Button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b">
-                        {["Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Flags", "Source", "Actions"].map((h) => (
-                          <th key={h} className="text-left px-4 py-3 font-medium">{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {appointments.map((r) => (
-                        <tr key={r.mrn} className="border-b last:border-0">
-                          <td className="px-4 py-3">{r.name}</td>
-                          <td className="px-4 py-3">{r.mrn}</td>
-                          <td className="px-4 py-3">{r.age}</td>
-                          <td className="px-4 py-3">{r.visit}</td>
-                          <td className="px-4 py-3">{r.lang}</td>
-                          <td className="px-4 py-3">{r.flags}</td>
-                          <td className="px-4 py-3">{r.src}</td>
-                          <td className="px-4 py-3"><Button size="sm" onClick={() => handleOpenAppointment(r)} className="rounded-full">Open</Button></td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                )}
               </div>
             </section>
 
-            {/* Capture */}
-            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <Mic className="h-5 w-5" aria-hidden /> Audio Capture
-              </h2>
-              <p className="mt-2 opacity-80">Record the visit and watch notes generate in real time.</p>
+            {/* Schedule Section */}
+            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Unified Schedule
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Schedule imported from multiple EHR systems and practice management platforms.</p>
+                </div>
 
-              <div className="mt-4 grid gap-6 lg:grid-cols-12">
-                {/* Left: Controls */}
-                <Card className="lg:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Audio Capture</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-5">
-                    <div>
-                      <Button onClick={toggleRecording} className="rounded-full" variant={isRecording ? "destructive" : "default"}>
-                        {isRecording ? (
-                          <>
-                            <CircleStop className="h-4 w-4 mr-2" /> Stop Recording
-                          </>
-                        ) : (
-                          <>
-                            <Mic className="h-4 w-4 mr-2" /> Start Recording
-                          </>
-                        )}
+                <Card className="overflow-hidden">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                          Epic: Synced 2 min ago
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                          Cerner: Synced 5 min ago
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse"></div>
+                          AthenaHealth: Syncing…
+                        </span>
+                      </div>
+                      <Button variant="outline" className="rounded-lg">
+                        Sync Now
                       </Button>
-                      <div className="mt-3 flex items-center gap-2 text-sm opacity-80">
-                        <span className={`h-2.5 w-2.5 rounded-full ${isRecording ? 'bg-destructive' : 'bg-muted-foreground/50'}`} />
-                        <span>{timeStr}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b bg-muted/50">
+                            {["Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Flags", "Source", "Actions"].map((header) => (
+                              <th key={header} className="text-left px-6 py-4 font-semibold text-sm">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {appointments.map((appointment) => (
+                            <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-colors">
+                              <td className="px-6 py-4 font-medium">{appointment.name}</td>
+                              <td className="px-6 py-4 text-muted-foreground">{appointment.mrn}</td>
+                              <td className="px-6 py-4">{appointment.age}</td>
+                              <td className="px-6 py-4">
+                                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary">
+                                  {appointment.visit}
+                                </span>
+                              </td>
+                              <td className="px-6 py-4">{appointment.lang}</td>
+                              <td className="px-6 py-4">
+                                {appointment.flags && (
+                                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    {appointment.flags}
+                                  </span>
+                                )}
+                              </td>
+                              <td className="px-6 py-4">
+                                <span className="inline-flex items-center gap-1">
+                                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                                  {appointment.src}
+                                </span>
+                              </td>
+                              <td className="px-6 py-4">
+                                <Button 
+                                  size="sm" 
+                                  onClick={() => handleOpenAppointment(appointment)} 
+                                  className="rounded-lg"
+                                >
+                                  Open
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Capture Section */}
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Mic className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Audio Capture
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Record the visit and watch notes generate in real time.</p>
+                </div>
+
+                <div className="grid gap-8 xl:grid-cols-12">
+                  <Card className="xl:col-span-3">
+                    <CardHeader>
+                      <CardTitle>Audio Capture</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div>
+                        <Button onClick={toggleRecording} className="w-full rounded-lg" variant={isRecording ? "destructive" : "default"}>
+                          {isRecording ? (
+                            <>
+                              <CircleStop className="h-4 w-4 mr-2" /> Stop Recording
+                            </>
+                          ) : (
+                            <>
+                              <Mic className="h-4 w-4 mr-2" /> Start Recording
+                            </>
+                          )}
+                        </Button>
+                        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                          <span className={`h-2.5 w-2.5 rounded-full ${isRecording ? 'bg-destructive animate-pulse' : 'bg-muted-foreground/50'}`} />
+                          <span className="font-mono">{timeStr}</span>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Simple waveform */}
-                    <div className="flex items-end gap-1 h-16">
-                      {[8,14,20,12,18,10,16,22,12,15].map((h, i) => (
-                        <div key={i} className="w-1.5 rounded bg-primary/70" style={{ height: `${h}px` }} />
-                      ))}
-                    </div>
+                      <div className="flex items-end gap-1 h-20 p-4 bg-muted/30 rounded-lg">
+                        {[8,14,20,12,18,10,16,22,12,15,19,8,16].map((h, i) => (
+                          <div key={i} className="w-2 rounded bg-primary/70 transition-all" style={{ height: `${h}px` }} />
+                        ))}
+                      </div>
 
-                    <div className="flex gap-3">
-                      <Button variant="outline" className="rounded-full">Pause Session</Button>
-                      <Button variant="outline" className="rounded-full">Discard</Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <div className="flex flex-col gap-2">
+                        <Button variant="outline" className="rounded-lg">Pause Session</Button>
+                        <Button variant="outline" className="rounded-lg">Discard</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                {/* Mid: AI Note */}
-                <Card className="lg:col-span-6">
-                  <CardHeader>
-                    <CardTitle>AI-Generated Note</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[360px] text-sm whitespace-pre-wrap">
-                      {transcript || "Patient presents today for follow-up of diabetes and hypertension.\n\nCHIEF COMPLAINT: [content will be generated]"}
-                    </div>
-                  </CardContent>
-                </Card>
+                  <Card className="xl:col-span-6">
+                    <CardHeader>
+                      <CardTitle>AI-Generated Note</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-lg border p-6 min-h-[400px] text-sm whitespace-pre-wrap">
+                        {transcript || "Patient presents today for follow-up of diabetes and hypertension.\n\nCHIEF COMPLAINT: [content will be generated]"}
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                {/* Right: Patient Context */}
-                <Card className="lg:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Patient Context</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="rounded-lg border p-4 min-h-[360px] text-sm whitespace-pre-wrap opacity-90">
-                      {selectedPatient ? patientContext || "Loading patient data…" : "Open a patient from Schedule to load context."}
-                    </div>
-                  </CardContent>
-                </Card>
+                  <Card className="xl:col-span-3">
+                    <CardHeader>
+                      <CardTitle>Patient Context</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-lg border p-4 min-h-[400px] text-sm whitespace-pre-wrap text-muted-foreground">
+                        {selectedPatient ? patientContext || "Loading patient data…" : "Open a patient from Schedule to load context."}
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                {/* Footer actions */}
-                <div className="lg:col-span-12 flex flex-wrap gap-3">
-                  <Button variant="outline" className="rounded-full">Discard</Button>
-                  <Button variant="outline" className="rounded-full">Pause Session</Button>
-                  <Button className="rounded-full" onClick={() => onNavClick('coding')}>Finalize Visit</Button>
+                  <div className="xl:col-span-12 flex flex-wrap gap-3">
+                    <Button variant="outline" className="rounded-lg">Discard</Button>
+                    <Button variant="outline" className="rounded-lg">Pause Session</Button>
+                    <Button className="rounded-lg" onClick={() => onNavClick('coding')}>Finalize Visit</Button>
+                  </div>
                 </div>
               </div>
             </section>
 
-            {/* Coding */}
-            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <ClipboardList className="h-5 w-5" aria-hidden /> Coding & Compliance Review
-              </h2>
-              <p className="mt-2 opacity-80">Resolve documentation issues and review suggested codes.</p>
+            {/* Coding Section */}
+            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <ClipboardList className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Coding & Compliance Review
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Resolve documentation issues and review suggested codes.</p>
+                </div>
 
-              <div className="mt-4 grid gap-6 lg:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Documentation Review</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2 text-sm">
-                    {checks.map((i, idx) => (
-                      <div key={i.label} className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className={`h-4 w-4 ${i.ok ? "text-green-600" : "opacity-40"}`} />
-                          <span>{i.label}</span>
+                <div className="grid gap-8 lg:grid-cols-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Documentation Review</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {checks.map((item, idx) => (
+                        <div key={item.label} className="flex items-center justify-between gap-3 p-3 rounded-lg border">
+                          <div className="flex items-center gap-3">
+                            <CheckCircle2 className={`h-5 w-5 ${item.ok ? "text-green-600" : "text-muted-foreground"}`} />
+                            <span className={item.ok ? "" : "text-muted-foreground"}>{item.label}</span>
+                          </div>
+                          {!item.ok && (
+                            <Button size="sm" variant="outline" className="rounded-lg" onClick={() => markFix(idx)}>
+                              Fix
+                            </Button>
+                          )}
                         </div>
-                        {!i.ok && (
-                          <Button size="sm" variant="outline" className="rounded-full" onClick={() => markFix(idx)}>
-                            Fix
-                          </Button>
-                        )}
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Suggested Codes</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4 text-sm">
-                    <div>
-                      <div className="font-medium mb-2">Primary Diagnosis (ICD-10)</div>
-                      <div className="rounded-lg border p-3">E11.9 • Type 2 Diabetes Mellitus (95% confidence)</div>
-                      <div className="rounded-lg border p-3 mt-2">I10 • Essential Hypertension (92% confidence)</div>
-                    </div>
-                    <div>
-                      <div className="font-medium mb-2">Procedures (CPT)</div>
-                      <div className="rounded-lg border p-3">99213 • Office visit, established patient, low complexity (88% confidence)</div>
-                    </div>
-                    <div className="flex gap-3">
-                      <Button variant="outline" className="rounded-full">Back to Edit</Button>
-                      <Button className="rounded-full" onClick={() => onNavClick("send")}>Continue to EHR</Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Suggested Codes</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div>
+                        <div className="font-semibold mb-3">Primary Diagnosis (ICD-10)</div>
+                        <div className="space-y-2">
+                          <div className="rounded-lg border p-4 bg-green-50/50">
+                            <div className="font-medium">E11.9 • Type 2 Diabetes Mellitus</div>
+                            <div className="text-sm text-green-600 font-medium">95% confidence</div>
+                          </div>
+                          <div className="rounded-lg border p-4 bg-green-50/50">
+                            <div className="font-medium">I10 • Essential Hypertension</div>
+                            <div className="text-sm text-green-600 font-medium">92% confidence</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-3">Procedures (CPT)</div>
+                        <div className="rounded-lg border p-4 bg-blue-50/50">
+                          <div className="font-medium">99213 • Office visit, established patient</div>
+                          <div className="text-sm text-blue-600 font-medium">88% confidence</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-3">
+                        <Button variant="outline" className="rounded-lg">Back to Edit</Button>
+                        <Button className="rounded-lg" onClick={() => onNavClick("send")}>Continue to EHR</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </section>
 
-            {/* Send to EHR */}
-            <section id="send" className={`screen ${active === "send" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <Send className="h-5 w-5" aria-hidden /> Send to EHR (Write-back Preview)
-              </h2>
-              <p className="mt-2 opacity-80">Preview the clinical note and structured fields before sending to the EHR.</p>
-
-              <div className="mt-4">
-                {isSending && (
-                  <div className="fixed inset-0 z-40 grid place-items-center bg-background/60 backdrop-blur-sm">
-                    <div className="rounded-lg border bg-card p-6 shadow-lg">
-                      <div className="text-sm font-medium">Sending to EHR…</div>
-                      <div className="text-xs opacity-70 mt-1">Writing note and structured fields</div>
+            {/* Send to EHR Section */}
+            <section id="send" className={`screen ${active === "send" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Send className="h-5 w-5 text-primary" aria-hidden />
                     </div>
+                    Send to EHR
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Preview the clinical note and structured fields before sending to the EHR.</p>
+                </div>
+
+                {isSending ? (
+                  <Card>
+                    <CardContent className="flex items-center justify-center py-12">
+                      <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                        <p className="mt-4 font-medium">Sending to Epic...</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="grid gap-8 xl:grid-cols-3">
+                    <Card className="xl:col-span-2">
+                      <CardHeader>
+                        <CardTitle>Final Note Preview</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="rounded-lg border p-6 min-h-[400px] text-sm whitespace-pre-wrap">
+                          CHIEF COMPLAINT: Blood sugars trending higher over the last few weeks.
+                          
+                          HISTORY OF PRESENT ILLNESS: Patient presents for follow-up of diabetes and hypertension. Checks sugars twice daily. Morning readings 140-160, evening 180-200. No hypoglycemia episodes.
+                          
+                          PHYSICAL EXAMINATION: BP 138/82, HR 76. Lungs clear. No peripheral edema.
+                          
+                          ASSESSMENT AND PLAN: 
+                          1. Type 2 Diabetes Mellitus - Poorly controlled. Increase Metformin to 1000mg BID.
+                          2. Hypertension - Well controlled on current regimen.
+                          
+                          Return to clinic in 3 months.
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="xl:col-span-1">
+                      <CardHeader>
+                        <CardTitle>EHR Fields</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="space-y-2">
+                          <Label className="font-semibold">Diagnosis Codes</Label>
+                          <div className="text-sm space-y-1">
+                            <div>E11.9 - Type 2 Diabetes</div>
+                            <div>I10 - Hypertension</div>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="font-semibold">Procedure Codes</Label>
+                          <div className="text-sm">99213 - Office Visit</div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="font-semibold">Target EHR</Label>
+                          <div className="text-sm">{selectedEhr || 'Epic'}</div>
+                        </div>
+                        
+                        <Separator className="my-4" />
+                        
+                        <div className="flex flex-col gap-2">
+                          <Button className="w-full rounded-lg" onClick={() => {
+                            setIsSending(true);
+                            setTimeout(() => {
+                              setIsSending(false);
+                              onNavClick('automations');
+                              toast({ title: "Note sent successfully", description: "Clinical note has been delivered to Epic." });
+                            }, 2000);
+                          }}>
+                            Send to {selectedEhr || 'Epic'}
+                          </Button>
+                          <Button variant="outline" className="w-full rounded-lg">Save as Draft</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 )}
+              </div>
+            </section>
 
-                <Tabs defaultValue="note" className="w-full">
-                  <TabsList className="flex gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-md">
-                    <TabsTrigger value="note" className="rounded-full px-3 py-1.5 text-sm">Note Preview</TabsTrigger>
-                    <TabsTrigger value="orders" className="rounded-full px-3 py-1.5 text-sm">Orders</TabsTrigger>
-                    <TabsTrigger value="referrals" className="rounded-full px-3 py-1.5 text-sm">Referrals</TabsTrigger>
-                    <TabsTrigger value="rx" className="rounded-full px-3 py-1.5 text-sm">Prescriptions</TabsTrigger>
-                    <TabsTrigger value="followup" className="rounded-full px-3 py-1.5 text-sm">Follow-up</TabsTrigger>
-                    <TabsTrigger value="mapping" className="rounded-full px-3 py-1.5 text-sm">Field Mapping</TabsTrigger>
-                  </TabsList>
-
-                  <TabsContent value="note" className="mt-4">
-                    <div className="grid gap-6 lg:grid-cols-2">
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>Clinical Note Preview</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="rounded-lg border p-4 min-h-[160px] text-sm opacity-90">
-                            Chief Complaint: Follow-up for diabetes and hypertension…
-                            <br />
-                            HPI: 45-year-old male returns for routine follow-up…
-                            <br />
-                            A/P: Continue current medications. RTC in 3 months.
-                          </div>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>Structured Fields</CardTitle>
-                        </CardHeader>
-                        <CardContent className="text-sm space-y-2">
-                          {[
-                            ["Chief Complaint", "Follow-up for diabetes"],
-                            ["Primary Diagnosis", "Type 2 Diabetes (E11.9)"],
-                            ["Secondary Diagnosis", "Essential Hypertension (I10)"],
-                            ["Encounter Type", "Office Visit (99213)"],
-                          ].map(([k, v]) => (
-                            <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
-                              <div className="font-medium">{k}</div>
-                              <div className="opacity-80">{v}</div>
-                            </div>
-                          ))}
-
-                          <div className="flex gap-3 pt-2">
-                            <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back to Coding</Button>
-                            <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                          </div>
-                        </CardContent>
-                      </Card>
+            {/* Automations Section */}
+            <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Wand2 className="h-5 w-5 text-primary" aria-hidden />
                     </div>
-                  </TabsContent>
-
-                  <TabsContent value="orders" className="mt-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Orders</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-3 text-sm">
-                        {[
-                          "HbA1c",
-                          "CMP",
-                          "Lipid Panel",
-                          "Microalbumin/Creatinine Ratio",
-                        ].map((o) => (
-                          <label key={o} className="flex items-center gap-2">
-                            <Checkbox defaultChecked />
-                            <span>{o}</span>
-                          </label>
-                        ))}
-                        <div className="flex gap-3 pt-2">
-                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
-                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="referrals" className="mt-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Referrals</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <label className="flex items-center gap-2">
-                          <Checkbox />
-                          <span>Endocrinology</span>
-                        </label>
-                        <label className="flex items-center gap-2">
-                          <Checkbox />
-                          <span>Diabetes Education</span>
-                        </label>
-                        <div className="flex gap-3 pt-2">
-                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
-                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="rx" className="mt-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Prescriptions</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <div className="rounded-lg border p-3">Metformin 1000mg BID — 90 days</div>
-                        <div className="rounded-lg border p-3">Lisinopril 10mg QD — 90 days</div>
-                        <div className="flex gap-3 pt-2">
-                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
-                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="followup" className="mt-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Follow-up</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        <div className="rounded-lg border p-3">Return in 3 months for diabetes follow-up</div>
-                        <div className="rounded-lg border p-3">Nurse call in 2 weeks to check SMBG</div>
-                        <div className="flex gap-3 pt-2">
-                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
-                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="mapping" className="mt-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Field Mapping</CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        {[
-                          ["Chief Complaint", "note.sections.cc"],
-                          ["HPI", "note.sections.hpi"],
-                          ["A/P", "note.sections.ap"],
-                          ["Primary Dx", "icd10.primary"],
-                        ].map(([k, v]) => (
-                          <div key={k as string} className="grid grid-cols-1 sm:grid-cols-2 gap-2 rounded-lg border p-3">
-                            <div className="font-medium">{k}</div>
-                            <div className="opacity-80">{v}</div>
-                          </div>
-                        ))}
-                        <div className="flex gap-3 pt-2">
-                          <Button variant="outline" className="rounded-full" onClick={() => onNavClick("coding")}>Back</Button>
-                          <Button className="rounded-full" onClick={() => setSendDialogOpen(true)} disabled={isSending}>Send to EHR</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-                </Tabs>
-
-                <AlertDialog open={sendDialogOpen} onOpenChange={setSendDialogOpen}>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Send to EHR?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        We will write back the note and selected structured fields to your connected EHR.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="rounded-full">Cancel</AlertDialogCancel>
-                      <AlertDialogAction className="rounded-full" onClick={() => {
-                        setSendDialogOpen(false)
-                        setIsSending(true)
-                        setTimeout(() => {
-                          setIsSending(false)
-                          toast({ title: "Sent to EHR", description: "Note and orders successfully written back." })
-                        }, 1400)
-                      }}>Confirm Send</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-            </section>
-
-            {/* Automations */}
-            <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <Wand2 className="h-5 w-5" aria-hidden /> Patient-Facing Automations
-              </h2>
-              <p className="mt-2 opacity-80">Automate follow-ups, reminders, and questionnaires to reduce administrative burden.</p>
-
-              <div className="mt-4 grid gap-6 md:grid-cols-2">
-                {[
-                  { t: "Follow-up Appointment Scheduling", d: "Suggests and books follow-ups based on care plans" },
-                  { t: "Lab Results Notifications", d: "Notifies patients when results are ready with interpretation" },
-                  { t: "Medication Reminders", d: "Personalized reminders to improve adherence" },
-                  { t: "Pre-visit Questionnaires", d: "Condition-specific questionnaires before appointments" },
-                ].map((i) => (
-                  <Card key={i.t}>
-                    <CardHeader>
-                      <CardTitle className="text-base">{i.t}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex items-center justify-between gap-4">
-                      <p className="text-sm opacity-80">{i.d}</p>
-                      <Button variant="outline" className="rounded-full">Configure</Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            {/* AI Agent */}
-            <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <Bot className="h-5 w-5" aria-hidden /> AI Call & Chat Agent
-              </h2>
-              <p className="mt-2 opacity-80">Automate patient communication with intelligent escalation to on-call providers.</p>
-
-              <div className="mt-4 grid gap-6 lg:grid-cols-3">
-                {/* Left: Features */}
-                <div className="lg:col-span-2 space-y-4">
-                  {/* Feature 1 */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
-                        <span>Schedule Follow-up Calls</span>
-                        <Switch checked={agent.followups} onCheckedChange={(v) => setAgent((p) => ({ ...p, followups: v }))} />
-                      </CardTitle>
-                      <p className="text-sm opacity-80">AI automatically schedules and conducts follow-up calls for reminders and care coordination.</p>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
-                        Reduces no-shows by 40%
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Feature 2 */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
-                        <span>Inbound Call Management</span>
-                        <Switch checked={agent.inbound} onCheckedChange={(v) => setAgent((p) => ({ ...p, inbound: v }))} />
-                      </CardTitle>
-                      <p className="text-sm opacity-80">Handle routine patient inquiries, scheduling, and basic medical questions 24/7.</p>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
-                        Automates 80% of routine calls
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Feature 3 */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
-                        <span>Patient Outreach</span>
-                        <Switch checked={agent.outreach} onCheckedChange={(v) => setAgent((p) => ({ ...p, outreach: v }))} />
-                      </CardTitle>
-                      <p className="text-sm opacity-80">Proactive reminders for preventive care, medication adherence, and wellness check-ins.</p>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
-                        Improves patient satisfaction by 35%
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Feature 4 */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
-                        <span>24/7 Patient Support</span>
-                        <Switch checked={agent.support} onCheckedChange={(v) => setAgent((p) => ({ ...p, support: v }))} />
-                      </CardTitle>
-                      <p className="text-sm opacity-80">Round-the-clock availability with intelligent escalation to on-call providers.</p>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-md bg-primary/10 text-sm px-3 py-2">
-                        Increases preventive care compliance by 50%
-                      </div>
-                    </CardContent>
-                  </Card>
+                    Workflow Automations
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Configure automatic workflows to streamline your practice operations.</p>
                 </div>
 
-                {/* Right: Configuration */}
-                <Card className="h-fit">
-                  <CardHeader>
-                    <CardTitle>Configuration</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4 text-sm">
-                    <div>
-                      <div className="font-medium mb-2">Business Hours</div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div>
-                          <Label htmlFor="bh-start">Start</Label>
-                          <Input id="bh-start" type="time" defaultValue="08:00" />
+                <div className="grid gap-6 lg:grid-cols-2">
+                  {[
+                    {
+                      title: "Auto-Generate Patient Instructions",
+                      description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
+                      enabled: true
+                    },
+                    {
+                      title: "Schedule Follow-up Reminders",
+                      description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
+                      enabled: true
+                    },
+                    {
+                      title: "Lab Order Processing", 
+                      description: "Automatically process and track lab orders mentioned in visit notes.",
+                      enabled: false
+                    },
+                    {
+                      title: "Prescription Refill Alerts",
+                      description: "Alert when patients are due for prescription refills based on their medication history.",
+                      enabled: true
+                    }
+                  ].map((automation, index) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-lg">{automation.title}</CardTitle>
+                            <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
+                          </div>
+                          <Switch 
+                            checked={automation.enabled} 
+                            onCheckedChange={() => {}} 
+                          />
                         </div>
-                        <div>
-                          <Label htmlFor="bh-end">End</Label>
-                          <Input id="bh-end" type="time" defaultValue="17:00" />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <Label className="mb-1 block">Primary Language</Label>
-                      <Select defaultValue="english">
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select language" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="english">English</SelectItem>
-                          <SelectItem value="spanish">Spanish</SelectItem>
-                          <SelectItem value="multilingual">Multilingual</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="escalation" className="mb-1 block">Escalation Phone</Label>
-                      <Input id="escalation" placeholder="On-call provider number" />
-                    </div>
-                    <div className="flex gap-3 pt-1">
-                      <Button variant="outline" className="rounded-full">Skip AI Agent</Button>
-                      <Button className="rounded-full">Activate AI Agent</Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                      </CardHeader>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="rounded-lg">Configure</Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <div className="mt-8">
+                  <Button className="rounded-lg" onClick={() => onNavClick('agent')}>
+                    Continue to AI Agent Setup
+                  </Button>
+                </div>
               </div>
             </section>
 
-            {/* Dashboard */}
-            <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"} scroll-mt-24`}>
-              <h2 className="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" aria-hidden /> Post-Visit Operations Dashboard
-              </h2>
-              <p className="mt-2 opacity-80">Monitor follow-ups, waitlist, agent performance, and patient messages.</p>
+            {/* AI Agent Section */}
+            <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Bot className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    AI Agent Configuration
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Configure your AI agent to handle patient communications and administrative tasks.</p>
+                </div>
 
-              <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                {[
-                  ["Follow-up Queue", "12 Overdue"],
-                  ["Waitlist", "3 Offers Sent"],
-                  ["AI Agent Calls", "47 Today"],
-                  ["Patient Messages", "5 New"],
-                ].map(([k, v]) => (
-                  <Card key={k as string}>
+                <div className="grid gap-6 lg:grid-cols-2">
+                  {[
+                    {
+                      key: 'followups',
+                      title: "Follow-up Call Automation",
+                      description: "AI agent makes post-visit follow-up calls to check on patient recovery and medication adherence.",
+                      enabled: agent.followups
+                    },
+                    {
+                      key: 'inbound', 
+                      title: "Inbound Call Screening",
+                      description: "Screen and triage incoming patient calls, handling routine questions and scheduling requests.",
+                      enabled: agent.inbound
+                    },
+                    {
+                      key: 'outreach',
+                      title: "Patient Outreach Campaigns", 
+                      description: "Proactive outreach for preventive care reminders, wellness checks, and health education.",
+                      enabled: agent.outreach
+                    },
+                    {
+                      key: 'support',
+                      title: "24/7 Patient Support",
+                      description: "Round-the-clock AI support for urgent patient questions and basic medical guidance.",
+                      enabled: agent.support
+                    }
+                  ].map((feature) => (
+                    <Card key={feature.key}>
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-lg">{feature.title}</CardTitle>
+                            <p className="text-sm text-muted-foreground mt-1">{feature.description}</p>
+                          </div>
+                          <Switch 
+                            checked={feature.enabled}
+                            onCheckedChange={(checked) => 
+                              setAgent(prev => ({ ...prev, [feature.key]: checked }))
+                            }
+                          />
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="rounded-lg">Configure</Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <div className="mt-8">
+                  <Button className="rounded-lg" onClick={() => onNavClick('dashboard')}>
+                    View Analytics Dashboard
+                  </Button>
+                </div>
+              </div>
+            </section>
+
+            {/* Dashboard Section */}
+            <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"} h-full overflow-y-auto`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <BarChart3 className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Analytics Dashboard
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Monitor your practice performance and AI agent effectiveness.</p>
+                </div>
+
+                <div className="grid gap-6 xl:grid-cols-3">
+                  <Card className="xl:col-span-2">
                     <CardHeader>
-                      <CardTitle className="text-base">{k}</CardTitle>
+                      <CardTitle>Weekly Visit Volume</CardTitle>
                     </CardHeader>
-                    <CardContent className="text-sm opacity-80">{v}</CardContent>
+                    <CardContent>
+                      <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={visitData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="day" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </CardContent>
                   </Card>
-                ))}
-              </div>
 
-              <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                <Card className="h-[300px]">
-                  <CardHeader>
-                    <CardTitle>Daily Visit Volume</CardTitle>
-                  </CardHeader>
-                  <CardContent className="h-[220px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={visitData} margin={{ left: 4, right: 12 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="day" />
-                        <YAxis allowDecimals={false} />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={2} dot={false} />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-                <Card className="h-[300px]">
-                  <CardHeader>
-                    <CardTitle>AI Agent Performance</CardTitle>
-                  </CardHeader>
-                  <CardContent className="h-[220px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie dataKey="value" data={agentMix} cx="50%" cy="50%" outerRadius={80} label>
-                          {agentMix.map((e, i) => (
-                            <Cell key={`c-${i}`} fill={e.color} />
-                          ))}
-                        </Pie>
-                        <Legend />
-                        <Tooltip />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-              </div>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>AI Agent Call Distribution</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ResponsiveContainer width="100%" height={300}>
+                        <PieChart>
+                          <Pie
+                            data={agentMix}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                            label
+                          >
+                            {agentMix.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Pie>
+                          <Tooltip />
+                          <Legend />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </CardContent>
+                  </Card>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button asChild className="rounded-full">
-                  <Link to="/welcome">Try ScribeAI Free</Link>
-                </Button>
-                <Button asChild variant="outline" className="rounded-full">
-                  <Link to="/why-s10ai">Learn how it works</Link>
-                </Button>
+                  <div className="xl:col-span-3 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {[
+                      { label: "Notes Generated", value: "147", change: "+12%" },
+                      { label: "Time Saved", value: "23.5 hrs", change: "+8%" },
+                      { label: "AI Agent Calls", value: "89", change: "+15%" },
+                      { label: "Patient Satisfaction", value: "96%", change: "+2%" },
+                    ].map((stat, index) => (
+                      <Card key={index}>
+                        <CardContent className="p-6">
+                          <div className="text-2xl font-bold">{stat.value}</div>
+                          <p className="text-xs text-muted-foreground">{stat.label}</p>
+                          <p className="text-xs text-green-600 mt-1">{stat.change} from last week</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
-            </article>
           </main>
         </div>
+
+        {/* Send Dialog */}
+        <AlertDialog open={sendDialogOpen} onOpenChange={setSendDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Send Note to EHR?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will send the completed clinical note and codes to your connected EHR system.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={() => {
+                setIsSending(true);
+                setTimeout(() => {
+                  setIsSending(false);
+                  setSendDialogOpen(false);
+                  onNavClick('automations');
+                }, 2000);
+              }}>
+                Send to EHR
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </>
   );
