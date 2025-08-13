@@ -415,8 +415,8 @@ const ProductWalkthrough: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Settings className="h-5 w-5 text-primary" aria-hidden />
+                    <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                      <Settings className="h-5 w-5 text-blue-600" aria-hidden />
                     </div>
                     Get set up in 2 minutes
                   </h2>
@@ -424,16 +424,16 @@ const ProductWalkthrough: React.FC = () => {
 
                   <div className="mt-6 relative">
                     <div className="flex items-center justify-between max-w-md">
-                      <div className={`flex items-center gap-3 ${setupStep !== 'ehr' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      <div className={`flex items-center gap-3 ${setupStep !== 'ehr' ? 'text-blue-600' : 'text-muted-foreground'}`}>
                         <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
-                          setupStep !== 'ehr' ? 'bg-primary text-primary-foreground' : 'border-2'
+                          setupStep !== 'ehr' ? 'bg-blue-500 text-white' : 'border-2'
                         }`}>1</div>
                         <span className="font-medium">Set Note Style</span>
                       </div>
                       <div className="flex-1 h-0.5 bg-border mx-4" />
-                      <div className={`flex items-center gap-3 ${setupStep === 'ehr' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      <div className={`flex items-center gap-3 ${setupStep === 'ehr' ? 'text-blue-600' : 'text-muted-foreground'}`}>
                         <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
-                          setupStep === 'ehr' ? 'bg-primary text-primary-foreground' : 'border-2'
+                          setupStep === 'ehr' ? 'bg-blue-500 text-white' : 'border-2'
                         }`}>2</div>
                         <span className="font-medium">Connect EHR</span>
                       </div>
@@ -445,11 +445,11 @@ const ProductWalkthrough: React.FC = () => {
                   <div className="grid gap-6 md:gap-8 lg:grid-cols-2 max-w-4xl">
                     <button 
                       onClick={() => setSetupStep('note')} 
-                      className="group rounded-2xl border-2 hover:border-primary/50 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-primary/10"
+                      className="group rounded-2xl border-2 hover:border-blue-300 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-blue-100"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 grid place-items-center transition-colors">
-                          <FileText className="h-6 w-6 text-primary" />
+                        <div className="h-12 w-12 rounded-xl bg-blue-100 group-hover:bg-blue-200 grid place-items-center transition-colors">
+                          <FileText className="h-6 w-6 text-blue-600" />
                         </div>
                         <div className="flex-1">
                           <div className="text-xl font-semibold mb-2">Set your note style</div>
@@ -460,11 +460,11 @@ const ProductWalkthrough: React.FC = () => {
 
                     <button 
                       onClick={() => setSetupStep('ehr')} 
-                      className="group rounded-2xl border-2 hover:border-primary/50 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-primary/10"
+                      className="group rounded-2xl border-2 hover:border-green-300 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-green-100"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 grid place-items-center transition-colors">
-                          <Server className="h-6 w-6 text-primary" />
+                        <div className="h-12 w-12 rounded-xl bg-green-100 group-hover:bg-green-200 grid place-items-center transition-colors">
+                          <Server className="h-6 w-6 text-green-600" />
                         </div>
                         <div className="flex-1">
                           <div className="text-xl font-semibold mb-2">Connect to your EHR(s)</div>
@@ -480,8 +480,8 @@ const ProductWalkthrough: React.FC = () => {
                     <Card className="xl:col-span-2 2xl:col-span-3">
                       <CardHeader className="pb-6">
                         <CardTitle className="flex items-center gap-3 text-xl">
-                          <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <FileText className="h-4 w-4 text-primary" />
+                          <div className="h-8 w-8 rounded-lg bg-slate-100 flex items-center justify-center">
+                            <FileText className="h-4 w-4 text-slate-600" />
                           </div>
                           Set Your Note Style
                         </CardTitle>
@@ -643,7 +643,7 @@ const ProductWalkthrough: React.FC = () => {
                                             
                                             {/* Progress bar animation */}
                                             {selectedSpecialtySlug === spec.slug && (
-                                              <div className="mt-3 h-1.5 w-full bg-primary/20 rounded-full overflow-hidden">
+                                              <div className="mt-3 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
                                                 <div className="h-full w-full bg-gradient-to-r from-primary to-primary/80 rounded-full animate-slide-in-right" />
                                               </div>
                                             )}
@@ -803,10 +803,10 @@ const ProductWalkthrough: React.FC = () => {
                                                         }
                                                       }}
                                                       disabled={scratchSections.includes(h)}
-                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-primary/60 text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
+                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
                                                       style={{ animationDelay: `${index * 20}ms` }}
                                                     >
-                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-primary/10 group-hover:bg-primary/20 text-primary'}`}>
+                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-slate-100 group-hover:bg-slate-200 text-slate-600'}`}>
                                                         {scratchSections.includes(h) ? (
                                                           <CheckCircle2 className="h-4 w-4" />
                                                         ) : (
@@ -836,10 +836,10 @@ const ProductWalkthrough: React.FC = () => {
                                                         }
                                                       }}
                                                       disabled={scratchSections.includes(h)}
-                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-primary/60 text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
+                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
                                                       style={{ animationDelay: `${index * 20}ms` }}
                                                     >
-                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-primary/10 group-hover:bg-primary/20 text-primary'}`}>
+                                                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-slate-100 group-hover:bg-slate-200 text-slate-600'}`}>
                                                         {scratchSections.includes(h) ? (
                                                           <CheckCircle2 className="h-4 w-4" />
                                                         ) : (
@@ -905,8 +905,8 @@ const ProductWalkthrough: React.FC = () => {
                                       <Card className="h-full border-2 bg-gradient-to-br from-background to-muted/5 animate-fade-in">
                                         <CardHeader className="pb-4">
                                           <CardTitle className="text-center text-sm font-semibold flex items-center justify-center gap-2">
-                                            <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
-                                              <FileText className="h-3 w-3 text-primary" />
+                                            <div className="h-6 w-6 rounded-lg bg-indigo-100 flex items-center justify-center">
+                                              <FileText className="h-3 w-3 text-indigo-600" />
                                             </div>
                                             Your Template Structure ({scratchSections.length})
                                           </CardTitle>
@@ -946,12 +946,12 @@ const ProductWalkthrough: React.FC = () => {
                                                     setDragIndex(null);
                                                     toast({ title: "Section reordered", description: "Template structure updated" });
                                                   }}
-                                                  className="group relative rounded-xl border-2 bg-gradient-to-r from-card to-card/80 p-4 cursor-move hover:border-primary/60 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 animate-scale-in"
+                                                  className="group relative rounded-xl border-2 bg-gradient-to-r from-card to-card/80 p-4 cursor-move hover:border-indigo-300 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100 hover:-translate-y-0.5 animate-scale-in"
                                                 >
                                                   <div className="flex items-center justify-between">
                                                     <div className="flex items-center gap-3">
-                                                      <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                                                        <span className="text-primary text-xs font-bold">{i + 1}</span>
+                                                      <div className="h-8 w-8 rounded-lg bg-indigo-100 flex items-center justify-center">
+                                                        <span className="text-indigo-600 text-xs font-bold">{i + 1}</span>
                                                       </div>
                                                       <span className="font-medium text-sm">{h}</span>
                                                     </div>
@@ -1100,8 +1100,8 @@ const ProductWalkthrough: React.FC = () => {
                   <Card className="max-w-4xl">
                     <CardHeader className="pb-6">
                       <CardTitle className="flex items-center gap-3 text-xl">
-                        <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <ShieldCheck className="h-4 w-4 text-primary" />
+                        <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                          <ShieldCheck className="h-4 w-4 text-emerald-600" />
                         </div>
                         Connect to Your EHR
                       </CardTitle>
@@ -1163,9 +1163,9 @@ const ProductWalkthrough: React.FC = () => {
                               <button
                                 key={ehr.name}
                                 onClick={() => setSelectedEhr(ehr.name)}
-                                className={`rounded-xl border-2 hover:border-primary/50 p-3 text-center transition-all duration-200 hover:shadow-md ${
-                                  selectedEhr === ehr.name ? 'border-primary bg-primary/5 ring-2 ring-primary/20' : ''
-                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-primary/30 bg-primary/5' : ''}`}
+                                className={`rounded-xl border-2 hover:border-emerald-300 p-3 text-center transition-all duration-200 hover:shadow-md ${
+                                  selectedEhr === ehr.name ? 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200' : ''
+                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-300 bg-emerald-50' : ''}`}
                               >
                                 <div className="text-xl mb-1">{ehr.logo}</div>
                                 <div className="font-semibold text-xs">{ehr.name}</div>
@@ -1192,7 +1192,7 @@ const ProductWalkthrough: React.FC = () => {
                             <input type="radio" name="conn" defaultChecked className="scale-110" />
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <Bot className="h-4 w-4 text-primary" />
+                                <Bot className="h-4 w-4 text-slate-600" />
                                 <div className="font-medium">AI Agent Integration</div>
                               </div>
                               <div className="text-sm text-muted-foreground mt-1">
