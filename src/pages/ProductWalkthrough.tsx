@@ -393,18 +393,18 @@ const ProductWalkthrough: React.FC = () => {
         <div className="main-content">
           <div className="top-nav">
             <div>
-              <h1 className="text-base md:text-lg font-semibold">AI Medical Scribe</h1>
-              <p className="text-xs opacity-80">ScribeAI • End-to-end clinical documentation workflow</p>
+              <h1 className="text-base md:text-lg font-semibold">AI Medical Scribe & AI Agents Workflow</h1>
+              <p className="text-xs opacity-80">End-to-end clinical documentation & automation platform</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-full px-3 py-1 border" aria-label="Clinician">
-                <div className="h-6 w-6 rounded-full grid place-items-center text-xs font-medium border" aria-hidden>
+              <div className="flex items-center gap-2 rounded-full px-3 py-1 border border-blue-200 bg-blue-50/50" aria-label="Clinician">
+                <div className="h-6 w-6 rounded-full bg-blue-100 grid place-items-center text-xs font-medium border border-blue-300" aria-hidden>
                   SM
                 </div>
-                <span className="text-sm hidden md:inline">Dr. Sarah Mitchell</span>
+                <span className="text-sm hidden md:inline font-medium text-blue-700">Dr. Sarah Mitchell</span>
               </div>
               <Button asChild className="rounded-full">
-                <Link to="/welcome">Get started</Link>
+                <Link to="/welcome">Schedule a product walkthrough</Link>
               </Button>
             </div>
           </div>
