@@ -419,7 +419,7 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="library" className="space-y-3">
                           <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
                             {specialtyTemplates.map((spec) => (
                               <button
                                 key={spec.slug}
@@ -427,7 +427,7 @@ const ProductWalkthrough: React.FC = () => {
                                   setSelectedSpecialtySlug(spec.slug);
                                   setLiveHeaders(spec.headers || headersBySpecialty[spec.slug] || defaultHeaders);
                                 }}
-                                className={`rounded-xl border px-4 py-5 h-24 text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
+                                className={`rounded-xl border px-4 py-5 min-h-[88px] text-left hover:bg-muted transition ${selectedSpecialtySlug === spec.slug ? 'ring-2 ring-primary/50' : ''}`}
                                 aria-pressed={selectedSpecialtySlug === spec.slug}
                               >
                                 <div className="font-semibold">{spec.name}</div>
@@ -452,7 +452,7 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="scratch" className="grid gap-3">
                           <div className="text-sm font-medium">Build Template from Scratch</div>
-                          <div className="grid gap-4 md:grid-cols-3">
+                          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                             <div className="rounded-lg border p-3">
                               <div className="text-xs font-medium mb-2">Section Palette</div>
                               <div className="flex flex-wrap gap-2">
@@ -463,7 +463,7 @@ const ProductWalkthrough: React.FC = () => {
                                 ))}
                               </div>
                             </div>
-                            <div className="md:col-span-2 rounded-lg border p-3 min-h-[220px]">
+                            <div className="lg:col-span-2 rounded-lg border p-3 min-h-[220px]">
                               {scratchSections.map((h, i) => (
                                 <div
                                   key={`${h}-${i}`}
