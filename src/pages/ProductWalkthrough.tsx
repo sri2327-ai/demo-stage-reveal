@@ -800,26 +800,36 @@ const ProductWalkthrough: React.FC = () => {
                     <CardContent className="space-y-6">
                       <div>
                         <div className="text-sm font-semibold mb-4">Select your EHR system</div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                           {[
-                            { name: "Epic", logo: "🏥" },
-                            { name: "Cerner", logo: "⚕️" },
-                            { name: "Athena", logo: "🔬" },
-                            { name: "eCW", logo: "💊" },
-                            { name: "NextGen", logo: "📋" },
-                            { name: "Allscripts", logo: "🩺" }
+                            { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
+                            { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
+                            { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
+                            { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
+                            { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
+                            { name: "Allscripts", logo: "🩺", subtitle: "Allscripts Healthcare" },
+                            { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
+                            { name: "Greenway", logo: "🌱", subtitle: "Greenway Health" },
+                            { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
+                            { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
+                            { name: "CureMD", logo: "💉", subtitle: "CureMD Healthcare" },
+                            { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono EHR" },
+                            { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
+                            { name: "Kareo", logo: "💼", subtitle: "Tebra (Kareo)" },
+                            { name: "ChartLogic", logo: "📈", subtitle: "ChartLogic" },
+                            { name: "Other", logo: "🔧", subtitle: "Custom Integration" }
                           ].map((ehr) => (
                             <button
                               key={ehr.name}
                               onClick={() => setSelectedEhr(ehr.name)}
                               className={`rounded-xl border-2 hover:border-primary/50 p-4 text-center transition-all duration-200 hover:shadow-md ${
-                                selectedEhr === ehr.name ? 'border-primary bg-primary/5' : ''
+                                selectedEhr === ehr.name ? 'border-primary bg-primary/5 ring-2 ring-primary/20' : ''
                               }`}
                             >
                               <div className="text-2xl mb-2">{ehr.logo}</div>
                               <div className="font-semibold text-sm">{ehr.name}</div>
                               <div className="text-xs text-muted-foreground mt-1">
-                                {ehr.name === 'Cerner' ? 'Oracle Health' : 'EHR System'}
+                                {ehr.subtitle}
                               </div>
                             </button>
                           ))}
@@ -863,20 +873,49 @@ const ProductWalkthrough: React.FC = () => {
                         ))}
                       </div>
 
-                      <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-lg" onClick={() => setSetupStep('landing')}>
-                          Back
-                        </Button>
-                        <Button variant="outline" className="rounded-lg">
-                          Skip for now
-                        </Button>
-                        <Button 
-                          onClick={handleConnect} 
-                          disabled={!selectedEhr || connecting} 
-                          className="rounded-lg"
-                        >
-                          {connecting ? 'Connecting…' : selectedEhr ? `Connect ${selectedEhr}` : 'Select EHR to Connect'}
-                        </Button>
+                      {/* Enhanced Action Buttons */}
+                      <div className="sticky bottom-0 bg-white border-t pt-4 -mx-6 px-6 -mb-6 pb-6">
+                        <div className="flex flex-wrap gap-3 justify-between items-center">
+                          <div className="flex gap-3">
+                            <Button 
+                              variant="outline" 
+                              className="rounded-full px-6"
+                              onClick={() => setSetupStep('landing')}
+                            >
+                              ← Back
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              className="rounded-full px-6 text-muted-foreground hover:text-foreground"
+                              onClick={() => {
+                                toast({ title: "Setup saved", description: "You can configure EHR connection later from Settings." });
+                                onNavClick("schedule");
+                              }}
+                            >
+                              Skip for now
+                            </Button>
+                          </div>
+                          <Button 
+                            onClick={handleConnect} 
+                            disabled={!selectedEhr || connecting} 
+                            className="rounded-full px-8 font-semibold shadow-md hover:shadow-lg transition-all"
+                            size="lg"
+                          >
+                            {connecting ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                Connecting to {selectedEhr}...
+                              </>
+                            ) : selectedEhr ? (
+                              <>
+                                <ShieldCheck className="h-4 w-4 mr-2" />
+                                Connect {selectedEhr}
+                              </>
+                            ) : (
+                              'Select EHR to Connect'
+                            )}
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
