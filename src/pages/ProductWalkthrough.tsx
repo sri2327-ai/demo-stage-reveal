@@ -1526,14 +1526,41 @@ const ProductWalkthrough: React.FC = () => {
                     Clinical Documentation
                   </h2>
                   <p className="mt-3 text-muted-foreground text-lg">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
+                  
+                  {/* Real-time Status Bar */}
+                  <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <div className={`h-3 w-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}></div>
+                          <span className="font-medium">
+                            {isRecording ? 'Recording Active' : 'Ready to Capture'}
+                          </span>
+                        </div>
+                        {selectedPatient && (
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <span>•</span>
+                            <span>Patient: {selectedPatient.name}</span>
+                            <span>•</span>
+                            <span>Visit: {selectedPatient.visit}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-xs text-muted-foreground">AI Processing:</div>
+                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <div className="text-xs font-medium text-green-700">Active</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Enhanced Responsive Grid Layout */}
                 <div className="grid gap-6 lg:gap-8 xl:grid-cols-12">
                   
-                  {/* Input Methods - Enhanced with Audio/Type Toggle */}
+                  {/* Enhanced Input Methods Panel */}
                   <div className="xl:col-span-4 space-y-6">
-                    <Card className="border-2">
+                    <Card className="border-2 bg-gradient-to-br from-background to-muted/5">
                       <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2">
                           <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -1544,78 +1571,150 @@ const ProductWalkthrough: React.FC = () => {
                       </CardHeader>
                       <CardContent className="space-y-6">
                         
-                        {/* Mode Toggle */}
+                        {/* Enhanced Mode Toggle */}
                         <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2">
-                            <TabsTrigger value="audio" className="flex items-center gap-2">
+                          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+                            <TabsTrigger value="audio" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
                               <Mic className="h-4 w-4" />
-                              <span className="hidden sm:inline">Audio</span>
+                              <span className="hidden sm:inline">Audio Capture</span>
+                              <span className="sm:hidden">Audio</span>
                             </TabsTrigger>
-                            <TabsTrigger value="type" className="flex items-center gap-2">
+                            <TabsTrigger value="type" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
                               <FileText className="h-4 w-4" />
-                              <span className="hidden sm:inline">Type</span>
+                              <span className="hidden sm:inline">Manual Entry</span>
+                              <span className="sm:hidden">Type</span>
                             </TabsTrigger>
                           </TabsList>
                           
-                          {/* Audio Capture Tab */}
-                          <TabsContent value="audio" className="mt-4 space-y-4">
-                            <div className="space-y-4">
-                              <Button 
-                                onClick={toggleRecording} 
-                                className="w-full rounded-lg h-12 font-semibold" 
-                                variant={isRecording ? "destructive" : "default"}
-                              >
-                                {isRecording ? (
-                                  <>
-                                    <CircleStop className="h-5 w-5 mr-2" /> Stop Recording
-                                  </>
-                                ) : (
-                                  <>
-                                    <Mic className="h-5 w-5 mr-2" /> Start Recording
-                                  </>
-                                )}
-                              </Button>
+                          {/* Enhanced Audio Capture Tab */}
+                          <TabsContent value="audio" className="mt-6 space-y-6">
+                            <div className="space-y-6">
                               
-                              {/* Recording Status */}
-                              <div className="flex items-center justify-center gap-2 text-sm">
-                                <span className={`h-3 w-3 rounded-full ${isRecording ? 'bg-destructive animate-pulse' : 'bg-muted-foreground/50'}`} />
-                                <span className="font-mono text-lg">{timeStr}</span>
-                                <span className="text-muted-foreground">
-                                  {isRecording ? 'Recording...' : 'Ready to record'}
-                                </span>
+                              {/* Recording Controls */}
+                              <div className="space-y-4">
+                                <Button 
+                                  onClick={toggleRecording} 
+                                  className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${
+                                    isRecording 
+                                      ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25 animate-pulse' 
+                                      : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'
+                                  }`}
+                                >
+                                  {isRecording ? (
+                                    <>
+                                      <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Mic className="h-6 w-6 mr-3" /> Start Recording
+                                    </>
+                                  )}
+                                </Button>
+                                
+                                {/* Enhanced Recording Status */}
+                                <div className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
+                                  <div className="flex items-center gap-2">
+                                    <div className={`h-4 w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
+                                    <span className="font-mono text-2xl font-bold">{timeStr}</span>
+                                  </div>
+                                  <div className="h-6 w-px bg-border mx-2"></div>
+                                  <div className="text-sm text-center">
+                                    <div className="font-medium">
+                                      {isRecording ? 'Recording in Progress' : 'Ready to Record'}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
 
-                              {/* Audio Visualizer */}
-                              <div className="flex items-end justify-center gap-1 h-16 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
-                                {[8,14,20,12,18,10,16,22,12,15,19,8,16,25,11].map((h, i) => (
-                                  <div 
-                                    key={i} 
-                                    className={`w-2 rounded transition-all duration-300 ${
-                                      isRecording ? 'bg-primary animate-pulse' : 'bg-primary/30'
-                                    }`} 
-                                    style={{ 
-                                      height: `${isRecording ? h : h * 0.3}px`,
-                                      animationDelay: `${i * 100}ms`
-                                    }} 
-                                  />
-                                ))}
+                              {/* Enhanced Audio Visualizer */}
+                              <Card className="p-4 bg-gradient-to-r from-muted/20 to-muted/5">
+                                <div className="text-xs font-medium text-muted-foreground mb-3 text-center">
+                                  Audio Input Level
+                                </div>
+                                <div className="flex items-end justify-center gap-1 h-20">
+                                  {[8,14,20,12,18,10,16,22,12,15,19,8,16,25,11,20,12,18,14,10].map((h, i) => (
+                                    <div 
+                                      key={i} 
+                                      className={`w-2 rounded-t transition-all duration-300 ${
+                                        isRecording 
+                                          ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' 
+                                          : 'bg-gradient-to-t from-primary/20 to-primary/10'
+                                      }`} 
+                                      style={{ 
+                                        height: `${isRecording ? h : h * 0.3}px`,
+                                        animationDelay: `${i * 50}ms`
+                                      }} 
+                                    />
+                                  ))}
+                                </div>
+                              </Card>
+                              
+                              {/* Audio Quality Indicators */}
+                              <div className="grid grid-cols-3 gap-3 text-xs">
+                                <div className="text-center p-2 rounded-lg bg-green-50 border border-green-200">
+                                  <div className="font-medium text-green-700">Quality</div>
+                                  <div className="text-green-600">Excellent</div>
+                                </div>
+                                <div className="text-center p-2 rounded-lg bg-blue-50 border border-blue-200">
+                                  <div className="font-medium text-blue-700">Clarity</div>
+                                  <div className="text-blue-600">Clear</div>
+                                </div>
+                                <div className="text-center p-2 rounded-lg bg-purple-50 border border-purple-200">
+                                  <div className="font-medium text-purple-700">Background</div>
+                                  <div className="text-purple-600">Quiet</div>
+                                </div>
                               </div>
                             </div>
                           </TabsContent>
                           
-                          {/* Type Input Tab */}
-                          <TabsContent value="type" className="mt-4">
-                            <div className="space-y-4">
-                              <div className="text-sm font-medium text-muted-foreground">
-                                Type your clinical notes directly
+                          {/* Enhanced Type Input Tab */}
+                          <TabsContent value="type" className="mt-6">
+                            <div className="space-y-6">
+                              <div className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                                <Bot className="h-4 w-4" />
+                                AI-Assisted Manual Entry
                               </div>
-                              <Textarea 
-                                placeholder="Begin typing your clinical notes here. AI will assist with structuring and formatting as you type..."
-                                value={typeNotes}
-                                onChange={(e) => setTypeNotes(e.target.value)}
-                                className="min-h-[200px] resize-none text-sm"
-                              />
-                              <div className="flex gap-2">
+                              
+                              <div className="space-y-4">
+                                <Textarea 
+                                  placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..."
+                                  value={typeNotes}
+                                  onChange={(e) => setTypeNotes(e.target.value)}
+                                  className="min-h-[250px] resize-none text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors"
+                                />
+                                
+                                {/* AI Suggestions Panel */}
+                                {typeNotes.length > 20 && (
+                                  <Card className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
+                                    <div className="text-xs font-medium text-primary mb-2 flex items-center gap-1">
+                                      <Bot className="h-3 w-3" />
+                                      AI Suggestions
+                                    </div>
+                                    <div className="text-xs text-muted-foreground space-y-1">
+                                      <div>• Consider adding vital signs if available</div>
+                                      <div>• Review of systems may be beneficial</div>
+                                      <div>• Assessment and plan section recommended</div>
+                                    </div>
+                                  </Card>
+                                )}
+                                
+                                {/* Word Count & Metrics */}
+                                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                                  <div className="flex items-center gap-4">
+                                    <span>{typeNotes.split(' ').filter(Boolean).length} words</span>
+                                    <span>{typeNotes.length} characters</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                                    <span>AI analyzing</span>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-2">
                                 <Button 
                                   variant="outline" 
                                   size="sm"
@@ -1623,8 +1722,12 @@ const ProductWalkthrough: React.FC = () => {
                                     setTypeNotes("");
                                     toast({ title: "Notes cleared", description: "Ready for new input" });
                                   }}
+                                  className="rounded-lg"
                                 >
-                                  Clear
+                                  <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                  </svg>
+                                  Clear All
                                 </Button>
                                 <Button 
                                   size="sm"
@@ -1635,37 +1738,54 @@ const ProductWalkthrough: React.FC = () => {
                                     }
                                   }}
                                   disabled={!typeNotes.trim()}
+                                  className="rounded-lg"
                                 >
                                   <Wand2 className="h-4 w-4 mr-2" />
-                                  Process Notes
+                                  Process & Structure
+                                </Button>
+                                <Button 
+                                  variant="outline"
+                                  size="sm"
+                                  className="rounded-lg"
+                                  onClick={() => toast({ title: "Voice dictation", description: "Feature coming soon!" })}
+                                >
+                                  <Mic className="h-4 w-4 mr-2" />
+                                  Voice Dictation
                                 </Button>
                               </div>
                             </div>
                           </TabsContent>
                         </Tabs>
 
-                        {/* Common Controls */}
-                        <div className="flex flex-col gap-2 pt-4 border-t">
-                          <Button variant="outline" className="rounded-lg">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Pause Session
-                          </Button>
-                          <Button variant="outline" className="rounded-lg text-destructive hover:text-destructive">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                            Discard Session
-                          </Button>
+                        {/* Enhanced Session Controls */}
+                        <div className="pt-6 border-t space-y-3">
+                          <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
+                          <div className="grid gap-2">
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              Pause Session
+                            </Button>
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                              <Upload className="h-4 w-4 mr-2" />
+                              Upload Audio File
+                            </Button>
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                              End & Discard Session
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
                   </div>
 
-                  {/* AI-Generated Note - Enhanced */}
+                  {/* Enhanced AI-Generated Note Panel */}
                   <div className="xl:col-span-5">
-                    <Card className="h-full border-2">
+                    <Card className="h-full border-2 bg-gradient-to-br from-background to-muted/5">
                       <CardHeader className="pb-4">
                         <CardTitle className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
@@ -1674,145 +1794,67 @@ const ProductWalkthrough: React.FC = () => {
                             </div>
                             AI-Generated Clinical Note
                           </div>
-                          <div className="flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                            <span className="text-xs text-muted-foreground">Live Processing</span>
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
+                              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                              <span className="text-xs text-muted-foreground">Live Processing</span>
+                            </div>
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                              <Settings className="h-3 w-3 mr-1" />
+                              Settings
+                            </Button>
                           </div>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="rounded-lg border bg-gradient-to-br from-background to-muted/10 p-6 min-h-[500px] max-h-[600px] overflow-y-auto custom-scrollbar">
-                          <div className="text-sm whitespace-pre-wrap leading-relaxed">
-                            {transcript || typeNotes || `${selectedPatient ? `Patient: ${selectedPatient.name}\nMRN: ${selectedPatient.mrn}\nVisit: ${selectedPatient.visit}\n\n` : ""}CLINICAL NOTE\n\n${captureMode === 'audio' ? 'Begin recording' : 'Start typing'} to generate structured clinical documentation...\n\nThe AI will automatically organize content into:\n• Chief Complaint\n• History of Present Illness\n• Physical Examination\n• Assessment\n• Plan\n\nReal-time processing ensures accurate medical terminology and proper clinical structure.`}
+                      <CardContent className="space-y-4">
+                        
+                        {/* Processing Status */}
+                        <div className="p-3 bg-gradient-to-r from-blue-50 to-blue-50/50 rounded-lg border border-blue-200">
+                          <div className="flex items-center gap-2 text-sm">
+                            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                            <span className="font-medium text-blue-700">Real-time transcription and structuring active</span>
+                          </div>
+                          <div className="text-xs text-blue-600 mt-1 flex items-center gap-4">
+                            <span>• Medical terminology detection</span>
+                            <span>• Grammar correction</span>
+                            <span>• Clinical structure formatting</span>
                           </div>
                         </div>
                         
-                        {/* Note Actions */}
-                        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
-                          <Button variant="outline" size="sm" className="rounded-lg">
+                        {/* Note Content */}
+                        <div className="rounded-lg border-2 bg-gradient-to-br from-background to-muted/10 p-6 min-h-[400px] max-h-[500px] overflow-y-auto custom-scrollbar">
+                          <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                            {transcript || typeNotes || `${selectedPatient ? `📋 CLINICAL NOTE\n\nPatient: ${selectedPatient.name}\nMRN: ${selectedPatient.mrn}\nVisit Type: ${selectedPatient.visit}\nDate: ${new Date().toLocaleDateString()}\n\n` : ""}🎯 READY FOR INPUT\n\n${captureMode === 'audio' ? '🎤 Begin recording' : '⌨️ Start typing'} to generate structured clinical documentation...\n\n📝 AI will automatically organize content into:\n\n• Chief Complaint\n• History of Present Illness  \n• Review of Systems\n• Physical Examination\n• Assessment & Differential\n• Plan & Follow-up\n• Patient Instructions\n\n✨ Features:\n• Real-time medical terminology correction\n• Automatic ICD-10/CPT code suggestions\n• Clinical decision support\n• Template-based structure\n• Integration with patient history`}
+                          </div>
+                        </div>
+                        
+                        {/* Enhanced Note Actions */}
+                        <div className="flex flex-wrap gap-3 pt-4 border-t">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
                             <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
-                            Edit
+                            Edit Note
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
                             <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
-                            Copy
+                            Copy Text
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg">
-                            <Wand2 className="h-4 w-4 mr-2" />
-                            Enhance with AI
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                            <FileText className="h-4 w-4 mr-2" />
+                            Export
+                          </Button>
+                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => onNavClick('coding')}>
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                            Continue to Coding
                           </Button>
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-
-                  {/* Enhanced Patient Context - Right Side */}
-                  <div className="xl:col-span-3">
-                    <Card className="h-full border-2 bg-gradient-to-br from-blue-50/50 to-background">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2 text-blue-900">
-                          <div className="h-6 w-6 rounded-lg bg-blue-100 flex items-center justify-center">
-                            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                          </div>
-                          Patient Summary Snapshot
-                        </CardTitle>
-                        <p className="text-xs text-blue-700/70">Previous medical history and context</p>
-                      </CardHeader>
-                      <CardContent>
-                        {selectedPatient ? (
-                          <div className="space-y-4">
-                            {/* Patient Header */}
-                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                              <div className="flex items-center gap-3">
-                                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-blue-700">
-                                  {selectedPatient.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                  <div className="font-semibold text-blue-900">{selectedPatient.name}</div>
-                                  <div className="text-sm text-blue-700">MRN: {selectedPatient.mrn}</div>
-                                  <div className="text-sm text-blue-600">{selectedPatient.age} • {selectedPatient.visit}</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Clinical Context */}
-                            <div className="h-[400px] max-h-[500px] overflow-y-auto custom-scrollbar">
-                              <div className="text-sm space-y-4">
-                                {patientContext ? (
-                                  <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
-                                    {patientContext}
-                                  </div>
-                                ) : (
-                                  <div className="space-y-4">
-                                    <div className="animate-pulse space-y-3">
-                                      <div className="h-4 bg-blue-100 rounded w-3/4"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-1/2"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
-                                    </div>
-                                    <div className="text-blue-600 text-center py-4">
-                                      Loading patient medical history...
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Quick Actions */}
-                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50">
-                                View Full History
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50">
-                                Lab Results
-                              </Button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="h-full flex items-center justify-center text-center">
-                            <div className="space-y-3">
-                              <div className="text-4xl opacity-30">👤</div>
-                              <div className="text-sm font-medium text-blue-800">No Patient Selected</div>
-                              <div className="text-xs text-blue-600 leading-relaxed max-w-sm">
-                                Select a patient from the Schedule to load their medical history and context for this visit.
-                              </div>
-                              <Button variant="outline" size="sm" onClick={() => onNavClick('schedule')} className="text-blue-700 border-blue-200">
-                                Go to Schedule
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Session Actions - Full Width */}
-                  <div className="xl:col-span-12 flex flex-col sm:flex-row flex-wrap gap-3 pt-4 border-t">
-                    <Button variant="outline" className="rounded-lg">
-                      <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                      Save Draft
-                    </Button>
-                    <Button variant="outline" className="rounded-lg">
-                      <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                      </svg>
-                      Share with Team
-                    </Button>
-                    <div className="flex-1"></div>
-                    <Button 
-                      className="rounded-lg font-semibold px-8 shadow-lg" 
-                      onClick={() => onNavClick('coding')}
-                    >
-                      <CheckCircle2 className="h-4 w-4 mr-2" />
-                      Finalize Visit & Review Coding
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -1898,76 +1940,332 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     Send to EHR
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Preview the clinical note and structured fields before sending to the EHR.</p>
+                  <p className="mt-3 text-muted-foreground text-lg">Review, validate, and send your clinical documentation to the EHR system.</p>
+                  
+                  {/* Status Bar */}
+                  <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-50/50 rounded-xl border border-green-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        <div>
+                          <div className="font-medium text-green-800">Clinical Note Ready</div>
+                          <div className="text-sm text-green-600">All required fields validated • Ready for EHR transmission</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-700">
+                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                        <span>Connected to {selectedEhr || 'Epic'}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {isSending ? (
-                  <Card>
-                    <CardContent className="flex items-center justify-center py-12">
-                      <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-                        <p className="mt-4 font-medium">Sending to Epic...</p>
+                  <Card className="border-2">
+                    <CardContent className="flex items-center justify-center py-16">
+                      <div className="text-center space-y-6">
+                        <div className="flex items-center justify-center">
+                          <div className="relative">
+                            <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary/20"></div>
+                            <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent absolute top-0"></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-lg font-semibold mb-2">Sending to {selectedEhr || 'Epic'}</div>
+                          <div className="text-sm text-muted-foreground space-y-1">
+                            <div>✓ Validating note structure</div>
+                            <div>✓ Checking required fields</div>
+                            <div>⏳ Transmitting to EHR...</div>
+                          </div>
+                        </div>
+                        <div className="w-full max-w-sm mx-auto">
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-primary rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-1">Transmission in progress...</div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
                 ) : (
-                  <div className="grid gap-8 xl:grid-cols-3">
-                    <Card className="xl:col-span-2">
-                      <CardHeader>
-                        <CardTitle>Final Note Preview</CardTitle>
+                  <div className="grid gap-6 xl:grid-cols-12">
+                    
+                    {/* Enhanced Note Preview */}
+                    <Card className="xl:col-span-8 border-2 bg-gradient-to-br from-background to-muted/5">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-2">
+                            <FileText className="h-5 w-5 text-primary" />
+                            Final Clinical Note Preview
+                          </CardTitle>
+                          <div className="flex items-center gap-2">
+                            <Button variant="outline" size="sm" className="rounded-lg">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                              Edit Note
+                            </Button>
+                            <Button variant="outline" size="sm" className="rounded-lg">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                              </svg>
+                              Preview Mode
+                            </Button>
+                          </div>
+                        </div>
                       </CardHeader>
                       <CardContent>
-                        <div className="rounded-lg border p-6 min-h-[400px] text-sm whitespace-pre-wrap">
-                          CHIEF COMPLAINT: Blood sugars trending higher over the last few weeks.
-                          
-                          HISTORY OF PRESENT ILLNESS: Patient presents for follow-up of diabetes and hypertension. Checks sugars twice daily. Morning readings 140-160, evening 180-200. No hypoglycemia episodes.
-                          
-                          PHYSICAL EXAMINATION: BP 138/82, HR 76. Lungs clear. No peripheral edema.
-                          
-                          ASSESSMENT AND PLAN: 
-                          1. Type 2 Diabetes Mellitus - Poorly controlled. Increase Metformin to 1000mg BID.
-                          2. Hypertension - Well controlled on current regimen.
-                          
-                          Return to clinic in 3 months.
+                        <div className="rounded-xl border-2 bg-gradient-to-br from-background to-muted/10 p-6 min-h-[500px] max-h-[600px] overflow-y-auto custom-scrollbar">
+                          <div className="text-sm leading-relaxed space-y-4">
+                            
+                            {/* Patient Header */}
+                            <div className="pb-4 border-b border-muted">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <div className="text-lg font-semibold text-foreground">
+                                    {selectedPatient?.name || 'John Doe'}
+                                  </div>
+                                  <div className="text-sm text-muted-foreground">
+                                    MRN: {selectedPatient?.mrn || '12345'} • DOB: 01/15/1978 • Age: 45
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-sm font-medium">Visit Date: {new Date().toLocaleDateString()}</div>
+                                  <div className="text-xs text-muted-foreground">
+                                    Provider: Dr. Sarah Johnson, MD
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Clinical Note Content */}
+                            <div className="space-y-6">
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  CHIEF COMPLAINT
+                                </div>
+                                <div className="text-foreground pl-4">
+                                  Blood sugars trending higher over the last few weeks.
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  HISTORY OF PRESENT ILLNESS
+                                </div>
+                                <div className="text-foreground pl-4">
+                                  Patient presents for follow-up of diabetes and hypertension. Checks sugars twice daily. Morning readings 140-160, evening 180-200. No hypoglycemia episodes. Reports adherence to current medication regimen. No recent changes in diet or exercise routine.
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  PHYSICAL EXAMINATION
+                                </div>
+                                <div className="text-foreground pl-4">
+                                  Vital Signs: BP 138/82, HR 76, RR 16, Temp 98.6°F, O2 Sat 98%<br/>
+                                  General: Well-appearing, no acute distress<br/>
+                                  Cardiovascular: Regular rate and rhythm, no murmurs<br/>
+                                  Pulmonary: Lungs clear to auscultation bilaterally<br/>
+                                  Extremities: No peripheral edema, pulses intact
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  ASSESSMENT AND PLAN
+                                </div>
+                                <div className="text-foreground pl-4 space-y-3">
+                                  <div>
+                                    <div className="font-medium">1. Type 2 Diabetes Mellitus (E11.9) - Poorly controlled</div>
+                                    <div className="text-sm text-muted-foreground ml-3">
+                                      • Increase Metformin to 1000mg BID<br/>
+                                      • Continue glucose monitoring<br/>
+                                      • HbA1c in 3 months<br/>
+                                      • Diabetes education referral
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="font-medium">2. Hypertension (I10) - Well controlled</div>
+                                    <div className="text-sm text-muted-foreground ml-3">
+                                      • Continue current regimen<br/>
+                                      • Home BP monitoring
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  FOLLOW-UP
+                                </div>
+                                <div className="text-foreground pl-4">
+                                  Return to clinic in 3 months or sooner if concerns. Patient educated on signs/symptoms requiring immediate medical attention.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Note Metadata */}
+                        <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+                          <div className="flex items-center justify-between text-xs text-muted-foreground">
+                            <div className="flex items-center gap-4">
+                              <span>Word count: 245</span>
+                              <span>Sections: 5</span>
+                              <span>Medical terms: 18</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CheckCircle2 className="h-3 w-3 text-green-600" />
+                              <span className="text-green-700">Validation passed</span>
+                            </div>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
                     
-                    <Card className="xl:col-span-1">
-                      <CardHeader>
-                        <CardTitle>EHR Fields</CardTitle>
+                    {/* Enhanced EHR Fields Panel */}
+                    <Card className="xl:col-span-4 h-fit border-2 bg-gradient-to-br from-background to-muted/5">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="flex items-center gap-2">
+                          <Server className="h-5 w-5 text-primary" />
+                          EHR Integration
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                          <Label className="font-semibold">Diagnosis Codes</Label>
-                          <div className="text-sm space-y-1">
-                            <div>E11.9 - Type 2 Diabetes</div>
-                            <div>I10 - Hypertension</div>
+                      <CardContent className="space-y-6">
+                        
+                        {/* EHR Selection */}
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <div className="text-sm font-semibold">Target EHR System</div>
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                              <Settings className="h-3 w-3 mr-1" />
+                              Change
+                            </Button>
+                          </div>
+                          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div className="flex items-center gap-2">
+                              <div className="h-3 w-3 rounded-full bg-blue-500"></div>
+                              <div>
+                                <div className="font-medium text-blue-800">{selectedEhr || 'Epic MyChart'}</div>
+                                <div className="text-xs text-blue-600">Connected • Last sync: 2 min ago</div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          <Label className="font-semibold">Procedure Codes</Label>
-                          <div className="text-sm">99213 - Office Visit</div>
+                        
+                        {/* Diagnosis Codes */}
+                        <div className="space-y-3">
+                          <div className="text-sm font-semibold flex items-center justify-between">
+                            Diagnosis Codes (ICD-10)
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                              Add
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded-lg">
+                              <div>
+                                <div className="text-sm font-medium text-green-800">E11.9</div>
+                                <div className="text-xs text-green-600">Type 2 Diabetes Mellitus</div>
+                              </div>
+                              <div className="text-xs text-green-700 font-medium">Primary</div>
+                            </div>
+                            <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded-lg">
+                              <div>
+                                <div className="text-sm font-medium text-green-800">I10</div>
+                                <div className="text-xs text-green-600">Essential Hypertension</div>
+                              </div>
+                              <div className="text-xs text-green-700 font-medium">Secondary</div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="space-y-2">
-                          <Label className="font-semibold">Target EHR</Label>
-                          <div className="text-sm">{selectedEhr || 'Epic'}</div>
+                        
+                        {/* Procedure Codes */}
+                        <div className="space-y-3">
+                          <div className="text-sm font-semibold flex items-center justify-between">
+                            Procedure Codes (CPT)
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                              Edit
+                            </Button>
+                          </div>
+                          <div className="p-2 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div className="text-sm font-medium text-blue-800">99213</div>
+                            <div className="text-xs text-blue-600">Office/Outpatient Visit - Established Patient</div>
+                            <div className="text-xs text-blue-700 mt-1">Confidence: 95%</div>
+                          </div>
+                        </div>
+
+                        {/* Validation Status */}
+                        <div className="space-y-3">
+                          <div className="text-sm font-semibold">Validation Status</div>
+                          <div className="space-y-2 text-xs">
+                            <div className="flex items-center gap-2 text-green-700">
+                              <CheckCircle2 className="h-4 w-4" />
+                              <span>Required fields complete</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-green-700">
+                              <CheckCircle2 className="h-4 w-4" />
+                              <span>Diagnosis codes validated</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-green-700">
+                              <CheckCircle2 className="h-4 w-4" />
+                              <span>Provider credentials verified</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-green-700">
+                              <CheckCircle2 className="h-4 w-4" />
+                              <span>EHR connection active</span>
+                            </div>
+                          </div>
                         </div>
                         
                         <Separator className="my-4" />
                         
-                        <div className="flex flex-col gap-2">
-                          <Button className="w-full rounded-lg" onClick={() => {
-                            setIsSending(true);
-                            setTimeout(() => {
-                              setIsSending(false);
-                              onNavClick('automations');
-                              toast({ title: "Note sent successfully", description: "Clinical note has been delivered to Epic." });
-                            }, 2000);
-                          }}>
+                        {/* Send Actions */}
+                        <div className="space-y-3">
+                          <Button 
+                            className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" 
+                            onClick={() => {
+                              setIsSending(true);
+                              setTimeout(() => {
+                                setIsSending(false);
+                                onNavClick('automations');
+                                toast({ 
+                                  title: "Note sent successfully", 
+                                  description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated` 
+                                });
+                              }, 3000);
+                            }}
+                          >
+                            <Send className="h-5 w-5 mr-2" />
                             Send to {selectedEhr || 'Epic'}
                           </Button>
-                          <Button variant="outline" className="w-full rounded-lg">Save as Draft</Button>
+                          
+                          <div className="grid grid-cols-2 gap-2">
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
+                              </svg>
+                              Save Draft
+                            </Button>
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Export PDF
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
