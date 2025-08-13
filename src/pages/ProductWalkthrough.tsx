@@ -801,17 +801,25 @@ const ProductWalkthrough: React.FC = () => {
                       <div>
                         <div className="text-sm font-semibold mb-4">Select your EHR system</div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                          {["Epic", "Cerner", "Athena", "eCW", "NextGen", "Allscripts"].map((ehr) => (
+                          {[
+                            { name: "Epic", logo: "🏥" },
+                            { name: "Cerner", logo: "⚕️" },
+                            { name: "Athena", logo: "🔬" },
+                            { name: "eCW", logo: "💊" },
+                            { name: "NextGen", logo: "📋" },
+                            { name: "Allscripts", logo: "🩺" }
+                          ].map((ehr) => (
                             <button
-                              key={ehr}
-                              onClick={() => setSelectedEhr(ehr)}
+                              key={ehr.name}
+                              onClick={() => setSelectedEhr(ehr.name)}
                               className={`rounded-xl border-2 hover:border-primary/50 p-4 text-center transition-all duration-200 hover:shadow-md ${
-                                selectedEhr === ehr ? 'border-primary bg-primary/5' : ''
+                                selectedEhr === ehr.name ? 'border-primary bg-primary/5' : ''
                               }`}
                             >
-                              <div className="font-semibold">{ehr}</div>
+                              <div className="text-2xl mb-2">{ehr.logo}</div>
+                              <div className="font-semibold text-sm">{ehr.name}</div>
                               <div className="text-xs text-muted-foreground mt-1">
-                                {ehr === 'Cerner' ? 'Oracle Health' : 'EHR System'}
+                                {ehr.name === 'Cerner' ? 'Oracle Health' : 'EHR System'}
                               </div>
                             </button>
                           ))}
@@ -820,19 +828,27 @@ const ProductWalkthrough: React.FC = () => {
 
                       <div>
                         <div className="text-sm font-semibold mb-3">Connection Method</div>
-                        <div className="rounded-xl border p-4 space-y-3">
-                          <label className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
+                        <div className="rounded-xl border p-4">
+                          <label className="flex items-center gap-3 p-4 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
                             <input type="radio" name="conn" defaultChecked className="scale-110" />
-                            <div>
-                              <div className="font-medium">SMART on FHIR/OAuth</div>
-                              <div className="text-sm text-muted-foreground">Secure, standardized connection (Recommended)</div>
-                            </div>
-                          </label>
-                          <label className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
-                            <input type="radio" name="conn" className="scale-110" />
-                            <div>
-                              <div className="font-medium">API Key</div>
-                              <div className="text-sm text-muted-foreground">Direct API integration</div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <Bot className="h-4 w-4 text-primary" />
+                                <div className="font-medium">AI Agent Integration</div>
+                              </div>
+                              <div className="text-sm text-muted-foreground mt-1">
+                                Secure, intelligent connection that clinicians trust. Our AI agents handle the integration seamlessly while maintaining full HIPAA compliance and data security.
+                              </div>
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
+                                  <CheckCircle2 className="h-3 w-3" />
+                                  Zero-code setup
+                                </span>
+                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-medium">
+                                  <ShieldCheck className="h-3 w-3" />
+                                  Clinician-friendly
+                                </span>
+                              </div>
                             </div>
                           </label>
                         </div>
