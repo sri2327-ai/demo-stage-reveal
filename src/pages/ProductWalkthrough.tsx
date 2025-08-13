@@ -19,6 +19,13 @@ import {
   FileText,
   Server,
   CircleStop,
+  RefreshCw,
+  List,
+  Calendar,
+  Search,
+  Filter,
+  Play,
+  MoreVertical,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -87,9 +94,18 @@ type Appointment = {
 };
 
 const defaultAppointments: Appointment[] = [
-  { name: "John Doe", mrn: "12345", age: "45/M", visit: "Follow-up", lang: "English", flags: "", src: "Epic" },
-  { name: "Jane Smith", mrn: "67890", age: "32/F", visit: "New Patient", lang: "Spanish", flags: "Interpreter", src: "Cerner" },
-  { name: "Peter Jones", mrn: "54321", age: "68/M", visit: "Annual Physical", lang: "English", flags: "Refill", src: "Athena" },
+  { name: "John Doe", mrn: "12345", age: "45/M", visit: "Follow-up", lang: "English", flags: "", src: "Epic - Main Campus" },
+  { name: "Jane Smith", mrn: "67890", age: "32/F", visit: "New Patient", lang: "Spanish", flags: "Interpreter", src: "Cerner - Downtown Clinic" },
+  { name: "Peter Jones", mrn: "54321", age: "68/M", visit: "Annual Physical", lang: "English", flags: "Refill", src: "Athena - Westside Campus" },
+  { name: "Maria Garcia", mrn: "98765", age: "28/F", visit: "Consultation", lang: "Spanish", flags: "High Priority", src: "Epic - Main Campus" },
+  { name: "Robert Chen", mrn: "13579", age: "52/M", visit: "Follow-up", lang: "Chinese", flags: "Interpreter", src: "Cerner - East Location" },
+  { name: "Sarah Johnson", mrn: "24680", age: "39/F", visit: "Procedure", lang: "English", flags: "Pre-op", src: "Allscripts - Surgery Center" },
+  { name: "Mohammed Ali", mrn: "11223", age: "62/M", visit: "Cardiology", lang: "Arabic", flags: "Interpreter", src: "Epic - Heart Center" },
+  { name: "Lisa Thompson", mrn: "33445", age: "29/F", visit: "Urgent Care", lang: "English", flags: "Same Day", src: "NextGen - Urgent Care" },
+  { name: "David Kim", mrn: "55667", age: "41/M", visit: "Telemedicine", lang: "Korean", flags: "Virtual", src: "Epic - Telehealth" },
+  { name: "Emily Rodriguez", mrn: "77889", age: "36/F", visit: "Dermatology", lang: "Spanish", flags: "Specialist", src: "Cerner - Specialty Clinic" },
+  { name: "James Wilson", mrn: "99001", age: "58/M", visit: "Orthopedic", lang: "English", flags: "Post-op", src: "Athena - Sports Medicine" },
+  { name: "Anna Petrov", mrn: "12346", age: "33/F", visit: "Obstetrics", lang: "Russian", flags: "Interpreter", src: "Epic - Women's Health" },
 ];
 
 const visitData = [
@@ -115,6 +131,9 @@ const ProductWalkthrough: React.FC = () => {
   const [appointments] = useState<Appointment[]>(defaultAppointments);
   const [selectedPatient, setSelectedPatient] = useState<Appointment | null>(null);
   const [patientContext, setPatientContext] = useState<string>("");
+  const [scheduleView, setScheduleView] = useState<'list' | 'calendar'>('list');
+  const [scheduleSearch, setScheduleSearch] = useState<string>("");
+  const [locationFilter, setLocationFilter] = useState<string>("all");
 
   const [isRecording, setIsRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -1216,82 +1235,281 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     Unified Schedule
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Schedule imported from multiple EHR systems and practice management platforms.</p>
+                  <p className="mt-3 text-muted-foreground text-lg">
+                    Schedule imported from multiple EHR systems and practice management platforms across {new Set(appointments.map(a => a.src.split(' - ')[0])).size} systems 
+                    and {new Set(appointments.map(a => a.src.split(' - ')[1] || 'Main')).size} locations.
+                  </p>
                 </div>
 
-                <Card className="overflow-hidden">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                          Epic: Synced 2 min ago
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                          Cerner: Synced 5 min ago
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse"></div>
-                          AthenaHealth: Syncing…
-                        </span>
+                {/* Enhanced Controls Section */}
+                <div className="grid gap-4 lg:gap-6 mb-6">
+                  <Card className="border-2 bg-gradient-to-r from-background to-muted/5">
+                    <CardHeader className="pb-4">
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        
+                        {/* Sync Status - Enhanced */}
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                          <div className="flex items-center gap-2 text-sm">
+                            <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse"></div>
+                            <span className="font-medium text-green-700">Live Sync Active</span>
+                          </div>
+                          <div className="h-4 w-px bg-border"></div>
+                          <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-muted-foreground">
+                            <span className="flex items-center gap-1.5">
+                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                              Epic (4 locations)
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                              Cerner (3 locations)
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                              <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                              Athena (2 locations)
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                              NextGen (1 location)
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Controls */}
+                        <div className="flex items-center gap-3">
+                          <Button variant="outline" size="sm" className="rounded-lg">
+                            <RefreshCw className="h-4 w-4 mr-2" />
+                            Sync All
+                          </Button>
+                          <div className="h-4 w-px bg-border"></div>
+                          <Tabs value={scheduleView} onValueChange={(v: 'list' | 'calendar') => setScheduleView(v)} className="w-fit">
+                            <TabsList className="bg-muted/50">
+                              <TabsTrigger value="list" className="text-xs px-3">
+                                <List className="h-3 w-3 mr-1" />
+                                List
+                              </TabsTrigger>
+                              <TabsTrigger value="calendar" className="text-xs px-3">
+                                <Calendar className="h-3 w-3 mr-1" />
+                                Calendar
+                              </TabsTrigger>
+                            </TabsList>
+                          </Tabs>
+                        </div>
                       </div>
-                      <Button variant="outline" className="rounded-lg">
-                        Sync Now
-                      </Button>
-                    </div>
-                  </CardHeader>
+                    </CardHeader>
+
+                    {/* Search and Filter Bar */}
+                    <CardContent className="pt-0 pb-6">
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex-1">
+                          <div className="relative">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <input
+                              type="text"
+                              placeholder="Search patients, MRN, visit type..."
+                              value={scheduleSearch}
+                              onChange={(e) => setScheduleSearch(e.target.value)}
+                              className="w-full pl-10 pr-4 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex gap-3">
+                          <select
+                            value={locationFilter}
+                            onChange={(e) => setLocationFilter(e.target.value)}
+                            className="px-3 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary min-w-[140px]"
+                          >
+                            <option value="all">All Locations</option>
+                            <option value="Main Campus">Main Campus</option>
+                            <option value="Downtown Clinic">Downtown Clinic</option>
+                            <option value="Westside Campus">Westside Campus</option>
+                            <option value="East Location">East Location</option>
+                            <option value="Surgery Center">Surgery Center</option>
+                            <option value="Heart Center">Heart Center</option>
+                            <option value="Urgent Care">Urgent Care</option>
+                            <option value="Telehealth">Telehealth</option>
+                            <option value="Specialty Clinic">Specialty Clinic</option>
+                            <option value="Sports Medicine">Sports Medicine</option>
+                            <option value="Women's Health">Women's Health</option>
+                          </select>
+                          <Button variant="outline" size="sm" className="rounded-lg whitespace-nowrap">
+                            <Filter className="h-4 w-4 mr-2" />
+                            More Filters
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Schedule Content */}
+                <Card className="overflow-hidden border-2">
                   <CardContent className="p-0">
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b bg-muted/50">
-                            {["Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Flags", "Source", "Actions"].map((header) => (
-                              <th key={header} className="text-left px-6 py-4 font-semibold text-sm">
-                                {header}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {appointments.map((appointment) => (
-                            <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-colors">
-                              <td className="px-6 py-4 font-medium">{appointment.name}</td>
-                              <td className="px-6 py-4 text-muted-foreground">{appointment.mrn}</td>
-                              <td className="px-6 py-4">{appointment.age}</td>
-                              <td className="px-6 py-4">
-                                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary">
-                                  {appointment.visit}
-                                </span>
-                              </td>
-                              <td className="px-6 py-4">{appointment.lang}</td>
-                              <td className="px-6 py-4">
-                                {appointment.flags && (
-                                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800">
-                                    {appointment.flags}
-                                  </span>
-                                )}
-                              </td>
-                              <td className="px-6 py-4">
-                                <span className="inline-flex items-center gap-1">
-                                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                                  {appointment.src}
-                                </span>
-                              </td>
-                              <td className="px-6 py-4">
-                                <Button 
-                                  size="sm" 
-                                  onClick={() => handleOpenAppointment(appointment)} 
-                                  className="rounded-lg"
-                                >
-                                  Open
-                                </Button>
-                              </td>
+                    {scheduleView === 'list' ? (
+                      <div className="overflow-x-auto">
+                        <table className="w-full">
+                          <thead>
+                            <tr className="border-b bg-gradient-to-r from-muted/80 to-muted/40">
+                              {["Time", "Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Priority", "Location & System", "Actions"].map((header) => (
+                                <th key={header} className="text-left px-4 lg:px-6 py-4 font-semibold text-xs lg:text-sm whitespace-nowrap">
+                                  {header}
+                                </th>
+                              ))}
                             </tr>
+                          </thead>
+                          <tbody>
+                            {appointments
+                              .filter(appointment => {
+                                const matchesSearch = scheduleSearch === "" || 
+                                  appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
+                                  appointment.mrn.includes(scheduleSearch) ||
+                                  appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
+                                const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
+                                return matchesSearch && matchesLocation;
+                              })
+                              .map((appointment, index) => {
+                                const [system, location] = appointment.src.split(' - ');
+                                const times = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM"];
+                                const time = times[index % times.length];
+                                
+                                return (
+                                  <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-all duration-200 group animate-fade-in">
+                                    <td className="px-4 lg:px-6 py-4 font-mono text-xs lg:text-sm font-medium">
+                                      {time}
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4">
+                                      <div className="font-medium text-sm">{appointment.name}</div>
+                                      <div className="text-xs text-muted-foreground mt-0.5">ID: {appointment.mrn}</div>
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4 text-muted-foreground font-mono text-xs lg:text-sm">
+                                      {appointment.mrn}
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4 text-sm">{appointment.age}</td>
+                                    <td className="px-4 lg:px-6 py-4">
+                                      <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                        {appointment.visit}
+                                      </span>
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4 text-sm">{appointment.lang}</td>
+                                    <td className="px-4 lg:px-6 py-4">
+                                      {appointment.flags && (
+                                        <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border ${
+                                          appointment.flags.includes('High Priority') ? 'bg-red-50 text-red-700 border-red-200' :
+                                          appointment.flags.includes('Interpreter') ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                                          appointment.flags.includes('Pre-op') ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                                          appointment.flags.includes('Same Day') ? 'bg-orange-50 text-orange-700 border-orange-200' :
+                                          appointment.flags.includes('Virtual') ? 'bg-green-50 text-green-700 border-green-200' :
+                                          appointment.flags.includes('Post-op') ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
+                                          'bg-yellow-50 text-yellow-700 border-yellow-200'
+                                        }`}>
+                                          {appointment.flags}
+                                        </span>
+                                      )}
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4">
+                                      <div className="flex flex-col gap-1">
+                                        <div className="flex items-center gap-2">
+                                          <div className={`h-2 w-2 rounded-full ${
+                                            system === 'Epic' ? 'bg-blue-500' :
+                                            system === 'Cerner' ? 'bg-green-500' :
+                                            system === 'Athena' ? 'bg-purple-500' :
+                                            system === 'Allscripts' ? 'bg-orange-500' :
+                                            system === 'NextGen' ? 'bg-red-500' :
+                                            'bg-gray-500'
+                                          }`}></div>
+                                          <span className="text-xs font-medium">{system}</span>
+                                        </div>
+                                        <div className="text-xs text-muted-foreground pl-4">
+                                          {location || 'Main Location'}
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4">
+                                      <div className="flex items-center gap-2">
+                                        <Button 
+                                          size="sm" 
+                                          onClick={() => handleOpenAppointment(appointment)} 
+                                          className="rounded-lg h-8 px-3 text-xs font-medium group-hover:shadow-md transition-shadow"
+                                        >
+                                          <Play className="h-3 w-3 mr-1" />
+                                          Start
+                                        </Button>
+                                        <Button 
+                                          variant="outline" 
+                                          size="sm" 
+                                          className="rounded-lg h-8 px-2"
+                                        >
+                                          <MoreVertical className="h-3 w-3" />
+                                        </Button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                          </tbody>
+                        </table>
+
+                        {/* Empty State */}
+                        {appointments.filter(appointment => {
+                          const matchesSearch = scheduleSearch === "" || 
+                            appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
+                            appointment.mrn.includes(scheduleSearch) ||
+                            appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
+                          const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
+                          return matchesSearch && matchesLocation;
+                        }).length === 0 && (
+                          <div className="text-center py-12">
+                            <div className="text-4xl opacity-20 mb-4">📅</div>
+                            <div className="text-lg font-medium text-muted-foreground">No appointments found</div>
+                            <div className="text-sm text-muted-foreground mt-2">
+                              Try adjusting your search or filter criteria
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      /* Calendar View */
+                      <div className="p-6">
+                        <div className="grid grid-cols-7 gap-4 mb-6">
+                          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                            <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
+                              {day}
+                            </div>
                           ))}
-                        </tbody>
-                      </table>
-                    </div>
+                          {Array.from({ length: 35 }, (_, i) => {
+                            const isToday = i === 15; // Mock today
+                            const hasAppointments = Math.random() > 0.7;
+                            const appointmentCount = hasAppointments ? Math.floor(Math.random() * 5) + 1 : 0;
+                            
+                            return (
+                              <div 
+                                key={i} 
+                                className={`min-h-[80px] p-2 border rounded-lg transition-colors cursor-pointer ${
+                                  isToday ? 'bg-primary/10 border-primary/30' : 
+                                  hasAppointments ? 'bg-muted/30 hover:bg-muted/50' : 
+                                  'hover:bg-muted/20'
+                                }`}
+                              >
+                                <div className={`text-sm font-medium mb-1 ${isToday ? 'text-primary' : ''}`}>
+                                  {i + 1}
+                                </div>
+                                {hasAppointments && (
+                                  <div className="space-y-1">
+                                    {Array.from({ length: appointmentCount }, (_, j) => (
+                                      <div key={j} className="text-xs p-1 bg-primary/20 text-primary rounded truncate">
+                                        {j === 0 ? '9:00 AM' : j === 1 ? '10:30 AM' : j === 2 ? '2:00 PM' : '3:30 PM'}
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="text-center text-sm text-muted-foreground">
+                          Click on any date to view detailed appointments
+                        </div>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </div>
