@@ -1635,7 +1635,7 @@ const ProductWalkthrough: React.FC = () => {
                                   onClick={toggleRecording} 
                                   className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${
                                     isRecording 
-                                      ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25 animate-pulse' 
+                                      ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' 
                                       : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'
                                   }`}
                                 >
