@@ -395,7 +395,7 @@ const ProductWalkthrough: React.FC = () => {
                     </CardHeader>
                     <CardContent className="flex flex-col gap-4">
                       <Tabs defaultValue="previous" className="w-full">
-                        <TabsList className="w-full inline-flex gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-xl">
+                        <TabsList className="w-full inline-flex gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap bg-muted p-1 rounded-xl h-auto min-h-[40px]">
                           <TabsTrigger value="previous" className="rounded-full px-3 py-1.5 text-sm">Paste previous note</TabsTrigger>
                           <TabsTrigger value="library" className="rounded-full px-3 py-1.5 text-sm">Template library</TabsTrigger>
                           <TabsTrigger value="import" className="rounded-full px-3 py-1.5 text-sm">Import template</TabsTrigger>
@@ -419,7 +419,7 @@ const ProductWalkthrough: React.FC = () => {
 
                         <TabsContent value="library" className="space-y-3">
                           <div className="text-sm font-medium">Select Specialty Template</div>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+                          <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(180px,1fr))]">
                             {specialtyTemplates.map((spec) => (
                               <button
                                 key={spec.slug}
