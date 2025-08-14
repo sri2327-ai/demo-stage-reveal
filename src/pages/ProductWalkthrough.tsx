@@ -282,6 +282,7 @@ const ProductWalkthrough: React.FC = () => {
   }, [isRecording]);
 
   const onNavClick = (id: string) => {
+    console.log('Navigating to:', id);
     setActive(id);
     setActiveTooltip(null); // Hide tooltip when navigating
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -453,8 +454,14 @@ const ProductWalkthrough: React.FC = () => {
                     <button
                       className={`nav-button ${active === s.id ? "active" : ""}`}
                       onClick={() => onNavClick(s.id)}
-                      onMouseEnter={() => setActiveTooltip(s.id)}
-                      onMouseLeave={() => setActiveTooltip(null)}
+                      onMouseEnter={() => {
+                        console.log('Hover on', s.id, s.description);
+                        setActiveTooltip(s.id);
+                      }}
+                      onMouseLeave={() => {
+                        console.log('Leave', s.id);
+                        setActiveTooltip(null);
+                      }}
                       aria-current={active === s.id ? "step" : undefined}
                       data-screen={s.id}
                       title={s.description} // For mobile tooltip
@@ -465,12 +472,10 @@ const ProductWalkthrough: React.FC = () => {
                     
                     {/* Desktop Tooltip */}
                     {activeTooltip === s.id && (
-                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 z-50 animate-fade-in hidden lg:block">
-                        <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-xl max-w-xs border">
-                          <div className="font-medium mb-1">{s.label}</div>
-                          <div className="opacity-90">{s.description}</div>
-                          {/* Arrow */}
-                          <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-gray-900"></div>
+                      <div className="tooltip-container">
+                        <div className="tooltip-content">
+                          <div className="tooltip-title">{s.label}</div>
+                          <div className="tooltip-description">{s.description}</div>
                         </div>
                       </div>
                     )}
@@ -2589,14 +2594,14 @@ const ProductWalkthrough: React.FC = () => {
                     {
                       key: "labOrders",
                       title: "Lab Order Processing", 
-                      description: "Automatically process and track lab orders mentioned in visit notes.",
+                      description: "Automatically process and track lab orders mentioned in the current visit notes and send them to the lab.",
                       enabled: automations.labOrders,
                       color: "gray"
                     },
                     {
                       key: "prescriptionRefills",
                       title: "Prescription Refill Alerts",
-                      description: "Alert when patients are due for prescription refills based on their medication history.",
+                      description: "Alert when patients are due for prescription refills and send prescription orders from the current visit to pharmacy.",
                       enabled: automations.prescriptionRefills,
                       color: "orange"
                     }
