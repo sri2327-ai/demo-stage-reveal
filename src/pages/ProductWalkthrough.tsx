@@ -392,27 +392,27 @@ const ProductWalkthrough: React.FC = () => {
 
         <div className="main-content">
           <div className="top-nav">
-            <div>
-              <h1 className="text-base md:text-lg font-semibold">AI Medical Scribe & AI Agents Workflow</h1>
-              <p className="text-xs opacity-80">End-to-end clinical documentation & automation platform</p>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-sm md:text-base font-semibold truncate">AI Medical Scribe & Agents</h1>
+              <p className="text-xs opacity-70 truncate">Clinical documentation & automation</p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-full px-3 py-1 border border-blue-200 bg-blue-50/50" aria-label="Clinician">
-                <div className="h-6 w-6 rounded-full bg-blue-100 grid place-items-center text-xs font-medium border border-blue-300" aria-hidden>
+            <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
+              <div className="hidden sm:flex items-center gap-2 rounded-full px-2 lg:px-3 py-1 border border-blue-200 bg-blue-50/50" aria-label="Clinician">
+                <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-blue-100 grid place-items-center text-xs font-medium border border-blue-300" aria-hidden>
                   SM
                 </div>
-                <span className="text-sm hidden md:inline font-medium text-blue-700">Dr. Sarah Mitchell</span>
+                <span className="text-xs lg:text-sm font-medium text-blue-700 hidden md:inline">Dr. Sarah Mitchell</span>
               </div>
-              <Button asChild className="rounded-full">
-                <Link to="/welcome">Schedule a product walkthrough</Link>
+              <Button asChild className="rounded-full text-xs lg:text-sm px-3 lg:px-4 py-1.5 lg:py-2">
+                <Link to="/welcome">Schedule Demo</Link>
               </Button>
             </div>
           </div>
 
-          <main ref={containerRef} className="w-full h-full">
+          <main className="w-full">
             {/* Setup Section */}
-            <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
@@ -1273,8 +1273,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Schedule Section */}
-            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -1563,8 +1563,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Capture Section */}
-            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -2022,8 +2022,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Coding Section */}
-            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -2092,8 +2092,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Send to EHR Section */}
-            <section id="send" className={`screen ${active === "send" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="send" className={`screen ${active === "send" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -2436,8 +2436,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Automations Section */}
-            <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
@@ -2565,8 +2565,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* AI Agent Section */}
-            <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
@@ -2695,8 +2695,8 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Dashboard Section */}
-            <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"} h-full overflow-y-auto`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
