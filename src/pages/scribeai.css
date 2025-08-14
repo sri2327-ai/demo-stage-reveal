@@ -30,12 +30,12 @@
   box-shadow: 0 8px 32px hsl(var(--primary) / 0.12), 0 0 0 1px hsl(var(--border) / 0.1);
 }
 
-.nav-brand { width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.nav-brand { width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; padding: 8px; }
 .nav-brand-icon { color: hsl(var(--primary)); font-weight: 700; font-size: 18px; }
 .nav-brand-text { margin-left: 10px; font-weight: 600; color: hsl(var(--foreground)); opacity: 0; visibility: hidden; white-space: nowrap; transition: all .25s ease; }
 .left-nav:hover .nav-brand-text { opacity: 1; visibility: visible; }
-.nav-logo { height: 28px; max-width: 100%; object-fit: contain; }
-.left-nav:hover .nav-logo { height: 32px; transition: height 250ms ease; }
+.nav-logo { height: 36px; max-width: 100%; object-fit: contain; transition: height 250ms ease; }
+.left-nav:hover .nav-logo { height: 40px; transition: height 250ms ease; }
 
 .nav-list { list-style: none; padding: 0; margin: 0; width: 100%; }
 .nav-item { margin-bottom: 8px; }
@@ -125,6 +125,49 @@
   background-color: hsl(var(--muted-foreground) / 0.3);
 }
 
+/* Enhanced tooltip animations */
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Interactive demo guide animations */
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 /* Tablet and Mobile */
 @media (max-width: 1024px) {
   .left-nav { 
@@ -158,6 +201,37 @@
     border-radius: 12px;
     min-height: 48px;
     position: relative;
+  }
+  
+  /* Mobile tooltips on tap */
+  .nav-button:active::before {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 60;
+    animation: fadeInUp 0.2s ease-out;
+  }
+  
+  .nav-button:active::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid rgba(0, 0, 0, 0.9);
+    z-index: 61;
   }
   .nav-icon { width: 22px; height: 22px; }
   .main-content { margin-left: 0; padding-bottom: 100px; }

@@ -62,14 +62,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
 
 const sections = [
-  { id: "setup", label: "Setup" },
-  { id: "schedule", label: "Schedule" },
-  { id: "capture", label: "Capture" },
-  { id: "coding", label: "Coding" },
-  { id: "send", label: "Send to EHR" },
-  { id: "automations", label: "Automations" },
-  { id: "agent", label: "AI Agent" },
-  { id: "dashboard", label: "Dashboard" },
+  { id: "setup", label: "Setup", description: "Configure your note format and connect to your EHR system" },
+  { id: "schedule", label: "Schedule", description: "View and manage appointments from multiple systems" },
+  { id: "capture", label: "Capture", description: "Record patient encounters with AI-powered transcription" },
+  { id: "coding", label: "Coding", description: "Review and validate AI-generated medical codes" },
+  { id: "send", label: "Send to EHR", description: "Securely send documentation to your electronic health record" },
+  { id: "automations", label: "Automations", description: "Configure workflow automations to streamline operations" },
+  { id: "agent", label: "AI Agent", description: "Set up AI agents for patient communication and support" },
+  { id: "dashboard", label: "Dashboard", description: "Monitor performance metrics and system analytics" },
 ];
 
 const iconById: Record<string, React.ComponentType<any>> = {
@@ -168,6 +168,26 @@ const ProductWalkthrough: React.FC = () => {
     prescriptionRefills: true
   });
 
+  // Demo guidance state
+  const [showDemoGuide, setShowDemoGuide] = useState(true);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showDemoGuide) {
+        setShowDemoGuide(false);
+      }
+      if (e.key === 'h' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        setShowDemoGuide(true);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showDemoGuide]);
+
   // Demo states for interactive functionality
   const [analyzing, setAnalyzing] = useState(false);
   const [importing, setImporting] = useState(false);
@@ -263,6 +283,7 @@ const ProductWalkthrough: React.FC = () => {
 
   const onNavClick = (id: string) => {
     setActive(id);
+    setActiveTooltip(null); // Hide tooltip when navigating
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -365,6 +386,59 @@ const ProductWalkthrough: React.FC = () => {
         </script>
       </Helmet>
 
+      {/* Interactive Demo Guide */}
+      {showDemoGuide && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-scale-in border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <Wand2 className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Interactive Demo</h3>
+                <p className="text-sm text-muted-foreground">Explore AI Medical Scribe & Agents</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4 mb-6">
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">Click on any menu item to explore different modules and features</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">Hover over navigation items to see detailed descriptions</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">Try interactive elements like buttons and forms throughout the demo</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">Press <kbd className="px-2 py-1 bg-gray-100 rounded text-xs">Ctrl+H</kbd> to reopen this guide anytime</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-3">
+              <Button 
+                onClick={() => setShowDemoGuide(false)}
+                className="flex-1 rounded-full"
+              >
+                Start Exploring
+              </Button>
+              <Button 
+                variant="ghost" 
+                onClick={() => setShowDemoGuide(false)}
+                className="px-4 rounded-full"
+                size="sm"
+              >
+                Skip
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="scribeai-layout">
         <aside className="left-nav">
           <div className="nav-brand">
@@ -375,15 +449,32 @@ const ProductWalkthrough: React.FC = () => {
               const Icon = iconById[s.id];
               return (
                 <li key={s.id} className="nav-item">
-                  <button
-                    className={`nav-button ${active === s.id ? "active" : ""}`}
-                    onClick={() => onNavClick(s.id)}
-                    aria-current={active === s.id ? "step" : undefined}
-                    data-screen={s.id}
-                  >
-                    {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
-                    <span className="nav-text">{s.label}</span>
-                  </button>
+                  <div className="relative">
+                    <button
+                      className={`nav-button ${active === s.id ? "active" : ""}`}
+                      onClick={() => onNavClick(s.id)}
+                      onMouseEnter={() => setActiveTooltip(s.id)}
+                      onMouseLeave={() => setActiveTooltip(null)}
+                      aria-current={active === s.id ? "step" : undefined}
+                      data-screen={s.id}
+                      title={s.description} // For mobile tooltip
+                    >
+                      {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
+                      <span className="nav-text">{s.label}</span>
+                    </button>
+                    
+                    {/* Desktop Tooltip */}
+                    {activeTooltip === s.id && (
+                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 z-50 opacity-0 animate-fade-in hidden lg:block">
+                        <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg max-w-xs">
+                          <div className="font-medium mb-1">{s.label}</div>
+                          <div className="opacity-90">{s.description}</div>
+                          {/* Arrow */}
+                          <div className="absolute right-full top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45 -mr-1"></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </li>
               );
             })}
@@ -397,6 +488,16 @@ const ProductWalkthrough: React.FC = () => {
               <p className="text-xs opacity-70 truncate">Clinical documentation & automation</p>
             </div>
             <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowDemoGuide(true)}
+                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-3"
+                title="Show demo guide"
+              >
+                <Wand2 className="h-4 w-4" />
+                <span className="hidden sm:inline ml-1 text-xs">Guide</span>
+              </Button>
               <div className="hidden sm:flex items-center gap-2 rounded-full px-2 lg:px-3 py-1 border border-blue-200 bg-blue-50/50" aria-label="Clinician">
                 <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-blue-100 grid place-items-center text-xs font-medium border border-blue-300" aria-hidden>
                   SM
