@@ -465,12 +465,12 @@ const ProductWalkthrough: React.FC = () => {
                     
                     {/* Desktop Tooltip */}
                     {activeTooltip === s.id && (
-                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 z-50 opacity-0 animate-fade-in hidden lg:block">
-                        <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg max-w-xs">
+                      <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 z-50 animate-fade-in hidden lg:block">
+                        <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-xl max-w-xs border">
                           <div className="font-medium mb-1">{s.label}</div>
                           <div className="opacity-90">{s.description}</div>
                           {/* Arrow */}
-                          <div className="absolute right-full top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45 -mr-1"></div>
+                          <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-gray-900"></div>
                         </div>
                       </div>
                     )}
@@ -1895,7 +1895,10 @@ const ProductWalkthrough: React.FC = () => {
                                   variant="outline"
                                   size="sm"
                                   className="rounded-lg"
-                                  onClick={() => toast({ title: "Voice dictation", description: "Feature coming soon!" })}
+                                  onClick={() => {
+                                    setCaptureMode('audio');
+                                    toast({ title: "Voice dictation activated", description: "You can now use voice dictation to capture notes" });
+                                  }}
                                 >
                                   <Mic className="h-4 w-4 mr-2" />
                                   Voice Dictation
