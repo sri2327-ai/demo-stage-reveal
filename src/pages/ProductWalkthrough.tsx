@@ -171,6 +171,13 @@ const ProductWalkthrough: React.FC = () => {
   // Demo guidance state
   const [showDemoGuide, setShowDemoGuide] = useState(true);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  
+  // Demo popup conversion state
+  const [showDemoPopup, setShowDemoPopup] = useState(false);
+  const [hasShownPopup, setHasShownPopup] = useState(false);
+  const [timeOnPage, setTimeOnPage] = useState(0);
+  const [userInteractions, setUserInteractions] = useState(0);
+  const timeOnPageRef = useRef<NodeJS.Timeout | null>(null);
 
   // Keyboard navigation
   useEffect(() => {
@@ -187,6 +194,67 @@ const ProductWalkthrough: React.FC = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showDemoGuide]);
+
+  // Demo popup engagement tracking
+  useEffect(() => {
+    // Track time on page
+    timeOnPageRef.current = setInterval(() => {
+      setTimeOnPage(prev => prev + 1);
+    }, 1000);
+
+    // Track user interactions
+    const trackInteraction = () => {
+      setUserInteractions(prev => prev + 1);
+    };
+
+    // Add event listeners for user engagement
+    window.addEventListener('scroll', trackInteraction);
+    window.addEventListener('click', trackInteraction);
+    window.addEventListener('keydown', trackInteraction);
+    window.addEventListener('mousemove', trackInteraction);
+
+    return () => {
+      if (timeOnPageRef.current) {
+        clearInterval(timeOnPageRef.current);
+      }
+      window.removeEventListener('scroll', trackInteraction);
+      window.removeEventListener('click', trackInteraction);
+      window.removeEventListener('keydown', trackInteraction);
+      window.removeEventListener('mousemove', trackInteraction);
+    };
+  }, []);
+
+  // Show demo popup based on engagement
+  useEffect(() => {
+    if (hasShownPopup || showDemoPopup) return;
+    
+    // Show popup after 75 seconds of time on page OR after 10+ interactions and 45+ seconds
+    const shouldShowPopup = 
+      timeOnPage >= 75 || 
+      (timeOnPage >= 45 && userInteractions >= 10);
+    
+    if (shouldShowPopup) {
+      setShowDemoPopup(true);
+      setHasShownPopup(true);
+    }
+  }, [timeOnPage, userInteractions, hasShownPopup, showDemoPopup]);
+
+  // Handle demo popup actions
+  const handleBookDemo = () => {
+    // In a real app, this would redirect to booking page or trigger booking flow
+    window.open('https://calendly.com/s10ai-demo', '_blank');
+    setShowDemoPopup(false);
+  };
+
+  const handleClosePopup = () => {
+    setShowDemoPopup(false);
+    // Optionally show again after some time if user continues browsing
+    setTimeout(() => {
+      if (timeOnPage > 300) { // If still on page after 5 more minutes
+        setHasShownPopup(false);
+      }
+    }, 300000); // 5 minutes
+  };
 
   // Demo states for interactive functionality
   const [analyzing, setAnalyzing] = useState(false);
@@ -2903,6 +2971,42 @@ const ProductWalkthrough: React.FC = () => {
                 }, 2000);
               }}>
                 Send to EHR
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        {/* Demo Conversion Popup */}
+        <AlertDialog open={showDemoPopup} onOpenChange={setShowDemoPopup}>
+          <AlertDialogContent className="max-w-md">
+            <AlertDialogHeader className="text-center space-y-4">
+              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <CalendarDays className="h-8 w-8 text-white" />
+              </div>
+              <AlertDialogTitle className="text-xl font-semibold">
+                Ready to see ScribeAI in action?
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-base leading-relaxed">
+                You've explored our product walkthrough. Now discover how ScribeAI can transform your practice with a personalized demo tailored to your specialty.
+                <br /><br />
+                <strong>Get your custom demo and see:</strong>
+                <ul className="text-left mt-2 space-y-1 text-sm">
+                  <li>• Live AI transcription with your specialty templates</li>
+                  <li>• EHR integration setup for your practice</li>
+                  <li>• ROI calculations specific to your workflow</li>
+                  <li>• Implementation timeline and support options</li>
+                </ul>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row">
+              <AlertDialogCancel onClick={handleClosePopup} className="order-2 sm:order-1">
+                Maybe Later
+              </AlertDialogCancel>
+              <AlertDialogAction 
+                onClick={handleBookDemo}
+                className="order-1 sm:order-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6"
+              >
+                Book Free Demo
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
