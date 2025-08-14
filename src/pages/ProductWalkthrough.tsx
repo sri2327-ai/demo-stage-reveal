@@ -26,6 +26,7 @@ import {
   Filter,
   Play,
   MoreVertical,
+  ArrowLeft,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -572,16 +573,16 @@ const ProductWalkthrough: React.FC = () => {
                 <span className="hidden sm:inline ml-1 text-xs">Guide</span>
               </Button>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 asChild
-                className="hidden sm:flex items-center gap-2 rounded-full px-2 lg:px-3 py-1 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted border border-border/50 hover:border-border transition-all min-w-0"
+                className="hidden sm:flex items-center gap-2 rounded-full px-3 lg:px-4 py-2 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border hover:border-border/80 hover:shadow-sm transition-all min-w-0"
               >
                 <Link to="/" className="flex items-center gap-2">
-                  <div className="h-4 w-4 lg:h-5 lg:w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center">
-                    <span className="text-[10px] lg:text-xs font-bold text-white">S10</span>
+                  <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center shadow-sm">
+                    <ArrowLeft className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" strokeWidth={2.5} />
                   </div>
-                  <span className="hidden md:inline">Return to S10.AI</span>
+                  <span className="hidden md:inline font-medium">Return to S10.AI website</span>
                 </Link>
               </Button>
               <Button asChild className="rounded-full text-xs lg:text-sm px-2 sm:px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl transition-all min-w-0">
