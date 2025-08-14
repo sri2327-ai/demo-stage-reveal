@@ -577,7 +577,7 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
                 <span className="text-xs lg:text-sm font-medium text-blue-700 hidden md:inline">Dr. Sarah Mitchell</span>
               </div>
-              <Button asChild className="rounded-full text-xs lg:text-sm px-3 lg:px-4 py-1.5 lg:py-2">
+              <Button asChild className="rounded-full text-xs lg:text-sm px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl">
                 <Link to="/welcome">Schedule Demo</Link>
               </Button>
             </div>
