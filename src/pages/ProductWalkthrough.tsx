@@ -2980,14 +2980,14 @@ const ProductWalkthrough: React.FC = () => {
         <AlertDialog open={showDemoPopup} onOpenChange={setShowDemoPopup}>
           <AlertDialogContent className="max-w-md">
             <AlertDialogHeader className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center shadow-lg">
                 <CalendarDays className="h-8 w-8 text-white" />
               </div>
               <AlertDialogTitle className="text-xl font-semibold">
-                Ready to see ScribeAI in action?
+                Ready to see S10.AI in action?
               </AlertDialogTitle>
               <AlertDialogDescription className="text-base leading-relaxed">
-                You've explored our product walkthrough. Now discover how ScribeAI can transform your practice with a personalized demo tailored to your specialty.
+                You've explored our product walkthrough. Now discover how S10.AI can transform your practice with a personalized demo tailored to your specialty.
                 <br /><br />
                 <strong>Get your custom demo and see:</strong>
                 <ul className="text-left mt-2 space-y-1 text-sm">
@@ -3004,7 +3004,7 @@ const ProductWalkthrough: React.FC = () => {
               </AlertDialogCancel>
               <AlertDialogAction 
                 onClick={handleBookDemo}
-                className="order-1 sm:order-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6"
+                className="order-1 sm:order-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6"
               >
                 Book Free Demo
               </AlertDialogAction>
