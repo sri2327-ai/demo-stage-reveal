@@ -2584,7 +2584,7 @@ const ProductWalkthrough: React.FC = () => {
                           <Bot className="h-6 w-6 text-gray-600" />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-800">AI Agent "MedAssist" Ready</div>
+                          <div className="font-medium text-gray-800">AI Agent Ready</div>
                           <div className="text-sm text-gray-600">Trained on medical protocols • 24/7 availability • Multi-language support</div>
                         </div>
                       </div>
