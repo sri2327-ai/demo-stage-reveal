@@ -87,15 +87,31 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  background: hsl(var(--card));
+  background: hsl(var(--card) / 0.95);
   border-bottom: 1px solid hsl(var(--border));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  gap: 16px;
+  padding: 8px 12px;
+  gap: 8px;
   backdrop-filter: blur(8px);
-  min-height: 60px;
+  min-height: 56px;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .top-nav {
+    padding: 12px 16px;
+    min-height: 60px;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .top-nav {
+    padding: 12px 20px;
+    gap: 16px;
+  }
 }
 
 .screen { min-height: calc(100vh - 60px); }
@@ -160,10 +176,9 @@
 /* Desktop Tooltip Styles */
 .tooltip-container {
   position: absolute;
-  left: 100%;
+  left: calc(100% + 8px);
   top: 50%;
   transform: translateY(-50%);
-  margin-left: 12px;
   z-index: 9999;
   pointer-events: none;
   animation: tooltipFadeIn 0.2s ease-out forwards;
@@ -176,11 +191,12 @@
 }
 
 .tooltip-content {
-  background: #1f2937;
-  color: white;
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
   padding: 12px 16px;
   border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px hsl(var(--primary) / 0.15);
   max-width: 280px;
   font-size: 13px;
   line-height: 1.4;
@@ -194,17 +210,27 @@
   top: 50%;
   transform: translateY(-50%);
   border: 6px solid transparent;
-  border-right-color: #1f2937;
+  border-right-color: hsl(var(--border));
+}
+
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  right: calc(100% - 1px);
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: hsl(var(--popover));
 }
 
 .tooltip-title {
   font-weight: 600;
   margin-bottom: 4px;
-  color: #f9fafb;
+  color: hsl(var(--popover-foreground));
 }
 
 .tooltip-description {
-  color: #d1d5db;
+  color: hsl(var(--muted-foreground));
   font-size: 12px;
 }
 
@@ -300,19 +326,11 @@
   }
   .nav-icon { width: 22px; height: 22px; }
   .main-content { margin-left: 0; padding-bottom: 100px; }
-  .top-nav { 
-    padding: 12px 16px;
-    border-bottom: 1px solid hsl(var(--border) / 0.5); 
-  }
   .screen { min-height: calc(100vh - 60px); }
 }
 
 /* Small mobile adjustments */
 @media (max-width: 640px) {
-  .top-nav {
-    padding: 8px 12px;
-    min-height: 56px;
-  }
   .left-nav {
     bottom: 12px;
     left: 12px;

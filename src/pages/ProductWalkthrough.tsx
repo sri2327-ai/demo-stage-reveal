@@ -460,45 +460,45 @@ const ProductWalkthrough: React.FC = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-scale-in border">
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                <Wand2 className="h-5 w-5 text-blue-600" />
+              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center">
+                <Wand2 className="h-5 w-5 text-white" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Interactive Demo</h3>
-                <p className="text-sm text-muted-foreground">Explore AI Medical Scribe & Agents</p>
+                <p className="text-sm text-muted-foreground">Explore S10.AI Medical Scribe & Agents</p>
               </div>
             </div>
             
             <div className="space-y-4 mb-6">
               <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">Click on any menu item to explore different modules and features</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">Hover over navigation items to see detailed descriptions</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">Try interactive elements like buttons and forms throughout the demo</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">Press <kbd className="px-2 py-1 bg-gray-100 rounded text-xs">Ctrl+H</kbd> to reopen this guide anytime</p>
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">Press <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Ctrl+H</kbd> to reopen this guide anytime</p>
               </div>
             </div>
             
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button 
                 onClick={() => setShowDemoGuide(false)}
-                className="flex-1 rounded-full"
+                className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg"
               >
                 Start Exploring
               </Button>
               <Button 
                 variant="ghost" 
                 onClick={() => setShowDemoGuide(false)}
-                className="px-4 rounded-full"
+                className="px-4 rounded-full border border-border hover:bg-muted"
                 size="sm"
               >
                 Skip
@@ -557,28 +557,38 @@ const ProductWalkthrough: React.FC = () => {
         <div className="main-content">
           <div className="top-nav">
             <div className="flex-1 min-w-0">
-              <h1 className="text-sm md:text-base font-semibold truncate">AI Medical Scribe & Agents</h1>
-              <p className="text-xs opacity-70 truncate">Clinical documentation & automation</p>
+              <h1 className="text-sm md:text-base lg:text-lg font-semibold truncate">AI Medical Scribe & Agents</h1>
+              <p className="text-xs md:text-sm opacity-70 truncate">Clinical documentation & automation</p>
             </div>
-            <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowDemoGuide(true)}
-                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-3"
+                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-2 lg:px-3 min-w-0"
                 title="Show demo guide"
               >
                 <Wand2 className="h-4 w-4" />
                 <span className="hidden sm:inline ml-1 text-xs">Guide</span>
               </Button>
-              <div className="hidden sm:flex items-center gap-2 rounded-full px-2 lg:px-3 py-1 border border-blue-200 bg-blue-50/50" aria-label="Clinician">
-                <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-blue-100 grid place-items-center text-xs font-medium border border-blue-300" aria-hidden>
-                  SM
-                </div>
-                <span className="text-xs lg:text-sm font-medium text-blue-700 hidden md:inline">Dr. Sarah Mitchell</span>
-              </div>
-              <Button asChild className="rounded-full text-xs lg:text-sm px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl">
-                <Link to="/welcome">Schedule Demo</Link>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="hidden sm:flex items-center gap-2 rounded-full px-2 lg:px-3 py-1 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted border border-border/50 hover:border-border transition-all min-w-0"
+              >
+                <Link to="/" className="flex items-center gap-2">
+                  <div className="h-4 w-4 lg:h-5 lg:w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center">
+                    <span className="text-[10px] lg:text-xs font-bold text-white">S10</span>
+                  </div>
+                  <span className="hidden md:inline">Return to S10.AI</span>
+                </Link>
+              </Button>
+              <Button asChild className="rounded-full text-xs lg:text-sm px-2 sm:px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl transition-all min-w-0">
+                <Link to="/welcome">
+                  <span className="hidden sm:inline">Schedule Demo</span>
+                  <span className="sm:hidden">Demo</span>
+                </Link>
               </Button>
             </div>
           </div>
@@ -2978,15 +2988,15 @@ const ProductWalkthrough: React.FC = () => {
 
         {/* Demo Conversion Popup */}
         <AlertDialog open={showDemoPopup} onOpenChange={setShowDemoPopup}>
-          <AlertDialogContent className="max-w-md">
+          <AlertDialogContent className="max-w-md mx-4 sm:mx-auto">
             <AlertDialogHeader className="text-center space-y-4">
               <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center shadow-lg">
                 <CalendarDays className="h-8 w-8 text-white" />
               </div>
-              <AlertDialogTitle className="text-xl font-semibold">
+              <AlertDialogTitle className="text-lg sm:text-xl font-semibold">
                 Ready to see S10.AI in action?
               </AlertDialogTitle>
-              <AlertDialogDescription className="text-base leading-relaxed">
+              <AlertDialogDescription className="text-sm sm:text-base leading-relaxed">
                 You've explored our product walkthrough. Now discover how S10.AI can transform your practice with a personalized demo tailored to your specialty.
                 <br /><br />
                 <strong>Get your custom demo and see:</strong>
@@ -2998,13 +3008,16 @@ const ProductWalkthrough: React.FC = () => {
                 </ul>
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row">
-              <AlertDialogCancel onClick={handleClosePopup} className="order-2 sm:order-1">
+            <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row gap-2">
+              <AlertDialogCancel 
+                onClick={handleClosePopup} 
+                className="order-2 sm:order-1 w-full sm:w-auto"
+              >
                 Maybe Later
               </AlertDialogCancel>
               <AlertDialogAction 
                 onClick={handleBookDemo}
-                className="order-1 sm:order-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6"
+                className="order-1 sm:order-2 w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6 transition-all"
               >
                 Book Free Demo
               </AlertDialogAction>
