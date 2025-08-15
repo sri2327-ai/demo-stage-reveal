@@ -672,77 +672,104 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
 
                 {setupStep === 'landing' && (
-                  <div className="max-w-4xl mx-auto">
-                    <Card className="border-2 bg-gradient-to-br from-background to-muted/20">
-                      <CardContent className="p-8">
-                        <div className="text-center mb-8">
-                          <div className="h-16 w-16 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-4">
-                            <Wand2 className="h-8 w-8 text-white" />
+                  <div className="h-[calc(100vh-200px)] flex items-center justify-center">
+                    <div className="max-w-5xl mx-auto w-full">
+                      <Card className="border-2 bg-gradient-to-br from-background to-muted/10 shadow-xl">
+                        <CardContent className="p-8">
+                          <div className="text-center mb-6">
+                            <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
+                              <Wand2 className="h-6 w-6 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">Setup Your S10.AI Workflow</h3>
+                            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+                              Get started with AI-powered clinical documentation in two simple steps
+                            </p>
                           </div>
-                          <h3 className="text-2xl font-bold mb-3">Welcome to S10.AI Setup</h3>
-                          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                            Get started with our AI-powered clinical documentation in just a few steps. 
-                            Configure your note templates first, then connect to your EHR systems.
-                          </p>
-                        </div>
-                        
-                        <div className="grid gap-6 md:grid-cols-2">
-                          <button 
-                            onClick={() => setSetupStep('note')} 
-                            className="group relative rounded-2xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
-                          >
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                                <CheckCircle2 className="h-4 w-4 text-primary" />
-                              </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all">
-                                <FileText className="h-6 w-6 text-blue-600" />
-                              </div>
-                              <div className="flex-1 pr-8">
-                                <div className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">1. Configure Note Templates</div>
-                                <div className="text-muted-foreground text-sm leading-relaxed">
-                                  Set up your clinical documentation style by importing existing templates, 
-                                  selecting from our specialty library, or building custom formats.
-                                </div>
-                                <div className="flex items-center gap-2 mt-3 text-xs font-medium text-primary">
-                                  <span>Start Here</span>
-                                  <ArrowLeft className="h-3 w-3 rotate-180" />
+                          
+                          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                            <button 
+                              onClick={() => setSetupStep('note')} 
+                              className="group relative rounded-xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
+                            >
+                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                  <ArrowLeft className="h-3 w-3 text-primary rotate-180" />
                                 </div>
                               </div>
-                            </div>
-                          </button>
+                              <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <FileText className="h-5 w-5 text-blue-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] text-white text-xs font-bold flex items-center justify-center">1</div>
+                                    <div className="font-bold text-lg group-hover:text-primary transition-colors">Note Templates</div>
+                                  </div>
+                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
+                                    Configure your clinical documentation style with specialty templates or custom formats
+                                  </div>
+                                  <div className="flex items-center gap-2 text-xs font-medium text-primary">
+                                    <span>Start Here</span>
+                                    <div className="h-4 w-4 rounded-full bg-primary/10 flex items-center justify-center">
+                                      <ArrowLeft className="h-2 w-2 rotate-180" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </button>
 
-                          <button 
-                            onClick={() => setSetupStep('ehr')} 
-                            className="group relative rounded-2xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
-                          >
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center">
-                                <Server className="h-4 w-4 text-emerald-600" />
-                              </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all">
-                                <ShieldCheck className="h-6 w-6 text-emerald-600" />
-                              </div>
-                              <div className="flex-1 pr-8">
-                                <div className="text-xl font-bold mb-2 group-hover:text-emerald-700 transition-colors">2. Connect Your EHR</div>
-                                <div className="text-muted-foreground text-sm leading-relaxed">
-                                  Securely integrate with Epic, Cerner, Athena, and 200+ other EHR systems 
-                                  using our HIPAA-compliant AI agents.
-                                </div>
-                                <div className="flex items-center gap-2 mt-3 text-xs font-medium text-emerald-600">
-                                  <span>Coming Next</span>
-                                  <ArrowLeft className="h-3 w-3 rotate-180" />
+                            <button 
+                              onClick={() => setSetupStep('ehr')} 
+                              className="group relative rounded-xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
+                            >
+                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                                  <ArrowLeft className="h-3 w-3 text-emerald-600 rotate-180" />
                                 </div>
                               </div>
+                              <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <ShieldCheck className="h-5 w-5 text-emerald-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <div className="h-6 w-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">2</div>
+                                    <div className="font-bold text-lg group-hover:text-emerald-700 transition-colors">EHR Integration</div>
+                                  </div>
+                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
+                                    Securely connect to Epic, Cerner, and 200+ other EHR systems with AI agents
+                                  </div>
+                                  <div className="flex items-center gap-2 text-xs font-medium text-emerald-600">
+                                    <span>Next Step</span>
+                                    <div className="h-4 w-4 rounded-full bg-emerald-100 flex items-center justify-center">
+                                      <ArrowLeft className="h-2 w-2 rotate-180" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </button>
+                          </div>
+                          
+                          <div className="text-center mt-6 pt-4 border-t">
+                            <p className="text-xs text-muted-foreground mb-3">Quick setup • Takes less than 2 minutes</p>
+                            <div className="flex items-center justify-center gap-4">
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <span>HIPAA Compliant</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <span>Zero Code Required</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <span>200+ EHR Systems</span>
+                              </div>
                             </div>
-                          </button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
                   </div>
                 )}
 
