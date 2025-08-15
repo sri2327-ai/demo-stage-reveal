@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft } from "lucide-react";
+import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft, Pause, Square, Copy, Edit3, History, TestTube, AlertTriangle, FileDown, Edit, Eye } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, Legend } from "recharts";
 import "./scribeai.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -1953,7 +1953,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Capture Section */}
-            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} pb-20`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div>
                   <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
@@ -2161,28 +2161,7 @@ const ProductWalkthrough: React.FC = () => {
                           </TabsContent>
                         </Tabs>
 
-                        {/* Enhanced Session Controls */}
-                        <div className="pt-6 border-t space-y-3">
-                          <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
-                          <div className="grid gap-2">
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              Pause Session
-                            </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
-                              <Upload className="h-4 w-4 mr-2" />
-                              Upload Audio File
-                            </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                              End & Discard Session
-                            </Button>
-                          </div>
-                        </div>
+                        {/* Session Controls - moved to bottom action bar */}
                       </CardContent>
                     </Card>
                   </div>
@@ -2256,31 +2235,7 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                         </div>
                         
-                        {/* Enhanced Note Actions */}
-                        <div className="flex flex-wrap gap-3 pt-4 border-t">
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                            Edit Note
-                          </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                            </svg>
-                            Copy Text
-                          </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <FileText className="h-4 w-4 mr-2" />
-                            Export
-                          </Button>
-                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => onNavClick('coding')}>
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                            Continue to Coding
-                          </Button>
-                        </div>
+                        {/* Enhanced Note Actions - moved to bottom action bar */}
                       </CardContent>
                     </Card>
                   </div>
@@ -2354,27 +2309,7 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                             </div>
 
-                            {/* Quick Actions */}
-                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                Full History
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                Lab Results
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Allergies
-                              </Button>
-                            </div>
+                            {/* Quick Actions - moved to bottom action bar */}
                           </div> : <div className="h-full flex items-center justify-center text-center">
                             <div className="space-y-3">
                               <div className="text-4xl opacity-30">👤</div>
@@ -2393,6 +2328,196 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
               </div>
             </section>
+            
+            {/* Fixed Action Bar for Clinical Documentation */}
+            {active === "capture" && (
+              <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border shadow-lg z-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    
+                    {/* Primary Actions */}
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg" 
+                        onClick={() => {
+                          const textArea = document.createElement('textarea');
+                          textArea.value = transcript || typeNotes || 'No content to edit';
+                          document.body.appendChild(textArea);
+                          textArea.select();
+                          textArea.focus();
+                          toast({
+                            title: "Edit Mode",
+                            description: "Note content is now editable",
+                          });
+                        }}
+                      >
+                        <Edit className="h-4 w-4 mr-1" />
+                        Edit Text
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg"
+                        onClick={() => {
+                          navigator.clipboard.writeText(transcript || typeNotes || 'No content available').then(() => {
+                            toast({
+                              title: "Copied!",
+                              description: "Note content copied to clipboard",
+                            });
+                          });
+                        }}
+                      >
+                        <Copy className="h-4 w-4 mr-1" />
+                        Copy Text
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg"
+                        onClick={() => {
+                          const element = document.createElement("a");
+                          const file = new Blob([transcript || typeNotes || 'No content available'], {type: 'text/plain'});
+                          element.href = URL.createObjectURL(file);
+                          element.download = `clinical-note-${new Date().toISOString().split('T')[0]}.txt`;
+                          element.click();
+                          toast({
+                            title: "Exported",
+                            description: "Clinical note exported successfully",
+                          });
+                        }}
+                      >
+                        <FileDown className="h-4 w-4 mr-1" />
+                        Export
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="rounded-lg"
+                        onClick={() => {
+                          onNavClick('coding');
+                          toast({
+                            title: "Proceeding to Coding",
+                            description: "Moving to medical coding section",
+                          });
+                        }}
+                      >
+                        <ArrowLeft className="h-4 w-4 mr-1 rotate-180" />
+                        Continue to Coding
+                      </Button>
+                    </div>
+                    
+                    {/* Session Controls */}
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg"
+                        onClick={() => {
+                          setIsRecording(!isRecording);
+                          toast({
+                            title: isRecording ? "Session Paused" : "Session Resumed",
+                            description: isRecording ? "Recording paused" : "Recording resumed",
+                          });
+                        }}
+                      >
+                        <Pause className="h-4 w-4 mr-1" />
+                        Pause Session
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg"
+                        onClick={() => {
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.accept = 'audio/*';
+                          input.onchange = (e) => {
+                            const file = (e.target as HTMLInputElement).files?.[0];
+                            if (file) {
+                              toast({
+                                title: "Audio Uploaded",
+                                description: `File "${file.name}" uploaded successfully`,
+                              });
+                            }
+                          };
+                          input.click();
+                        }}
+                      >
+                        <Upload className="h-4 w-4 mr-1" />
+                        Upload Audio File
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg text-destructive hover:text-destructive hover:bg-destructive/10"
+                        onClick={() => {
+                          if (confirm('Are you sure you want to end and discard this session?')) {
+                            setTranscript('');
+                            setTypeNotes('');
+                            setSelectedPatient(null);
+                            toast({
+                              title: "Session Discarded",
+                              description: "Clinical documentation session ended",
+                              variant: "destructive",
+                            });
+                          }
+                        }}
+                      >
+                        <Square className="h-4 w-4 mr-1" />
+                        End & Discard Session
+                      </Button>
+                    </div>
+                    
+                    {/* Patient Data Actions */}
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        onClick={() => {
+                          toast({
+                            title: "Full History",
+                            description: "Loading complete patient medical history",
+                          });
+                        }}
+                      >
+                        <History className="h-4 w-4 mr-1" />
+                        Full History
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        onClick={() => {
+                          toast({
+                            title: "Lab Results",
+                            description: "Loading recent laboratory results",
+                          });
+                        }}
+                      >
+                        <TestTube className="h-4 w-4 mr-1" />
+                        Lab Results
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        onClick={() => {
+                          toast({
+                            title: "Allergies",
+                            description: "Displaying patient allergy information",
+                          });
+                        }}
+                      >
+                        <AlertTriangle className="h-4 w-4 mr-1" />
+                        Allergies
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Coding Section */}
             <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
