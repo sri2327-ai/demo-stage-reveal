@@ -757,17 +757,17 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                   </div>}
 
-                {setupStep === 'note' && <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5">
-                    <Card className="xl:col-span-2 2xl:col-span-3">
-                      <CardHeader className="pb-6">
-                        <CardTitle className="flex items-center gap-3 text-xl">
-                          <div className="h-8 w-8 rounded-lg bg-slate-100 flex items-center justify-center">
+                 {setupStep === 'note' && <div className="grid gap-6 xl:grid-cols-3 2xl:grid-cols-5 max-h-[calc(100vh-200px)] min-h-[500px]">
+                    <Card className="xl:col-span-2 2xl:col-span-3 flex flex-col h-full max-h-[calc(100vh-200px)]">
+                      <CardHeader className="pb-4 flex-shrink-0">
+                        <CardTitle className="flex items-center gap-3 text-lg">
+                          <div className="h-7 w-7 rounded-lg bg-slate-100 flex items-center justify-center">
                             <FileText className="h-4 w-4 text-slate-600" />
                           </div>
                           Set Your Note Style
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="flex flex-col h-full">
+                      <CardContent className="flex flex-col flex-1 min-h-0 px-6 pb-4">
                         {/* Action buttons - always visible at top */}
                         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b mb-6">
                           <Button variant="outline" size="sm" className="rounded-full" onClick={() => setSetupStep('landing')}>
@@ -823,11 +823,11 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsTrigger>
                             </TabsList>
 
-                            <div className="flex-1 min-h-0 max-h-[60vh] overflow-hidden">
+                            <div className="flex-1 min-h-0 max-h-[45vh] overflow-hidden">
                               <TabsContent value="previous" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
+                                <div className="h-full flex flex-col gap-3 max-h-[45vh]">
                                   <div className="text-sm font-semibold">Paste Previous Note</div>
-                                  <Textarea value={previousNote} onChange={e => setPreviousNote(e.target.value)} placeholder="Paste your previous note here and we'll extract the template structure for you..." className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
+                                  <Textarea value={previousNote} onChange={e => setPreviousNote(e.target.value)} placeholder="Paste your previous note here and we'll extract the template structure for you..." className="flex-1 min-h-[120px] max-h-[200px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" disabled={analyzing || !previousNote.trim()} onClick={() => {
                                 if (!previousNote.trim()) {
                                   toast({
@@ -881,8 +881,8 @@ const ProductWalkthrough: React.FC = () => {
                                   </div>
                                   
                                   {/* Fixed height scrollable container for templates */}
-                                  <div className="flex-1 min-h-0 max-h-[45vh]">
-                                    <div className="h-full overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-4">
+                                  <div className="flex-1 min-h-0 max-h-[35vh]">
+                                    <div className="h-full overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-3">
                                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
                                         {filteredTemplates.map((spec, index) => <button key={spec.slug} onClick={() => {
                                       setSelectedSpecialtySlug(spec.slug);
@@ -971,9 +971,9 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="paste" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
+                                <div className="h-full flex flex-col gap-3 max-h-[45vh]">
                                   <div className="text-sm font-semibold">Paste Template Content</div>
-                                  <Textarea placeholder="Paste your template content here and we'll extract the structure..." className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
+                                  <Textarea placeholder="Paste your template content here and we'll extract the structure..." className="flex-1 min-h-[120px] max-h-[200px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
                                 setAnalyzing(true);
                                 setTimeout(() => {
@@ -996,7 +996,7 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="scratch" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4 max-h-[60vh]">
+                                <div className="h-full flex flex-col gap-3 max-h-[45vh]">
                                   <div className="flex items-center justify-between">
                                     <div className="text-sm font-semibold">Build Template from Scratch</div>
                                     <Button variant="outline" size="sm" onClick={() => {
@@ -1235,9 +1235,9 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="prompt" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
+                                <div className="h-full flex flex-col gap-3 max-h-[45vh]">
                                   <div className="text-sm font-semibold">Build Template by AI Prompt</div>
-                                  <Textarea placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
+                                  <Textarea placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" className="flex-1 min-h-[120px] max-h-[200px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
                                 setGenerating(true);
                                 setProgress(0);
@@ -1348,7 +1348,7 @@ const ProductWalkthrough: React.FC = () => {
                       
                       <CardContent className="p-6">
                         {/* Compact two-column layout */}
-                        <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-280px)] min-h-[500px]">
+                        <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-350px)] max-h-[500px] min-h-[400px]">
                           
                           {/* EHR Selection - Left Column */}
                           <div className="lg:col-span-2 flex flex-col">
