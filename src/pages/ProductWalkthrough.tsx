@@ -4,55 +4,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  CheckCircle2,
-  Settings,
-  CalendarDays,
-  Mic,
-  ClipboardList,
-  Send,
-  Wand2,
-  Bot,
-  BarChart3,
-  ShieldCheck,
-  Upload,
-  FileText,
-  Server,
-  CircleStop,
-  RefreshCw,
-  List,
-  Calendar,
-  Search,
-  Filter,
-  Play,
-  MoreVertical,
-  ArrowLeft,
-} from "lucide-react";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-} from "recharts";
+import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft } from "lucide-react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, Legend } from "recharts";
 import "./scribeai.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -61,18 +17,39 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
-
-const sections = [
-  { id: "setup", label: "Setup", description: "Configure your note format and connect to your EHR system" },
-  { id: "schedule", label: "Schedule", description: "View and manage appointments from multiple systems" },
-  { id: "capture", label: "Capture", description: "Record patient encounters with AI-powered transcription" },
-  { id: "coding", label: "Coding", description: "Review and validate AI-generated medical codes" },
-  { id: "send", label: "Send to EHR", description: "Securely send documentation to your electronic health record" },
-  { id: "automations", label: "Automations", description: "Configure workflow automations to streamline operations" },
-  { id: "agent", label: "AI Agent", description: "Set up AI agents for patient communication and support" },
-  { id: "dashboard", label: "Dashboard", description: "Monitor performance metrics and system analytics" },
-];
-
+const sections = [{
+  id: "setup",
+  label: "Setup",
+  description: "Configure your note format and connect to your EHR system"
+}, {
+  id: "schedule",
+  label: "Schedule",
+  description: "View and manage appointments from multiple systems"
+}, {
+  id: "capture",
+  label: "Capture",
+  description: "Record patient encounters with AI-powered transcription"
+}, {
+  id: "coding",
+  label: "Coding",
+  description: "Review and validate AI-generated medical codes"
+}, {
+  id: "send",
+  label: "Send to EHR",
+  description: "Securely send documentation to your electronic health record"
+}, {
+  id: "automations",
+  label: "Automations",
+  description: "Configure workflow automations to streamline operations"
+}, {
+  id: "agent",
+  label: "AI Agent",
+  description: "Set up AI agents for patient communication and support"
+}, {
+  id: "dashboard",
+  label: "Dashboard",
+  description: "Monitor performance metrics and system analytics"
+}];
 const iconById: Record<string, React.ComponentType<any>> = {
   setup: Settings,
   schedule: CalendarDays,
@@ -81,9 +58,8 @@ const iconById: Record<string, React.ComponentType<any>> = {
   send: Send,
   automations: Wand2,
   agent: Bot,
-  dashboard: BarChart3,
+  dashboard: BarChart3
 };
-
 type Appointment = {
   name: string;
   mrn: string;
@@ -93,38 +69,138 @@ type Appointment = {
   flags: string;
   src: string;
 };
-
-const defaultAppointments: Appointment[] = [
-  { name: "John Doe", mrn: "12345", age: "45/M", visit: "Follow-up", lang: "English", flags: "", src: "Epic - Main Campus" },
-  { name: "Jane Smith", mrn: "67890", age: "32/F", visit: "New Patient", lang: "Spanish", flags: "Interpreter", src: "Cerner - Downtown Clinic" },
-  { name: "Peter Jones", mrn: "54321", age: "68/M", visit: "Annual Physical", lang: "English", flags: "Refill", src: "Athena - Westside Campus" },
-  { name: "Maria Garcia", mrn: "98765", age: "28/F", visit: "Consultation", lang: "Spanish", flags: "High Priority", src: "Epic - Main Campus" },
-  { name: "Robert Chen", mrn: "13579", age: "52/M", visit: "Follow-up", lang: "Chinese", flags: "Interpreter", src: "Cerner - East Location" },
-  { name: "Sarah Johnson", mrn: "24680", age: "39/F", visit: "Procedure", lang: "English", flags: "Pre-op", src: "Allscripts - Surgery Center" },
-  { name: "Mohammed Ali", mrn: "11223", age: "62/M", visit: "Cardiology", lang: "Arabic", flags: "Interpreter", src: "Epic - Heart Center" },
-  { name: "Lisa Thompson", mrn: "33445", age: "29/F", visit: "Urgent Care", lang: "English", flags: "Same Day", src: "NextGen - Urgent Care" },
-  { name: "David Kim", mrn: "55667", age: "41/M", visit: "Telemedicine", lang: "Korean", flags: "Virtual", src: "Epic - Telehealth" },
-  { name: "Emily Rodriguez", mrn: "77889", age: "36/F", visit: "Dermatology", lang: "Spanish", flags: "Specialist", src: "Cerner - Specialty Clinic" },
-  { name: "James Wilson", mrn: "99001", age: "58/M", visit: "Orthopedic", lang: "English", flags: "Post-op", src: "Athena - Sports Medicine" },
-  { name: "Anna Petrov", mrn: "12346", age: "33/F", visit: "Obstetrics", lang: "Russian", flags: "Interpreter", src: "Epic - Women's Health" },
-];
-
-const visitData = [
-  { day: "Mon", value: 12 },
-  { day: "Tue", value: 19 },
-  { day: "Wed", value: 15 },
-  { day: "Thu", value: 17 },
-  { day: "Fri", value: 22 },
-  { day: "Sat", value: 8 },
-  { day: "Sun", value: 14 },
-];
-
-const agentMix = [
-  { name: "Automated", value: 75, color: "#16a34a" },
-  { name: "Transferred", value: 15, color: "#fb923c" },
-  { name: "Voicemail", value: 10, color: "#64748b" },
-];
-
+const defaultAppointments: Appointment[] = [{
+  name: "John Doe",
+  mrn: "12345",
+  age: "45/M",
+  visit: "Follow-up",
+  lang: "English",
+  flags: "",
+  src: "Epic - Main Campus"
+}, {
+  name: "Jane Smith",
+  mrn: "67890",
+  age: "32/F",
+  visit: "New Patient",
+  lang: "Spanish",
+  flags: "Interpreter",
+  src: "Cerner - Downtown Clinic"
+}, {
+  name: "Peter Jones",
+  mrn: "54321",
+  age: "68/M",
+  visit: "Annual Physical",
+  lang: "English",
+  flags: "Refill",
+  src: "Athena - Westside Campus"
+}, {
+  name: "Maria Garcia",
+  mrn: "98765",
+  age: "28/F",
+  visit: "Consultation",
+  lang: "Spanish",
+  flags: "High Priority",
+  src: "Epic - Main Campus"
+}, {
+  name: "Robert Chen",
+  mrn: "13579",
+  age: "52/M",
+  visit: "Follow-up",
+  lang: "Chinese",
+  flags: "Interpreter",
+  src: "Cerner - East Location"
+}, {
+  name: "Sarah Johnson",
+  mrn: "24680",
+  age: "39/F",
+  visit: "Procedure",
+  lang: "English",
+  flags: "Pre-op",
+  src: "Allscripts - Surgery Center"
+}, {
+  name: "Mohammed Ali",
+  mrn: "11223",
+  age: "62/M",
+  visit: "Cardiology",
+  lang: "Arabic",
+  flags: "Interpreter",
+  src: "Epic - Heart Center"
+}, {
+  name: "Lisa Thompson",
+  mrn: "33445",
+  age: "29/F",
+  visit: "Urgent Care",
+  lang: "English",
+  flags: "Same Day",
+  src: "NextGen - Urgent Care"
+}, {
+  name: "David Kim",
+  mrn: "55667",
+  age: "41/M",
+  visit: "Telemedicine",
+  lang: "Korean",
+  flags: "Virtual",
+  src: "Epic - Telehealth"
+}, {
+  name: "Emily Rodriguez",
+  mrn: "77889",
+  age: "36/F",
+  visit: "Dermatology",
+  lang: "Spanish",
+  flags: "Specialist",
+  src: "Cerner - Specialty Clinic"
+}, {
+  name: "James Wilson",
+  mrn: "99001",
+  age: "58/M",
+  visit: "Orthopedic",
+  lang: "English",
+  flags: "Post-op",
+  src: "Athena - Sports Medicine"
+}, {
+  name: "Anna Petrov",
+  mrn: "12346",
+  age: "33/F",
+  visit: "Obstetrics",
+  lang: "Russian",
+  flags: "Interpreter",
+  src: "Epic - Women's Health"
+}];
+const visitData = [{
+  day: "Mon",
+  value: 12
+}, {
+  day: "Tue",
+  value: 19
+}, {
+  day: "Wed",
+  value: 15
+}, {
+  day: "Thu",
+  value: 17
+}, {
+  day: "Fri",
+  value: 22
+}, {
+  day: "Sat",
+  value: 8
+}, {
+  day: "Sun",
+  value: 14
+}];
+const agentMix = [{
+  name: "Automated",
+  value: 75,
+  color: "#16a34a"
+}, {
+  name: "Transferred",
+  value: 15,
+  color: "#fb923c"
+}, {
+  name: "Voicemail",
+  value: 10,
+  color: "#64748b"
+}];
 const ProductWalkthrough: React.FC = () => {
   const [active, setActive] = useState<string>(sections[0].id);
   const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
@@ -135,36 +211,49 @@ const ProductWalkthrough: React.FC = () => {
   const [scheduleView, setScheduleView] = useState<'list' | 'calendar'>('list');
   const [scheduleSearch, setScheduleSearch] = useState<string>("");
   const [locationFilter, setLocationFilter] = useState<string>("all");
-
   const [isRecording, setIsRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [transcript, setTranscript] = useState("");
   const recordTimerRef = useRef<number | null>(null);
   const transcriptTimerRef = useRef<number | null>(null);
-
-  const [checks, setChecks] = useState(
-    [
-      { label: "Chief Complaint documented", ok: true },
-      { label: "History of Present Illness complete", ok: true },
-      { label: "Assessment and Plan complete", ok: true },
-      { label: "Review of Systems needs attention", ok: false },
-      { label: "Physical examination incomplete", ok: false },
-    ] as { label: string; ok: boolean }[]
-  );
-
+  const [checks, setChecks] = useState([{
+    label: "Chief Complaint documented",
+    ok: true
+  }, {
+    label: "History of Present Illness complete",
+    ok: true
+  }, {
+    label: "Assessment and Plan complete",
+    ok: true
+  }, {
+    label: "Review of Systems needs attention",
+    ok: false
+  }, {
+    label: "Physical examination incomplete",
+    ok: false
+  }] as {
+    label: string;
+    ok: boolean;
+  }[]);
   const [setupStep, setSetupStep] = useState<"landing" | "note" | "ehr">("landing");
-
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
 
   // AI Agent toggles (UI only)
-  const [agent, setAgent] = useState({ followups: true, inbound: true, outreach: true, support: false });
-  
+  const [agent, setAgent] = useState({
+    followups: true,
+    inbound: true,
+    outreach: true,
+    support: false
+  });
+
   // Automation toggles  
   const [automations, setAutomations] = useState({
     patientInstructions: true,
-    followupReminders: true, 
+    followupReminders: true,
     labOrders: false,
     prescriptionRefills: true
   });
@@ -172,7 +261,7 @@ const ProductWalkthrough: React.FC = () => {
   // Demo guidance state
   const [showDemoGuide, setShowDemoGuide] = useState(true);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
-  
+
   // Demo popup conversion state
   const [showDemoPopup, setShowDemoPopup] = useState(false);
   const [hasShownPopup, setHasShownPopup] = useState(false);
@@ -191,7 +280,6 @@ const ProductWalkthrough: React.FC = () => {
         setShowDemoGuide(true);
       }
     };
-    
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showDemoGuide]);
@@ -213,7 +301,6 @@ const ProductWalkthrough: React.FC = () => {
     window.addEventListener('click', trackInteraction);
     window.addEventListener('keydown', trackInteraction);
     window.addEventListener('mousemove', trackInteraction);
-
     return () => {
       if (timeOnPageRef.current) {
         clearInterval(timeOnPageRef.current);
@@ -228,12 +315,9 @@ const ProductWalkthrough: React.FC = () => {
   // Show demo popup based on engagement
   useEffect(() => {
     if (hasShownPopup || showDemoPopup) return;
-    
+
     // Show popup after 75 seconds of time on page OR after 10+ interactions and 45+ seconds
-    const shouldShowPopup = 
-      timeOnPage >= 75 || 
-      (timeOnPage >= 45 && userInteractions >= 10);
-    
+    const shouldShowPopup = timeOnPage >= 75 || timeOnPage >= 45 && userInteractions >= 10;
     if (shouldShowPopup) {
       setShowDemoPopup(true);
       setHasShownPopup(true);
@@ -246,12 +330,12 @@ const ProductWalkthrough: React.FC = () => {
     window.open('https://calendly.com/s10ai-demo', '_blank');
     setShowDemoPopup(false);
   };
-
   const handleClosePopup = () => {
     setShowDemoPopup(false);
     // Optionally show again after some time if user continues browsing
     setTimeout(() => {
-      if (timeOnPage > 300) { // If still on page after 5 more minutes
+      if (timeOnPage > 300) {
+        // If still on page after 5 more minutes
         setHasShownPopup(false);
       }
     }, 300000); // 5 minutes
@@ -263,41 +347,29 @@ const ProductWalkthrough: React.FC = () => {
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [saveAsDefault, setSaveAsDefault] = useState(false);
-  
+
   // Capture section states
   const [captureMode, setCaptureMode] = useState<'audio' | 'type'>('audio');
   const [typeNotes, setTypeNotes] = useState("");
 
   // Template headers and UX state for Note Style
-  const defaultHeaders = [
-    "Chief Complaint",
-    "History of Present Illness",
-    "Review of Systems",
-    "Past Medical History",
-    "Medications",
-    "Allergies",
-    "Physical Exam",
-    "Assessment",
-    "Plan",
-  ];
-
+  const defaultHeaders = ["Chief Complaint", "History of Present Illness", "Review of Systems", "Past Medical History", "Medications", "Allergies", "Physical Exam", "Assessment", "Plan"];
   const headersBySpecialty: Record<string, string[]> = {
-    "allergy-immunology": ["Chief Complaint","HPI","Allergy History","Environmental Triggers","Physical Exam","Skin Testing","Assessment","Treatment Plan"],
-    "anesthesiology": ["Pre-op Assessment","Airway Evaluation","ASA Classification","Anesthetic Plan","Intra-op Course","Post-op Care"],
-    "cardiology": ["Chief Complaint","HPI","Cardiac Risk Factors","Medications","Exam","ECG","Echocardiogram","Assessment","Plan"],
-    "dermatology": ["Chief Complaint","HPI","Lesion Description","Location & Distribution","Exam","Assessment","Plan"],
-    "behavioral-health": ["Chief Complaint","Subjective","Objective","Assessment","Plan","Safety/Risk"],
-    "emergency-medicine": ["Chief Complaint","HPI","Triage Assessment","Physical Exam","Diagnostic Studies","ED Course","Disposition"],
-    "family-medicine": ["Chief Complaint","HPI","Review of Systems","Physical Exam","Assessment","Plan","Health Maintenance"],
-    "internal-medicine": ["Chief Complaint","HPI","Review of Systems","Physical Exam","Assessment","Plan","Follow-up"],
-    "pediatrics": ["Chief Complaint","HPI","Development","Growth Charts","Physical Exam","Assessment","Plan","Parent Education"],
-    "psychiatry": ["Chief Complaint","HPI","Mental Status Exam","Risk Assessment","Medication Review","Assessment","Treatment Plan"],
-    "orthopedics": ["Chief Complaint","HPI","Injury Mechanism","Physical Exam","Range of Motion","Imaging","Assessment","Treatment Plan"],
-    "oncology": ["Chief Complaint","HPI","Performance Status","Physical Exam","Staging","Treatment Response","Plan"],
-    "neurology": ["Chief Complaint","HPI","Neurological Exam","Mental Status","Imaging Review","Assessment","Treatment Plan"],
+    "allergy-immunology": ["Chief Complaint", "HPI", "Allergy History", "Environmental Triggers", "Physical Exam", "Skin Testing", "Assessment", "Treatment Plan"],
+    "anesthesiology": ["Pre-op Assessment", "Airway Evaluation", "ASA Classification", "Anesthetic Plan", "Intra-op Course", "Post-op Care"],
+    "cardiology": ["Chief Complaint", "HPI", "Cardiac Risk Factors", "Medications", "Exam", "ECG", "Echocardiogram", "Assessment", "Plan"],
+    "dermatology": ["Chief Complaint", "HPI", "Lesion Description", "Location & Distribution", "Exam", "Assessment", "Plan"],
+    "behavioral-health": ["Chief Complaint", "Subjective", "Objective", "Assessment", "Plan", "Safety/Risk"],
+    "emergency-medicine": ["Chief Complaint", "HPI", "Triage Assessment", "Physical Exam", "Diagnostic Studies", "ED Course", "Disposition"],
+    "family-medicine": ["Chief Complaint", "HPI", "Review of Systems", "Physical Exam", "Assessment", "Plan", "Health Maintenance"],
+    "internal-medicine": ["Chief Complaint", "HPI", "Review of Systems", "Physical Exam", "Assessment", "Plan", "Follow-up"],
+    "pediatrics": ["Chief Complaint", "HPI", "Development", "Growth Charts", "Physical Exam", "Assessment", "Plan", "Parent Education"],
+    "psychiatry": ["Chief Complaint", "HPI", "Mental Status Exam", "Risk Assessment", "Medication Review", "Assessment", "Treatment Plan"],
+    "orthopedics": ["Chief Complaint", "HPI", "Injury Mechanism", "Physical Exam", "Range of Motion", "Imaging", "Assessment", "Treatment Plan"],
+    "oncology": ["Chief Complaint", "HPI", "Performance Status", "Physical Exam", "Staging", "Treatment Response", "Plan"],
+    "neurology": ["Chief Complaint", "HPI", "Neurological Exam", "Mental Status", "Imaging Review", "Assessment", "Treatment Plan"]
     // Add more as needed - all templates now have headers defined
   };
-
   const [previousNote, setPreviousNote] = useState("");
   const [selectedSpecialtySlug, setSelectedSpecialtySlug] = useState<string | null>(null);
   const [liveHeaders, setLiveHeaders] = useState<string[]>(defaultHeaders);
@@ -305,38 +377,29 @@ const ProductWalkthrough: React.FC = () => {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [customSectionName, setCustomSectionName] = useState("");
-  
+
   // Filter templates based on search
   const filteredTemplates = useMemo(() => {
     if (!searchTerm.trim()) return specialtyTemplates;
-    return specialtyTemplates.filter(template => 
-      template.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    return specialtyTemplates.filter(template => template.name.toLowerCase().includes(searchTerm.toLowerCase()));
   }, [searchTerm]);
 
   // Initialize live preview as empty for better UX
   useEffect(() => {
     setLiveHeaders([]);
   }, []);
-
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Recording timers
   useEffect(() => {
     if (isRecording) {
       // Clock timer
-      recordTimerRef.current = window.setInterval(() => setSeconds((s) => s + 1), 1000);
+      recordTimerRef.current = window.setInterval(() => setSeconds(s => s + 1), 1000);
       // Simulated transcription
-      const lines = [
-        "Patient presents for follow-up of diabetes and hypertension.",
-        "\n\nCHIEF COMPLAINT: Blood sugars trending higher over the last few weeks.",
-        "\n\nHPI: Checks sugars twice daily. Morning 140–160, evening 180–200. No hypoglycemia.",
-        "\n\nEXAM: BP 138/82, HR 76. Lungs clear. No edema.",
-        "\n\nA/P: Increase Metformin to 1000mg BID. RTC in 3 months.",
-      ];
+      const lines = ["Patient presents for follow-up of diabetes and hypertension.", "\n\nCHIEF COMPLAINT: Blood sugars trending higher over the last few weeks.", "\n\nHPI: Checks sugars twice daily. Morning 140–160, evening 180–200. No hypoglycemia.", "\n\nEXAM: BP 138/82, HR 76. Lungs clear. No edema.", "\n\nA/P: Increase Metformin to 1000mg BID. RTC in 3 months."];
       let i = 0;
       transcriptTimerRef.current = window.setInterval(() => {
-        setTranscript((t) => (i < lines.length ? t + lines[i++] : t));
+        setTranscript(t => i < lines.length ? t + lines[i++] : t);
         if (i >= lines.length && transcriptTimerRef.current) {
           window.clearInterval(transcriptTimerRef.current);
           transcriptTimerRef.current = null;
@@ -350,25 +413,22 @@ const ProductWalkthrough: React.FC = () => {
       transcriptTimerRef.current = null;
     };
   }, [isRecording]);
-
   const onNavClick = (id: string) => {
     console.log('Navigating to:', id);
     setActive(id);
     setActiveTooltip(null); // Hide tooltip when navigating
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   };
-
   const pageTitle = "ScribeAI Product Walkthrough | AI Medical Scribe";
   const description = "ScribeAI walkthrough: setup, schedule, capture, coding, send to EHR, automations, AI agent, dashboard.";
-
   const timeStr = useMemo(() => {
-    const m = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
+    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   }, [seconds]);
-
   const handleConnect = () => {
     if (!selectedEhr || connecting) return;
     setConnecting(true);
@@ -377,22 +437,17 @@ const ProductWalkthrough: React.FC = () => {
       onNavClick("schedule");
     }, 1600);
   };
-
   const handleOpenAppointment = (appt: Appointment) => {
     setSelectedPatient(appt);
     setPatientContext("");
     onNavClick("capture");
     setTimeout(() => {
-      setPatientContext(
-        `Patient Summary\n${appt.name} (${appt.age})\nMRN: ${appt.mrn}\nVisit Type: ${appt.visit}\n\nActive Problems\n• Type 2 Diabetes\n• Hypertension\n• Hyperlipidemia\n\nCurrent Medications\n• Metformin 500mg BID\n• Lisinopril 10mg daily\n• Atorvastatin 20mg daily\n\nAllergies\n• Penicillin (rash)\n\nRecent Labs\n• HbA1c: 8.2% (3 months ago)\n• Creatinine: 1.1 mg/dL\n• LDL: 95 mg/dL\n\nAlert: HbA1c above target. Consider medication adjustment.`
-      );
+      setPatientContext(`Patient Summary\n${appt.name} (${appt.age})\nMRN: ${appt.mrn}\nVisit Type: ${appt.visit}\n\nActive Problems\n• Type 2 Diabetes\n• Hypertension\n• Hyperlipidemia\n\nCurrent Medications\n• Metformin 500mg BID\n• Lisinopril 10mg daily\n• Atorvastatin 20mg daily\n\nAllergies\n• Penicillin (rash)\n\nRecent Labs\n• HbA1c: 8.2% (3 months ago)\n• Creatinine: 1.1 mg/dL\n• LDL: 95 mg/dL\n\nAlert: HbA1c above target. Consider medication adjustment.`);
     }, 600);
   };
-
   const toggleRecording = () => {
     const newRecordingState = !isRecording;
     setIsRecording(newRecordingState);
-    
     if (newRecordingState) {
       // Starting recording
       setSeconds(0);
@@ -405,15 +460,7 @@ const ProductWalkthrough: React.FC = () => {
       setTimeout(() => {
         transcriptTimerRef.current = window.setInterval(() => {
           setTranscript(prev => {
-            const words = [
-              "Patient reports increased blood sugar levels over the past two weeks.",
-              "Morning readings ranging from 140 to 160 milligrams per deciliter.",
-              "Evening readings between 180 and 200 milligrams per deciliter.",
-              "No episodes of hypoglycemia reported.",
-              "Patient continues current medication regimen as prescribed.",
-              "Blood pressure appears well controlled on current therapy.",
-              "Physical examination reveals no acute distress."
-            ];
+            const words = ["Patient reports increased blood sugar levels over the past two weeks.", "Morning readings ranging from 140 to 160 milligrams per deciliter.", "Evening readings between 180 and 200 milligrams per deciliter.", "No episodes of hypoglycemia reported.", "Patient continues current medication regimen as prescribed.", "Blood pressure appears well controlled on current therapy.", "Physical examination reveals no acute distress."];
             const currentWords = prev.split(' ').filter(w => w.length > 0);
             if (currentWords.length < words.join(' ').split(' ').length) {
               const nextWord = words.join(' ').split(' ')[currentWords.length];
@@ -435,31 +482,33 @@ const ProductWalkthrough: React.FC = () => {
       }
     }
   };
-
   const markFix = (idx: number) => {
-    setChecks((arr) => arr.map((c, i) => (i === idx ? { ...c, ok: true } : c)));
+    setChecks(arr => arr.map((c, i) => i === idx ? {
+      ...c,
+      ok: true
+    } : c));
   };
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/scribeai"} />
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: "ScribeAI",
-            description,
-            brand: { "@type": "Brand", name: "S10AI" },
-          })}
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "ScribeAI",
+          description,
+          brand: {
+            "@type": "Brand",
+            name: "S10AI"
+          }
+        })}
         </script>
       </Helmet>
 
       {/* Interactive Demo Guide */}
-      {showDemoGuide && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      {showDemoGuide && <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-scale-in border">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center">
@@ -491,24 +540,15 @@ const ProductWalkthrough: React.FC = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                onClick={() => setShowDemoGuide(false)}
-                className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg"
-              >
+              <Button onClick={() => setShowDemoGuide(false)} className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg">
                 Start Exploring
               </Button>
-              <Button 
-                variant="ghost" 
-                onClick={() => setShowDemoGuide(false)}
-                className="px-4 rounded-full border border-border hover:bg-muted"
-                size="sm"
-              >
+              <Button variant="ghost" onClick={() => setShowDemoGuide(false)} className="px-4 rounded-full border border-border hover:bg-muted" size="sm">
                 Skip
               </Button>
             </div>
           </div>
-        </div>
-      )}
+        </div>}
 
       <div className="scribeai-layout">
         <aside className="left-nav">
@@ -516,43 +556,32 @@ const ProductWalkthrough: React.FC = () => {
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
           <ul className="nav-list">
-            {sections.map((s) => {
-              const Icon = iconById[s.id];
-              return (
-                <li key={s.id} className="nav-item">
+            {sections.map(s => {
+            const Icon = iconById[s.id];
+            return <li key={s.id} className="nav-item">
                   <div className="relative">
-                    <button
-                      className={`nav-button ${active === s.id ? "active" : ""}`}
-                      onClick={() => onNavClick(s.id)}
-                      onMouseEnter={() => {
-                        console.log('Hover on', s.id, s.description);
-                        setActiveTooltip(s.id);
-                      }}
-                      onMouseLeave={() => {
-                        console.log('Leave', s.id);
-                        setActiveTooltip(null);
-                      }}
-                      aria-current={active === s.id ? "step" : undefined}
-                      data-screen={s.id}
-                      title={s.description} // For mobile tooltip
-                    >
+                    <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
+                  console.log('Hover on', s.id, s.description);
+                  setActiveTooltip(s.id);
+                }} onMouseLeave={() => {
+                  console.log('Leave', s.id);
+                  setActiveTooltip(null);
+                }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description} // For mobile tooltip
+                >
                       {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
                       <span className="nav-text">{s.label}</span>
                     </button>
                     
                     {/* Desktop Tooltip */}
-                    {activeTooltip === s.id && (
-                      <div className="tooltip-container">
+                    {activeTooltip === s.id && <div className="tooltip-container">
                         <div className="tooltip-content">
                           <div className="tooltip-title">{s.label}</div>
                           <div className="tooltip-description">{s.description}</div>
                         </div>
-                      </div>
-                    )}
+                      </div>}
                   </div>
-                </li>
-              );
-            })}
+                </li>;
+          })}
           </ul>
         </aside>
 
@@ -563,22 +592,11 @@ const ProductWalkthrough: React.FC = () => {
               <p className="text-xs md:text-sm opacity-70 truncate">Clinical documentation & automation</p>
             </div>
             <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 flex-shrink-0">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowDemoGuide(true)}
-                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-2 lg:px-3 min-w-0"
-                title="Show demo guide"
-              >
+              <Button variant="ghost" size="sm" onClick={() => setShowDemoGuide(true)} className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-2 lg:px-3 min-w-0" title="Show demo guide">
                 <Wand2 className="h-4 w-4" />
                 <span className="hidden sm:inline ml-1 text-xs">Guide</span>
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                asChild
-                className="hidden sm:flex items-center gap-2 rounded-full px-3 lg:px-4 py-2 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border hover:border-border/80 hover:shadow-sm transition-all min-w-0"
-              >
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex items-center gap-2 rounded-full px-3 lg:px-4 py-2 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border hover:border-border/80 hover:shadow-sm transition-all min-w-0">
                 <Link to="/" className="flex items-center gap-2">
                   <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center shadow-sm">
                     <ArrowLeft className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" strokeWidth={2.5} />
@@ -611,12 +629,8 @@ const ProductWalkthrough: React.FC = () => {
                   {/* Improved progress indicator */}
                   <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-6 rounded-2xl border border-border/50">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${
-                        setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'
-                      }`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
-                          setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
-                        }`}>
+                      <div className={`flex items-center gap-3 transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
+                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>
                           {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
                         </div>
                         <div>
@@ -625,21 +639,12 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </div>
                       
-                      <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${
-                        setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'
-                      }`}>
-                        <div className={`h-full transition-all duration-500 ${
-                          setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : 
-                          setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'
-                        }`} />
+                      <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'}`}>
+                        <div className={`h-full transition-all duration-500 ${setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'}`} />
                       </div>
                       
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${
-                        setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'
-                      }`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
-                          setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
-                        }`}>2</div>
+                      <div className={`flex items-center gap-3 transition-all duration-300 ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
+                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>2</div>
                         <div>
                           <div className="font-semibold">EHR Integration</div>
                           <div className="text-xs text-muted-foreground">Connect to your systems</div>
@@ -648,31 +653,11 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     
                     {/* Quick action buttons */}
-                    <div className="flex items-center justify-center gap-3 pt-4 border-t border-border/50">
-                      <Button
-                        variant={setupStep === 'note' || setupStep === 'landing' ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSetupStep('note')}
-                        className="rounded-full px-4 transition-all"
-                      >
-                        <FileText className="h-4 w-4 mr-2" />
-                        Configure Templates
-                      </Button>
-                      <Button
-                        variant={setupStep === 'ehr' ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSetupStep('ehr')}
-                        className="rounded-full px-4 transition-all"
-                      >
-                        <Server className="h-4 w-4 mr-2" />
-                        Connect EHR
-                      </Button>
-                    </div>
+                    
                   </div>
                 </div>
 
-                {setupStep === 'landing' && (
-                  <div className="h-[calc(100vh-200px)] flex items-center justify-center">
+                {setupStep === 'landing' && <div className="h-[calc(100vh-200px)] flex items-center justify-center">
                     <div className="max-w-5xl mx-auto w-full">
                       <Card className="border-2 bg-gradient-to-br from-background to-muted/10 shadow-xl">
                         <CardContent className="p-8">
@@ -687,10 +672,7 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                           
                           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                            <button 
-                              onClick={() => setSetupStep('note')} 
-                              className="group relative rounded-xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
-                            >
+                            <button onClick={() => setSetupStep('note')} className="group relative rounded-xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10">
                               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                                   <ArrowLeft className="h-3 w-3 text-primary rotate-180" />
@@ -718,10 +700,7 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                             </button>
 
-                            <button 
-                              onClick={() => setSetupStep('ehr')} 
-                              className="group relative rounded-xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
-                            >
+                            <button onClick={() => setSetupStep('ehr')} className="group relative rounded-xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100">
                               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
                                   <ArrowLeft className="h-3 w-3 text-emerald-600 rotate-180" />
@@ -770,11 +749,9 @@ const ProductWalkthrough: React.FC = () => {
                         </CardContent>
                       </Card>
                     </div>
-                  </div>
-                )}
+                  </div>}
 
-                {setupStep === 'note' && (
-                  <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5">
+                {setupStep === 'note' && <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5">
                     <Card className="xl:col-span-2 2xl:col-span-3">
                       <CardHeader className="pb-6">
                         <CardTitle className="flex items-center gap-3 text-xl">
@@ -791,30 +768,21 @@ const ProductWalkthrough: React.FC = () => {
                             ← Back
                           </Button>
                           <div className="flex gap-2">
-                            <Button 
-                              variant={saveAsDefault ? "default" : "outline"} 
-                              size="sm" 
-                              className="rounded-full transition-all"
-                              onClick={() => {
-                                setSaveAsDefault(!saveAsDefault);
-                                toast({ 
-                                  title: saveAsDefault ? "Default template removed" : "Template saved as default", 
-                                  description: saveAsDefault ? "This template will no longer be your default" : "This template will be used for new patients",
-                                  duration: 2000
-                                });
-                              }}
-                            >
-                              {saveAsDefault ? (
-                                <>
+                            <Button variant={saveAsDefault ? "default" : "outline"} size="sm" className="rounded-full transition-all" onClick={() => {
+                          setSaveAsDefault(!saveAsDefault);
+                          toast({
+                            title: saveAsDefault ? "Default template removed" : "Template saved as default",
+                            description: saveAsDefault ? "This template will no longer be your default" : "This template will be used for new patients",
+                            duration: 2000
+                          });
+                        }}>
+                              {saveAsDefault ? <>
                                   <CheckCircle2 className="h-4 w-4 mr-2" />
                                   Saved as Default
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <Settings className="h-4 w-4 mr-2" />
                                   Save as Default
-                                </>
-                              )}
+                                </>}
                             </Button>
                             <Button onClick={() => setSetupStep('ehr')} size="sm" className="rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl">
                               Next: Connect EHR →
@@ -853,50 +821,41 @@ const ProductWalkthrough: React.FC = () => {
                               <TabsContent value="previous" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Paste Previous Note</div>
-                                  <Textarea
-                                    value={previousNote}
-                                    onChange={(e) => setPreviousNote(e.target.value)}
-                                    placeholder="Paste your previous note here and we'll extract the template structure for you..."
-                                    className="flex-1 min-h-[200px] resize-none"
-                                  />
-                                  <Button 
-                                    className="rounded-full w-fit animate-fade-in" 
-                                    disabled={analyzing || !previousNote.trim()}
-                                    onClick={() => {
-                                      if (!previousNote.trim()) {
-                                        toast({ title: "Please paste a note first", variant: "destructive" });
-                                        return;
-                                      }
-                                      setAnalyzing(true);
-                                      setProgress(0);
-                                      const interval = setInterval(() => {
-                                        setProgress(p => {
-                                          if (p >= 100) {
-                                            clearInterval(interval);
-                                            setAnalyzing(false);
-                                            // Extract realistic headers from the note content
-                                            const extractedHeaders = previousNote.trim() ? 
-                                              ["Chief Complaint", "History of Present Illness", "Physical Examination", "Assessment and Plan", "Follow-up Instructions"] :
-                                              defaultHeaders;
-                                            setLiveHeaders(extractedHeaders);
-                                            toast({ title: "Template extracted successfully!", description: `${extractedHeaders.length} sections identified from your note.` });
-                                            return 100;
-                                          }
-                                          return p + 20;
-                                        });
-                                      }, 300);
-                                    }}
-                                  >
-                                    {analyzing ? (
-                                      <>
+                                  <Textarea value={previousNote} onChange={e => setPreviousNote(e.target.value)} placeholder="Paste your previous note here and we'll extract the template structure for you..." className="flex-1 min-h-[200px] resize-none" />
+                                  <Button className="rounded-full w-fit animate-fade-in" disabled={analyzing || !previousNote.trim()} onClick={() => {
+                                if (!previousNote.trim()) {
+                                  toast({
+                                    title: "Please paste a note first",
+                                    variant: "destructive"
+                                  });
+                                  return;
+                                }
+                                setAnalyzing(true);
+                                setProgress(0);
+                                const interval = setInterval(() => {
+                                  setProgress(p => {
+                                    if (p >= 100) {
+                                      clearInterval(interval);
+                                      setAnalyzing(false);
+                                      // Extract realistic headers from the note content
+                                      const extractedHeaders = previousNote.trim() ? ["Chief Complaint", "History of Present Illness", "Physical Examination", "Assessment and Plan", "Follow-up Instructions"] : defaultHeaders;
+                                      setLiveHeaders(extractedHeaders);
+                                      toast({
+                                        title: "Template extracted successfully!",
+                                        description: `${extractedHeaders.length} sections identified from your note.`
+                                      });
+                                      return 100;
+                                    }
+                                    return p + 20;
+                                  });
+                                }, 300);
+                              }}>
+                                    {analyzing ? <>
                                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                                         Analyzing... {progress}%
-                                      </>
-                                    ) : (
-                                      <>
+                                      </> : <>
                                         <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Template
-                                      </>
-                                    )}
+                                      </>}
                                   </Button>
                                 </div>
                               </TabsContent>
@@ -912,44 +871,28 @@ const ProductWalkthrough: React.FC = () => {
                                   
                                   {/* Search functionality */}
                                   <div className="relative">
-                                    <Input 
-                                      placeholder="Search specialties..." 
-                                      className="h-9"
-                                      value={searchTerm}
-                                      onChange={(e) => setSearchTerm(e.target.value)}
-                                    />
+                                    <Input placeholder="Search specialties..." className="h-9" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                                   </div>
                                   
                                   {/* Fixed height scrollable container for templates */}
                                   <div className="flex-1 min-h-0">
                                     <div className="h-[350px] overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-4">
                                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-                                        {filteredTemplates.map((spec, index) => (
-                                          <button
-                                            key={spec.slug}
-                                            onClick={() => {
-                                              setSelectedSpecialtySlug(spec.slug);
-                                              const templateHeaders = spec.headers || headersBySpecialty[spec.slug] || defaultHeaders;
-                                              setLiveHeaders(templateHeaders);
-                                              toast({ 
-                                                title: `${spec.name} template selected`, 
-                                                description: `${templateHeaders.length} sections loaded` 
-                                              });
-                                            }}
-                                            className={`group relative rounded-2xl border-2 hover:border-primary/60 p-4 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-in ${
-                                              selectedSpecialtySlug === spec.slug 
-                                                ? 'border-primary bg-gradient-to-br from-primary/10 to-primary/5 shadow-lg shadow-primary/20 -translate-y-1' 
-                                                : 'hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30 border-border bg-background'
-                                            }`}
-                                            style={{ animationDelay: `${index * 30}ms` }}
-                                            aria-pressed={selectedSpecialtySlug === spec.slug}
-                                          >
+                                        {filteredTemplates.map((spec, index) => <button key={spec.slug} onClick={() => {
+                                      setSelectedSpecialtySlug(spec.slug);
+                                      const templateHeaders = spec.headers || headersBySpecialty[spec.slug] || defaultHeaders;
+                                      setLiveHeaders(templateHeaders);
+                                      toast({
+                                        title: `${spec.name} template selected`,
+                                        description: `${templateHeaders.length} sections loaded`
+                                      });
+                                    }} className={`group relative rounded-2xl border-2 hover:border-primary/60 p-4 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-in ${selectedSpecialtySlug === spec.slug ? 'border-primary bg-gradient-to-br from-primary/10 to-primary/5 shadow-lg shadow-primary/20 -translate-y-1' : 'hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30 border-border bg-background'}`} style={{
+                                      animationDelay: `${index * 30}ms`
+                                    }} aria-pressed={selectedSpecialtySlug === spec.slug}>
                                             {/* Selection indicator */}
-                                            {selectedSpecialtySlug === spec.slug && (
-                                              <div className="absolute top-3 right-3 h-6 w-6 rounded-full bg-primary flex items-center justify-center animate-scale-in">
+                                            {selectedSpecialtySlug === spec.slug && <div className="absolute top-3 right-3 h-6 w-6 rounded-full bg-primary flex items-center justify-center animate-scale-in">
                                                 <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
-                                              </div>
-                                            )}
+                                              </div>}
                                             
                                             <div className="space-y-3">
                                               <div className="font-semibold text-sm leading-tight text-foreground line-clamp-2 min-h-[2.5rem] flex items-center pr-8">
@@ -962,28 +905,23 @@ const ProductWalkthrough: React.FC = () => {
                                             </div>
                                             
                                             {/* Progress bar animation */}
-                                            {selectedSpecialtySlug === spec.slug && (
-                                              <div className="mt-3 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                            {selectedSpecialtySlug === spec.slug && <div className="mt-3 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
                                                 <div className="h-full w-full bg-gradient-to-r from-primary to-primary/80 rounded-full animate-slide-in-right" />
-                                              </div>
-                                            )}
+                                              </div>}
                                             
                                             {/* Hover effect overlay */}
                                             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                                          </button>
-                                        ))}
+                                          </button>)}
                                       </div>
                                       
                                       {/* No results state */}
-                                      {filteredTemplates.length === 0 && (
-                                        <div className="h-full flex items-center justify-center text-center">
+                                      {filteredTemplates.length === 0 && <div className="h-full flex items-center justify-center text-center">
                                           <div className="space-y-3">
                                             <div className="text-4xl opacity-20">🔍</div>
                                             <div className="text-sm font-medium text-muted-foreground">No templates found</div>
                                             <div className="text-xs text-muted-foreground">Try adjusting your search terms</div>
                                           </div>
-                                        </div>
-                                      )}
+                                        </div>}
                                     </div>
                                   </div>
                                 </div>
@@ -993,39 +931,34 @@ const ProductWalkthrough: React.FC = () => {
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Import Template File</div>
                                   <div className="flex-1 flex items-center justify-center">
-                                    <button 
-                                      onClick={() => {
-                                        setImporting(true);
-                                        setProgress(0);
-                                        const interval = setInterval(() => {
-                                          setProgress(p => {
-                                            if (p >= 100) {
-                                              clearInterval(interval);
-                                              setImporting(false);
-                                              setLiveHeaders(["Chief Complaint", "History", "Assessment", "Plan"]);
-                                              toast({ title: "File imported successfully!", description: "Template structure extracted from uploaded file." });
-                                              return 100;
-                                            }
-                                            return p + 25;
-                                          });
-                                        }, 400);
-                                      }}
-                                      disabled={importing}
-                                      className="group aspect-video max-w-md flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-all duration-200 w-full hover:bg-primary/5 disabled:opacity-50 animate-fade-in"
-                                    >
-                                      {importing ? (
-                                        <>
+                                    <button onClick={() => {
+                                  setImporting(true);
+                                  setProgress(0);
+                                  const interval = setInterval(() => {
+                                    setProgress(p => {
+                                      if (p >= 100) {
+                                        clearInterval(interval);
+                                        setImporting(false);
+                                        setLiveHeaders(["Chief Complaint", "History", "Assessment", "Plan"]);
+                                        toast({
+                                          title: "File imported successfully!",
+                                          description: "Template structure extracted from uploaded file."
+                                        });
+                                        return 100;
+                                      }
+                                      return p + 25;
+                                    });
+                                  }, 400);
+                                }} disabled={importing} className="group aspect-video max-w-md flex flex-col items-center justify-center rounded-xl border-2 border-dashed hover:border-primary/50 transition-all duration-200 w-full hover:bg-primary/5 disabled:opacity-50 animate-fade-in">
+                                      {importing ? <>
                                           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-3" />
                                           <div className="text-sm font-medium">Importing... {progress}%</div>
                                           <div className="text-xs text-muted-foreground mt-2">Processing file...</div>
-                                        </>
-                                      ) : (
-                                        <>
+                                        </> : <>
                                           <Upload className="h-8 sm:h-10 w-8 sm:w-10 text-muted-foreground mb-3 group-hover:text-primary transition-colors" />
                                           <div className="text-xs sm:text-sm font-medium px-2 text-center">Drop file or click to browse</div>
                                           <div className="text-[10px] sm:text-xs text-muted-foreground mt-2 text-center">Supports .docx, .txt, .pdf</div>
-                                        </>
-                                      )}
+                                        </>}
                                     </button>
                                   </div>
                                 </div>
@@ -1034,32 +967,24 @@ const ProductWalkthrough: React.FC = () => {
                               <TabsContent value="paste" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Paste Template Content</div>
-                                  <Textarea 
-                                    placeholder="Paste your template content here and we'll extract the structure..." 
-                                    className="flex-1 min-h-[200px] resize-none" 
-                                  />
-                                  <Button 
-                                    className="rounded-full w-fit animate-fade-in"
-                                    onClick={() => {
-                                      setAnalyzing(true);
-                                      setTimeout(() => {
-                                        setAnalyzing(false);
-                                        setLiveHeaders(["Chief Complaint", "HPI", "Physical Exam", "Assessment", "Plan"]);
-                                        toast({ title: "Headers extracted!", description: "Template structure identified from pasted content." });
-                                      }, 2000);
-                                    }}
-                                    disabled={analyzing}
-                                  >
-                                    {analyzing ? (
-                                      <>
+                                  <Textarea placeholder="Paste your template content here and we'll extract the structure..." className="flex-1 min-h-[200px] resize-none" />
+                                  <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
+                                setAnalyzing(true);
+                                setTimeout(() => {
+                                  setAnalyzing(false);
+                                  setLiveHeaders(["Chief Complaint", "HPI", "Physical Exam", "Assessment", "Plan"]);
+                                  toast({
+                                    title: "Headers extracted!",
+                                    description: "Template structure identified from pasted content."
+                                  });
+                                }, 2000);
+                              }} disabled={analyzing}>
+                                    {analyzing ? <>
                                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                                         Analyzing...
-                                      </>
-                                    ) : (
-                                      <>
+                                      </> : <>
                                         <Wand2 className="h-4 w-4 mr-2" /> Analyze & Extract Headers
-                                      </>
-                                    )}
+                                      </>}
                                   </Button>
                                 </div>
                               </TabsContent>
@@ -1068,16 +993,14 @@ const ProductWalkthrough: React.FC = () => {
                                 <div className="h-full flex flex-col gap-6">
                                   <div className="flex items-center justify-between">
                                     <div className="text-sm font-semibold">Build Template from Scratch</div>
-                                    <Button 
-                                      variant="outline" 
-                                      size="sm"
-                                      onClick={() => {
-                                        setScratchSections([]);
-                                        setLiveHeaders([]);
-                                        toast({ title: "Template cleared", description: "Start building your custom template" });
-                                      }}
-                                      className="text-xs h-8"
-                                    >
+                                    <Button variant="outline" size="sm" onClick={() => {
+                                  setScratchSections([]);
+                                  setLiveHeaders([]);
+                                  toast({
+                                    title: "Template cleared",
+                                    description: "Start building your custom template"
+                                  });
+                                }} className="text-xs h-8">
                                       Clear All
                                     </Button>
                                   </div>
@@ -1108,34 +1031,29 @@ const ProductWalkthrough: React.FC = () => {
                                             <TabsContent value="common" className="h-[280px] m-0">
                                               <div className="h-full overflow-y-auto custom-scrollbar pr-2">
                                                 <div className="grid grid-cols-1 gap-2">
-                                                  {defaultHeaders.map((h, index) => (
-                                                    <button 
-                                                      key={h} 
-                                                      type="button" 
-                                                      onClick={() => {
-                                                        if (!scratchSections.includes(h)) {
-                                                          const newSections = [...scratchSections, h];
-                                                          setScratchSections(newSections);
-                                                          setLiveHeaders(newSections);
-                                                          toast({ title: "Section added", description: `"${h}" added to template` });
-                                                        } else {
-                                                          toast({ title: "Already added", description: `"${h}" is already in your template` });
-                                                        }
-                                                      }}
-                                                      disabled={scratchSections.includes(h)}
-                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
-                                                      style={{ animationDelay: `${index * 20}ms` }}
-                                                    >
+                                                  {defaultHeaders.map((h, index) => <button key={h} type="button" onClick={() => {
+                                                if (!scratchSections.includes(h)) {
+                                                  const newSections = [...scratchSections, h];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                  toast({
+                                                    title: "Section added",
+                                                    description: `"${h}" added to template`
+                                                  });
+                                                } else {
+                                                  toast({
+                                                    title: "Already added",
+                                                    description: `"${h}" is already in your template`
+                                                  });
+                                                }
+                                              }} disabled={scratchSections.includes(h)} className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50" style={{
+                                                animationDelay: `${index * 20}ms`
+                                              }}>
                                                       <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-slate-100 group-hover:bg-slate-200 text-slate-600'}`}>
-                                                        {scratchSections.includes(h) ? (
-                                                          <CheckCircle2 className="h-4 w-4" />
-                                                        ) : (
-                                                          <span className="text-sm">+</span>
-                                                        )}
+                                                        {scratchSections.includes(h) ? <CheckCircle2 className="h-4 w-4" /> : <span className="text-sm">+</span>}
                                                       </div>
                                                       <span className="flex-1">{h}</span>
-                                                    </button>
-                                                  ))}
+                                                    </button>)}
                                                 </div>
                                               </div>
                                             </TabsContent>
@@ -1143,32 +1061,24 @@ const ProductWalkthrough: React.FC = () => {
                                             <TabsContent value="specialty" className="h-[280px] m-0">
                                               <div className="h-full overflow-y-auto custom-scrollbar pr-2">
                                                 <div className="grid grid-cols-1 gap-2">
-                                                  {["Vital Signs", "Allergies", "Current Medications", "Past Medical History", "Social History", "Family History", "Surgical History", "Imaging Results", "Lab Results", "Procedures", "Consultation Notes", "Discharge Instructions"].map((h, index) => (
-                                                    <button 
-                                                      key={h} 
-                                                      type="button" 
-                                                      onClick={() => {
-                                                        if (!scratchSections.includes(h)) {
-                                                          const newSections = [...scratchSections, h];
-                                                          setScratchSections(newSections);
-                                                          setLiveHeaders(newSections);
-                                                          toast({ title: "Section added", description: `"${h}" added to template` });
-                                                        }
-                                                      }}
-                                                      disabled={scratchSections.includes(h)}
-                                                      className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50"
-                                                      style={{ animationDelay: `${index * 20}ms` }}
-                                                    >
+                                                  {["Vital Signs", "Allergies", "Current Medications", "Past Medical History", "Social History", "Family History", "Surgical History", "Imaging Results", "Lab Results", "Procedures", "Consultation Notes", "Discharge Instructions"].map((h, index) => <button key={h} type="button" onClick={() => {
+                                                if (!scratchSections.includes(h)) {
+                                                  const newSections = [...scratchSections, h];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                  toast({
+                                                    title: "Section added",
+                                                    description: `"${h}" added to template`
+                                                  });
+                                                }
+                                              }} disabled={scratchSections.includes(h)} className="group flex items-center gap-3 px-4 py-3 rounded-xl border-2 hover:border-slate-300 text-sm font-medium transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 text-left bg-background animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted/50" style={{
+                                                animationDelay: `${index * 20}ms`
+                                              }}>
                                                       <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${scratchSections.includes(h) ? 'bg-green-100 text-green-600' : 'bg-slate-100 group-hover:bg-slate-200 text-slate-600'}`}>
-                                                        {scratchSections.includes(h) ? (
-                                                          <CheckCircle2 className="h-4 w-4" />
-                                                        ) : (
-                                                          <span className="text-sm">+</span>
-                                                        )}
+                                                        {scratchSections.includes(h) ? <CheckCircle2 className="h-4 w-4" /> : <span className="text-sm">+</span>}
                                                       </div>
                                                       <span className="flex-1">{h}</span>
-                                                    </button>
-                                                  ))}
+                                                    </button>)}
                                                 </div>
                                               </div>
                                             </TabsContent>
@@ -1179,34 +1089,30 @@ const ProductWalkthrough: React.FC = () => {
                                                   Create your own custom sections
                                                 </div>
                                                 <div className="flex gap-2">
-                                                  <Input 
-                                                    placeholder="Enter section name..."
-                                                    value={customSectionName}
-                                                    onChange={(e) => setCustomSectionName(e.target.value)}
-                                                    onKeyPress={(e) => {
-                                                      if (e.key === 'Enter' && customSectionName.trim()) {
-                                                        const newSections = [...scratchSections, customSectionName.trim()];
-                                                        setScratchSections(newSections);
-                                                        setLiveHeaders(newSections);
-                                                        setCustomSectionName('');
-                                                        toast({ title: "Custom section added", description: `"${customSectionName.trim()}" added to template` });
-                                                      }
-                                                    }}
-                                                    className="text-sm"
-                                                  />
-                                                  <Button 
-                                                    size="sm"
-                                                    onClick={() => {
-                                                      if (customSectionName.trim()) {
-                                                        const newSections = [...scratchSections, customSectionName.trim()];
-                                                        setScratchSections(newSections);
-                                                        setLiveHeaders(newSections);
-                                                        setCustomSectionName('');
-                                                        toast({ title: "Custom section added", description: `"${customSectionName.trim()}" added to template` });
-                                                      }
-                                                    }}
-                                                    disabled={!customSectionName.trim()}
-                                                  >
+                                                  <Input placeholder="Enter section name..." value={customSectionName} onChange={e => setCustomSectionName(e.target.value)} onKeyPress={e => {
+                                                if (e.key === 'Enter' && customSectionName.trim()) {
+                                                  const newSections = [...scratchSections, customSectionName.trim()];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                  setCustomSectionName('');
+                                                  toast({
+                                                    title: "Custom section added",
+                                                    description: `"${customSectionName.trim()}" added to template`
+                                                  });
+                                                }
+                                              }} className="text-sm" />
+                                                  <Button size="sm" onClick={() => {
+                                                if (customSectionName.trim()) {
+                                                  const newSections = [...scratchSections, customSectionName.trim()];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                  setCustomSectionName('');
+                                                  toast({
+                                                    title: "Custom section added",
+                                                    description: `"${customSectionName.trim()}" added to template`
+                                                  });
+                                                }
+                                              }} disabled={!customSectionName.trim()}>
                                                     Add
                                                   </Button>
                                                 </div>
@@ -1233,8 +1139,7 @@ const ProductWalkthrough: React.FC = () => {
                                         </CardHeader>
                                         <CardContent className="pt-0 h-full pb-6">
                                           {/* Empty state with better UX */}
-                                          {scratchSections.length === 0 ? (
-                                            <div className="h-full flex items-center justify-center text-center">
+                                          {scratchSections.length === 0 ? <div className="h-full flex items-center justify-center text-center">
                                               <div className="space-y-4 max-w-sm">
                                                 <div className="text-6xl opacity-20">📝</div>
                                                 <div className="space-y-2">
@@ -1245,29 +1150,22 @@ const ProductWalkthrough: React.FC = () => {
                                                   </div>
                                                 </div>
                                               </div>
-                                            </div>
-                                          ) : (
-                                            <div className="space-y-3 h-[320px] overflow-y-auto custom-scrollbar pr-2">
-                                              {scratchSections.map((h, i) => (
-                                                <div
-                                                  key={`${h}-${i}`}
-                                                  draggable
-                                                  onDragStart={() => setDragIndex(i)}
-                                                  onDragOver={(e) => e.preventDefault()}
-                                                  onDrop={() => {
-                                                    if (dragIndex === null || dragIndex === i) return;
-                                                    setScratchSections((arr) => {
-                                                      const copy = [...arr];
-                                                      const [moved] = copy.splice(dragIndex, 1);
-                                                      copy.splice(i, 0, moved);
-                                                      setLiveHeaders(copy);
-                                                      return copy;
-                                                    });
-                                                    setDragIndex(null);
-                                                    toast({ title: "Section reordered", description: "Template structure updated" });
-                                                  }}
-                                                  className="group relative rounded-xl border-2 bg-gradient-to-r from-card to-card/80 p-4 cursor-move hover:border-indigo-300 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100 hover:-translate-y-0.5 animate-scale-in"
-                                                >
+                                            </div> : <div className="space-y-3 h-[320px] overflow-y-auto custom-scrollbar pr-2">
+                                              {scratchSections.map((h, i) => <div key={`${h}-${i}`} draggable onDragStart={() => setDragIndex(i)} onDragOver={e => e.preventDefault()} onDrop={() => {
+                                          if (dragIndex === null || dragIndex === i) return;
+                                          setScratchSections(arr => {
+                                            const copy = [...arr];
+                                            const [moved] = copy.splice(dragIndex, 1);
+                                            copy.splice(i, 0, moved);
+                                            setLiveHeaders(copy);
+                                            return copy;
+                                          });
+                                          setDragIndex(null);
+                                          toast({
+                                            title: "Section reordered",
+                                            description: "Template structure updated"
+                                          });
+                                        }} className="group relative rounded-xl border-2 bg-gradient-to-r from-card to-card/80 p-4 cursor-move hover:border-indigo-300 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100 hover:-translate-y-0.5 animate-scale-in">
                                                   <div className="flex items-center justify-between">
                                                     <div className="flex items-center gap-3">
                                                       <div className="h-8 w-8 rounded-lg bg-indigo-100 flex items-center justify-center">
@@ -1276,49 +1174,38 @@ const ProductWalkthrough: React.FC = () => {
                                                       <span className="font-medium text-sm">{h}</span>
                                                     </div>
                                                     <div className="flex items-center gap-2">
-                                                      <button 
-                                                        type="button" 
-                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" 
-                                                        onClick={(e) => {
-                                                          e.stopPropagation();
-                                                          if (i > 0) {
-                                                            const newSections = [...scratchSections];
-                                                            [newSections[i], newSections[i-1]] = [newSections[i-1], newSections[i]];
-                                                            setScratchSections(newSections);
-                                                            setLiveHeaders(newSections);
-                                                          }
-                                                        }}
-                                                        disabled={i === 0}
-                                                      >
+                                                      <button type="button" className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" onClick={e => {
+                                                e.stopPropagation();
+                                                if (i > 0) {
+                                                  const newSections = [...scratchSections];
+                                                  [newSections[i], newSections[i - 1]] = [newSections[i - 1], newSections[i]];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                }
+                                              }} disabled={i === 0}>
                                                         ↑
                                                       </button>
-                                                      <button 
-                                                        type="button" 
-                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" 
-                                                        onClick={(e) => {
-                                                          e.stopPropagation();
-                                                          if (i < scratchSections.length - 1) {
-                                                            const newSections = [...scratchSections];
-                                                            [newSections[i], newSections[i+1]] = [newSections[i+1], newSections[i]];
-                                                            setScratchSections(newSections);
-                                                            setLiveHeaders(newSections);
-                                                          }
-                                                        }}
-                                                        disabled={i === scratchSections.length - 1}
-                                                      >
+                                                      <button type="button" className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-md hover:bg-muted/50" onClick={e => {
+                                                e.stopPropagation();
+                                                if (i < scratchSections.length - 1) {
+                                                  const newSections = [...scratchSections];
+                                                  [newSections[i], newSections[i + 1]] = [newSections[i + 1], newSections[i]];
+                                                  setScratchSections(newSections);
+                                                  setLiveHeaders(newSections);
+                                                }
+                                              }} disabled={i === scratchSections.length - 1}>
                                                         ↓
                                                       </button>
-                                                      <button 
-                                                        type="button" 
-                                                        className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-destructive hover:text-destructive/80 hover:underline px-2 py-1 rounded-md hover:bg-destructive/10" 
-                                                        onClick={(e) => {
-                                                          e.stopPropagation();
-                                                          const newSections = scratchSections.filter((_, idx) => idx !== i);
-                                                          setScratchSections(newSections);
-                                                          setLiveHeaders(newSections);
-                                                          toast({ title: "Section removed", description: `"${h}" removed from template` });
-                                                        }}
-                                                      >
+                                                      <button type="button" className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-xs text-destructive hover:text-destructive/80 hover:underline px-2 py-1 rounded-md hover:bg-destructive/10" onClick={e => {
+                                                e.stopPropagation();
+                                                const newSections = scratchSections.filter((_, idx) => idx !== i);
+                                                setScratchSections(newSections);
+                                                setLiveHeaders(newSections);
+                                                toast({
+                                                  title: "Section removed",
+                                                  description: `"${h}" removed from template`
+                                                });
+                                              }}>
                                                         Remove
                                                       </button>
                                                     </div>
@@ -1332,10 +1219,8 @@ const ProductWalkthrough: React.FC = () => {
                                                       <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
                                                     </div>
                                                   </div>
-                                                </div>
-                                              ))}
-                                            </div>
-                                          )}
+                                                </div>)}
+                                            </div>}
                                         </CardContent>
                                       </Card>
                                     </div>
@@ -1346,40 +1231,32 @@ const ProductWalkthrough: React.FC = () => {
                               <TabsContent value="prompt" className="h-full m-0">
                                 <div className="h-full flex flex-col gap-4">
                                   <div className="text-sm font-semibold">Build Template by AI Prompt</div>
-                                  <Textarea 
-                                    placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" 
-                                    className="flex-1 min-h-[200px] resize-none"
-                                  />
-                                  <Button 
-                                    className="rounded-full w-fit animate-fade-in"
-                                    onClick={() => {
-                                      setGenerating(true);
-                                      setProgress(0);
-                                      const interval = setInterval(() => {
-                                        setProgress(p => {
-                                          if (p >= 100) {
-                                            clearInterval(interval);
-                                            setGenerating(false);
-                                            setLiveHeaders(["Chief Complaint", "HPI", "Assessment", "Plan", "Follow-up"]);
-                                            toast({ title: "AI Template generated!", description: "Custom template created based on your prompt." });
-                                            return 100;
-                                          }
-                                          return p + 10;
-                                        });
-                                      }, 200);
-                                    }}
-                                    disabled={generating}
-                                  >
-                                    {generating ? (
-                                      <>
+                                  <Textarea placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" className="flex-1 min-h-[200px] resize-none" />
+                                  <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
+                                setGenerating(true);
+                                setProgress(0);
+                                const interval = setInterval(() => {
+                                  setProgress(p => {
+                                    if (p >= 100) {
+                                      clearInterval(interval);
+                                      setGenerating(false);
+                                      setLiveHeaders(["Chief Complaint", "HPI", "Assessment", "Plan", "Follow-up"]);
+                                      toast({
+                                        title: "AI Template generated!",
+                                        description: "Custom template created based on your prompt."
+                                      });
+                                      return 100;
+                                    }
+                                    return p + 10;
+                                  });
+                                }, 200);
+                              }} disabled={generating}>
+                                    {generating ? <>
                                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                                         Generating... {progress}%
-                                      </>
-                                    ) : (
-                                      <>
+                                      </> : <>
                                         <Wand2 className="h-4 w-4 mr-2" /> Generate Template
-                                      </>
-                                    )}
+                                      </>}
                                   </Button>
                                 </div>
                               </TabsContent>
@@ -1400,8 +1277,7 @@ const ProductWalkthrough: React.FC = () => {
                       </CardHeader>
                        <CardContent className="p-6">
                          <div className="max-h-[400px] sm:max-h-[500px] overflow-y-auto space-y-3">
-                           {liveHeaders.length === 0 ? (
-                             <div className="text-center py-12">
+                           {liveHeaders.length === 0 ? <div className="text-center py-12">
                                <div className="h-16 w-16 mx-auto rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-4">
                                  <Wand2 className="h-8 w-8 text-primary" />
                                </div>
@@ -1427,15 +1303,12 @@ const ProductWalkthrough: React.FC = () => {
                                    <span>Generate with AI</span>
                                  </div>
                                </div>
-                             </div>
-                           ) : (
-                             <>
+                             </div> : <>
                                <div className="flex items-center justify-between mb-4 pb-3 border-b">
                                  <div className="text-sm font-semibold text-foreground">Template Preview</div>
                                  <div className="text-xs text-muted-foreground">{liveHeaders.length} sections</div>
                                </div>
-                               {liveHeaders.map((s, index) => (
-                                 <div key={`${s}-${index}`} className="group rounded-xl border-2 border-border hover:border-primary/30 p-4 transition-all duration-200 hover:shadow-md hover:shadow-primary/10 animate-fade-in bg-gradient-to-r from-background to-muted/30">
+                               {liveHeaders.map((s, index) => <div key={`${s}-${index}`} className="group rounded-xl border-2 border-border hover:border-primary/30 p-4 transition-all duration-200 hover:shadow-md hover:shadow-primary/10 animate-fade-in bg-gradient-to-r from-background to-muted/30">
                                    <div className="flex items-center gap-3 mb-2">
                                      <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
                                        <span className="text-xs font-bold text-primary">{index + 1}</span>
@@ -1445,18 +1318,14 @@ const ProductWalkthrough: React.FC = () => {
                                    <div className="text-xs text-muted-foreground pl-9 leading-relaxed">
                                      AI will automatically populate this section based on your patient conversation and clinical context.
                                    </div>
-                                 </div>
-                               ))}
-                             </>
-                           )}
+                                 </div>)}
+                             </>}
                          </div>
                        </CardContent>
                     </Card>
-                  </div>
-                )}
+                  </div>}
 
-                {setupStep === 'ehr' && (
-                  <div className="max-w-6xl mx-auto">
+                {setupStep === 'ehr' && <div className="max-w-6xl mx-auto">
                     <Card className="border-2 bg-gradient-to-br from-background to-muted/10">
                       <CardHeader className="pb-4 bg-gradient-to-r from-emerald-50 to-emerald-100 border-b">
                         <CardTitle className="flex items-center gap-3 text-xl">
@@ -1488,56 +1357,103 @@ const ProductWalkthrough: React.FC = () => {
                             <div className="flex-1 border rounded-xl bg-gradient-to-br from-muted/10 to-muted/5 p-4 overflow-hidden">
                               <div className="h-full overflow-y-auto custom-scrollbar">
                                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-                                  {[
-                                    { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
-                                    { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
-                                    { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
-                                    { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
-                                    { name: "Allscripts", logo: "🩺", subtitle: "Allscripts" },
-                                    { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
-                                    { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
-                                    { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
-                                    { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
-                                    { name: "CureMD", logo: "💉", subtitle: "CureMD" },
-                                    { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono" },
-                                    { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
-                                    { name: "Kareo", logo: "💼", subtitle: "Tebra" },
-                                    { name: "ModMed", logo: "🏥", subtitle: "ModMed" },
-                                    { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
-                                    { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
-                                    { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
-                                    { name: "WebPT", logo: "💪", subtitle: "WebPT" },
-                                    { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
-                                    { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
-                                  ].map((ehr) => (
-                                    <button
-                                      key={ehr.name}
-                                      onClick={() => {
-                                        setSelectedEhr(ehr.name);
-                                        toast({ 
-                                          title: `${ehr.name} selected`, 
-                                          description: `Ready to connect`,
-                                          duration: 2000 
-                                        });
-                                      }}
-                                      className={`group rounded-lg border-2 hover:border-emerald-400 p-2 text-center transition-all duration-200 hover:shadow-md hover:scale-105 ${
-                                        selectedEhr === ehr.name ? 
-                                          'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200 scale-105 shadow-md' : 
-                                          'bg-background hover:bg-emerald-50/50'
-                                      } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/30' : ''}`}
-                                    >
-                                      {selectedEhr === ehr.name && (
-                                        <div className="absolute -top-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                                  {[{
+                                name: "Epic",
+                                logo: "🏥",
+                                subtitle: "Epic Systems"
+                              }, {
+                                name: "Cerner",
+                                logo: "⚕️",
+                                subtitle: "Oracle Health"
+                              }, {
+                                name: "Athena",
+                                logo: "🔬",
+                                subtitle: "athenahealth"
+                              }, {
+                                name: "NextGen",
+                                logo: "📋",
+                                subtitle: "NextGen Healthcare"
+                              }, {
+                                name: "Allscripts",
+                                logo: "🩺",
+                                subtitle: "Allscripts"
+                              }, {
+                                name: "Meditech",
+                                logo: "🏥",
+                                subtitle: "MEDITECH"
+                              }, {
+                                name: "eClinicalWorks",
+                                logo: "💊",
+                                subtitle: "eCW"
+                              }, {
+                                name: "Practice Fusion",
+                                logo: "⚡",
+                                subtitle: "Veracyte"
+                              }, {
+                                name: "Amazing Charts",
+                                logo: "📊",
+                                subtitle: "Amazing Charts"
+                              }, {
+                                name: "CureMD",
+                                logo: "💉",
+                                subtitle: "CureMD"
+                              }, {
+                                name: "DrChrono",
+                                logo: "👨‍⚕️",
+                                subtitle: "DrChrono"
+                              }, {
+                                name: "AdvancedMD",
+                                logo: "🔬",
+                                subtitle: "AdvancedMD"
+                              }, {
+                                name: "Kareo",
+                                logo: "💼",
+                                subtitle: "Tebra"
+                              }, {
+                                name: "ModMed",
+                                logo: "🏥",
+                                subtitle: "ModMed"
+                              }, {
+                                name: "Praxis",
+                                logo: "🧠",
+                                subtitle: "Praxis EMR"
+                              }, {
+                                name: "Centricity",
+                                logo: "🎯",
+                                subtitle: "GE Healthcare"
+                              }, {
+                                name: "SimplePractice",
+                                logo: "✨",
+                                subtitle: "SimplePractice"
+                              }, {
+                                name: "WebPT",
+                                logo: "💪",
+                                subtitle: "WebPT"
+                              }, {
+                                name: "TotalMD",
+                                logo: "🏥",
+                                subtitle: "TotalMD"
+                              }, {
+                                name: "Any EHR",
+                                logo: "🔧",
+                                subtitle: "Custom Integration"
+                              }].map(ehr => <button key={ehr.name} onClick={() => {
+                                setSelectedEhr(ehr.name);
+                                toast({
+                                  title: `${ehr.name} selected`,
+                                  description: `Ready to connect`,
+                                  duration: 2000
+                                });
+                              }} className={`group rounded-lg border-2 hover:border-emerald-400 p-2 text-center transition-all duration-200 hover:shadow-md hover:scale-105 ${selectedEhr === ehr.name ? 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200 scale-105 shadow-md' : 'bg-background hover:bg-emerald-50/50'} ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/30' : ''}`}>
+                                      {selectedEhr === ehr.name && <div className="absolute -top-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center">
                                           <CheckCircle2 className="h-3 w-3 text-white" />
-                                        </div>
-                                      )}
+                                        </div>}
                                       <div className="text-lg mb-1">{ehr.logo}</div>
                                       <div className="font-semibold text-[10px] leading-tight group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
                                       <div className="text-[9px] text-muted-foreground leading-tight">
                                         {ehr.subtitle}
                                       </div>
-                                    </button>
-                                  ))}
+                                    </button>)}
                                 </div>
                               </div>
                             </div>
@@ -1575,55 +1491,37 @@ const ProductWalkthrough: React.FC = () => {
 
                               {/* Security Features */}
                               <div className="grid grid-cols-1 gap-2 p-3 bg-muted/30 rounded-lg">
-                                {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((feature) => (
-                                  <div key={feature} className="flex items-center gap-2">
+                                {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map(feature => <div key={feature} className="flex items-center gap-2">
                                     <CheckCircle2 className="h-3 w-3 text-green-600" />
                                     <span className="text-xs font-medium">{feature}</span>
-                                  </div>
-                                ))}
+                                  </div>)}
                               </div>
                             </div>
 
                             {/* Action Buttons - Always visible at bottom */}
                             <div className="space-y-3 pt-4 border-t">
                               <div className="flex flex-col gap-2">
-                                <Button 
-                                  onClick={handleConnect} 
-                                  disabled={!selectedEhr || connecting} 
-                                  className="w-full rounded-full font-semibold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269]"
-                                  size="lg"
-                                >
-                                  {connecting ? (
-                                    <>
+                                <Button onClick={handleConnect} disabled={!selectedEhr || connecting} className="w-full rounded-full font-semibold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269]" size="lg">
+                                  {connecting ? <>
                                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                                       Connecting...
-                                    </>
-                                  ) : selectedEhr ? (
-                                    <>
+                                    </> : selectedEhr ? <>
                                       <ShieldCheck className="h-4 w-4 mr-2" />
                                       Connect {selectedEhr}
-                                    </>
-                                  ) : (
-                                    'Select EHR to Connect'
-                                  )}
+                                    </> : 'Select EHR to Connect'}
                                 </Button>
                                 
                                 <div className="flex gap-2">
-                                  <Button 
-                                    variant="outline" 
-                                    className="flex-1 rounded-full"
-                                    onClick={() => setSetupStep('landing')}
-                                  >
+                                  <Button variant="outline" className="flex-1 rounded-full" onClick={() => setSetupStep('landing')}>
                                     ← Back
                                   </Button>
-                                  <Button 
-                                    variant="ghost" 
-                                    className="flex-1 rounded-full text-muted-foreground hover:text-foreground"
-                                    onClick={() => {
-                                      toast({ title: "Setup saved", description: "You can configure EHR later." });
-                                      onNavClick("schedule");
-                                    }}
-                                  >
+                                  <Button variant="ghost" className="flex-1 rounded-full text-muted-foreground hover:text-foreground" onClick={() => {
+                                toast({
+                                  title: "Setup saved",
+                                  description: "You can configure EHR later."
+                                });
+                                onNavClick("schedule");
+                              }}>
                                     Skip for now
                                   </Button>
                                 </div>
@@ -1641,8 +1539,7 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                )}
+                  </div>}
               </div>
             </section>
 
@@ -1724,21 +1621,11 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="flex-1">
                           <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <input
-                              type="text"
-                              placeholder="Search patients, MRN, visit type..."
-                              value={scheduleSearch}
-                              onChange={(e) => setScheduleSearch(e.target.value)}
-                              className="w-full pl-10 pr-4 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                            />
+                            <input type="text" placeholder="Search patients, MRN, visit type..." value={scheduleSearch} onChange={e => setScheduleSearch(e.target.value)} className="w-full pl-10 pr-4 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" />
                           </div>
                         </div>
                         <div className="flex gap-3">
-                          <select
-                            value={locationFilter}
-                            onChange={(e) => setLocationFilter(e.target.value)}
-                            className="px-3 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary min-w-[140px]"
-                          >
+                          <select value={locationFilter} onChange={e => setLocationFilter(e.target.value)} className="px-3 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary min-w-[140px]">
                             <option value="all">All Locations</option>
                             <option value="Main Campus">Main Campus</option>
                             <option value="Downtown Clinic">Downtown Clinic</option>
@@ -1765,35 +1652,25 @@ const ProductWalkthrough: React.FC = () => {
                 {/* Schedule Content */}
                 <Card className="overflow-hidden border-2">
                   <CardContent className="p-0">
-                    {scheduleView === 'list' ? (
-                      <div className="overflow-x-auto">
+                    {scheduleView === 'list' ? <div className="overflow-x-auto">
                         <table className="w-full">
                           <thead>
                             <tr className="border-b bg-gradient-to-r from-muted/80 to-muted/40">
-                              {["Time", "Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Priority", "Location & System", "Actions"].map((header) => (
-                                <th key={header} className="text-left px-4 lg:px-6 py-4 font-semibold text-xs lg:text-sm whitespace-nowrap">
+                              {["Time", "Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Priority", "Location & System", "Actions"].map(header => <th key={header} className="text-left px-4 lg:px-6 py-4 font-semibold text-xs lg:text-sm whitespace-nowrap">
                                   {header}
-                                </th>
-                              ))}
+                                </th>)}
                             </tr>
                           </thead>
                           <tbody>
-                            {appointments
-                              .filter(appointment => {
-                                const matchesSearch = scheduleSearch === "" || 
-                                  appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
-                                  appointment.mrn.includes(scheduleSearch) ||
-                                  appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
-                                const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
-                                return matchesSearch && matchesLocation;
-                              })
-                              .map((appointment, index) => {
-                                const [system, location] = appointment.src.split(' - ');
-                                const times = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM"];
-                                const time = times[index % times.length];
-                                
-                                return (
-                                  <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-all duration-200 group animate-fade-in">
+                            {appointments.filter(appointment => {
+                          const matchesSearch = scheduleSearch === "" || appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) || appointment.mrn.includes(scheduleSearch) || appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
+                          const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
+                          return matchesSearch && matchesLocation;
+                        }).map((appointment, index) => {
+                          const [system, location] = appointment.src.split(' - ');
+                          const times = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM"];
+                          const time = times[index % times.length];
+                          return <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-all duration-200 group animate-fade-in">
                                     <td className="px-4 lg:px-6 py-4 font-mono text-xs lg:text-sm font-medium">
                                       {time}
                                     </td>
@@ -1812,31 +1689,14 @@ const ProductWalkthrough: React.FC = () => {
                                     </td>
                                     <td className="px-4 lg:px-6 py-4 text-sm">{appointment.lang}</td>
                                     <td className="px-4 lg:px-6 py-4">
-                                      {appointment.flags && (
-                                        <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border ${
-                                          appointment.flags.includes('High Priority') ? 'bg-red-50 text-red-700 border-red-200' :
-                                          appointment.flags.includes('Interpreter') ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                                          appointment.flags.includes('Pre-op') ? 'bg-purple-50 text-purple-700 border-purple-200' :
-                                          appointment.flags.includes('Same Day') ? 'bg-orange-50 text-orange-700 border-orange-200' :
-                                          appointment.flags.includes('Virtual') ? 'bg-green-50 text-green-700 border-green-200' :
-                                          appointment.flags.includes('Post-op') ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
-                                          'bg-yellow-50 text-yellow-700 border-yellow-200'
-                                        }`}>
+                                      {appointment.flags && <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border ${appointment.flags.includes('High Priority') ? 'bg-red-50 text-red-700 border-red-200' : appointment.flags.includes('Interpreter') ? 'bg-blue-50 text-blue-700 border-blue-200' : appointment.flags.includes('Pre-op') ? 'bg-purple-50 text-purple-700 border-purple-200' : appointment.flags.includes('Same Day') ? 'bg-orange-50 text-orange-700 border-orange-200' : appointment.flags.includes('Virtual') ? 'bg-green-50 text-green-700 border-green-200' : appointment.flags.includes('Post-op') ? 'bg-indigo-50 text-indigo-700 border-indigo-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200'}`}>
                                           {appointment.flags}
-                                        </span>
-                                      )}
+                                        </span>}
                                     </td>
                                     <td className="px-4 lg:px-6 py-4">
                                       <div className="flex flex-col gap-1">
                                         <div className="flex items-center gap-2">
-                                          <div className={`h-2 w-2 rounded-full ${
-                                            system === 'Epic' ? 'bg-blue-500' :
-                                            system === 'Cerner' ? 'bg-green-500' :
-                                            system === 'Athena' ? 'bg-purple-500' :
-                                            system === 'Allscripts' ? 'bg-orange-500' :
-                                            system === 'NextGen' ? 'bg-red-500' :
-                                            'bg-gray-500'
-                                          }`}></div>
+                                          <div className={`h-2 w-2 rounded-full ${system === 'Epic' ? 'bg-blue-500' : system === 'Cerner' ? 'bg-green-500' : system === 'Athena' ? 'bg-purple-500' : system === 'Allscripts' ? 'bg-orange-500' : system === 'NextGen' ? 'bg-red-500' : 'bg-gray-500'}`}></div>
                                           <span className="text-xs font-medium">{system}</span>
                                         </div>
                                         <div className="text-xs text-muted-foreground pl-4">
@@ -1846,91 +1706,62 @@ const ProductWalkthrough: React.FC = () => {
                                     </td>
                                     <td className="px-4 lg:px-6 py-4">
                                       <div className="flex items-center gap-2">
-                                        <Button 
-                                          size="sm" 
-                                          onClick={() => handleOpenAppointment(appointment)} 
-                                          className="rounded-lg h-8 px-3 text-xs font-medium group-hover:shadow-md transition-shadow"
-                                        >
+                                        <Button size="sm" onClick={() => handleOpenAppointment(appointment)} className="rounded-lg h-8 px-3 text-xs font-medium group-hover:shadow-md transition-shadow">
                                           <Play className="h-3 w-3 mr-1" />
                                           Start
                                         </Button>
-                                        <Button 
-                                          variant="outline" 
-                                          size="sm" 
-                                          className="rounded-lg h-8 px-2"
-                                        >
+                                        <Button variant="outline" size="sm" className="rounded-lg h-8 px-2">
                                           <MoreVertical className="h-3 w-3" />
                                         </Button>
                                       </div>
                                     </td>
-                                  </tr>
-                                );
-                              })}
+                                  </tr>;
+                        })}
                           </tbody>
                         </table>
 
                         {/* Empty State */}
                         {appointments.filter(appointment => {
-                          const matchesSearch = scheduleSearch === "" || 
-                            appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
-                            appointment.mrn.includes(scheduleSearch) ||
-                            appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
-                          const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
-                          return matchesSearch && matchesLocation;
-                        }).length === 0 && (
-                          <div className="text-center py-12">
+                      const matchesSearch = scheduleSearch === "" || appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) || appointment.mrn.includes(scheduleSearch) || appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
+                      const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
+                      return matchesSearch && matchesLocation;
+                    }).length === 0 && <div className="text-center py-12">
                             <div className="text-4xl opacity-20 mb-4">📅</div>
                             <div className="text-lg font-medium text-muted-foreground">No appointments found</div>
                             <div className="text-sm text-muted-foreground mt-2">
                               Try adjusting your search or filter criteria
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      /* Calendar View */
-                      <div className="p-6">
+                          </div>}
+                      </div> : (/* Calendar View */
+                  <div className="p-6">
                         <div className="grid grid-cols-7 gap-4 mb-6">
-                          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                            <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
+                          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
                               {day}
-                            </div>
-                          ))}
-                          {Array.from({ length: 35 }, (_, i) => {
-                            const isToday = i === 15; // Mock today
-                            const hasAppointments = Math.random() > 0.7;
-                            const appointmentCount = hasAppointments ? Math.floor(Math.random() * 5) + 1 : 0;
-                            
-                            return (
-                              <div 
-                                key={i} 
-                                className={`min-h-[80px] p-2 border rounded-lg transition-colors cursor-pointer ${
-                                  isToday ? 'bg-primary/10 border-primary/30' : 
-                                  hasAppointments ? 'bg-muted/30 hover:bg-muted/50' : 
-                                  'hover:bg-muted/20'
-                                }`}
-                              >
+                            </div>)}
+                          {Array.from({
+                        length: 35
+                      }, (_, i) => {
+                        const isToday = i === 15; // Mock today
+                        const hasAppointments = Math.random() > 0.7;
+                        const appointmentCount = hasAppointments ? Math.floor(Math.random() * 5) + 1 : 0;
+                        return <div key={i} className={`min-h-[80px] p-2 border rounded-lg transition-colors cursor-pointer ${isToday ? 'bg-primary/10 border-primary/30' : hasAppointments ? 'bg-muted/30 hover:bg-muted/50' : 'hover:bg-muted/20'}`}>
                                 <div className={`text-sm font-medium mb-1 ${isToday ? 'text-primary' : ''}`}>
                                   {i + 1}
                                 </div>
-                                {hasAppointments && (
-                                  <div className="space-y-1">
-                                    {Array.from({ length: appointmentCount }, (_, j) => (
-                                      <div key={j} className="text-xs p-1 bg-primary/20 text-primary rounded truncate">
+                                {hasAppointments && <div className="space-y-1">
+                                    {Array.from({
+                              length: appointmentCount
+                            }, (_, j) => <div key={j} className="text-xs p-1 bg-primary/20 text-primary rounded truncate">
                                         {j === 0 ? '9:00 AM' : j === 1 ? '10:30 AM' : j === 2 ? '2:00 PM' : '3:30 PM'}
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
+                                      </div>)}
+                                  </div>}
+                              </div>;
+                      })}
                         </div>
                         <div className="text-center text-sm text-muted-foreground">
                           Click on any date to view detailed appointments
                         </div>
-                      </div>
-                    )}
+                      </div>)}
                   </CardContent>
                 </Card>
               </div>
@@ -1958,14 +1789,12 @@ const ProductWalkthrough: React.FC = () => {
                             {isRecording ? 'Recording Active' : 'Ready to Capture'}
                           </span>
                         </div>
-                        {selectedPatient && (
-                          <div className="flex items-center gap-2 text-muted-foreground">
+                        {selectedPatient && <div className="flex items-center gap-2 text-muted-foreground">
                             <span>•</span>
                             <span>Patient: {selectedPatient.name}</span>
                             <span>•</span>
                             <span>Visit: {selectedPatient.visit}</span>
-                          </div>
-                        )}
+                          </div>}
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="text-xs text-muted-foreground">AI Processing:</div>
@@ -2013,23 +1842,12 @@ const ProductWalkthrough: React.FC = () => {
                               
                               {/* Recording Controls */}
                               <div className="space-y-4">
-                                <Button 
-                                  onClick={toggleRecording} 
-                                  className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${
-                                    isRecording 
-                                      ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' 
-                                      : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'
-                                  }`}
-                                >
-                                  {isRecording ? (
-                                    <>
+                                <Button onClick={toggleRecording} className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'}`}>
+                                  {isRecording ? <>
                                       <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
-                                    </>
-                                  ) : (
-                                    <>
+                                    </> : <>
                                       <Mic className="h-6 w-6 mr-3" /> Start Recording
-                                    </>
-                                  )}
+                                    </>}
                                 </Button>
                                 
                                 {/* Enhanced Recording Status */}
@@ -2056,20 +1874,10 @@ const ProductWalkthrough: React.FC = () => {
                                   Audio Input Level
                                 </div>
                                 <div className="flex items-end justify-center gap-1 h-20">
-                                  {[8,14,20,12,18,10,16,22,12,15,19,8,16,25,11,20,12,18,14,10].map((h, i) => (
-                                    <div 
-                                      key={i} 
-                                      className={`w-2 rounded-t transition-all duration-300 ${
-                                        isRecording 
-                                          ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' 
-                                          : 'bg-gradient-to-t from-primary/20 to-primary/10'
-                                      }`} 
-                                      style={{ 
-                                        height: `${isRecording ? h : h * 0.3}px`,
-                                        animationDelay: `${i * 50}ms`
-                                      }} 
-                                    />
-                                  ))}
+                                  {[8, 14, 20, 12, 18, 10, 16, 22, 12, 15, 19, 8, 16, 25, 11, 20, 12, 18, 14, 10].map((h, i) => <div key={i} className={`w-2 rounded-t transition-all duration-300 ${isRecording ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' : 'bg-gradient-to-t from-primary/20 to-primary/10'}`} style={{
+                                  height: `${isRecording ? h : h * 0.3}px`,
+                                  animationDelay: `${i * 50}ms`
+                                }} />)}
                                 </div>
                               </Card>
                               
@@ -2100,16 +1908,10 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                               
                               <div className="space-y-4">
-                                <Textarea 
-                                  placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..."
-                                  value={typeNotes}
-                                  onChange={(e) => setTypeNotes(e.target.value)}
-                                  className="min-h-[250px] resize-none text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors"
-                                />
+                                <Textarea placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..." value={typeNotes} onChange={e => setTypeNotes(e.target.value)} className="min-h-[250px] resize-none text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors" />
                                 
                                 {/* AI Suggestions Panel */}
-                                {typeNotes.length > 20 && (
-                                  <Card className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
+                                {typeNotes.length > 20 && <Card className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
                                     <div className="text-xs font-medium text-primary mb-2 flex items-center gap-1">
                                       <Bot className="h-3 w-3" />
                                       AI Suggestions
@@ -2119,8 +1921,7 @@ const ProductWalkthrough: React.FC = () => {
                                       <div>• Review of systems may be beneficial</div>
                                       <div>• Assessment and plan section recommended</div>
                                     </div>
-                                  </Card>
-                                )}
+                                  </Card>}
                                 
                                 {/* Word Count & Metrics */}
                                 <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -2136,43 +1937,37 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                               
                               <div className="flex flex-wrap gap-2">
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                  onClick={() => {
-                                    setTypeNotes("");
-                                    toast({ title: "Notes cleared", description: "Ready for new input" });
-                                  }}
-                                  className="rounded-lg"
-                                >
+                                <Button variant="outline" size="sm" onClick={() => {
+                                setTypeNotes("");
+                                toast({
+                                  title: "Notes cleared",
+                                  description: "Ready for new input"
+                                });
+                              }} className="rounded-lg">
                                   <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                   </svg>
                                   Clear All
                                 </Button>
-                                <Button 
-                                  size="sm"
-                                  onClick={() => {
-                                    if (typeNotes.trim()) {
-                                      setTranscript(typeNotes);
-                                      toast({ title: "Notes processed", description: "AI is structuring your notes" });
-                                    }
-                                  }}
-                                  disabled={!typeNotes.trim()}
-                                  className="rounded-lg"
-                                >
+                                <Button size="sm" onClick={() => {
+                                if (typeNotes.trim()) {
+                                  setTranscript(typeNotes);
+                                  toast({
+                                    title: "Notes processed",
+                                    description: "AI is structuring your notes"
+                                  });
+                                }
+                              }} disabled={!typeNotes.trim()} className="rounded-lg">
                                   <Wand2 className="h-4 w-4 mr-2" />
                                   Process & Structure
                                 </Button>
-                                <Button 
-                                  variant="outline"
-                                  size="sm"
-                                  className="rounded-lg"
-                                  onClick={() => {
-                                    setCaptureMode('audio');
-                                    toast({ title: "Voice dictation activated", description: "You can now use voice dictation to capture notes" });
-                                  }}
-                                >
+                                <Button variant="outline" size="sm" className="rounded-lg" onClick={() => {
+                                setCaptureMode('audio');
+                                toast({
+                                  title: "Voice dictation activated",
+                                  description: "You can now use voice dictation to capture notes"
+                                });
+                              }}>
                                   <Mic className="h-4 w-4 mr-2" />
                                   Voice Dictation
                                 </Button>
@@ -2296,8 +2091,7 @@ const ProductWalkthrough: React.FC = () => {
                         <p className="text-xs text-blue-700/70">Medical history and previous visit details</p>
                       </CardHeader>
                       <CardContent>
-                        {selectedPatient ? (
-                          <div className="space-y-4">
+                        {selectedPatient ? <div className="space-y-4">
                             {/* Patient Header */}
                             <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                               <div className="flex items-center gap-3">
@@ -2334,12 +2128,9 @@ const ProductWalkthrough: React.FC = () => {
                             {/* Clinical Context */}
                             <div className="h-[300px] max-h-[400px] overflow-y-auto custom-scrollbar">
                               <div className="text-sm space-y-4">
-                                {patientContext ? (
-                                  <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
+                                {patientContext ? <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
                                     {patientContext}
-                                  </div>
-                                ) : (
-                                  <div className="space-y-4">
+                                  </div> : <div className="space-y-4">
                                     <div className="animate-pulse space-y-3">
                                       <div className="h-4 bg-blue-100 rounded w-3/4"></div>
                                       <div className="h-4 bg-blue-100 rounded w-1/2"></div>
@@ -2350,8 +2141,7 @@ const ProductWalkthrough: React.FC = () => {
                                     <div className="text-blue-600 text-center py-4">
                                       Loading patient medical history...
                                     </div>
-                                  </div>
-                                )}
+                                  </div>}
                               </div>
                             </div>
 
@@ -2376,9 +2166,7 @@ const ProductWalkthrough: React.FC = () => {
                                 Allergies
                               </Button>
                             </div>
-                          </div>
-                        ) : (
-                          <div className="h-full flex items-center justify-center text-center">
+                          </div> : <div className="h-full flex items-center justify-center text-center">
                             <div className="space-y-3">
                               <div className="text-4xl opacity-30">👤</div>
                               <div className="text-sm font-medium text-blue-800">No Patient Selected</div>
@@ -2389,8 +2177,7 @@ const ProductWalkthrough: React.FC = () => {
                                 Go to Schedule
                               </Button>
                             </div>
-                          </div>
-                        )}
+                          </div>}
                       </CardContent>
                     </Card>
                   </div>
@@ -2417,19 +2204,15 @@ const ProductWalkthrough: React.FC = () => {
                       <CardTitle>Documentation Review</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      {checks.map((item, idx) => (
-                        <div key={item.label} className="flex items-center justify-between gap-3 p-3 rounded-lg border">
+                      {checks.map((item, idx) => <div key={item.label} className="flex items-center justify-between gap-3 p-3 rounded-lg border">
                           <div className="flex items-center gap-3">
                             <CheckCircle2 className={`h-5 w-5 ${item.ok ? "text-green-600" : "text-muted-foreground"}`} />
                             <span className={item.ok ? "" : "text-muted-foreground"}>{item.label}</span>
                           </div>
-                          {!item.ok && (
-                            <Button size="sm" variant="outline" className="rounded-lg" onClick={() => markFix(idx)}>
+                          {!item.ok && <Button size="sm" variant="outline" className="rounded-lg" onClick={() => markFix(idx)}>
                               Fix
-                            </Button>
-                          )}
-                        </div>
-                      ))}
+                            </Button>}
+                        </div>)}
                     </CardContent>
                   </Card>
 
@@ -2498,8 +2281,7 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
                 </div>
 
-                {isSending ? (
-                  <Card className="border-2">
+                {isSending ? <Card className="border-2">
                     <CardContent className="flex items-center justify-center py-16">
                       <div className="text-center space-y-6">
                         <div className="flex items-center justify-center">
@@ -2518,15 +2300,15 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                         <div className="w-full max-w-sm mx-auto">
                           <div className="h-2 bg-muted rounded-full overflow-hidden">
-                            <div className="h-full bg-primary rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                            <div className="h-full bg-primary rounded-full animate-pulse" style={{
+                          width: '75%'
+                        }}></div>
                           </div>
                           <div className="text-xs text-muted-foreground mt-1">Transmission in progress...</div>
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ) : (
-                  <div className="grid gap-6 xl:grid-cols-12">
+                  </Card> : <div className="grid gap-6 xl:grid-cols-12">
                     
                     {/* Enhanced Note Preview */}
                     <Card className="xl:col-span-8 border-2 bg-gradient-to-br from-background to-muted/5">
@@ -2605,10 +2387,10 @@ const ProductWalkthrough: React.FC = () => {
                                   PHYSICAL EXAMINATION
                                 </div>
                                 <div className="text-foreground pl-4">
-                                  Vital Signs: BP 138/82, HR 76, RR 16, Temp 98.6°F, O2 Sat 98%<br/>
-                                  General: Well-appearing, no acute distress<br/>
-                                  Cardiovascular: Regular rate and rhythm, no murmurs<br/>
-                                  Pulmonary: Lungs clear to auscultation bilaterally<br/>
+                                  Vital Signs: BP 138/82, HR 76, RR 16, Temp 98.6°F, O2 Sat 98%<br />
+                                  General: Well-appearing, no acute distress<br />
+                                  Cardiovascular: Regular rate and rhythm, no murmurs<br />
+                                  Pulmonary: Lungs clear to auscultation bilaterally<br />
                                   Extremities: No peripheral edema, pulses intact
                                 </div>
                               </div>
@@ -2622,16 +2404,16 @@ const ProductWalkthrough: React.FC = () => {
                                   <div>
                                     <div className="font-medium">1. Type 2 Diabetes Mellitus (E11.9) - Poorly controlled</div>
                                     <div className="text-sm text-muted-foreground ml-3">
-                                      • Increase Metformin to 1000mg BID<br/>
-                                      • Continue glucose monitoring<br/>
-                                      • HbA1c in 3 months<br/>
+                                      • Increase Metformin to 1000mg BID<br />
+                                      • Continue glucose monitoring<br />
+                                      • HbA1c in 3 months<br />
                                       • Diabetes education referral
                                     </div>
                                   </div>
                                   <div>
                                     <div className="font-medium">2. Hypertension (I10) - Well controlled</div>
                                     <div className="text-sm text-muted-foreground ml-3">
-                                      • Continue current regimen<br/>
+                                      • Continue current regimen<br />
                                       • Home BP monitoring
                                     </div>
                                   </div>
@@ -2772,20 +2554,17 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Send Actions */}
                         <div className="space-y-3">
-                          <Button 
-                            className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" 
-                            onClick={() => {
-                              setIsSending(true);
-                              setTimeout(() => {
-                                setIsSending(false);
-                                onNavClick('automations');
-                                toast({ 
-                                  title: "Note sent successfully", 
-                                  description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated` 
-                                });
-                              }, 3000);
-                            }}
-                          >
+                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
+                        setIsSending(true);
+                        setTimeout(() => {
+                          setIsSending(false);
+                          onNavClick('automations');
+                          toast({
+                            title: "Note sent successfully",
+                            description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
+                          });
+                        }, 3000);
+                      }}>
                             <Send className="h-5 w-5 mr-2" />
                             Send to {selectedEhr || 'Epic'}
                           </Button>
@@ -2807,8 +2586,7 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                )}
+                  </div>}
               </div>
             </section>
 
@@ -2843,72 +2621,52 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-2">
-                  {[
-                    {
-                      key: "patientInstructions",
-                      title: "Auto-Generate Patient Instructions",
-                      description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
-                      enabled: automations.patientInstructions,
-                      color: "green",
-                      options: ["Email to Patient", "Send to Patient Portal", "Print Instructions"]
-                    },
-                    {
-                      key: "followupReminders", 
-                      title: "Schedule Follow-up Reminders",
-                      description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
-                      enabled: automations.followupReminders,
-                      color: "blue"
-                    },
-                    {
-                      key: "labOrders",
-                      title: "Lab Order Processing", 
-                      description: "Automatically process and track lab orders mentioned in the current visit notes and send them to the lab.",
-                      enabled: automations.labOrders,
-                      color: "gray"
-                    },
-                    {
-                      key: "prescriptionRefills",
-                      title: "Prescription Refill Alerts",
-                      description: "Alert when patients are due for prescription refills and send prescription orders from the current visit to pharmacy.",
-                      enabled: automations.prescriptionRefills,
-                      color: "orange"
-                    }
-                  ].map((automation, index) => (
-                    <Card key={automation.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-shadow">
+                  {[{
+                  key: "patientInstructions",
+                  title: "Auto-Generate Patient Instructions",
+                  description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
+                  enabled: automations.patientInstructions,
+                  color: "green",
+                  options: ["Email to Patient", "Send to Patient Portal", "Print Instructions"]
+                }, {
+                  key: "followupReminders",
+                  title: "Schedule Follow-up Reminders",
+                  description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
+                  enabled: automations.followupReminders,
+                  color: "blue"
+                }, {
+                  key: "labOrders",
+                  title: "Lab Order Processing",
+                  description: "Automatically process and track lab orders mentioned in the current visit notes and send them to the lab.",
+                  enabled: automations.labOrders,
+                  color: "gray"
+                }, {
+                  key: "prescriptionRefills",
+                  title: "Prescription Refill Alerts",
+                  description: "Alert when patients are due for prescription refills and send prescription orders from the current visit to pharmacy.",
+                  enabled: automations.prescriptionRefills,
+                  color: "orange"
+                }].map((automation, index) => <Card key={automation.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-shadow">
                       <CardHeader className="pb-4">
                         <div className="flex items-start justify-between">
                           <div className="flex items-start gap-3">
-                            <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${
-                              automation.enabled 
-                                ? `bg-${automation.color}-100` 
-                                : 'bg-gray-100'
-                            }`}>
-                              <div className={`h-3 w-3 rounded-full ${
-                                automation.enabled 
-                                  ? `bg-${automation.color}-500` 
-                                  : 'bg-gray-400'
-                              }`}></div>
+                            <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${automation.enabled ? `bg-${automation.color}-100` : 'bg-gray-100'}`}>
+                              <div className={`h-3 w-3 rounded-full ${automation.enabled ? `bg-${automation.color}-500` : 'bg-gray-400'}`}></div>
                             </div>
                             <div>
                               <CardTitle className="text-lg text-gray-900">{automation.title}</CardTitle>
                               <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
-                              {automation.options && automation.enabled && (
-                                <div className="mt-2 flex flex-wrap gap-1">
-                                  {automation.options.map((option, idx) => (
-                                    <span key={idx} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                              {automation.options && automation.enabled && <div className="mt-2 flex flex-wrap gap-1">
+                                  {automation.options.map((option, idx) => <span key={idx} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
                                       {option}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
+                                    </span>)}
+                                </div>}
                             </div>
                           </div>
-                          <Switch 
-                            checked={automation.enabled} 
-                            onCheckedChange={(checked) => 
-                              setAutomations(prev => ({ ...prev, [automation.key]: checked }))
-                            }
-                          />
+                          <Switch checked={automation.enabled} onCheckedChange={checked => setAutomations(prev => ({
+                        ...prev,
+                        [automation.key]: checked
+                      }))} />
                         </div>
                       </CardHeader>
                       <CardContent className="pt-0">
@@ -2917,16 +2675,13 @@ const ProductWalkthrough: React.FC = () => {
                             <Settings className="h-3 w-3 mr-2" />
                             Configure
                           </Button>
-                          {automation.enabled && (
-                            <div className="text-xs text-green-600 flex items-center gap-1">
+                          {automation.enabled && <div className="text-xs text-green-600 flex items-center gap-1">
                               <div className="h-2 w-2 rounded-full bg-green-500"></div>
                               Active
-                            </div>
-                          )}
+                            </div>}
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
 
                 <div className="mt-8 flex justify-between items-center">
@@ -2974,49 +2729,39 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-2">
-                  {[
-                    {
-                      key: 'followups',
-                      title: "Follow-up Call Automation",
-                      description: "AI agent makes post-visit follow-up calls to check on patient recovery, medication adherence, reduce no-shows, and confirm upcoming appointments.",
-                      enabled: agent.followups,
-                      icon: "phone",
-                      stats: "150+ calls/month • 40% reduction in no-shows"
-                    },
-                    {
-                      key: 'inbound', 
-                      title: "Inbound Call Screening",
-                      description: "Screen and triage incoming patient calls, handling routine questions and scheduling requests.",
-                      enabled: agent.inbound,
-                      icon: "phone-incoming",
-                      stats: "85% automation rate"
-                    },
-                    {
-                      key: 'outreach',
-                      title: "Patient Outreach Campaigns", 
-                      description: "Proactive outreach for preventive care reminders, wellness checks, and health education.",
-                      enabled: agent.outreach,
-                      icon: "megaphone",
-                      stats: "300+ patients/month"
-                    },
-                    {
-                      key: 'support',
-                      title: "24/7 Patient Support",
-                      description: "Round-the-clock AI support for urgent patient questions and basic medical guidance.",
-                      enabled: agent.support,
-                      icon: "clock",
-                      stats: "24/7 availability"
-                    }
-                  ].map((feature, index) => (
-                    <Card key={feature.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-all duration-300">
+                  {[{
+                  key: 'followups',
+                  title: "Follow-up Call Automation",
+                  description: "AI agent makes post-visit follow-up calls to check on patient recovery, medication adherence, reduce no-shows, and confirm upcoming appointments.",
+                  enabled: agent.followups,
+                  icon: "phone",
+                  stats: "150+ calls/month • 40% reduction in no-shows"
+                }, {
+                  key: 'inbound',
+                  title: "Inbound Call Screening",
+                  description: "Screen and triage incoming patient calls, handling routine questions and scheduling requests.",
+                  enabled: agent.inbound,
+                  icon: "phone-incoming",
+                  stats: "85% automation rate"
+                }, {
+                  key: 'outreach',
+                  title: "Patient Outreach Campaigns",
+                  description: "Proactive outreach for preventive care reminders, wellness checks, and health education.",
+                  enabled: agent.outreach,
+                  icon: "megaphone",
+                  stats: "300+ patients/month"
+                }, {
+                  key: 'support',
+                  title: "24/7 Patient Support",
+                  description: "Round-the-clock AI support for urgent patient questions and basic medical guidance.",
+                  enabled: agent.support,
+                  icon: "clock",
+                  stats: "24/7 availability"
+                }].map((feature, index) => <Card key={feature.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-all duration-300">
                       <CardHeader className="pb-4">
                         <div className="flex items-start justify-between">
                           <div className="flex items-start gap-3">
-                            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${
-                              feature.enabled 
-                                ? 'bg-gray-100 border-2 border-gray-200' 
-                                : 'bg-gray-100 border-2 border-gray-200'
-                            }`}>
+                            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${feature.enabled ? 'bg-gray-100 border-2 border-gray-200' : 'bg-gray-100 border-2 border-gray-200'}`}>
                               {feature.icon === 'phone' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-gray-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
                               {feature.icon === 'phone-incoming' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-gray-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
                               {feature.icon === 'megaphone' && <svg className={`h-5 w-5 ${feature.enabled ? 'text-gray-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>}
@@ -3028,12 +2773,10 @@ const ProductWalkthrough: React.FC = () => {
                               <div className="mt-2 text-xs text-gray-600 font-medium">{feature.stats}</div>
                             </div>
                           </div>
-                          <Switch 
-                            checked={feature.enabled}
-                            onCheckedChange={(checked) => 
-                              setAgent(prev => ({ ...prev, [feature.key]: checked }))
-                            }
-                          />
+                          <Switch checked={feature.enabled} onCheckedChange={checked => setAgent(prev => ({
+                        ...prev,
+                        [feature.key]: checked
+                      }))} />
                         </div>
                       </CardHeader>
                       <CardContent className="pt-0">
@@ -3042,21 +2785,16 @@ const ProductWalkthrough: React.FC = () => {
                             <Settings className="h-3 w-3 mr-2" />
                             Configure Agent
                           </Button>
-                          {feature.enabled ? (
-                            <div className="text-xs text-green-600 flex items-center gap-1">
+                          {feature.enabled ? <div className="text-xs text-green-600 flex items-center gap-1">
                               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                               Online
-                            </div>
-                          ) : (
-                            <div className="text-xs text-gray-500 flex items-center gap-1">
+                            </div> : <div className="text-xs text-gray-500 flex items-center gap-1">
                               <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                               Offline
-                            </div>
-                          )}
+                            </div>}
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
 
                 <div className="mt-8 flex justify-between items-center">
@@ -3109,18 +2847,8 @@ const ProductWalkthrough: React.FC = () => {
                     <CardContent>
                       <ResponsiveContainer width="100%" height={300}>
                         <PieChart>
-                          <Pie
-                            data={agentMix}
-                            cx="50%"
-                            cy="50%"
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                            label
-                          >
-                            {agentMix.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
+                          <Pie data={agentMix} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" dataKey="value" label>
+                            {agentMix.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                           </Pie>
                           <Tooltip />
                           <Legend />
@@ -3130,20 +2858,29 @@ const ProductWalkthrough: React.FC = () => {
                   </Card>
 
                   <div className="xl:col-span-3 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {[
-                      { label: "Notes Generated", value: "147", change: "+12%" },
-                      { label: "Time Saved", value: "23.5 hrs", change: "+8%" },
-                      { label: "AI Agent Calls", value: "89", change: "+15%" },
-                      { label: "Patient Satisfaction", value: "96%", change: "+2%" },
-                    ].map((stat, index) => (
-                      <Card key={index}>
+                    {[{
+                    label: "Notes Generated",
+                    value: "147",
+                    change: "+12%"
+                  }, {
+                    label: "Time Saved",
+                    value: "23.5 hrs",
+                    change: "+8%"
+                  }, {
+                    label: "AI Agent Calls",
+                    value: "89",
+                    change: "+15%"
+                  }, {
+                    label: "Patient Satisfaction",
+                    value: "96%",
+                    change: "+2%"
+                  }].map((stat, index) => <Card key={index}>
                         <CardContent className="p-6">
                           <div className="text-2xl font-bold">{stat.value}</div>
                           <p className="text-xs text-muted-foreground">{stat.label}</p>
                           <p className="text-xs text-green-600 mt-1">{stat.change} from last week</p>
                         </CardContent>
-                      </Card>
-                    ))}
+                      </Card>)}
                   </div>
                 </div>
               </div>
@@ -3163,13 +2900,13 @@ const ProductWalkthrough: React.FC = () => {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction onClick={() => {
-                setIsSending(true);
-                setTimeout(() => {
-                  setIsSending(false);
-                  setSendDialogOpen(false);
-                  onNavClick('automations');
-                }, 2000);
-              }}>
+              setIsSending(true);
+              setTimeout(() => {
+                setIsSending(false);
+                setSendDialogOpen(false);
+                onNavClick('automations');
+              }, 2000);
+            }}>
                 Send to EHR
               </AlertDialogAction>
             </AlertDialogFooter>
@@ -3199,24 +2936,16 @@ const ProductWalkthrough: React.FC = () => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row gap-2">
-              <AlertDialogCancel 
-                onClick={handleClosePopup} 
-                className="order-2 sm:order-1 w-full sm:w-auto"
-              >
+              <AlertDialogCancel onClick={handleClosePopup} className="order-2 sm:order-1 w-full sm:w-auto">
                 Maybe Later
               </AlertDialogCancel>
-              <AlertDialogAction 
-                onClick={handleBookDemo}
-                className="order-1 sm:order-2 w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6 transition-all"
-              >
+              <AlertDialogAction onClick={handleBookDemo} className="order-1 sm:order-2 w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6 transition-all">
                 Book Free Demo
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default ProductWalkthrough;
