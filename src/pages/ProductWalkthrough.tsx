@@ -3082,7 +3082,7 @@ const ProductWalkthrough: React.FC = () => {
                   <div className="text-sm text-muted-foreground">
                     Advanced agent training available in settings
                   </div>
-                  <Button className="rounded-lg bg-teal-600 hover:bg-teal-700" onClick={() => onNavClick('dashboard')}>
+                  <Button className="rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => onNavClick('dashboard')}>
                     <BarChart3 className="h-4 w-4 mr-2" />
                     View Analytics Dashboard
                   </Button>
