@@ -262,6 +262,7 @@ const ProductWalkthrough: React.FC = () => {
   const [importing, setImporting] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [saveAsDefault, setSaveAsDefault] = useState(false);
   
   // Capture section states
   const [captureMode, setCaptureMode] = useState<'audio' | 'type'>('audio');
@@ -313,9 +314,9 @@ const ProductWalkthrough: React.FC = () => {
     );
   }, [searchTerm]);
 
-  // Initialize live preview with scratch sections
+  // Initialize live preview as empty for better UX
   useEffect(() => {
-    setLiveHeaders(scratchSections);
+    setLiveHeaders([]);
   }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -600,63 +601,148 @@ const ProductWalkthrough: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div className="mb-8">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                      <Settings className="h-5 w-5 text-blue-600" aria-hidden />
+                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
+                      <Settings className="h-5 w-5 text-white" aria-hidden />
                     </div>
-                    Get set up in 2 minutes
+                    Setup Your Workflow
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Choose your note format and connect securely to your EHR.</p>
+                  <p className="mt-3 text-muted-foreground text-lg">Configure your note templates and EHR connections in a streamlined workflow.</p>
 
-                  <div className="mt-6 relative">
-                    <div className="flex items-center justify-between max-w-md">
-                      <div className={`flex items-center gap-3 ${setupStep !== 'ehr' ? 'text-blue-600' : 'text-muted-foreground'}`}>
-                        <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
-                          setupStep !== 'ehr' ? 'bg-blue-500 text-white' : 'border-2'
-                        }`}>1</div>
-                        <span className="font-medium">Set Note Style</span>
+                  {/* Improved progress indicator */}
+                  <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-6 rounded-2xl border border-border/50">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`flex items-center gap-3 transition-all duration-300 ${
+                        setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'
+                      }`}>
+                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
+                          setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
+                        }`}>
+                          {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
+                        </div>
+                        <div>
+                          <div className="font-semibold">Note Templates</div>
+                          <div className="text-xs text-muted-foreground">Configure your documentation style</div>
+                        </div>
                       </div>
-                      <div className="flex-1 h-0.5 bg-border mx-4" />
-                      <div className={`flex items-center gap-3 ${setupStep === 'ehr' ? 'text-blue-600' : 'text-muted-foreground'}`}>
-                        <div className={`h-8 w-8 rounded-full grid place-items-center font-semibold text-sm ${
-                          setupStep === 'ehr' ? 'bg-blue-500 text-white' : 'border-2'
+                      
+                      <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${
+                        setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'
+                      }`}>
+                        <div className={`h-full transition-all duration-500 ${
+                          setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : 
+                          setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'
+                        }`} />
+                      </div>
+                      
+                      <div className={`flex items-center gap-3 transition-all duration-300 ${
+                        setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'
+                      }`}>
+                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
+                          setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
                         }`}>2</div>
-                        <span className="font-medium">Connect EHR</span>
+                        <div>
+                          <div className="font-semibold">EHR Integration</div>
+                          <div className="text-xs text-muted-foreground">Connect to your systems</div>
+                        </div>
                       </div>
+                    </div>
+                    
+                    {/* Quick action buttons */}
+                    <div className="flex items-center justify-center gap-3 pt-4 border-t border-border/50">
+                      <Button
+                        variant={setupStep === 'note' || setupStep === 'landing' ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSetupStep('note')}
+                        className="rounded-full px-4 transition-all"
+                      >
+                        <FileText className="h-4 w-4 mr-2" />
+                        Configure Templates
+                      </Button>
+                      <Button
+                        variant={setupStep === 'ehr' ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSetupStep('ehr')}
+                        className="rounded-full px-4 transition-all"
+                      >
+                        <Server className="h-4 w-4 mr-2" />
+                        Connect EHR
+                      </Button>
                     </div>
                   </div>
                 </div>
 
                 {setupStep === 'landing' && (
-                  <div className="grid gap-6 md:gap-8 lg:grid-cols-2 max-w-4xl">
-                    <button 
-                      onClick={() => setSetupStep('note')} 
-                      className="group rounded-2xl border-2 hover:border-blue-300 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-blue-100"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-blue-100 group-hover:bg-blue-200 grid place-items-center transition-colors">
-                          <FileText className="h-6 w-6 text-blue-600" />
+                  <div className="max-w-4xl mx-auto">
+                    <Card className="border-2 bg-gradient-to-br from-background to-muted/20">
+                      <CardContent className="p-8">
+                        <div className="text-center mb-8">
+                          <div className="h-16 w-16 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-4">
+                            <Wand2 className="h-8 w-8 text-white" />
+                          </div>
+                          <h3 className="text-2xl font-bold mb-3">Welcome to S10.AI Setup</h3>
+                          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                            Get started with our AI-powered clinical documentation in just a few steps. 
+                            Configure your note templates first, then connect to your EHR systems.
+                          </p>
                         </div>
-                        <div className="flex-1">
-                          <div className="text-xl font-semibold mb-2">Set your note style</div>
-                          <div className="text-muted-foreground">Import, paste, or build a template for your clinical notes.</div>
-                        </div>
-                      </div>
-                    </button>
+                        
+                        <div className="grid gap-6 md:grid-cols-2">
+                          <button 
+                            onClick={() => setSetupStep('note')} 
+                            className="group relative rounded-2xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
+                          >
+                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                                <CheckCircle2 className="h-4 w-4 text-primary" />
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all">
+                                <FileText className="h-6 w-6 text-blue-600" />
+                              </div>
+                              <div className="flex-1 pr-8">
+                                <div className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">1. Configure Note Templates</div>
+                                <div className="text-muted-foreground text-sm leading-relaxed">
+                                  Set up your clinical documentation style by importing existing templates, 
+                                  selecting from our specialty library, or building custom formats.
+                                </div>
+                                <div className="flex items-center gap-2 mt-3 text-xs font-medium text-primary">
+                                  <span>Start Here</span>
+                                  <ArrowLeft className="h-3 w-3 rotate-180" />
+                                </div>
+                              </div>
+                            </div>
+                          </button>
 
-                    <button 
-                      onClick={() => setSetupStep('ehr')} 
-                      className="group rounded-2xl border-2 hover:border-green-300 p-8 text-left transition-all duration-200 hover:shadow-lg hover:shadow-green-100"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-green-100 group-hover:bg-green-200 grid place-items-center transition-colors">
-                          <Server className="h-6 w-6 text-green-600" />
+                          <button 
+                            onClick={() => setSetupStep('ehr')} 
+                            className="group relative rounded-2xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
+                          >
+                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                                <Server className="h-4 w-4 text-emerald-600" />
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all">
+                                <ShieldCheck className="h-6 w-6 text-emerald-600" />
+                              </div>
+                              <div className="flex-1 pr-8">
+                                <div className="text-xl font-bold mb-2 group-hover:text-emerald-700 transition-colors">2. Connect Your EHR</div>
+                                <div className="text-muted-foreground text-sm leading-relaxed">
+                                  Securely integrate with Epic, Cerner, Athena, and 200+ other EHR systems 
+                                  using our HIPAA-compliant AI agents.
+                                </div>
+                                <div className="flex items-center gap-2 mt-3 text-xs font-medium text-emerald-600">
+                                  <span>Coming Next</span>
+                                  <ArrowLeft className="h-3 w-3 rotate-180" />
+                                </div>
+                              </div>
+                            </div>
+                          </button>
                         </div>
-                        <div className="flex-1">
-                          <div className="text-xl font-semibold mb-2">Connect to your EHR(s)</div>
-                          <div className="text-muted-foreground">Securely link to Epic, Cerner, and more for a seamless workflow.</div>
-                        </div>
-                      </div>
-                    </button>
+                      </CardContent>
+                    </Card>
                   </div>
                 )}
 
@@ -678,10 +764,32 @@ const ProductWalkthrough: React.FC = () => {
                             ← Back
                           </Button>
                           <div className="flex gap-2">
-                            <Button variant="outline" size="sm" className="rounded-full">
-                              Save as Default
+                            <Button 
+                              variant={saveAsDefault ? "default" : "outline"} 
+                              size="sm" 
+                              className="rounded-full transition-all"
+                              onClick={() => {
+                                setSaveAsDefault(!saveAsDefault);
+                                toast({ 
+                                  title: saveAsDefault ? "Default template removed" : "Template saved as default", 
+                                  description: saveAsDefault ? "This template will no longer be your default" : "This template will be used for new patients",
+                                  duration: 2000
+                                });
+                              }}
+                            >
+                              {saveAsDefault ? (
+                                <>
+                                  <CheckCircle2 className="h-4 w-4 mr-2" />
+                                  Saved as Default
+                                </>
+                              ) : (
+                                <>
+                                  <Settings className="h-4 w-4 mr-2" />
+                                  Save as Default
+                                </>
+                              )}
                             </Button>
-                            <Button onClick={() => setSetupStep('ehr')} size="sm" className="rounded-full">
+                            <Button onClick={() => setSetupStep('ehr')} size="sm" className="rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl">
                               Next: Connect EHR →
                             </Button>
                           </div>
@@ -1254,26 +1362,65 @@ const ProductWalkthrough: React.FC = () => {
                       </CardContent>
                     </Card>
 
-                    <Card className="xl:col-span-1 2xl:col-span-2 h-fit">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="text-lg">Live Preview</CardTitle>
+                    <Card className="xl:col-span-1 2xl:col-span-2 h-fit border-2 bg-gradient-to-br from-background to-muted/20">
+                      <CardHeader className="pb-4 bg-gradient-to-r from-primary/5 to-primary/10 border-b">
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <FileText className="h-3 w-3 text-primary" />
+                          </div>
+                          Live Preview
+                        </CardTitle>
                       </CardHeader>
-                       <CardContent>
-                         <div className="max-h-[400px] sm:max-h-[500px] overflow-y-auto space-y-3 pr-2">
+                       <CardContent className="p-6">
+                         <div className="max-h-[400px] sm:max-h-[500px] overflow-y-auto space-y-3">
                            {liveHeaders.length === 0 ? (
-                             <div className="text-center py-8 text-muted-foreground">
-                               <div className="text-sm">No template selected</div>
-                               <div className="text-xs mt-1">Choose an option from the tabs above</div>
-                             </div>
-                           ) : (
-                             liveHeaders.map((s, index) => (
-                               <div key={`${s}-${index}`} className="rounded-lg border p-3 transition-all hover:shadow-sm animate-fade-in">
-                                 <div className="font-semibold text-xs sm:text-sm mb-1 text-primary">{s}</div>
-                                 <div className="text-[10px] sm:text-xs text-muted-foreground">
-                                   [AI will generate content based on recorded conversation]
+                             <div className="text-center py-12">
+                               <div className="h-16 w-16 mx-auto rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-4">
+                                 <Wand2 className="h-8 w-8 text-primary" />
+                               </div>
+                               <div className="text-lg font-semibold mb-2">Build Your Template</div>
+                               <div className="text-sm text-muted-foreground mb-6 max-w-xs mx-auto leading-relaxed">
+                                 Choose any option from the left panel to start building your clinical documentation template. Your changes will appear here in real-time.
+                               </div>
+                               <div className="grid grid-cols-2 gap-3 text-xs">
+                                 <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 text-left">
+                                   <div className="h-2 w-2 rounded-full bg-blue-500" />
+                                   <span>Import from file</span>
+                                 </div>
+                                 <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 text-left">
+                                   <div className="h-2 w-2 rounded-full bg-purple-500" />
+                                   <span>Use specialty templates</span>
+                                 </div>
+                                 <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 text-left">
+                                   <div className="h-2 w-2 rounded-full bg-teal-500" />
+                                   <span>Build from scratch</span>
+                                 </div>
+                                 <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 text-left">
+                                   <div className="h-2 w-2 rounded-full bg-pink-500" />
+                                   <span>Generate with AI</span>
                                  </div>
                                </div>
-                             ))
+                             </div>
+                           ) : (
+                             <>
+                               <div className="flex items-center justify-between mb-4 pb-3 border-b">
+                                 <div className="text-sm font-semibold text-foreground">Template Preview</div>
+                                 <div className="text-xs text-muted-foreground">{liveHeaders.length} sections</div>
+                               </div>
+                               {liveHeaders.map((s, index) => (
+                                 <div key={`${s}-${index}`} className="group rounded-xl border-2 border-border hover:border-primary/30 p-4 transition-all duration-200 hover:shadow-md hover:shadow-primary/10 animate-fade-in bg-gradient-to-r from-background to-muted/30">
+                                   <div className="flex items-center gap-3 mb-2">
+                                     <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                                       <span className="text-xs font-bold text-primary">{index + 1}</span>
+                                     </div>
+                                     <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{s}</div>
+                                   </div>
+                                   <div className="text-xs text-muted-foreground pl-9 leading-relaxed">
+                                     AI will automatically populate this section based on your patient conversation and clinical context.
+                                   </div>
+                                 </div>
+                               ))}
+                             </>
                            )}
                          </div>
                        </CardContent>
@@ -1299,9 +1446,16 @@ const ProductWalkthrough: React.FC = () => {
                           Integrates with 200+ EHR systems including all major platforms
                         </div>
                         
-                        {/* Scrollable EHR Grid Container */}
-                        <div className="h-80 overflow-y-auto border rounded-lg p-4 bg-gray-50/50">
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                        {/* Enhanced Scrollable EHR Grid Container */}
+                        <div className="relative">
+                          <div className="h-80 overflow-y-auto border rounded-xl p-4 bg-gradient-to-br from-muted/20 to-muted/10 scroll-smooth custom-scrollbar">
+                            {/* Scroll indicator at top */}
+                            <div className="sticky top-0 z-10 flex items-center justify-center pb-2 mb-2 bg-gradient-to-b from-muted/20 to-transparent">
+                              <div className="text-xs text-muted-foreground font-medium px-3 py-1 bg-background/80 rounded-full border shadow-sm">
+                                Scroll to see all 40+ EHR systems
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                             {[
                               { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
                               { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
@@ -1347,18 +1501,41 @@ const ProductWalkthrough: React.FC = () => {
                             ].map((ehr) => (
                               <button
                                 key={ehr.name}
-                                onClick={() => setSelectedEhr(ehr.name)}
-                                className={`rounded-xl border-2 hover:border-emerald-300 p-3 text-center transition-all duration-200 hover:shadow-md ${
-                                  selectedEhr === ehr.name ? 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200' : ''
-                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-300 bg-emerald-50' : ''}`}
+                                onClick={() => {
+                                  setSelectedEhr(ehr.name);
+                                  toast({ 
+                                    title: `${ehr.name} selected`, 
+                                    description: `Ready to connect to ${ehr.subtitle}`,
+                                    duration: 2000 
+                                  });
+                                }}
+                                className={`group rounded-xl border-2 hover:border-emerald-400 p-3 text-center transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 ${
+                                  selectedEhr === ehr.name ? 
+                                    'border-gradient-to-br from-[#143151] to-[#387E89] bg-gradient-to-br from-emerald-50 to-emerald-100 ring-2 ring-emerald-200 scale-105 shadow-lg shadow-emerald-200' : 
+                                    'bg-background hover:bg-emerald-50'
+                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/50' : ''}`}
                               >
+                                {selectedEhr === ehr.name && (
+                                  <div className="absolute -top-1 -right-1 h-6 w-6 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-full flex items-center justify-center">
+                                    <CheckCircle2 className="h-3 w-3 text-white" />
+                                  </div>
+                                )}
                                 <div className="text-xl mb-1">{ehr.logo}</div>
-                                <div className="font-semibold text-xs">{ehr.name}</div>
+                                <div className="font-semibold text-xs group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
                                 <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
                                   {ehr.subtitle}
                                 </div>
                               </button>
                             ))}
+                          </div>
+                            {/* Bottom gradient fade to indicate more content */}
+                            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+                          </div>
+                          {/* Scroll indicator at bottom */}
+                          <div className="flex items-center justify-center pt-2">
+                            <div className="text-xs text-muted-foreground font-medium px-3 py-1 bg-muted/50 rounded-full border">
+                              ↑ Scroll up for more options ↑
+                            </div>
                           </div>
                         </div>
                         
