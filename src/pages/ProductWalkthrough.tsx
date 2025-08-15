@@ -2194,14 +2194,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* Coding Section */}
             <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <ClipboardList className="h-5 w-5 text-primary" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <ClipboardList className="h-4 w-4 text-primary" aria-hidden />
                     </div>
                     Coding & Compliance Review
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Resolve documentation issues and review suggested codes.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Resolve documentation issues and review suggested codes.</p>
                 </div>
 
                 <div className="grid gap-8 lg:grid-cols-2">
