@@ -1552,14 +1552,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* Schedule Section */}
             <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <CalendarDays className="h-4 w-4 text-primary" aria-hidden />
                     </div>
                     Unified Schedule
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">
+                  <p className="mt-1 text-muted-foreground text-base">
                     Schedule imported from multiple EHR systems and practice management platforms across {new Set(appointments.map(a => a.src.split(' - ')[0])).size} systems 
                     and {new Set(appointments.map(a => a.src.split(' - ')[1] || 'Main')).size} locations.
                   </p>
