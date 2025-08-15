@@ -2704,13 +2704,34 @@ const ProductWalkthrough: React.FC = () => {
                             Final Clinical Note Preview
                           </CardTitle>
                           <div className="flex items-center gap-2">
-                            <Button variant="outline" size="sm" className="rounded-lg">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="rounded-lg"
+                              onClick={() => {
+                                onNavClick('capture');
+                                toast({
+                                  title: "Edit Mode",
+                                  description: "Returning to clinical documentation for editing",
+                                });
+                              }}
+                            >
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
                               Edit Note
                             </Button>
-                            <Button variant="outline" size="sm" className="rounded-lg">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="rounded-lg"
+                              onClick={() => {
+                                toast({
+                                  title: "Preview Mode",
+                                  description: "Switching to full-screen preview mode",
+                                });
+                              }}
+                            >
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -2865,7 +2886,17 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
                             <div className="text-sm font-semibold">Target EHR System</div>
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="rounded-lg text-xs"
+                              onClick={() => {
+                                toast({
+                                  title: "EHR System",
+                                  description: "Opening EHR selection menu",
+                                });
+                              }}
+                            >
                               <Settings className="h-3 w-3 mr-1" />
                               Change
                             </Button>
@@ -2885,7 +2916,17 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="text-sm font-semibold flex items-center justify-between">
                             Diagnosis Codes (ICD-10)
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="rounded-lg text-xs"
+                              onClick={() => {
+                                toast({
+                                  title: "Add Diagnosis",
+                                  description: "Opening ICD-10 code selector",
+                                });
+                              }}
+                            >
                               <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                               </svg>
@@ -2914,7 +2955,17 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="text-sm font-semibold flex items-center justify-between">
                             Procedure Codes (CPT)
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="rounded-lg text-xs"
+                              onClick={() => {
+                                toast({
+                                  title: "Edit Procedure Code",
+                                  description: "Opening CPT code editor",
+                                });
+                              }}
+                            >
                               <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
@@ -2957,13 +3008,37 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           
                           <div className="grid grid-cols-2 gap-2">
-                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                            <Button 
+                              variant="outline" 
+                              className="rounded-lg h-9 text-sm"
+                              onClick={() => {
+                                toast({
+                                  title: "Draft Saved",
+                                  description: "Clinical note saved to drafts folder",
+                                });
+                              }}
+                            >
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
                               </svg>
                               Save Draft
                             </Button>
-                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                            <Button 
+                              variant="outline" 
+                              className="rounded-lg h-9 text-sm"
+                              onClick={() => {
+                                // Create and download PDF
+                                const element = document.createElement("a");
+                                const file = new Blob(['Clinical Note PDF - Generated by S10.AI'], {type: 'application/pdf'});
+                                element.href = URL.createObjectURL(file);
+                                element.download = `clinical-note-${new Date().toISOString().split('T')[0]}.pdf`;
+                                element.click();
+                                toast({
+                                  title: "PDF Exported",
+                                  description: "Clinical note exported as PDF successfully",
+                                });
+                              }}
+                            >
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                               </svg>
