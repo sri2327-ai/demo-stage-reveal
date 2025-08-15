@@ -757,8 +757,16 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                         </CardContent>
                       </Card>
-                    </div>
-                  </div>}
+                     </div>
+                     
+                     {/* Don't see your EHR notification - for landing step */}
+                     <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center max-w-md mx-auto">
+                       <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+                       <div className="text-xs text-blue-700">
+                         We integrate with any system through custom protocols.
+                       </div>
+                     </div>
+                   </div>}
 
                  {setupStep === 'note' && <div className="grid gap-6 xl:grid-cols-3 2xl:grid-cols-5 max-h-[calc(100vh-200px)] min-h-[500px]">
                     <Card className="xl:col-span-2 2xl:col-span-3 flex flex-col h-full max-h-[calc(100vh-200px)]">
@@ -1331,8 +1339,16 @@ const ProductWalkthrough: React.FC = () => {
                              </>}
                          </div>
                        </CardContent>
-                    </Card>
-                  </div>}
+                     </Card>
+                     
+                     {/* Don't see your EHR notification - for note step */}
+                     <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center max-w-md mx-auto">
+                       <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+                       <div className="text-xs text-blue-700">
+                         We integrate with any system through custom protocols.
+                       </div>
+                     </div>
+                   </div>}
 
                 {setupStep === 'ehr' && <div className="max-w-6xl mx-auto">
                     <Card className="border-2 bg-gradient-to-br from-background to-muted/10">
@@ -1536,13 +1552,15 @@ const ProductWalkthrough: React.FC = () => {
                                 </div>
                               </div>
                               
-                              {/* Don't see your EHR notification - centered */}
-                              <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center">
-                                <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
-                                <div className="text-xs text-blue-700">
-                                  We integrate with any system through custom protocols.
+                              {/* Don't see your EHR notification - always visible in setup */}
+                              {active === "setup" && (
+                                <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center">
+                                  <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+                                  <div className="text-xs text-blue-700">
+                                    We integrate with any system through custom protocols.
+                                  </div>
                                 </div>
-                              </div>
+                              )}
                               
                             </div>
                           </div>
