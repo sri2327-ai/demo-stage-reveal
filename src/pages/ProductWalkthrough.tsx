@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
   id: "setup",
@@ -2211,6 +2211,10 @@ const ProductWalkthrough: React.FC = () => {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-56 max-h-96 overflow-y-auto">
+                                <DropdownMenuLabel className="text-xs font-medium">
+                                  Regenerate with Template
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
                                 {specialtyTemplates.map((template) => (
                                   <DropdownMenuItem 
                                     key={template.slug}
