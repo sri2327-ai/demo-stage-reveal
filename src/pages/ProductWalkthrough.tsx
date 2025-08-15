@@ -2312,7 +2312,7 @@ const ProductWalkthrough: React.FC = () => {
                             <FileText className="h-4 w-4 mr-2" />
                             Export
                           </Button>
-                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => onNavClick('coding')}>
+                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => onNavClick('coding')}>
                             <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
