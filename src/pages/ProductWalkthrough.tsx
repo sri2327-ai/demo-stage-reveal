@@ -2975,11 +2975,7 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </CardHeader>
                       <CardContent className="pt-0">
-                        <div className="flex items-center justify-between">
-                          <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50">
-                            <Settings className="h-3 w-3 mr-2" />
-                            Configure Agent
-                          </Button>
+                        <div className="flex justify-end">
                           {feature.enabled ? <div className="text-xs text-green-600 flex items-center gap-1">
                               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                               Online
