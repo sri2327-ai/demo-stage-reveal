@@ -2839,6 +2839,50 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                         </div>
                         
+                        {/* Patient Instructions */}
+                        <div className="space-y-2 sm:space-y-3">
+                          <div className="text-xs sm:text-sm font-semibold flex items-center justify-between">
+                            Patient Instructions
+                            <Button variant="outline" size="sm" className="rounded-lg text-[10px] sm:text-xs h-7 sm:h-8" onClick={() => {
+                              toast({
+                                title: "Patient Instructions",
+                                description: "Customizing patient after-visit summary and instructions"
+                              });
+                            }}>
+                              <svg className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                              Edit
+                            </Button>
+                          </div>
+                          <div className="space-y-1.5 sm:space-y-2">
+                            <div className="flex items-center justify-between p-2 bg-purple-50 border border-purple-200 rounded-lg">
+                              <div className="flex items-center gap-2 min-w-0">
+                                <svg className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <div className="min-w-0">
+                                  <div className="text-xs sm:text-sm font-medium text-purple-800">Email to Patient</div>
+                                  <div className="text-[10px] sm:text-xs text-purple-600 truncate">john.doe@email.com</div>
+                                </div>
+                              </div>
+                              <div className="text-[10px] sm:text-xs text-purple-700 font-medium flex-shrink-0">Ready</div>
+                            </div>
+                            <div className="flex items-center justify-between p-2 bg-purple-50 border border-purple-200 rounded-lg">
+                              <div className="flex items-center gap-2 min-w-0">
+                                <svg className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <div className="min-w-0">
+                                  <div className="text-xs sm:text-sm font-medium text-purple-800">Patient Portal</div>
+                                  <div className="text-[10px] sm:text-xs text-purple-600 truncate">MyChart Integration</div>
+                                </div>
+                              </div>
+                              <div className="text-[10px] sm:text-xs text-purple-700 font-medium flex-shrink-0">Ready</div>
+                            </div>
+                          </div>
+                        </div>
+                        
                         {/* Procedure Codes */}
                         <div className="space-y-2 sm:space-y-3">
                           <div className="text-xs sm:text-sm font-semibold flex items-center justify-between">
