@@ -2650,10 +2650,46 @@ const ProductWalkthrough: React.FC = () => {
                       <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-2">
                           <Server className="h-5 w-5 text-primary" />
-                          EHR Integration
+                          Send to EHR
                         </CardTitle>
+                        <p className="text-sm text-muted-foreground mt-1">Notes are automatically structured into custom EHR fields of your choice - configure which fields receive specific data types.</p>
                       </CardHeader>
                       <CardContent className="space-y-6">
+                        
+                        {/* Send Actions - Moved to Top */}
+                        <div className="space-y-3">
+                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
+                        setIsSending(true);
+                        setTimeout(() => {
+                          setIsSending(false);
+                          onNavClick('automations');
+                          toast({
+                            title: "Note sent successfully",
+                            description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
+                          });
+                        }, 3000);
+                      }}>
+                            <Send className="h-5 w-5 mr-2" />
+                            Send to {selectedEhr || 'Epic'}
+                          </Button>
+                          
+                          <div className="grid grid-cols-2 gap-2">
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
+                              </svg>
+                              Save Draft
+                            </Button>
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Export PDF
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        <Separator className="my-4" />
                         
                         {/* EHR Selection */}
                         <div className="space-y-3">
@@ -2742,41 +2778,6 @@ const ProductWalkthrough: React.FC = () => {
                               <CheckCircle2 className="h-4 w-4" />
                               <span>EHR connection active</span>
                             </div>
-                          </div>
-                        </div>
-                        
-                        <Separator className="my-4" />
-                        
-                        {/* Send Actions */}
-                        <div className="space-y-3">
-                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
-                        setIsSending(true);
-                        setTimeout(() => {
-                          setIsSending(false);
-                          onNavClick('automations');
-                          toast({
-                            title: "Note sent successfully",
-                            description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
-                          });
-                        }, 3000);
-                      }}>
-                            <Send className="h-5 w-5 mr-2" />
-                            Send to {selectedEhr || 'Epic'}
-                          </Button>
-                          
-                          <div className="grid grid-cols-2 gap-2">
-                            <Button variant="outline" className="rounded-lg h-9 text-sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
-                              </svg>
-                              Save Draft
-                            </Button>
-                            <Button variant="outline" className="rounded-lg h-9 text-sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                              </svg>
-                              Export PDF
-                            </Button>
                           </div>
                         </div>
                       </CardContent>
