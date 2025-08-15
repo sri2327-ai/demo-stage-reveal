@@ -1776,14 +1776,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* Capture Section */}
             <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Mic className="h-5 w-5 text-primary" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Mic className="h-4 w-4 text-primary" aria-hidden />
                     </div>
                     Clinical Documentation
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
                   
                   {/* Real-time Status Bar */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
