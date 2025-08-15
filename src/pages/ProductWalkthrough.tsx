@@ -1958,7 +1958,7 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     Clinical Documentation
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Capture patient encounters through ambient audio recording or manual typing with AI assistance.</p>
                   
                   {/* Real-time Status Bar */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
