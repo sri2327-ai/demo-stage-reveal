@@ -1429,207 +1429,192 @@ const ProductWalkthrough: React.FC = () => {
                 )}
 
                 {setupStep === 'ehr' && (
-                  <Card className="max-w-4xl">
-                    <CardHeader className="pb-6">
-                      <CardTitle className="flex items-center gap-3 text-xl">
-                        <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                          <ShieldCheck className="h-4 w-4 text-emerald-600" />
-                        </div>
-                        Connect to Your EHR
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div>
-                        <div className="text-sm font-semibold mb-2">Select your EHR system</div>
-                        <div className="text-xs text-muted-foreground mb-4 flex items-center gap-2">
+                  <div className="max-w-6xl mx-auto">
+                    <Card className="border-2 bg-gradient-to-br from-background to-muted/10">
+                      <CardHeader className="pb-4 bg-gradient-to-r from-emerald-50 to-emerald-100 border-b">
+                        <CardTitle className="flex items-center gap-3 text-xl">
+                          <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                          </div>
+                          Connect to Your EHR System
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
                           <CheckCircle2 className="h-4 w-4 text-green-600" />
-                          Integrates with 200+ EHR systems including all major platforms
-                        </div>
-                        
-                        {/* Enhanced Scrollable EHR Grid Container */}
-                        <div className="relative">
-                          <div className="h-80 overflow-y-auto border rounded-xl p-4 bg-gradient-to-br from-muted/20 to-muted/10 scroll-smooth custom-scrollbar">
-                            {/* Scroll indicator at top */}
-                            <div className="sticky top-0 z-10 flex items-center justify-center pb-2 mb-2 bg-gradient-to-b from-muted/20 to-transparent">
-                              <div className="text-xs text-muted-foreground font-medium px-3 py-1 bg-background/80 rounded-full border shadow-sm">
-                                Scroll to see all 40+ EHR systems
+                          Secure integration with 200+ EHR systems • HIPAA compliant • Zero-code setup
+                        </p>
+                      </CardHeader>
+                      
+                      <CardContent className="p-6">
+                        {/* Compact two-column layout */}
+                        <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-280px)] min-h-[500px]">
+                          
+                          {/* EHR Selection - Left Column */}
+                          <div className="lg:col-span-2 flex flex-col">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="text-sm font-semibold">Choose Your EHR</div>
+                              <div className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
+                                40+ systems supported
                               </div>
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                            {[
-                              { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
-                              { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
-                              { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
-                              { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
-                              { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
-                              { name: "Allscripts", logo: "🩺", subtitle: "Allscripts Healthcare" },
-                              { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
-                              { name: "Greenway", logo: "🌱", subtitle: "Greenway Health" },
-                              { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
-                              { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
-                              { name: "CureMD", logo: "💉", subtitle: "CureMD Healthcare" },
-                              { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono EHR" },
-                              { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
-                              { name: "Kareo", logo: "💼", subtitle: "Tebra (Kareo)" },
-                              { name: "ChartLogic", logo: "📈", subtitle: "ChartLogic" },
-                              { name: "ModMed", logo: "🏥", subtitle: "Modernizing Medicine" },
-                              { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
-                              { name: "WRS Health", logo: "💻", subtitle: "WRS Health" },
-                              { name: "Aprima", logo: "⚕️", subtitle: "Aprima Medical" },
-                              { name: "HealthFusion", logo: "🔄", subtitle: "HealthFusion MediTouch" },
-                              { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
-                              { name: "TherapyNotes", logo: "📝", subtitle: "TherapyNotes" },
-                              { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
-                              { name: "TheraNest", logo: "🏠", subtitle: "TheraNest" },
-                              { name: "WebPT", logo: "💪", subtitle: "WebPT" },
-                              { name: "Therabill", logo: "📋", subtitle: "Therabill" },
-                              { name: "InSync", logo: "🔄", subtitle: "InSync Healthcare" },
-                              { name: "Valant", logo: "🧭", subtitle: "Valant EHR" },
-                              { name: "ICANotes", logo: "📄", subtitle: "ICANotes" },
-                              { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
-                              { name: "Sevocity", logo: "🌐", subtitle: "Sevocity" },
-                              { name: "Azalea Health", logo: "🌸", subtitle: "Azalea Health" },
-                              { name: "Netsmart", logo: "🌐", subtitle: "Netsmart myEvolv" },
-                              { name: "PointClickCare", logo: "👆", subtitle: "PointClickCare" },
-                              { name: "MatrixCare", logo: "🏥", subtitle: "MatrixCare" },
-                              { name: "CareVoyant", logo: "🚀", subtitle: "CareVoyant" },
-                              { name: "Brightree", logo: "🌳", subtitle: "Brightree by ResMed" },
-                              { name: "CompuGroup", logo: "💼", subtitle: "CompuGroup Medical" },
-                              { name: "Office Practicum", logo: "🏢", subtitle: "Office Practicum" },
-                              { name: "PrimeSuite", logo: "👑", subtitle: "Greenway PrimeSuite" },
-                              { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
-                            ].map((ehr) => (
-                              <button
-                                key={ehr.name}
-                                onClick={() => {
-                                  setSelectedEhr(ehr.name);
-                                  toast({ 
-                                    title: `${ehr.name} selected`, 
-                                    description: `Ready to connect to ${ehr.subtitle}`,
-                                    duration: 2000 
-                                  });
-                                }}
-                                className={`group rounded-xl border-2 hover:border-emerald-400 p-3 text-center transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 ${
-                                  selectedEhr === ehr.name ? 
-                                    'border-gradient-to-br from-[#143151] to-[#387E89] bg-gradient-to-br from-emerald-50 to-emerald-100 ring-2 ring-emerald-200 scale-105 shadow-lg shadow-emerald-200' : 
-                                    'bg-background hover:bg-emerald-50'
-                                } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/50' : ''}`}
-                              >
-                                {selectedEhr === ehr.name && (
-                                  <div className="absolute -top-1 -right-1 h-6 w-6 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-full flex items-center justify-center">
-                                    <CheckCircle2 className="h-3 w-3 text-white" />
-                                  </div>
-                                )}
-                                <div className="text-xl mb-1">{ehr.logo}</div>
-                                <div className="font-semibold text-xs group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
-                                <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
-                                  {ehr.subtitle}
+                            
+                            {/* Compact EHR Grid - Fixed height with scroll */}
+                            <div className="flex-1 border rounded-xl bg-gradient-to-br from-muted/10 to-muted/5 p-4 overflow-hidden">
+                              <div className="h-full overflow-y-auto custom-scrollbar">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+                                  {[
+                                    { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
+                                    { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
+                                    { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
+                                    { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
+                                    { name: "Allscripts", logo: "🩺", subtitle: "Allscripts" },
+                                    { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
+                                    { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
+                                    { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
+                                    { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
+                                    { name: "CureMD", logo: "💉", subtitle: "CureMD" },
+                                    { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono" },
+                                    { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
+                                    { name: "Kareo", logo: "💼", subtitle: "Tebra" },
+                                    { name: "ModMed", logo: "🏥", subtitle: "ModMed" },
+                                    { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
+                                    { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
+                                    { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
+                                    { name: "WebPT", logo: "💪", subtitle: "WebPT" },
+                                    { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
+                                    { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
+                                  ].map((ehr) => (
+                                    <button
+                                      key={ehr.name}
+                                      onClick={() => {
+                                        setSelectedEhr(ehr.name);
+                                        toast({ 
+                                          title: `${ehr.name} selected`, 
+                                          description: `Ready to connect`,
+                                          duration: 2000 
+                                        });
+                                      }}
+                                      className={`group rounded-lg border-2 hover:border-emerald-400 p-2 text-center transition-all duration-200 hover:shadow-md hover:scale-105 ${
+                                        selectedEhr === ehr.name ? 
+                                          'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200 scale-105 shadow-md' : 
+                                          'bg-background hover:bg-emerald-50/50'
+                                      } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/30' : ''}`}
+                                    >
+                                      {selectedEhr === ehr.name && (
+                                        <div className="absolute -top-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                                          <CheckCircle2 className="h-3 w-3 text-white" />
+                                        </div>
+                                      )}
+                                      <div className="text-lg mb-1">{ehr.logo}</div>
+                                      <div className="font-semibold text-[10px] leading-tight group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
+                                      <div className="text-[9px] text-muted-foreground leading-tight">
+                                        {ehr.subtitle}
+                                      </div>
+                                    </button>
+                                  ))}
                                 </div>
-                              </button>
-                            ))}
+                              </div>
+                            </div>
                           </div>
-                            {/* Bottom gradient fade to indicate more content */}
-                            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-                          </div>
-                          {/* Scroll indicator at bottom */}
-                          <div className="flex items-center justify-center pt-2">
-                            <div className="text-xs text-muted-foreground font-medium px-3 py-1 bg-muted/50 rounded-full border">
-                              ↑ Scroll up for more options ↑
+
+                          {/* Connection Method & Actions - Right Column */}
+                          <div className="lg:col-span-1 flex flex-col justify-between">
+                            
+                            {/* Connection Method */}
+                            <div className="space-y-4">
+                              <div className="text-sm font-semibold">Connection Method</div>
+                              <Card className="p-4 border-2 bg-gradient-to-br from-blue-50 to-blue-100">
+                                <div className="flex items-start gap-3">
+                                  <div className="h-8 w-8 rounded-lg bg-blue-100 flex items-center justify-center mt-1">
+                                    <Bot className="h-4 w-4 text-blue-600" />
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="font-semibold text-sm mb-1">AI Agent Integration</div>
+                                    <div className="text-xs text-muted-foreground leading-relaxed mb-3">
+                                      Secure, zero-code connection trusted by clinicians. HIPAA compliant with end-to-end encryption.
+                                    </div>
+                                    <div className="flex flex-wrap gap-1">
+                                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-800 text-[10px] font-medium">
+                                        <CheckCircle2 className="h-2 w-2" />
+                                        Zero-code
+                                      </span>
+                                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-medium">
+                                        <ShieldCheck className="h-2 w-2" />
+                                        HIPAA
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Card>
+
+                              {/* Security Features */}
+                              <div className="grid grid-cols-1 gap-2 p-3 bg-muted/30 rounded-lg">
+                                {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((feature) => (
+                                  <div key={feature} className="flex items-center gap-2">
+                                    <CheckCircle2 className="h-3 w-3 text-green-600" />
+                                    <span className="text-xs font-medium">{feature}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Action Buttons - Always visible at bottom */}
+                            <div className="space-y-3 pt-4 border-t">
+                              <div className="flex flex-col gap-2">
+                                <Button 
+                                  onClick={handleConnect} 
+                                  disabled={!selectedEhr || connecting} 
+                                  className="w-full rounded-full font-semibold shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269]"
+                                  size="lg"
+                                >
+                                  {connecting ? (
+                                    <>
+                                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                      Connecting...
+                                    </>
+                                  ) : selectedEhr ? (
+                                    <>
+                                      <ShieldCheck className="h-4 w-4 mr-2" />
+                                      Connect {selectedEhr}
+                                    </>
+                                  ) : (
+                                    'Select EHR to Connect'
+                                  )}
+                                </Button>
+                                
+                                <div className="flex gap-2">
+                                  <Button 
+                                    variant="outline" 
+                                    className="flex-1 rounded-full"
+                                    onClick={() => setSetupStep('landing')}
+                                  >
+                                    ← Back
+                                  </Button>
+                                  <Button 
+                                    variant="ghost" 
+                                    className="flex-1 rounded-full text-muted-foreground hover:text-foreground"
+                                    onClick={() => {
+                                      toast({ title: "Setup saved", description: "You can configure EHR later." });
+                                      onNavClick("schedule");
+                                    }}
+                                  >
+                                    Skip for now
+                                  </Button>
+                                </div>
+                              </div>
+                              
+                              {/* Don't see your EHR note - compact */}
+                              <div className="p-2 bg-blue-50/50 rounded-lg border border-blue-100">
+                                <div className="text-xs font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+                                <div className="text-[10px] text-blue-700 leading-tight">
+                                  We integrate with any system through custom protocols.
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        
-                        <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                          <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
-                          <div className="text-xs text-blue-700">
-                            Our AI agents can integrate with any EHR system through custom protocols. We support legacy systems, specialty-specific platforms, and emerging technologies.
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="text-sm font-semibold mb-3">Connection Method</div>
-                        <div className="rounded-xl border p-4">
-                          <label className="flex items-center gap-3 p-4 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
-                            <input type="radio" name="conn" defaultChecked className="scale-110" />
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <Bot className="h-4 w-4 text-slate-600" />
-                                <div className="font-medium">AI Agent Integration</div>
-                              </div>
-                              <div className="text-sm text-muted-foreground mt-1">
-                                Secure, intelligent connection that clinicians trust. Our AI agents handle the integration seamlessly while maintaining full HIPAA compliance and data security.
-                              </div>
-                              <div className="flex flex-wrap gap-2 mt-2">
-                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
-                                  <CheckCircle2 className="h-3 w-3" />
-                                  Zero-code setup
-                                </span>
-                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-medium">
-                                  <ShieldCheck className="h-3 w-3" />
-                                  Clinician-friendly
-                                </span>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 bg-muted/30 rounded-xl">
-                        {["BAA Covered", "End-to-End Encryption", "HIPAA Compliant"].map((feature) => (
-                          <div key={feature} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-green-600" />
-                            <span className="text-sm font-medium">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Enhanced Action Buttons */}
-                      <div className="sticky bottom-0 bg-white border-t pt-4 -mx-6 px-6 -mb-6 pb-6">
-                        <div className="flex flex-wrap gap-3 justify-between items-center">
-                          <div className="flex gap-3">
-                            <Button 
-                              variant="outline" 
-                              className="rounded-full px-6"
-                              onClick={() => setSetupStep('landing')}
-                            >
-                              ← Back
-                            </Button>
-                            <Button 
-                              variant="ghost" 
-                              className="rounded-full px-6 text-muted-foreground hover:text-foreground"
-                              onClick={() => {
-                                toast({ title: "Setup saved", description: "You can configure EHR connection later from Settings." });
-                                onNavClick("schedule");
-                              }}
-                            >
-                              Skip for now
-                            </Button>
-                          </div>
-                          <Button 
-                            onClick={handleConnect} 
-                            disabled={!selectedEhr || connecting} 
-                            className="rounded-full px-8 font-semibold shadow-md hover:shadow-lg transition-all"
-                            size="lg"
-                          >
-                            {connecting ? (
-                              <>
-                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                                Connecting to {selectedEhr}...
-                              </>
-                            ) : selectedEhr ? (
-                              <>
-                                <ShieldCheck className="h-4 w-4 mr-2" />
-                                Connect {selectedEhr}
-                              </>
-                            ) : (
-                              'Select EHR to Connect'
-                            )}
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </div>
                 )}
               </div>
             </section>
