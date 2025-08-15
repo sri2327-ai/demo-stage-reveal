@@ -617,17 +617,17 @@ const ProductWalkthrough: React.FC = () => {
             {/* Setup Section */}
             <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-4">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
-                      <Settings className="h-5 w-5 text-white" aria-hidden />
+                <div className="mb-2">
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
+                      <Settings className="h-4 w-4 text-white" aria-hidden />
                     </div>
                     Setup Your Workflow
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Configure your note templates and EHR connections in a streamlined workflow.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Configure your note templates and EHR connections in a streamlined workflow.</p>
 
                   {/* Improved progress indicator */}
-                  <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-4 rounded-2xl border border-border/50 max-w-2xl mx-auto">
+                  <div className="mt-4 bg-gradient-to-r from-muted/50 to-muted/20 p-3 rounded-2xl border border-border/50 max-w-2xl mx-auto">
                     <div className="flex items-center justify-between mb-4">
                       <button 
                         onClick={() => setSetupStep('note')}
