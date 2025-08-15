@@ -1956,99 +1956,99 @@ const ProductWalkthrough: React.FC = () => {
 
             {/* Capture Section */}
             <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Mic className="h-4 w-4 text-primary" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Mic className="h-3 w-3 sm:h-4 sm:w-4 text-primary" aria-hidden />
                     </div>
-                    Clinical Documentation
+                    <span className="min-w-0 truncate">Clinical Documentation</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Capture patient encounters through ambient audio recording or manual typing with AI assistance.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Capture patient encounters through ambient audio recording or manual typing with AI assistance.</p>
                   
                   {/* Real-time Status Bar */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-4">
+                  <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                         <div className="flex items-center gap-2">
-                          <div className={`h-3 w-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}></div>
-                          <span className="font-medium">
+                          <div className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}></div>
+                          <span className="font-medium text-sm sm:text-base">
                             {isRecording ? 'Recording Active' : 'Ready to Capture'}
                           </span>
                         </div>
-                        {selectedPatient && <div className="flex items-center gap-2 text-muted-foreground">
-                            <span>•</span>
-                            <span>Patient: {selectedPatient.name}</span>
-                            <span>•</span>
-                            <span>Visit: {selectedPatient.visit}</span>
+                        {selectedPatient && <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
+                            <span className="hidden sm:inline">•</span>
+                            <span className="truncate">Patient: {selectedPatient.name}</span>
+                            <span className="hidden sm:inline">•</span>
+                            <span className="truncate">Visit: {selectedPatient.visit}</span>
                           </div>}
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="text-xs text-muted-foreground">AI Processing:</div>
-                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <div className="text-xs font-medium text-green-700">Active</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground">AI Processing:</div>
+                        <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <div className="text-[10px] sm:text-xs font-medium text-green-700">Active</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Enhanced Responsive Grid Layout */}
-                <div className="grid gap-6 lg:gap-8 xl:grid-cols-12">
+                <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-12 xl:grid-cols-12">
                   
                   {/* Enhanced Input Methods Panel */}
-                  <div className="xl:col-span-4 space-y-6">
+                  <div className="lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-6">
                     <Card className="border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2">
-                          <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <CardHeader className="pb-3 sm:pb-4">
+                        <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                          <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-lg bg-primary/10 flex items-center justify-center">
                             {captureMode === 'audio' ? <Mic className="h-3 w-3 text-primary" /> : <FileText className="h-3 w-3 text-primary" />}
                           </div>
-                          Input Method
+                          <span className="min-w-0 truncate">Input Method</span>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-6">
+                      <CardContent className="space-y-4 sm:space-y-6">
                         
                         {/* Enhanced Mode Toggle */}
                         <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-                            <TabsTrigger value="audio" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
-                              <Mic className="h-4 w-4" />
+                          <TabsList className="grid w-full grid-cols-2 bg-muted/50 h-10 sm:h-11">
+                            <TabsTrigger value="audio" className="flex items-center gap-1 sm:gap-2 data-[state=active]:bg-primary/10 text-xs sm:text-sm">
+                              <Mic className="h-3 w-3 sm:h-4 sm:w-4" />
                               <span className="hidden sm:inline">Audio Capture</span>
                               <span className="sm:hidden">Audio</span>
                             </TabsTrigger>
-                            <TabsTrigger value="type" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
-                              <FileText className="h-4 w-4" />
+                            <TabsTrigger value="type" className="flex items-center gap-1 sm:gap-2 data-[state=active]:bg-primary/10 text-xs sm:text-sm">
+                              <FileText className="h-3 w-3 sm:h-4 sm:w-4" />
                               <span className="hidden sm:inline">Manual Entry</span>
                               <span className="sm:hidden">Type</span>
                             </TabsTrigger>
                           </TabsList>
                           
                           {/* Enhanced Audio Capture Tab */}
-                          <TabsContent value="audio" className="mt-6 space-y-6">
-                            <div className="space-y-6">
+                          <TabsContent value="audio" className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+                            <div className="space-y-4 sm:space-y-6">
                               
                               {/* Recording Controls */}
-                              <div className="space-y-4">
-                                <Button onClick={toggleRecording} className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'}`}>
+                              <div className="space-y-3 sm:space-y-4">
+                                <Button onClick={toggleRecording} className={`w-full rounded-xl h-12 sm:h-16 font-semibold text-sm sm:text-lg transition-all duration-300 ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'}`}>
                                   {isRecording ? <>
-                                      <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
+                                      <CircleStop className="h-4 w-4 sm:h-6 sm:w-6 mr-2 sm:mr-3" /> <span className="hidden sm:inline">Stop Recording</span><span className="sm:hidden">Stop</span>
                                     </> : <>
-                                      <Mic className="h-6 w-6 mr-3" /> Start Recording
+                                      <Mic className="h-4 w-4 sm:h-6 sm:w-6 mr-2 sm:mr-3" /> <span className="hidden sm:inline">Start Recording</span><span className="sm:hidden">Record</span>
                                     </>}
                                 </Button>
                                 
                                 {/* Enhanced Recording Status */}
-                                <div className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
-                                  <div className="flex items-center gap-2">
-                                    <div className={`h-4 w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
-                                    <span className="font-mono text-2xl font-bold">{timeStr}</span>
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-3 p-3 sm:p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
+                                  <div className="flex items-center justify-center gap-2">
+                                    <div className={`h-3 w-3 sm:h-4 sm:w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
+                                    <span className="font-mono text-lg sm:text-2xl font-bold">{timeStr}</span>
                                   </div>
-                                  <div className="h-6 w-px bg-border mx-2"></div>
-                                  <div className="text-sm text-center">
+                                  <div className="hidden sm:block h-6 w-px bg-border mx-2"></div>
+                                  <div className="text-xs sm:text-sm text-center">
                                     <div className="font-medium">
                                       {isRecording ? 'Recording in Progress' : 'Ready to Record'}
                                     </div>
-                                    <div className="text-xs text-muted-foreground">
+                                    <div className="text-[10px] sm:text-xs text-muted-foreground">
                                       {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
                                     </div>
                                   </div>
@@ -2056,29 +2056,29 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
 
                               {/* Enhanced Audio Visualizer */}
-                              <Card className="p-4 bg-gradient-to-r from-muted/20 to-muted/5">
-                                <div className="text-xs font-medium text-muted-foreground mb-3 text-center">
+                              <Card className="p-3 sm:p-4 bg-gradient-to-r from-muted/20 to-muted/5">
+                                <div className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-2 sm:mb-3 text-center">
                                   Audio Input Level
                                 </div>
-                                <div className="flex items-end justify-center gap-1 h-20">
-                                  {[8, 14, 20, 12, 18, 10, 16, 22, 12, 15, 19, 8, 16, 25, 11, 20, 12, 18, 14, 10].map((h, i) => <div key={i} className={`w-2 rounded-t transition-all duration-300 ${isRecording ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' : 'bg-gradient-to-t from-primary/20 to-primary/10'}`} style={{
-                                  height: `${isRecording ? h : h * 0.3}px`,
+                                <div className="flex items-end justify-center gap-0.5 sm:gap-1 h-16 sm:h-20">
+                                  {[8, 14, 20, 12, 18, 10, 16, 22, 12, 15, 19, 8, 16, 25, 11, 20, 12, 18, 14, 10].map((h, i) => <div key={i} className={`w-1.5 sm:w-2 rounded-t transition-all duration-300 ${isRecording ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' : 'bg-gradient-to-t from-primary/20 to-primary/10'}`} style={{
+                                  height: `${isRecording ? h * 0.8 : h * 0.3}px`,
                                   animationDelay: `${i * 50}ms`
                                 }} />)}
                                 </div>
                               </Card>
                               
                               {/* Audio Quality Indicators */}
-                              <div className="grid grid-cols-3 gap-3 text-xs">
-                                <div className="text-center p-2 rounded-lg bg-green-50 border border-green-200">
+                              <div className="grid grid-cols-3 gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                                <div className="text-center p-1.5 sm:p-2 rounded-lg bg-green-50 border border-green-200">
                                   <div className="font-medium text-green-700">Quality</div>
                                   <div className="text-green-600">Excellent</div>
                                 </div>
-                                <div className="text-center p-2 rounded-lg bg-blue-50 border border-blue-200">
+                                <div className="text-center p-1.5 sm:p-2 rounded-lg bg-blue-50 border border-blue-200">
                                   <div className="font-medium text-blue-700">Clarity</div>
                                   <div className="text-blue-600">Clear</div>
                                 </div>
-                                <div className="text-center p-2 rounded-lg bg-purple-50 border border-purple-200">
+                                <div className="text-center p-1.5 sm:p-2 rounded-lg bg-purple-50 border border-purple-200">
                                   <div className="font-medium text-purple-700">Background</div>
                                   <div className="text-purple-600">Quiet</div>
                                 </div>
@@ -2087,15 +2087,15 @@ const ProductWalkthrough: React.FC = () => {
                           </TabsContent>
                           
                           {/* Enhanced Type Input Tab */}
-                          <TabsContent value="type" className="mt-6">
-                            <div className="space-y-6">
-                              <div className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                                <Bot className="h-4 w-4" />
-                                AI-Assisted Manual Entry
+                          <TabsContent value="type" className="mt-4 sm:mt-6">
+                            <div className="space-y-4 sm:space-y-6">
+                              <div className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center gap-2">
+                                <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
+                                <span className="min-w-0 truncate">AI-Assisted Manual Entry</span>
                               </div>
                               
-                              <div className="space-y-4">
-                                <Textarea placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..." value={typeNotes} onChange={e => setTypeNotes(e.target.value)} className="min-h-[250px] resize-none text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors" />
+                              <div className="space-y-3 sm:space-y-4">
+                                <Textarea placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..." value={typeNotes} onChange={e => setTypeNotes(e.target.value)} className="min-h-[200px] sm:min-h-[250px] resize-none text-xs sm:text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors" />
                                 
                                 {/* AI Suggestions Panel */}
                                 {typeNotes.length > 20 && <Card className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
@@ -2111,13 +2111,13 @@ const ProductWalkthrough: React.FC = () => {
                                   </Card>}
                                 
                                 {/* Word Count & Metrics */}
-                                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                                  <div className="flex items-center gap-4">
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] sm:text-xs text-muted-foreground">
+                                  <div className="flex items-center gap-2 sm:gap-4">
                                     <span>{typeNotes.split(' ').filter(Boolean).length} words</span>
                                     <span>{typeNotes.length} characters</span>
                                   </div>
                                   <div className="flex items-center gap-1">
-                                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                                    <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500"></div>
                                     <span>AI analyzing</span>
                                   </div>
                                 </div>
@@ -2130,11 +2130,12 @@ const ProductWalkthrough: React.FC = () => {
                                   title: "Notes cleared",
                                   description: "Ready for new input"
                                 });
-                              }} className="rounded-lg">
-                                  <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              }} className="rounded-lg text-xs flex-1 sm:flex-none">
+                                  <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                   </svg>
-                                  Clear All
+                                  <span className="hidden sm:inline">Clear All</span>
+                                  <span className="sm:hidden">Clear</span>
                                 </Button>
                                 <Button size="sm" onClick={() => {
                                 if (typeNotes.trim()) {
@@ -2144,19 +2145,21 @@ const ProductWalkthrough: React.FC = () => {
                                     description: "AI is structuring your notes"
                                   });
                                 }
-                              }} disabled={!typeNotes.trim()} className="rounded-lg">
-                                  <Wand2 className="h-4 w-4 mr-2" />
-                                  Process & Structure
+                              }} disabled={!typeNotes.trim()} className="rounded-lg text-xs flex-1 sm:flex-none">
+                                  <Wand2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                                  <span className="hidden sm:inline">Process & Structure</span>
+                                  <span className="sm:hidden">Process</span>
                                 </Button>
-                                <Button variant="outline" size="sm" className="rounded-lg" onClick={() => {
+                                <Button variant="outline" size="sm" className="rounded-lg text-xs flex-1 sm:flex-none" onClick={() => {
                                 setCaptureMode('audio');
                                 toast({
                                   title: "Voice dictation activated",
                                   description: "You can now use voice dictation to capture notes"
                                 });
                               }}>
-                                  <Mic className="h-4 w-4 mr-2" />
-                                  Voice Dictation
+                                  <Mic className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                                  <span className="hidden sm:inline">Voice Dictation</span>
+                                  <span className="sm:hidden">Voice</span>
                                 </Button>
                               </div>
                             </div>
@@ -2164,31 +2167,33 @@ const ProductWalkthrough: React.FC = () => {
                         </Tabs>
 
                         {/* Enhanced Session Controls */}
-                        <div className="pt-6 border-t space-y-3">
-                          <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
+                        <div className="pt-4 sm:pt-6 border-t space-y-3">
+                          <div className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-2 sm:mb-3">Session Controls</div>
                           <div className="grid gap-2">
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm" onClick={() => {
+                            <Button variant="outline" className="rounded-lg justify-start h-9 sm:h-10 text-xs sm:text-sm" size="sm" onClick={() => {
                               setIsRecording(false);
                               toast({
                                 title: "Session paused",
                                 description: "Recording and transcription paused. Click to resume when ready."
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
-                              Pause Session
+                              <span className="hidden sm:inline">Pause Session</span>
+                              <span className="sm:hidden">Pause</span>
                             </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm" onClick={() => {
+                            <Button variant="outline" className="rounded-lg justify-start h-9 sm:h-10 text-xs sm:text-sm" size="sm" onClick={() => {
                               toast({
                                 title: "Audio file uploader",
                                 description: "Opening file selector for audio upload (.mp3, .wav, .m4a formats supported)"
                               });
                             }}>
-                              <Upload className="h-4 w-4 mr-2" />
-                              Upload Audio File
+                              <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                              <span className="hidden sm:inline">Upload Audio File</span>
+                              <span className="sm:hidden">Upload Audio</span>
                             </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm" onClick={() => {
+                            <Button variant="outline" className="rounded-lg justify-start h-9 sm:h-10 text-xs sm:text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm" onClick={() => {
                               setIsRecording(false);
                               setTranscript("");
                               setTypeNotes("");
@@ -2199,10 +2204,11 @@ const ProductWalkthrough: React.FC = () => {
                                 variant: "destructive"
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                               </svg>
-                              End & Discard Session
+                              <span className="hidden sm:inline">End & Discard Session</span>
+                              <span className="sm:hidden">End Session</span>
                             </Button>
                           </div>
                         </div>
@@ -2211,26 +2217,27 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
 
                   {/* Enhanced AI-Generated Note Panel */}
-                  <div className="xl:col-span-5">
+                  <div className="lg:col-span-7 xl:col-span-5">
                     <Card className="h-full border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center justify-between">
+                      <CardHeader className="pb-3 sm:pb-4">
+                        <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                           <div className="flex items-center gap-2">
-                            <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-lg bg-primary/10 flex items-center justify-center">
                               <Bot className="h-3 w-3 text-primary" />
                             </div>
-                            AI-Generated Clinical Note
+                            <span className="text-sm sm:text-base min-w-0 truncate">AI-Generated Clinical Note</span>
                           </div>
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <div className="flex items-center gap-2">
-                              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                              <span className="text-xs text-muted-foreground">Live Processing</span>
+                              <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500 animate-pulse"></div>
+                              <span className="text-[10px] sm:text-xs text-muted-foreground">Live Processing</span>
                             </div>
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="sm" className="rounded-lg text-xs">
-                                  <RefreshCw className="h-3 w-3 mr-1" />
-                                  Regenerate
+                                <Button variant="outline" size="sm" className="rounded-lg text-[10px] sm:text-xs px-2 sm:px-3 h-7 sm:h-8">
+                                  <RefreshCw className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-0.5 sm:mr-1" />
+                                  <span className="hidden sm:inline">Regenerate</span>
+                                  <span className="sm:hidden">Regen</span>
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-56 max-h-96 overflow-y-auto">
@@ -2250,39 +2257,40 @@ const ProductWalkthrough: React.FC = () => {
                       <CardContent className="space-y-4">
                         
                         {/* Processing Status */}
-                        <div className="p-3 bg-gradient-to-r from-blue-50 to-blue-50/50 rounded-lg border border-blue-200">
-                          <div className="flex items-center gap-2 text-sm">
-                            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-                            <span className="font-medium text-blue-700">Real-time transcription and structuring active</span>
+                        <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-50 to-blue-50/50 rounded-lg border border-blue-200">
+                          <div className="flex items-center gap-2 text-xs sm:text-sm">
+                            <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                            <span className="font-medium text-blue-700 min-w-0 truncate">Real-time transcription and structuring active</span>
                           </div>
-                          <div className="text-xs text-blue-600 mt-1 flex flex-wrap items-center gap-3">
+                          <div className="text-[10px] sm:text-xs text-blue-600 mt-1 flex flex-wrap items-center gap-2 sm:gap-3">
                             <span>• Medical terminology detection</span>
                             <span>• Grammar correction</span>
-                            <span>• Clinical structure formatting</span>
+                            <span className="hidden sm:inline">• Clinical structure formatting</span>
                           </div>
                         </div>
                         
                         {/* Note Content */}
-                        <div className="rounded-lg border-2 bg-gradient-to-br from-background to-muted/10 p-6 min-h-[400px] max-h-[500px] overflow-y-auto custom-scrollbar">
-                          <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                        <div className="rounded-lg border-2 bg-gradient-to-br from-background to-muted/10 p-3 sm:p-6 min-h-[300px] sm:min-h-[400px] max-h-[400px] sm:max-h-[500px] overflow-y-auto custom-scrollbar">
+                          <div className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">
                             {transcript || typeNotes || `${selectedPatient ? `📋 CLINICAL NOTE\n\nPatient: ${selectedPatient.name}\nMRN: ${selectedPatient.mrn}\nVisit Type: ${selectedPatient.visit}\nDate: ${new Date().toLocaleDateString()}\n\n` : ""}🎯 READY FOR INPUT\n\n${captureMode === 'audio' ? '🎤 Begin recording' : '⌨️ Start typing'} to generate structured clinical documentation...\n\n📝 AI will automatically organize content into:\n\n• Chief Complaint\n• History of Present Illness  \n• Review of Systems\n• Physical Examination\n• Assessment & Differential\n• Plan & Follow-up\n• Patient Instructions\n\n✨ Features:\n• Real-time medical terminology correction\n• Automatic ICD-10/CPT code suggestions\n• Clinical decision support\n• Template-based structure\n• Integration with patient history`}
                           </div>
                         </div>
                         
                         {/* Enhanced Note Actions */}
-                        <div className="flex flex-wrap gap-3 pt-4 border-t">
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => {
+                        <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4 border-t">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none text-xs sm:text-sm px-2 sm:px-3 h-8 sm:h-9" onClick={() => {
                             toast({
                               title: "Note editor opened",
                               description: "Opening rich text editor for manual note editing and refinement"
                             });
                           }}>
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
-                            Edit Note
+                            <span className="hidden sm:inline">Edit Note</span>
+                            <span className="sm:hidden">Edit</span>
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={async () => {
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none text-xs sm:text-sm px-2 sm:px-3 h-8 sm:h-9" onClick={async () => {
                             const textToCopy = transcript || typeNotes || "No content to copy";
                             try {
                               await navigator.clipboard.writeText(textToCopy);
@@ -2298,25 +2306,28 @@ const ProductWalkthrough: React.FC = () => {
                               });
                             }
                           }}>
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
-                            Copy Text
+                            <span className="hidden sm:inline">Copy Text</span>
+                            <span className="sm:hidden">Copy</span>
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => {
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none text-xs sm:text-sm px-2 sm:px-3 h-8 sm:h-9" onClick={() => {
                             toast({
                               title: "Exporting note",
                               description: "Clinical note is being exported as PDF, Word, and plain text formats"
                             });
                           }}>
-                            <FileText className="h-4 w-4 mr-2" />
-                            Export
+                            <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Export</span>
+                            <span className="sm:hidden">Export</span>
                           </Button>
-                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => onNavClick('coding')}>
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white text-xs sm:text-sm px-2 sm:px-3 h-8 sm:h-9" onClick={() => onNavClick('coding')}>
+                            <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
-                            Continue to Coding
+                            <span className="hidden sm:inline">Continue to Coding</span>
+                            <span className="sm:hidden">Continue</span>
                           </Button>
                         </div>
                       </CardContent>
@@ -2324,18 +2335,18 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
 
                   {/* Patient Summary Snapshot - Right Side */}
-                  <div className="xl:col-span-3">
+                  <div className="lg:col-span-12 xl:col-span-3">
                     <Card className="h-full border-2 bg-gradient-to-br from-blue-50/50 to-background">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2 text-blue-900">
-                          <div className="h-6 w-6 rounded-lg bg-blue-100 flex items-center justify-center">
+                      <CardHeader className="pb-3 sm:pb-4">
+                        <CardTitle className="flex items-center gap-2 text-blue-900 text-sm sm:text-base">
+                          <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-lg bg-blue-100 flex items-center justify-center">
                             <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                           </div>
-                          Patient Summary Snapshot
+                          <span className="min-w-0 truncate">Patient Summary Snapshot</span>
                         </CardTitle>
-                        <p className="text-xs text-blue-700/70">Medical history and previous visit details</p>
+                        <p className="text-[10px] sm:text-xs text-blue-700/70">Medical history and previous visit details</p>
                       </CardHeader>
                       <CardContent>
                         {selectedPatient ? <div className="space-y-4">
