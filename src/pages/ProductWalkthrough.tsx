@@ -617,7 +617,7 @@ const ProductWalkthrough: React.FC = () => {
             {/* Setup Section */}
             <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
+                <div className="mb-4">
                   <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
                     <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
                       <Settings className="h-5 w-5 text-white" aria-hidden />
