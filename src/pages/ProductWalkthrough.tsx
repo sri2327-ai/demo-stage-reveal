@@ -2260,10 +2260,10 @@ const ProductWalkthrough: React.FC = () => {
             {/* Send to EHR Section */}
             <section id="send" className={`screen ${active === "send" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Send className="h-5 w-5 text-primary" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Send className="h-4 w-4 text-primary" aria-hidden />
                     </div>
                     Send to EHR
                   </h2>
@@ -2599,14 +2599,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* Automations Section */}
             <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
-                      <Wand2 className="h-5 w-5 text-gray-600" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <Wand2 className="h-4 w-4 text-gray-600" aria-hidden />
                     </div>
                     <span className="text-gray-900">Workflow Automations</span>
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Configure automatic workflows to streamline your practice operations.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Configure automatic workflows to streamline your practice operations.</p>
                   
                   {/* Status Bar */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
@@ -2705,14 +2705,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* AI Agent Section */}
             <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
-                      <Bot className="h-5 w-5 text-gray-600" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <Bot className="h-4 w-4 text-gray-600" aria-hidden />
                     </div>
                     <span className="text-gray-900">AI Agent Configuration</span>
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Configure your AI agent to handle patient communications and administrative tasks.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Configure your AI agent to handle patient communications and administrative tasks.</p>
                   
                   {/* Agent Status */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
@@ -2818,14 +2818,14 @@ const ProductWalkthrough: React.FC = () => {
             {/* Dashboard Section */}
             <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <BarChart3 className="h-5 w-5 text-primary" aria-hidden />
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <BarChart3 className="h-4 w-4 text-primary" aria-hidden />
                     </div>
                     Analytics Dashboard
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Monitor your practice performance and AI agent effectiveness.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Monitor your practice performance and AI agent effectiveness.</p>
                 </div>
 
                 <div className="grid gap-6 xl:grid-cols-3">
