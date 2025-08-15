@@ -738,8 +738,8 @@ const ProductWalkthrough: React.FC = () => {
                 )}
 
                 {setupStep === 'note' && (
-                  <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5">
-                    <Card className="xl:col-span-2 2xl:col-span-3">
+                  <div className="grid gap-8 xl:grid-cols-3 2xl:grid-cols-5 h-[calc(100vh-180px)]">
+                    <Card className="xl:col-span-2 2xl:col-span-3 flex flex-col max-h-full">
                       <CardHeader className="pb-6">
                         <CardTitle className="flex items-center gap-3 text-xl">
                           <div className="h-8 w-8 rounded-lg bg-slate-100 flex items-center justify-center">
@@ -748,7 +748,7 @@ const ProductWalkthrough: React.FC = () => {
                           Set Your Note Style
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="flex flex-col h-full">
+                      <CardContent className="flex flex-col h-full overflow-hidden">
                         {/* Action buttons - always visible at top */}
                         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b mb-6">
                           <Button variant="outline" size="sm" className="rounded-full" onClick={() => setSetupStep('landing')}>
@@ -814,8 +814,8 @@ const ProductWalkthrough: React.FC = () => {
                             </TabsList>
 
                             <div className="flex-1 min-h-0">
-                              <TabsContent value="previous" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4">
+                              <TabsContent value="previous" className="h-full m-0 overflow-y-auto">
+                                <div className="h-full flex flex-col gap-4 pr-2">
                                   <div className="text-sm font-semibold">Paste Previous Note</div>
                                   <Textarea
                                     value={previousNote}
@@ -995,8 +995,8 @@ const ProductWalkthrough: React.FC = () => {
                                 </div>
                               </TabsContent>
 
-                              <TabsContent value="paste" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4">
+                              <TabsContent value="paste" className="h-full m-0 overflow-y-auto">
+                                <div className="h-full flex flex-col gap-4 pr-2">
                                   <div className="text-sm font-semibold">Paste Template Content</div>
                                   <Textarea 
                                     placeholder="Paste your template content here and we'll extract the structure..." 
