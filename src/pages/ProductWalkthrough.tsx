@@ -629,7 +629,10 @@ const ProductWalkthrough: React.FC = () => {
                   {/* Improved progress indicator */}
                   <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-6 rounded-2xl border border-border/50">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
+                      <button 
+                        onClick={() => setSetupStep('note')}
+                        className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}
+                      >
                         <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>
                           {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
                         </div>
@@ -637,19 +640,22 @@ const ProductWalkthrough: React.FC = () => {
                           <div className="font-semibold">Note Templates</div>
                           <div className="text-xs text-muted-foreground">Configure your documentation style</div>
                         </div>
-                      </div>
+                      </button>
                       
                       <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'}`}>
                         <div className={`h-full transition-all duration-500 ${setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'}`} />
                       </div>
                       
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
+                      <button 
+                        onClick={() => setSetupStep('ehr')}
+                        className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}
+                      >
                         <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>2</div>
                         <div>
                           <div className="font-semibold">EHR Integration</div>
                           <div className="text-xs text-muted-foreground">Connect to your systems</div>
                         </div>
-                      </div>
+                      </button>
                     </div>
                     
                     {/* Quick action buttons */}
