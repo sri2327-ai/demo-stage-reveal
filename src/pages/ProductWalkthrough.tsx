@@ -519,42 +519,42 @@ const ProductWalkthrough: React.FC = () => {
       </Helmet>
 
       {/* Interactive Demo Guide */}
-      {showDemoGuide && <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-scale-in border">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center">
-                <Wand2 className="h-5 w-5 text-white" />
+      {showDemoGuide && <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full max-w-[95vw] sm:max-w-lg p-4 sm:p-6 animate-scale-in border">
+            <div className="flex items-start sm:items-center gap-3 mb-4">
+              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center flex-shrink-0">
+                <Wand2 className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
-              <div>
-                <h3 className="font-semibold text-lg">Interactive Demo</h3>
-                <p className="text-sm text-muted-foreground">Explore S10.AI Medical Scribe & Agents</p>
-              </div>
-            </div>
-            
-            <div className="space-y-4 mb-6">
-              <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">Click on any menu item to explore different modules and features</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">Hover over navigation items to see detailed descriptions</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">Try interactive elements like buttons and forms throughout the demo</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">Press <kbd className="px-2 py-1 bg-muted rounded text-xs font-mono">Ctrl+H</kbd> to reopen this guide anytime</p>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-semibold text-base sm:text-lg">Interactive Demo</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Explore S10.AI Medical Scribe & Agents</p>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button onClick={() => setShowDemoGuide(false)} className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg">
+            <div className="space-y-3 sm:space-y-4 mb-6">
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">Click on any menu item to explore different modules and features</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">Hover over navigation items to see detailed descriptions</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">Try interactive elements like buttons and forms throughout the demo</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">Press <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-muted rounded text-[10px] sm:text-xs font-mono">Ctrl+H</kbd> to reopen this guide anytime</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              <Button onClick={() => setShowDemoGuide(false)} className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg text-sm sm:text-base">
                 Start Exploring
               </Button>
-              <Button variant="ghost" onClick={() => setShowDemoGuide(false)} className="px-4 rounded-full border border-border hover:bg-muted" size="sm">
+              <Button variant="ghost" onClick={() => setShowDemoGuide(false)} className="px-3 sm:px-4 rounded-full border border-border hover:bg-muted text-sm sm:text-base">
                 Skip
               </Button>
             </div>
@@ -562,9 +562,9 @@ const ProductWalkthrough: React.FC = () => {
         </div>}
 
       {/* Don't see your EHR Alert - Fixed at top for EHR step only */}
-      {active === "setup" && setupStep === "ehr" && <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg">
-          <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
-          <div className="text-xs text-blue-700">
+      {active === "setup" && setupStep === "ehr" && <div className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 z-40 mx-2 sm:mx-0 p-2 sm:p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg max-w-[90vw] sm:max-w-none">
+          <div className="text-xs sm:text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+          <div className="text-[10px] sm:text-xs text-blue-700">
             We integrate with any system through custom protocols.
           </div>
         </div>}
@@ -606,24 +606,25 @@ const ProductWalkthrough: React.FC = () => {
 
         <div className="main-content">
           <div className="top-nav">
-            <div className="flex-1 min-w-0">
-              <h1 className="text-sm md:text-base lg:text-lg font-semibold truncate">AI Medical Scribe & Agents</h1>
-              <p className="text-xs md:text-sm opacity-70 truncate">Clinical documentation & automation</p>
+            <div className="flex-1 min-w-0 px-1 sm:px-0">
+              <h1 className="text-sm sm:text-base lg:text-lg font-semibold truncate">AI Medical Scribe & Agents</h1>
+              <p className="text-[10px] sm:text-xs md:text-sm opacity-70 truncate">Clinical documentation & automation</p>
             </div>
             <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 flex-shrink-0">
-              <Button variant="ghost" size="sm" onClick={() => setShowDemoGuide(true)} className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-2 lg:px-3 min-w-0" title="Show demo guide">
-                <Wand2 className="h-4 w-4" />
+              <Button variant="ghost" size="sm" onClick={() => setShowDemoGuide(true)} className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-1.5 sm:px-2 lg:px-3 min-w-0 h-8 sm:h-9" title="Show demo guide">
+                <Wand2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 <span className="hidden sm:inline ml-1 text-xs">Guide</span>
               </Button>
-              <Button variant="outline" size="sm" asChild className="hidden sm:flex items-center gap-2 rounded-full px-3 lg:px-4 py-2 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border hover:border-border/80 hover:shadow-sm transition-all min-w-0">
+              <Button variant="outline" size="sm" asChild className="hidden md:flex items-center gap-2 rounded-full px-3 lg:px-4 py-2 text-xs lg:text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-border hover:border-border/80 hover:shadow-sm transition-all min-w-0">
                 <Link to="/" className="flex items-center gap-2">
                   <div className="h-5 w-5 lg:h-6 lg:w-6 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center shadow-sm">
                     <ArrowLeft className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" strokeWidth={2.5} />
                   </div>
-                  <span className="hidden md:inline font-medium">Return to S10.AI website</span>
+                  <span className="hidden lg:inline font-medium">Return to S10.AI website</span>
+                  <span className="lg:hidden font-medium">Home</span>
                 </Link>
               </Button>
-              <Button asChild className="rounded-full text-xs lg:text-sm px-2 sm:px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl transition-all min-w-0">
+              <Button asChild className="rounded-full text-[10px] sm:text-xs lg:text-sm px-2 sm:px-3 lg:px-4 py-1.5 lg:py-2 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl transition-all min-w-0 h-8 sm:h-9">
                 <Link to="/welcome">
                   <span className="hidden sm:inline">Schedule Demo</span>
                   <span className="sm:hidden">Demo</span>
@@ -635,83 +636,86 @@ const ProductWalkthrough: React.FC = () => {
           <main className="w-full">
             {/* Setup Section */}
             <section id="setup" className={`screen ${active === "setup" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
-                      <Settings className="h-4 w-4 text-white" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
+                      <Settings className="h-3 w-3 sm:h-4 sm:w-4 text-white" aria-hidden />
                     </div>
-                    Setup Your Workflow
+                    <span className="min-w-0 truncate">Setup Your Workflow</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Configure your note templates and EHR connections in a streamlined workflow.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your note templates and EHR connections in a streamlined workflow.</p>
 
                   {/* Improved progress indicator */}
-                  <div className="mt-4 bg-gradient-to-r from-muted/50 to-muted/20 p-3 rounded-2xl border border-border/50 max-w-2xl mx-auto">
-                    <div className="flex items-center justify-between mb-4">
-                      <button onClick={() => setSetupStep('note')} className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>
-                          {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
+                  <div className="mt-3 sm:mt-4 bg-gradient-to-r from-muted/50 to-muted/20 p-3 sm:p-4 rounded-2xl border border-border/50 max-w-4xl mx-auto">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                      <button onClick={() => setSetupStep('note')} className={`flex items-center gap-2 sm:gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'} min-w-0`}>
+                        <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full grid place-items-center font-bold text-xs sm:text-sm transition-all duration-300 flex-shrink-0 ${setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>
+                          {setupStep === 'ehr' ? <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" /> : '1'}
                         </div>
-                        <div>
-                          <div className="font-semibold">Note Templates</div>
+                        <div className="min-w-0">
+                          <div className="font-semibold text-sm sm:text-base">Note Templates</div>
                           <div className="text-xs text-muted-foreground">Configure your documentation style</div>
                         </div>
                       </button>
                       
-                      <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'}`}>
+                      <div className={`flex-1 h-1 mx-2 sm:mx-6 rounded-full overflow-hidden ${setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'} hidden sm:block`}>
                         <div className={`h-full transition-all duration-500 ${setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'}`} />
                       </div>
                       
-                      <button onClick={() => setSetupStep('ehr')} className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>2</div>
-                        <div>
-                          <div className="font-semibold">EHR Integration</div>
+                      <button onClick={() => setSetupStep('ehr')} className={`flex items-center gap-2 sm:gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'} min-w-0`}>
+                        <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full grid place-items-center font-bold text-xs sm:text-sm transition-all duration-300 flex-shrink-0 ${setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>2</div>
+                        <div className="min-w-0">
+                          <div className="font-semibold text-sm sm:text-base">EHR Integration</div>
                           <div className="text-xs text-muted-foreground">Connect to your systems</div>
                         </div>
                       </button>
                     </div>
                     
-                    {/* Quick action buttons */}
+                    {/* Mobile progress bar */}
+                    <div className={`sm:hidden h-1 mx-2 rounded-full overflow-hidden ${setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'}`}>
+                      <div className={`h-full transition-all duration-500 ${setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'}`} />
+                    </div>
                     
                   </div>
                 </div>
 
-                {setupStep === 'landing' && <div className="h-[calc(100vh-200px)] flex items-center justify-center">
+                {setupStep === 'landing' && <div className="min-h-[50vh] sm:min-h-[60vh] lg:h-[calc(100vh-200px)] flex items-center justify-center px-2 sm:px-0">
                     <div className="max-w-5xl mx-auto w-full">
                       <Card className="border-2 bg-gradient-to-br from-background to-muted/10 shadow-xl">
-                        <CardContent className="px-8 py-6">
-                          <div className="text-center mb-6">
-                            <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
-                              <Wand2 className="h-6 w-6 text-white" />
+                        <CardContent className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+                          <div className="text-center mb-4 sm:mb-6">
+                            <div className="h-10 w-10 sm:h-12 sm:w-12 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
+                              <Wand2 className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                             </div>
-                            <h3 className="text-xl font-bold mb-2">Setup Your S10.AI Workflow</h3>
-                            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+                            <h3 className="text-lg sm:text-xl font-bold mb-2">Setup Your S10.AI Workflow</h3>
+                            <p className="text-muted-foreground text-xs sm:text-sm max-w-2xl mx-auto px-2">
                               Get started with AI-powered clinical documentation in two simple steps
                             </p>
                           </div>
                           
-                          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                            <button onClick={() => setSetupStep('note')} className="group relative rounded-xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10">
-                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                  <ArrowLeft className="h-3 w-3 text-primary rotate-180" />
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                            <button onClick={() => setSetupStep('note')} className="group relative rounded-xl border-2 hover:border-primary/40 p-4 sm:p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10">
+                              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                  <ArrowLeft className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary rotate-180" />
                                 </div>
                               </div>
-                              <div className="flex items-start gap-4">
-                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all flex-shrink-0">
-                                  <FileText className="h-5 w-5 text-blue-600" />
+                              <div className="flex items-start gap-3 sm:gap-4">
+                                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] text-white text-xs font-bold flex items-center justify-center">1</div>
-                                    <div className="font-bold text-lg group-hover:text-primary transition-colors">Note Templates</div>
+                                    <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] text-white text-xs font-bold flex items-center justify-center">1</div>
+                                    <div className="font-bold text-base sm:text-lg group-hover:text-primary transition-colors">Note Templates</div>
                                   </div>
-                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
+                                  <div className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3">
                                     Configure your clinical documentation style with specialty templates or custom formats
                                   </div>
                                   <div className="flex items-center gap-2 text-xs font-medium text-primary">
                                     <span>Start Here</span>
-                                    <div className="h-4 w-4 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <div className="h-3 w-3 sm:h-4 sm:w-4 rounded-full bg-primary/10 flex items-center justify-center">
                                       <ArrowLeft className="h-2 w-2 rotate-180" />
                                     </div>
                                   </div>
@@ -719,27 +723,27 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                             </button>
 
-                            <button onClick={() => setSetupStep('ehr')} className="group relative rounded-xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100">
-                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
-                                  <ArrowLeft className="h-3 w-3 text-emerald-600 rotate-180" />
+                            <button onClick={() => setSetupStep('ehr')} className="group relative rounded-xl border-2 hover:border-emerald-400 p-4 sm:p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100">
+                              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                                  <ArrowLeft className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-emerald-600 rotate-180" />
                                 </div>
                               </div>
-                              <div className="flex items-start gap-4">
-                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all flex-shrink-0">
-                                  <ShieldCheck className="h-5 w-5 text-emerald-600" />
+                              <div className="flex items-start gap-3 sm:gap-4">
+                                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="h-6 w-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">2</div>
-                                    <div className="font-bold text-lg group-hover:text-emerald-700 transition-colors">EHR Integration</div>
+                                    <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">2</div>
+                                    <div className="font-bold text-base sm:text-lg group-hover:text-emerald-700 transition-colors">EHR Integration</div>
                                   </div>
-                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
+                                  <div className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3">
                                     Securely connect to Epic, Cerner, and 200+ other EHR systems with AI agents
                                   </div>
                                   <div className="flex items-center gap-2 text-xs font-medium text-emerald-600">
                                     <span>Next Step</span>
-                                    <div className="h-4 w-4 rounded-full bg-emerald-100 flex items-center justify-center">
+                                    <div className="h-3 w-3 sm:h-4 sm:w-4 rounded-full bg-emerald-100 flex items-center justify-center">
                                       <ArrowLeft className="h-2 w-2 rotate-180" />
                                     </div>
                                   </div>
@@ -1565,88 +1569,89 @@ const ProductWalkthrough: React.FC = () => {
 
             {/* Schedule Section */}
             <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <CalendarDays className="h-4 w-4 text-primary" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <CalendarDays className="h-3 w-3 sm:h-4 sm:w-4 text-primary" aria-hidden />
                     </div>
-                    Unified Schedule
+                    <span className="min-w-0 truncate">Unified Schedule</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">
                     For providers across multiple clinics, locations, and EHR systems. Single EHR setups can also be fully customized.
                   </p>
                 </div>
 
                 {/* Enhanced Controls Section */}
-                <div className="grid gap-4 lg:gap-6 mb-6">
+                <div className="grid gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
                   <Card className="border-2 bg-gradient-to-r from-background to-muted/5">
-                    <CardHeader className="pb-4">
-                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <CardHeader className="pb-3 sm:pb-4">
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
                         
                         {/* Sync Status - Enhanced */}
-                        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                          <div className="flex items-center gap-2 text-sm">
-                            <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse"></div>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 lg:gap-4">
+                          <div className="flex items-center gap-2 text-xs sm:text-sm">
+                            <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-green-500 animate-pulse"></div>
                             <span className="font-medium text-green-700">Live Sync Active</span>
                           </div>
-                          <div className="h-4 w-px bg-border"></div>
-                          <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-muted-foreground">
+                          <div className="h-px w-full sm:h-4 sm:w-px bg-border"></div>
+                          <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 text-[10px] sm:text-xs text-muted-foreground">
                             <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Epic (4 locations)
+                              <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500"></div>
+                              <span className="truncate">Epic (4 locations)</span>
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Cerner (3 locations)
+                              <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500"></div>
+                              <span className="truncate">Cerner (3 locations)</span>
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-                              Athena (2 locations)
+                              <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                              <span className="truncate">Athena (2 locations)</span>
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              NextGen (1 location)
+                              <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500"></div>
+                              <span className="truncate">NextGen (1 location)</span>
                             </span>
                           </div>
                         </div>
 
                         {/* Controls */}
-                        <div className="relative flex items-center gap-3">
-                          <Button variant="outline" size="sm" className="rounded-lg" disabled={syncing} onClick={() => {
-                          setSyncing(true);
-                          setTimeout(() => {
-                            setSyncing(false);
-                            toast({
-                              title: "Sync Complete",
-                              description: "All systems synchronized successfully. 3 new appointments added."
-                            });
-                          }, 2500);
-                        }}>
-                            <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
-                            {syncing ? 'Syncing...' : 'Sync All'}
+                        <div className="relative flex items-center gap-2 sm:gap-3">
+                          <Button variant="outline" size="sm" className="rounded-lg text-xs sm:text-sm px-2 sm:px-3" disabled={syncing} onClick={() => {
+                        setSyncing(true);
+                        setTimeout(() => {
+                          setSyncing(false);
+                          toast({
+                            title: "Sync Complete",
+                            description: "All systems synchronized successfully. 3 new appointments added."
+                          });
+                        }, 2500);
+                      }}>
+                            <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${syncing ? 'animate-spin' : ''}`} />
+                            <span className="hidden sm:inline">{syncing ? 'Syncing...' : 'Sync All'}</span>
+                            <span className="sm:hidden">{syncing ? 'Sync' : 'Sync'}</span>
                           </Button>
-                          <div className="h-4 w-px bg-border"></div>
+                          <div className="h-4 w-px bg-border hidden sm:block"></div>
                           <Tabs value={scheduleView} onValueChange={(v: 'list' | 'calendar') => setScheduleView(v)} className="w-fit">
-                            <TabsList className="bg-muted/50">
-                              <TabsTrigger value="list" className="text-xs px-3">
-                                <List className="h-3 w-3 mr-1" />
-                                List
+                            <TabsList className="bg-muted/50 p-0.5 sm:p-1">
+                              <TabsTrigger value="list" className="text-[10px] sm:text-xs px-2 sm:px-3">
+                                <List className="h-3 w-3 mr-0.5 sm:mr-1" />
+                                <span className="hidden sm:inline">List</span>
                               </TabsTrigger>
                               
                              </TabsList>
                            </Tabs>
-                           <div className="h-4 w-px bg-border"></div>
+                           <div className="h-4 w-px bg-border hidden sm:block"></div>
                            
                            {/* Settings Button */}
-                           <Button variant="outline" size="sm" className="rounded-lg px-3" onClick={() => setShowScheduleSettings(!showScheduleSettings)}>
-                             <Settings className="h-4 w-4" />
+                           <Button variant="outline" size="sm" className="rounded-lg px-2 sm:px-3" onClick={() => setShowScheduleSettings(!showScheduleSettings)}>
+                             <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
                            </Button>
                            
                            {/* Settings Dropdown */}
-                           {showScheduleSettings && <div className="absolute right-0 top-full mt-2 w-72 bg-background border rounded-lg shadow-lg z-50 animate-fade-in">
-                               <div className="p-4 space-y-4">
-                                 <div className="text-sm font-semibold">Schedule Settings</div>
+                           {showScheduleSettings && <div className="absolute right-0 top-full mt-2 w-60 sm:w-72 bg-background border rounded-lg shadow-lg z-50 animate-fade-in">
+                               <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
+                                 <div className="text-xs sm:text-sm font-semibold">Schedule Settings</div>
                                  
                                  <div className="space-y-3">
                                    <div className="flex items-center justify-between">
@@ -2826,15 +2831,15 @@ const ProductWalkthrough: React.FC = () => {
 
             {/* Automations Section */}
             <section id="automations" className={`screen ${active === "automations" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                      <Wand2 className="h-4 w-4 text-gray-600" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <Wand2 className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" aria-hidden />
                     </div>
-                    <span className="text-gray-900">Workflow Automations</span>
+                    <span className="text-gray-900 min-w-0 truncate">Workflow Automations</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Configure automatic workflows to streamline your practice operations.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure automatic workflows to streamline your practice operations.</p>
                   
                   {/* Status Bar */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
@@ -2932,15 +2937,15 @@ const ProductWalkthrough: React.FC = () => {
 
             {/* AI Agent Section */}
             <section id="agent" className={`screen ${active === "agent" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                      <Bot className="h-4 w-4 text-gray-600" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" aria-hidden />
                     </div>
-                    <span className="text-gray-900">AI Agent Configuration</span>
+                    <span className="text-gray-900 min-w-0 truncate">AI Agent Configuration</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Configure your AI agent to handle patient communications and administrative tasks. Works with your existing calling software, VOIP, etc. - no rip and replace needed.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your AI agent to handle patient communications and administrative tasks. Works with your existing calling software, VOIP, etc. - no rip and replace needed.</p>
                   
                   {/* Agent Status */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
