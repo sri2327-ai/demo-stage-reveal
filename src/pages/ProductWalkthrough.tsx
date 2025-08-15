@@ -1609,6 +1609,96 @@ const ProductWalkthrough: React.FC = () => {
               </div>
             </section>
 
+            {/* Schedule Section */}
+            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Schedule
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">View and manage appointments from multiple systems.</p>
+                </div>
+
+                <div className="grid gap-6">
+                  <Card className="border-2">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <CalendarDays className="h-16 w-16 text-primary mx-auto" />
+                        <h3 className="text-xl font-semibold">Schedule Management</h3>
+                        <p className="text-muted-foreground">Unified view of all your appointments across multiple systems.</p>
+                        <Button onClick={() => onNavClick('capture')} className="mt-4">
+                          Select Patient & Start Capture →
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Capture Section */}
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Mic className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Capture
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Record patient encounters with AI-powered transcription.</p>
+                </div>
+
+                <div className="grid gap-6">
+                  <Card className="border-2">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <Mic className="h-16 w-16 text-primary mx-auto" />
+                        <h3 className="text-xl font-semibold">AI-Powered Transcription</h3>
+                        <p className="text-muted-foreground">Record patient encounters and get real-time AI transcription.</p>
+                        <Button onClick={() => onNavClick('coding')} className="mt-4">
+                          Complete Recording & Code →
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Coding Section */}
+            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+                <div className="mb-8">
+                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <ClipboardList className="h-5 w-5 text-primary" aria-hidden />
+                    </div>
+                    Coding
+                  </h2>
+                  <p className="mt-3 text-muted-foreground text-lg">Review and validate AI-generated medical codes.</p>
+                </div>
+
+                <div className="grid gap-6">
+                  <Card className="border-2">
+                    <CardContent className="p-6">
+                      <div className="text-center space-y-4">
+                        <ClipboardList className="h-16 w-16 text-primary mx-auto" />
+                        <h3 className="text-xl font-semibold">AI Medical Coding</h3>
+                        <p className="text-muted-foreground">Review and validate AI-generated ICD-10 and CPT codes.</p>
+                        <Button onClick={() => onNavClick('send')} className="mt-4">
+                          Validate Codes & Send to EHR →
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
             {/* Send to EHR Section */}
             <section id="send" className={`screen ${active === "send" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
