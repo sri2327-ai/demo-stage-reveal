@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft, Pause, Square, Copy, Edit3, History, TestTube, AlertTriangle, FileDown, Edit, Eye } from "lucide-react";
+import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, Legend } from "recharts";
 import "./scribeai.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
   id: "setup",
@@ -1723,10 +1723,7 @@ const ProductWalkthrough: React.FC = () => {
                             <option value="Sports Medicine">Sports Medicine</option>
                             <option value="Women's Health">Women's Health</option>
                           </select>
-                          <Button variant="outline" size="sm" className="rounded-lg whitespace-nowrap" onClick={() => setShowMoreFilters(!showMoreFilters)}>
-                            <Filter className="h-4 w-4 mr-2" />
-                            More Filters
-                          </Button>
+                          
                         </div>
                         
                         {/* Advanced Filters Panel */}
@@ -1953,7 +1950,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Capture Section */}
-            <section id="capture" className={`screen ${active === "capture" ? "animate-fade-in" : "hidden"} pb-20`}>
+            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div>
                   <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
@@ -2008,22 +2005,13 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Enhanced Mode Toggle */}
                         <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-muted/30 to-muted/50 p-1 rounded-xl shadow-inner">
-                            <TabsTrigger 
-                              value="audio" 
-                              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary transition-all duration-300 rounded-lg font-medium data-[state=active]:scale-[1.02]"
-                            >
-                              <div className="relative">
-                                <Mic className="h-4 w-4" />
-                                {isRecording && <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>}
-                              </div>
+                          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+                            <TabsTrigger value="audio" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
+                              <Mic className="h-4 w-4" />
                               <span className="hidden sm:inline">Audio Capture</span>
                               <span className="sm:hidden">Audio</span>
                             </TabsTrigger>
-                            <TabsTrigger 
-                              value="type" 
-                              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary transition-all duration-300 rounded-lg font-medium data-[state=active]:scale-[1.02]"
-                            >
+                            <TabsTrigger value="type" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
                               <FileText className="h-4 w-4" />
                               <span className="hidden sm:inline">Manual Entry</span>
                               <span className="sm:hidden">Type</span>
@@ -2036,69 +2024,27 @@ const ProductWalkthrough: React.FC = () => {
                               
                               {/* Recording Controls */}
                               <div className="space-y-4">
-                                <Button 
-                                  onClick={toggleRecording} 
-                                  className={`w-full rounded-xl h-20 font-semibold text-lg transition-all duration-500 transform ${
-                                    isRecording 
-                                      ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 shadow-xl shadow-red-500/30 scale-[1.02]' 
-                                      : 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-xl shadow-primary/30 hover:scale-[1.05]'
-                                  } hover:shadow-2xl active:scale-[0.98]`}
-                                >
-                                  <div className="flex items-center gap-3">
-                                    {isRecording ? (
-                                      <div className="relative">
-                                        <CircleStop className="h-7 w-7" />
-                                        <div className="absolute inset-0 h-7 w-7 rounded-full border-2 border-white/50 animate-ping"></div>
-                                      </div>
-                                    ) : (
-                                      <div className="relative">
-                                        <Mic className="h-7 w-7" />
-                                        <div className="absolute -inset-1 rounded-full bg-white/20 animate-pulse"></div>
-                                      </div>
-                                    )}
-                                    <div className="text-left">
-                                      <div className="text-xl font-bold">
-                                        {isRecording ? 'Stop Recording' : 'Start Recording'}
-                                      </div>
-                                      <div className="text-sm opacity-90">
-                                        {isRecording ? 'Click to finish' : 'Click to begin'}
-                                      </div>
-                                    </div>
-                                  </div>
+                                <Button onClick={toggleRecording} className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'}`}>
+                                  {isRecording ? <>
+                                      <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
+                                    </> : <>
+                                      <Mic className="h-6 w-6 mr-3" /> Start Recording
+                                    </>}
                                 </Button>
                                 
-                                {/* Enhanced Recording Status with better visual hierarchy */}
-                                <div className="relative overflow-hidden rounded-xl border-2 border-gradient-to-r from-primary/20 to-primary/10">
-                                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
-                                  <div className="relative p-6 bg-gradient-to-br from-background/95 to-muted/20">
-                                    <div className="flex items-center justify-between">
-                                      <div className="flex items-center gap-4">
-                                        <div className="relative">
-                                          <div className={`h-6 w-6 rounded-full transition-all duration-300 ${isRecording ? 'bg-red-500' : 'bg-muted-foreground/30'}`} />
-                                          {isRecording && (
-                                            <>
-                                              <div className="absolute inset-0 h-6 w-6 rounded-full bg-red-500 animate-ping opacity-40"></div>
-                                              <div className="absolute inset-0 h-6 w-6 rounded-full bg-red-400 animate-pulse"></div>
-                                            </>
-                                          )}
-                                        </div>
-                                        <div>
-                                          <div className="font-mono text-3xl font-bold text-primary tracking-wider">
-                                            {timeStr}
-                                          </div>
-                                          <div className="text-sm text-muted-foreground">
-                                            Session Duration
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div className="text-right">
-                                        <div className={`font-semibold text-lg transition-colors duration-300 ${isRecording ? 'text-red-600' : 'text-green-600'}`}>
-                                          {isRecording ? 'Recording in Progress' : 'Ready to Record'}
-                                        </div>
-                                        <div className="text-sm text-muted-foreground mt-1">
-                                          {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
-                                        </div>
-                                      </div>
+                                {/* Enhanced Recording Status */}
+                                <div className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
+                                  <div className="flex items-center gap-2">
+                                    <div className={`h-4 w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
+                                    <span className="font-mono text-2xl font-bold">{timeStr}</span>
+                                  </div>
+                                  <div className="h-6 w-px bg-border mx-2"></div>
+                                  <div className="text-sm text-center">
+                                    <div className="font-medium">
+                                      {isRecording ? 'Recording in Progress' : 'Ready to Record'}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
                                     </div>
                                   </div>
                                 </div>
@@ -2212,7 +2158,28 @@ const ProductWalkthrough: React.FC = () => {
                           </TabsContent>
                         </Tabs>
 
-                        {/* Session Controls - moved to bottom action bar */}
+                        {/* Enhanced Session Controls */}
+                        <div className="pt-6 border-t space-y-3">
+                          <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
+                          <div className="grid gap-2">
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              Pause Session
+                            </Button>
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                              <Upload className="h-4 w-4 mr-2" />
+                              Upload Audio File
+                            </Button>
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm">
+                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                              End & Discard Session
+                            </Button>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                   </div>
@@ -2241,24 +2208,14 @@ const ProductWalkthrough: React.FC = () => {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-56 max-h-96 overflow-y-auto">
-                                <DropdownMenuLabel className="text-xs font-medium">
-                                  Regenerate with Template
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                {specialtyTemplates.map((template) => (
-                                  <DropdownMenuItem 
-                                    key={template.slug}
-                                    onClick={() => {
-                                      toast({
-                                        title: "Template Applied",
-                                        description: `Regenerating note with ${template.name} template`,
-                                      });
-                                    }}
-                                    className="cursor-pointer"
-                                  >
+                                {specialtyTemplates.map(template => <DropdownMenuItem key={template.slug} onClick={() => {
+                                toast({
+                                  title: "Template Applied",
+                                  description: `Regenerating note with ${template.name} template`
+                                });
+                              }} className="cursor-pointer">
                                     {template.name}
-                                  </DropdownMenuItem>
-                                ))}
+                                  </DropdownMenuItem>)}
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </div>
@@ -2286,7 +2243,31 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                         </div>
                         
-                        {/* Enhanced Note Actions - moved to bottom action bar */}
+                        {/* Enhanced Note Actions */}
+                        <div className="flex flex-wrap gap-3 pt-4 border-t">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Edit Note
+                          </Button>
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                            Copy Text
+                          </Button>
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                            <FileText className="h-4 w-4 mr-2" />
+                            Export
+                          </Button>
+                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => onNavClick('coding')}>
+                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                            Continue to Coding
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   </div>
@@ -2360,7 +2341,27 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                             </div>
 
-                            {/* Quick Actions - moved to bottom action bar */}
+                            {/* Quick Actions */}
+                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                Full History
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                Lab Results
+                              </Button>
+                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
+                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Allergies
+                              </Button>
+                            </div>
                           </div> : <div className="h-full flex items-center justify-center text-center">
                             <div className="space-y-3">
                               <div className="text-4xl opacity-30">👤</div>
@@ -2379,196 +2380,6 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
               </div>
             </section>
-            
-            {/* Fixed Action Bar for Clinical Documentation */}
-            {active === "capture" && (
-              <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border shadow-lg z-50 hidden lg:block">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    
-                    {/* Primary Actions */}
-                    <div className="flex items-center gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105" 
-                        onClick={() => {
-                          const textArea = document.createElement('textarea');
-                          textArea.value = transcript || typeNotes || 'No content to edit';
-                          document.body.appendChild(textArea);
-                          textArea.select();
-                          textArea.focus();
-                          toast({
-                            title: "Edit Mode",
-                            description: "Note content is now editable",
-                          });
-                        }}
-                      >
-                        <Edit className="h-4 w-4 mr-1" />
-                        Edit Text
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105"
-                        onClick={() => {
-                          navigator.clipboard.writeText(transcript || typeNotes || 'No content available').then(() => {
-                            toast({
-                              title: "Copied!",
-                              description: "Note content copied to clipboard",
-                            });
-                          });
-                        }}
-                      >
-                        <Copy className="h-4 w-4 mr-1" />
-                        Copy Text
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105"
-                        onClick={() => {
-                          const element = document.createElement("a");
-                          const file = new Blob([transcript || typeNotes || 'No content available'], {type: 'text/plain'});
-                          element.href = URL.createObjectURL(file);
-                          element.download = `clinical-note-${new Date().toISOString().split('T')[0]}.txt`;
-                          element.click();
-                          toast({
-                            title: "Exported",
-                            description: "Clinical note exported successfully",
-                          });
-                        }}
-                      >
-                        <FileDown className="h-4 w-4 mr-1" />
-                        Export
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105"
-                        onClick={() => {
-                          onNavClick('coding');
-                          toast({
-                            title: "Proceeding to Coding",
-                            description: "Moving to medical coding section",
-                          });
-                        }}
-                      >
-                        <ArrowLeft className="h-4 w-4 mr-1 rotate-180" />
-                        Continue to Coding
-                      </Button>
-                    </div>
-                    
-                    {/* Session Controls */}
-                    <div className="flex items-center gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105"
-                        onClick={() => {
-                          setIsRecording(!isRecording);
-                          toast({
-                            title: isRecording ? "Session Paused" : "Session Resumed",
-                            description: isRecording ? "Recording paused" : "Recording resumed",
-                          });
-                        }}
-                      >
-                        <Pause className="h-4 w-4 mr-1" />
-                        Pause Session
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg transition-all hover:scale-105"
-                        onClick={() => {
-                          const input = document.createElement('input');
-                          input.type = 'file';
-                          input.accept = 'audio/*';
-                          input.onchange = (e) => {
-                            const file = (e.target as HTMLInputElement).files?.[0];
-                            if (file) {
-                              toast({
-                                title: "Audio Uploaded",
-                                description: `File "${file.name}" uploaded successfully`,
-                              });
-                            }
-                          };
-                          input.click();
-                        }}
-                      >
-                        <Upload className="h-4 w-4 mr-1" />
-                        Upload Audio File
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg text-destructive hover:text-destructive hover:bg-destructive/10 transition-all hover:scale-105"
-                        onClick={() => {
-                          if (confirm('Are you sure you want to end and discard this session?')) {
-                            setTranscript('');
-                            setTypeNotes('');
-                            setSelectedPatient(null);
-                            toast({
-                              title: "Session Discarded",
-                              description: "Clinical documentation session ended",
-                              variant: "destructive",
-                            });
-                          }
-                        }}
-                      >
-                        <Square className="h-4 w-4 mr-1" />
-                        End & Discard Session
-                      </Button>
-                    </div>
-                    
-                    {/* Patient Data Actions */}
-                    <div className="flex items-center gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
-                        onClick={() => {
-                          toast({
-                            title: "Full History",
-                            description: "Loading complete patient medical history",
-                          });
-                        }}
-                      >
-                        <History className="h-4 w-4 mr-1" />
-                        Full History
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
-                        onClick={() => {
-                          toast({
-                            title: "Lab Results",
-                            description: "Loading recent laboratory results",
-                          });
-                        }}
-                      >
-                        <TestTube className="h-4 w-4 mr-1" />
-                        Lab Results
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
-                        onClick={() => {
-                          toast({
-                            title: "Allergies",
-                            description: "Displaying patient allergy information",
-                          });
-                        }}
-                      >
-                        <AlertTriangle className="h-4 w-4 mr-1" />
-                        Allergies
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Coding Section */}
             <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
@@ -2627,7 +2438,7 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-lg" onClick={() => onNavClick("capture")}>Back to Edit</Button>
+                        <Button variant="outline" className="rounded-lg">Back to Edit</Button>
                         <Button className="rounded-lg" onClick={() => onNavClick("send")}>Continue to EHR</Button>
                       </div>
                     </CardContent>
@@ -2704,34 +2515,13 @@ const ProductWalkthrough: React.FC = () => {
                             Final Clinical Note Preview
                           </CardTitle>
                           <div className="flex items-center gap-2">
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="rounded-lg"
-                              onClick={() => {
-                                onNavClick('capture');
-                                toast({
-                                  title: "Edit Mode",
-                                  description: "Returning to clinical documentation for editing",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" size="sm" className="rounded-lg">
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
                               Edit Note
                             </Button>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="rounded-lg"
-                              onClick={() => {
-                                toast({
-                                  title: "Preview Mode",
-                                  description: "Switching to full-screen preview mode",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" size="sm" className="rounded-lg">
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -2835,39 +2625,6 @@ const ProductWalkthrough: React.FC = () => {
                                   Return to clinic in 3 months or sooner if concerns. Patient educated on signs/symptoms requiring immediate medical attention.
                                 </div>
                               </div>
-                              
-                              <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
-                                  PATIENT INSTRUCTIONS
-                                </div>
-                                <div className="text-foreground pl-4 space-y-2">
-                                  <div className="font-medium">Diabetes Management:</div>
-                                  <div className="text-sm text-muted-foreground ml-3">
-                                    • Take Metformin 1000mg twice daily with meals<br />
-                                    • Monitor blood sugar twice daily (fasting and 2 hours after largest meal)<br />
-                                    • Target blood sugar: 80-130 mg/dL fasting, under 180 mg/dL after meals<br />
-                                    • Continue low-carb diet and 30 minutes walking daily<br />
-                                    • Schedule diabetes education class within 2 weeks
-                                  </div>
-                                  
-                                  <div className="font-medium mt-3">Hypertension Management:</div>
-                                  <div className="text-sm text-muted-foreground ml-3">
-                                    • Continue current blood pressure medications as prescribed<br />
-                                    • Check blood pressure at home 3x weekly<br />
-                                    • Maintain low-sodium diet (under 2300mg daily)<br />
-                                    • Contact office if BP consistently over 140/90
-                                  </div>
-                                  
-                                  <div className="font-medium mt-3">Follow-up Care:</div>
-                                  <div className="text-sm text-muted-foreground ml-3">
-                                    • Schedule return visit in 3 months<br />
-                                    • HbA1c lab work in 3 months (order provided)<br />
-                                    • Call office for any symptoms: dizziness, excessive thirst, frequent urination<br />
-                                    • Emergency contact: (555) 123-4567
-                                  </div>
-                                </div>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -2886,100 +2643,16 @@ const ProductWalkthrough: React.FC = () => {
                             </div>
                           </div>
                         </div>
-                        
-                        {/* Patient Instructions Actions */}
-                        <div className="mt-4 p-4 bg-gradient-to-r from-blue-50/50 to-blue-50/20 rounded-lg border border-blue-200/50">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                              <div className="h-5 w-5 rounded-lg bg-blue-100 flex items-center justify-center">
-                                <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                              </div>
-                              <div>
-                                <div className="text-sm font-semibold text-blue-900">Patient Instructions Ready</div>
-                                <div className="text-xs text-blue-600">Generated automatically from visit notes</div>
-                              </div>
-                            </div>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg"
-                              onClick={() => {
-                                toast({
-                                  title: "Patient Instructions",
-                                  description: "Opening patient instructions in full view",
-                                });
-                              }}
-                            >
-                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                              </svg>
-                              View Instructions
-                            </Button>
-                          </div>
-                          
-                          <div className="flex gap-2">
-                            <Button 
-                              size="sm" 
-                              className="flex-1 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-sm"
-                              onClick={() => {
-                                toast({
-                                  title: "Email Sent",
-                                  description: "Patient instructions emailed to patient successfully",
-                                });
-                              }}
-                            >
-                              <svg className="h-3 w-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                              </svg>
-                              Email to Patient
-                            </Button>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="flex-1 rounded-lg border-blue-200 text-blue-700 hover:bg-blue-50"
-                              onClick={() => {
-                                toast({
-                                  title: "Portal Updated",
-                                  description: "Instructions sent to patient portal successfully",
-                                });
-                              }}
-                            >
-                              <svg className="h-3 w-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
-                              </svg>
-                              Send to Portal
-                            </Button>
-                          </div>
-                        </div>
                       </CardContent>
                     </Card>
                     
                     {/* Enhanced EHR Fields Panel */}
                     <Card className="xl:col-span-4 h-fit border-2 bg-gradient-to-br from-background to-muted/5">
                       <CardHeader className="pb-4">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="flex items-center gap-2">
-                            <Server className="h-5 w-5 text-primary" />
-                            EHR Integration Status
-                          </CardTitle>
-                          <Button className="rounded-xl h-10 font-semibold text-sm shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
-                            setIsSending(true);
-                            setTimeout(() => {
-                              setIsSending(false);
-                              onNavClick('automations');
-                              toast({
-                                title: "Note sent successfully",
-                                description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
-                              });
-                            }, 3000);
-                          }}>
-                            <Send className="h-4 w-4 mr-2" />
-                            Send to {selectedEhr || 'Epic'}
-                          </Button>
-                        </div>
+                        <CardTitle className="flex items-center gap-2">
+                          <Server className="h-5 w-5 text-primary" />
+                          EHR Integration
+                        </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-6">
                         
@@ -2987,17 +2660,7 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
                             <div className="text-sm font-semibold">Target EHR System</div>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="rounded-lg text-xs"
-                              onClick={() => {
-                                toast({
-                                  title: "EHR System",
-                                  description: "Opening EHR selection menu",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
                               <Settings className="h-3 w-3 mr-1" />
                               Change
                             </Button>
@@ -3017,17 +2680,7 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="text-sm font-semibold flex items-center justify-between">
                             Diagnosis Codes (ICD-10)
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="rounded-lg text-xs"
-                              onClick={() => {
-                                toast({
-                                  title: "Add Diagnosis",
-                                  description: "Opening ICD-10 code selector",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
                               <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                               </svg>
@@ -3056,17 +2709,7 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="space-y-3">
                           <div className="text-sm font-semibold flex items-center justify-between">
                             Procedure Codes (CPT)
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="rounded-lg text-xs"
-                              onClick={() => {
-                                toast({
-                                  title: "Edit Procedure Code",
-                                  description: "Opening CPT code editor",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
                               <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
@@ -3107,39 +2750,29 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Send Actions */}
                         <div className="space-y-3">
+                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
+                        setIsSending(true);
+                        setTimeout(() => {
+                          setIsSending(false);
+                          onNavClick('automations');
+                          toast({
+                            title: "Note sent successfully",
+                            description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
+                          });
+                        }, 3000);
+                      }}>
+                            <Send className="h-5 w-5 mr-2" />
+                            Send to {selectedEhr || 'Epic'}
+                          </Button>
                           
                           <div className="grid grid-cols-2 gap-2">
-                            <Button 
-                              variant="outline" 
-                              className="rounded-lg h-9 text-sm"
-                              onClick={() => {
-                                toast({
-                                  title: "Draft Saved",
-                                  description: "Clinical note saved to drafts folder",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
                               </svg>
                               Save Draft
                             </Button>
-                            <Button 
-                              variant="outline" 
-                              className="rounded-lg h-9 text-sm"
-                              onClick={() => {
-                                // Create and download PDF
-                                const element = document.createElement("a");
-                                const file = new Blob(['Clinical Note PDF - Generated by S10.AI'], {type: 'application/pdf'});
-                                element.href = URL.createObjectURL(file);
-                                element.download = `clinical-note-${new Date().toISOString().split('T')[0]}.pdf`;
-                                element.click();
-                                toast({
-                                  title: "PDF Exported",
-                                  description: "Clinical note exported as PDF successfully",
-                                });
-                              }}
-                            >
+                            <Button variant="outline" className="rounded-lg h-9 text-sm">
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                               </svg>
@@ -3234,17 +2867,7 @@ const ProductWalkthrough: React.FC = () => {
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="flex items-center justify-between">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50"
-                            onClick={() => {
-                              toast({
-                                title: `Configure ${automation.title}`,
-                                description: "Opening automation configuration settings",
-                              });
-                            }}
-                          >
+                          <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50">
                             <Settings className="h-3 w-3 mr-2" />
                             Configure
                           </Button>
@@ -3257,25 +2880,14 @@ const ProductWalkthrough: React.FC = () => {
                     </Card>)}
                 </div>
 
-                <div className="mt-8 p-4 bg-gradient-to-r from-muted/20 to-background rounded-xl border border-border/50">
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm text-muted-foreground">
-                      Configure additional automations in settings
-                    </div>
-                    <Button 
-                      className="rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.02]" 
-                      onClick={() => {
-                        onNavClick('agent');
-                        toast({
-                          title: "Proceeding to AI Agent",
-                          description: "Moving to AI agent setup section",
-                        });
-                      }}
-                    >
-                      <Bot className="h-4 w-4 mr-2" />
-                      Continue to AI Agent Setup
-                    </Button>
+                <div className="mt-8 flex justify-between items-center">
+                  <div className="text-sm text-muted-foreground">
+                    Configure additional automations in settings
                   </div>
+                  <Button className="rounded-lg bg-gray-600 hover:bg-gray-700" onClick={() => onNavClick('agent')}>
+                    <Bot className="h-4 w-4 mr-2" />
+                    Continue to AI Agent Setup
+                  </Button>
                 </div>
               </div>
             </section>
@@ -3364,7 +2976,11 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </CardHeader>
                       <CardContent className="pt-0">
-                        <div className="flex items-center justify-end">
+                        <div className="flex items-center justify-between">
+                          <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50">
+                            <Settings className="h-3 w-3 mr-2" />
+                            Configure Agent
+                          </Button>
                           {feature.enabled ? <div className="text-xs text-green-600 flex items-center gap-1">
                               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                               Online
