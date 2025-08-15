@@ -2382,7 +2382,7 @@ const ProductWalkthrough: React.FC = () => {
             
             {/* Fixed Action Bar for Clinical Documentation */}
             {active === "capture" && (
-              <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border shadow-lg z-50">
+              <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border shadow-lg z-50 hidden lg:block">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     
