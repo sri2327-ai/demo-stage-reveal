@@ -823,11 +823,11 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsTrigger>
                             </TabsList>
 
-                            <div className="flex-1 min-h-0">
+                            <div className="flex-1 min-h-0 max-h-[60vh] overflow-hidden">
                               <TabsContent value="previous" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4">
+                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
                                   <div className="text-sm font-semibold">Paste Previous Note</div>
-                                  <Textarea value={previousNote} onChange={e => setPreviousNote(e.target.value)} placeholder="Paste your previous note here and we'll extract the template structure for you..." className="flex-1 min-h-[200px] resize-none" />
+                                  <Textarea value={previousNote} onChange={e => setPreviousNote(e.target.value)} placeholder="Paste your previous note here and we'll extract the template structure for you..." className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" disabled={analyzing || !previousNote.trim()} onClick={() => {
                                 if (!previousNote.trim()) {
                                   toast({
@@ -881,8 +881,8 @@ const ProductWalkthrough: React.FC = () => {
                                   </div>
                                   
                                   {/* Fixed height scrollable container for templates */}
-                                  <div className="flex-1 min-h-0">
-                                    <div className="h-[350px] overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-4">
+                                  <div className="flex-1 min-h-0 max-h-[45vh]">
+                                    <div className="h-full overflow-y-auto custom-scrollbar pr-2 border rounded-lg bg-muted/20 p-4">
                                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
                                         {filteredTemplates.map((spec, index) => <button key={spec.slug} onClick={() => {
                                       setSelectedSpecialtySlug(spec.slug);
@@ -971,9 +971,9 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="paste" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4">
+                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
                                   <div className="text-sm font-semibold">Paste Template Content</div>
-                                  <Textarea placeholder="Paste your template content here and we'll extract the structure..." className="flex-1 min-h-[200px] resize-none" />
+                                  <Textarea placeholder="Paste your template content here and we'll extract the structure..." className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
                                 setAnalyzing(true);
                                 setTimeout(() => {
@@ -996,7 +996,7 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="scratch" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-6">
+                                <div className="h-full flex flex-col gap-4 max-h-[60vh]">
                                   <div className="flex items-center justify-between">
                                     <div className="text-sm font-semibold">Build Template from Scratch</div>
                                     <Button variant="outline" size="sm" onClick={() => {
@@ -1235,9 +1235,9 @@ const ProductWalkthrough: React.FC = () => {
                               </TabsContent>
 
                               <TabsContent value="prompt" className="h-full m-0">
-                                <div className="h-full flex flex-col gap-4">
+                                <div className="h-full flex flex-col gap-3 max-h-[60vh]">
                                   <div className="text-sm font-semibold">Build Template by AI Prompt</div>
-                                  <Textarea placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" className="flex-1 min-h-[200px] resize-none" />
+                                  <Textarea placeholder="Describe your ideal note template (e.g., 'Create a cardiology follow-up template with emphasis on cardiac risk factors and medication review')" className="flex-1 min-h-[150px] max-h-[250px] resize-none" />
                                   <Button className="rounded-full w-fit animate-fade-in" onClick={() => {
                                 setGenerating(true);
                                 setProgress(0);
