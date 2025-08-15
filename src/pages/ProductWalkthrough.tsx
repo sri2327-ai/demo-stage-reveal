@@ -627,7 +627,7 @@ const ProductWalkthrough: React.FC = () => {
                   <p className="mt-3 text-muted-foreground text-lg">Configure your note templates and EHR connections in a streamlined workflow.</p>
 
                   {/* Improved progress indicator */}
-                  <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-6 rounded-2xl border border-border/50">
+                  <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-4 rounded-2xl border border-border/50 max-w-2xl mx-auto">
                     <div className="flex items-center justify-between mb-4">
                       <button 
                         onClick={() => setSetupStep('note')}
