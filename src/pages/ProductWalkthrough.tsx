@@ -2901,7 +2901,7 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     <span className="text-gray-900">AI Agent Configuration</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Configure your AI agent to handle patient communications and administrative tasks.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Configure your AI agent to handle patient communications and administrative tasks. Works with your existing calling software, VOIP, etc. - no rip and replace needed.</p>
                   
                   {/* Agent Status */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
