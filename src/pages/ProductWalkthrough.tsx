@@ -672,47 +672,40 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
 
                 {setupStep === 'landing' && (
-                  <div className="h-[calc(100vh-200px)] flex items-center justify-center">
-                    <div className="max-w-5xl mx-auto w-full">
+                  <div className="h-[calc(100vh-150px)] flex items-center justify-center py-4">
+                    <div className="max-w-4xl mx-auto w-full">
                       <Card className="border-2 bg-gradient-to-br from-background to-muted/10 shadow-xl">
-                        <CardContent className="p-8">
-                          <div className="text-center mb-6">
-                            <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
-                              <Wand2 className="h-6 w-6 text-white" />
+                        <CardContent className="p-6">
+                          <div className="text-center mb-5">
+                            <div className="h-10 w-10 mx-auto rounded-xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
+                              <Wand2 className="h-5 w-5 text-white" />
                             </div>
                             <h3 className="text-xl font-bold mb-2">Setup Your S10.AI Workflow</h3>
-                            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-                              Get started with AI-powered clinical documentation in two simple steps
+                            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
+                              Configure your AI-powered clinical documentation in two simple steps
                             </p>
                           </div>
                           
-                          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                          <div className="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto mb-5">
                             <button 
                               onClick={() => setSetupStep('note')} 
-                              className="group relative rounded-xl border-2 hover:border-primary/40 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
+                              className="group relative rounded-xl border-2 hover:border-primary/40 p-5 text-left transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 bg-gradient-to-br hover:from-primary/5 hover:to-primary/10"
                             >
-                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                  <ArrowLeft className="h-3 w-3 text-primary rotate-180" />
-                                </div>
-                              </div>
-                              <div className="flex items-start gap-4">
-                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all flex-shrink-0">
-                                  <FileText className="h-5 w-5 text-blue-600" />
+                              <div className="flex items-start gap-3">
+                                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-100 to-blue-200 group-hover:from-blue-200 group-hover:to-blue-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <FileText className="h-4 w-4 text-blue-600" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] text-white text-xs font-bold flex items-center justify-center">1</div>
-                                    <div className="font-bold text-lg group-hover:text-primary transition-colors">Note Templates</div>
+                                    <div className="h-5 w-5 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] text-white text-xs font-bold flex items-center justify-center">1</div>
+                                    <div className="font-bold text-base group-hover:text-primary transition-colors">Note Templates</div>
                                   </div>
-                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
-                                    Configure your clinical documentation style with specialty templates or custom formats
+                                  <div className="text-muted-foreground text-sm leading-relaxed mb-2">
+                                    Configure clinical documentation with specialty templates or custom formats
                                   </div>
-                                  <div className="flex items-center gap-2 text-xs font-medium text-primary">
+                                  <div className="flex items-center gap-1 text-xs font-medium text-primary">
                                     <span>Start Here</span>
-                                    <div className="h-4 w-4 rounded-full bg-primary/10 flex items-center justify-center">
-                                      <ArrowLeft className="h-2 w-2 rotate-180" />
-                                    </div>
+                                    <ArrowLeft className="h-3 w-3 rotate-180" />
                                   </div>
                                 </div>
                               </div>
@@ -720,50 +713,43 @@ const ProductWalkthrough: React.FC = () => {
 
                             <button 
                               onClick={() => setSetupStep('ehr')} 
-                              className="group relative rounded-xl border-2 hover:border-emerald-400 p-6 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
+                              className="group relative rounded-xl border-2 hover:border-emerald-400 p-5 text-left transition-all duration-300 hover:shadow-lg hover:shadow-emerald-100 hover:scale-105 bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100"
                             >
-                              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
-                                  <ArrowLeft className="h-3 w-3 text-emerald-600 rotate-180" />
-                                </div>
-                              </div>
-                              <div className="flex items-start gap-4">
-                                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all flex-shrink-0">
-                                  <ShieldCheck className="h-5 w-5 text-emerald-600" />
+                              <div className="flex items-start gap-3">
+                                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-100 to-emerald-200 group-hover:from-emerald-200 group-hover:to-emerald-300 flex items-center justify-center transition-all flex-shrink-0">
+                                  <ShieldCheck className="h-4 w-4 text-emerald-600" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="h-6 w-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">2</div>
-                                    <div className="font-bold text-lg group-hover:text-emerald-700 transition-colors">EHR Integration</div>
+                                    <div className="h-5 w-5 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">2</div>
+                                    <div className="font-bold text-base group-hover:text-emerald-700 transition-colors">EHR Integration</div>
                                   </div>
-                                  <div className="text-muted-foreground text-sm leading-relaxed mb-3">
-                                    Securely connect to Epic, Cerner, and 200+ other EHR systems with AI agents
+                                  <div className="text-muted-foreground text-sm leading-relaxed mb-2">
+                                    Connect to Epic, Cerner, and 200+ other EHR systems with AI agents
                                   </div>
-                                  <div className="flex items-center gap-2 text-xs font-medium text-emerald-600">
+                                  <div className="flex items-center gap-1 text-xs font-medium text-emerald-600">
                                     <span>Next Step</span>
-                                    <div className="h-4 w-4 rounded-full bg-emerald-100 flex items-center justify-center">
-                                      <ArrowLeft className="h-2 w-2 rotate-180" />
-                                    </div>
+                                    <ArrowLeft className="h-3 w-3 rotate-180" />
                                   </div>
                                 </div>
                               </div>
                             </button>
                           </div>
                           
-                          <div className="text-center mt-6 pt-4 border-t">
-                            <p className="text-xs text-muted-foreground mb-3">Quick setup • Takes less than 2 minutes</p>
+                          <div className="text-center pt-3 border-t">
+                            <p className="text-xs text-muted-foreground mb-2">Quick setup • Takes less than 2 minutes</p>
                             <div className="flex items-center justify-center gap-4">
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
                                 <span>HIPAA Compliant</span>
                               </div>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
-                                <span>Zero Code Required</span>
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                                <span>Zero Code</span>
                               </div>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
-                                <span>200+ EHR Systems</span>
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                                <span>200+ EHRs</span>
                               </div>
                             </div>
                           </div>
@@ -1456,92 +1442,90 @@ const ProductWalkthrough: React.FC = () => {
                 )}
 
                 {setupStep === 'ehr' && (
-                  <div className="max-w-6xl mx-auto">
-                    <Card className="border-2 bg-gradient-to-br from-background to-muted/10">
-                      <CardHeader className="pb-4 bg-gradient-to-r from-emerald-50 to-emerald-100 border-b">
-                        <CardTitle className="flex items-center gap-3 text-xl">
-                          <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                            <ShieldCheck className="h-4 w-4 text-emerald-600" />
-                          </div>
-                          Connect to Your EHR System
-                        </CardTitle>
-                        <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-green-600" />
-                          Secure integration with 200+ EHR systems • HIPAA compliant • Zero-code setup
-                        </p>
-                      </CardHeader>
-                      
-                      <CardContent className="p-6">
-                        {/* Compact two-column layout */}
-                        <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-280px)] min-h-[500px]">
-                          
-                          {/* EHR Selection - Left Column */}
-                          <div className="lg:col-span-2 flex flex-col">
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="text-sm font-semibold">Choose Your EHR</div>
-                              <div className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
-                                40+ systems supported
-                              </div>
+                  <div className="h-[calc(100vh-140px)] py-2">
+                    <div className="max-w-6xl mx-auto h-full">
+                      <Card className="border-2 bg-gradient-to-br from-background to-muted/10 h-full flex flex-col">
+                        <CardHeader className="pb-2 bg-gradient-to-r from-emerald-50 to-emerald-100 border-b px-4 py-2">
+                          <CardTitle className="flex items-center gap-2 text-base">
+                            <div className="h-5 w-5 rounded-lg bg-emerald-100 flex items-center justify-center">
+                              <ShieldCheck className="h-3 w-3 text-emerald-600" />
                             </div>
+                            Connect Your EHR System
+                          </CardTitle>
+                          <p className="text-xs text-muted-foreground flex items-center gap-2">
+                            <CheckCircle2 className="h-3 w-3 text-green-600" />
+                            Secure • HIPAA compliant • 200+ systems supported
+                          </p>
+                        </CardHeader>
+                        
+                        <CardContent className="p-4 flex-1 min-h-0">
+                          <div className="grid lg:grid-cols-3 gap-4 h-full">
                             
-                            {/* Compact EHR Grid - Fixed height with scroll */}
-                            <div className="flex-1 border rounded-xl bg-gradient-to-br from-muted/10 to-muted/5 p-4 overflow-hidden">
-                              <div className="h-full overflow-y-auto custom-scrollbar">
-                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-                                  {[
-                                    { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
-                                    { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
-                                    { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
-                                    { name: "NextGen", logo: "📋", subtitle: "NextGen Healthcare" },
-                                    { name: "Allscripts", logo: "🩺", subtitle: "Allscripts" },
-                                    { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
-                                    { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
-                                    { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
-                                    { name: "Amazing Charts", logo: "📊", subtitle: "Amazing Charts" },
-                                    { name: "CureMD", logo: "💉", subtitle: "CureMD" },
-                                    { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono" },
-                                    { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
-                                    { name: "Kareo", logo: "💼", subtitle: "Tebra" },
-                                    { name: "ModMed", logo: "🏥", subtitle: "ModMed" },
-                                    { name: "Praxis", logo: "🧠", subtitle: "Praxis EMR" },
-                                    { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
-                                    { name: "SimplePractice", logo: "✨", subtitle: "SimplePractice" },
-                                    { name: "WebPT", logo: "💪", subtitle: "WebPT" },
-                                    { name: "TotalMD", logo: "🏥", subtitle: "TotalMD" },
-                                    { name: "Any EHR", logo: "🔧", subtitle: "Custom Integration" }
-                                  ].map((ehr) => (
-                                    <button
-                                      key={ehr.name}
-                                      onClick={() => {
-                                        setSelectedEhr(ehr.name);
-                                        toast({ 
-                                          title: `${ehr.name} selected`, 
-                                          description: `Ready to connect`,
-                                          duration: 2000 
-                                        });
-                                      }}
-                                      className={`group rounded-lg border-2 hover:border-emerald-400 p-2 text-center transition-all duration-200 hover:shadow-md hover:scale-105 ${
-                                        selectedEhr === ehr.name ? 
-                                          'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200 scale-105 shadow-md' : 
-                                          'bg-background hover:bg-emerald-50/50'
-                                      } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/30' : ''}`}
-                                    >
-                                      {selectedEhr === ehr.name && (
-                                        <div className="absolute -top-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                                          <CheckCircle2 className="h-3 w-3 text-white" />
+                            {/* EHR Selection - Compact */}
+                            <div className="lg:col-span-2 flex flex-col">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="text-sm font-semibold">Choose Your EHR</div>
+                                <div className="text-xs text-muted-foreground bg-muted/50 px-2 py-0.5 rounded">
+                                  40+ systems
+                                </div>
+                              </div>
+                              
+                              <div className="flex-1 border rounded-lg bg-gradient-to-br from-muted/10 to-muted/5 p-3 overflow-hidden">
+                                <div className="h-full overflow-y-auto custom-scrollbar">
+                                  <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1.5">
+                                    {[
+                                      { name: "Epic", logo: "🏥", subtitle: "Epic Systems" },
+                                      { name: "Cerner", logo: "⚕️", subtitle: "Oracle Health" },
+                                      { name: "Athena", logo: "🔬", subtitle: "athenahealth" },
+                                      { name: "NextGen", logo: "📋", subtitle: "NextGen" },
+                                      { name: "Allscripts", logo: "🩺", subtitle: "Allscripts" },
+                                      { name: "Meditech", logo: "🏥", subtitle: "MEDITECH" },
+                                      { name: "eClinicalWorks", logo: "💊", subtitle: "eCW" },
+                                      { name: "Practice Fusion", logo: "⚡", subtitle: "Veracyte" },
+                                      { name: "Amazing Charts", logo: "📊", subtitle: "Charts" },
+                                      { name: "CureMD", logo: "💉", subtitle: "CureMD" },
+                                      { name: "DrChrono", logo: "👨‍⚕️", subtitle: "DrChrono" },
+                                      { name: "AdvancedMD", logo: "🔬", subtitle: "AdvancedMD" },
+                                      { name: "Kareo", logo: "💼", subtitle: "Tebra" },
+                                      { name: "ModMed", logo: "🏥", subtitle: "ModMed" },
+                                      { name: "Praxis", logo: "🧠", subtitle: "Praxis" },
+                                      { name: "Centricity", logo: "🎯", subtitle: "GE Healthcare" },
+                                      { name: "SimplePractice", logo: "✨", subtitle: "Simple" },
+                                      { name: "WebPT", logo: "💪", subtitle: "WebPT" },
+                                      { name: "Any EHR", logo: "🔧", subtitle: "Custom" }
+                                    ].map((ehr) => (
+                                      <button
+                                        key={ehr.name}
+                                        onClick={() => {
+                                          setSelectedEhr(ehr.name);
+                                          toast({ 
+                                            title: ehr.name, 
+                                            description: "Ready to connect",
+                                            duration: 1500 
+                                          });
+                                        }}
+                                        className={`group rounded border hover:border-emerald-400 p-1.5 text-center transition-all hover:shadow-sm hover:scale-105 ${
+                                          selectedEhr === ehr.name ? 
+                                            'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-200 scale-105' : 
+                                            'bg-background hover:bg-emerald-50/50'
+                                        } ${ehr.name === 'Any EHR' ? 'border-dashed border-emerald-400 bg-emerald-50/30' : ''}`}
+                                      >
+                                        {selectedEhr === ehr.name && (
+                                          <div className="absolute -top-0.5 -right-0.5 h-3 w-3 bg-emerald-500 rounded-full flex items-center justify-center">
+                                            <CheckCircle2 className="h-2 w-2 text-white" />
+                                          </div>
+                                        )}
+                                        <div className="text-sm mb-0.5">{ehr.logo}</div>
+                                        <div className="font-semibold text-[9px] leading-tight group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
+                                        <div className="text-[8px] text-muted-foreground leading-tight">
+                                          {ehr.subtitle}
                                         </div>
-                                      )}
-                                      <div className="text-lg mb-1">{ehr.logo}</div>
-                                      <div className="font-semibold text-[10px] leading-tight group-hover:text-emerald-700 transition-colors">{ehr.name}</div>
-                                      <div className="text-[9px] text-muted-foreground leading-tight">
-                                        {ehr.subtitle}
-                                      </div>
-                                    </button>
-                                  ))}
+                                      </button>
+                                    ))}
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
 
                           {/* Connection Method & Actions - Right Column */}
                           <div className="lg:col-span-1 flex flex-col justify-between">
@@ -1638,834 +1622,12 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
                   </div>
                 )}
-              </div>
-            </section>
-
-            {/* Schedule Section */}
-            <section id="schedule" className={`screen ${active === "schedule" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
-                    </div>
-                    Unified Schedule
-                  </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">
-                    Schedule imported from multiple EHR systems and practice management platforms across {new Set(appointments.map(a => a.src.split(' - ')[0])).size} systems 
-                    and {new Set(appointments.map(a => a.src.split(' - ')[1] || 'Main')).size} locations.
-                  </p>
-                </div>
-
-                {/* Enhanced Controls Section */}
-                <div className="grid gap-4 lg:gap-6 mb-6">
-                  <Card className="border-2 bg-gradient-to-r from-background to-muted/5">
-                    <CardHeader className="pb-4">
-                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                        
-                        {/* Sync Status - Enhanced */}
-                        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                          <div className="flex items-center gap-2 text-sm">
-                            <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse"></div>
-                            <span className="font-medium text-green-700">Live Sync Active</span>
-                          </div>
-                          <div className="h-4 w-px bg-border"></div>
-                          <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Epic (4 locations)
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Cerner (3 locations)
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-                              Athena (2 locations)
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              NextGen (1 location)
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Controls */}
-                        <div className="flex items-center gap-3">
-                          <Button variant="outline" size="sm" className="rounded-lg">
-                            <RefreshCw className="h-4 w-4 mr-2" />
-                            Sync All
-                          </Button>
-                          <div className="h-4 w-px bg-border"></div>
-                          <Tabs value={scheduleView} onValueChange={(v: 'list' | 'calendar') => setScheduleView(v)} className="w-fit">
-                            <TabsList className="bg-muted/50">
-                              <TabsTrigger value="list" className="text-xs px-3">
-                                <List className="h-3 w-3 mr-1" />
-                                List
-                              </TabsTrigger>
-                              <TabsTrigger value="calendar" className="text-xs px-3">
-                                <Calendar className="h-3 w-3 mr-1" />
-                                Calendar
-                              </TabsTrigger>
-                            </TabsList>
-                          </Tabs>
-                        </div>
-                      </div>
-                    </CardHeader>
-
-                    {/* Search and Filter Bar */}
-                    <CardContent className="pt-0 pb-6">
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <div className="flex-1">
-                          <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <input
-                              type="text"
-                              placeholder="Search patients, MRN, visit type..."
-                              value={scheduleSearch}
-                              onChange={(e) => setScheduleSearch(e.target.value)}
-                              className="w-full pl-10 pr-4 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex gap-3">
-                          <select
-                            value={locationFilter}
-                            onChange={(e) => setLocationFilter(e.target.value)}
-                            className="px-3 py-2 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary min-w-[140px]"
-                          >
-                            <option value="all">All Locations</option>
-                            <option value="Main Campus">Main Campus</option>
-                            <option value="Downtown Clinic">Downtown Clinic</option>
-                            <option value="Westside Campus">Westside Campus</option>
-                            <option value="East Location">East Location</option>
-                            <option value="Surgery Center">Surgery Center</option>
-                            <option value="Heart Center">Heart Center</option>
-                            <option value="Urgent Care">Urgent Care</option>
-                            <option value="Telehealth">Telehealth</option>
-                            <option value="Specialty Clinic">Specialty Clinic</option>
-                            <option value="Sports Medicine">Sports Medicine</option>
-                            <option value="Women's Health">Women's Health</option>
-                          </select>
-                          <Button variant="outline" size="sm" className="rounded-lg whitespace-nowrap">
-                            <Filter className="h-4 w-4 mr-2" />
-                            More Filters
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Schedule Content */}
-                <Card className="overflow-hidden border-2">
-                  <CardContent className="p-0">
-                    {scheduleView === 'list' ? (
-                      <div className="overflow-x-auto">
-                        <table className="w-full">
-                          <thead>
-                            <tr className="border-b bg-gradient-to-r from-muted/80 to-muted/40">
-                              {["Time", "Patient", "MRN", "Age/Sex", "Visit Type", "Language", "Priority", "Location & System", "Actions"].map((header) => (
-                                <th key={header} className="text-left px-4 lg:px-6 py-4 font-semibold text-xs lg:text-sm whitespace-nowrap">
-                                  {header}
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {appointments
-                              .filter(appointment => {
-                                const matchesSearch = scheduleSearch === "" || 
-                                  appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
-                                  appointment.mrn.includes(scheduleSearch) ||
-                                  appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
-                                const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
-                                return matchesSearch && matchesLocation;
-                              })
-                              .map((appointment, index) => {
-                                const [system, location] = appointment.src.split(' - ');
-                                const times = ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM"];
-                                const time = times[index % times.length];
-                                
-                                return (
-                                  <tr key={appointment.mrn} className="border-b hover:bg-muted/30 transition-all duration-200 group animate-fade-in">
-                                    <td className="px-4 lg:px-6 py-4 font-mono text-xs lg:text-sm font-medium">
-                                      {time}
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4">
-                                      <div className="font-medium text-sm">{appointment.name}</div>
-                                      <div className="text-xs text-muted-foreground mt-0.5">ID: {appointment.mrn}</div>
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4 text-muted-foreground font-mono text-xs lg:text-sm">
-                                      {appointment.mrn}
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4 text-sm">{appointment.age}</td>
-                                    <td className="px-4 lg:px-6 py-4">
-                                      <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                        {appointment.visit}
-                                      </span>
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4 text-sm">{appointment.lang}</td>
-                                    <td className="px-4 lg:px-6 py-4">
-                                      {appointment.flags && (
-                                        <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border ${
-                                          appointment.flags.includes('High Priority') ? 'bg-red-50 text-red-700 border-red-200' :
-                                          appointment.flags.includes('Interpreter') ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                                          appointment.flags.includes('Pre-op') ? 'bg-purple-50 text-purple-700 border-purple-200' :
-                                          appointment.flags.includes('Same Day') ? 'bg-orange-50 text-orange-700 border-orange-200' :
-                                          appointment.flags.includes('Virtual') ? 'bg-green-50 text-green-700 border-green-200' :
-                                          appointment.flags.includes('Post-op') ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
-                                          'bg-yellow-50 text-yellow-700 border-yellow-200'
-                                        }`}>
-                                          {appointment.flags}
-                                        </span>
-                                      )}
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4">
-                                      <div className="flex flex-col gap-1">
-                                        <div className="flex items-center gap-2">
-                                          <div className={`h-2 w-2 rounded-full ${
-                                            system === 'Epic' ? 'bg-blue-500' :
-                                            system === 'Cerner' ? 'bg-green-500' :
-                                            system === 'Athena' ? 'bg-purple-500' :
-                                            system === 'Allscripts' ? 'bg-orange-500' :
-                                            system === 'NextGen' ? 'bg-red-500' :
-                                            'bg-gray-500'
-                                          }`}></div>
-                                          <span className="text-xs font-medium">{system}</span>
-                                        </div>
-                                        <div className="text-xs text-muted-foreground pl-4">
-                                          {location || 'Main Location'}
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <td className="px-4 lg:px-6 py-4">
-                                      <div className="flex items-center gap-2">
-                                        <Button 
-                                          size="sm" 
-                                          onClick={() => handleOpenAppointment(appointment)} 
-                                          className="rounded-lg h-8 px-3 text-xs font-medium group-hover:shadow-md transition-shadow"
-                                        >
-                                          <Play className="h-3 w-3 mr-1" />
-                                          Start
-                                        </Button>
-                                        <Button 
-                                          variant="outline" 
-                                          size="sm" 
-                                          className="rounded-lg h-8 px-2"
-                                        >
-                                          <MoreVertical className="h-3 w-3" />
-                                        </Button>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                );
-                              })}
-                          </tbody>
-                        </table>
-
-                        {/* Empty State */}
-                        {appointments.filter(appointment => {
-                          const matchesSearch = scheduleSearch === "" || 
-                            appointment.name.toLowerCase().includes(scheduleSearch.toLowerCase()) ||
-                            appointment.mrn.includes(scheduleSearch) ||
-                            appointment.visit.toLowerCase().includes(scheduleSearch.toLowerCase());
-                          const matchesLocation = locationFilter === "all" || appointment.src.includes(locationFilter);
-                          return matchesSearch && matchesLocation;
-                        }).length === 0 && (
-                          <div className="text-center py-12">
-                            <div className="text-4xl opacity-20 mb-4">📅</div>
-                            <div className="text-lg font-medium text-muted-foreground">No appointments found</div>
-                            <div className="text-sm text-muted-foreground mt-2">
-                              Try adjusting your search or filter criteria
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      /* Calendar View */
-                      <div className="p-6">
-                        <div className="grid grid-cols-7 gap-4 mb-6">
-                          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                            <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
-                              {day}
-                            </div>
-                          ))}
-                          {Array.from({ length: 35 }, (_, i) => {
-                            const isToday = i === 15; // Mock today
-                            const hasAppointments = Math.random() > 0.7;
-                            const appointmentCount = hasAppointments ? Math.floor(Math.random() * 5) + 1 : 0;
-                            
-                            return (
-                              <div 
-                                key={i} 
-                                className={`min-h-[80px] p-2 border rounded-lg transition-colors cursor-pointer ${
-                                  isToday ? 'bg-primary/10 border-primary/30' : 
-                                  hasAppointments ? 'bg-muted/30 hover:bg-muted/50' : 
-                                  'hover:bg-muted/20'
-                                }`}
-                              >
-                                <div className={`text-sm font-medium mb-1 ${isToday ? 'text-primary' : ''}`}>
-                                  {i + 1}
-                                </div>
-                                {hasAppointments && (
-                                  <div className="space-y-1">
-                                    {Array.from({ length: appointmentCount }, (_, j) => (
-                                      <div key={j} className="text-xs p-1 bg-primary/20 text-primary rounded truncate">
-                                        {j === 0 ? '9:00 AM' : j === 1 ? '10:30 AM' : j === 2 ? '2:00 PM' : '3:30 PM'}
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div className="text-center text-sm text-muted-foreground">
-                          Click on any date to view detailed appointments
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-            </section>
-
-            {/* Capture Section */}
-            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Mic className="h-5 w-5 text-primary" aria-hidden />
-                    </div>
-                    Clinical Documentation
-                  </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Capture patient encounters through audio recording or manual typing with AI assistance.</p>
-                  
-                  {/* Real-time Status Bar */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <div className={`h-3 w-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}></div>
-                          <span className="font-medium">
-                            {isRecording ? 'Recording Active' : 'Ready to Capture'}
-                          </span>
-                        </div>
-                        {selectedPatient && (
-                          <div className="flex items-center gap-2 text-muted-foreground">
-                            <span>•</span>
-                            <span>Patient: {selectedPatient.name}</span>
-                            <span>•</span>
-                            <span>Visit: {selectedPatient.visit}</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-xs text-muted-foreground">AI Processing:</div>
-                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <div className="text-xs font-medium text-green-700">Active</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Enhanced Responsive Grid Layout */}
-                <div className="grid gap-6 lg:gap-8 xl:grid-cols-12">
-                  
-                  {/* Enhanced Input Methods Panel */}
-                  <div className="xl:col-span-4 space-y-6">
-                    <Card className="border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2">
-                          <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
-                            {captureMode === 'audio' ? <Mic className="h-3 w-3 text-primary" /> : <FileText className="h-3 w-3 text-primary" />}
-                          </div>
-                          Input Method
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-6">
-                        
-                        {/* Enhanced Mode Toggle */}
-                        <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-                            <TabsTrigger value="audio" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
-                              <Mic className="h-4 w-4" />
-                              <span className="hidden sm:inline">Audio Capture</span>
-                              <span className="sm:hidden">Audio</span>
-                            </TabsTrigger>
-                            <TabsTrigger value="type" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
-                              <FileText className="h-4 w-4" />
-                              <span className="hidden sm:inline">Manual Entry</span>
-                              <span className="sm:hidden">Type</span>
-                            </TabsTrigger>
-                          </TabsList>
-                          
-                          {/* Enhanced Audio Capture Tab */}
-                          <TabsContent value="audio" className="mt-6 space-y-6">
-                            <div className="space-y-6">
-                              
-                              {/* Recording Controls */}
-                              <div className="space-y-4">
-                                <Button 
-                                  onClick={toggleRecording} 
-                                  className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${
-                                    isRecording 
-                                      ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' 
-                                      : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'
-                                  }`}
-                                >
-                                  {isRecording ? (
-                                    <>
-                                      <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
-                                    </>
-                                  ) : (
-                                    <>
-                                      <Mic className="h-6 w-6 mr-3" /> Start Recording
-                                    </>
-                                  )}
-                                </Button>
-                                
-                                {/* Enhanced Recording Status */}
-                                <div className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
-                                  <div className="flex items-center gap-2">
-                                    <div className={`h-4 w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
-                                    <span className="font-mono text-2xl font-bold">{timeStr}</span>
-                                  </div>
-                                  <div className="h-6 w-px bg-border mx-2"></div>
-                                  <div className="text-sm text-center">
-                                    <div className="font-medium">
-                                      {isRecording ? 'Recording in Progress' : 'Ready to Record'}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                      {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* Enhanced Audio Visualizer */}
-                              <Card className="p-4 bg-gradient-to-r from-muted/20 to-muted/5">
-                                <div className="text-xs font-medium text-muted-foreground mb-3 text-center">
-                                  Audio Input Level
-                                </div>
-                                <div className="flex items-end justify-center gap-1 h-20">
-                                  {[8,14,20,12,18,10,16,22,12,15,19,8,16,25,11,20,12,18,14,10].map((h, i) => (
-                                    <div 
-                                      key={i} 
-                                      className={`w-2 rounded-t transition-all duration-300 ${
-                                        isRecording 
-                                          ? 'bg-gradient-to-t from-primary to-primary/60 animate-pulse' 
-                                          : 'bg-gradient-to-t from-primary/20 to-primary/10'
-                                      }`} 
-                                      style={{ 
-                                        height: `${isRecording ? h : h * 0.3}px`,
-                                        animationDelay: `${i * 50}ms`
-                                      }} 
-                                    />
-                                  ))}
-                                </div>
-                              </Card>
-                              
-                              {/* Audio Quality Indicators */}
-                              <div className="grid grid-cols-3 gap-3 text-xs">
-                                <div className="text-center p-2 rounded-lg bg-green-50 border border-green-200">
-                                  <div className="font-medium text-green-700">Quality</div>
-                                  <div className="text-green-600">Excellent</div>
-                                </div>
-                                <div className="text-center p-2 rounded-lg bg-blue-50 border border-blue-200">
-                                  <div className="font-medium text-blue-700">Clarity</div>
-                                  <div className="text-blue-600">Clear</div>
-                                </div>
-                                <div className="text-center p-2 rounded-lg bg-purple-50 border border-purple-200">
-                                  <div className="font-medium text-purple-700">Background</div>
-                                  <div className="text-purple-600">Quiet</div>
-                                </div>
-                              </div>
-                            </div>
-                          </TabsContent>
-                          
-                          {/* Enhanced Type Input Tab */}
-                          <TabsContent value="type" className="mt-6">
-                            <div className="space-y-6">
-                              <div className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                                <Bot className="h-4 w-4" />
-                                AI-Assisted Manual Entry
-                              </div>
-                              
-                              <div className="space-y-4">
-                                <Textarea 
-                                  placeholder="Begin typing your clinical notes here. AI will assist with structuring, medical terminology, and formatting as you type..."
-                                  value={typeNotes}
-                                  onChange={(e) => setTypeNotes(e.target.value)}
-                                  className="min-h-[250px] resize-none text-sm leading-relaxed border-2 focus:border-primary/50 transition-colors"
-                                />
-                                
-                                {/* AI Suggestions Panel */}
-                                {typeNotes.length > 20 && (
-                                  <Card className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
-                                    <div className="text-xs font-medium text-primary mb-2 flex items-center gap-1">
-                                      <Bot className="h-3 w-3" />
-                                      AI Suggestions
-                                    </div>
-                                    <div className="text-xs text-muted-foreground space-y-1">
-                                      <div>• Consider adding vital signs if available</div>
-                                      <div>• Review of systems may be beneficial</div>
-                                      <div>• Assessment and plan section recommended</div>
-                                    </div>
-                                  </Card>
-                                )}
-                                
-                                {/* Word Count & Metrics */}
-                                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                                  <div className="flex items-center gap-4">
-                                    <span>{typeNotes.split(' ').filter(Boolean).length} words</span>
-                                    <span>{typeNotes.length} characters</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                                    <span>AI analyzing</span>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              <div className="flex flex-wrap gap-2">
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                  onClick={() => {
-                                    setTypeNotes("");
-                                    toast({ title: "Notes cleared", description: "Ready for new input" });
-                                  }}
-                                  className="rounded-lg"
-                                >
-                                  <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                  </svg>
-                                  Clear All
-                                </Button>
-                                <Button 
-                                  size="sm"
-                                  onClick={() => {
-                                    if (typeNotes.trim()) {
-                                      setTranscript(typeNotes);
-                                      toast({ title: "Notes processed", description: "AI is structuring your notes" });
-                                    }
-                                  }}
-                                  disabled={!typeNotes.trim()}
-                                  className="rounded-lg"
-                                >
-                                  <Wand2 className="h-4 w-4 mr-2" />
-                                  Process & Structure
-                                </Button>
-                                <Button 
-                                  variant="outline"
-                                  size="sm"
-                                  className="rounded-lg"
-                                  onClick={() => {
-                                    setCaptureMode('audio');
-                                    toast({ title: "Voice dictation activated", description: "You can now use voice dictation to capture notes" });
-                                  }}
-                                >
-                                  <Mic className="h-4 w-4 mr-2" />
-                                  Voice Dictation
-                                </Button>
-                              </div>
-                            </div>
-                          </TabsContent>
-                        </Tabs>
-
-                        {/* Enhanced Session Controls */}
-                        <div className="pt-6 border-t space-y-3">
-                          <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
-                          <div className="grid gap-2">
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              Pause Session
-                            </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
-                              <Upload className="h-4 w-4 mr-2" />
-                              Upload Audio File
-                            </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm">
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                              End & Discard Session
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Enhanced AI-Generated Note Panel */}
-                  <div className="xl:col-span-5">
-                    <Card className="h-full border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <div className="h-6 w-6 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <Bot className="h-3 w-3 text-primary" />
-                            </div>
-                            AI-Generated Clinical Note
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-2">
-                              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                              <span className="text-xs text-muted-foreground">Live Processing</span>
-                            </div>
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
-                              <Settings className="h-3 w-3 mr-1" />
-                              Settings
-                            </Button>
-                          </div>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        
-                        {/* Processing Status */}
-                        <div className="p-3 bg-gradient-to-r from-blue-50 to-blue-50/50 rounded-lg border border-blue-200">
-                          <div className="flex items-center gap-2 text-sm">
-                            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-                            <span className="font-medium text-blue-700">Real-time transcription and structuring active</span>
-                          </div>
-                          <div className="text-xs text-blue-600 mt-1 flex flex-wrap items-center gap-3">
-                            <span>• Medical terminology detection</span>
-                            <span>• Grammar correction</span>
-                            <span>• Clinical structure formatting</span>
-                          </div>
-                        </div>
-                        
-                        {/* Note Content */}
-                        <div className="rounded-lg border-2 bg-gradient-to-br from-background to-muted/10 p-6 min-h-[400px] max-h-[500px] overflow-y-auto custom-scrollbar">
-                          <div className="text-sm whitespace-pre-wrap leading-relaxed">
-                            {transcript || typeNotes || `${selectedPatient ? `📋 CLINICAL NOTE\n\nPatient: ${selectedPatient.name}\nMRN: ${selectedPatient.mrn}\nVisit Type: ${selectedPatient.visit}\nDate: ${new Date().toLocaleDateString()}\n\n` : ""}🎯 READY FOR INPUT\n\n${captureMode === 'audio' ? '🎤 Begin recording' : '⌨️ Start typing'} to generate structured clinical documentation...\n\n📝 AI will automatically organize content into:\n\n• Chief Complaint\n• History of Present Illness  \n• Review of Systems\n• Physical Examination\n• Assessment & Differential\n• Plan & Follow-up\n• Patient Instructions\n\n✨ Features:\n• Real-time medical terminology correction\n• Automatic ICD-10/CPT code suggestions\n• Clinical decision support\n• Template-based structure\n• Integration with patient history`}
-                          </div>
-                        </div>
-                        
-                        {/* Enhanced Note Actions */}
-                        <div className="flex flex-wrap gap-3 pt-4 border-t">
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                            Edit Note
-                          </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                            </svg>
-                            Copy Text
-                          </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
-                            <FileText className="h-4 w-4 mr-2" />
-                            Export
-                          </Button>
-                          <Button size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => onNavClick('coding')}>
-                            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                            Continue to Coding
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Patient Summary Snapshot - Right Side */}
-                  <div className="xl:col-span-3">
-                    <Card className="h-full border-2 bg-gradient-to-br from-blue-50/50 to-background">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2 text-blue-900">
-                          <div className="h-6 w-6 rounded-lg bg-blue-100 flex items-center justify-center">
-                            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                          </div>
-                          Patient Summary Snapshot
-                        </CardTitle>
-                        <p className="text-xs text-blue-700/70">Medical history and previous visit details</p>
-                      </CardHeader>
-                      <CardContent>
-                        {selectedPatient ? (
-                          <div className="space-y-4">
-                            {/* Patient Header */}
-                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                              <div className="flex items-center gap-3">
-                                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-blue-700">
-                                  {selectedPatient.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                  <div className="font-semibold text-blue-900">{selectedPatient.name}</div>
-                                  <div className="text-sm text-blue-700">MRN: {selectedPatient.mrn}</div>
-                                  <div className="text-sm text-blue-600">{selectedPatient.age} • {selectedPatient.visit}</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Previous Visit Summary */}
-                            <div className="space-y-3">
-                              <div className="text-sm font-semibold text-blue-900 flex items-center gap-2">
-                                <svg className="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Last Visit: March 15, 2024
-                              </div>
-                              <div className="p-3 bg-gradient-to-r from-green-50 to-green-50/50 rounded-lg border border-green-200 text-xs">
-                                <div className="font-medium text-green-800 mb-1">Visit Summary</div>
-                                <div className="text-green-700 space-y-1">
-                                  <div>• Diabetes follow-up - HbA1c improved to 7.8%</div>
-                                  <div>• Blood pressure well controlled</div>
-                                  <div>• Renewed prescriptions</div>
-                                  <div>• Scheduled for 3-month follow-up</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Clinical Context */}
-                            <div className="h-[300px] max-h-[400px] overflow-y-auto custom-scrollbar">
-                              <div className="text-sm space-y-4">
-                                {patientContext ? (
-                                  <div className="whitespace-pre-wrap leading-relaxed text-gray-700">
-                                    {patientContext}
-                                  </div>
-                                ) : (
-                                  <div className="space-y-4">
-                                    <div className="animate-pulse space-y-3">
-                                      <div className="h-4 bg-blue-100 rounded w-3/4"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-1/2"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-5/6"></div>
-                                      <div className="h-4 bg-blue-100 rounded w-2/3"></div>
-                                    </div>
-                                    <div className="text-blue-600 text-center py-4">
-                                      Loading patient medical history...
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Quick Actions */}
-                            <div className="flex flex-wrap gap-2 pt-4 border-t border-blue-200">
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                Full History
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                Lab Results
-                              </Button>
-                              <Button variant="outline" size="sm" className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg">
-                                <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Allergies
-                              </Button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="h-full flex items-center justify-center text-center">
-                            <div className="space-y-3">
-                              <div className="text-4xl opacity-30">👤</div>
-                              <div className="text-sm font-medium text-blue-800">No Patient Selected</div>
-                              <div className="text-xs text-blue-600 leading-relaxed max-w-sm">
-                                Select a patient from the Schedule to load their medical history and context for this visit.
-                              </div>
-                              <Button variant="outline" size="sm" onClick={() => onNavClick('schedule')} className="text-blue-700 border-blue-200">
-                                Go to Schedule
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Coding Section */}
-            <section id="coding" className={`screen ${active === "coding" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <ClipboardList className="h-5 w-5 text-primary" aria-hidden />
-                    </div>
-                    Coding & Compliance Review
-                  </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Resolve documentation issues and review suggested codes.</p>
-                </div>
-
-                <div className="grid gap-8 lg:grid-cols-2">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Documentation Review</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      {checks.map((item, idx) => (
-                        <div key={item.label} className="flex items-center justify-between gap-3 p-3 rounded-lg border">
-                          <div className="flex items-center gap-3">
-                            <CheckCircle2 className={`h-5 w-5 ${item.ok ? "text-green-600" : "text-muted-foreground"}`} />
-                            <span className={item.ok ? "" : "text-muted-foreground"}>{item.label}</span>
-                          </div>
-                          {!item.ok && (
-                            <Button size="sm" variant="outline" className="rounded-lg" onClick={() => markFix(idx)}>
-                              Fix
-                            </Button>
-                          )}
-                        </div>
-                      ))}
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Suggested Codes</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div>
-                        <div className="font-semibold mb-3">Primary Diagnosis (ICD-10)</div>
-                        <div className="space-y-2">
-                          <div className="rounded-lg border p-4 bg-green-50/50">
-                            <div className="font-medium">E11.9 • Type 2 Diabetes Mellitus</div>
-                            <div className="text-sm text-green-600 font-medium">95% confidence</div>
-                          </div>
-                          <div className="rounded-lg border p-4 bg-green-50/50">
-                            <div className="font-medium">I10 • Essential Hypertension</div>
-                            <div className="text-sm text-green-600 font-medium">92% confidence</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-semibold mb-3">Procedures (CPT)</div>
-                        <div className="rounded-lg border p-4 bg-blue-50/50">
-                          <div className="font-medium">99213 • Office visit, established patient</div>
-                          <div className="text-sm text-blue-600 font-medium">88% confidence</div>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-lg">Back to Edit</Button>
-                        <Button className="rounded-lg" onClick={() => onNavClick("send")}>Continue to EHR</Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
             </section>
 
             {/* Send to EHR Section */}
