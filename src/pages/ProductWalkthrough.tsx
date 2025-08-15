@@ -2516,7 +2516,7 @@ const ProductWalkthrough: React.FC = () => {
                           </CardTitle>
                           <div className="flex items-center gap-2">
                             <Button variant="outline" size="sm" className="rounded-lg" onClick={() => {
-                              onNavClick('clinical');
+                              onNavClick('capture');
                               toast({
                                 title: "Returning to editor",
                                 description: "Opening clinical documentation module for editing"
