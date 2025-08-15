@@ -2835,6 +2835,39 @@ const ProductWalkthrough: React.FC = () => {
                                   Return to clinic in 3 months or sooner if concerns. Patient educated on signs/symptoms requiring immediate medical attention.
                                 </div>
                               </div>
+                              
+                              <div>
+                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
+                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                  PATIENT INSTRUCTIONS
+                                </div>
+                                <div className="text-foreground pl-4 space-y-2">
+                                  <div className="font-medium">Diabetes Management:</div>
+                                  <div className="text-sm text-muted-foreground ml-3">
+                                    • Take Metformin 1000mg twice daily with meals<br />
+                                    • Monitor blood sugar twice daily (fasting and 2 hours after largest meal)<br />
+                                    • Target blood sugar: 80-130 mg/dL fasting, under 180 mg/dL after meals<br />
+                                    • Continue low-carb diet and 30 minutes walking daily<br />
+                                    • Schedule diabetes education class within 2 weeks
+                                  </div>
+                                  
+                                  <div className="font-medium mt-3">Hypertension Management:</div>
+                                  <div className="text-sm text-muted-foreground ml-3">
+                                    • Continue current blood pressure medications as prescribed<br />
+                                    • Check blood pressure at home 3x weekly<br />
+                                    • Maintain low-sodium diet (under 2300mg daily)<br />
+                                    • Contact office if BP consistently over 140/90
+                                  </div>
+                                  
+                                  <div className="font-medium mt-3">Follow-up Care:</div>
+                                  <div className="text-sm text-muted-foreground ml-3">
+                                    • Schedule return visit in 3 months<br />
+                                    • HbA1c lab work in 3 months (order provided)<br />
+                                    • Call office for any symptoms: dizziness, excessive thirst, frequent urination<br />
+                                    • Emergency contact: (555) 123-4567
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -2851,6 +2884,74 @@ const ProductWalkthrough: React.FC = () => {
                               <CheckCircle2 className="h-3 w-3 text-green-600" />
                               <span className="text-green-700">Validation passed</span>
                             </div>
+                          </div>
+                        </div>
+                        
+                        {/* Patient Instructions Actions */}
+                        <div className="mt-4 p-4 bg-gradient-to-r from-blue-50/50 to-blue-50/20 rounded-lg border border-blue-200/50">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <div className="h-5 w-5 rounded-lg bg-blue-100 flex items-center justify-center">
+                                <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                              </div>
+                              <div>
+                                <div className="text-sm font-semibold text-blue-900">Patient Instructions Ready</div>
+                                <div className="text-xs text-blue-600">Generated automatically from visit notes</div>
+                              </div>
+                            </div>
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="text-blue-700 border-blue-200 hover:bg-blue-50 rounded-lg"
+                              onClick={() => {
+                                toast({
+                                  title: "Patient Instructions",
+                                  description: "Opening patient instructions in full view",
+                                });
+                              }}
+                            >
+                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                              </svg>
+                              View Instructions
+                            </Button>
+                          </div>
+                          
+                          <div className="flex gap-2">
+                            <Button 
+                              size="sm" 
+                              className="flex-1 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-sm"
+                              onClick={() => {
+                                toast({
+                                  title: "Email Sent",
+                                  description: "Patient instructions emailed to patient successfully",
+                                });
+                              }}
+                            >
+                              <svg className="h-3 w-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              </svg>
+                              Email to Patient
+                            </Button>
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1 rounded-lg border-blue-200 text-blue-700 hover:bg-blue-50"
+                              onClick={() => {
+                                toast({
+                                  title: "Portal Updated",
+                                  description: "Instructions sent to patient portal successfully",
+                                });
+                              }}
+                            >
+                              <svg className="h-3 w-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+                              </svg>
+                              Send to Portal
+                            </Button>
                           </div>
                         </div>
                       </CardContent>
