@@ -1628,6 +1628,7 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                   </div>
                 )}
+              </div>
             </section>
 
             {/* Send to EHR Section */}
