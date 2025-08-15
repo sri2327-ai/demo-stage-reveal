@@ -2973,7 +2973,7 @@ const ProductWalkthrough: React.FC = () => {
                   <div className="text-sm text-muted-foreground">
                     Configure additional automations in settings
                   </div>
-                  <Button className="rounded-lg bg-gray-600 hover:bg-gray-700" onClick={() => onNavClick('agent')}>
+                  <Button className="rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => onNavClick('agent')}>
                     <Bot className="h-4 w-4 mr-2" />
                     Continue to AI Agent Setup
                   </Button>
