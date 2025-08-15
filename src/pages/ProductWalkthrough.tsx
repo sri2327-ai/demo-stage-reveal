@@ -2627,7 +2627,7 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" className="rounded-lg">Back to Edit</Button>
+                        <Button variant="outline" className="rounded-lg" onClick={() => onNavClick("capture")}>Back to Edit</Button>
                         <Button className="rounded-lg" onClick={() => onNavClick("send")}>Continue to EHR</Button>
                       </div>
                     </CardContent>
