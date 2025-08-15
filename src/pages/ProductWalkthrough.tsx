@@ -608,65 +608,43 @@ const ProductWalkthrough: React.FC = () => {
                   </h2>
                   <p className="mt-3 text-muted-foreground text-lg">Configure your note templates and EHR connections in a streamlined workflow.</p>
 
-                  {/* Improved progress indicator */}
-                  <div className="mt-8 bg-gradient-to-r from-muted/50 to-muted/20 p-6 rounded-2xl border border-border/50">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${
-                        setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'
-                      }`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
-                          setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
+                  {/* Compact progress indicator */}
+                  <div className="mt-4 bg-gradient-to-r from-muted/30 to-muted/10 p-3 rounded-xl border border-border/30">
+                    <div className="flex items-center justify-between">
+                      <button
+                        onClick={() => setSetupStep('note')}
+                        className={`flex items-center gap-2 transition-all duration-200 hover:scale-105 ${
+                          setupStep === 'landing' || setupStep === 'note' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <div className={`h-6 w-6 rounded-full grid place-items-center font-bold text-xs transition-all duration-200 cursor-pointer ${
+                          setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-md' : 'border border-muted-foreground/40 hover:border-primary'
                         }`}>
-                          {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
+                          {setupStep === 'ehr' ? <CheckCircle2 className="h-3 w-3" /> : '1'}
                         </div>
-                        <div>
-                          <div className="font-semibold">Note Templates</div>
-                          <div className="text-xs text-muted-foreground">Configure your documentation style</div>
-                        </div>
-                      </div>
+                        <div className="text-sm font-medium">Templates</div>
+                      </button>
                       
-                      <div className={`flex-1 h-1 mx-6 rounded-full overflow-hidden ${
+                      <div className={`flex-1 h-0.5 mx-3 rounded-full transition-all duration-300 ${
                         setupStep === 'ehr' ? 'bg-gradient-to-r from-[#143151] to-[#387E89]' : 'bg-border'
                       }`}>
-                        <div className={`h-full transition-all duration-500 ${
+                        <div className={`h-full transition-all duration-500 rounded-full ${
                           setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : 
                           setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'
                         }`} />
                       </div>
                       
-                      <div className={`flex items-center gap-3 transition-all duration-300 ${
-                        setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'
-                      }`}>
-                        <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${
-                          setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'
-                        }`}>2</div>
-                        <div>
-                          <div className="font-semibold">EHR Integration</div>
-                          <div className="text-xs text-muted-foreground">Connect to your systems</div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Quick action buttons */}
-                    <div className="flex items-center justify-center gap-3 pt-4 border-t border-border/50">
-                      <Button
-                        variant={setupStep === 'note' || setupStep === 'landing' ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSetupStep('note')}
-                        className="rounded-full px-4 transition-all"
-                      >
-                        <FileText className="h-4 w-4 mr-2" />
-                        Configure Templates
-                      </Button>
-                      <Button
-                        variant={setupStep === 'ehr' ? "default" : "outline"}
-                        size="sm"
+                      <button
                         onClick={() => setSetupStep('ehr')}
-                        className="rounded-full px-4 transition-all"
+                        className={`flex items-center gap-2 transition-all duration-200 hover:scale-105 ${
+                          setupStep === 'ehr' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                        }`}
                       >
-                        <Server className="h-4 w-4 mr-2" />
-                        Connect EHR
-                      </Button>
+                        <div className={`h-6 w-6 rounded-full grid place-items-center font-bold text-xs transition-all duration-200 cursor-pointer ${
+                          setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-md' : 'border border-muted-foreground/40 hover:border-primary'
+                        }`}>2</div>
+                        <div className="text-sm font-medium">EHR</div>
+                      </button>
                     </div>
                   </div>
                 </div>
