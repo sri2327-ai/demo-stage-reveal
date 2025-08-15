@@ -560,14 +560,12 @@ const ProductWalkthrough: React.FC = () => {
         </div>}
 
       {/* Don't see your EHR Alert - Fixed at top for EHR step only */}
-      {active === "setup" && setupStep === "ehr" && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg">
+      {active === "setup" && setupStep === "ehr" && <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg">
           <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
           <div className="text-xs text-blue-700">
             We integrate with any system through custom protocols.
           </div>
-        </div>
-      )}
+        </div>}
 
       <div className="scribeai-layout">
         <aside className="left-nav">
@@ -1547,14 +1545,12 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                               
                               {/* Don't see your EHR notification - always visible in setup */}
-                              {active === "setup" && (
-                                <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center">
+                              {active === "setup" && <div className="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-200 text-center">
                                   <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
                                   <div className="text-xs text-blue-700">
                                     We integrate with any system through custom protocols.
                                   </div>
-                                </div>
-                              )}
+                                </div>}
                               
                             </div>
                           </div>
@@ -1636,10 +1632,7 @@ const ProductWalkthrough: React.FC = () => {
                                 <List className="h-3 w-3 mr-1" />
                                 List
                               </TabsTrigger>
-                              <TabsTrigger value="calendar" className="text-xs px-3">
-                                <Calendar className="h-3 w-3 mr-1" />
-                                Calendar
-                              </TabsTrigger>
+                              
                              </TabsList>
                            </Tabs>
                            <div className="h-4 w-px bg-border"></div>
