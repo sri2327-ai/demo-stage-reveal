@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
   id: "setup",
@@ -2202,10 +2203,30 @@ const ProductWalkthrough: React.FC = () => {
                               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
                               <span className="text-xs text-muted-foreground">Live Processing</span>
                             </div>
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs">
-                              <Settings className="h-3 w-3 mr-1" />
-                              Settings
-                            </Button>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="outline" size="sm" className="rounded-lg text-xs">
+                                  <RefreshCw className="h-3 w-3 mr-1" />
+                                  Regenerate
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="w-56 max-h-96 overflow-y-auto">
+                                {specialtyTemplates.map((template) => (
+                                  <DropdownMenuItem 
+                                    key={template.slug}
+                                    onClick={() => {
+                                      toast({
+                                        title: "Template Applied",
+                                        description: `Regenerating note with ${template.name} template`,
+                                      });
+                                    }}
+                                    className="cursor-pointer"
+                                  >
+                                    {template.name}
+                                  </DropdownMenuItem>
+                                ))}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </div>
                         </CardTitle>
                       </CardHeader>
