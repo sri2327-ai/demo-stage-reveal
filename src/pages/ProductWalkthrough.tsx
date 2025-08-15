@@ -2838,10 +2838,26 @@ const ProductWalkthrough: React.FC = () => {
                     {/* Enhanced EHR Fields Panel */}
                     <Card className="xl:col-span-4 h-fit border-2 bg-gradient-to-br from-background to-muted/5">
                       <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2">
-                          <Server className="h-5 w-5 text-primary" />
-                          EHR Integration
-                        </CardTitle>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-2">
+                            <Server className="h-5 w-5 text-primary" />
+                            EHR Integration Status
+                          </CardTitle>
+                          <Button className="rounded-xl h-10 font-semibold text-sm shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
+                            setIsSending(true);
+                            setTimeout(() => {
+                              setIsSending(false);
+                              onNavClick('automations');
+                              toast({
+                                title: "Note sent successfully",
+                                description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
+                              });
+                            }, 3000);
+                          }}>
+                            <Send className="h-4 w-4 mr-2" />
+                            Send to {selectedEhr || 'Epic'}
+                          </Button>
+                        </div>
                       </CardHeader>
                       <CardContent className="space-y-6">
                         
@@ -2939,20 +2955,6 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Send Actions */}
                         <div className="space-y-3">
-                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
-                        setIsSending(true);
-                        setTimeout(() => {
-                          setIsSending(false);
-                          onNavClick('automations');
-                          toast({
-                            title: "Note sent successfully",
-                            description: `Clinical note delivered to ${selectedEhr || 'Epic'} • Patient chart updated`
-                          });
-                        }, 3000);
-                      }}>
-                            <Send className="h-5 w-5 mr-2" />
-                            Send to {selectedEhr || 'Epic'}
-                          </Button>
                           
                           <div className="grid grid-cols-2 gap-2">
                             <Button variant="outline" className="rounded-lg h-9 text-sm">
