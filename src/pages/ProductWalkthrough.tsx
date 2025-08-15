@@ -559,6 +559,14 @@ const ProductWalkthrough: React.FC = () => {
           </div>
         </div>}
 
+      {/* Don't see your EHR Alert - Fixed at top */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg">
+        <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
+        <div className="text-xs text-blue-700">
+          We integrate with any system through custom protocols.
+        </div>
+      </div>
+
       <div className="scribeai-layout">
         <aside className="left-nav">
           <div className="nav-brand">
@@ -1536,13 +1544,6 @@ const ProductWalkthrough: React.FC = () => {
                                 </div>
                               </div>
                               
-                              {/* Don't see your EHR note - compact */}
-                              <div className="p-2 bg-blue-50/50 rounded-lg border border-blue-100">
-                                <div className="text-xs font-medium text-blue-900 mb-1">Don't see your EHR?</div>
-                                <div className="text-[10px] text-blue-700 leading-tight">
-                                  We integrate with any system through custom protocols.
-                                </div>
-                              </div>
                             </div>
                           </div>
                         </div>
