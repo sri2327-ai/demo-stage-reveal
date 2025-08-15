@@ -2722,7 +2722,7 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Send Actions - Moved to Top */}
                         <div className="space-y-3">
-                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" onClick={() => {
+                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => {
                         setIsSending(true);
                         setTimeout(() => {
                           setIsSending(false);
