@@ -660,7 +660,7 @@ const ProductWalkthrough: React.FC = () => {
                 {setupStep === 'landing' && <div className="h-[calc(100vh-200px)] flex items-center justify-center">
                     <div className="max-w-5xl mx-auto w-full">
                       <Card className="border-2 bg-gradient-to-br from-background to-muted/10 shadow-xl">
-                        <CardContent className="p-8">
+                        <CardContent className="px-8 py-6">
                           <div className="text-center mb-6">
                             <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center mb-3">
                               <Wand2 className="h-6 w-6 text-white" />
