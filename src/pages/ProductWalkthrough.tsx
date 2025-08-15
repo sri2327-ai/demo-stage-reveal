@@ -559,8 +559,8 @@ const ProductWalkthrough: React.FC = () => {
           </div>
         </div>}
 
-      {/* Don't see your EHR Alert - Fixed at top for note step only */}
-      {active === "setup" && setupStep === "note" && (
+      {/* Don't see your EHR Alert - Fixed at top for note and ehr steps */}
+      {active === "setup" && (setupStep === "note" || setupStep === "ehr") && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 p-3 bg-blue-50/95 backdrop-blur-sm rounded-lg border border-blue-200 shadow-lg">
           <div className="text-sm font-medium text-blue-900 mb-1">Don't see your EHR?</div>
           <div className="text-xs text-blue-700">
