@@ -2511,118 +2511,120 @@ const ProductWalkthrough: React.FC = () => {
 
             {/* Send to EHR Section */}
             <section id="send" className={`screen ${active === "send" ? "" : "hidden"}`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Send className="h-4 w-4 text-primary" aria-hidden />
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Send className="h-3 w-3 sm:h-4 sm:w-4 text-primary" aria-hidden />
                     </div>
-                    Send to EHR
+                    <span className="min-w-0 truncate">Send to EHR</span>
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Review, validate, and send your clinical documentation to the EHR system. Patient instructions can be sent via email or to patient portal.</p>
+                  <p className="mt-1 sm:mt-3 text-muted-foreground text-sm sm:text-base lg:text-lg">Review, validate, and send your clinical documentation to the EHR system. Patient instructions can be sent via email or to patient portal.</p>
                   
                   {/* Status Bar */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-50/50 rounded-xl border border-green-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-600" />
-                        <div>
-                          <div className="font-medium text-green-800">Clinical Note Ready</div>
-                          <div className="text-sm text-green-600">All required fields validated • Ready for EHR transmission</div>
+                  <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-green-50 to-green-50/50 rounded-xl border border-green-200">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 flex-shrink-0" />
+                        <div className="min-w-0">
+                          <div className="font-medium text-green-800 text-sm sm:text-base">Clinical Note Ready</div>
+                          <div className="text-xs sm:text-sm text-green-600">All required fields validated • Ready for EHR transmission</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-700">
-                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                        <span>Connected to {selectedEhr || 'Epic'}</span>
+                      <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-green-700">
+                        <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500 flex-shrink-0"></div>
+                        <span className="truncate">Connected to {selectedEhr || 'Epic'}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {isSending ? <Card className="border-2">
-                    <CardContent className="flex items-center justify-center py-16">
-                      <div className="text-center space-y-6">
+                    <CardContent className="flex items-center justify-center py-8 sm:py-12 lg:py-16">
+                      <div className="text-center space-y-4 sm:space-y-6">
                         <div className="flex items-center justify-center">
                           <div className="relative">
-                            <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary/20"></div>
-                            <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent absolute top-0"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-4 border-primary/20"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-4 border-primary border-t-transparent absolute top-0"></div>
                           </div>
                         </div>
                         <div>
-                          <div className="text-lg font-semibold mb-2">Sending to {selectedEhr || 'Epic'}</div>
-                          <div className="text-sm text-muted-foreground space-y-1">
+                          <div className="text-base sm:text-lg font-semibold mb-2">Sending to {selectedEhr || 'Epic'}</div>
+                          <div className="text-xs sm:text-sm text-muted-foreground space-y-1">
                             <div>✓ Validating note structure</div>
                             <div>✓ Checking required fields</div>
                             <div>⏳ Transmitting to EHR...</div>
                           </div>
                         </div>
-                        <div className="w-full max-w-sm mx-auto">
-                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="w-full max-w-xs sm:max-w-sm mx-auto">
+                          <div className="h-1.5 sm:h-2 bg-muted rounded-full overflow-hidden">
                             <div className="h-full bg-primary rounded-full animate-pulse" style={{
                           width: '75%'
                         }}></div>
                           </div>
-                          <div className="text-xs text-muted-foreground mt-1">Transmission in progress...</div>
+                          <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">Transmission in progress...</div>
                         </div>
                       </div>
                     </CardContent>
-                  </Card> : <div className="grid gap-6 xl:grid-cols-12">
+                  </Card> : <div className="grid gap-4 sm:gap-6 lg:grid-cols-12 xl:grid-cols-12">
                     
                     {/* Enhanced Note Preview */}
-                    <Card className="xl:col-span-8 border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="flex items-center gap-2">
-                            <FileText className="h-5 w-5 text-primary" />
-                            Final Clinical Note Preview
+                    <Card className="lg:col-span-8 xl:col-span-8 border-2 bg-gradient-to-br from-background to-muted/5">
+                      <CardHeader className="pb-3 sm:pb-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                          <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                            <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                            <span className="min-w-0 truncate">Final Clinical Note Preview</span>
                           </CardTitle>
-                          <div className="flex items-center gap-2">
-                            <Button variant="outline" size="sm" className="rounded-lg" onClick={() => {
+                          <div className="flex items-center gap-1 sm:gap-2">
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs sm:text-sm h-8 sm:h-9 flex-1 sm:flex-none" onClick={() => {
                               onNavClick('capture');
                               toast({
                                 title: "Returning to editor",
                                 description: "Opening clinical documentation module for editing"
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
-                              Edit Note
+                              <span className="hidden sm:inline">Edit Note</span>
+                              <span className="sm:hidden">Edit</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="rounded-lg" onClick={() => {
+                            <Button variant="outline" size="sm" className="rounded-lg text-xs sm:text-sm h-8 sm:h-9 flex-1 sm:flex-none" onClick={() => {
                               setPreviewMode(!previewMode);
                               toast({
                                 title: previewMode ? "Exiting preview mode" : "Entering preview mode",
                                 description: previewMode ? "Returning to normal view" : "Full-screen preview enabled"
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
-                              Preview Mode
+                              <span className="hidden sm:inline">Preview Mode</span>
+                              <span className="sm:hidden">Preview</span>
                             </Button>
                           </div>
                         </div>
                       </CardHeader>
-                      <CardContent>
-                        <div className="rounded-xl border-2 bg-gradient-to-br from-background to-muted/10 p-6 min-h-[500px] max-h-[600px] overflow-y-auto custom-scrollbar">
-                          <div className="text-sm leading-relaxed space-y-4">
+                      <CardContent className="px-3 sm:px-6">
+                        <div className="rounded-xl border-2 bg-gradient-to-br from-background to-muted/10 p-3 sm:p-4 lg:p-6 min-h-[400px] sm:min-h-[500px] max-h-[500px] sm:max-h-[600px] overflow-y-auto custom-scrollbar">
+                          <div className="text-xs sm:text-sm leading-relaxed space-y-3 sm:space-y-4">
                             
                             {/* Patient Header */}
-                            <div className="pb-4 border-b border-muted">
-                              <div className="flex items-center justify-between mb-3">
-                                <div>
-                                  <div className="text-lg font-semibold text-foreground">
+                            <div className="pb-3 sm:pb-4 border-b border-muted">
+                              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-3">
+                                <div className="min-w-0">
+                                  <div className="text-sm sm:text-base lg:text-lg font-semibold text-foreground">
                                     {selectedPatient?.name || 'John Doe'}
                                   </div>
-                                  <div className="text-sm text-muted-foreground">
+                                  <div className="text-xs sm:text-sm text-muted-foreground">
                                     MRN: {selectedPatient?.mrn || '12345'} • DOB: 01/15/1978 • Age: 45
                                   </div>
                                 </div>
-                                <div className="text-right">
-                                  <div className="text-sm font-medium">Visit Date: {new Date().toLocaleDateString()}</div>
-                                  <div className="text-xs text-muted-foreground">
+                                <div className="text-left sm:text-right">
+                                  <div className="text-xs sm:text-sm font-medium">Visit Date: {new Date().toLocaleDateString()}</div>
+                                  <div className="text-[10px] sm:text-xs text-muted-foreground">
                                     Provider: Dr. Sarah Johnson, MD
                                   </div>
                                 </div>
@@ -2630,33 +2632,33 @@ const ProductWalkthrough: React.FC = () => {
                             </div>
 
                             {/* Clinical Note Content */}
-                            <div className="space-y-6">
+                            <div className="space-y-4 sm:space-y-6">
                               <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                <div className="font-semibold text-primary mb-1 sm:mb-2 flex items-center gap-2 text-xs sm:text-sm">
+                                  <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                                   CHIEF COMPLAINT
                                 </div>
-                                <div className="text-foreground pl-4">
+                                <div className="text-foreground pl-3 sm:pl-4">
                                   Blood sugars trending higher over the last few weeks.
                                 </div>
                               </div>
                               
                               <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                <div className="font-semibold text-primary mb-1 sm:mb-2 flex items-center gap-2 text-xs sm:text-sm">
+                                  <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                                   HISTORY OF PRESENT ILLNESS
                                 </div>
-                                <div className="text-foreground pl-4">
+                                <div className="text-foreground pl-3 sm:pl-4">
                                   Patient presents for follow-up of diabetes and hypertension. Checks sugars twice daily. Morning readings 140-160, evening 180-200. No hypoglycemia episodes. Reports adherence to current medication regimen. No recent changes in diet or exercise routine.
                                 </div>
                               </div>
                               
                               <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                <div className="font-semibold text-primary mb-1 sm:mb-2 flex items-center gap-2 text-xs sm:text-sm">
+                                  <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                                   PHYSICAL EXAMINATION
                                 </div>
-                                <div className="text-foreground pl-4">
+                                <div className="text-foreground pl-3 sm:pl-4">
                                   Vital Signs: BP 138/82, HR 76, RR 16, Temp 98.6°F, O2 Sat 98%<br />
                                   General: Well-appearing, no acute distress<br />
                                   Cardiovascular: Regular rate and rhythm, no murmurs<br />
@@ -2666,14 +2668,14 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                               
                               <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                <div className="font-semibold text-primary mb-1 sm:mb-2 flex items-center gap-2 text-xs sm:text-sm">
+                                  <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                                   ASSESSMENT AND PLAN
                                 </div>
-                                <div className="text-foreground pl-4 space-y-3">
+                                <div className="text-foreground pl-3 sm:pl-4 space-y-2 sm:space-y-3">
                                   <div>
-                                    <div className="font-medium">1. Type 2 Diabetes Mellitus (E11.9) - Poorly controlled</div>
-                                    <div className="text-sm text-muted-foreground ml-3">
+                                    <div className="font-medium text-xs sm:text-sm">1. Type 2 Diabetes Mellitus (E11.9) - Poorly controlled</div>
+                                    <div className="text-[10px] sm:text-xs text-muted-foreground ml-2 sm:ml-3">
                                       • Increase Metformin to 1000mg BID<br />
                                       • Continue glucose monitoring<br />
                                       • HbA1c in 3 months<br />
@@ -2681,8 +2683,8 @@ const ProductWalkthrough: React.FC = () => {
                                     </div>
                                   </div>
                                   <div>
-                                    <div className="font-medium">2. Hypertension (I10) - Well controlled</div>
-                                    <div className="text-sm text-muted-foreground ml-3">
+                                    <div className="font-medium text-xs sm:text-sm">2. Hypertension (I10) - Well controlled</div>
+                                    <div className="text-[10px] sm:text-xs text-muted-foreground ml-2 sm:ml-3">
                                       • Continue current regimen<br />
                                       • Home BP monitoring
                                     </div>
@@ -2691,11 +2693,11 @@ const ProductWalkthrough: React.FC = () => {
                               </div>
                               
                               <div>
-                                <div className="font-semibold text-primary mb-2 flex items-center gap-2">
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                <div className="font-semibold text-primary mb-1 sm:mb-2 flex items-center gap-2 text-xs sm:text-sm">
+                                  <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary flex-shrink-0"></div>
                                   FOLLOW-UP
                                 </div>
-                                <div className="text-foreground pl-4">
+                                <div className="text-foreground pl-3 sm:pl-4">
                                   Return to clinic in 3 months or sooner if concerns. Patient educated on signs/symptoms requiring immediate medical attention.
                                 </div>
                               </div>
@@ -2704,9 +2706,9 @@ const ProductWalkthrough: React.FC = () => {
                         </div>
                         
                         {/* Note Metadata */}
-                        <div className="mt-4 p-3 bg-muted/50 rounded-lg">
-                          <div className="flex items-center justify-between text-xs text-muted-foreground">
-                            <div className="flex items-center gap-4">
+                        <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-muted/50 rounded-lg">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[10px] sm:text-xs text-muted-foreground">
+                            <div className="flex items-center gap-2 sm:gap-4">
                               <span>Word count: 245</span>
                               <span>Sections: 5</span>
                               <span>Medical terms: 18</span>
@@ -2721,19 +2723,19 @@ const ProductWalkthrough: React.FC = () => {
                     </Card>
                     
                     {/* Enhanced EHR Fields Panel */}
-                    <Card className="xl:col-span-4 h-fit border-2 bg-gradient-to-br from-background to-muted/5">
-                      <CardHeader className="pb-4">
-                        <CardTitle className="flex items-center gap-2">
-                          <Server className="h-5 w-5 text-primary" />
-                          Send to EHR
+                    <Card className="lg:col-span-4 xl:col-span-4 h-fit border-2 bg-gradient-to-br from-background to-muted/5">
+                      <CardHeader className="pb-3 sm:pb-4">
+                        <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                          <Server className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                          <span className="min-w-0 truncate">Send to EHR</span>
                         </CardTitle>
-                        <p className="text-sm text-muted-foreground mt-1">Notes are automatically structured into custom EHR fields of your choice - configure which fields receive specific data types.</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-1">Notes are automatically structured into custom EHR fields of your choice - configure which fields receive specific data types.</p>
                       </CardHeader>
-                      <CardContent className="space-y-6">
+                      <CardContent className="space-y-4 sm:space-y-6">
                         
                         {/* Send Actions - Moved to Top */}
-                        <div className="space-y-3">
-                          <Button className="w-full rounded-xl h-12 font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => {
+                        <div className="space-y-2 sm:space-y-3">
+                          <Button className="w-full rounded-xl h-10 sm:h-12 font-semibold text-sm sm:text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white" onClick={() => {
                         setIsSending(true);
                         setTimeout(() => {
                           setIsSending(false);
@@ -2744,138 +2746,140 @@ const ProductWalkthrough: React.FC = () => {
                           });
                         }, 3000);
                       }}>
-                            <Send className="h-5 w-5 mr-2" />
+                            <Send className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                             Send to {selectedEhr || 'Epic'}
                           </Button>
                           
-                          <div className="grid grid-cols-2 gap-2">
-                            <Button variant="outline" className="rounded-lg h-9 text-sm" onClick={() => {
+                          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                            <Button variant="outline" className="rounded-lg h-8 sm:h-9 text-xs sm:text-sm" onClick={() => {
                               toast({
                                 title: "Note saved to drafts",
                                 description: "Clinical note saved successfully to drafts folder"
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
                               </svg>
-                              Save Draft
+                              <span className="hidden sm:inline">Save Draft</span>
+                              <span className="sm:hidden">Save</span>
                             </Button>
-                            <Button variant="outline" className="rounded-lg h-9 text-sm" onClick={() => {
+                            <Button variant="outline" className="rounded-lg h-8 sm:h-9 text-xs sm:text-sm" onClick={() => {
                               toast({
                                 title: "Downloading PDF",
                                 description: "Clinical note exported as PDF and downloading now"
                               });
                             }}>
-                              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                               </svg>
-                              Export PDF
+                              <span className="hidden sm:inline">Export PDF</span>
+                              <span className="sm:hidden">PDF</span>
                             </Button>
                           </div>
                         </div>
                         
-                        <Separator className="my-4" />
+                        <Separator className="my-3 sm:my-4" />
                         
                         {/* EHR Selection */}
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           <div className="flex items-center justify-between">
-                            <div className="text-sm font-semibold">Target EHR System</div>
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => {
+                            <div className="text-xs sm:text-sm font-semibold">Target EHR System</div>
+                            <Button variant="outline" size="sm" className="rounded-lg text-[10px] sm:text-xs h-7 sm:h-8" onClick={() => {
                               toast({
                                 title: "EHR System Selection",
                                 description: "Opening EHR system selection menu"
                               });
                             }}>
-                              <Settings className="h-3 w-3 mr-1" />
+                              <Settings className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1" />
                               Change
                             </Button>
                           </div>
-                          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                          <div className="p-2 sm:p-3 bg-blue-50 border border-blue-200 rounded-lg">
                             <div className="flex items-center gap-2">
-                              <div className="h-3 w-3 rounded-full bg-blue-500"></div>
-                              <div>
-                                <div className="font-medium text-blue-800">{selectedEhr || 'Epic MyChart'}</div>
-                                <div className="text-xs text-blue-600">Connected • Last sync: 2 min ago</div>
+                              <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-blue-500 flex-shrink-0"></div>
+                              <div className="min-w-0">
+                                <div className="font-medium text-blue-800 text-xs sm:text-sm truncate">{selectedEhr || 'Epic MyChart'}</div>
+                                <div className="text-[10px] sm:text-xs text-blue-600">Connected • Last sync: 2 min ago</div>
                               </div>
                             </div>
                           </div>
                         </div>
                         
                         {/* Diagnosis Codes */}
-                        <div className="space-y-3">
-                          <div className="text-sm font-semibold flex items-center justify-between">
+                        <div className="space-y-2 sm:space-y-3">
+                          <div className="text-xs sm:text-sm font-semibold flex items-center justify-between">
                             Diagnosis Codes (ICD-10)
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => {
+                            <Button variant="outline" size="sm" className="rounded-lg text-[10px] sm:text-xs h-7 sm:h-8" onClick={() => {
                               toast({
                                 title: "ICD-10 Code Selector",
                                 description: "Opening diagnosis code selector with search and filtering"
                               });
                             }}>
-                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                               </svg>
                               Add
                             </Button>
                           </div>
-                          <div className="space-y-2">
+                          <div className="space-y-1.5 sm:space-y-2">
                             <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded-lg">
-                              <div>
-                                <div className="text-sm font-medium text-green-800">E11.9</div>
-                                <div className="text-xs text-green-600">Type 2 Diabetes Mellitus</div>
+                              <div className="min-w-0">
+                                <div className="text-xs sm:text-sm font-medium text-green-800">E11.9</div>
+                                <div className="text-[10px] sm:text-xs text-green-600 truncate">Type 2 Diabetes Mellitus</div>
                               </div>
-                              <div className="text-xs text-green-700 font-medium">Primary</div>
+                              <div className="text-[10px] sm:text-xs text-green-700 font-medium flex-shrink-0">Primary</div>
                             </div>
                             <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded-lg">
-                              <div>
-                                <div className="text-sm font-medium text-green-800">I10</div>
-                                <div className="text-xs text-green-600">Essential Hypertension</div>
+                              <div className="min-w-0">
+                                <div className="text-xs sm:text-sm font-medium text-green-800">I10</div>
+                                <div className="text-[10px] sm:text-xs text-green-600 truncate">Essential Hypertension</div>
                               </div>
-                              <div className="text-xs text-green-700 font-medium">Secondary</div>
+                              <div className="text-[10px] sm:text-xs text-green-700 font-medium flex-shrink-0">Secondary</div>
                             </div>
                           </div>
                         </div>
                         
                         {/* Procedure Codes */}
-                        <div className="space-y-3">
-                          <div className="text-sm font-semibold flex items-center justify-between">
+                        <div className="space-y-2 sm:space-y-3">
+                          <div className="text-xs sm:text-sm font-semibold flex items-center justify-between">
                             Procedure Codes (CPT)
-                            <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => {
+                            <Button variant="outline" size="sm" className="rounded-lg text-[10px] sm:text-xs h-7 sm:h-8" onClick={() => {
                               toast({
                                 title: "CPT Code Editor",
                                 description: "Opening procedure code editor for modification"
                               });
                             }}>
-                              <svg className="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
                               Edit
                             </Button>
                           </div>
                           <div className="p-2 bg-blue-50 border border-blue-200 rounded-lg">
-                            <div className="text-sm font-medium text-blue-800">99213</div>
-                            <div className="text-xs text-blue-600">Office/Outpatient Visit - Established Patient</div>
-                            <div className="text-xs text-blue-700 mt-1">Confidence: 95%</div>
+                            <div className="text-xs sm:text-sm font-medium text-blue-800">99213</div>
+                            <div className="text-[10px] sm:text-xs text-blue-600">Office/Outpatient Visit - Established Patient</div>
+                            <div className="text-[10px] sm:text-xs text-blue-700 mt-1">Confidence: 95%</div>
                           </div>
                         </div>
 
                         {/* Validation Status */}
-                        <div className="space-y-3">
-                          <div className="text-sm font-semibold">Validation Status</div>
-                          <div className="space-y-2 text-xs">
+                        <div className="space-y-2 sm:space-y-3">
+                          <div className="text-xs sm:text-sm font-semibold">Validation Status</div>
+                          <div className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-xs">
                             <div className="flex items-center gap-2 text-green-700">
-                              <CheckCircle2 className="h-4 w-4" />
+                              <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                               <span>Required fields complete</span>
                             </div>
                             <div className="flex items-center gap-2 text-green-700">
-                              <CheckCircle2 className="h-4 w-4" />
+                              <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                               <span>Diagnosis codes validated</span>
                             </div>
                             <div className="flex items-center gap-2 text-green-700">
-                              <CheckCircle2 className="h-4 w-4" />
+                              <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                               <span>Provider credentials verified</span>
                             </div>
                             <div className="flex items-center gap-2 text-green-700">
-                              <CheckCircle2 className="h-4 w-4" />
+                              <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                               <span>EHR connection active</span>
                             </div>
                           </div>
