@@ -1953,7 +1953,7 @@ const ProductWalkthrough: React.FC = () => {
             </section>
 
             {/* Capture Section */}
-            <section id="capture" className={`screen ${active === "capture" ? "" : "hidden"} pb-20`}>
+            <section id="capture" className={`screen ${active === "capture" ? "animate-fade-in" : "hidden"} pb-20`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
                 <div>
                   <h2 className="text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
@@ -2008,13 +2008,22 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Enhanced Mode Toggle */}
                         <Tabs value={captureMode} onValueChange={(value: 'audio' | 'type') => setCaptureMode(value)} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-                            <TabsTrigger value="audio" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
-                              <Mic className="h-4 w-4" />
+                          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-muted/30 to-muted/50 p-1 rounded-xl shadow-inner">
+                            <TabsTrigger 
+                              value="audio" 
+                              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary transition-all duration-300 rounded-lg font-medium data-[state=active]:scale-[1.02]"
+                            >
+                              <div className="relative">
+                                <Mic className="h-4 w-4" />
+                                {isRecording && <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>}
+                              </div>
                               <span className="hidden sm:inline">Audio Capture</span>
                               <span className="sm:hidden">Audio</span>
                             </TabsTrigger>
-                            <TabsTrigger value="type" className="flex items-center gap-2 data-[state=active]:bg-primary/10">
+                            <TabsTrigger 
+                              value="type" 
+                              className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary transition-all duration-300 rounded-lg font-medium data-[state=active]:scale-[1.02]"
+                            >
                               <FileText className="h-4 w-4" />
                               <span className="hidden sm:inline">Manual Entry</span>
                               <span className="sm:hidden">Type</span>
@@ -2027,27 +2036,69 @@ const ProductWalkthrough: React.FC = () => {
                               
                               {/* Recording Controls */}
                               <div className="space-y-4">
-                                <Button onClick={toggleRecording} className={`w-full rounded-xl h-16 font-semibold text-lg transition-all duration-300 ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25' : 'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-[1.02]'}`}>
-                                  {isRecording ? <>
-                                      <CircleStop className="h-6 w-6 mr-3" /> Stop Recording
-                                    </> : <>
-                                      <Mic className="h-6 w-6 mr-3" /> Start Recording
-                                    </>}
+                                <Button 
+                                  onClick={toggleRecording} 
+                                  className={`w-full rounded-xl h-20 font-semibold text-lg transition-all duration-500 transform ${
+                                    isRecording 
+                                      ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 shadow-xl shadow-red-500/30 scale-[1.02]' 
+                                      : 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-xl shadow-primary/30 hover:scale-[1.05]'
+                                  } hover:shadow-2xl active:scale-[0.98]`}
+                                >
+                                  <div className="flex items-center gap-3">
+                                    {isRecording ? (
+                                      <div className="relative">
+                                        <CircleStop className="h-7 w-7" />
+                                        <div className="absolute inset-0 h-7 w-7 rounded-full border-2 border-white/50 animate-ping"></div>
+                                      </div>
+                                    ) : (
+                                      <div className="relative">
+                                        <Mic className="h-7 w-7" />
+                                        <div className="absolute -inset-1 rounded-full bg-white/20 animate-pulse"></div>
+                                      </div>
+                                    )}
+                                    <div className="text-left">
+                                      <div className="text-xl font-bold">
+                                        {isRecording ? 'Stop Recording' : 'Start Recording'}
+                                      </div>
+                                      <div className="text-sm opacity-90">
+                                        {isRecording ? 'Click to finish' : 'Click to begin'}
+                                      </div>
+                                    </div>
+                                  </div>
                                 </Button>
                                 
-                                {/* Enhanced Recording Status */}
-                                <div className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-muted/30 to-muted/10 rounded-lg border">
-                                  <div className="flex items-center gap-2">
-                                    <div className={`h-4 w-4 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-muted-foreground/50'}`} />
-                                    <span className="font-mono text-2xl font-bold">{timeStr}</span>
-                                  </div>
-                                  <div className="h-6 w-px bg-border mx-2"></div>
-                                  <div className="text-sm text-center">
-                                    <div className="font-medium">
-                                      {isRecording ? 'Recording in Progress' : 'Ready to Record'}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                      {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
+                                {/* Enhanced Recording Status with better visual hierarchy */}
+                                <div className="relative overflow-hidden rounded-xl border-2 border-gradient-to-r from-primary/20 to-primary/10">
+                                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+                                  <div className="relative p-6 bg-gradient-to-br from-background/95 to-muted/20">
+                                    <div className="flex items-center justify-between">
+                                      <div className="flex items-center gap-4">
+                                        <div className="relative">
+                                          <div className={`h-6 w-6 rounded-full transition-all duration-300 ${isRecording ? 'bg-red-500' : 'bg-muted-foreground/30'}`} />
+                                          {isRecording && (
+                                            <>
+                                              <div className="absolute inset-0 h-6 w-6 rounded-full bg-red-500 animate-ping opacity-40"></div>
+                                              <div className="absolute inset-0 h-6 w-6 rounded-full bg-red-400 animate-pulse"></div>
+                                            </>
+                                          )}
+                                        </div>
+                                        <div>
+                                          <div className="font-mono text-3xl font-bold text-primary tracking-wider">
+                                            {timeStr}
+                                          </div>
+                                          <div className="text-sm text-muted-foreground">
+                                            Session Duration
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className={`font-semibold text-lg transition-colors duration-300 ${isRecording ? 'text-red-600' : 'text-green-600'}`}>
+                                          {isRecording ? 'Recording in Progress' : 'Ready to Record'}
+                                        </div>
+                                        <div className="text-sm text-muted-foreground mt-1">
+                                          {isRecording ? 'Speak clearly for best results' : 'High-quality audio recommended'}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -2340,7 +2391,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg" 
+                        className="rounded-lg transition-all hover:scale-105" 
                         onClick={() => {
                           const textArea = document.createElement('textarea');
                           textArea.value = transcript || typeNotes || 'No content to edit';
@@ -2359,7 +2410,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg"
+                        className="rounded-lg transition-all hover:scale-105"
                         onClick={() => {
                           navigator.clipboard.writeText(transcript || typeNotes || 'No content available').then(() => {
                             toast({
@@ -2375,7 +2426,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg"
+                        className="rounded-lg transition-all hover:scale-105"
                         onClick={() => {
                           const element = document.createElement("a");
                           const file = new Blob([transcript || typeNotes || 'No content available'], {type: 'text/plain'});
@@ -2393,7 +2444,7 @@ const ProductWalkthrough: React.FC = () => {
                       </Button>
                       <Button 
                         size="sm" 
-                        className="rounded-lg"
+                        className="rounded-lg transition-all hover:scale-105"
                         onClick={() => {
                           onNavClick('coding');
                           toast({
@@ -2412,7 +2463,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg"
+                        className="rounded-lg transition-all hover:scale-105"
                         onClick={() => {
                           setIsRecording(!isRecording);
                           toast({
@@ -2427,7 +2478,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg"
+                        className="rounded-lg transition-all hover:scale-105"
                         onClick={() => {
                           const input = document.createElement('input');
                           input.type = 'file';
@@ -2450,7 +2501,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg text-destructive hover:text-destructive hover:bg-destructive/10"
+                        className="rounded-lg text-destructive hover:text-destructive hover:bg-destructive/10 transition-all hover:scale-105"
                         onClick={() => {
                           if (confirm('Are you sure you want to end and discard this session?')) {
                             setTranscript('');
@@ -2474,7 +2525,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
                         onClick={() => {
                           toast({
                             title: "Full History",
@@ -2488,7 +2539,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
                         onClick={() => {
                           toast({
                             title: "Lab Results",
@@ -2502,7 +2553,7 @@ const ProductWalkthrough: React.FC = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50"
+                        className="rounded-lg text-blue-700 border-blue-200 hover:bg-blue-50 transition-all hover:scale-105"
                         onClick={() => {
                           toast({
                             title: "Allergies",
