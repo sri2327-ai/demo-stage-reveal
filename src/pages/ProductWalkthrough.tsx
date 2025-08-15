@@ -2456,7 +2456,7 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     Send to EHR
                   </h2>
-                  <p className="mt-3 text-muted-foreground text-lg">Review, validate, and send your clinical documentation to the EHR system.</p>
+                  <p className="mt-3 text-muted-foreground text-lg">Review, validate, and send your clinical documentation to the EHR system. Patient instructions can be sent via email or to patient portal.</p>
                   
                   {/* Status Bar */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-50/50 rounded-xl border border-green-200">
