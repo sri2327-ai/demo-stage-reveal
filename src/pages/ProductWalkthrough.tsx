@@ -3133,7 +3133,17 @@ const ProductWalkthrough: React.FC = () => {
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="flex items-center justify-between">
-                          <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50"
+                            onClick={() => {
+                              toast({
+                                title: `Configure ${automation.title}`,
+                                description: "Opening automation configuration settings",
+                              });
+                            }}
+                          >
                             <Settings className="h-3 w-3 mr-2" />
                             Configure
                           </Button>
@@ -3146,14 +3156,25 @@ const ProductWalkthrough: React.FC = () => {
                     </Card>)}
                 </div>
 
-                <div className="mt-8 flex justify-between items-center">
-                  <div className="text-sm text-muted-foreground">
-                    Configure additional automations in settings
+                <div className="mt-8 p-4 bg-gradient-to-r from-muted/20 to-background rounded-xl border border-border/50">
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-muted-foreground">
+                      Configure additional automations in settings
+                    </div>
+                    <Button 
+                      className="rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.02]" 
+                      onClick={() => {
+                        onNavClick('agent');
+                        toast({
+                          title: "Proceeding to AI Agent",
+                          description: "Moving to AI agent setup section",
+                        });
+                      }}
+                    >
+                      <Bot className="h-4 w-4 mr-2" />
+                      Continue to AI Agent Setup
+                    </Button>
                   </div>
-                  <Button className="rounded-lg bg-gray-600 hover:bg-gray-700" onClick={() => onNavClick('agent')}>
-                    <Bot className="h-4 w-4 mr-2" />
-                    Continue to AI Agent Setup
-                  </Button>
                 </div>
               </div>
             </section>
