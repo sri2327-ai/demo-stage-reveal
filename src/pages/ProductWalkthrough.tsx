@@ -1573,9 +1573,7 @@ const ProductWalkthrough: React.FC = () => {
                     Unified Schedule
                   </h2>
                   <p className="mt-1 text-muted-foreground text-base">
-                    Designed for providers practicing across multiple clinics, locations, and EHR systems. 
-                    Schedule imports from various practice management platforms. Even if you have only one EHR 
-                    system, it can still be fully customized to your workflow.
+                    For providers across multiple clinics, locations, and EHR systems. Single EHR setups can also be fully customized.
                   </p>
                 </div>
 
