@@ -638,10 +638,7 @@ const ProductWalkthrough: React.FC = () => {
                   {/* Improved progress indicator */}
                   <div className="mt-4 bg-gradient-to-r from-muted/50 to-muted/20 p-3 rounded-2xl border border-border/50 max-w-2xl mx-auto">
                     <div className="flex items-center justify-between mb-4">
-                      <button 
-                        onClick={() => setSetupStep('note')}
-                        className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}
-                      >
+                      <button onClick={() => setSetupStep('note')} className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'landing' || setupStep === 'note' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
                         <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'landing' || setupStep === 'note' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>
                           {setupStep === 'ehr' ? <CheckCircle2 className="h-5 w-5" /> : '1'}
                         </div>
@@ -655,10 +652,7 @@ const ProductWalkthrough: React.FC = () => {
                         <div className={`h-full transition-all duration-500 ${setupStep === 'ehr' ? 'w-full bg-gradient-to-r from-[#143151] to-[#387E89]' : setupStep === 'note' ? 'w-1/2 bg-gradient-to-r from-[#143151] to-[#387E89]' : 'w-0'}`} />
                       </div>
                       
-                      <button 
-                        onClick={() => setSetupStep('ehr')}
-                        className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}
-                      >
+                      <button onClick={() => setSetupStep('ehr')} className={`flex items-center gap-3 transition-all duration-300 hover:scale-105 cursor-pointer ${setupStep === 'ehr' ? 'text-primary scale-105' : 'text-muted-foreground'}`}>
                         <div className={`h-10 w-10 rounded-full grid place-items-center font-bold text-sm transition-all duration-300 ${setupStep === 'ehr' ? 'bg-gradient-to-br from-[#143151] to-[#387E89] text-white shadow-lg' : 'border-2 border-muted-foreground/30'}`}>2</div>
                         <div>
                           <div className="font-semibold">EHR Integration</div>
@@ -1609,22 +1603,16 @@ const ProductWalkthrough: React.FC = () => {
 
                         {/* Controls */}
                         <div className="relative flex items-center gap-3">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="rounded-lg"
-                            disabled={syncing}
-                            onClick={() => {
-                              setSyncing(true);
-                              setTimeout(() => {
-                                setSyncing(false);
-                                toast({
-                                  title: "Sync Complete",
-                                  description: "All systems synchronized successfully. 3 new appointments added.",
-                                });
-                              }, 2500);
-                            }}
-                          >
+                          <Button variant="outline" size="sm" className="rounded-lg" disabled={syncing} onClick={() => {
+                          setSyncing(true);
+                          setTimeout(() => {
+                            setSyncing(false);
+                            toast({
+                              title: "Sync Complete",
+                              description: "All systems synchronized successfully. 3 new appointments added."
+                            });
+                          }, 2500);
+                        }}>
                             <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
                             {syncing ? 'Syncing...' : 'Sync All'}
                           </Button>
@@ -1644,78 +1632,62 @@ const ProductWalkthrough: React.FC = () => {
                            <div className="h-4 w-px bg-border"></div>
                            
                            {/* Settings Button */}
-                           <Button 
-                             variant="outline" 
-                             size="sm" 
-                             className="rounded-lg px-3"
-                             onClick={() => setShowScheduleSettings(!showScheduleSettings)}
-                           >
+                           <Button variant="outline" size="sm" className="rounded-lg px-3" onClick={() => setShowScheduleSettings(!showScheduleSettings)}>
                              <Settings className="h-4 w-4" />
                            </Button>
                            
                            {/* Settings Dropdown */}
-                           {showScheduleSettings && (
-                             <div className="absolute right-0 top-full mt-2 w-72 bg-background border rounded-lg shadow-lg z-50 animate-fade-in">
+                           {showScheduleSettings && <div className="absolute right-0 top-full mt-2 w-72 bg-background border rounded-lg shadow-lg z-50 animate-fade-in">
                                <div className="p-4 space-y-4">
                                  <div className="text-sm font-semibold">Schedule Settings</div>
                                  
                                  <div className="space-y-3">
                                    <div className="flex items-center justify-between">
                                      <Label htmlFor="auto-refresh" className="text-sm">Auto-refresh</Label>
-                                     <Switch 
-                                       id="auto-refresh"
-                                       checked={scheduleSettings.autoRefresh}
-                                       onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, autoRefresh: checked}))}
-                                     />
+                                     <Switch id="auto-refresh" checked={scheduleSettings.autoRefresh} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                  ...prev,
+                                  autoRefresh: checked
+                                }))} />
                                    </div>
                                    
                                    <div className="flex items-center justify-between">
                                      <Label htmlFor="highlight-priority" className="text-sm">Highlight Priority</Label>
-                                     <Switch 
-                                       id="highlight-priority"
-                                       checked={scheduleSettings.highlightPriority}
-                                       onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, highlightPriority: checked}))}
-                                     />
+                                     <Switch id="highlight-priority" checked={scheduleSettings.highlightPriority} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                  ...prev,
+                                  highlightPriority: checked
+                                }))} />
                                    </div>
                                    
                                    <div className="flex items-center justify-between">
                                      <Label htmlFor="show-cancelled-settings" className="text-sm">Show Cancelled Appointments</Label>
-                                     <Switch 
-                                       id="show-cancelled-settings"
-                                       checked={scheduleSettings.showCancelled}
-                                       onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, showCancelled: checked}))}
-                                     />
+                                     <Switch id="show-cancelled-settings" checked={scheduleSettings.showCancelled} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                  ...prev,
+                                  showCancelled: checked
+                                }))} />
                                    </div>
                                    
                                    <div className="flex items-center justify-between">
                                      <Label htmlFor="group-by-location" className="text-sm">Group by Location</Label>
-                                     <Switch 
-                                       id="group-by-location"
-                                       checked={scheduleSettings.groupByLocation}
-                                       onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, groupByLocation: checked}))}
-                                     />
+                                     <Switch id="group-by-location" checked={scheduleSettings.groupByLocation} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                  ...prev,
+                                  groupByLocation: checked
+                                }))} />
                                    </div>
                                  </div>
                                  
                                  <div className="pt-3 border-t">
-                                   <Button 
-                                     size="sm" 
-                                     variant="outline"
-                                     className="w-full"
-                                     onClick={() => {
-                                       setShowScheduleSettings(false);
-                                       toast({
-                                         title: "Settings saved",
-                                         description: "Schedule preferences updated"
-                                       });
-                                     }}
-                                   >
+                                   <Button size="sm" variant="outline" className="w-full" onClick={() => {
+                                setShowScheduleSettings(false);
+                                toast({
+                                  title: "Settings saved",
+                                  description: "Schedule preferences updated"
+                                });
+                              }}>
                                      Save Settings
                                    </Button>
                                  </div>
                                </div>
-                             </div>
-                            )}
+                             </div>}
                           </div>
                         </div>
                     </CardHeader>
@@ -1744,20 +1716,14 @@ const ProductWalkthrough: React.FC = () => {
                             <option value="Sports Medicine">Sports Medicine</option>
                             <option value="Women's Health">Women's Health</option>
                           </select>
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="rounded-lg whitespace-nowrap"
-                            onClick={() => setShowMoreFilters(!showMoreFilters)}
-                          >
+                          <Button variant="outline" size="sm" className="rounded-lg whitespace-nowrap" onClick={() => setShowMoreFilters(!showMoreFilters)}>
                             <Filter className="h-4 w-4 mr-2" />
                             More Filters
                           </Button>
                         </div>
                         
                         {/* Advanced Filters Panel */}
-                        {showMoreFilters && (
-                          <div className="mt-4 p-4 bg-muted/20 rounded-lg border animate-fade-in">
+                        {showMoreFilters && <div className="mt-4 p-4 bg-muted/20 rounded-lg border animate-fade-in">
                             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                               <div className="space-y-2">
                                 <Label className="text-xs font-medium">Visit Type</Label>
@@ -1827,19 +1793,17 @@ const ProductWalkthrough: React.FC = () => {
                             <div className="flex items-center justify-between mt-4 pt-3 border-t">
                               <div className="flex items-center gap-4">
                                 <div className="flex items-center space-x-2">
-                                  <Checkbox 
-                                    id="show-cancelled" 
-                                    checked={scheduleSettings.showCancelled}
-                                    onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, showCancelled: !!checked}))}
-                                  />
+                                  <Checkbox id="show-cancelled" checked={scheduleSettings.showCancelled} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                ...prev,
+                                showCancelled: !!checked
+                              }))} />
                                   <Label htmlFor="show-cancelled" className="text-xs">Show Cancelled</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <Checkbox 
-                                    id="group-location"
-                                    checked={scheduleSettings.groupByLocation}
-                                    onCheckedChange={(checked) => setScheduleSettings(prev => ({...prev, groupByLocation: !!checked}))}
-                                  />
+                                  <Checkbox id="group-location" checked={scheduleSettings.groupByLocation} onCheckedChange={checked => setScheduleSettings(prev => ({
+                                ...prev,
+                                groupByLocation: !!checked
+                              }))} />
                                   <Label htmlFor="group-location" className="text-xs">Group by Location</Label>
                                 </div>
                               </div>
@@ -1848,19 +1812,18 @@ const ProductWalkthrough: React.FC = () => {
                                 <Button variant="outline" size="sm" onClick={() => setShowMoreFilters(false)}>
                                   Cancel
                                 </Button>
-                                <Button 
-                                  size="sm" 
-                                  onClick={() => {
-                                    toast({ title: "Filters applied", description: "Schedule updated with new filters" });
-                                    setShowMoreFilters(false);
-                                  }}
-                                >
+                                <Button size="sm" onClick={() => {
+                              toast({
+                                title: "Filters applied",
+                                description: "Schedule updated with new filters"
+                              });
+                              setShowMoreFilters(false);
+                            }}>
                                   Apply Filters
                                 </Button>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          </div>}
                       </div>
                     </CardContent>
                   </Card>
@@ -1927,9 +1890,7 @@ const ProductWalkthrough: React.FC = () => {
                                           <Play className="h-3 w-3 mr-1" />
                                           Start
                                         </Button>
-                                        <Button variant="outline" size="sm" className="rounded-lg h-8 px-2">
-                                          <MoreVertical className="h-3 w-3" />
-                                        </Button>
+                                        
                                       </div>
                                     </td>
                                   </tr>;
