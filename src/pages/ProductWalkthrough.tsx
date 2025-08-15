@@ -2167,17 +2167,38 @@ const ProductWalkthrough: React.FC = () => {
                         <div className="pt-6 border-t space-y-3">
                           <div className="text-xs font-medium text-muted-foreground mb-3">Session Controls</div>
                           <div className="grid gap-2">
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm" onClick={() => {
+                              setIsRecording(false);
+                              toast({
+                                title: "Session paused",
+                                description: "Recording and transcription paused. Click to resume when ready."
+                              });
+                            }}>
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
                               Pause Session
                             </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm">
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm" size="sm" onClick={() => {
+                              toast({
+                                title: "Audio file uploader",
+                                description: "Opening file selector for audio upload (.mp3, .wav, .m4a formats supported)"
+                              });
+                            }}>
                               <Upload className="h-4 w-4 mr-2" />
                               Upload Audio File
                             </Button>
-                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm">
+                            <Button variant="outline" className="rounded-lg justify-start h-10 text-sm text-destructive hover:text-destructive hover:bg-destructive/10" size="sm" onClick={() => {
+                              setIsRecording(false);
+                              setTranscript("");
+                              setTypeNotes("");
+                              setSeconds(0);
+                              toast({
+                                title: "Session ended",
+                                description: "Current session discarded. All progress has been cleared.",
+                                variant: "destructive"
+                              });
+                            }}>
                               <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                               </svg>
@@ -2250,19 +2271,44 @@ const ProductWalkthrough: React.FC = () => {
                         
                         {/* Enhanced Note Actions */}
                         <div className="flex flex-wrap gap-3 pt-4 border-t">
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => {
+                            toast({
+                              title: "Note editor opened",
+                              description: "Opening rich text editor for manual note editing and refinement"
+                            });
+                          }}>
                             <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                             Edit Note
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={async () => {
+                            const textToCopy = transcript || typeNotes || "No content to copy";
+                            try {
+                              await navigator.clipboard.writeText(textToCopy);
+                              toast({
+                                title: "Text copied",
+                                description: "Clinical note content copied to clipboard successfully"
+                              });
+                            } catch (err) {
+                              toast({
+                                title: "Copy failed",
+                                description: "Unable to copy to clipboard. Please try again.",
+                                variant: "destructive"
+                              });
+                            }
+                          }}>
                             <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
                             Copy Text
                           </Button>
-                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none">
+                          <Button variant="outline" size="sm" className="rounded-lg flex-1 sm:flex-none" onClick={() => {
+                            toast({
+                              title: "Exporting note",
+                              description: "Clinical note is being exported as PDF, Word, and plain text formats"
+                            });
+                          }}>
                             <FileText className="h-4 w-4 mr-2" />
                             Export
                           </Button>
