@@ -264,60 +264,46 @@ const TranscribeAndDictate = () => {
         </section>
 
         {/* Testimonials & Results Section */}
-        <section className="py-20 lg:py-32 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/40 via-blue-50/40 to-cyan-50/40" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,126,137,0.1),transparent_50%)] opacity-60" />
-          <div className="container relative z-10">
+        <section className="py-16 lg:py-24">
+          <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#387E89]/10 to-blue-500/10 backdrop-blur-sm border border-[#387E89]/20 rounded-full px-4 py-2 mb-6">
-                <Quote className="w-4 h-4 text-[#387E89]" />
-                <span className="text-sm font-medium text-[#387E89]">Doctor Testimonials</span>
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-[#387E89] to-blue-600 bg-clip-text text-transparent">
-                What Doctors Say
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Real feedback from healthcare professionals transforming their documentation workflow
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">What Doctors Say</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Real feedback from healthcare professionals using S10.AI
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group"
                 >
-                  <Card className="h-full border-0 bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-white/90 group-hover:to-white/70 rounded-3xl overflow-hidden">
-                    <CardContent className="p-8 relative">
-                      <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
-                        <Quote className="w-12 h-12 text-[#387E89]" />
+                  <Card className="bg-card border h-full hover:shadow-elegant hover:scale-105 transition-all duration-300">
+                    <CardContent className="p-6 relative">
+                      <div className="absolute top-4 right-4">
+                        <Quote className="w-6 h-6 text-primary/10" />
                       </div>
-                      <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-[#387E89]/10 to-blue-500/10 rounded-full blur-2xl opacity-50" />
-                      
-                      <div className="flex items-center gap-1 mb-6">
+                      <div className="flex items-center gap-1 mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current drop-shadow-sm" />
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                         ))}
                       </div>
-                      
-                      <blockquote className="text-xl text-foreground/90 mb-8 font-medium leading-relaxed relative z-10">
+                      <blockquote className="text-lg text-foreground mb-6 italic font-medium leading-relaxed">
                         "{testimonial.quote}"
                       </blockquote>
-                      
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-gradient-to-r from-[#387E89]/20 to-blue-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Stethoscope className="w-6 h-6 text-[#387E89]" />
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Stethoscope className="w-5 h-5 text-primary" />
                         </div>
-                        <cite className="text-muted-foreground font-semibold text-lg">— {testimonial.author}</cite>
+                        <cite className="text-muted-foreground font-medium">— {testimonial.author}</cite>
                       </div>
                     </CardContent>
                   </Card>
@@ -329,15 +315,15 @@ const TranscribeAndDictate = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center"
+              className="text-center mt-12"
             >
-              <div className="inline-flex items-center gap-6 bg-gradient-to-r from-[#387E89]/10 to-blue-500/10 backdrop-blur-xl border border-[#387E89]/20 rounded-3xl px-10 py-6 hover:scale-105 transition-all duration-300 shadow-lg">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#387E89]/20 to-blue-500/20 rounded-2xl flex items-center justify-center">
-                  <CheckCircle className="w-8 h-8 text-[#387E89]" />
+              <div className="inline-flex items-center gap-4 bg-primary/10 rounded-2xl px-8 py-4">
+                <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <div className="font-bold text-2xl bg-gradient-to-r from-[#387E89] to-blue-600 bg-clip-text text-transparent">Save 2+ hours daily</div>
-                  <div className="text-muted-foreground text-lg">While improving patient engagement and note quality</div>
+                  <div className="font-semibold text-lg text-primary">Save 2+ hours daily</div>
+                  <div className="text-muted-foreground">While improving patient engagement and note quality</div>
                 </div>
               </div>
             </motion.div>
