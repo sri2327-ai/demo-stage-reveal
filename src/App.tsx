@@ -22,6 +22,7 @@ import MaintainEyeContact from "./pages/MaintainEyeContact";
 import CutAdminTasks from "./pages/CutAdminTasks";
 import MinimizeEHRTime from "./pages/MinimizeEHRTime";
 import ReduceBurnout from "./pages/ReduceBurnout";
+import TranscribeAndDictate from "./pages/TranscribeAndDictate";
 import PatientCenteredCare from "./pages/PatientCenteredCare";
 import IncreaseProfitability from "./pages/IncreaseProfitability";
 import { WelcomeForm } from "./components/WelcomeForm";
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/cut-admin-tasks" element={<CutAdminTasks />} />
             <Route path="/minimize-ehr-time" element={<MinimizeEHRTime />} />
             <Route path="/reduce-burnout" element={<ReduceBurnout />} />
+            <Route path="/transcribe-and-dictate" element={<TranscribeAndDictate />} />
             <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
             <Route path="/increase-profitability" element={<IncreaseProfitability />} />
             <Route path="/specialties" element={<SpecialtyHub />} />
