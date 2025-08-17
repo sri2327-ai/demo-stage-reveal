@@ -193,80 +193,48 @@ const TranscribeAndDictate = () => {
         </section>
 
         {/* Clinical Use Cases Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50/70 via-blue-50/50 to-indigo-50/30 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] opacity-30" />
-          <div className="container relative z-10">
+        <section className="py-16 lg:py-24 bg-muted/30">
+          <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
-              <div className="inline-flex items-center rounded-full mb-4 bg-primary/10 backdrop-blur-sm border border-primary/20 px-4 py-2 text-primary text-sm font-semibold">
-                <Stethoscope className="w-4 h-4 mr-2" />
-                Clinical Applications
-              </div>
-              <h2 className="text-3xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Proven across specialties
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                From emergency rooms to family practices, S10.AI adapts to any clinical environment with precision and reliability
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Clinical Use Cases</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Proven solutions across medical specialties and settings
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
+            <div className="grid md:grid-cols-3 gap-8">
               {clinicalUseCases.map((useCase, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="group"
                 >
-                  <Card className="bg-white/70 backdrop-blur-sm border border-white/60 shadow-lg hover:shadow-2xl hover:border-primary/30 transition-all duration-300 h-full overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <CardContent className="p-8 relative">
-                      <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
-                        <div className="text-primary group-hover:scale-110 transition-transform duration-300">
-                          {useCase.icon}
-                        </div>
+                  <Card className="glassmorphism border-0 h-full">
+                    <CardContent className="p-6">
+                      <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                        {useCase.icon}
                       </div>
-                      <h3 className="font-bold mb-4 text-xl text-primary group-hover:text-primary/90 transition-colors duration-300">
-                        {useCase.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-6 leading-relaxed text-base">
-                        {useCase.description}
-                      </p>
-                      <div className="space-y-3">
+                      <h3 className="font-semibold mb-3 text-xl text-primary">{useCase.title}</h3>
+                      <p className="text-muted-foreground mb-4">{useCase.description}</p>
+                      <ul className="space-y-2">
                         {useCase.details.map((detail, detailIndex) => (
-                          <div key={detailIndex} className="flex items-start gap-3 group/item">
-                            <div className="w-5 h-5 bg-primary/10 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 group-hover/item:bg-primary/20 transition-colors duration-200">
-                              <CheckCircle className="w-3 h-3 text-primary" />
-                            </div>
-                            <span className="text-muted-foreground text-sm leading-relaxed group-hover/item:text-foreground transition-colors duration-200">
-                              {detail}
-                            </span>
-                          </div>
+                          <li key={detailIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                            {detail}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-center mt-12"
-            >
-              <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl px-6 py-3 shadow-lg">
-                <Heart className="w-5 h-5 text-red-500" />
-                <span className="text-foreground font-medium">Trusted by healthcare professionals worldwide</span>
-              </div>
-            </motion.div>
           </div>
         </section>
 
