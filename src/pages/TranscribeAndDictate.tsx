@@ -215,7 +215,7 @@ const TranscribeAndDictate = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="glassmorphism border-0 h-full">
+                  <Card className="h-full rounded-2xl border border-[#387E89]/30 bg-gradient-to-br from-blue-50 to-cyan-50 shadow-sm hover:shadow-md transition-all">
                     <CardContent className="p-6">
                       <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
                         {useCase.icon}
