@@ -139,10 +139,16 @@ const TranscribeAndDictate = () => {
                 S10.AI captures medical conversations with 99.7% accuracy across any setting, specialty, or language. Focus on your patients while we handle the notes.
               </p>
               
-              <Button size="lg" className="rounded-full px-8 premium-button ring-1 ring-white/10 hover:translate-y-0.5 transition-all duration-300 group">
-                Try S10.AI
-                <Mic className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="rounded-full px-8 premium-button ring-1 ring-white/10 hover:translate-y-0.5 transition-all duration-300 group">
+                  Try S10.AI
+                  <Mic className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
+                </Button>
+                <Button size="lg" variant="outline" className="rounded-full px-8 hover:bg-primary/5 transition-all duration-300 group">
+                  Watch Demo
+                  <Zap className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
+                </Button>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -169,13 +175,14 @@ const TranscribeAndDictate = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
                 >
-                  <Card className="bg-card border h-full hover:shadow-elegant transition-all duration-300">
+                  <Card className="bg-card border h-full hover:shadow-elegant hover:border-primary/20 transition-all duration-300 group">
                     <CardContent className="p-6">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                         {benefit.icon}
                       </div>
-                      <h3 className="font-semibold mb-3 text-primary">{benefit.title}</h3>
+                      <h3 className="font-semibold mb-3 text-primary group-hover:text-primary/90">{benefit.title}</h3>
                       <p className="text-muted-foreground">{benefit.description}</p>
                     </CardContent>
                   </Card>
@@ -231,6 +238,31 @@ const TranscribeAndDictate = () => {
           </div>
         </section>
 
+        {/* Stats Section */}
+        <section className="py-16 lg:py-24 bg-gradient-to-r from-primary/5 to-purple-500/5">
+          <div className="container">
+            <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+              {[
+                { number: "99.7%", label: "Accuracy Rate" },
+                { number: "60+", label: "Languages" },
+                { number: "2+", label: "Hours Saved Daily" },
+                { number: "24/7", label: "Availability" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{stat.number}</div>
+                  <div className="text-muted-foreground font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Testimonials & Results Section */}
         <section className="py-16 lg:py-24">
           <div className="container">
@@ -240,9 +272,9 @@ const TranscribeAndDictate = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Proven Results</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">What Doctors Say</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Save 2+ hours daily while improving patient engagement and note quality
+                Real feedback from healthcare professionals using S10.AI
               </p>
             </motion.div>
 
@@ -254,18 +286,25 @@ const TranscribeAndDictate = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="bg-card border h-full">
-                    <CardContent className="p-6">
+                  <Card className="bg-card border h-full hover:shadow-elegant hover:scale-105 transition-all duration-300">
+                    <CardContent className="p-6 relative">
+                      <div className="absolute top-4 right-4">
+                        <Quote className="w-6 h-6 text-primary/10" />
+                      </div>
                       <div className="flex items-center gap-1 mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                         ))}
                       </div>
-                      <Quote className="w-8 h-8 text-primary/20 mb-4" />
-                      <blockquote className="text-lg text-foreground mb-4 italic">
+                      <blockquote className="text-lg text-foreground mb-6 italic font-medium leading-relaxed">
                         "{testimonial.quote}"
                       </blockquote>
-                      <cite className="text-muted-foreground font-medium">— {testimonial.author}</cite>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Stethoscope className="w-5 h-5 text-primary" />
+                        </div>
+                        <cite className="text-muted-foreground font-medium">— {testimonial.author}</cite>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
