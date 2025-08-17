@@ -116,9 +116,9 @@ const TranscribeAndDictate = () => {
 
       <div className="min-h-screen bg-gradient-subtle">
         {/* Hero Section */}
-        <section className="relative py-24 lg:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/70 via-blue-50/70 to-indigo-50/70" />
-          <div className="absolute inset-0 bg-checker-grid" />
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-primary">
+          <div className="absolute inset-0 bg-gradient-radial" />
+          <div className="absolute inset-0 bg-checker-grid opacity-20" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -126,25 +126,25 @@ const TranscribeAndDictate = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <HeroBadge>
+              <HeroBadge className="bg-white/20 border-white/30 text-white backdrop-blur-sm">
                 <Mic className="w-4 h-4 mr-2" />
                 Transcribe & Dictate
               </HeroBadge>
               
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-gradient leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white leading-tight">
                 Turn every conversation into perfect documentation
               </h1>
               
-              <p className="text-xl lg:text-2xl text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
                 S10.AI captures medical conversations with 99.7% accuracy across any setting, specialty, or language. Focus on your patients while we handle the notes.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="rounded-full px-8 premium-button ring-1 ring-white/10 hover:translate-y-0.5 transition-all duration-300 group">
+                <Button size="lg" className="rounded-full px-8 hero-button shadow-glow hover:scale-105 transition-all duration-300 group">
                   Try S10.AI
                   <Mic className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
                 </Button>
-                <Button size="lg" variant="outline" className="rounded-full px-8 hover:bg-primary/5 transition-all duration-300 group">
+                <Button size="lg" variant="outline" className="rounded-full px-8 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 group">
                   Watch Demo
                   <Zap className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
                 </Button>
@@ -154,15 +154,16 @@ const TranscribeAndDictate = () => {
         </section>
 
         {/* Key Benefits Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-y border-white/20">
-          <div className="container">
+        <section className="py-16 lg:py-24 bg-gradient-secondary relative">
+          <div className="absolute inset-0 bg-gradient-radial opacity-30" />
+          <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Key Benefits</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-primary">Key Benefits</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Advanced AI transcription that adapts to your clinical workflow
               </p>
@@ -175,15 +176,17 @@ const TranscribeAndDictate = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <Card className="bg-card border h-full hover:shadow-elegant hover:border-primary/20 transition-all duration-300 group">
+                  <Card className="glassmorphism border-0 h-full hover:shadow-glow hover:bg-white/20 transition-all duration-300 group">
                     <CardContent className="p-6">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                        {benefit.icon}
+                      <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                        <div className="text-white">
+                          {benefit.icon}
+                        </div>
                       </div>
-                      <h3 className="font-semibold mb-3 text-primary group-hover:text-primary/90">{benefit.title}</h3>
-                      <p className="text-muted-foreground">{benefit.description}</p>
+                      <h3 className="font-semibold mb-3 text-primary group-hover:text-accent transition-colors">{benefit.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -239,24 +242,30 @@ const TranscribeAndDictate = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-r from-primary/5 to-purple-500/5">
-          <div className="container">
+        <section className="py-16 lg:py-24 bg-gradient-primary relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-10" />
+          <div className="container relative z-10">
             <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {[
-                { number: "99.7%", label: "Accuracy Rate" },
-                { number: "60+", label: "Languages" },
-                { number: "2+", label: "Hours Saved Daily" },
-                { number: "24/7", label: "Availability" }
+                { number: "99.7%", label: "Accuracy Rate", icon: <CheckCircle className="w-8 h-8" /> },
+                { number: "60+", label: "Languages", icon: <Globe className="w-8 h-8" /> },
+                { number: "2+", label: "Hours Saved Daily", icon: <Zap className="w-8 h-8" /> },
+                { number: "24/7", label: "Availability", icon: <Users className="w-8 h-8" /> }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
+                  className="text-center group"
                 >
-                  <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="mb-4 flex justify-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-white group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
+                      {stat.icon}
+                    </div>
+                  </div>
+                  <div className="text-4xl lg:text-5xl font-bold text-white mb-2 group-hover:scale-105 transition-transform">{stat.number}</div>
+                  <div className="text-white/80 font-medium">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -286,24 +295,24 @@ const TranscribeAndDictate = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="bg-card border h-full hover:shadow-elegant hover:scale-105 transition-all duration-300">
+                  <Card className="glassmorphism border-0 h-full hover:shadow-glow hover:bg-white/20 hover:scale-105 transition-all duration-300">
                     <CardContent className="p-6 relative">
                       <div className="absolute top-4 right-4">
-                        <Quote className="w-6 h-6 text-primary/10" />
+                        <Quote className="w-8 h-8 text-accent/20" />
                       </div>
                       <div className="flex items-center gap-1 mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current drop-shadow-sm" />
                         ))}
                       </div>
                       <blockquote className="text-lg text-foreground mb-6 italic font-medium leading-relaxed">
                         "{testimonial.quote}"
                       </blockquote>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                          <Stethoscope className="w-5 h-5 text-primary" />
+                        <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-elegant">
+                          <Stethoscope className="w-6 h-6 text-white" />
                         </div>
-                        <cite className="text-muted-foreground font-medium">— {testimonial.author}</cite>
+                        <cite className="text-primary font-semibold">— {testimonial.author}</cite>
                       </div>
                     </CardContent>
                   </Card>
@@ -317,12 +326,12 @@ const TranscribeAndDictate = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mt-12"
             >
-              <div className="inline-flex items-center gap-4 bg-primary/10 rounded-2xl px-8 py-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-primary" />
+              <div className="inline-flex items-center gap-4 glassmorphism rounded-2xl px-8 py-6 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
+                  <CheckCircle className="w-8 h-8 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="font-semibold text-lg text-primary">Save 2+ hours daily</div>
+                  <div className="font-bold text-xl text-primary mb-1">Save 2+ hours daily</div>
                   <div className="text-muted-foreground">While improving patient engagement and note quality</div>
                 </div>
               </div>
@@ -342,25 +351,32 @@ const TranscribeAndDictate = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-primary relative overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-10" />
+        <section className="py-20 lg:py-28 bg-gradient-primary relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-radial" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] opacity-20" />
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto"
+              className="text-center max-w-4xl mx-auto"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-background mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                 Transform your documentation workflow today
               </h2>
-              <p className="text-xl text-background/80 mb-8">
+              <p className="text-xl lg:text-2xl text-white/90 mb-10 leading-relaxed">
                 Experience 99.7% accurate transcription that adapts to your clinical practice.
               </p>
-              <Button size="lg" className="bg-white/20 text-white border border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group">
-                Start Free Trial
-                <Mic className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="hero-button shadow-glow hover:scale-105 transition-all duration-300 group px-8 py-4 text-lg">
+                  Start Free Trial
+                  <Mic className="w-6 h-6 ml-2 transition-transform group-hover:scale-110" />
+                </Button>
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 group px-8 py-4 text-lg">
+                  Schedule Demo
+                  <Heart className="w-6 h-6 ml-2 transition-transform group-hover:scale-110" />
+                </Button>
+              </div>
             </motion.div>
           </div>
         </section>
