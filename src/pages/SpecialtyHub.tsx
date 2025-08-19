@@ -147,17 +147,17 @@ export default function SpecialtyHub() {
             {/* Case Studies Grid */}
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="p-8 bg-card/80 backdrop-blur-xl border border-white/10 hover:shadow-elegant hover:scale-[1.02] transition-all duration-500 cursor-pointer group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary to-primary/60 opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
                 
                 <div className="relative z-10">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-bold rounded-full mb-3">
+                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-primary to-primary/60 text-white text-sm font-bold rounded-full mb-3">
                         75% Time Savings
                       </div>
                       <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors leading-tight">
@@ -180,17 +180,17 @@ export default function SpecialtyHub() {
               </Card>
 
               <Card className="p-8 bg-card/80 backdrop-blur-xl border border-white/10 hover:shadow-elegant hover:scale-[1.02] transition-all duration-500 cursor-pointer group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-500 opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent to-accent/60 opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
                 
                 <div className="relative z-10">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent/60 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-bold rounded-full mb-3">
+                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-accent to-accent/60 text-white text-sm font-bold rounded-full mb-3">
                         150% ROI
                       </div>
                       <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors leading-tight">
