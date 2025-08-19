@@ -159,9 +159,6 @@ export default function SpecialtyHub() {
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-primary to-primary/60 text-white text-sm font-bold rounded-full mb-3">
-                        75% Time Savings
-                      </div>
                       <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors leading-tight">
                         Emergency Medicine Practice Cuts Documentation Time by 75%
                       </h3>
@@ -194,9 +191,6 @@ export default function SpecialtyHub() {
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="inline-block px-3 py-1 bg-gradient-to-r from-accent to-accent/60 text-white text-sm font-bold rounded-full mb-3">
-                        150% ROI
-                      </div>
                       <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors leading-tight">
                         Multi-Specialty Clinic Achieves 150% ROI in 6 Months
                       </h3>
