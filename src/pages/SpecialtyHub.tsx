@@ -151,10 +151,12 @@ export default function SpecialtyHub() {
                 
                 <div className="relative z-10">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center overflow-hidden shadow-elegant group-hover:scale-110 transition-transform duration-300">
+                      <img 
+                        src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=48&h=48&fit=crop&crop=face" 
+                        alt="Emergency Medicine Case Study" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="inline-block px-3 py-1 bg-gradient-to-r from-primary to-primary/60 text-white text-sm font-bold rounded-full mb-3">
@@ -184,10 +186,12 @@ export default function SpecialtyHub() {
                 
                 <div className="relative z-10">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent/60 rounded-xl flex items-center justify-center text-white shadow-elegant group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                      </svg>
+                    <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent/60 rounded-xl flex items-center justify-center overflow-hidden shadow-elegant group-hover:scale-110 transition-transform duration-300">
+                      <img 
+                        src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=48&h=48&fit=crop&crop=face" 
+                        alt="Multi-Specialty Clinic Case Study" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="inline-block px-3 py-1 bg-gradient-to-r from-accent to-accent/60 text-white text-sm font-bold rounded-full mb-3">
