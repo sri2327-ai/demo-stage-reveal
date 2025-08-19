@@ -109,10 +109,12 @@ export default function SpecialtyHub() {
                   </blockquote>
                   
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                      </svg>
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+                      <img 
+                        src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=64&h=64&fit=crop&crop=face" 
+                        alt="Dr. Michael Chen" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <p className="font-bold text-xl mb-1">Dr. Michael Chen</p>
