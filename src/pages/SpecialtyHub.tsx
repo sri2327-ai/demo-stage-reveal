@@ -128,7 +128,7 @@ export default function SpecialtyHub() {
               {/* Video Testimonial */}
               <div className="relative">
                 <Card className="p-2 bg-card/80 backdrop-blur-xl border border-white/10 shadow-elegant overflow-hidden">
-                  <div className="relative aspect-video rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center overflow-hidden">
+                  <div className="relative aspect-video rounded-xl bg-gradient-to-br from-primary/80 to-primary/60 flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=450&fit=crop')] bg-cover bg-center opacity-40" />
                     <div className="relative z-10 text-center">
                       <Button size="lg" className="w-20 h-20 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 transition-all duration-300 group">
