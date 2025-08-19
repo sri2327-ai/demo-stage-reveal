@@ -185,6 +185,11 @@
   .animate-marquee:hover {
     animation-play-state: paused;
   }
+
+  /* Subtle text glow for dark backgrounds */
+  .text-glow {
+    text-shadow: 0 2px 12px hsl(var(--primary-glow) / 0.6);
+  }
 }
 
 /* Existing animation utilities... */

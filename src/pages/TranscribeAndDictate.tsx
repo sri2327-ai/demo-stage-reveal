@@ -204,7 +204,7 @@ const TranscribeAndDictate = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-center mb-20"
             >
-              <div className="inline-flex items-center gap-3 bg-gradient-primary/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-primary/20">
+              <div className="inline-flex items-center gap-3 glassmorphism rounded-full px-6 py-3 mb-8">
                 <Stethoscope className="w-5 h-5 text-primary" />
                 <span className="text-primary font-semibold">Clinical Excellence</span>
               </div>
@@ -295,7 +295,7 @@ const TranscribeAndDictate = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-center mt-20"
             >
-              <div className="inline-flex items-center gap-4 bg-gradient-primary/5 backdrop-blur-sm rounded-2xl px-8 py-4 border border-primary/10">
+              <div className="inline-flex items-center gap-4 glassmorphism rounded-2xl px-8 py-4">
                 <div className="flex -space-x-2">
                   {[...Array(3)].map((_, i) => (
                     <div key={i} className="w-10 h-10 bg-gradient-primary rounded-full border-2 border-white flex items-center justify-center">
