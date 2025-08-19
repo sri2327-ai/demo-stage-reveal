@@ -197,118 +197,47 @@ const TranscribeAndDictate = () => {
         {/* Clinical Use Cases Section */}
         <section className="py-16 lg:py-24 bg-muted/30 relative">
           <div className="absolute inset-0 bg-gradient-radial opacity-30" />
-          <div className="container relative z-10 max-w-7xl">
+          <div className="container relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-center mb-20"
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-3 glassmorphism rounded-full px-6 py-3 mb-8">
-                <Stethoscope className="w-5 h-5 text-primary" />
-                <span className="text-primary font-semibold">Clinical Excellence</span>
-              </div>
-              <h2 className="text-5xl lg:text-7xl font-black mb-8 text-gradient leading-tight">
-                Clinical Use Cases
-              </h2>
-              <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light">
-                Proven solutions across medical specialties and settings, 
-                <span className="text-primary font-medium"> transforming healthcare documentation</span>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gradient">Clinical Use Cases</h2>
+              <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Proven solutions across medical specialties and settings
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-3 gap-10 lg:gap-12">
+            <div className="grid md:grid-cols-3 gap-8">
               {clinicalUseCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ 
-                    duration: 0.7, 
-                    delay: index * 0.2,
-                    ease: [0.25, 0.25, 0, 1]
-                  }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="h-full rounded-[2rem] border-2 border-accent/40 bg-gradient-to-br from-white/95 via-accent/8 to-accent/15 hover:shadow-glow hover:border-primary/60 transition-all duration-700 backdrop-blur-md overflow-hidden relative">
-                    {/* Animated background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    {/* Floating particles effect */}
-                    <div className="absolute top-4 right-4 w-2 h-2 bg-primary/20 rounded-full animate-pulse" />
-                    <div className="absolute top-8 right-8 w-1 h-1 bg-accent/30 rounded-full animate-pulse" style={{animationDelay: '0.5s'}} />
-                    
-                    <CardContent className="p-10 relative z-10">
-                      <div className="w-24 h-24 bg-gradient-primary rounded-[1.5rem] flex items-center justify-center mb-10 group-hover:shadow-glow group-hover:scale-110 group-hover:rotate-3 transition-all duration-700 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-white/20 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                        <div className="text-white text-2xl relative z-10">{useCase.icon}</div>
+                  <Card className="h-full rounded-3xl border-2 border-accent/30 bg-gradient-to-br from-white via-accent/5 to-accent/10 hover:shadow-elegant hover:border-accent/50 hover:-translate-y-3 transition-all duration-500 group backdrop-blur-sm">
+                    <CardContent className="p-8">
+                      <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mb-8 group-hover:shadow-glow group-hover:scale-110 transition-all duration-500">
+                        <div className="text-white text-xl">{useCase.icon}</div>
                       </div>
-                      
-                      <h3 className="font-black mb-6 text-3xl text-primary group-hover:text-gradient transition-all duration-500 leading-tight">
-                        {useCase.title}
-                      </h3>
-                      
-                      <p className="text-muted-foreground mb-8 text-xl leading-relaxed font-medium">
-                        {useCase.description}
-                      </p>
-                      
-                      <div className="space-y-4">
+                      <h3 className="font-bold mb-4 text-2xl text-primary group-hover:text-gradient transition-all duration-300">{useCase.title}</h3>
+                      <p className="text-muted-foreground mb-6 text-lg leading-relaxed">{useCase.description}</p>
+                      <ul className="space-y-3">
                         {useCase.details.map((detail, detailIndex) => (
-                          <motion.div
-                            key={detailIndex}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ 
-                              duration: 0.5, 
-                              delay: (index * 0.2) + (detailIndex * 0.1) 
-                            }}
-                            className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 group-hover:bg-white/70 transition-all duration-500"
-                          >
-                            <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors duration-300">
-                              <CheckCircle className="w-4 h-4 text-primary" />
-                            </div>
-                            <span className="text-muted-foreground text-lg leading-relaxed font-medium">
-                              {detail}
-                            </span>
-                          </motion.div>
+                          <li key={detailIndex} className="flex items-start gap-3 text-base text-muted-foreground">
+                            <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            {detail}
+                          </li>
                         ))}
-                      </div>
-                      
-                      {/* Interactive hover element */}
-                      <div className="mt-8 pt-6 border-t border-accent/20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                        <div className="flex items-center gap-3 text-primary">
-                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                          <span className="font-semibold text-lg">Ready to implement</span>
-                        </div>
-                      </div>
+                      </ul>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
-            
-            {/* Bottom accent */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center mt-20"
-            >
-              <div className="inline-flex items-center gap-4 glassmorphism rounded-2xl px-8 py-4">
-                <div className="flex -space-x-2">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="w-10 h-10 bg-gradient-primary rounded-full border-2 border-white flex items-center justify-center">
-                      <Heart className="w-4 h-4 text-white" />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-left">
-                  <div className="font-bold text-primary text-lg">Trusted by 10,000+ healthcare professionals</div>
-                  <div className="text-muted-foreground">Across all major medical specialties</div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </section>
 
