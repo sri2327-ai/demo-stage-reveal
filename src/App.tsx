@@ -23,7 +23,9 @@ import MedicalAbbreviationDetail from "./pages/MedicalAbbreviationDetail";
 import MedicalPrefixes from "./pages/MedicalPrefixes";
 import MedicalPrefixDetail from "./pages/MedicalPrefixDetail";
 import MedicalSuffixes from "./pages/MedicalSuffixes";
+import MedicalSuffixDetail from "./pages/MedicalSuffixDetail";
 import MedicalRoots from "./pages/MedicalRoots";
+import MedicalRootDetail from "./pages/MedicalRootDetail";
 import MaintainEyeContact from "./pages/MaintainEyeContact";
 import CutAdminTasks from "./pages/CutAdminTasks";
 import MinimizeEHRTime from "./pages/MinimizeEHRTime";
@@ -72,6 +74,12 @@ const App = () => (
             <Route path="/icd10-codes/:range" element={<ICD10CodeRange />} />
             <Route path="/medical-abbreviations" element={<MedicalAbbreviations />} />
             <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
+            <Route path="/medical-prefixes" element={<MedicalPrefixes />} />
+            <Route path="/medical-prefixes/:id" element={<MedicalPrefixDetail />} />
+            <Route path="/medical-suffixes" element={<MedicalSuffixes />} />
+            <Route path="/medical-suffixes/:id" element={<MedicalSuffixDetail />} />
+            <Route path="/medical-roots" element={<MedicalRoots />} />
+            <Route path="/medical-roots/:id" element={<MedicalRootDetail />} />
             <Route path="/presentation" element={<Presentation />} />
             <Route path="/scribeai" element={<ProductWalkthrough />} />
             <Route path="/maintain-eye-contact" element={<MaintainEyeContact />} />
