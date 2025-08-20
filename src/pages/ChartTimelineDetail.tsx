@@ -39,12 +39,7 @@ const ChartTimelineDetail = () => {
   };
 
   const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'scoring': return 'from-blue-500 to-cyan-500';
-      case 'protocols': return 'from-green-500 to-emerald-500';
-      case 'charts': return 'from-purple-500 to-violet-500';
-      default: return 'from-gray-500 to-gray-600';
-    }
+    return 'from-[#143151] to-[#387E89]';
   };
 
   const Icon = getCategoryIcon(item.category);

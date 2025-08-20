@@ -21,21 +21,21 @@ const ChartsTimelines = () => {
       name: 'Scoring Systems, Scales, and Classifications', 
       icon: BarChart3,
       description: 'Clinical scoring systems and assessment scales',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-[#143151] to-[#387E89]'
     },
     { 
       id: 'protocols', 
       name: 'Clinical Protocols, Timelines, and Bundles', 
       icon: Clock,
       description: 'Evidence-based clinical protocols and care bundles',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-[#143151] to-[#387E89]'
     },
     { 
       id: 'charts', 
       name: 'Charts and Tools', 
       icon: FileText,
       description: 'Reference charts and diagnostic tools',
-      color: 'from-purple-500 to-violet-500'
+      color: 'from-[#143151] to-[#387E89]'
     }
   ];
 
@@ -67,8 +67,7 @@ const ChartsTimelines = () => {
   };
 
   const getCategoryColor = (category: string) => {
-    const categoryData = categories.find(cat => cat.id === category);
-    return categoryData?.color || 'from-gray-500 to-gray-600';
+    return 'from-[#143151] to-[#387E89]';
   };
 
   const getCategoryIcon = (category: string) => {
@@ -81,7 +80,7 @@ const ChartsTimelines = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
         {/* Hero Section */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-200/40">
+          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-[#387E89]/10 to-[#143151]/10 backdrop-blur-sm rounded-full text-[#143151] text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-[#387E89]/30">
             <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Clinical Resources
           </div>
@@ -174,7 +173,7 @@ const ChartsTimelines = () => {
                 const Icon = getCategoryIcon(item.category);
                 return (
                   <Link key={item.id} to={`/charts-timelines/${item.id}`} className="group block">
-                    <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-sky-50 hover:border-[#387E89]/30">
+                    <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-sm hover:shadow-xl hover:shadow-[#387E89]/10 transition-all duration-300 hover:-translate-y-2 hover:bg-gradient-to-br hover:from-[#387E89]/5 hover:to-[#143151]/5 hover:border-[#387E89]/30">
                       <CardHeader className="pb-3 sm:pb-4 p-4 sm:p-6">
                         <div className="flex items-start justify-between mb-2 sm:mb-3">
                           <div className="flex items-center space-x-2">
