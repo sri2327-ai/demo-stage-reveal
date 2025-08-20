@@ -1056,6 +1056,481 @@ export const medicalPrefixes: MedicalPrefix[] = [
     specialty: "General",
     relatedTerms: ["mono-", "single-"],
     clinicalContext: "Used to describe singular or one-sided conditions"
+  },
+  {
+    prefix: "vas/o-",
+    meaning: "vessel, duct",
+    origin: "Latin",
+    examples: [
+      { word: "vasodilation", definition: "vessel widening" },
+      { word: "vasoconstriction", definition: "vessel narrowing" },
+      { word: "vascular", definition: "relating to vessels" },
+      { word: "vasectomy", definition: "vessel cutting procedure" },
+      { word: "vasculitis", definition: "vessel inflammation" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["vessel", "vascular"],
+    clinicalContext: "Essential for cardiovascular and circulatory terminology"
+  },
+  {
+    prefix: "xen/o-",
+    meaning: "foreign, strange",
+    origin: "Greek",
+    examples: [
+      { word: "xenograft", definition: "foreign tissue graft" },
+      { word: "xenophobia", definition: "fear of foreigners" },
+      { word: "xenobiotic", definition: "foreign chemical compound" },
+      { word: "xenogenesis", definition: "reproduction involving foreign species" }
+    ],
+    specialty: "Transplant Surgery",
+    relatedTerms: ["foreign", "alien"],
+    clinicalContext: "Used in transplantation and immunology"
+  },
+  {
+    prefix: "xer/o-",
+    meaning: "dry",
+    origin: "Greek",
+    examples: [
+      { word: "xerostomia", definition: "dry mouth" },
+      { word: "xerophthalmia", definition: "dry eyes" },
+      { word: "xerosis", definition: "abnormal dryness" },
+      { word: "xeroderma", definition: "dry skin condition" }
+    ],
+    specialty: "Dermatology",
+    relatedTerms: ["dry", "arid"],
+    clinicalContext: "Describes conditions involving dryness"
+  },
+  {
+    prefix: "zyg/o-",
+    meaning: "joined, paired",
+    origin: "Greek",
+    examples: [
+      { word: "zygote", definition: "joined gametes" },
+      { word: "zygoma", definition: "cheek bone" },
+      { word: "syzygy", definition: "joined alignment" },
+      { word: "azygos", definition: "unpaired vein" }
+    ],
+    specialty: "Embryology",
+    relatedTerms: ["joined", "union"],
+    clinicalContext: "Important in development and anatomy"
+  },
+  {
+    prefix: "auto-",
+    meaning: "self",
+    origin: "Greek",
+    examples: [
+      { word: "autoimmune", definition: "self-immune response" },
+      { word: "autopsy", definition: "self-examination" },
+      { word: "autonomic", definition: "self-governing" },
+      { word: "autograft", definition: "self-tissue graft" },
+      { word: "autism", definition: "self-focused condition" }
+    ],
+    specialty: "Immunology",
+    relatedTerms: ["self", "own"],
+    clinicalContext: "Critical for autoimmune and self-referential conditions"
+  },
+  {
+    prefix: "blast/o-",
+    meaning: "embryonic cell, germ",
+    origin: "Greek",
+    examples: [
+      { word: "blastocyst", definition: "embryonic cell mass" },
+      { word: "osteoblast", definition: "bone-forming cell" },
+      { word: "lymphoblast", definition: "immature lymphocyte" },
+      { word: "erythroblast", definition: "red blood cell precursor" },
+      { word: "neuroblast", definition: "nerve cell precursor" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["cell", "precursor"],
+    clinicalContext: "Essential for cellular development and oncology"
+  },
+  {
+    prefix: "carcin/o-",
+    meaning: "cancer, malignant",
+    origin: "Greek",
+    examples: [
+      { word: "carcinoma", definition: "malignant tumor" },
+      { word: "carcinogen", definition: "cancer-causing agent" },
+      { word: "carcinogenesis", definition: "cancer development" },
+      { word: "carcinoid", definition: "cancer-like tumor" }
+    ],
+    specialty: "Oncology",
+    relatedTerms: ["cancer", "malignant"],
+    clinicalContext: "Fundamental for cancer terminology"
+  },
+  {
+    prefix: "chondr/o-",
+    meaning: "cartilage",
+    origin: "Greek",
+    examples: [
+      { word: "chondritis", definition: "cartilage inflammation" },
+      { word: "chondroma", definition: "cartilage tumor" },
+      { word: "chondrocyte", definition: "cartilage cell" },
+      { word: "achondroplasia", definition: "cartilage formation disorder" },
+      { word: "perichondrium", definition: "around cartilage" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["cartilage", "gristle"],
+    clinicalContext: "Important for joint and skeletal disorders"
+  },
+  {
+    prefix: "cyst/o-",
+    meaning: "bladder, sac",
+    origin: "Greek",
+    examples: [
+      { word: "cystitis", definition: "bladder inflammation" },
+      { word: "cystoscopy", definition: "bladder examination" },
+      { word: "cystectomy", definition: "bladder removal" },
+      { word: "polycystic", definition: "many cysts" },
+      { word: "cholecyst", definition: "gallbladder" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["bladder", "sac"],
+    clinicalContext: "Essential for urological and cystic conditions"
+  },
+  {
+    prefix: "derm/o-",
+    meaning: "skin",
+    origin: "Greek",
+    examples: [
+      { word: "dermatitis", definition: "skin inflammation" },
+      { word: "dermatology", definition: "study of skin" },
+      { word: "epidermis", definition: "outer skin layer" },
+      { word: "hypodermic", definition: "under the skin" },
+      { word: "dermatome", definition: "skin segment" }
+    ],
+    specialty: "Dermatology",
+    relatedTerms: ["skin", "cutaneous"],
+    clinicalContext: "Fundamental for skin conditions and procedures"
+  },
+  {
+    prefix: "electr/o-",
+    meaning: "electricity, electric",
+    origin: "Greek",
+    examples: [
+      { word: "electrocardiogram", definition: "heart electrical recording" },
+      { word: "electroencephalogram", definition: "brain electrical recording" },
+      { word: "electrolyte", definition: "electrically conducting solution" },
+      { word: "electrocautery", definition: "electrical burning" },
+      { word: "electromyogram", definition: "muscle electrical recording" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["electrical", "current"],
+    clinicalContext: "Critical for diagnostic and therapeutic procedures"
+  },
+  {
+    prefix: "fibr/o-",
+    meaning: "fiber, fibrous tissue",
+    origin: "Latin",
+    examples: [
+      { word: "fibrosis", definition: "fibrous tissue formation" },
+      { word: "fibroma", definition: "fibrous tumor" },
+      { word: "fibroblast", definition: "fiber-forming cell" },
+      { word: "fibromyalgia", definition: "fibrous muscle pain" },
+      { word: "fibrillation", definition: "fiber-like contractions" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["fiber", "fibrous"],
+    clinicalContext: "Important for connective tissue disorders"
+  },
+  {
+    prefix: "gluc/o-",
+    meaning: "glucose, sugar",
+    origin: "Greek",
+    examples: [
+      { word: "glucose", definition: "blood sugar" },
+      { word: "glucagon", definition: "glucose-raising hormone" },
+      { word: "gluconeogenesis", definition: "glucose formation" },
+      { word: "hypoglycemia", definition: "low blood sugar" },
+      { word: "glucometer", definition: "glucose measuring device" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["sugar", "sweet"],
+    clinicalContext: "Essential for diabetes and metabolism"
+  },
+  {
+    prefix: "hem/o-",
+    meaning: "blood",
+    origin: "Greek",
+    examples: [
+      { word: "hemoglobin", definition: "blood protein" },
+      { word: "hemorrhage", definition: "blood loss" },
+      { word: "hematoma", definition: "blood clot" },
+      { word: "hemophilia", definition: "blood clotting disorder" },
+      { word: "hemolysis", definition: "blood cell destruction" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["blood", "sanguine"],
+    clinicalContext: "Fundamental for blood-related conditions"
+  },
+  {
+    prefix: "hepat/o-",
+    meaning: "liver",
+    origin: "Greek",
+    examples: [
+      { word: "hepatitis", definition: "liver inflammation" },
+      { word: "hepatoma", definition: "liver tumor" },
+      { word: "hepatectomy", definition: "liver removal" },
+      { word: "hepatomegaly", definition: "enlarged liver" },
+      { word: "hepatotoxic", definition: "toxic to liver" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["liver", "hepatic"],
+    clinicalContext: "Essential for liver diseases and procedures"
+  },
+  {
+    prefix: "kine/o-",
+    meaning: "movement, motion",
+    origin: "Greek",
+    examples: [
+      { word: "kinetic", definition: "relating to motion" },
+      { word: "kinesiology", definition: "study of movement" },
+      { word: "dyskinesia", definition: "abnormal movement" },
+      { word: "akinesia", definition: "absence of movement" },
+      { word: "hyperkinesia", definition: "excessive movement" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["movement", "motion"],
+    clinicalContext: "Important for movement disorders and rehabilitation"
+  },
+  {
+    prefix: "lip/o-",
+    meaning: "fat, lipid",
+    origin: "Greek",
+    examples: [
+      { word: "lipoma", definition: "fatty tumor" },
+      { word: "liposuction", definition: "fat removal" },
+      { word: "lipid", definition: "fat molecule" },
+      { word: "hyperlipidemia", definition: "high blood fats" },
+      { word: "lipolysis", definition: "fat breakdown" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["fat", "adipose"],
+    clinicalContext: "Important for metabolic and cosmetic procedures"
+  },
+  {
+    prefix: "lymph/o-",
+    meaning: "lymph, lymphatic system",
+    origin: "Latin",
+    examples: [
+      { word: "lymphoma", definition: "lymphatic tumor" },
+      { word: "lymphocyte", definition: "lymph cell" },
+      { word: "lymphadenitis", definition: "lymph node inflammation" },
+      { word: "lymphedema", definition: "lymphatic swelling" },
+      { word: "lymphangiogram", definition: "lymph vessel x-ray" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["lymphatic", "immune"],
+    clinicalContext: "Critical for immune system and cancer staging"
+  },
+  {
+    prefix: "my/o-",
+    meaning: "muscle",
+    origin: "Greek",
+    examples: [
+      { word: "myocardial", definition: "heart muscle" },
+      { word: "myalgia", definition: "muscle pain" },
+      { word: "myositis", definition: "muscle inflammation" },
+      { word: "myopathy", definition: "muscle disease" },
+      { word: "myoblast", definition: "muscle cell precursor" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["muscle", "muscular"],
+    clinicalContext: "Fundamental for muscle disorders and cardiac conditions"
+  },
+  {
+    prefix: "necr/o-",
+    meaning: "death, dead tissue",
+    origin: "Greek",
+    examples: [
+      { word: "necrosis", definition: "tissue death" },
+      { word: "necrotizing", definition: "causing tissue death" },
+      { word: "necropsy", definition: "examination of dead" },
+      { word: "necrotic", definition: "relating to dead tissue" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["death", "dead"],
+    clinicalContext: "Important for tissue death and wound healing"
+  },
+  {
+    prefix: "nephr/o-",
+    meaning: "kidney",
+    origin: "Greek",
+    examples: [
+      { word: "nephritis", definition: "kidney inflammation" },
+      { word: "nephrology", definition: "study of kidneys" },
+      { word: "nephrectomy", definition: "kidney removal" },
+      { word: "nephron", definition: "kidney functional unit" },
+      { word: "nephrotoxic", definition: "toxic to kidneys" }
+    ],
+    specialty: "Nephrology",
+    relatedTerms: ["kidney", "renal"],
+    clinicalContext: "Essential for kidney diseases and procedures"
+  },
+  {
+    prefix: "neur/o-",
+    meaning: "nerve, nervous system",
+    origin: "Greek",
+    examples: [
+      { word: "neurology", definition: "study of nerves" },
+      { word: "neuron", definition: "nerve cell" },
+      { word: "neuropathy", definition: "nerve disease" },
+      { word: "neuralgia", definition: "nerve pain" },
+      { word: "neurosurgery", definition: "nerve surgery" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["nerve", "neural"],
+    clinicalContext: "Fundamental for nervous system disorders"
+  },
+  {
+    prefix: "oste/o-",
+    meaning: "bone",
+    origin: "Greek",
+    examples: [
+      { word: "osteoporosis", definition: "bone thinning" },
+      { word: "osteomyelitis", definition: "bone infection" },
+      { word: "osteoblast", definition: "bone-forming cell" },
+      { word: "osteoarthritis", definition: "bone joint inflammation" },
+      { word: "osteotomy", definition: "bone cutting" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["bone", "skeletal"],
+    clinicalContext: "Essential for bone diseases and fractures"
+  },
+  {
+    prefix: "path/o-",
+    meaning: "disease, suffering",
+    origin: "Greek",
+    examples: [
+      { word: "pathology", definition: "study of disease" },
+      { word: "pathogen", definition: "disease-causing agent" },
+      { word: "neuropathy", definition: "nerve disease" },
+      { word: "psychopath", definition: "mental disease" },
+      { word: "pathophysiology", definition: "disease function study" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["disease", "illness"],
+    clinicalContext: "Fundamental for disease processes and diagnosis"
+  },
+  {
+    prefix: "phag/o-",
+    meaning: "eating, swallowing",
+    origin: "Greek",
+    examples: [
+      { word: "phagocyte", definition: "eating cell" },
+      { word: "dysphagia", definition: "difficulty swallowing" },
+      { word: "phagocytosis", definition: "cell eating process" },
+      { word: "macrophage", definition: "large eating cell" },
+      { word: "aphasia", definition: "inability to speak/swallow" }
+    ],
+    specialty: "Immunology",
+    relatedTerms: ["eating", "consuming"],
+    clinicalContext: "Important for immune function and swallowing disorders"
+  },
+  {
+    prefix: "pneum/o-",
+    meaning: "lung, air",
+    origin: "Greek",
+    examples: [
+      { word: "pneumonia", definition: "lung inflammation" },
+      { word: "pneumothorax", definition: "air in chest cavity" },
+      { word: "pneumonectomy", definition: "lung removal" },
+      { word: "pneumatic", definition: "relating to air" },
+      { word: "pneumococcus", definition: "lung infection bacteria" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["lung", "air"],
+    clinicalContext: "Essential for respiratory conditions"
+  },
+  {
+    prefix: "rhin/o-",
+    meaning: "nose",
+    origin: "Greek",
+    examples: [
+      { word: "rhinitis", definition: "nose inflammation" },
+      { word: "rhinoplasty", definition: "nose surgery" },
+      { word: "rhinorrhea", definition: "runny nose" },
+      { word: "rhinoscopy", definition: "nose examination" },
+      { word: "rhinovirus", definition: "nose virus" }
+    ],
+    specialty: "Otolaryngology",
+    relatedTerms: ["nose", "nasal"],
+    clinicalContext: "Important for nasal and sinus conditions"
+  },
+  {
+    prefix: "scler/o-",
+    meaning: "hard, hardening",
+    origin: "Greek",
+    examples: [
+      { word: "sclerosis", definition: "hardening condition" },
+      { word: "sclera", definition: "hard eye layer" },
+      { word: "atherosclerosis", definition: "artery hardening" },
+      { word: "scleritis", definition: "sclera inflammation" },
+      { word: "sclerotherapy", definition: "hardening treatment" }
+    ],
+    specialty: "Rheumatology",
+    relatedTerms: ["hard", "hardening"],
+    clinicalContext: "Important for autoimmune and vascular conditions"
+  },
+  {
+    prefix: "therm/o-",
+    meaning: "heat, temperature",
+    origin: "Greek",
+    examples: [
+      { word: "thermometer", definition: "temperature measuring device" },
+      { word: "hypothermia", definition: "low body temperature" },
+      { word: "hyperthermia", definition: "high body temperature" },
+      { word: "thermotherapy", definition: "heat treatment" },
+      { word: "thermoregulation", definition: "temperature control" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["heat", "temperature"],
+    clinicalContext: "Important for temperature-related conditions"
+  },
+  {
+    prefix: "thromb/o-",
+    meaning: "blood clot",
+    origin: "Greek",
+    examples: [
+      { word: "thrombosis", definition: "blood clot formation" },
+      { word: "thrombus", definition: "blood clot" },
+      { word: "thrombocyte", definition: "clotting cell (platelet)" },
+      { word: "thromboembolism", definition: "clot traveling in blood" },
+      { word: "thrombolysis", definition: "clot dissolution" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["clot", "coagulation"],
+    clinicalContext: "Critical for cardiovascular and clotting disorders"
+  },
+  {
+    prefix: "toxic/o-",
+    meaning: "poison, poisonous",
+    origin: "Greek",
+    examples: [
+      { word: "toxic", definition: "poisonous" },
+      { word: "toxicology", definition: "study of poisons" },
+      { word: "detoxification", definition: "poison removal" },
+      { word: "hepatotoxic", definition: "poisonous to liver" },
+      { word: "neurotoxic", definition: "poisonous to nerves" }
+    ],
+    specialty: "Toxicology",
+    relatedTerms: ["poison", "harmful"],
+    clinicalContext: "Important for poisoning and drug safety"
+  },
+  {
+    prefix: "troph/o-",
+    meaning: "nourishment, development",
+    origin: "Greek",
+    examples: [
+      { word: "atrophy", definition: "lack of nourishment" },
+      { word: "hypertrophy", definition: "excessive growth" },
+      { word: "dystrophy", definition: "abnormal development" },
+      { word: "trophoblast", definition: "nourishing cell layer" },
+      { word: "neurotrophic", definition: "nerve nourishing" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["nourishment", "growth"],
+    clinicalContext: "Essential for growth disorders and muscle conditions"
   }
 ];
 

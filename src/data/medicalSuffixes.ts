@@ -772,6 +772,449 @@ export const medicalSuffixes: MedicalSuffix[] = [
     specialty: "Pain Management",
     relatedTerms: ["-algia", "pain"],
     clinicalContext: "Alternative suffix for describing pain conditions"
+  },
+  {
+    suffix: "-ptosis",
+    meaning: "drooping, falling",
+    origin: "Greek",
+    examples: [
+      { word: "blepharoptosis", definition: "eyelid drooping" },
+      { word: "nephroptosis", definition: "kidney dropping" },
+      { word: "gastroptosis", definition: "stomach dropping" },
+      { word: "hepatoptosis", definition: "liver dropping" }
+    ],
+    specialty: "General Surgery",
+    relatedTerms: ["drooping", "prolapse"],
+    clinicalContext: "Describes organ displacement or drooping conditions"
+  },
+  {
+    suffix: "-rrhea",
+    meaning: "flow, discharge",
+    origin: "Greek",
+    examples: [
+      { word: "diarrhea", definition: "flowing through" },
+      { word: "amenorrhea", definition: "absence of menstrual flow" },
+      { word: "rhinorrhea", definition: "nasal discharge" },
+      { word: "galactorrhea", definition: "milk discharge" },
+      { word: "pyorrhea", definition: "pus discharge" }
+    ],
+    specialty: "General",
+    relatedTerms: ["flow", "discharge"],
+    clinicalContext: "Describes abnormal flows or discharges from body"
+  },
+  {
+    suffix: "-rrhexis",
+    meaning: "rupture, bursting",
+    origin: "Greek",
+    examples: [
+      { word: "cardiorrhexis", definition: "heart rupture" },
+      { word: "hysterorrhexis", definition: "uterus rupture" },
+      { word: "splenicorrhexis", definition: "spleen rupture" },
+      { word: "hepatorrhexis", definition: "liver rupture" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["rupture", "tear"],
+    clinicalContext: "Describes organ rupture or tearing conditions"
+  },
+  {
+    suffix: "-schisis",
+    meaning: "splitting, cleft",
+    origin: "Greek",
+    examples: [
+      { word: "spina bifida", definition: "split spine" },
+      { word: "palatoschisis", definition: "cleft palate" },
+      { word: "rachischisis", definition: "spinal cleft" },
+      { word: "cheiloschisis", definition: "cleft lip" }
+    ],
+    specialty: "Pediatrics",
+    relatedTerms: ["cleft", "split"],
+    clinicalContext: "Describes congenital splitting or cleft conditions"
+  },
+  {
+    suffix: "-scopy",
+    meaning: "examination, viewing",
+    origin: "Greek",
+    examples: [
+      { word: "endoscopy", definition: "internal examination" },
+      { word: "colonoscopy", definition: "colon examination" },
+      { word: "arthroscopy", definition: "joint examination" },
+      { word: "laparoscopy", definition: "abdominal examination" },
+      { word: "bronchoscopy", definition: "airway examination" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["examination", "viewing"],
+    clinicalContext: "Essential for diagnostic procedures and minimally invasive surgery"
+  },
+  {
+    suffix: "-stasis",
+    meaning: "stopping, controlling",
+    origin: "Greek",
+    examples: [
+      { word: "hemostasis", definition: "blood stopping" },
+      { word: "homeostasis", definition: "body balance maintenance" },
+      { word: "epistaxis", definition: "nosebleed control" },
+      { word: "bacteriostasis", definition: "bacterial growth stopping" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["stopping", "control"],
+    clinicalContext: "Important for bleeding control and physiological balance"
+  },
+  {
+    suffix: "-stomy",
+    meaning: "surgical opening",
+    origin: "Greek",
+    examples: [
+      { word: "colostomy", definition: "colon opening" },
+      { word: "tracheostomy", definition: "trachea opening" },
+      { word: "gastrostomy", definition: "stomach opening" },
+      { word: "ileostomy", definition: "ileum opening" },
+      { word: "nephrostomy", definition: "kidney opening" }
+    ],
+    specialty: "Surgery",
+    relatedTerms: ["opening", "stoma"],
+    clinicalContext: "Describes surgical creation of openings for drainage or access"
+  },
+  {
+    suffix: "-trophy",
+    meaning: "nourishment, development",
+    origin: "Greek",
+    examples: [
+      { word: "atrophy", definition: "wasting away" },
+      { word: "hypertrophy", definition: "excessive growth" },
+      { word: "dystrophy", definition: "abnormal development" },
+      { word: "eutrophy", definition: "normal nourishment" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["nourishment", "growth"],
+    clinicalContext: "Describes tissue growth and development conditions"
+  },
+  {
+    suffix: "-uria",
+    meaning: "urine condition",
+    origin: "Greek",
+    examples: [
+      { word: "polyuria", definition: "excessive urination" },
+      { word: "oliguria", definition: "decreased urination" },
+      { word: "hematuria", definition: "blood in urine" },
+      { word: "proteinuria", definition: "protein in urine" },
+      { word: "glycosuria", definition: "glucose in urine" }
+    ],
+    specialty: "Nephrology",
+    relatedTerms: ["urine", "urination"],
+    clinicalContext: "Essential for kidney and urinary system disorders"
+  },
+  {
+    suffix: "-version",
+    meaning: "turning, changing position",
+    origin: "Latin",
+    examples: [
+      { word: "retroversion", definition: "backward turning" },
+      { word: "anteversion", definition: "forward turning" },
+      { word: "eversion", definition: "turning outward" },
+      { word: "inversion", definition: "turning inward" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["turning", "positioning"],
+    clinicalContext: "Describes organ positioning and movement"
+  },
+  {
+    suffix: "-vorous",
+    meaning: "eating, feeding on",
+    origin: "Latin",
+    examples: [
+      { word: "carnivorous", definition: "meat eating" },
+      { word: "herbivorous", definition: "plant eating" },
+      { word: "omnivorous", definition: "eating everything" },
+      { word: "piscivorous", definition: "fish eating" }
+    ],
+    specialty: "Nutrition",
+    relatedTerms: ["eating", "feeding"],
+    clinicalContext: "Describes dietary habits and nutritional patterns"
+  },
+  {
+    suffix: "-ward",
+    meaning: "in the direction of",
+    origin: "English",
+    examples: [
+      { word: "toward", definition: "in direction of" },
+      { word: "inward", definition: "toward the inside" },
+      { word: "outward", definition: "toward the outside" },
+      { word: "forward", definition: "toward the front" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["direction", "orientation"],
+    clinicalContext: "Indicates directional movement or positioning"
+  },
+  {
+    suffix: "-wise",
+    meaning: "in the manner of",
+    origin: "English",
+    examples: [
+      { word: "clockwise", definition: "in manner of clock movement" },
+      { word: "likewise", definition: "in similar manner" },
+      { word: "otherwise", definition: "in different manner" },
+      { word: "stepwise", definition: "in step-by-step manner" }
+    ],
+    specialty: "General",
+    relatedTerms: ["manner", "way"],
+    clinicalContext: "Describes method or manner of procedure"
+  },
+  {
+    suffix: "-yl",
+    meaning: "chemical group",
+    origin: "Greek",
+    examples: [
+      { word: "methyl", definition: "CH3 chemical group" },
+      { word: "ethyl", definition: "C2H5 chemical group" },
+      { word: "acetyl", definition: "CH3CO chemical group" },
+      { word: "hydroxyl", definition: "OH chemical group" }
+    ],
+    specialty: "Biochemistry",
+    relatedTerms: ["chemical", "group"],
+    clinicalContext: "Essential for understanding drug chemistry and metabolism"
+  },
+  {
+    suffix: "-zoon",
+    meaning: "animal, living being",
+    origin: "Greek",
+    examples: [
+      { word: "protozoon", definition: "first animal (single-celled)" },
+      { word: "spermatozoon", definition: "seed animal (sperm)" },
+      { word: "microzoon", definition: "small animal" },
+      { word: "metazoon", definition: "multicellular animal" }
+    ],
+    specialty: "Microbiology",
+    relatedTerms: ["animal", "organism"],
+    clinicalContext: "Used in classification of organisms and parasites"
+  },
+  {
+    suffix: "-zyme",
+    meaning: "enzyme, ferment",
+    origin: "Greek",
+    examples: [
+      { word: "enzyme", definition: "biological catalyst" },
+      { word: "lysozyme", definition: "cell-dissolving enzyme" },
+      { word: "ribozyme", definition: "RNA enzyme" },
+      { word: "coenzyme", definition: "enzyme helper" }
+    ],
+    specialty: "Biochemistry",
+    relatedTerms: ["enzyme", "catalyst"],
+    clinicalContext: "Essential for understanding metabolism and drug action"
+  },
+  {
+    suffix: "-blast",
+    meaning: "embryonic cell, precursor",
+    origin: "Greek",
+    examples: [
+      { word: "osteoblast", definition: "bone-forming cell" },
+      { word: "fibroblast", definition: "fiber-forming cell" },
+      { word: "neuroblast", definition: "nerve cell precursor" },
+      { word: "erythroblast", definition: "red blood cell precursor" },
+      { word: "lymphoblast", definition: "lymphocyte precursor" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["precursor", "immature cell"],
+    clinicalContext: "Critical for understanding cell development and cancer"
+  },
+  {
+    suffix: "-clast",
+    meaning: "cell that breaks down",
+    origin: "Greek",
+    examples: [
+      { word: "osteoclast", definition: "bone-destroying cell" },
+      { word: "odontoclast", definition: "tooth-destroying cell" },
+      { word: "chondroclast", definition: "cartilage-destroying cell" },
+      { word: "hemoclast", definition: "blood-destroying cell" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["destroyer", "breakdown"],
+    clinicalContext: "Important for bone remodeling and tissue breakdown"
+  },
+  {
+    suffix: "-crine",
+    meaning: "secretion, separate",
+    origin: "Greek",
+    examples: [
+      { word: "endocrine", definition: "internal secretion" },
+      { word: "exocrine", definition: "external secretion" },
+      { word: "paracrine", definition: "nearby secretion" },
+      { word: "autocrine", definition: "self secretion" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["secretion", "hormone"],
+    clinicalContext: "Essential for understanding glandular function"
+  },
+  {
+    suffix: "-desis",
+    meaning: "binding, fusion",
+    origin: "Greek",
+    examples: [
+      { word: "arthrodesis", definition: "joint fusion" },
+      { word: "pleurodesis", definition: "pleural space fusion" },
+      { word: "spondylodesis", definition: "vertebral fusion" },
+      { word: "tenodesis", definition: "tendon binding" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["fusion", "binding"],
+    clinicalContext: "Describes surgical fusion procedures"
+  },
+  {
+    suffix: "-duct",
+    meaning: "leading, carrying",
+    origin: "Latin",
+    examples: [
+      { word: "conduct", definition: "lead together" },
+      { word: "abduct", definition: "lead away" },
+      { word: "adduct", definition: "lead toward" },
+      { word: "oviduct", definition: "egg-carrying tube" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["leading", "carrying"],
+    clinicalContext: "Describes movement and anatomical structures"
+  },
+  {
+    suffix: "-fuge",
+    meaning: "fleeing, driving away",
+    origin: "Latin",
+    examples: [
+      { word: "centrifuge", definition: "center-fleeing device" },
+      { word: "febrifuge", definition: "fever-driving medicine" },
+      { word: "vermifuge", definition: "worm-driving medicine" },
+      { word: "lactifuge", definition: "milk-stopping agent" }
+    ],
+    specialty: "Pharmacology",
+    relatedTerms: ["driving away", "expelling"],
+    clinicalContext: "Describes agents that expel or reduce substances"
+  },
+  {
+    suffix: "-gene",
+    meaning: "producing, causing",
+    origin: "Greek",
+    examples: [
+      { word: "carcinogen", definition: "cancer-producing agent" },
+      { word: "pathogen", definition: "disease-causing agent" },
+      { word: "allergen", definition: "allergy-causing substance" },
+      { word: "mutagen", definition: "mutation-causing agent" },
+      { word: "teratogen", definition: "birth defect-causing agent" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["producing", "causing"],
+    clinicalContext: "Essential for understanding disease causation"
+  },
+  {
+    suffix: "-genic",
+    meaning: "producing, caused by",
+    origin: "Greek",
+    examples: [
+      { word: "carcinogenic", definition: "cancer-producing" },
+      { word: "pathogenic", definition: "disease-causing" },
+      { word: "psychogenic", definition: "mind-caused" },
+      { word: "iatrogenic", definition: "treatment-caused" },
+      { word: "neurogenic", definition: "nerve-caused" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["causing", "producing"],
+    clinicalContext: "Describes origin or cause of conditions"
+  },
+  {
+    suffix: "-graph",
+    meaning: "instrument for recording",
+    origin: "Greek",
+    examples: [
+      { word: "electrocardiograph", definition: "heart electrical recorder" },
+      { word: "mammograph", definition: "breast x-ray machine" },
+      { word: "tomograph", definition: "slice imaging machine" },
+      { word: "phonograph", definition: "sound recorder" }
+    ],
+    specialty: "Radiology",
+    relatedTerms: ["recorder", "instrument"],
+    clinicalContext: "Essential for diagnostic imaging equipment"
+  },
+  {
+    suffix: "-kinesis",
+    meaning: "movement, motion",
+    origin: "Greek",
+    examples: [
+      { word: "dyskinesis", definition: "abnormal movement" },
+      { word: "hyperkinesis", definition: "excessive movement" },
+      { word: "hypokinesis", definition: "decreased movement" },
+      { word: "akinesis", definition: "absence of movement" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["movement", "motion"],
+    clinicalContext: "Important for movement disorders and cardiac function"
+  },
+  {
+    suffix: "-lith",
+    meaning: "stone, calculus",
+    origin: "Greek",
+    examples: [
+      { word: "cholelith", definition: "gallstone" },
+      { word: "nephrolith", definition: "kidney stone" },
+      { word: "ureterolith", definition: "ureter stone" },
+      { word: "sialolith", definition: "salivary gland stone" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["stone", "calculus"],
+    clinicalContext: "Essential for stone-related conditions and procedures"
+  },
+  {
+    suffix: "-meter",
+    meaning: "measuring instrument",
+    origin: "Greek",
+    examples: [
+      { word: "thermometer", definition: "temperature measurer" },
+      { word: "sphygmomanometer", definition: "blood pressure measurer" },
+      { word: "spirometer", definition: "lung capacity measurer" },
+      { word: "glucometer", definition: "glucose measurer" },
+      { word: "oximeter", definition: "oxygen measurer" }
+    ],
+    specialty: "General",
+    relatedTerms: ["measurer", "gauge"],
+    clinicalContext: "Essential for diagnostic measurements and monitoring"
+  },
+  {
+    suffix: "-metry",
+    meaning: "process of measuring",
+    origin: "Greek",
+    examples: [
+      { word: "spirometry", definition: "lung function measurement" },
+      { word: "audiometry", definition: "hearing measurement" },
+      { word: "optometry", definition: "vision measurement" },
+      { word: "biometry", definition: "biological measurement" },
+      { word: "pelvimetry", definition: "pelvis measurement" }
+    ],
+    specialty: "Diagnostics",
+    relatedTerms: ["measurement", "testing"],
+    clinicalContext: "Important for diagnostic testing and assessment"
+  },
+  {
+    suffix: "-morph",
+    meaning: "shape, form",
+    origin: "Greek",
+    examples: [
+      { word: "polymorphonuclear", definition: "many-shaped nucleus" },
+      { word: "amorphous", definition: "without shape" },
+      { word: "dimorphic", definition: "two forms" },
+      { word: "metamorphosis", definition: "change of form" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["shape", "form"],
+    clinicalContext: "Important for describing cellular and tissue appearance"
+  },
+  {
+    suffix: "-opia",
+    meaning: "vision condition",
+    origin: "Greek",
+    examples: [
+      { word: "myopia", definition: "nearsightedness" },
+      { word: "hyperopia", definition: "farsightedness" },
+      { word: "diplopia", definition: "double vision" },
+      { word: "amblyopia", definition: "lazy eye" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["vision", "sight"],
+    clinicalContext: "Essential for vision disorders and eye conditions"
   }
 ];
 
