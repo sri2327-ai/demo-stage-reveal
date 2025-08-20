@@ -23,7 +23,7 @@ const MedicalTerminology = () => {
       description: "Word parts that appear at the end of medical terms to indicate conditions or procedures",
       path: "/medical-suffixes",
       examples: ["-itis (inflammation)", "-ectomy (removal)", "-ology (study of)"],
-      count: "35+",
+      count: "50+",
       color: "from-green-500 to-emerald-500",
       icon: "🔬"
     },
@@ -32,7 +32,7 @@ const MedicalTerminology = () => {
       description: "Foundation words that provide the core meaning to medical terminology",
       path: "/medical-roots", 
       examples: ["cardi/o (heart)", "neur/o (nerve)", "dermat/o (skin)"],
-      count: "40+",
+      count: "60+",
       color: "from-purple-500 to-violet-500",
       icon: "🫀"
     }
@@ -137,7 +137,7 @@ const MedicalTerminology = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm sm:text-base text-gray-500">
               <div className="flex items-center gap-2">
                 <Stethoscope className="h-5 w-5 text-[#387E89]" />
-                <span>115+ Medical Terms</span>
+                <span>200+ Medical Terms</span>
               </div>
               <span className="hidden sm:block">•</span>
               <span>Etymology & Examples</span>
