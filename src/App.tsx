@@ -26,6 +26,7 @@ import MedicalSuffixes from "./pages/MedicalSuffixes";
 import MedicalSuffixDetail from "./pages/MedicalSuffixDetail";
 import MedicalRoots from "./pages/MedicalRoots";
 import MedicalRootDetail from "./pages/MedicalRootDetail";
+import MedicalTerminology from "./pages/MedicalTerminology";
 import MaintainEyeContact from "./pages/MaintainEyeContact";
 import CutAdminTasks from "./pages/CutAdminTasks";
 import MinimizeEHRTime from "./pages/MinimizeEHRTime";
@@ -72,6 +73,7 @@ const App = () => (
             <Route path="/templates" element={<Templates />} />
             <Route path="/icd10-codes" element={<ICD10Codes />} />
             <Route path="/icd10-codes/:range" element={<ICD10CodeRange />} />
+            <Route path="/medical-terminology" element={<MedicalTerminology />} />
             <Route path="/medical-abbreviations" element={<MedicalAbbreviations />} />
             <Route path="/medical-abbreviations/:code" element={<MedicalAbbreviationDetail />} />
             <Route path="/medical-prefixes" element={<MedicalPrefixes />} />

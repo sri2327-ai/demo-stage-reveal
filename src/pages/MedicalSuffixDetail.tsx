@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Book, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,6 +46,39 @@ const MedicalSuffixDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <Helmet>
+        <title>{suffix.suffix} - Medical Suffix Meaning & Examples | S10.AI</title>
+        <meta 
+          name="description" 
+          content={`Learn about the medical suffix ${suffix.suffix} meaning "${suffix.meaning}". Includes etymology, clinical examples, and usage in healthcare terminology.`} 
+        />
+        <meta 
+          name="keywords" 
+          content={`medical suffix, ${suffix.suffix}, ${suffix.meaning}, medical terminology, healthcare, ${suffix.examples.map(ex => ex.word).join(', ')}`} 
+        />
+        <link rel="canonical" href={`https://s10.ai/medical-suffixes/${encodeURIComponent(suffix.suffix.toLowerCase())}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalContent",
+            "name": `Medical Suffix: ${suffix.suffix}`,
+            "description": `${suffix.suffix} is a medical suffix meaning "${suffix.meaning}" from ${suffix.origin} origin.`,
+            "educationalLevel": "Professional",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "Healthcare Professionals"
+            },
+            "about": {
+              "@type": "Thing",
+              "name": "Medical Terminology"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "S10.AI"
+            }
+          })}
+        </script>
+      </Helmet>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-6xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
@@ -89,6 +123,34 @@ const MedicalSuffixDetail = () => {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 leading-relaxed">{suffix.clinicalContext}</p>
+          </CardContent>
+        </Card>
+
+        {/* Example Clinical Note */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-xl font-bold text-[#143151]">Example Clinical Note</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-sm text-blue-800 font-medium mb-2">Sample Documentation:</p>
+              <div className="bg-white border rounded p-4 font-mono text-sm">
+                <p className="mb-2"><strong>Clinical Assessment:</strong></p>
+                <p>
+                  Patient diagnosed with <span className="bg-yellow-200 px-1 rounded font-semibold">{suffix.examples[0]?.word || 'condition'}</span>
+                  {suffix.examples[0] && ` (${suffix.examples[0].definition})`}.
+                  {suffix.suffix === '-itis' && ' Inflammation markers elevated, prescribed anti-inflammatory medication.'}
+                  {suffix.suffix === '-ectomy' && ' Surgical removal completed successfully, patient stable post-procedure.'}
+                  {suffix.suffix === '-ology' && ' Referred to specialist for comprehensive evaluation and management.'}
+                  {suffix.suffix === '-oma' && ' Imaging reveals mass requiring further evaluation and possible biopsy.'}
+                  {suffix.suffix === '-pathy' && ' Progressive disease pattern noted, treatment plan adjusted accordingly.'}
+                  {!['-itis', '-ectomy', '-ology', '-oma', '-pathy'].includes(suffix.suffix) && ' Treatment plan initiated based on clinical findings.'}
+                </p>
+                <p className="mt-2 text-xs text-gray-600">
+                  Note: The suffix "<strong>{suffix.suffix}</strong>" meaning "<strong>{suffix.meaning}</strong>" is highlighted above.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Book, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,6 +46,39 @@ const MedicalRootDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <Helmet>
+        <title>{root.root} - Medical Root Word Meaning & Examples | S10.AI</title>
+        <meta 
+          name="description" 
+          content={`Learn about the medical root word ${root.root} meaning "${root.meaning}". Includes etymology, clinical examples, and usage in healthcare terminology.`} 
+        />
+        <meta 
+          name="keywords" 
+          content={`medical root word, ${root.root}, ${root.meaning}, medical terminology, healthcare, ${root.examples.map(ex => ex.word).join(', ')}`} 
+        />
+        <link rel="canonical" href={`https://s10.ai/medical-roots/${encodeURIComponent(root.root.toLowerCase())}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalContent",
+            "name": `Medical Root Word: ${root.root}`,
+            "description": `${root.root} is a medical root word meaning "${root.meaning}" from ${root.origin} origin.`,
+            "educationalLevel": "Professional",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "Healthcare Professionals"
+            },
+            "about": {
+              "@type": "Thing",
+              "name": "Medical Terminology"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "S10.AI"
+            }
+          })}
+        </script>
+      </Helmet>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-6xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
@@ -89,6 +123,35 @@ const MedicalRootDetail = () => {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 leading-relaxed">{root.clinicalContext}</p>
+          </CardContent>
+        </Card>
+
+        {/* Example Clinical Note */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-xl font-bold text-[#143151]">Example Clinical Note</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-sm text-blue-800 font-medium mb-2">Sample Documentation:</p>
+              <div className="bg-white border rounded p-4 font-mono text-sm">
+                <p className="mb-2"><strong>Clinical Documentation:</strong></p>
+                <p>
+                  <span className="bg-yellow-200 px-1 rounded font-semibold">{root.examples[0]?.word || 'Condition'}</span> evaluation reveals 
+                  {root.examples[0] && ` ${root.examples[0].definition.toLowerCase()}`}.
+                  {root.root === 'cardi/o' && ' EKG shows normal sinus rhythm, echocardiogram pending.'}
+                  {root.root === 'neur/o' && ' Neurological examination within normal limits, reflexes intact.'}
+                  {root.root === 'dermat/o' && ' Skin lesion biopsied, awaiting pathology results.'}
+                  {root.root === 'gastr/o' && ' Gastroscopy scheduled to evaluate upper GI symptoms.'}
+                  {root.root === 'hemat/o' && ' Complete blood count ordered to assess hematological status.'}
+                  {root.root === 'nephr/o' && ' Renal function tests indicate normal kidney performance.'}
+                  {!['cardi/o', 'neur/o', 'dermat/o', 'gastr/o', 'hemat/o', 'nephr/o'].includes(root.root) && ' Further evaluation and monitoring recommended.'}
+                </p>
+                <p className="mt-2 text-xs text-gray-600">
+                  Note: The root word "<strong>{root.root}</strong>" meaning "<strong>{root.meaning}</strong>" is highlighted above.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

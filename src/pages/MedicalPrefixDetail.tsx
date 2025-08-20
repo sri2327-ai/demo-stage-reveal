@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Book, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,6 +46,39 @@ const MedicalPrefixDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <Helmet>
+        <title>{prefix.prefix} - Medical Prefix Meaning & Examples | S10.AI</title>
+        <meta 
+          name="description" 
+          content={`Learn about the medical prefix ${prefix.prefix} meaning "${prefix.meaning}". Includes etymology, clinical examples, and usage in healthcare terminology.`} 
+        />
+        <meta 
+          name="keywords" 
+          content={`medical prefix, ${prefix.prefix}, ${prefix.meaning}, medical terminology, healthcare, ${prefix.examples.map(ex => ex.word).join(', ')}`} 
+        />
+        <link rel="canonical" href={`https://s10.ai/medical-prefixes/${encodeURIComponent(prefix.prefix.toLowerCase())}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalContent",
+            "name": `Medical Prefix: ${prefix.prefix}`,
+            "description": `${prefix.prefix} is a medical prefix meaning "${prefix.meaning}" from ${prefix.origin} origin.`,
+            "educationalLevel": "Professional",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "Healthcare Professionals"
+            },
+            "about": {
+              "@type": "Thing",
+              "name": "Medical Terminology"
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "S10.AI"
+            }
+          })}
+        </script>
+      </Helmet>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-6xl">
         {/* Navigation */}
         <div className="mb-6 sm:mb-8">
@@ -89,6 +123,34 @@ const MedicalPrefixDetail = () => {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 leading-relaxed">{prefix.clinicalContext}</p>
+          </CardContent>
+        </Card>
+
+        {/* Example Clinical Note */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-xl font-bold text-[#143151]">Example Clinical Note</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-sm text-blue-800 font-medium mb-2">Sample Documentation:</p>
+              <div className="bg-white border rounded p-4 font-mono text-sm">
+                <p className="mb-2"><strong>Patient Assessment:</strong></p>
+                <p>
+                  Patient presents with <span className="bg-yellow-200 px-1 rounded font-semibold">{prefix.examples[0]?.word || 'condition'}</span> 
+                  {prefix.examples[0] && ` (${prefix.examples[0].definition})`}. 
+                  {prefix.prefix === 'hyper-' && 'Vital signs show elevated blood pressure at 160/95 mmHg.'} 
+                  {prefix.prefix === 'hypo-' && 'Laboratory results indicate low glucose levels at 65 mg/dL.'}
+                  {prefix.prefix === 'anti-' && 'Prescribed antibiotic therapy for bacterial infection.'}
+                  {prefix.prefix === 'pre-' && 'Scheduled for preoperative evaluation next week.'}
+                  {prefix.prefix === 'post-' && 'Patient recovering well in postoperative period.'}
+                  {!['hyper-', 'hypo-', 'anti-', 'pre-', 'post-'].includes(prefix.prefix) && 'Clinical findings support this diagnosis.'}
+                </p>
+                <p className="mt-2 text-xs text-gray-600">
+                  Note: The prefix "<strong>{prefix.prefix}</strong>" meaning "<strong>{prefix.meaning}</strong>" is highlighted above.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
