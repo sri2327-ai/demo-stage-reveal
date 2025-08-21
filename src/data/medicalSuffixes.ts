@@ -1784,9 +1784,11 @@ export const searchSuffixes = (query: string): MedicalSuffix[] => {
 };
 
 export const getSuffixesByLetter = (letter: string): MedicalSuffix[] => {
-  return medicalSuffixes.filter(
-    (suffix) => suffix.suffix.charAt(1).toUpperCase() === letter.toUpperCase()
-  );
+  return medicalSuffixes.filter((suffix) => {
+    // Handle suffixes that start with "-" (skip the dash)
+    const firstLetter = suffix.suffix.replace(/^[^a-zA-Z]*/, '').charAt(0);
+    return firstLetter.toUpperCase() === letter.toUpperCase();
+  });
 };
 
 export const getSuffixByName = (name: string): MedicalSuffix | undefined => {
