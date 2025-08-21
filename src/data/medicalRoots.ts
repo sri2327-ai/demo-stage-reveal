@@ -1555,6 +1555,1014 @@ export const medicalRoots: MedicalRoot[] = [
     specialty: "Urology",
     relatedTerms: ["bladder", "sac"],
     clinicalContext: "Important for urinary bladder conditions and procedures"
+  },
+  {
+    root: "vitr/o",
+    meaning: "glass, vitreous",
+    origin: "Latin",
+    examples: [
+      { word: "vitreous", definition: "glass-like eye gel" },
+      { word: "vitritis", definition: "vitreous inflammation" },
+      { word: "vitrectomy", definition: "vitreous removal" },
+      { word: "vitreal", definition: "relating to vitreous" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["vitreous humor", "glass-like"],
+    clinicalContext: "Critical for retinal surgery and eye procedures"
+  },
+  {
+    root: "vulv/o",
+    meaning: "vulva",
+    origin: "Latin",
+    examples: [
+      { word: "vulvar", definition: "relating to vulva" },
+      { word: "vulvitis", definition: "vulva inflammation" },
+      { word: "vulvectomy", definition: "vulva removal" },
+      { word: "vulvovaginitis", definition: "vulva-vagina inflammation" }
+    ],
+    specialty: "Gynecology",
+    relatedTerms: ["vulva", "external genitalia"],
+    clinicalContext: "Important for gynecological conditions and infections"
+  },
+  {
+    root: "xanth/o",
+    meaning: "yellow",
+    origin: "Greek",
+    examples: [
+      { word: "xanthoma", definition: "yellow fatty deposit" },
+      { word: "xanthelasma", definition: "yellow eyelid patches" },
+      { word: "xanthosis", definition: "yellow discoloration" },
+      { word: "xanthine", definition: "yellow compound" }
+    ],
+    specialty: "Dermatology",
+    relatedTerms: ["yellow", "pigmentation"],
+    clinicalContext: "Important for lipid disorders and skin conditions"
+  },
+  {
+    root: "xer/o",
+    meaning: "dry",
+    origin: "Greek",
+    examples: [
+      { word: "xerosis", definition: "abnormal dryness" },
+      { word: "xerostomia", definition: "dry mouth" },
+      { word: "xerophthalmia", definition: "dry eyes" },
+      { word: "xeroderma", definition: "dry skin condition" }
+    ],
+    specialty: "Dermatology",
+    relatedTerms: ["dry", "dehydration"],
+    clinicalContext: "Critical for autoimmune conditions and medication side effects"
+  },
+  {
+    root: "zo/o",
+    meaning: "animal, life",
+    origin: "Greek",
+    examples: [
+      { word: "zoonosis", definition: "animal-transmitted disease" },
+      { word: "zoology", definition: "study of animals" },
+      { word: "protozoa", definition: "single-celled animals" },
+      { word: "zoonotic", definition: "animal-related infection" }
+    ],
+    specialty: "Infectious Disease",
+    relatedTerms: ["animal", "organism"],
+    clinicalContext: "Critical for infectious disease and epidemiology"
+  },
+  {
+    root: "zyg/o",
+    meaning: "yoke, pair, junction",
+    origin: "Greek",
+    examples: [
+      { word: "zygote", definition: "fertilized egg" },
+      { word: "zygoma", definition: "cheekbone" },
+      { word: "zygomatic", definition: "relating to cheekbone" },
+      { word: "zygosity", definition: "genetic pairing" }
+    ],
+    specialty: "Embryology",
+    relatedTerms: ["pair", "junction"],
+    clinicalContext: "Essential for reproduction and facial anatomy"
+  },
+  {
+    root: "abdomin/o",
+    meaning: "abdomen",
+    origin: "Latin",
+    examples: [
+      { word: "abdominal", definition: "relating to abdomen" },
+      { word: "abdominoplasty", definition: "abdomen surgery" },
+      { word: "abdominocentesis", definition: "abdomen puncture" },
+      { word: "abdominoscopy", definition: "abdomen examination" }
+    ],
+    specialty: "General Surgery",
+    relatedTerms: ["belly", "stomach area"],
+    clinicalContext: "Critical for abdominal surgery and examination"
+  },
+  {
+    root: "acetabul/o",
+    meaning: "hip socket",
+    origin: "Latin",
+    examples: [
+      { word: "acetabulum", definition: "hip socket" },
+      { word: "acetabular", definition: "relating to hip socket" },
+      { word: "acetabuloplasty", definition: "hip socket repair" },
+      { word: "acetabulectomy", definition: "hip socket removal" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["hip socket", "pelvis"],
+    clinicalContext: "Important for hip replacement and fracture repair"
+  },
+  {
+    root: "acr/o",
+    meaning: "extremity, highest point",
+    origin: "Greek",
+    examples: [
+      { word: "acromion", definition: "shoulder blade tip" },
+      { word: "acral", definition: "relating to extremities" },
+      { word: "acrodermatitis", definition: "extremity skin inflammation" },
+      { word: "acrocyanosis", definition: "blue extremities" }
+    ],
+    specialty: "Rheumatology",
+    relatedTerms: ["extremity", "tip"],
+    clinicalContext: "Important for circulation disorders and joint disease"
+  },
+  {
+    root: "aden/o",
+    meaning: "gland",
+    origin: "Greek",
+    examples: [
+      { word: "adenoma", definition: "gland tumor" },
+      { word: "adenitis", definition: "gland inflammation" },
+      { word: "adenectomy", definition: "gland removal" },
+      { word: "adenopathy", definition: "gland disease" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["gland", "secretion"],
+    clinicalContext: "Critical for hormone disorders and cancer screening"
+  },
+  {
+    root: "adip/o",
+    meaning: "fat",
+    origin: "Latin",
+    examples: [
+      { word: "adipose", definition: "fatty tissue" },
+      { word: "adipocyte", definition: "fat cell" },
+      { word: "adiposity", definition: "fatness" },
+      { word: "adipectomy", definition: "fat removal" }
+    ],
+    specialty: "Plastic Surgery",
+    relatedTerms: ["fat", "fatty tissue"],
+    clinicalContext: "Important for obesity treatment and body contouring"
+  },
+  {
+    root: "albin/o",
+    meaning: "white",
+    origin: "Latin",
+    examples: [
+      { word: "album", definition: "white protein" },
+      { word: "albino", definition: "lacking pigment" },
+      { word: "albinism", definition: "absence of pigment" },
+      { word: "albumin", definition: "white blood protein" }
+    ],
+    specialty: "Genetics",
+    relatedTerms: ["white", "colorless"],
+    clinicalContext: "Important for genetic disorders and protein studies"
+  },
+  {
+    root: "alveol/o",
+    meaning: "small sac, alveolus",
+    origin: "Latin",
+    examples: [
+      { word: "alveolus", definition: "air sac in lung" },
+      { word: "alveolar", definition: "relating to alveoli" },
+      { word: "alveolitis", definition: "alveoli inflammation" },
+      { word: "alveolectomy", definition: "alveolus removal" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["air sac", "lung unit"],
+    clinicalContext: "Critical for respiratory disease and gas exchange"
+  },
+  {
+    root: "amni/o",
+    meaning: "amnion, amniotic sac",
+    origin: "Greek",
+    examples: [
+      { word: "amnion", definition: "fetal membrane" },
+      { word: "amniotic", definition: "relating to amniotic fluid" },
+      { word: "amniocentesis", definition: "amniotic fluid sampling" },
+      { word: "oligohydramnios", definition: "decreased amniotic fluid" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["amniotic fluid", "fetal sac"],
+    clinicalContext: "Essential for prenatal testing and fetal monitoring"
+  },
+  {
+    root: "angi/o",
+    meaning: "vessel, blood vessel",
+    origin: "Greek",
+    examples: [
+      { word: "angiography", definition: "vessel imaging" },
+      { word: "angioplasty", definition: "vessel repair" },
+      { word: "angioma", definition: "vessel tumor" },
+      { word: "angiopathy", definition: "vessel disease" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["blood vessel", "vascular"],
+    clinicalContext: "Critical for cardiovascular procedures and imaging"
+  },
+  {
+    root: "ankyl/o",
+    meaning: "stiff, bent, fused",
+    origin: "Greek",
+    examples: [
+      { word: "ankylosis", definition: "joint stiffness" },
+      { word: "ankylosing", definition: "causing stiffness" },
+      { word: "ankylotic", definition: "relating to fusion" },
+      { word: "ankylodactyly", definition: "finger stiffness" }
+    ],
+    specialty: "Rheumatology",
+    relatedTerms: ["stiff", "fused"],
+    clinicalContext: "Important for arthritis and joint mobility disorders"
+  },
+  {
+    root: "aort/o",
+    meaning: "aorta",
+    origin: "Greek",
+    examples: [
+      { word: "aortic", definition: "relating to aorta" },
+      { word: "aortitis", definition: "aorta inflammation" },
+      { word: "aortography", definition: "aorta X-ray" },
+      { word: "aortostenosis", definition: "aorta narrowing" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["main artery", "aorta"],
+    clinicalContext: "Critical for heart surgery and vascular disease"
+  },
+  {
+    root: "append/o",
+    meaning: "appendix",
+    origin: "Latin",
+    examples: [
+      { word: "appendix", definition: "small intestinal pouch" },
+      { word: "appendicitis", definition: "appendix inflammation" },
+      { word: "appendectomy", definition: "appendix removal" },
+      { word: "appendicular", definition: "relating to appendix" }
+    ],
+    specialty: "General Surgery",
+    relatedTerms: ["appendix", "vermiform"],
+    clinicalContext: "Critical for appendicitis diagnosis and emergency surgery"
+  },
+  {
+    root: "arteri/o",
+    meaning: "artery",
+    origin: "Greek",
+    examples: [
+      { word: "arterial", definition: "relating to arteries" },
+      { word: "arteriosclerosis", definition: "artery hardening" },
+      { word: "arteriotomy", definition: "artery incision" },
+      { word: "arteriopathy", definition: "artery disease" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["artery", "arterial"],
+    clinicalContext: "Essential for vascular surgery and circulation disorders"
+  },
+  {
+    root: "arthr/o",
+    meaning: "joint",
+    origin: "Greek",
+    examples: [
+      { word: "arthritis", definition: "joint inflammation" },
+      { word: "arthroscopy", definition: "joint examination" },
+      { word: "arthroplasty", definition: "joint replacement" },
+      { word: "arthralgia", definition: "joint pain" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["joint", "articulation"],
+    clinicalContext: "Critical for joint disorders and orthopedic surgery"
+  },
+  {
+    root: "atel/o",
+    meaning: "incomplete, imperfect",
+    origin: "Greek",
+    examples: [
+      { word: "atelectasis", definition: "lung collapse" },
+      { word: "atelencephaly", definition: "incomplete brain" },
+      { word: "atelocardia", definition: "incomplete heart" },
+      { word: "atelomyelia", definition: "incomplete spinal cord" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["incomplete", "collapsed"],
+    clinicalContext: "Important for lung disease and developmental disorders"
+  },
+  {
+    root: "ather/o",
+    meaning: "fatty plaque, porridge",
+    origin: "Greek",
+    examples: [
+      { word: "atherosclerosis", definition: "fatty plaque buildup" },
+      { word: "atheroma", definition: "fatty deposit" },
+      { word: "atherectomy", definition: "plaque removal" },
+      { word: "atherogenic", definition: "plaque-forming" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["plaque", "cholesterol"],
+    clinicalContext: "Critical for heart disease prevention and treatment"
+  },
+  {
+    root: "atri/o",
+    meaning: "atrium, chamber",
+    origin: "Latin",
+    examples: [
+      { word: "atrial", definition: "relating to atrium" },
+      { word: "atrioventricular", definition: "atrium-ventricle" },
+      { word: "atriotomy", definition: "atrium incision" },
+      { word: "atrioseptal", definition: "atrial septum" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["atrium", "heart chamber"],
+    clinicalContext: "Essential for cardiac rhythm disorders and surgery"
+  },
+  {
+    root: "audi/o",
+    meaning: "hearing, sound",
+    origin: "Latin",
+    examples: [
+      { word: "audiology", definition: "study of hearing" },
+      { word: "audiometer", definition: "hearing test device" },
+      { word: "audiogram", definition: "hearing test chart" },
+      { word: "auditory", definition: "relating to hearing" }
+    ],
+    specialty: "Otolaryngology",
+    relatedTerms: ["hearing", "sound"],
+    clinicalContext: "Critical for hearing loss evaluation and treatment"
+  },
+  {
+    root: "aur/o",
+    meaning: "ear",
+    origin: "Latin",
+    examples: [
+      { word: "aural", definition: "relating to ear" },
+      { word: "auricle", definition: "external ear" },
+      { word: "auricular", definition: "relating to ear" },
+      { word: "binaural", definition: "relating to both ears" }
+    ],
+    specialty: "Otolaryngology",
+    relatedTerms: ["ear", "hearing"],
+    clinicalContext: "Important for ear disorders and hearing problems"
+  },
+  {
+    root: "axill/o",
+    meaning: "armpit, axilla",
+    origin: "Latin",
+    examples: [
+      { word: "axilla", definition: "armpit" },
+      { word: "axillary", definition: "relating to armpit" },
+      { word: "axillectomy", definition: "armpit tissue removal" },
+      { word: "subaxillary", definition: "below armpit" }
+    ],
+    specialty: "General Surgery",
+    relatedTerms: ["armpit", "underarm"],
+    clinicalContext: "Important for lymph node evaluation and breast surgery"
+  },
+  {
+    root: "azot/o",
+    meaning: "nitrogen, urea",
+    origin: "Greek",
+    examples: [
+      { word: "azotemia", definition: "nitrogen in blood" },
+      { word: "azoturia", definition: "nitrogen in urine" },
+      { word: "azoospermia", definition: "no sperm in semen" },
+      { word: "azote", definition: "nitrogen" }
+    ],
+    specialty: "Nephrology",
+    relatedTerms: ["nitrogen", "urea"],
+    clinicalContext: "Critical for kidney function assessment and toxicology"
+  },
+  {
+    root: "balan/o",
+    meaning: "glans penis",
+    origin: "Greek",
+    examples: [
+      { word: "balanitis", definition: "glans inflammation" },
+      { word: "balanoposthitis", definition: "glans-foreskin inflammation" },
+      { word: "balanoplasty", definition: "glans repair" },
+      { word: "balanorrhagia", definition: "glans bleeding" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["glans", "penis tip"],
+    clinicalContext: "Important for male genital infections and conditions"
+  },
+  {
+    root: "bar/o",
+    meaning: "weight, pressure",
+    origin: "Greek",
+    examples: [
+      { word: "barometric", definition: "relating to pressure" },
+      { word: "barotrauma", definition: "pressure injury" },
+      { word: "baroreceptor", definition: "pressure sensor" },
+      { word: "baroreflex", definition: "pressure response" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["pressure", "weight"],
+    clinicalContext: "Important for diving medicine and pressure injuries"
+  },
+  {
+    root: "bas/o",
+    meaning: "base, alkaline",
+    origin: "Greek",
+    examples: [
+      { word: "base", definition: "alkaline substance" },
+      { word: "basic", definition: "alkaline" },
+      { word: "basophil", definition: "base-loving cell" },
+      { word: "basophilia", definition: "increased basophils" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["base", "alkaline"],
+    clinicalContext: "Important for acid-base balance and blood disorders"
+  },
+  {
+    root: "bil/i",
+    meaning: "bile",
+    origin: "Latin",
+    examples: [
+      { word: "bile", definition: "liver digestive fluid" },
+      { word: "biliary", definition: "relating to bile" },
+      { word: "bilirubin", definition: "bile pigment" },
+      { word: "cholangiogram", definition: "bile duct X-ray" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["bile", "gallbladder"],
+    clinicalContext: "Critical for liver disease and digestive disorders"
+  },
+  {
+    root: "blast/o",
+    meaning: "germ, bud, embryonic",
+    origin: "Greek",
+    examples: [
+      { word: "blastocyst", definition: "early embryo stage" },
+      { word: "osteoblast", definition: "bone-forming cell" },
+      { word: "blastoma", definition: "embryonic tumor" },
+      { word: "neuroblast", definition: "nerve precursor cell" }
+    ],
+    specialty: "Oncology",
+    relatedTerms: ["embryonic", "immature cell"],
+    clinicalContext: "Critical for cancer diagnosis and developmental biology"
+  },
+  {
+    root: "blephar/o",
+    meaning: "eyelid",
+    origin: "Greek",
+    examples: [
+      { word: "blepharitis", definition: "eyelid inflammation" },
+      { word: "blepharoplasty", definition: "eyelid surgery" },
+      { word: "blepharospasm", definition: "eyelid spasm" },
+      { word: "blepharostasis", definition: "eyelid drooping" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["eyelid", "palpebra"],
+    clinicalContext: "Important for eyelid disorders and cosmetic surgery"
+  },
+  {
+    root: "brachi/o",
+    meaning: "arm",
+    origin: "Greek",
+    examples: [
+      { word: "brachial", definition: "relating to arm" },
+      { word: "brachiocephalic", definition: "arm-head vessel" },
+      { word: "brachioradialis", definition: "arm-radius muscle" },
+      { word: "brachioplasty", definition: "arm surgery" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["arm", "upper limb"],
+    clinicalContext: "Important for arm fractures and vascular procedures"
+  },
+  {
+    root: "brachy/o",
+    meaning: "short",
+    origin: "Greek",
+    examples: [
+      { word: "brachycephaly", definition: "short head" },
+      { word: "brachydactyly", definition: "short fingers" },
+      { word: "brachytherapy", definition: "short-distance radiation" },
+      { word: "brachycardia", definition: "slow heart rate" }
+    ],
+    specialty: "Genetics",
+    relatedTerms: ["short", "abbreviated"],
+    clinicalContext: "Important for genetic conditions and radiation therapy"
+  },
+  {
+    root: "bronch/o",
+    meaning: "bronchus, airway",
+    origin: "Greek",
+    examples: [
+      { word: "bronchitis", definition: "bronchus inflammation" },
+      { word: "bronchoscopy", definition: "bronchus examination" },
+      { word: "bronchodilator", definition: "airway opener" },
+      { word: "bronchiectasis", definition: "bronchus dilation" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["bronchus", "airway"],
+    clinicalContext: "Critical for respiratory disease and lung procedures"
+  },
+  {
+    root: "bucc/o",
+    meaning: "cheek",
+    origin: "Latin",
+    examples: [
+      { word: "buccal", definition: "relating to cheek" },
+      { word: "buccolingual", definition: "cheek-tongue" },
+      { word: "buccinator", definition: "cheek muscle" },
+      { word: "bucconasal", definition: "cheek-nose" }
+    ],
+    specialty: "Dentistry",
+    relatedTerms: ["cheek", "mouth side"],
+    clinicalContext: "Important for dental procedures and oral examination"
+  },
+  {
+    root: "burs/o",
+    meaning: "bursa, fluid sac",
+    origin: "Greek",
+    examples: [
+      { word: "bursa", definition: "fluid-filled sac" },
+      { word: "bursitis", definition: "bursa inflammation" },
+      { word: "bursectomy", definition: "bursa removal" },
+      { word: "subacromial", definition: "below shoulder bursa" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["bursa", "joint sac"],
+    clinicalContext: "Important for joint pain and sports medicine"
+  },
+  {
+    root: "calc/o",
+    meaning: "calcium, lime",
+    origin: "Latin",
+    examples: [
+      { word: "calcium", definition: "mineral element" },
+      { word: "calcification", definition: "calcium deposit" },
+      { word: "hypercalcemia", definition: "high calcium" },
+      { word: "calculus", definition: "stone formation" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["calcium", "mineral"],
+    clinicalContext: "Critical for bone health and metabolic disorders"
+  },
+  {
+    root: "calcane/o",
+    meaning: "heel bone, calcaneus",
+    origin: "Latin",
+    examples: [
+      { word: "calcaneus", definition: "heel bone" },
+      { word: "calcaneal", definition: "relating to heel" },
+      { word: "calcaneofibular", definition: "heel-fibula ligament" },
+      { word: "subcalcaneal", definition: "below heel bone" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["heel bone", "foot"],
+    clinicalContext: "Important for foot injuries and ankle problems"
+  },
+  {
+    root: "cali/o",
+    meaning: "calyx, cup",
+    origin: "Greek",
+    examples: [
+      { word: "calyx", definition: "kidney cup" },
+      { word: "caliceal", definition: "relating to calyx" },
+      { word: "caliectasis", definition: "calyx dilation" },
+      { word: "pyelocaliceal", definition: "pelvis-calyx system" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["kidney cup", "collecting system"],
+    clinicalContext: "Important for kidney stones and urological procedures"
+  },
+  {
+    root: "capill/o",
+    meaning: "capillary, hair-like vessel",
+    origin: "Latin",
+    examples: [
+      { word: "capillary", definition: "smallest blood vessel" },
+      { word: "capillaritis", definition: "capillary inflammation" },
+      { word: "capilloscopy", definition: "capillary examination" },
+      { word: "pericapillary", definition: "around capillaries" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["capillary", "microvascular"],
+    clinicalContext: "Important for circulation and vascular disease"
+  },
+  {
+    root: "capit/o",
+    meaning: "head",
+    origin: "Latin",
+    examples: [
+      { word: "capital", definition: "relating to head" },
+      { word: "capitate", definition: "head-shaped bone" },
+      { word: "capitellum", definition: "small head" },
+      { word: "decapitation", definition: "head removal" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["head", "chief"],
+    clinicalContext: "Important for anatomical descriptions and surgery"
+  },
+  {
+    root: "capsul/o",
+    meaning: "capsule, small container",
+    origin: "Latin",
+    examples: [
+      { word: "capsule", definition: "enclosing structure" },
+      { word: "capsulitis", definition: "capsule inflammation" },
+      { word: "capsulotomy", definition: "capsule incision" },
+      { word: "encapsulated", definition: "enclosed in capsule" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["capsule", "covering"],
+    clinicalContext: "Critical for joint surgery and organ pathology"
+  },
+  {
+    root: "carcin/o",
+    meaning: "cancer, crab",
+    origin: "Greek",
+    examples: [
+      { word: "carcinoma", definition: "malignant tumor" },
+      { word: "carcinogenic", definition: "cancer-causing" },
+      { word: "carcinogenesis", definition: "cancer development" },
+      { word: "carcinoid", definition: "cancer-like tumor" }
+    ],
+    specialty: "Oncology",
+    relatedTerms: ["cancer", "malignant"],
+    clinicalContext: "Critical for cancer diagnosis and treatment"
+  },
+  {
+    root: "cardi/o",
+    meaning: "heart",
+    origin: "Greek",
+    examples: [
+      { word: "cardiac", definition: "relating to heart" },
+      { word: "cardiology", definition: "study of heart" },
+      { word: "cardiomyopathy", definition: "heart muscle disease" },
+      { word: "cardiovascular", definition: "heart-vessel system" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["heart", "cardiac"],
+    clinicalContext: "Critical for heart disease diagnosis and treatment"
+  },
+  {
+    root: "carp/o",
+    meaning: "wrist",
+    origin: "Greek",
+    examples: [
+      { word: "carpal", definition: "relating to wrist" },
+      { word: "carpus", definition: "wrist bones" },
+      { word: "metacarpal", definition: "beyond wrist" },
+      { word: "carpectomy", definition: "wrist bone removal" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["wrist", "carpal bones"],
+    clinicalContext: "Important for wrist injuries and hand surgery"
+  },
+  {
+    root: "caud/o",
+    meaning: "tail, toward feet",
+    origin: "Latin",
+    examples: [
+      { word: "caudal", definition: "toward tail/feet" },
+      { word: "caudad", definition: "in tail direction" },
+      { word: "caudate", definition: "having tail" },
+      { word: "caudolateral", definition: "tail-side direction" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["tail", "inferior"],
+    clinicalContext: "Important for anatomical positioning and surgery"
+  },
+  {
+    root: "cec/o",
+    meaning: "cecum, blind pouch",
+    origin: "Latin",
+    examples: [
+      { word: "cecum", definition: "first part of colon" },
+      { word: "cecal", definition: "relating to cecum" },
+      { word: "cecopexy", definition: "cecum fixation" },
+      { word: "ileocecal", definition: "ileum-cecum valve" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["cecum", "large intestine"],
+    clinicalContext: "Important for appendicitis and colon surgery"
+  },
+  {
+    root: "cellul/o",
+    meaning: "small cell, cellular",
+    origin: "Latin",
+    examples: [
+      { word: "cellular", definition: "relating to cells" },
+      { word: "cellulitis", definition: "tissue inflammation" },
+      { word: "subcellular", definition: "below cell level" },
+      { word: "multicellular", definition: "many cells" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["cell", "tissue"],
+    clinicalContext: "Important for infections and cellular biology"
+  },
+  {
+    root: "cephal/o",
+    meaning: "head",
+    origin: "Greek",
+    examples: [
+      { word: "cephalic", definition: "toward head" },
+      { word: "cephalalgia", definition: "headache" },
+      { word: "hydrocephalus", definition: "water on brain" },
+      { word: "cephalometry", definition: "head measurement" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["head", "cranial"],
+    clinicalContext: "Critical for brain disorders and obstetrics"
+  },
+  {
+    root: "cerebell/o",
+    meaning: "cerebellum, little brain",
+    origin: "Latin",
+    examples: [
+      { word: "cerebellar", definition: "relating to cerebellum" },
+      { word: "cerebellitis", definition: "cerebellum inflammation" },
+      { word: "cerebellopontine", definition: "cerebellum-pons angle" },
+      { word: "cerebellar", definition: "balance coordination" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["cerebellum", "balance"],
+    clinicalContext: "Important for movement disorders and balance"
+  },
+  {
+    root: "cerebr/o",
+    meaning: "brain, cerebrum",
+    origin: "Latin",
+    examples: [
+      { word: "cerebral", definition: "relating to brain" },
+      { word: "cerebrospinal", definition: "brain-spinal" },
+      { word: "cerebrovascular", definition: "brain vessels" },
+      { word: "cerebritis", definition: "brain inflammation" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["brain", "cerebrum"],
+    clinicalContext: "Critical for brain diseases and neurological disorders"
+  },
+  {
+    root: "cervic/o",
+    meaning: "neck, cervix",
+    origin: "Latin",
+    examples: [
+      { word: "cervical", definition: "relating to neck/cervix" },
+      { word: "cervicitis", definition: "cervix inflammation" },
+      { word: "cervicalgia", definition: "neck pain" },
+      { word: "cervicotomy", definition: "neck incision" }
+    ],
+    specialty: "Gynecology",
+    relatedTerms: ["neck", "cervix"],
+    clinicalContext: "Important for spine surgery and gynecology"
+  },
+  {
+    root: "cheil/o",
+    meaning: "lip",
+    origin: "Greek",
+    examples: [
+      { word: "cheilitis", definition: "lip inflammation" },
+      { word: "cheiloplasty", definition: "lip surgery" },
+      { word: "cheiloschisis", definition: "cleft lip" },
+      { word: "cheilosis", definition: "lip condition" }
+    ],
+    specialty: "Plastic Surgery",
+    relatedTerms: ["lip", "mouth"],
+    clinicalContext: "Important for cleft lip repair and oral surgery"
+  },
+  {
+    root: "chir/o",
+    meaning: "hand",
+    origin: "Greek",
+    examples: [
+      { word: "chiropractor", definition: "hand treatment" },
+      { word: "chirality", definition: "handedness" },
+      { word: "chirospasm", definition: "hand spasm" },
+      { word: "chiropractic", definition: "hand manipulation" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["hand", "manual"],
+    clinicalContext: "Important for hand surgery and manual therapy"
+  },
+  {
+    root: "chol/e",
+    meaning: "bile, gall",
+    origin: "Greek",
+    examples: [
+      { word: "cholesterol", definition: "bile solid" },
+      { word: "cholecystitis", definition: "gallbladder inflammation" },
+      { word: "cholelithiasis", definition: "gallstones" },
+      { word: "cholangitis", definition: "bile duct inflammation" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["bile", "gallbladder"],
+    clinicalContext: "Critical for gallbladder disease and liver disorders"
+  },
+  {
+    root: "chondr/o",
+    meaning: "cartilage",
+    origin: "Greek",
+    examples: [
+      { word: "chondroma", definition: "cartilage tumor" },
+      { word: "chondritis", definition: "cartilage inflammation" },
+      { word: "chondroplasty", definition: "cartilage repair" },
+      { word: "osteochondritis", definition: "bone-cartilage inflammation" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["cartilage", "gristle"],
+    clinicalContext: "Critical for joint disorders and sports injuries"
+  },
+  {
+    root: "chori/o",
+    meaning: "chorion, fetal membrane",
+    origin: "Greek",
+    examples: [
+      { word: "chorion", definition: "outer fetal membrane" },
+      { word: "chorionic", definition: "relating to chorion" },
+      { word: "chorioamnionitis", definition: "membrane infection" },
+      { word: "choriocarcinoma", definition: "chorion cancer" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["chorion", "placenta"],
+    clinicalContext: "Critical for pregnancy complications and cancer"
+  },
+  {
+    root: "choroid/o",
+    meaning: "choroid, vascular layer",
+    origin: "Greek",
+    examples: [
+      { word: "choroid", definition: "eye vascular layer" },
+      { word: "choroidal", definition: "relating to choroid" },
+      { word: "choroiditis", definition: "choroid inflammation" },
+      { word: "choroideremia", definition: "choroid degeneration" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["choroid", "eye layer"],
+    clinicalContext: "Important for retinal diseases and eye inflammation"
+  },
+  {
+    root: "chyl/o",
+    meaning: "chyle, milky fluid",
+    origin: "Greek",
+    examples: [
+      { word: "chyle", definition: "milky lymph" },
+      { word: "chylous", definition: "containing chyle" },
+      { word: "chylothorax", definition: "chyle in chest" },
+      { word: "chylomicron", definition: "fat particle" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["chyle", "lymphatic fluid"],
+    clinicalContext: "Important for lymphatic disorders and nutrition"
+  },
+  {
+    root: "cili/o",
+    meaning: "eyelash, cilium",
+    origin: "Latin",
+    examples: [
+      { word: "cilium", definition: "eyelash or cell projection" },
+      { word: "ciliary", definition: "relating to cilia" },
+      { word: "ciliogenesis", definition: "cilia formation" },
+      { word: "superciliary", definition: "above eyebrow" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["eyelash", "cilia"],
+    clinicalContext: "Important for eye anatomy and genetic diseases"
+  },
+  {
+    root: "clavicul/o",
+    meaning: "clavicle, collarbone",
+    origin: "Latin",
+    examples: [
+      { word: "clavicular", definition: "relating to clavicle" },
+      { word: "clavicle", definition: "collarbone" },
+      { word: "subclavicular", definition: "below clavicle" },
+      { word: "sternoclavicular", definition: "breastbone-clavicle" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["clavicle", "collarbone"],
+    clinicalContext: "Important for shoulder injuries and chest surgery"
+  },
+  {
+    root: "cleid/o",
+    meaning: "clavicle, key",
+    origin: "Greek",
+    examples: [
+      { word: "cleidocranial", definition: "clavicle-skull condition" },
+      { word: "cleidal", definition: "relating to clavicle" },
+      { word: "cleidotomy", definition: "clavicle cutting" },
+      { word: "acromioclavicular", definition: "shoulder-clavicle joint" }
+    ],
+    specialty: "Orthopedics",
+    relatedTerms: ["clavicle", "key bone"],
+    clinicalContext: "Important for genetic conditions and shoulder problems"
+  },
+  {
+    root: "cochle/o",
+    meaning: "cochlea, snail",
+    origin: "Greek",
+    examples: [
+      { word: "cochlea", definition: "inner ear spiral" },
+      { word: "cochlear", definition: "relating to cochlea" },
+      { word: "cochleitis", definition: "cochlea inflammation" },
+      { word: "cochleostomy", definition: "cochlea opening" }
+    ],
+    specialty: "Otolaryngology",
+    relatedTerms: ["cochlea", "inner ear"],
+    clinicalContext: "Critical for hearing loss and cochlear implants"
+  },
+  {
+    root: "col/o",
+    meaning: "colon, large intestine",
+    origin: "Greek",
+    examples: [
+      { word: "colon", definition: "large intestine" },
+      { word: "colonic", definition: "relating to colon" },
+      { word: "colostomy", definition: "colon opening" },
+      { word: "colectomy", definition: "colon removal" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["colon", "large bowel"],
+    clinicalContext: "Critical for colon cancer and bowel surgery"
+  },
+  {
+    root: "colp/o",
+    meaning: "vagina",
+    origin: "Greek",
+    examples: [
+      { word: "colposcopy", definition: "vagina examination" },
+      { word: "colpitis", definition: "vagina inflammation" },
+      { word: "colporrhaphy", definition: "vagina repair" },
+      { word: "colpotomy", definition: "vagina incision" }
+    ],
+    specialty: "Gynecology",
+    relatedTerms: ["vagina", "birth canal"],
+    clinicalContext: "Important for gynecological procedures and infections"
+  },
+  {
+    root: "conjunctiv/o",
+    meaning: "conjunctiva, eye membrane",
+    origin: "Latin",
+    examples: [
+      { word: "conjunctiva", definition: "eye surface membrane" },
+      { word: "conjunctival", definition: "relating to conjunctiva" },
+      { word: "conjunctivitis", definition: "conjunctiva inflammation" },
+      { word: "subconjunctival", definition: "below conjunctiva" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["conjunctiva", "eye lining"],
+    clinicalContext: "Important for eye infections and allergies"
+  },
+  {
+    root: "core/o",
+    meaning: "pupil",
+    origin: "Greek",
+    examples: [
+      { word: "coremorphosis", definition: "pupil deformity" },
+      { word: "corectopia", definition: "displaced pupil" },
+      { word: "coreoplasty", definition: "pupil repair" },
+      { word: "anisocoria", definition: "unequal pupils" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["pupil", "iris opening"],
+    clinicalContext: "Important for pupil disorders and neurological signs"
+  },
+  {
+    root: "corne/o",
+    meaning: "cornea",
+    origin: "Latin",
+    examples: [
+      { word: "cornea", definition: "clear eye front" },
+      { word: "corneal", definition: "relating to cornea" },
+      { word: "corneoplasty", definition: "cornea repair" },
+      { word: "keratoconus", definition: "cone-shaped cornea" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["cornea", "eye window"],
+    clinicalContext: "Critical for corneal transplants and eye surgery"
+  },
+  {
+    root: "coron/o",
+    meaning: "crown, coronary",
+    origin: "Latin",
+    examples: [
+      { word: "coronary", definition: "crown-like vessels" },
+      { word: "coronal", definition: "crown plane" },
+      { word: "coronoid", definition: "crown-shaped" },
+      { word: "coronoplasty", definition: "coronary repair" }
+    ],
+    specialty: "Cardiology",
+    relatedTerms: ["crown", "coronary artery"],
+    clinicalContext: "Critical for heart disease and cardiac procedures"
+  },
+  {
+    root: "corpor/o",
+    meaning: "body",
+    origin: "Latin",
+    examples: [
+      { word: "corporate", definition: "body-related" },
+      { word: "corporal", definition: "bodily" },
+      { word: "corpus", definition: "body structure" },
+      { word: "incorporate", definition: "take into body" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["body", "physical"],
+    clinicalContext: "Important for anatomical descriptions and pathology"
   }
 ];
 

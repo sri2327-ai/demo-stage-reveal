@@ -1215,6 +1215,552 @@ export const medicalSuffixes: MedicalSuffix[] = [
     specialty: "Ophthalmology",
     relatedTerms: ["vision", "sight"],
     clinicalContext: "Essential for vision disorders and eye conditions"
+  },
+  {
+    suffix: "-paresis",
+    meaning: "partial paralysis, weakness",
+    origin: "Greek",
+    examples: [
+      { word: "hemiparesis", definition: "half-body weakness" },
+      { word: "monoparesis", definition: "single limb weakness" },
+      { word: "quadriparesis", definition: "four limb weakness" },
+      { word: "gastroparesis", definition: "stomach weakness" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["weakness", "partial paralysis"],
+    clinicalContext: "Critical for stroke evaluation and neurological assessment"
+  },
+  {
+    suffix: "-partum",
+    meaning: "birth, delivery",
+    origin: "Latin",
+    examples: [
+      { word: "antepartum", definition: "before birth" },
+      { word: "intrapartum", definition: "during birth" },
+      { word: "postpartum", definition: "after birth" },
+      { word: "peripartum", definition: "around birth time" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["birth", "delivery"],
+    clinicalContext: "Essential for obstetric care and maternal health"
+  },
+  {
+    suffix: "-pepsia",
+    meaning: "digestion",
+    origin: "Greek",
+    examples: [
+      { word: "dyspepsia", definition: "difficult digestion" },
+      { word: "eupepsia", definition: "good digestion" },
+      { word: "apepsia", definition: "lack of digestion" },
+      { word: "bradypepsia", definition: "slow digestion" }
+    ],
+    specialty: "Gastroenterology",
+    relatedTerms: ["digestion", "stomach"],
+    clinicalContext: "Important for digestive disorders and GI evaluation"
+  },
+  {
+    suffix: "-pexy",
+    meaning: "surgical fixation",
+    origin: "Greek",
+    examples: [
+      { word: "nephropexy", definition: "kidney fixation" },
+      { word: "hysteropexy", definition: "uterus fixation" },
+      { word: "orchiopexy", definition: "testicle fixation" },
+      { word: "gastropexy", definition: "stomach fixation" }
+    ],
+    specialty: "Surgery",
+    relatedTerms: ["fixation", "surgical repair"],
+    clinicalContext: "Critical for organ displacement and surgical procedures"
+  },
+  {
+    suffix: "-phage",
+    meaning: "eating, devouring",
+    origin: "Greek",
+    examples: [
+      { word: "macrophage", definition: "large eating cell" },
+      { word: "bacteriophage", definition: "bacteria-eating virus" },
+      { word: "phagocyte", definition: "eating cell" },
+      { word: "autophagy", definition: "self-eating process" }
+    ],
+    specialty: "Immunology",
+    relatedTerms: ["eating", "consuming"],
+    clinicalContext: "Important for immune system function and cellular biology"
+  },
+  {
+    suffix: "-phakia",
+    meaning: "lens condition",
+    origin: "Greek",
+    examples: [
+      { word: "aphakia", definition: "absence of lens" },
+      { word: "pseudophakia", definition: "artificial lens" },
+      { word: "phakic", definition: "having natural lens" },
+      { word: "microphakia", definition: "small lens" }
+    ],
+    specialty: "Ophthalmology",
+    relatedTerms: ["lens", "eye"],
+    clinicalContext: "Critical for cataract surgery and lens implants"
+  },
+  {
+    suffix: "-pharmaco",
+    meaning: "drug, medicine",
+    origin: "Greek",
+    examples: [
+      { word: "pharmacology", definition: "study of drugs" },
+      { word: "pharmacokinetics", definition: "drug movement" },
+      { word: "pharmacotherapy", definition: "drug treatment" },
+      { word: "pharmacogenomics", definition: "drug genetics" }
+    ],
+    specialty: "Pharmacology",
+    relatedTerms: ["drug", "medicine"],
+    clinicalContext: "Essential for medication management and drug therapy"
+  },
+  {
+    suffix: "-philia",
+    meaning: "abnormal attraction, love of",
+    origin: "Greek",
+    examples: [
+      { word: "hemophilia", definition: "bleeding disorder" },
+      { word: "eosinophilia", definition: "increased eosinophils" },
+      { word: "neutrophilia", definition: "increased neutrophils" },
+      { word: "basophilia", definition: "increased basophils" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["attraction", "increased"],
+    clinicalContext: "Important for blood disorders and allergic conditions"
+  },
+  {
+    suffix: "-phonia",
+    meaning: "voice, sound",
+    origin: "Greek",
+    examples: [
+      { word: "aphonia", definition: "loss of voice" },
+      { word: "dysphonia", definition: "voice difficulty" },
+      { word: "euphonia", definition: "normal voice" },
+      { word: "hyperphonia", definition: "loud voice" }
+    ],
+    specialty: "Otolaryngology",
+    relatedTerms: ["voice", "speech"],
+    clinicalContext: "Critical for voice disorders and speech therapy"
+  },
+  {
+    suffix: "-phoria",
+    meaning: "carrying, bearing",
+    origin: "Greek",
+    examples: [
+      { word: "euphoria", definition: "feeling of well-being" },
+      { word: "dysphoria", definition: "feeling of unease" },
+      { word: "esophoria", definition: "inward eye turning" },
+      { word: "exophoria", definition: "outward eye turning" }
+    ],
+    specialty: "Psychiatry",
+    relatedTerms: ["carrying", "bearing"],
+    clinicalContext: "Important for mood disorders and eye alignment"
+  },
+  {
+    suffix: "-phragma",
+    meaning: "partition, fence",
+    origin: "Greek",
+    examples: [
+      { word: "diaphragm", definition: "breathing muscle partition" },
+      { word: "phragmoplast", definition: "cell division structure" },
+      { word: "septum", definition: "dividing wall" },
+      { word: "membrane", definition: "thin partition" }
+    ],
+    specialty: "Anatomy",
+    relatedTerms: ["partition", "barrier"],
+    clinicalContext: "Important for anatomical structures and surgical repair"
+  },
+  {
+    suffix: "-phylaxis",
+    meaning: "protection, guarding",
+    origin: "Greek",
+    examples: [
+      { word: "anaphylaxis", definition: "severe allergic reaction" },
+      { word: "prophylaxis", definition: "disease prevention" },
+      { word: "tachyphylaxis", definition: "rapid tolerance" },
+      { word: "phylactic", definition: "protective" }
+    ],
+    specialty: "Allergy/Immunology",
+    relatedTerms: ["protection", "prevention"],
+    clinicalContext: "Critical for allergic reactions and preventive medicine"
+  },
+  {
+    suffix: "-plakia",
+    meaning: "plaque, flat patch",
+    origin: "Greek",
+    examples: [
+      { word: "leukoplakia", definition: "white patches" },
+      { word: "erythroplakia", definition: "red patches" },
+      { word: "plaque", definition: "flat deposit" },
+      { word: "plakic", definition: "relating to plaque" }
+    ],
+    specialty: "Dentistry",
+    relatedTerms: ["plaque", "patch"],
+    clinicalContext: "Important for oral pathology and dental hygiene"
+  },
+  {
+    suffix: "-plegia",
+    meaning: "paralysis, stroke",
+    origin: "Greek",
+    examples: [
+      { word: "hemiplegia", definition: "half-body paralysis" },
+      { word: "quadriplegia", definition: "four-limb paralysis" },
+      { word: "paraplegia", definition: "lower body paralysis" },
+      { word: "monoplegia", definition: "single limb paralysis" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["paralysis", "weakness"],
+    clinicalContext: "Critical for stroke evaluation and spinal cord injury"
+  },
+  {
+    suffix: "-pneumo",
+    meaning: "lung, air",
+    origin: "Greek",
+    examples: [
+      { word: "pneumonia", definition: "lung infection" },
+      { word: "pneumothorax", definition: "air in chest" },
+      { word: "pneumonitis", definition: "lung inflammation" },
+      { word: "pneumectomy", definition: "lung removal" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["lung", "breathing"],
+    clinicalContext: "Essential for respiratory diseases and chest surgery"
+  },
+  {
+    suffix: "-poiesis",
+    meaning: "formation, production",
+    origin: "Greek",
+    examples: [
+      { word: "hematopoiesis", definition: "blood cell formation" },
+      { word: "erythropoiesis", definition: "red cell production" },
+      { word: "leukopoiesis", definition: "white cell production" },
+      { word: "thrombopoiesis", definition: "platelet production" }
+    ],
+    specialty: "Hematology",
+    relatedTerms: ["formation", "production"],
+    clinicalContext: "Critical for blood disorders and bone marrow disease"
+  },
+  {
+    suffix: "-porosis",
+    meaning: "porous condition",
+    origin: "Greek",
+    examples: [
+      { word: "osteoporosis", definition: "bone thinning" },
+      { word: "osteopenia", definition: "mild bone loss" },
+      { word: "porocephaly", definition: "brain cavities" },
+      { word: "porotic", definition: "having pores" }
+    ],
+    specialty: "Endocrinology",
+    relatedTerms: ["porous", "thinning"],
+    clinicalContext: "Important for bone density and fracture prevention"
+  },
+  {
+    suffix: "-praxia",
+    meaning: "action, doing",
+    origin: "Greek",
+    examples: [
+      { word: "apraxia", definition: "inability to perform actions" },
+      { word: "dyspraxia", definition: "difficulty with actions" },
+      { word: "eupraxia", definition: "normal action ability" },
+      { word: "praxis", definition: "purposeful action" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["action", "movement"],
+    clinicalContext: "Important for motor skills and neurological assessment"
+  },
+  {
+    suffix: "-ptysis",
+    meaning: "spitting, coughing up",
+    origin: "Greek",
+    examples: [
+      { word: "hemoptysis", definition: "coughing blood" },
+      { word: "expectoration", definition: "coughing up sputum" },
+      { word: "sputum", definition: "coughed-up material" },
+      { word: "ptysalism", definition: "excessive salivation" }
+    ],
+    specialty: "Pulmonology",
+    relatedTerms: ["coughing", "spitting"],
+    clinicalContext: "Critical for respiratory symptoms and lung disease"
+  },
+  {
+    suffix: "-puncture",
+    meaning: "piercing, pricking",
+    origin: "Latin",
+    examples: [
+      { word: "acupuncture", definition: "needle therapy" },
+      { word: "venipuncture", definition: "vein piercing" },
+      { word: "arthrocentesis", definition: "joint puncture" },
+      { word: "thoracentesis", definition: "chest puncture" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["piercing", "needle"],
+    clinicalContext: "Essential for diagnostic procedures and fluid sampling"
+  },
+  {
+    suffix: "-rrhexis",
+    meaning: "rupture, bursting",
+    origin: "Greek",
+    examples: [
+      { word: "cardiorrhexis", definition: "heart rupture" },
+      { word: "hysterorrhexis", definition: "uterus rupture" },
+      { word: "hepatorrhexis", definition: "liver rupture" },
+      { word: "splenorrhexis", definition: "spleen rupture" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["rupture", "tear"],
+    clinicalContext: "Critical for trauma assessment and emergency surgery"
+  },
+  {
+    suffix: "-schisis",
+    meaning: "splitting, cleft",
+    origin: "Greek",
+    examples: [
+      { word: "spina bifida", definition: "spine splitting" },
+      { word: "cheiloschisis", definition: "cleft lip" },
+      { word: "palatoschisis", definition: "cleft palate" },
+      { word: "cranioschisis", definition: "skull cleft" }
+    ],
+    specialty: "Plastic Surgery",
+    relatedTerms: ["cleft", "splitting"],
+    clinicalContext: "Important for congenital anomalies and reconstructive surgery"
+  },
+  {
+    suffix: "-sepsis",
+    meaning: "infection, decay",
+    origin: "Greek",
+    examples: [
+      { word: "sepsis", definition: "systemic infection" },
+      { word: "asepsis", definition: "absence of infection" },
+      { word: "antisepsis", definition: "infection prevention" },
+      { word: "septicemia", definition: "blood infection" }
+    ],
+    specialty: "Infectious Disease",
+    relatedTerms: ["infection", "contamination"],
+    clinicalContext: "Critical for infection control and critical care"
+  },
+  {
+    suffix: "-sthenia",
+    meaning: "strength, power",
+    origin: "Greek",
+    examples: [
+      { word: "asthenia", definition: "weakness, lack of strength" },
+      { word: "neurasthenia", definition: "nervous exhaustion" },
+      { word: "myasthenia", definition: "muscle weakness" },
+      { word: "hypersthenia", definition: "excessive strength" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["strength", "power"],
+    clinicalContext: "Important for muscle disorders and neurological weakness"
+  },
+  {
+    suffix: "-stomy",
+    meaning: "surgical opening",
+    origin: "Greek",
+    examples: [
+      { word: "tracheostomy", definition: "windpipe opening" },
+      { word: "colostomy", definition: "colon opening" },
+      { word: "ileostomy", definition: "ileum opening" },
+      { word: "nephrostomy", definition: "kidney opening" }
+    ],
+    specialty: "Surgery",
+    relatedTerms: ["opening", "stoma"],
+    clinicalContext: "Critical for surgical drainage and bowel diversion"
+  },
+  {
+    suffix: "-taxia",
+    meaning: "coordination, order",
+    origin: "Greek",
+    examples: [
+      { word: "ataxia", definition: "lack of coordination" },
+      { word: "dystaxia", definition: "impaired coordination" },
+      { word: "eutaxia", definition: "normal coordination" },
+      { word: "taxonomy", definition: "classification system" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["coordination", "balance"],
+    clinicalContext: "Important for movement disorders and cerebellar disease"
+  },
+  {
+    suffix: "-thermia",
+    meaning: "heat, temperature",
+    origin: "Greek",
+    examples: [
+      { word: "hyperthermia", definition: "elevated temperature" },
+      { word: "hypothermia", definition: "low temperature" },
+      { word: "pyrexia", definition: "fever" },
+      { word: "normothermia", definition: "normal temperature" }
+    ],
+    specialty: "Emergency Medicine",
+    relatedTerms: ["temperature", "heat"],
+    clinicalContext: "Critical for temperature regulation and fever management"
+  },
+  {
+    suffix: "-thymia",
+    meaning: "mood, emotion",
+    origin: "Greek",
+    examples: [
+      { word: "dysthymia", definition: "persistent depression" },
+      { word: "euthymia", definition: "normal mood" },
+      { word: "cyclothymia", definition: "mood cycling" },
+      { word: "hyperthymia", definition: "elevated mood" }
+    ],
+    specialty: "Psychiatry",
+    relatedTerms: ["mood", "emotion"],
+    clinicalContext: "Essential for mood disorders and psychiatric evaluation"
+  },
+  {
+    suffix: "-tocia",
+    meaning: "labor, childbirth",
+    origin: "Greek",
+    examples: [
+      { word: "dystocia", definition: "difficult labor" },
+      { word: "eutocia", definition: "normal labor" },
+      { word: "oxytocin", definition: "labor hormone" },
+      { word: "tocodynamometer", definition: "contraction monitor" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["labor", "birth"],
+    clinicalContext: "Critical for labor management and delivery complications"
+  },
+  {
+    suffix: "-tome",
+    meaning: "cutting instrument",
+    origin: "Greek",
+    examples: [
+      { word: "microtome", definition: "tissue cutting device" },
+      { word: "osteotome", definition: "bone cutting tool" },
+      { word: "dermatome", definition: "skin cutting instrument" },
+      { word: "keratome", definition: "cornea cutting knife" }
+    ],
+    specialty: "Surgery",
+    relatedTerms: ["cutting", "instrument"],
+    clinicalContext: "Important for surgical procedures and tissue preparation"
+  },
+  {
+    suffix: "-tonia",
+    meaning: "muscle tone, tension",
+    origin: "Greek",
+    examples: [
+      { word: "dystonia", definition: "abnormal muscle tone" },
+      { word: "hypotonia", definition: "low muscle tone" },
+      { word: "hypertonia", definition: "high muscle tone" },
+      { word: "atonia", definition: "lack of muscle tone" }
+    ],
+    specialty: "Neurology",
+    relatedTerms: ["muscle tone", "tension"],
+    clinicalContext: "Important for movement disorders and muscle disease"
+  },
+  {
+    suffix: "-tripsy",
+    meaning: "crushing, breaking",
+    origin: "Greek",
+    examples: [
+      { word: "lithotripsy", definition: "stone crushing" },
+      { word: "nephrotripsy", definition: "kidney stone crushing" },
+      { word: "pneumotripsy", definition: "lung tissue crushing" },
+      { word: "angiotripsy", definition: "vessel crushing" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["crushing", "breaking"],
+    clinicalContext: "Critical for kidney stone treatment and non-invasive procedures"
+  },
+  {
+    suffix: "-ulent",
+    meaning: "full of, characterized by",
+    origin: "Latin",
+    examples: [
+      { word: "purulent", definition: "full of pus" },
+      { word: "sanguinolent", definition: "bloody" },
+      { word: "turbulent", definition: "disturbed flow" },
+      { word: "flatulent", definition: "full of gas" }
+    ],
+    specialty: "Pathology",
+    relatedTerms: ["full of", "containing"],
+    clinicalContext: "Important for describing wound drainage and secretions"
+  },
+  {
+    suffix: "-uria",
+    meaning: "urine condition",
+    origin: "Greek",
+    examples: [
+      { word: "polyuria", definition: "excessive urination" },
+      { word: "oliguria", definition: "decreased urination" },
+      { word: "anuria", definition: "absence of urination" },
+      { word: "dysuria", definition: "painful urination" }
+    ],
+    specialty: "Urology",
+    relatedTerms: ["urine", "urination"],
+    clinicalContext: "Critical for kidney disease and urinary tract disorders"
+  },
+  {
+    suffix: "-version",
+    meaning: "turning, changing position",
+    origin: "Latin",
+    examples: [
+      { word: "version", definition: "fetal position change" },
+      { word: "inversion", definition: "turning inward" },
+      { word: "eversion", definition: "turning outward" },
+      { word: "retroversion", definition: "backward turning" }
+    ],
+    specialty: "Obstetrics",
+    relatedTerms: ["turning", "rotation"],
+    clinicalContext: "Important for fetal positioning and joint movement"
+  },
+  {
+    suffix: "-volemia",
+    meaning: "blood volume",
+    origin: "Greek",
+    examples: [
+      { word: "hypovolemia", definition: "low blood volume" },
+      { word: "hypervolemia", definition: "high blood volume" },
+      { word: "normovolemia", definition: "normal blood volume" },
+      { word: "isovolemia", definition: "equal blood volume" }
+    ],
+    specialty: "Critical Care",
+    relatedTerms: ["blood volume", "circulation"],
+    clinicalContext: "Critical for shock management and fluid resuscitation"
+  },
+  {
+    suffix: "-xanthia",
+    meaning: "yellow condition",
+    origin: "Greek",
+    examples: [
+      { word: "xanthoma", definition: "yellow tumor" },
+      { word: "carotenemia", definition: "yellow skin from carotene" },
+      { word: "jaundice", definition: "yellow skin condition" },
+      { word: "xanthosis", definition: "yellow discoloration" }
+    ],
+    specialty: "Dermatology",
+    relatedTerms: ["yellow", "pigmentation"],
+    clinicalContext: "Important for liver disease and lipid disorders"
+  },
+  {
+    suffix: "-zoon",
+    meaning: "animal, living being",
+    origin: "Greek",
+    examples: [
+      { word: "protozoon", definition: "first animal (single-celled)" },
+      { word: "spermatozoon", definition: "sperm cell" },
+      { word: "microzoon", definition: "microscopic animal" },
+      { word: "metazoon", definition: "multicellular animal" }
+    ],
+    specialty: "Microbiology",
+    relatedTerms: ["animal", "organism"],
+    clinicalContext: "Important for parasitology and infectious disease"
+  },
+  {
+    suffix: "-zygous",
+    meaning: "paired, joined",
+    origin: "Greek",
+    examples: [
+      { word: "homozygous", definition: "identical gene pair" },
+      { word: "heterozygous", definition: "different gene pair" },
+      { word: "hemizygous", definition: "single gene copy" },
+      { word: "autozygous", definition: "self-paired genes" }
+    ],
+    specialty: "Genetics",
+    relatedTerms: ["paired", "genetic"],
+    clinicalContext: "Critical for genetic counseling and hereditary disease"
   }
 ];
 
