@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { getMedicalPhraseById } from '@/data/mockMedicalPhrases';
 import { useToast } from '@/hooks/use-toast';
+import { FAQSection } from '@/components/FAQSection';
 
 const MedicalPhraseDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -213,6 +214,34 @@ const MedicalPhraseDetail = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* FAQ Section */}
+            <FAQSection
+              title="Frequently Asked Questions"
+              subtitle="Common questions about using medical phrases in clinical documentation"
+              faqs={[
+                {
+                  question: "How should I properly document this phrase in my notes?",
+                  answer: `When documenting "${phrase.phrase}" in your clinical notes, ensure it's placed in the appropriate section (${phrase.sectionOfNote}) and provides clear, accurate information about the patient's condition. Always follow your institution's documentation guidelines and ensure the phrase accurately reflects the patient's clinical status.`
+                },
+                {
+                  question: "What is the clinical significance of this phrase?",
+                  answer: `This phrase is clinically significant because ${phrase.clinicalContext.toLowerCase()} It helps healthcare providers understand the patient's condition and make informed decisions about diagnosis and treatment planning.`
+                },
+                {
+                  question: "Can this phrase be used in different medical specialties?",
+                  answer: `While this phrase is commonly used in ${phrase.specialty}, similar documentation may be applicable across multiple specialties when the clinical context is appropriate. Always ensure the phrase accurately describes the patient's condition regardless of the specialty context.`
+                },
+                {
+                  question: "How does this phrase relate to coding and billing?",
+                  answer: `${phrase.icd10Link ? `This phrase is associated with ICD-10 code ${phrase.icd10Link}, which helps with accurate coding and billing. ` : ''}Proper documentation using standardized phrases like this supports accurate diagnosis coding, which is essential for billing, quality metrics, and population health management.`
+                },
+                {
+                  question: "What should I do if the phrase doesn't exactly match my patient's condition?",
+                  answer: "Never use a standardized phrase if it doesn't accurately represent your patient's clinical status. Modify the documentation to reflect the actual clinical findings, or use alternative phrases that better describe the patient's condition. Accurate documentation is always more important than using standardized templates."
+                }
+              ]}
+            />
           </div>
         </div>
 
