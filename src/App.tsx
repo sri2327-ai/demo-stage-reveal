@@ -14,6 +14,8 @@ import Diagnoses from "./pages/Diagnoses";
 import DiagnosisDetail from "./pages/DiagnosisDetail";
 import ChartsTimelines from "./pages/ChartsTimelines";
 import ChartTimelineDetail from "./pages/ChartTimelineDetail";
+import MedicalPhrases from "./pages/MedicalPhrases";
+import MedicalPhraseDetail from "./pages/MedicalPhraseDetail";
 import Templates from "./pages/Templates";
 import ICD10Codes from "./pages/ICD10Codes";
 import ICD10CodeRange from "./pages/ICD10CodeRange";
@@ -70,6 +72,8 @@ const App = () => (
             <Route path="/diagnoses/:id" element={<DiagnosisDetail />} />
             <Route path="/charts-timelines" element={<ChartsTimelines />} />
             <Route path="/charts-timelines/:id" element={<ChartTimelineDetail />} />
+            <Route path="/medical-phrases" element={<MedicalPhrases />} />
+            <Route path="/medical-phrases/:id" element={<MedicalPhraseDetail />} />
             <Route path="/templates" element={<Templates />} />
             <Route path="/icd10-codes" element={<ICD10Codes />} />
             <Route path="/icd10-codes/:range" element={<ICD10CodeRange />} />
