@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Search, Filter, Book, Stethoscope, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,20 @@ const MedicalPrefixes = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <>
+      <Helmet>
+        <title>Medical Prefixes Guide | Healthcare Terminology Dictionary | S10.AI</title>
+        <meta name="description" content="Comprehensive guide to medical prefixes used in healthcare terminology. Learn 95+ medical prefixes with definitions, etymology, and clinical examples for healthcare professionals and medical students." />
+        <meta name="keywords" content="medical prefixes, healthcare terminology, medical dictionary, medical terms, clinical terminology, medical etymology, healthcare education, medical students, nursing terminology, medical abbreviations, clinical communication, medical vocabulary, healthcare professionals, medical prefix meanings, medical word parts" />
+        <meta property="og:title" content="Medical Prefixes Guide | Healthcare Terminology Dictionary" />
+        <meta property="og:description" content="Master medical prefixes with our comprehensive guide. 95+ prefixes with definitions, etymology, and clinical examples for healthcare professionals." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Medical Prefixes Guide | Healthcare Terminology Dictionary" />
+        <meta name="twitter:description" content="Master medical prefixes with our comprehensive guide. 95+ prefixes with definitions, etymology, and clinical examples." />
+        <link rel="canonical" href="/medical-prefixes" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
@@ -252,6 +266,7 @@ const MedicalPrefixes = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

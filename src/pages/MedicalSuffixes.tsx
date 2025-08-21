@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Search, Filter, Book, Stethoscope, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,20 @@ const MedicalSuffixes = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <>
+      <Helmet>
+        <title>Medical Suffixes Guide | Healthcare Terminology Dictionary | S10.AI</title>
+        <meta name="description" content="Complete guide to medical suffixes in healthcare terminology. Learn 80+ medical suffixes with definitions, etymology, and clinical examples for healthcare professionals and medical students." />
+        <meta name="keywords" content="medical suffixes, healthcare terminology, medical dictionary, medical terms, clinical terminology, medical etymology, healthcare education, medical students, nursing terminology, medical word endings, clinical communication, medical vocabulary, healthcare professionals, medical suffix meanings, medical word parts" />
+        <meta property="og:title" content="Medical Suffixes Guide | Healthcare Terminology Dictionary" />
+        <meta property="og:description" content="Master medical suffixes with our complete guide. 80+ suffixes with definitions, etymology, and clinical examples for healthcare professionals." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Medical Suffixes Guide | Healthcare Terminology Dictionary" />
+        <meta name="twitter:description" content="Master medical suffixes with our complete guide. 80+ suffixes with definitions, etymology, and clinical examples." />
+        <link rel="canonical" href="/medical-suffixes" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
@@ -252,6 +266,7 @@ const MedicalSuffixes = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
