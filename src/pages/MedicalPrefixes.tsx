@@ -10,7 +10,6 @@ import {
   searchPrefixes, 
   getPrefixesByLetter 
 } from "@/data/medicalPrefixes";
-import { createMedicalSlug, createUniqueKey } from "@/lib/slug-utils";
 
 const MedicalPrefixes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -137,10 +136,10 @@ const MedicalPrefixes = () => {
 
         {/* Prefixes Grid */}
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8 sm:mb-12">
-          {filteredPrefixes.map((prefix, index) => (
+          {filteredPrefixes.map((prefix) => (
             <Link
-              key={createUniqueKey(prefix.prefix, index)}
-              to={`/medical-prefixes/${createMedicalSlug(prefix.prefix)}`}
+              key={prefix.prefix}
+              to={`/medical-prefixes/${encodeURIComponent(prefix.prefix.toLowerCase())}`}
               className="group block"
             >
               <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 hover:border-[#387E89]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group-hover:bg-white overflow-hidden">

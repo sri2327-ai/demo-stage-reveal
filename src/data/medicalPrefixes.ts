@@ -2514,11 +2514,9 @@ export const searchPrefixes = (query: string): MedicalPrefix[] => {
 };
 
 export const getPrefixesByLetter = (letter: string): MedicalPrefix[] => {
-  return medicalPrefixes.filter((prefix) => {
-    // Handle prefixes that may start with special characters or letters
-    const firstLetter = prefix.prefix.replace(/^[^a-zA-Z]*/, '').charAt(0);
-    return firstLetter.toUpperCase() === letter.toUpperCase();
-  });
+  return medicalPrefixes.filter(
+    (prefix) => prefix.prefix.charAt(0).toUpperCase() === letter.toUpperCase()
+  );
 };
 
 export const getPrefixByName = (name: string): MedicalPrefix | undefined => {

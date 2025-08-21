@@ -2586,11 +2586,9 @@ export const searchRoots = (query: string): MedicalRoot[] => {
 };
 
 export const getRootsByLetter = (letter: string): MedicalRoot[] => {
-  return medicalRoots.filter((root) => {
-    // Handle roots that start with letters (skip special characters)
-    const firstLetter = root.root.replace(/^[^a-zA-Z]*/, '').charAt(0);
-    return firstLetter.toUpperCase() === letter.toUpperCase();
-  });
+  return medicalRoots.filter(
+    (root) => root.root.charAt(0).toUpperCase() === letter.toUpperCase()
+  );
 };
 
 export const getRootByName = (name: string): MedicalRoot | undefined => {

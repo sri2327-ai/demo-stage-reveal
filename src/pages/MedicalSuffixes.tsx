@@ -10,7 +10,6 @@ import {
   searchSuffixes, 
   getSuffixesByLetter 
 } from "@/data/medicalSuffixes";
-import { createMedicalSlug, createUniqueKey } from "@/lib/slug-utils";
 
 const MedicalSuffixes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -137,10 +136,10 @@ const MedicalSuffixes = () => {
 
         {/* Suffixes Grid */}
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8 sm:mb-12">
-          {filteredSuffixes.map((suffix, index) => (
+          {filteredSuffixes.map((suffix) => (
             <Link
-              key={createUniqueKey(suffix.suffix, index)}
-              to={`/medical-suffixes/${createMedicalSlug(suffix.suffix)}`}
+              key={suffix.suffix}
+              to={`/medical-suffixes/${encodeURIComponent(suffix.suffix.toLowerCase())}`}
               className="group block"
             >
               <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 hover:border-[#387E89]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group-hover:bg-white overflow-hidden">
