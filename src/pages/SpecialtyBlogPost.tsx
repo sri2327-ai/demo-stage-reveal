@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { specialties } from "@/data/specialties";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { FAQSection } from "@/components/FAQSection";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ReactMarkdown from "react-markdown";
@@ -83,6 +84,64 @@ export default function SpecialtyBlogPost(props: { slug?: string; postSlug?: str
         <section className="py-16 lg:py-24 bg-muted/30">
           <div className="container">
             <FAQSection title="Related FAQs" subtitle={`Common questions about ${specialty.name} workflows`} faqs={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
+          </div>
+        </section>
+
+        <section className="py-16 lg:py-24">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Enhance Your Practice</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Discover comprehensive resources to streamline your {specialty.name.toLowerCase()} workflow and improve patient outcomes
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <Card className="bg-card/50 backdrop-blur-sm border-2 hover:border-primary/20 transition-all duration-300 group">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">ICD-10 Codes</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Browse comprehensive diagnostic codes for accurate medical coding</p>
+                  <Button asChild className="w-full">
+                    <Link to="/icd10-codes">Explore Codes</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card/50 backdrop-blur-sm border-2 hover:border-primary/20 transition-all duration-300 group">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Templates</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Access ready-to-use clinical documentation templates</p>
+                  <Button asChild className="w-full">
+                    <Link to="/templates">Browse Templates</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card/50 backdrop-blur-sm border-2 hover:border-primary/20 transition-all duration-300 group">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 9l6-6m-6 0l6 6" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Book a Demo</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Schedule a personalized demo to see S10.AI in action</p>
+                  <Button asChild className="w-full" variant="secondary">
+                    <a href="#" onClick={(e) => e.preventDefault()}>Schedule Demo</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
       </article>
