@@ -54,7 +54,7 @@ const MedicalPrefixDetail = () => {
         />
         <meta 
           name="keywords" 
-          content={`medical prefix, ${prefix.prefix}, ${prefix.meaning}, medical terminology, healthcare, ${prefix.examples.map(ex => ex.word).join(', ')}`} 
+          content={`medical prefix ${prefix.prefix}, ${prefix.prefix} meaning, ${prefix.meaning}, medical terminology ${prefix.prefix}, healthcare prefix, ${prefix.specialty} terminology, ${prefix.origin} prefix, medical word parts, clinical terminology, ${prefix.examples.map(ex => ex.word).join(', ')}, medical education, healthcare professionals, medical dictionary, prefix definition, etymology medical terms, medical vocabulary, clinical documentation, healthcare training`} 
         />
         <link rel="canonical" href={`https://s10.ai/medical-prefixes/${encodeURIComponent(prefix.prefix.toLowerCase())}`} />
         <script type="application/ld+json">

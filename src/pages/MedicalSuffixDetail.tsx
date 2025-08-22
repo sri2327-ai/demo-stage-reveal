@@ -54,7 +54,7 @@ const MedicalSuffixDetail = () => {
         />
         <meta 
           name="keywords" 
-          content={`medical suffix, ${suffix.suffix}, ${suffix.meaning}, medical terminology, healthcare, ${suffix.examples.map(ex => ex.word).join(', ')}`} 
+          content={`medical suffix ${suffix.suffix}, ${suffix.suffix} meaning, ${suffix.meaning}, medical terminology ${suffix.suffix}, healthcare suffix, ${suffix.specialty} terminology, ${suffix.origin} suffix, medical word parts, clinical terminology, ${suffix.examples.map(ex => ex.word).join(', ')}, ${suffix.relatedTerms.join(', ')}, medical education, healthcare professionals, medical dictionary, suffix definition, etymology medical terms, medical vocabulary, clinical documentation, healthcare training`} 
         />
         <link rel="canonical" href={`https://s10.ai/medical-suffixes/${encodeURIComponent(suffix.suffix.toLowerCase())}`} />
         <script type="application/ld+json">

@@ -54,7 +54,7 @@ const MedicalRootDetail = () => {
         />
         <meta 
           name="keywords" 
-          content={`medical root word, ${root.root}, ${root.meaning}, medical terminology, healthcare, ${root.examples.map(ex => ex.word).join(', ')}`} 
+          content={`medical root word ${root.root}, ${root.root} meaning, ${root.meaning}, medical terminology ${root.root}, healthcare root word, ${root.specialty} terminology, ${root.origin} root, medical word parts, clinical terminology, ${root.examples.map(ex => ex.word).join(', ')}, ${root.relatedTerms.join(', ')}, medical education, healthcare professionals, medical dictionary, root word definition, etymology medical terms, medical vocabulary, clinical documentation, healthcare training`} 
         />
         <link rel="canonical" href={`https://s10.ai/medical-roots/${encodeURIComponent(root.root.toLowerCase())}`} />
         <script type="application/ld+json">
