@@ -117,28 +117,42 @@ const MedicalPhrases = () => {
 
         {/* Section Filter */}
         <div className="mb-8 sm:mb-12">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] text-center mb-6 sm:mb-8">
-            Browse by Note Section
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-            {sections.map(section => {
-            const Icon = section.icon;
-            const isSelected = selectedSection === section.name;
-            const itemCount = mockMedicalPhrases.filter(item => item.sectionOfNote === section.name).length;
-            return <Card key={section.id} className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${isSelected ? 'ring-2 ring-[#387E89] shadow-lg bg-gradient-to-br from-[#387E89]/5 to-[#143151]/5' : 'hover:shadow-lg'}`} onClick={() => handleSectionFilter(section.name)}>
-                  <CardContent className="p-4 text-center">
-                    <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r ${section.color} flex items-center justify-center`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-bold text-[#143151] mb-1 leading-tight">
-                      {section.name}
-                    </h3>
-                    <div className="text-xs text-[#387E89] font-medium">
-                      {itemCount} phrases
-                    </div>
-                  </CardContent>
-                </Card>;
-          })}
+          <div className="max-w-md mx-auto">
+            <label className="block text-sm font-medium text-[#143151] mb-3 text-center">
+              Filter by Note Section
+            </label>
+            <div className="relative">
+              <select
+                value={selectedSection}
+                onChange={(e) => handleSectionFilter(e.target.value)}
+                className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-[#143151] focus:border-[#387E89] focus:ring-4 focus:ring-[#387E89]/20 focus:outline-none transition-all duration-200 appearance-none cursor-pointer shadow-sm hover:shadow-md"
+              >
+                <option value="">All Note Sections</option>
+                {sections.map(section => {
+                  const itemCount = mockMedicalPhrases.filter(item => item.sectionOfNote === section.name).length;
+                  return (
+                    <option key={section.id} value={section.name}>
+                      {section.name} ({itemCount} phrases)
+                    </option>
+                  );
+                })}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <Filter className="h-5 w-5 text-[#387E89]" />
+              </div>
+            </div>
+            {selectedSection && (
+              <div className="mt-3 text-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleSectionFilter('')}
+                  className="text-xs border-[#387E89]/30 text-[#387E89] hover:bg-[#387E89]/10"
+                >
+                  Clear Section Filter
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
