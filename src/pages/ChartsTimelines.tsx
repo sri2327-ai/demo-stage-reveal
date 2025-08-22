@@ -94,35 +94,35 @@ const ChartsTimelines = () => {
         </div>
 
         {/* Category Filter Section */}
-        <div className="mb-8 sm:mb-12">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] text-center mb-6 sm:mb-8">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151] text-center mb-4 sm:mb-6">
             Browse by Category
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-6">
             {categories.map(category => {
               const Icon = category.icon;
               const isSelected = selectedCategory === category.id;
               return (
                 <Card 
                   key={category.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 ${
                     isSelected 
                       ? 'ring-2 ring-[#387E89] shadow-lg bg-gradient-to-br from-[#387E89]/5 to-[#143151]/5' 
-                      : 'hover:shadow-lg'
+                      : 'hover:shadow-md'
                   }`}
                   onClick={() => handleCategoryFilter(category.id)}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}>
-                      <Icon className="w-8 h-8 text-white" />
+                  <CardContent className="p-4 text-center">
+                    <div className={`w-10 h-10 mx-auto mb-2 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}>
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-[#143151] mb-2 leading-tight">
+                    <h3 className="text-sm font-bold text-[#143151] mb-1 leading-tight">
                       {category.name}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs text-gray-600 mb-2">
                       {category.description}
                     </p>
-                    <div className="mt-4 text-xs text-[#387E89] font-medium">
+                    <div className="text-xs text-[#387E89] font-medium">
                       {mockChartsTimelines.filter(item => item.category === category.id).length} items
                     </div>
                   </CardContent>
