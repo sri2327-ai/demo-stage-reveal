@@ -34,19 +34,19 @@ const CPTCodes = () => {
       <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center">
-              <FileText className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center shadow-lg">
+              <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
               CPT Codes & Billing Guide
             </h1>
           </div>
-          <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
             Comprehensive guide to Current Procedural Terminology (CPT) codes with detailed documentation requirements, 
             billing guidelines, and clinical examples. Essential resource for healthcare providers and medical billers.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm sm:text-base text-gray-500">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base text-gray-500">
             <div className="flex items-center gap-2">
               <Stethoscope className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89]" />
               <span>Evidence-Based</span>
@@ -60,8 +60,8 @@ const CPTCodes = () => {
 
         {/* Search and Filter Section */}
         <Card className="mb-8 sm:mb-12 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 shadow-lg">
-          <CardHeader className="pb-4 sm:pb-6">
-            <CardTitle className="flex items-center gap-2 sm:gap-3 text-xl sm:text-2xl font-bold text-[#143151]">
+          <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
+            <CardTitle className="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">
               <Search className="h-5 w-5 sm:h-6 sm:w-6 text-[#387E89]" />
               Search & Filter CPT Codes
             </CardTitle>
@@ -69,7 +69,7 @@ const CPTCodes = () => {
               Find CPT codes by number, description, specialty, or category
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6 sm:space-y-8">
+          <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6">
             {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
@@ -80,7 +80,7 @@ const CPTCodes = () => {
                   setSearchQuery(e.target.value);
                   setSelectedSpecialty("");
                 }}
-                className="pl-10 sm:pl-12 h-12 sm:h-14 text-base sm:text-lg border-gray-200 focus:border-[#387E89] focus:ring-[#387E89]/20"
+                className="pl-10 sm:pl-12 h-11 sm:h-12 lg:h-14 text-sm sm:text-base lg:text-lg border-gray-200 focus:border-[#387E89] focus:ring-[#387E89]/20 rounded-lg"
               />
             </div>
 
@@ -90,7 +90,7 @@ const CPTCodes = () => {
                 <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-[#387E89]" />
                 <span className="text-sm sm:text-base font-medium text-gray-700">Filter by Specialty:</span>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {allSpecialties.map((specialty) => (
                   <Button
                     key={specialty}
@@ -100,7 +100,7 @@ const CPTCodes = () => {
                       setSelectedSpecialty(specialty);
                       setSearchQuery("");
                     }}
-                    className={`text-sm sm:text-base font-semibold transition-all duration-200 ${
+                    className={`text-xs sm:text-sm lg:text-base font-semibold transition-all duration-200 px-3 sm:px-4 py-2 rounded-lg ${
                       selectedSpecialty === specialty 
                         ? "bg-gradient-to-br from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg"
                         : "border-gray-200 hover:border-[#387E89] hover:bg-[#387E89]/5 hover:text-[#387E89]"
@@ -114,7 +114,7 @@ const CPTCodes = () => {
                     variant="ghost"
                     size="sm"
                     onClick={clearFilters}
-                    className="ml-2 sm:ml-4 text-gray-600 hover:text-[#387E89] hover:bg-[#387E89]/5"
+                    className="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-600 hover:text-[#387E89] hover:bg-[#387E89]/5 px-3 py-2 rounded-lg"
                   >
                     Clear Filters
                   </Button>
@@ -123,7 +123,7 @@ const CPTCodes = () => {
             </div>
 
             {/* Results Count */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
               <div className="text-sm sm:text-base text-blue-800 font-medium">
                 Showing <span className="font-bold">{filteredCPTCodes.length}</span> of <span className="font-bold">{allCPTCodes.length}</span> CPT codes
                 {searchQuery && <span className="text-blue-600"> for "{searchQuery}"</span>}
@@ -134,39 +134,37 @@ const CPTCodes = () => {
         </Card>
 
         {/* CPT Codes Grid */}
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8 sm:mb-12">
+        <div className="grid gap-4 sm:gap-5 lg:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8 sm:mb-12">
           {filteredCPTCodes.map((code) => (
             <Link
               key={code.slug}
               to={`/cpt-codes/${code.slug}`}
               className="group block"
             >
-              <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 hover:border-[#387E89]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group-hover:bg-white overflow-hidden">
-                <CardHeader className="pb-3 sm:pb-4">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div className="flex flex-col gap-1">
-                      <div className="text-2xl font-bold text-[#387E89] font-mono">
-                        {code.cpt_code}
-                      </div>
-                      <CardTitle className="text-lg sm:text-xl font-bold text-[#143151] group-hover:text-[#387E89] transition-colors leading-tight">
-                        {code.title.replace(`CPT ${code.cpt_code} — `, '')}
-                      </CardTitle>
+              <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 hover:border-[#387E89]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group-hover:bg-white overflow-hidden">
+                <CardHeader className="pb-3 sm:pb-4 px-4 sm:px-6">
+                  <div className="flex flex-col gap-2 mb-2">
+                    <div className="text-xl sm:text-2xl font-bold text-[#387E89] font-mono">
+                      {code.cpt_code}
                     </div>
+                    <CardTitle className="text-base sm:text-lg font-bold text-[#143151] group-hover:text-[#387E89] transition-colors leading-tight line-clamp-2">
+                      {code.title.replace(`CPT ${code.cpt_code} — `, '')}
+                    </CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3 leading-relaxed">
+                <CardContent className="pt-0 px-4 sm:px-6 pb-4 sm:pb-6">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3">
                     {code.definition}
                   </p>
-                  <div className="space-y-2">
-                    <Badge variant="outline" className="text-xs font-medium bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30">
+                  <div className="space-y-3">
+                    <Badge variant="outline" className="text-xs font-medium bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 px-2 py-1">
                       {code.category}
                     </Badge>
-                    <div className="flex flex-wrap gap-1">
-                      <Badge variant="outline" className="text-xs">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="text-xs px-2 py-1">
                         {code.complexity_level}
                       </Badge>
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-xs px-2 py-1">
                         {code.average_time_spent}
                       </Badge>
                     </div>
