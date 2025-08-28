@@ -107,7 +107,7 @@ const CPTCodeDetail = () => {
         </div>
 
         {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16 border border-gray-200 rounded-xl p-6 sm:p-8 lg:p-10 bg-white/50 backdrop-blur-sm shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div className="w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
               <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
