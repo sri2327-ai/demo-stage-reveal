@@ -201,7 +201,7 @@ const CPTCodeDetail = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="relative">
-                <div className="bg-white border rounded-lg p-4 sm:p-6 text-gray-800 leading-relaxed text-xs sm:text-sm min-h-[400px] max-h-[600px] overflow-y-auto whitespace-pre-wrap">
+                <div className="bg-white border rounded-lg p-4 sm:p-6 pr-16 text-gray-800 leading-relaxed text-xs sm:text-sm min-h-[400px] max-h-[600px] overflow-y-auto whitespace-pre-wrap">
                   {cptCode.clinical_example_soap}
                 </div>
                 <Button
