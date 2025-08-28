@@ -107,33 +107,31 @@ const CPTCodeDetail = () => {
         </div>
 
         {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16 animate-in fade-in-50 slide-in-from-top-4 duration-700">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div className="group w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl mx-auto sm:mx-0 transition-all duration-300 hover:scale-105 cursor-default">
-              <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-white group-hover:scale-110 transition-transform duration-300" />
+            <div className="w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br from-[#143151] to-[#387E89] rounded-xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
+              <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
             </div>
-            <div className="text-center sm:text-left space-y-2 sm:space-y-3">
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#387E89] font-mono mb-1 sm:mb-2 tracking-wide animate-in slide-in-from-left-4 duration-500 delay-200">
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#387E89] font-mono mb-2 sm:mb-3">
                 {cptCode.cpt_code}
               </div>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight px-2 sm:px-0 animate-in slide-in-from-right-4 duration-500 delay-300">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight px-2 sm:px-0">
                 {cptCode.title.replace(`CPT ${cptCode.cpt_code} — `, '')}
               </h1>
             </div>
           </div>
-          <div className="max-w-4xl mx-auto animate-in fade-in-0 slide-in-from-bottom-4 duration-600 delay-400">
-            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed px-4 bg-gradient-to-br from-gray-50 to-white rounded-lg py-4 sm:py-6 border border-gray-100 shadow-sm">
-              {cptCode.seo_intro}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4 animate-in fade-in-0 slide-in-from-bottom-4 duration-600 delay-500">
-            <Badge className="bg-gradient-to-r from-[#387E89]/10 to-[#387E89]/5 text-[#387E89] border-[#387E89]/30 text-sm px-4 py-2 font-semibold shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200 cursor-default">
+          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
+            {cptCode.seo_intro}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4">
+            <Badge className="bg-[#387E89]/10 text-[#387E89] border-[#387E89]/30 text-sm px-3 py-1">
               {cptCode.category}
             </Badge>
-            <Badge variant="outline" className="text-sm px-4 py-2 font-medium border-gray-300 hover:border-[#387E89]/40 hover:bg-[#387E89]/5 hover:scale-105 transition-all duration-200 cursor-default">
+            <Badge variant="outline" className="text-sm px-3 py-1">
               {cptCode.complexity_level}
             </Badge>
-            <Badge variant="outline" className="text-sm px-4 py-2 font-medium border-gray-300 hover:border-[#387E89]/40 hover:bg-[#387E89]/5 hover:scale-105 transition-all duration-200 cursor-default">
+            <Badge variant="outline" className="text-sm px-3 py-1">
               {cptCode.average_time_spent}
             </Badge>
           </div>
