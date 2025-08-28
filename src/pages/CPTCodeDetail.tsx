@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, FileText, Clock, DollarSign, BookOpen, ClipboardList, Users, AlertTriangle, ChevronRight } from "lucide-react";
+import { ArrowLeft, FileText, Clock, DollarSign, BookOpen, ClipboardList, Users, AlertTriangle, ChevronRight, Copy } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,23 @@ import { CallToAction } from "@/components/CallToAction";
 const CPTCodeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const cptCode = slug ? getCPTCodeBySlug(slug) : null;
+  const { toast } = useToast();
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: "Copied to clipboard",
+        description: "Clinical example has been copied successfully.",
+      });
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Could not copy to clipboard. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (!cptCode) {
     return (
@@ -182,8 +200,19 @@ const CPTCodeDetail = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-white border rounded p-4 text-gray-800 leading-relaxed text-sm">
-                {cptCode.clinical_example_soap}
+              <div className="relative">
+                <div className="bg-white border rounded-lg p-6 text-gray-800 leading-relaxed text-sm min-h-[400px] max-h-[600px] overflow-y-auto whitespace-pre-wrap">
+                  {cptCode.clinical_example_soap}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(cptCode.clinical_example_soap)}
+                  className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm hover:bg-white"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copy
+                </Button>
               </div>
             </CardContent>
           </Card>
