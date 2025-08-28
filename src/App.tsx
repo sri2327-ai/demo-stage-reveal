@@ -31,6 +31,8 @@ import MedicalRootDetail from "./pages/MedicalRootDetail";
 import MedicalTerminology from "./pages/MedicalTerminology";
 import LabTests from "./pages/LabTests";
 import LabTestDetail from "./pages/LabTestDetail";
+import CPTCodes from "./pages/CPTCodes";
+import CPTCodeDetail from "./pages/CPTCodeDetail";
 import MaintainEyeContact from "./pages/MaintainEyeContact";
 import CutAdminTasks from "./pages/CutAdminTasks";
 import MinimizeEHRTime from "./pages/MinimizeEHRTime";
@@ -88,8 +90,10 @@ const App = () => (
             <Route path="/medical-suffixes/:id" element={<MedicalSuffixDetail />} />
             <Route path="/medical-roots" element={<MedicalRoots />} />
             <Route path="/medical-roots/:id" element={<MedicalRootDetail />} />
-            <Route path="/lab-tests" element={<LabTests />} />
-            <Route path="/lab-tests/:slug" element={<LabTestDetail />} />
+        <Route path="/lab-tests" element={<LabTests />} />
+        <Route path="/lab-tests/:slug" element={<LabTestDetail />} />
+        <Route path="/cpt-codes" element={<CPTCodes />} />
+        <Route path="/cpt-codes/:slug" element={<CPTCodeDetail />} />
             <Route path="/presentation" element={<Presentation />} />
             <Route path="/scribeai" element={<ProductWalkthrough />} />
             <Route path="/maintain-eye-contact" element={<MaintainEyeContact />} />
