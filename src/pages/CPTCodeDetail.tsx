@@ -201,14 +201,14 @@ const CPTCodeDetail = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="relative">
-                <div className="bg-white border rounded-lg p-4 sm:p-6 pr-16 text-gray-800 leading-relaxed text-xs sm:text-sm min-h-[400px] max-h-[600px] overflow-y-auto whitespace-pre-wrap">
+                <div className="bg-white border rounded-lg p-4 sm:p-6 pr-20 text-gray-800 leading-relaxed text-xs sm:text-sm min-h-[400px] max-h-[600px] overflow-y-auto whitespace-pre-wrap">
                   {cptCode.clinical_example_soap}
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => copyToClipboard(cptCode.clinical_example_soap)}
-                  className="absolute top-2 right-2 bg-white hover:bg-gray-50 border-gray-300 hover:border-[#387E89] text-gray-700 hover:text-[#387E89] shadow-sm transition-colors duration-200 focus:bg-white active:bg-gray-100"
+                  className="absolute top-3 right-3 bg-white hover:bg-gray-50 border-gray-300 hover:border-[#387E89] text-gray-700 hover:text-[#387E89] shadow-sm transition-colors duration-200 focus:bg-white active:bg-gray-100"
                 >
                   <Copy className="h-4 w-4" />
                   Copy
