@@ -39,12 +39,12 @@ const CPTCodes = () => {
               <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-[#143151] to-[#387E89] bg-clip-text text-transparent leading-tight">
-              CPT Codes & Billing Guide
+              CPT & HCPCS Codes Guide
             </h1>
           </div>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-            Comprehensive guide to Current Procedural Terminology (CPT) codes with detailed documentation requirements, 
-            billing guidelines, and clinical examples. Essential resource for healthcare providers and medical billers.
+            Comprehensive guide to Current Procedural Terminology (CPT) and Healthcare Common Procedure Coding System (HCPCS) codes 
+            with detailed documentation requirements, billing guidelines, and clinical examples. Essential resource for healthcare providers and medical billers.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base text-gray-500">
             <div className="flex items-center gap-2">
@@ -63,10 +63,10 @@ const CPTCodes = () => {
           <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
             <CardTitle className="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">
               <Search className="h-5 w-5 sm:h-6 sm:w-6 text-[#387E89]" />
-              Search & Filter CPT Codes
+              Search & Filter CPT & HCPCS Codes
             </CardTitle>
             <CardDescription className="text-sm sm:text-base text-gray-600">
-              Find CPT codes by number, description, specialty, or category
+              Find CPT and HCPCS codes by number, description, specialty, or category
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6">
@@ -74,7 +74,7 @@ const CPTCodes = () => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
               <Input
-                placeholder="Search CPT codes (e.g., 99214, office visit, E/M...)"
+                placeholder="Search CPT & HCPCS codes (e.g., 99214, J0135, office visit, E/M...)"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -125,7 +125,7 @@ const CPTCodes = () => {
             {/* Results Count */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
               <div className="text-sm sm:text-base text-blue-800 font-medium">
-                Showing <span className="font-bold">{filteredCPTCodes.length}</span> of <span className="font-bold">{allCPTCodes.length}</span> CPT codes
+                Showing <span className="font-bold">{filteredCPTCodes.length}</span> of <span className="font-bold">{allCPTCodes.length}</span> CPT & HCPCS codes
                 {searchQuery && <span className="text-blue-600"> for "{searchQuery}"</span>}
                 {selectedSpecialty && <span className="text-blue-600"> in {selectedSpecialty}</span>}
               </div>
@@ -144,8 +144,13 @@ const CPTCodes = () => {
               <Card className="h-full bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/60 hover:border-[#387E89]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group-hover:bg-white overflow-hidden">
                 <CardHeader className="pb-3 sm:pb-4 px-4 sm:px-6">
                   <div className="flex flex-col gap-2 mb-2">
-                    <div className="text-xl sm:text-2xl font-bold text-[#387E89] font-mono">
-                      {code.cpt_code}
+                    <div className="flex items-center gap-2">
+                      <div className="text-xl sm:text-2xl font-bold text-[#387E89] font-mono">
+                        {code.cpt_code}
+                      </div>
+                      <Badge variant="outline" className="text-xs font-medium bg-[#143151]/10 text-[#143151] border-[#143151]/30 px-2 py-1">
+                        {code.cpt_code.match(/^[A-Z]/) ? 'HCPCS' : 'CPT'}
+                      </Badge>
                     </div>
                     <CardTitle className="text-base sm:text-lg font-bold text-[#143151] group-hover:text-[#387E89] transition-colors leading-tight line-clamp-2">
                       {code.title.replace(`CPT ${code.cpt_code} — `, '')}
@@ -182,7 +187,7 @@ const CPTCodes = () => {
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <Search className="h-8 w-8 sm:h-10 sm:w-10 text-gray-400" />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-[#143151]">No CPT codes found</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-[#143151]">No codes found</h3>
               <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base max-w-md mx-auto">
                 Try adjusting your search query or browse by specialty to find what you're looking for
               </p>
@@ -191,7 +196,7 @@ const CPTCodes = () => {
                 variant="outline"
                 className="border-[#387E89] text-[#387E89] hover:bg-[#387E89] hover:text-white"
               >
-                Show All CPT Codes
+                Show All Codes
               </Button>
             </CardContent>
           </Card>
@@ -202,24 +207,24 @@ const CPTCodes = () => {
           <CardContent className="p-6 sm:p-8 lg:p-12">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] mb-4 sm:mb-6 text-center">
-                Understanding CPT Codes in Medical Billing
+                Understanding CPT & HCPCS Codes in Medical Billing
               </h2>
               <div className="space-y-4 sm:space-y-6 text-gray-600 text-sm sm:text-base leading-relaxed">
                 <p>
-                  Current Procedural Terminology (CPT) codes are essential for medical billing and documentation. 
-                  These standardized codes describe medical, surgical, and diagnostic services provided by healthcare 
+                  Current Procedural Terminology (CPT) and Healthcare Common Procedure Coding System (HCPCS) codes are essential for medical billing and documentation. 
+                  These standardized codes describe medical, surgical, and diagnostic services, as well as supplies and equipment provided by healthcare 
                   professionals, ensuring accurate communication between providers, payers, and patients.
                 </p>
                 <p>
-                  Our comprehensive CPT code guide provides detailed information about documentation requirements, 
+                  Our comprehensive coding guide provides detailed information about documentation requirements, 
                   reimbursement rates, and clinical examples for each code. Whether you're billing for evaluation 
-                  and management services, procedures, or consultations, proper CPT coding is crucial for compliance 
+                  and management services, procedures, consultations, or medical supplies, proper coding is crucial for compliance 
                   and optimal reimbursement.
                 </p>
                 <p>
-                  Each CPT code entry includes complexity levels, time requirements, common diagnoses, and real-world 
+                  Each code entry includes complexity levels, time requirements, common diagnoses, and real-world 
                   clinical examples to help healthcare providers understand proper usage and documentation standards. 
-                  Stay compliant and maximize your practice's revenue with accurate CPT coding.
+                  Stay compliant and maximize your practice's revenue with accurate CPT and HCPCS coding.
                 </p>
               </div>
             </div>
@@ -234,7 +239,7 @@ const CPTCodes = () => {
                 Ready to Streamline Your Medical Coding?
               </h2>
               <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-                Use S10.AI's intelligent clinical assistant to ensure accurate CPT coding and reduce documentation burden.
+                Use S10.AI's intelligent clinical assistant to ensure accurate CPT and HCPCS coding and reduce documentation burden.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <Link to="/demo" className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-[#143151] font-semibold rounded-xl hover:bg-gray-50 transition-colors shadow-lg text-sm sm:text-base">
