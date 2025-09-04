@@ -5,23 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { specialties } from "@/data/specialties";
-
-export default function SpecialtyBlogList(props: { slug?: string } = {}) {
+export default function SpecialtyBlogList(props: {
+  slug?: string;
+} = {}) {
   const params = useParams();
   const finalSlug = props.slug ?? params.slug;
   const specialty = specialties.find(s => s.slug === finalSlug);
-
   if (!specialty) {
-    return (
-      <div className="container py-16">
+    return <div className="container py-16">
         <h1 className="text-3xl font-bold mb-4">Specialty not found</h1>
         <Button asChild><Link to="/specialties">Back to Specialty Hub</Link></Button>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>{`${specialty.name} Blogs: AI scribe & agents`}</title>
         <meta name="description" content={`Explore ${specialty.name} posts about AI medical scribe workflows, coding, and patient engagement.`} />
@@ -32,10 +28,7 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
           <div className="container">
             <h1 className="text-4xl lg:text-6xl font-bold text-gradient mb-3">{specialty.name}</h1>
             <p className="text-muted-foreground max-w-2xl mb-6">{specialty.description}</p>
-            <Button 
-              size="lg" 
-              className="premium-button rounded-full px-8 py-3 text-base font-semibold hover:scale-105 transition-all duration-300 mb-6"
-            >
+            <Button size="lg" className="premium-button rounded-full px-8 py-3 text-base font-semibold hover:scale-105 transition-all duration-300 mb-6">
               Book a Demo
             </Button>
             <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
@@ -141,12 +134,7 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
                     <p className="text-muted-foreground text-base lg:text-lg mb-8 leading-relaxed max-w-3xl mx-auto">Connects with your {specialty.name.toLowerCase()}-specific EMR and 7,000+ productivity apps. No screen-switching. No duplicate entries. Just smarter workflows.</p>
                     
                     {/* Integration highlights */}
-                    <div className="flex flex-wrap justify-center gap-3 mb-8">
-                      <Badge variant="secondary" className="bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border-emerald-500/30 text-sm px-4 py-2">Epic</Badge>
-                      <Badge variant="secondary" className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/30 text-sm px-4 py-2">Cerner</Badge>
-                      <Badge variant="secondary" className="bg-gradient-to-r from-purple-500/20 to-emerald-500/20 border-purple-500/30 text-sm px-4 py-2">Allscripts</Badge>
-                      <Badge variant="secondary" className="bg-gradient-to-r from-emerald-500/20 to-purple-500/20 border-emerald-500/30 text-sm px-4 py-2">+ 7,000 more</Badge>
-                    </div>
+                    
                     
                     <Button className="premium-button rounded-full px-8 py-3 text-base font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
                       Read about integrations
@@ -306,22 +294,13 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
         <section className="py-16 lg:py-24">
           <div className="container">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {specialty.posts.map(p => (
-                <Card key={p.slug} className="bg-card border hover:shadow-elegant transition-all duration-300">
+              {specialty.posts.map(p => <Card key={p.slug} className="bg-card border hover:shadow-elegant transition-all duration-300">
                   <CardContent className="p-6">
-                    {p.image && (
-                      <div className="-mx-6 mb-4">
+                    {p.image && <div className="-mx-6 mb-4">
                         <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-t-lg">
-                          <img
-                            src={p.image}
-                            alt={p.imageAlt ?? `${p.title} – ${specialty.name}`}
-                            loading="lazy"
-                            decoding="async"
-                            className="h-full w-full object-cover"
-                          />
+                          <img src={p.image} alt={p.imageAlt ?? `${p.title} – ${specialty.name}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                         </AspectRatio>
-                      </div>
-                    )}
+                      </div>}
                     <h3 className="font-semibold text-xl mb-2">{p.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{p.excerpt}</p>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
@@ -331,8 +310,7 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
                     </div>
                     <Button asChild className="premium-button rounded-full px-4"><Link to={`/${specialty.slug}/${p.slug}`}>Read post</Link></Button>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
             
             {/* Call to Actions */}
@@ -380,6 +358,5 @@ export default function SpecialtyBlogList(props: { slug?: string } = {}) {
           </div>
         </section>
       </div>
-    </>
-  );
+    </>;
 }
