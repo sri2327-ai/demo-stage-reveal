@@ -106,7 +106,7 @@ export default function SpecialtyBlogList(props: {
                 </div>
 
                 {/* Custom Workflow Automation Card */}
-                <Card className="bg-gradient-to-r from-blue-500/15 to-purple-500/15 backdrop-blur-sm border border-white/30 shadow-elegant hover:shadow-2xl transition-all duration-500 group">
+                <Card className="bg-white backdrop-blur-sm border border-white/30 shadow-elegant hover:shadow-2xl transition-all duration-500 group">
                   <CardContent className="p-6 sm:p-8 lg:p-10 text-center">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                       <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,7 +121,7 @@ export default function SpecialtyBlogList(props: {
               </div>
 
                 {/* EMR Integration Highlight Card */}
-                <Card className="bg-gradient-to-r from-emerald-500/15 via-blue-500/15 to-purple-500/15 backdrop-blur-sm border border-white/40 shadow-elegant mx-4 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                <Card className="bg-white backdrop-blur-sm border border-white/40 shadow-elegant mx-4 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
                   {/* Background glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <CardContent className="p-6 sm:p-8 lg:p-10 text-center relative z-10">
@@ -275,7 +275,7 @@ export default function SpecialtyBlogList(props: {
                 </div>
 
                 {/* Additional support features */}
-                <Card className="bg-gradient-to-r from-blue-500/15 to-purple-500/15 backdrop-blur-sm border border-white/30 shadow-elegant hover:shadow-2xl transition-all duration-500 group">
+                <Card className="bg-white backdrop-blur-sm border border-white/30 shadow-elegant hover:shadow-2xl transition-all duration-500 group">
                   <CardContent className="p-6 sm:p-8 lg:p-10 text-center">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                       <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -293,6 +293,9 @@ export default function SpecialtyBlogList(props: {
 
         <section className="py-16 lg:py-24">
           <div className="container">
+            <div className="text-center mb-12 lg:mb-16">
+              <h2 className="text-3xl lg:text-5xl font-bold text-gradient mb-4">{specialty.name} Insights & Resources</h2>
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {specialty.posts.map(p => <Card key={p.slug} className="bg-card border hover:shadow-elegant transition-all duration-300">
                   <CardContent className="p-6">
