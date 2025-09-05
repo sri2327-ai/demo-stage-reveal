@@ -5,6 +5,167 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { specialties } from "@/data/specialties";
+import { useState } from "react";
+
+// Specialty Resources Component
+const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
+  const [activeTab, setActiveTab] = useState('Diagnoses');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const resourceData = {
+    'Diagnoses': [
+      { title: 'Myocardial Infarction', description: 'Commonly known as a heart attack, occurs when blood flow to part of the heart is blocked.' },
+      { title: 'Atrial Fibrillation', description: 'An irregular and often rapid heart rhythm that can lead to blood clots in the heart.' },
+      { title: 'Hypertension', description: 'Persistently high blood pressure that can damage arteries and organs over time.' },
+      { title: 'Coronary Artery Disease', description: 'Blockage in the arteries supplying the heart muscle with blood and oxygen.' }
+    ],
+    'ICD-10 Codes': [
+      { code: 'I21.9', description: 'Acute myocardial infarction, unspecified - used when specific details are unavailable' },
+      { code: 'I48.0', description: 'Atrial fibrillation - irregular heart rhythm diagnosis code' },
+      { code: 'I10', description: 'Essential (primary) hypertension - high blood pressure without known cause' },
+      { code: 'I25.10', description: 'Atherosclerotic heart disease of native coronary artery without angina pectoris' }
+    ],
+    'CPT Codes': [
+      { code: '93000', description: 'Electrocardiogram, complete - standard 12-lead ECG interpretation and report' },
+      { code: '99214', description: 'Office visit for established patient - moderate complexity evaluation and management' },
+      { code: '92928', description: 'Percutaneous transluminal coronary angioplasty - balloon catheter procedure' }
+    ],
+    'Templates': [
+      { title: 'Cardiology Initial Visit', description: 'Comprehensive template for new patient cardiology consultations and evaluations.' },
+      { title: 'Post-MI Follow-up', description: 'Structured template for monitoring patients after myocardial infarction recovery.' },
+      { title: 'Hypertension Management', description: 'Template for ongoing blood pressure monitoring and medication management.' }
+    ],
+    'Abbreviations': [
+      { abbreviation: 'ECG/EKG', description: 'Electrocardiogram - test that checks for problems with electrical activity of the heart' },
+      { abbreviation: 'BP', description: 'Blood pressure - the pressure of blood pushing against arterial walls' },
+      { abbreviation: 'CAD', description: 'Coronary artery disease - narrowing or blockage in heart arteries' }
+    ],
+    'Phrases': [
+      { phrase: 'Acute on chronic heart failure', description: 'Sudden worsening of long-term heart failure condition requiring immediate attention.' },
+      { phrase: 'Aortic valve stenosis', description: 'Narrowing of the aortic valve opening that restricts blood flow from the heart.' },
+      { phrase: 'Non-ST-elevation myocardial infarction', description: 'Type of heart attack without ST-segment elevation on ECG.' }
+    ]
+  };
+
+  const tabs = [
+    { key: 'Diagnoses', label: 'Diagnoses', icon: '📋' },
+    { key: 'ICD-10 Codes', label: 'ICD-10 Codes', icon: '🏥' },
+    { key: 'CPT Codes', label: 'CPT Codes', icon: '💳' },
+    { key: 'Templates', label: 'Templates', icon: '📄' },
+    { key: 'Abbreviations', label: 'Abbreviations', icon: '🔤' },
+    { key: 'Phrases', label: 'Phrases', icon: '💬' }
+  ];
+
+  const currentData = resourceData[activeTab as keyof typeof resourceData] || [];
+  const filteredData = currentData.filter(item => {
+    const searchText = searchQuery.toLowerCase();
+    const itemText = (
+      (item as any).title || 
+      (item as any).code || 
+      (item as any).phrase || 
+      (item as any).abbreviation || 
+      ''
+    ).toLowerCase() + ' ' + item.description.toLowerCase();
+    return itemText.includes(searchText);
+  });
+
+  return (
+    <div className="mt-16 pt-12 border-t border-border/50">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl lg:text-5xl font-bold text-gradient mb-4">{specialty.name} Resources</h2>
+        <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
+          Explore specialty-specific diagnoses, codes, phrases, and templates tailored for {specialty.name.toLowerCase()} practice.
+        </p>
+      </div>
+
+      {/* Tab Navigation */}
+      <div className="flex flex-wrap justify-center gap-2 lg:gap-4 mb-8 px-4">
+        {tabs.map(tab => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`flex items-center gap-2 px-4 lg:px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              activeTab === tab.key
+                ? 'bg-primary text-primary-foreground shadow-lg scale-105'
+                : 'bg-card hover:bg-card/80 text-muted-foreground hover:text-foreground hover:scale-105'
+            }`}
+          >
+            <span className="text-lg">{tab.icon}</span>
+            <span className="text-sm lg:text-base">{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Search Input */}
+      <div className="max-w-2xl mx-auto mb-8 px-4">
+        <div className="relative">
+          <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            placeholder={`Search ${activeTab.toLowerCase()}...`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+          />
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="bg-white rounded-2xl shadow-elegant p-6 lg:p-8 mx-4 min-h-[500px]">
+        <div className="mb-6">
+          <h3 className="text-2xl lg:text-3xl font-bold text-gradient mb-2">{activeTab}</h3>
+          <p className="text-muted-foreground">
+            {filteredData.length} {filteredData.length === 1 ? 'result' : 'results'} 
+            {searchQuery && ` for "${searchQuery}"`}
+          </p>
+        </div>
+
+        {filteredData.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <p className="text-lg text-muted-foreground">No results found for "{searchQuery}"</p>
+            <p className="text-sm text-muted-foreground mt-2">Try adjusting your search terms</p>
+          </div>
+        ) : (
+          <div className="grid gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredData.map((item, index) => (
+              <Card key={index} className="bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-500 group hover:shadow-elegant hover:-translate-y-1">
+                <CardContent className="p-6 h-full flex flex-col">
+                  <div className="flex-grow">
+                    <h4 className="font-bold text-lg mb-3 text-gradient group-hover:scale-105 transition-transform duration-300">
+                      {(item as any).title || 
+                       (item as any).code || 
+                       (item as any).phrase || 
+                       (item as any).abbreviation}
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-border/50">
+                    <Button 
+                      className="w-full premium-button rounded-full text-sm font-semibold hover:scale-105 transition-all duration-300"
+                      onClick={() => console.log('View details:', item)}
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 export default function SpecialtyBlogList(props: {
   slug?: string;
 } = {}) {
@@ -316,44 +477,8 @@ export default function SpecialtyBlogList(props: {
                 </Card>)}
             </div>
             
-            {/* Call to Actions */}
-            <div className="mt-16 pt-12 border-t border-border/50">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold mb-2">Explore More Resources</h2>
-                <p className="text-muted-foreground">Enhance your {specialty.name.toLowerCase()} practice with our comprehensive tools</p>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <Card className="bg-card/50 backdrop-blur-sm border-2 hover:border-primary/20 transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">ICD-10 Codes</h3>
-                    <p className="text-sm text-muted-foreground mb-4">Browse comprehensive ICD-10 diagnostic codes for accurate medical coding and documentation</p>
-                    <Button asChild className="w-full">
-                      <Link to="/icd10-codes">Explore ICD-10 Codes</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-                
-                <Card className="bg-card/50 backdrop-blur-sm border-2 hover:border-primary/20 transition-all duration-300 group">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">Documentation Templates</h3>
-                    <p className="text-sm text-muted-foreground mb-4">Access ready-to-use clinical documentation templates to streamline your workflow</p>
-                    <Button asChild className="w-full">
-                      <Link to="/templates">Browse Templates</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+            {/* Interactive Resources Section */}
+            <SpecialtyResourcesSection specialty={specialty} />
             
             <div className="mt-8">
               <Button variant="ghost" asChild><Link to="/specialties">← Back to Specialty Hub</Link></Button>
