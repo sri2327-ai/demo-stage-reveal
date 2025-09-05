@@ -6,6 +6,20 @@ import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { specialties } from "@/data/specialties";
 import { useState } from "react";
+import { 
+  Stethoscope, 
+  FileText, 
+  CreditCard, 
+  ClipboardList, 
+  Hash, 
+  MessageSquare,
+  ChevronRight,
+  ChevronLeft,
+  Activity,
+  BarChart3,
+  TestTube,
+  Search
+} from "lucide-react";
 
 // Specialty Resources Component
 const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
@@ -17,43 +31,97 @@ const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
       { title: 'Myocardial Infarction', description: 'Commonly known as a heart attack, occurs when blood flow to part of the heart is blocked.' },
       { title: 'Atrial Fibrillation', description: 'An irregular and often rapid heart rhythm that can lead to blood clots in the heart.' },
       { title: 'Hypertension', description: 'Persistently high blood pressure that can damage arteries and organs over time.' },
-      { title: 'Coronary Artery Disease', description: 'Blockage in the arteries supplying the heart muscle with blood and oxygen.' }
+      { title: 'Coronary Artery Disease', description: 'Blockage in the arteries supplying the heart muscle with blood and oxygen.' },
+      { title: 'Heart Failure', description: 'Condition where the heart cannot pump blood effectively to meet the body\'s needs.' },
+      { title: 'Arrhythmia', description: 'Abnormal heart rhythm that can be too fast, too slow, or irregular.' }
     ],
     'ICD-10 Codes': [
       { code: 'I21.9', description: 'Acute myocardial infarction, unspecified - used when specific details are unavailable' },
       { code: 'I48.0', description: 'Atrial fibrillation - irregular heart rhythm diagnosis code' },
       { code: 'I10', description: 'Essential (primary) hypertension - high blood pressure without known cause' },
-      { code: 'I25.10', description: 'Atherosclerotic heart disease of native coronary artery without angina pectoris' }
+      { code: 'I25.10', description: 'Atherosclerotic heart disease of native coronary artery without angina pectoris' },
+      { code: 'I50.9', description: 'Heart failure, unspecified - when specific type of heart failure is not documented' },
+      { code: 'I49.9', description: 'Cardiac arrhythmia, unspecified - abnormal heart rhythm not otherwise specified' }
     ],
     'CPT Codes': [
       { code: '93000', description: 'Electrocardiogram, complete - standard 12-lead ECG interpretation and report' },
       { code: '99214', description: 'Office visit for established patient - moderate complexity evaluation and management' },
-      { code: '92928', description: 'Percutaneous transluminal coronary angioplasty - balloon catheter procedure' }
+      { code: '92928', description: 'Percutaneous transluminal coronary angioplasty - balloon catheter procedure' },
+      { code: '93306', description: 'Echocardiography, transthoracic, real-time with image documentation' },
+      { code: '93015', description: 'Cardiovascular stress test using maximal or submaximal treadmill or bicycle exercise' }
     ],
     'Templates': [
       { title: 'Cardiology Initial Visit', description: 'Comprehensive template for new patient cardiology consultations and evaluations.' },
       { title: 'Post-MI Follow-up', description: 'Structured template for monitoring patients after myocardial infarction recovery.' },
-      { title: 'Hypertension Management', description: 'Template for ongoing blood pressure monitoring and medication management.' }
+      { title: 'Hypertension Management', description: 'Template for ongoing blood pressure monitoring and medication management.' },
+      { title: 'Heart Failure Assessment', description: 'Clinical template for evaluating and managing heart failure patients.' },
+      { title: 'Pre-operative Cardiac Clearance', description: 'Template for cardiac risk assessment before non-cardiac surgery.' }
     ],
     'Abbreviations': [
       { abbreviation: 'ECG/EKG', description: 'Electrocardiogram - test that checks for problems with electrical activity of the heart' },
       { abbreviation: 'BP', description: 'Blood pressure - the pressure of blood pushing against arterial walls' },
-      { abbreviation: 'CAD', description: 'Coronary artery disease - narrowing or blockage in heart arteries' }
+      { abbreviation: 'CAD', description: 'Coronary artery disease - narrowing or blockage in heart arteries' },
+      { abbreviation: 'CHF', description: 'Congestive heart failure - condition where heart cannot pump blood effectively' },
+      { abbreviation: 'MI', description: 'Myocardial infarction - medical term for heart attack' },
+      { abbreviation: 'AF', description: 'Atrial fibrillation - irregular heart rhythm affecting the upper chambers' }
     ],
     'Phrases': [
       { phrase: 'Acute on chronic heart failure', description: 'Sudden worsening of long-term heart failure condition requiring immediate attention.' },
       { phrase: 'Aortic valve stenosis', description: 'Narrowing of the aortic valve opening that restricts blood flow from the heart.' },
-      { phrase: 'Non-ST-elevation myocardial infarction', description: 'Type of heart attack without ST-segment elevation on ECG.' }
+      { phrase: 'Non-ST-elevation myocardial infarction', description: 'Type of heart attack without ST-segment elevation on ECG.' },
+      { phrase: 'Ejection fraction reduced', description: 'Heart failure with reduced pumping capacity of the left ventricle.' },
+      { phrase: 'Unstable angina pectoris', description: 'Chest pain due to reduced blood flow to heart muscle, unpredictable pattern.' }
+    ],
+    'Medical Prefix': [
+      { prefix: 'Cardi-', description: 'Pertaining to the heart. Example: Cardiology (study of the heart).' },
+      { prefix: 'Tachy-', description: 'Fast, rapid. Example: Tachycardia (fast heart rate above 100 bpm).' },
+      { prefix: 'Brady-', description: 'Slow. Example: Bradycardia (slow heart rate below 60 bpm).' },
+      { prefix: 'Angio-', description: 'Relating to blood vessels. Example: Angioplasty (procedure to open blocked vessels).' },
+      { prefix: 'Peri-', description: 'Around, surrounding. Example: Pericarditis (inflammation around the heart).' }
+    ],
+    'Medical Suffix': [
+      { suffix: '-ectomy', description: 'Surgical removal. Example: Atherectomy (removal of plaque from arteries).' },
+      { suffix: '-itis', description: 'Inflammation. Example: Myocarditis (inflammation of heart muscle).' },
+      { suffix: '-megaly', description: 'Enlargement. Example: Cardiomegaly (enlarged heart).' },
+      { suffix: '-sclerosis', description: 'Hardening. Example: Atherosclerosis (hardening of arteries).' },
+      { suffix: '-stenosis', description: 'Narrowing. Example: Aortic stenosis (narrowing of aortic valve).' }
+    ],
+    'Medical Root Words': [
+      { root: 'Cardi', description: 'Heart. Example: Cardiomyopathy (disease of heart muscle).' },
+      { root: 'Angio', description: 'Vessel. Example: Angiogram (imaging of blood vessels).' },
+      { root: 'Vasc', description: 'Vessel. Example: Vascular (relating to blood vessels).' },
+      { root: 'Myo', description: 'Muscle. Example: Myocardial (relating to heart muscle).' },
+      { root: 'Arterio', description: 'Artery. Example: Arteriosclerosis (hardening of arteries).' }
+    ],
+    'Clinical Charts and Timelines': [
+      { title: 'Cardiac Event Timeline', description: 'Comprehensive timeline tracking major cardiac events, procedures, and treatments over time.' },
+      { title: 'ECG/EKG Rhythm Strip Analysis', description: 'Visual chart displaying heart electrical activity patterns and rhythm interpretations.' },
+      { title: 'Blood Pressure Monitoring Chart', description: 'Systematic tracking of blood pressure readings with trend analysis and medication adjustments.' },
+      { title: 'Cardiac Catheterization Report', description: 'Detailed procedure timeline with findings, interventions, and post-procedure monitoring.' },
+      { title: 'Heart Failure Progression Chart', description: 'Visual timeline showing heart failure symptoms, treatments, and functional capacity changes.' }
+    ],
+    'Lab Test Results': [
+      { test: 'Troponin I/T Levels', description: 'Cardiac biomarkers elevated during heart muscle damage, crucial for MI diagnosis.' },
+      { test: 'BNP/NT-proBNP', description: 'Brain Natriuretic Peptide levels used to diagnose and monitor heart failure severity.' },
+      { test: 'Lipid Panel Complete', description: 'Comprehensive cholesterol and triglyceride assessment for cardiovascular risk evaluation.' },
+      { test: 'CK-MB (Creatine Kinase)', description: 'Heart-specific enzyme elevated during myocardial injury and heart attacks.' },
+      { test: 'D-Dimer', description: 'Blood clot breakdown product, elevated in conditions like pulmonary embolism.' },
+      { test: 'Homocysteine Level', description: 'Amino acid associated with increased cardiovascular disease risk when elevated.' }
     ]
   };
 
   const tabs = [
-    { key: 'Diagnoses', label: 'Diagnoses', icon: '📋' },
-    { key: 'ICD-10 Codes', label: 'ICD-10 Codes', icon: '🏥' },
-    { key: 'CPT Codes', label: 'CPT Codes', icon: '💳' },
-    { key: 'Templates', label: 'Templates', icon: '📄' },
-    { key: 'Abbreviations', label: 'Abbreviations', icon: '🔤' },
-    { key: 'Phrases', label: 'Phrases', icon: '💬' }
+    { key: 'Diagnoses', label: 'Diagnoses', icon: Stethoscope },
+    { key: 'ICD-10 Codes', label: 'ICD-10 Codes', icon: Hash },
+    { key: 'CPT Codes', label: 'CPT Codes', icon: CreditCard },
+    { key: 'Templates', label: 'Templates', icon: FileText },
+    { key: 'Abbreviations', label: 'Abbreviations', icon: MessageSquare },
+    { key: 'Phrases', label: 'Phrases', icon: ClipboardList },
+    { key: 'Medical Prefix', label: 'Prefix', icon: ChevronRight },
+    { key: 'Medical Suffix', label: 'Suffix', icon: ChevronLeft },
+    { key: 'Medical Root Words', label: 'Root Words', icon: Activity },
+    { key: 'Clinical Charts and Timelines', label: 'Charts', icon: BarChart3 },
+    { key: 'Lab Test Results', label: 'Lab Results', icon: TestTube }
   ];
 
   const currentData = resourceData[activeTab as keyof typeof resourceData] || [];
@@ -63,7 +131,11 @@ const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
       (item as any).title || 
       (item as any).code || 
       (item as any).phrase || 
-      (item as any).abbreviation || 
+      (item as any).abbreviation ||
+      (item as any).prefix ||
+      (item as any).suffix ||
+      (item as any).root ||
+      (item as any).test ||
       ''
     ).toLowerCase() + ' ' + item.description.toLowerCase();
     return itemText.includes(searchText);
@@ -71,90 +143,97 @@ const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
 
   return (
     <div className="mt-16 pt-12 border-t border-border/50">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl lg:text-5xl font-bold text-gradient mb-4">{specialty.name} Resources</h2>
-        <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
-          Explore specialty-specific diagnoses, codes, phrases, and templates tailored for {specialty.name.toLowerCase()} practice.
+      <div className="text-center mb-12 lg:mb-16">
+        <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gradient mb-4 sm:mb-6">{specialty.name} Resources</h2>
+        <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-4xl mx-auto px-4 leading-relaxed">
+          Explore comprehensive {specialty.name.toLowerCase()} resources including diagnoses, medical codes, clinical templates, terminology, and lab results tailored for modern cardiovascular practice.
         </p>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="flex flex-wrap justify-center gap-2 lg:gap-4 mb-8 px-4">
-        {tabs.map(tab => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 px-4 lg:px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeTab === tab.key
-                ? 'bg-primary text-primary-foreground shadow-lg scale-105'
-                : 'bg-card hover:bg-card/80 text-muted-foreground hover:text-foreground hover:scale-105'
-            }`}
-          >
-            <span className="text-lg">{tab.icon}</span>
-            <span className="text-sm lg:text-base">{tab.label}</span>
-          </button>
-        ))}
+      {/* Tab Navigation - Responsive Horizontal Scroll */}
+      <div className="mb-8 px-4">
+        <div className="flex gap-2 lg:gap-3 overflow-x-auto scrollbar-hide pb-4 lg:flex-wrap lg:justify-center lg:overflow-x-visible">
+          {tabs.map(tab => {
+            const IconComponent = tab.icon;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-4 sm:px-5 lg:px-6 py-3 lg:py-4 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+                  activeTab === tab.key
+                    ? 'bg-primary text-primary-foreground shadow-lg scale-105 border-2 border-primary'
+                    : 'bg-card hover:bg-card/80 text-muted-foreground hover:text-foreground hover:scale-105 border-2 border-transparent hover:border-primary/20'
+                }`}
+              >
+                <IconComponent size={18} className="flex-shrink-0" />
+                <span className="text-sm lg:text-base font-semibold">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Search Input */}
-      <div className="max-w-2xl mx-auto mb-8 px-4">
+      <div className="max-w-3xl mx-auto mb-8 px-4">
         <div className="relative">
-          <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <input
             type="text"
             placeholder={`Search ${activeTab.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+            className="w-full pl-12 pr-4 py-4 text-base rounded-xl border-2 border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-sm hover:shadow-md"
           />
         </div>
       </div>
 
       {/* Content Area */}
-      <div className="bg-white rounded-2xl shadow-elegant p-6 lg:p-8 mx-4 min-h-[500px]">
-        <div className="mb-6">
-          <h3 className="text-2xl lg:text-3xl font-bold text-gradient mb-2">{activeTab}</h3>
-          <p className="text-muted-foreground">
+      <div className="bg-white rounded-2xl shadow-elegant p-6 sm:p-8 lg:p-10 mx-4 min-h-[600px]">
+        <div className="mb-8">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gradient mb-3">{activeTab}</h3>
+          <p className="text-muted-foreground text-base lg:text-lg">
             {filteredData.length} {filteredData.length === 1 ? 'result' : 'results'} 
             {searchQuery && ` for "${searchQuery}"`}
           </p>
         </div>
 
         {filteredData.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+          <div className="text-center py-16">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-10 h-10 text-primary" />
             </div>
-            <p className="text-lg text-muted-foreground">No results found for "{searchQuery}"</p>
-            <p className="text-sm text-muted-foreground mt-2">Try adjusting your search terms</p>
+            <h4 className="text-xl font-semibold text-foreground mb-2">No results found</h4>
+            <p className="text-muted-foreground mb-1">No results found for "{searchQuery}"</p>
+            <p className="text-sm text-muted-foreground">Try adjusting your search terms or browse different categories</p>
           </div>
         ) : (
-          <div className="grid gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredData.map((item, index) => (
-              <Card key={index} className="bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-500 group hover:shadow-elegant hover:-translate-y-1">
+              <Card key={index} className="bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/30 hover:border-primary/40 transition-all duration-500 group hover:shadow-elegant hover:-translate-y-2">
                 <CardContent className="p-6 h-full flex flex-col">
                   <div className="flex-grow">
-                    <h4 className="font-bold text-lg mb-3 text-gradient group-hover:scale-105 transition-transform duration-300">
+                    <h4 className="font-bold text-lg lg:text-xl mb-3 text-gradient group-hover:scale-105 transition-transform duration-300 leading-tight">
                       {(item as any).title || 
                        (item as any).code || 
                        (item as any).phrase || 
-                       (item as any).abbreviation}
+                       (item as any).abbreviation ||
+                       (item as any).prefix ||
+                       (item as any).suffix ||
+                       (item as any).root ||
+                       (item as any).test}
                     </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
                       {item.description}
                     </p>
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t border-border/50">
+                  <div className="mt-6 pt-4 border-t border-border/50">
                     <Button 
-                      className="w-full premium-button rounded-full text-sm font-semibold hover:scale-105 transition-all duration-300"
+                      className="w-full premium-button rounded-full text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-md"
                       onClick={() => console.log('View details:', item)}
                     >
                       View Details
+                      <ChevronRight size={16} className="ml-1" />
                     </Button>
                   </div>
                 </CardContent>
@@ -162,6 +241,34 @@ const SpecialtyResourcesSection = ({ specialty }: { specialty: any }) => {
             ))}
           </div>
         )}
+      </div>
+
+      {/* SEO Content - Hidden but crawlable */}
+      <div className="sr-only">
+        <h3>{specialty.name} Medical Resources Directory</h3>
+        <p>Comprehensive collection of {specialty.name.toLowerCase()} medical resources including:</p>
+        <ul>
+          <li>Common {specialty.name.toLowerCase()} diagnoses and conditions</li>
+          <li>ICD-10 diagnostic codes for cardiovascular conditions</li>
+          <li>CPT procedure codes for cardiac interventions</li>
+          <li>Clinical documentation templates</li>
+          <li>Medical abbreviations and terminology</li>
+          <li>Common medical phrases in cardiology</li>
+          <li>Medical prefixes, suffixes, and root words</li>
+          <li>Clinical charts and patient timelines</li>
+          <li>Laboratory test results and interpretations</li>
+        </ul>
+        {Object.entries(resourceData).map(([category, items]) => (
+          <div key={category}>
+            <h4>{category}</h4>
+            {items.map((item, index) => (
+              <div key={index}>
+                <h5>{(item as any).title || (item as any).code || (item as any).phrase || (item as any).abbreviation || (item as any).prefix || (item as any).suffix || (item as any).root || (item as any).test}</h5>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
