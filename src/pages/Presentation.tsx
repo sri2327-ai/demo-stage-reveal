@@ -463,7 +463,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
 
               {/* Side-by-Side Layout */}
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Features Section - Left Side */}
                 <div className="space-y-6 lg:space-y-8">
                   {/* Key Stats Grid */}
