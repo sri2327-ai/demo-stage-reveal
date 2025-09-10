@@ -554,10 +554,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Animation Section - Right Side */}
                 <div className="flex justify-center xl:justify-start">
-                  <div className="w-full max-w-lg">
-                    <div className="relative bg-white p-3 sm:p-4 rounded-xl border border-[#387E89]/20 shadow-md overflow-hidden transform origin-top scale-90 sm:scale-95">
-                      <AnimatedCRUSH />
-                    </div>
+                  <div className="w-full max-w-md">
+                    <AnimatedCRUSH />
                   </div>
                 </div>
               </div>
@@ -583,10 +581,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Animation Section - Left Side */}
                 <div className="flex justify-center xl:justify-end order-2 xl:order-1">
-                  <div className="w-full max-w-lg">
-                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
-                      <AnimatedBRAVO />
-                    </div>
+                  <div className="w-full max-w-md">
+                    <AnimatedBRAVO />
                   </div>
                 </div>
 
