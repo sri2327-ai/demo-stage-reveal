@@ -448,120 +448,122 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* CRUSH Section */}
-          <div className="mb-20 sm:mb-24 lg:mb-32">
+          <div className="min-h-screen py-8 sm:py-12 lg:py-16 flex items-center scroll-mt-16">
             {/* Header Section */}
-            <div className="text-center mb-12 lg:mb-16">
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
-                CRUSH
-              </h3>
-              <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Medical Scribe</p>
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
-                <CheckCircle className="w-5 h-5" />
-                99.9% Accurate • HIPAA Compliant
-              </div>
-            </div>
-
-            {/* Side-by-Side Layout */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Features Section - Left Side */}
-              <div className="space-y-8 lg:space-y-10">
-                {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {[{
-                  icon: Clock,
-                  title: "Under 60 Seconds",
-                  desc: "Real-time documentation",
-                  color: "blue",
-                  gradient: "from-blue-50 to-blue-100"
-                }, {
-                  icon: Languages,
-                  title: "60+ Languages",
-                  desc: "Understands accents & context",
-                  color: "green",
-                  gradient: "from-green-50 to-emerald-100"
-                }, {
-                  icon: Database,
-                  title: "100+ EHRs",
-                  desc: "No API needed",
-                  color: "purple",
-                  gradient: "from-purple-50 to-purple-100"
-                }, {
-                  icon: Stethoscope,
-                  title: "50+ Specialties",
-                  desc: "Tailored workflows",
-                  color: "orange",
-                  gradient: "from-orange-50 to-orange-100"
-                }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
-                      <div className="text-center">
-                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
-                          <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
-                        </div>
-                        <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
-                        <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-                      </div>
-                    </div>)}
+            <div className="w-full">
+              <div className="text-center mb-8 lg:mb-10">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 lg:mb-4">
+                  CRUSH
+                </h3>
+                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 lg:mb-6">Your AI Medical Scribe</p>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-xs font-semibold mb-6 lg:mb-8 shadow-sm">
+                  <CheckCircle className="w-4 h-4" />
+                  99.9% Accurate • HIPAA Compliant
                 </div>
+              </div>
 
-                {/* Detailed Features */}
-                <div className="space-y-6">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
-                  <div className="space-y-4">
+              {/* Side-by-Side Layout */}
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Features Section - Left Side */}
+                <div className="space-y-6 lg:space-y-8">
+                  {/* Key Stats Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[{
-                    title: "Smart Medical Understanding",
-                    desc: "Understands medical language and context—no second-guessing, no errors",
-                    icon: Brain
+                    icon: Clock,
+                    title: "Under 60 Seconds",
+                    desc: "Real-time documentation",
+                    color: "blue",
+                    gradient: "from-blue-50 to-blue-100"
                   }, {
-                    title: "Advanced Coding Support",
-                    desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
-                    icon: Code
+                    icon: Languages,
+                    title: "60+ Languages",
+                    desc: "Understands accents & context",
+                    color: "green",
+                    gradient: "from-green-50 to-emerald-100"
                   }, {
-                    title: "Clinical Intelligence",
-                    desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
-                    icon: Lightbulb
+                    icon: Database,
+                    title: "100+ EHRs",
+                    desc: "No API needed",
+                    color: "purple",
+                    gradient: "from-purple-50 to-purple-100"
                   }, {
-                    title: "Pre-Visit Preparation",
-                    desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
-                    icon: ClipboardList
-                  }, {
-                    title: "Smart Edit & Natural Language",
-                    desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
-                    icon: MessageSquare
-                  }, {
-                    title: "Patient Visit Summary",
-                    desc: "Automated patient instructions in plain language, ready to email instantly",
-                    icon: FileText
-                  }, {
-                    title: "100% Customizable",
-                    desc: "Learns your preferences and adapts to your unique workflow and documentation style",
-                    icon: Settings
-                  }, {
-                    title: "Complete Automation",
-                    desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
-                    icon: Zap
-                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
-                        <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-4 h-4 text-green-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h5 className="font-semibold text-[#143151] text-base mb-2 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                          <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+                    icon: Stethoscope,
+                    title: "50+ Specialties",
+                    desc: "Tailored workflows",
+                    color: "orange",
+                    gradient: "from-orange-50 to-orange-100"
+                  }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+                        <div className="text-center">
+                          <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
+                            <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
+                          </div>
+                          <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
+                          <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
                         </div>
                       </div>)}
                   </div>
-                </div>
-              </div>
 
-              {/* Animation Section - Right Side */}
-              <div className="flex justify-center xl:justify-start">
-                <div className="w-full max-w-2xl">
-                  <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-2xl">
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <AnimatedCRUSH />
+                  {/* Detailed Features */}
+                  <div className="space-y-4">
+                    <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
+                    <div className="space-y-3 max-h-80 overflow-y-auto">
+                      {[{
+                      title: "Smart Medical Understanding",
+                      desc: "Understands medical language and context—no second-guessing, no errors",
+                      icon: Brain
+                    }, {
+                      title: "Advanced Coding Support",
+                      desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
+                      icon: Code
+                    }, {
+                      title: "Clinical Intelligence",
+                      desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
+                      icon: Lightbulb
+                    }, {
+                      title: "Pre-Visit Preparation",
+                      desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
+                      icon: ClipboardList
+                    }, {
+                      title: "Smart Edit & Natural Language",
+                      desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
+                      icon: MessageSquare
+                    }, {
+                      title: "Patient Visit Summary",
+                      desc: "Automated patient instructions in plain language, ready to email instantly",
+                      icon: FileText
+                    }, {
+                      title: "100% Customizable",
+                      desc: "Learns your preferences and adapts to your unique workflow and documentation style",
+                      icon: Settings
+                    }, {
+                      title: "Complete Automation",
+                      desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
+                      icon: Zap
+                    }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group">
+                          <div className="w-6 h-6 bg-gradient-to-br from-green-100 to-emerald-100 rounded-md flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <feature.icon className="w-3 h-3 text-green-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h5 className="font-semibold text-[#143151] text-sm mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                            <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                          </div>
+                        </div>)}
                     </div>
-                    
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
+                  </div>
+                </div>
+
+                {/* Animation Section - Right Side */}
+                <div className="flex justify-center xl:justify-start">
+                  <div className="w-full max-w-xl">
+                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
+                      <div className="group-hover:scale-105 transition-transform duration-300">
+                        <AnimatedCRUSH />
+                      </div>
                       
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -570,117 +572,119 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* BRAVO Section */}
-          <div className="mb-20 sm:mb-24">
+          <div className="min-h-screen py-8 sm:py-12 lg:py-16 flex items-center scroll-mt-16">
             {/* Header Section */}
-            <div className="text-center mb-12 lg:mb-16">
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
-                BRAVO
-              </h3>
-              <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Front Office Agent</p>
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
-                <UserCheck className="w-5 h-5" />
-                Automates Your Front Office
+            <div className="w-full">
+              <div className="text-center mb-8 lg:mb-10">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 lg:mb-4">
+                  BRAVO
+                </h3>
+                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 lg:mb-6">Your AI Front Office Agent</p>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-xs font-semibold mb-6 lg:mb-8 shadow-sm">
+                  <UserCheck className="w-4 h-4" />
+                  Automates Your Front Office
+                </div>
               </div>
-            </div>
 
-            {/* Side-by-Side Layout */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Animation Section - Left Side */}
-              <div className="flex justify-center xl:justify-end order-2 xl:order-1">
-                <div className="w-full max-w-2xl">
-                  <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-2xl">
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <AnimatedBRAVO />
-                    </div>
-                    
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
+              {/* Side-by-Side Layout */}
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Animation Section - Left Side */}
+                <div className="flex justify-center xl:justify-end order-2 xl:order-1">
+                  <div className="w-full max-w-xl">
+                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-4 sm:p-6 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
+                      <div className="group-hover:scale-105 transition-transform duration-300">
+                        <AnimatedBRAVO />
+                      </div>
                       
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Features Section - Right Side */}
-              <div className="space-y-8 lg:space-y-10 order-1 xl:order-2">
-                {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {[{
-                  icon: Phone,
-                  title: "AI Chat & Calls",
-                  desc: "Connects with patients 24/7",
-                  color: "blue",
-                  gradient: "from-blue-50 to-blue-100"
-                }, {
-                  icon: Calendar,
-                  title: "Smart Scheduling",
-                  desc: "Books & manages appointments",
-                  color: "green",
-                  gradient: "from-green-50 to-emerald-100"
-                }, {
-                  icon: Bell,
-                  title: "Auto Follow-ups",
-                  desc: "Multi-channel reminders",
-                  color: "purple",
-                  gradient: "from-purple-50 to-purple-100"
-                }, {
-                  icon: ClipboardList,
-                  title: "Pre-visit Intake",
-                  desc: "Handles questionnaires",
-                  color: "orange",
-                  gradient: "from-orange-50 to-orange-100"
-                }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-6 rounded-2xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
-                      <div className="text-center">
-                        <div className={`w-12 h-12 bg-gradient-to-br from-white to-${feature.color}-50 rounded-xl flex items-center justify-center shadow-sm mx-auto mb-3`}>
-                          <feature.icon className={`w-6 h-6 text-${feature.color}-600`} />
-                        </div>
-                        <h4 className="font-bold text-[#143151] text-base mb-2">{feature.title}</h4>
-                        <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-                      </div>
-                    </div>)}
-                </div>
-
-                {/* Detailed Features */}
-                <div className="space-y-6">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
-                  <div className="space-y-4">
+                {/* Features Section - Right Side */}
+                <div className="space-y-6 lg:space-y-8 order-1 xl:order-2">
+                  {/* Key Stats Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[{
-                    title: "24/7 AI-Powered Patient Interaction",
-                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
-                    icon: MessageCircle
+                    icon: Phone,
+                    title: "AI Chat & Calls",
+                    desc: "Connects with patients 24/7",
+                    color: "blue",
+                    gradient: "from-blue-50 to-blue-100"
                   }, {
-                    title: "Seamless Scheduling",
-                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
-                    icon: Calendar
+                    icon: Calendar,
+                    title: "Smart Scheduling",
+                    desc: "Books & manages appointments",
+                    color: "green",
+                    gradient: "from-green-50 to-emerald-100"
                   }, {
-                    title: "Help Reduce No-Shows & Boost Revenue",
-                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
-                    icon: TrendingUp
+                    icon: Bell,
+                    title: "Auto Follow-ups",
+                    desc: "Multi-channel reminders",
+                    color: "purple",
+                    gradient: "from-purple-50 to-purple-100"
                   }, {
-                    title: "Revenue Protection",
-                    desc: "Aims to reduce denials through improved data capture and RCM support",
-                    icon: Shield
-                  }, {
-                    title: "Overcome Staffing Shortages",
-                    desc: "AI task assignment with smart delegation to the right person or system",
-                    icon: Users
-                  }, {
-                    title: "Seamless Integration",
-                    desc: "Connects with many common EHR, CRM, and PMS systems",
-                    icon: Plug
-                  }, {
-                    title: "Smarter Referrals",
-                    desc: "Automates aspects of triage & care coordination under clinical guidance",
-                    icon: ArrowRight
-                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/60 transition-all duration-300 group">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-4 h-4 text-blue-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h5 className="font-semibold text-[#143151] text-base mb-2 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                          <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+                    icon: ClipboardList,
+                    title: "Pre-visit Intake",
+                    desc: "Handles questionnaires",
+                    color: "orange",
+                    gradient: "from-orange-50 to-orange-100"
+                  }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+                        <div className="text-center">
+                          <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
+                            <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
+                          </div>
+                          <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
+                          <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
                         </div>
                       </div>)}
+                  </div>
+
+                  {/* Detailed Features */}
+                  <div className="space-y-4">
+                    <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
+                    <div className="space-y-3 max-h-80 overflow-y-auto">
+                      {[{
+                      title: "24/7 AI-Powered Patient Interaction",
+                      desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
+                      icon: MessageCircle
+                    }, {
+                      title: "Seamless Scheduling",
+                      desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
+                      icon: Calendar
+                    }, {
+                      title: "Help Reduce No-Shows & Boost Revenue",
+                      desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
+                      icon: TrendingUp
+                    }, {
+                      title: "Revenue Protection",
+                      desc: "Aims to reduce denials through improved data capture and RCM support",
+                      icon: Shield
+                    }, {
+                      title: "Overcome Staffing Shortages",
+                      desc: "AI task assignment with smart delegation to the right person or system",
+                      icon: Users
+                    }, {
+                      title: "Seamless Integration",
+                      desc: "Connects with many common EHR, CRM, and PMS systems",
+                      icon: Plug
+                    }, {
+                      title: "Smarter Referrals",
+                      desc: "Automates aspects of triage & care coordination under clinical guidance",
+                      icon: ArrowRight
+                    }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group">
+                          <div className="w-6 h-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-md flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <feature.icon className="w-3 h-3 text-blue-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h5 className="font-semibold text-[#143151] text-sm mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                            <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                          </div>
+                        </div>)}
+                    </div>
                   </div>
                 </div>
               </div>
