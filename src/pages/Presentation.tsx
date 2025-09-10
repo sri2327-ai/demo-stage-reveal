@@ -554,8 +554,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Animation Section - Right Side */}
                 <div className="flex justify-center xl:justify-start">
-                  <div className="w-full max-w-xl">
-                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
+                  <div className="w-full max-w-md scale-75 sm:scale-85">
+                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-3 sm:p-4 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
                       <div className="group-hover:scale-105 transition-transform duration-300">
                         <AnimatedCRUSH />
                       </div>
@@ -590,8 +590,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Animation Section - Left Side */}
                 <div className="flex justify-center xl:justify-end order-2 xl:order-1">
-                  <div className="w-full max-w-xl">
-                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-4 sm:p-6 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
+                  <div className="w-full max-w-md scale-75 sm:scale-85">
+                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-3 sm:p-4 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
                       <div className="group-hover:scale-105 transition-transform duration-300">
                         <AnimatedBRAVO />
                       </div>
