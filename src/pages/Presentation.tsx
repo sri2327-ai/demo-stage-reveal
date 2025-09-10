@@ -465,7 +465,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               {/* Side-by-Side Layout */}
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Features Section - Left Side */}
-                <div className="space-y-6 lg:space-y-8">
+                <div className="space-y-6 lg:space-y-8 max-h-[72vh] overflow-y-auto pr-2">
                   {/* Key Stats Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[{
@@ -554,9 +554,11 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Animation Section - Right Side */}
                 <div className="flex justify-center xl:justify-start">
-                  <div className="w-full max-w-lg">
-                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
-                      <AnimatedCRUSH />
+                  <div className="w-full max-w-lg h-[72vh] flex items-center justify-center">
+                    <div className="relative bg-gradient-to-br from-blue-50 to-white p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-[#387E89]/20 overflow-hidden">
+                      <div className="scale-90 origin-center">
+                        <AnimatedCRUSH />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -583,15 +585,17 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Animation Section - Left Side */}
                 <div className="flex justify-center xl:justify-end order-2 xl:order-1">
-                  <div className="w-full max-w-lg">
-                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
-                      <AnimatedBRAVO />
+                  <div className="w-full max-w-lg h-[72vh] flex items-center justify-center">
+                    <div className="relative bg-gradient-to-br from-green-50 to-white p-4 sm:p-5 md:p-6 rounded-2xl border-2 border-[#143151]/20 overflow-hidden">
+                      <div className="scale-90 origin-center">
+                        <AnimatedBRAVO />
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Features Section - Right Side */}
-                <div className="space-y-6 lg:space-y-8 order-1 xl:order-2">
+                <div className="space-y-6 lg:space-y-8 order-1 xl:order-2 max-h-[72vh] overflow-y-auto pr-2">
                   {/* Key Stats Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[{
