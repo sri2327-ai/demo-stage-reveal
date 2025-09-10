@@ -436,8 +436,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       </section>
 
       {/* Meet Your AI Teammates - Redesigned with Separated Layout */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-blue-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="min-h-screen py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-white to-blue-50/30 flex items-center scroll-mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 sm:mb-6">
               Meet Your AI Teammates
