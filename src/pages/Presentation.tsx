@@ -555,7 +555,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Animation Section - Right Side */}
                 <div className="flex justify-center xl:justify-start">
                   <div className="w-full max-w-lg">
-                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
+                    <div className="relative bg-white p-3 sm:p-4 rounded-xl border border-[#387E89]/20 shadow-md overflow-hidden transform origin-top scale-90 sm:scale-95">
                       <AnimatedCRUSH />
                     </div>
                   </div>
