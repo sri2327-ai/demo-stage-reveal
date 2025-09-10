@@ -448,15 +448,15 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* CRUSH Section */}
-          <div className="min-h-screen py-8 sm:py-12 lg:py-16 flex items-center scroll-mt-16">
+          <div className="min-h-screen py-4 sm:py-6 flex items-center scroll-mt-16">
             {/* Header Section */}
             <div className="w-full">
-              <div className="text-center mb-8 lg:mb-10">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 lg:mb-4">
+              <div className="text-center mb-6 lg:mb-8">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-2 lg:mb-3">
                   CRUSH
                 </h3>
-                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 lg:mb-6">Your AI Medical Scribe</p>
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-xs font-semibold mb-6 lg:mb-8 shadow-sm">
+                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-3 lg:mb-4">Your AI Medical Scribe</p>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-xs font-semibold mb-4 lg:mb-6 shadow-sm">
                   <CheckCircle className="w-4 h-4" />
                   99.9% Accurate • HIPAA Compliant
                 </div>
@@ -554,16 +554,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
                 {/* Animation Section - Right Side */}
                 <div className="flex justify-center xl:justify-start">
-                  <div className="w-full max-w-md scale-75 sm:scale-85">
-                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-3 sm:p-4 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
-                      <div className="group-hover:scale-105 transition-transform duration-300">
-                        <AnimatedCRUSH />
-                      </div>
-                      
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
-                        
-                      </div>
+                  <div className="w-full max-w-lg">
+                    <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-xl">
+                      <AnimatedCRUSH />
                     </div>
                   </div>
                 </div>
@@ -572,15 +565,15 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* BRAVO Section */}
-          <div className="min-h-screen py-8 sm:py-12 lg:py-16 flex items-center scroll-mt-16">
+          <div className="min-h-screen py-4 sm:py-6 flex items-center scroll-mt-16">
             {/* Header Section */}
             <div className="w-full">
-              <div className="text-center mb-8 lg:mb-10">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-3 lg:mb-4">
+              <div className="text-center mb-6 lg:mb-8">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-2 lg:mb-3">
                   BRAVO
                 </h3>
-                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-4 lg:mb-6">Your AI Front Office Agent</p>
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-xs font-semibold mb-6 lg:mb-8 shadow-sm">
+                <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-3 lg:mb-4">Your AI Front Office Agent</p>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-xs font-semibold mb-4 lg:mb-6 shadow-sm">
                   <UserCheck className="w-4 h-4" />
                   Automates Your Front Office
                 </div>
@@ -590,16 +583,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Animation Section - Left Side */}
                 <div className="flex justify-center xl:justify-end order-2 xl:order-1">
-                  <div className="w-full max-w-md scale-75 sm:scale-85">
-                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-3 sm:p-4 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
-                      <div className="group-hover:scale-105 transition-transform duration-300">
-                        <AnimatedBRAVO />
-                      </div>
-                      
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
-                        
-                      </div>
+                  <div className="w-full max-w-lg">
+                    <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-xl">
+                      <AnimatedBRAVO />
                     </div>
                   </div>
                 </div>
