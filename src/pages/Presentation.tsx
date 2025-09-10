@@ -449,23 +449,24 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* CRUSH Section */}
           <div className="mb-20 sm:mb-24 lg:mb-32">
-            <div className="space-y-12 lg:space-y-16">
-              {/* Features Section */}
-              <div className="space-y-8 lg:space-y-10">
-                {/* Header Section */}
-                <div className="text-center">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
-                    CRUSH
-                  </h3>
-                  <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Medical Scribe</p>
-                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
-                    <CheckCircle className="w-5 h-5" />
-                    99.9% Accurate • HIPAA Compliant
-                  </div>
-                </div>
+            {/* Header Section */}
+            <div className="text-center mb-12 lg:mb-16">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
+                CRUSH
+              </h3>
+              <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Medical Scribe</p>
+              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
+                <CheckCircle className="w-5 h-5" />
+                99.9% Accurate • HIPAA Compliant
+              </div>
+            </div>
 
+            {/* Side-by-Side Layout */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Features Section - Left Side */}
+              <div className="space-y-8 lg:space-y-10">
                 {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[{
                   icon: Clock,
                   title: "Under 60 Seconds",
@@ -502,9 +503,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-6 lg:space-y-8 max-w-4xl mx-auto">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="space-y-6">
+                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
+                  <div className="space-y-4">
                     {[{
                     title: "Smart Medical Understanding",
                     desc: "Understands medical language and context—no second-guessing, no errors",
@@ -550,8 +551,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
               </div>
 
-              {/* Animation Section */}
-              <div className="flex justify-center">
+              {/* Animation Section - Right Side */}
+              <div className="flex justify-center xl:justify-start">
                 <div className="w-full max-w-2xl">
                   <div className="relative group bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#387E89]/20 hover:border-[#387E89]/40 transition-all duration-500 hover:shadow-2xl">
                     <div className="group-hover:scale-105 transition-transform duration-300">
@@ -570,23 +571,40 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* BRAVO Section */}
           <div className="mb-20 sm:mb-24">
-            <div className="space-y-12 lg:space-y-16">
-              {/* Features Section */}
-              <div className="space-y-8 lg:space-y-10">
-                {/* Header Section */}
-                <div className="text-center">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
-                    BRAVO
-                  </h3>
-                  <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Front Office Agent</p>
-                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
-                    <UserCheck className="w-5 h-5" />
-                    Automates Your Front Office
+            {/* Header Section */}
+            <div className="text-center mb-12 lg:mb-16">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 lg:mb-6">
+                BRAVO
+              </h3>
+              <p className="text-xl sm:text-2xl text-[#387E89] font-semibold mb-6 lg:mb-8">Your AI Front Office Agent</p>
+              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-6 py-3 rounded-full text-sm font-semibold mb-8 lg:mb-10 shadow-sm">
+                <UserCheck className="w-5 h-5" />
+                Automates Your Front Office
+              </div>
+            </div>
+
+            {/* Side-by-Side Layout */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Animation Section - Left Side */}
+              <div className="flex justify-center xl:justify-end order-2 xl:order-1">
+                <div className="w-full max-w-2xl">
+                  <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-2xl">
+                    <div className="group-hover:scale-105 transition-transform duration-300">
+                      <AnimatedBRAVO />
+                    </div>
+                    
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
+                      
+                    </div>
                   </div>
                 </div>
+              </div>
 
+              {/* Features Section - Right Side */}
+              <div className="space-y-8 lg:space-y-10 order-1 xl:order-2">
                 {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[{
                   icon: Phone,
                   title: "AI Chat & Calls",
@@ -623,9 +641,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 </div>
 
                 {/* Detailed Features */}
-                <div className="space-y-6 lg:space-y-8 max-w-4xl mx-auto">
-                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3 text-center">Complete Feature Set</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="space-y-6">
+                  <h4 className="text-lg font-bold text-[#143151] border-b border-gray-200 pb-3">Complete Feature Set</h4>
+                  <div className="space-y-4">
                     {[{
                     title: "24/7 AI-Powered Patient Interaction",
                     desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
@@ -663,22 +681,6 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                           <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
                         </div>
                       </div>)}
-                  </div>
-                </div>
-              </div>
-
-              {/* Animation Section */}
-              <div className="flex justify-center">
-                <div className="w-full max-w-2xl">
-                  <div className="relative group bg-gradient-to-br from-green-50 to-white p-6 sm:p-8 lg:p-10 rounded-3xl border-2 border-[#143151]/20 hover:border-[#143151]/40 transition-all duration-500 hover:shadow-2xl">
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <AnimatedBRAVO />
-                    </div>
-                    
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl flex items-center justify-center">
-                      
-                    </div>
                   </div>
                 </div>
               </div>
