@@ -450,11 +450,11 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           {/* CRUSH Section */}
           <div className="py-8 sm:py-12 lg:py-16 scroll-mt-16">
             {/* Header Section */}
-            <div className="text-center mb-8 lg:mb-12">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-2 lg:mb-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 lg:mb-12">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151]">
                 CRUSH
               </h3>
-              <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-3 lg:mb-4">Your AI Medical Scribe</p>
+              <p className="text-lg sm:text-xl text-[#387E89] font-semibold">Your AI Medical Scribe</p>
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
                 <CheckCircle className="w-4 h-4" />
                 99.9% Accurate • HIPAA Compliant
