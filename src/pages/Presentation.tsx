@@ -577,11 +577,11 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           {/* BRAVO Section */}
           <div className="py-8 sm:py-12 lg:py-16 scroll-mt-16">
             {/* Header Section */}
-            <div className="text-center mb-8 lg:mb-12">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151] mb-2 lg:mb-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 lg:mb-12">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151]">
                 BRAVO
               </h3>
-              <p className="text-lg sm:text-xl text-[#387E89] font-semibold mb-3 lg:mb-4">Your AI Front Office Agent</p>
+              <p className="text-lg sm:text-xl text-[#387E89] font-semibold">Your AI Front Office Agent</p>
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
                 <UserCheck className="w-4 h-4" />
                 Automates Your Front Office
