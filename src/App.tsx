@@ -45,6 +45,17 @@ import SpecialtyHub from "./pages/SpecialtyHub";
 import SpecialtyBlogList from "./pages/SpecialtyBlogList";
 import SpecialtyBlogPost from "./pages/SpecialtyBlogPost";
 import ProductWalkthrough from "./pages/ProductWalkthrough";
+import ContextualReasoning from "./pages/ContextualReasoning";
+import TemplatesPage from "./pages/TemplatesPage";
+import Customisation from "./pages/Customisation";
+import PreCharting from "./pages/PreCharting";
+import WorkflowsPrescriptions from "./pages/WorkflowsPrescriptions";
+import Calls from "./pages/Calls";
+import Coding from "./pages/Coding";
+import Chat from "./pages/Chat";
+import Email from "./pages/Email";
+import UniversalEHRIntegration from "./pages/UniversalEHRIntegration";
+import UniversalAppIntegrations from "./pages/UniversalAppIntegrations";
 import { specialties } from "@/data/specialties";
 
 const RedirectSpecialty = () => {
@@ -103,6 +114,17 @@ const App = () => (
             <Route path="/transcribe-and-dictate" element={<TranscribeAndDictate />} />
             <Route path="/patient-centered-care" element={<PatientCenteredCare />} />
             <Route path="/increase-profitability" element={<IncreaseProfitability />} />
+            <Route path="/contextual-reasoning" element={<ContextualReasoning />} />
+            <Route path="/templates-page" element={<TemplatesPage />} />
+            <Route path="/customisation" element={<Customisation />} />
+            <Route path="/pre-charting" element={<PreCharting />} />
+            <Route path="/workflows-prescriptions" element={<WorkflowsPrescriptions />} />
+            <Route path="/calls" element={<Calls />} />
+            <Route path="/coding" element={<Coding />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/email" element={<Email />} />
+            <Route path="/universal-ehr-integration" element={<UniversalEHRIntegration />} />
+            <Route path="/universal-app-integrations" element={<UniversalAppIntegrations />} />
             <Route path="/specialties" element={<SpecialtyHub />} />
             <Route path="/specialties/:slug" element={<RedirectSpecialty />} />
             <Route path="/specialties/:slug/:postSlug" element={<RedirectPost />} />
