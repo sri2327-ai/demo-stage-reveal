@@ -588,111 +588,110 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
             </div>
 
-            {/* Side-by-Side Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              {/* Animation Section - Left Side */}
-              <div className="flex justify-center lg:justify-end order-2 lg:order-1">
-                <div className="w-full max-w-lg">
+            {/* Key Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              {[{
+                icon: Phone,
+                title: "AI Chat & Calls",
+                desc: "Connects with patients 24/7",
+                color: "blue",
+                gradient: "from-blue-50 to-blue-100"
+              }, {
+                icon: Calendar,
+                title: "Smart Scheduling",
+                desc: "Books & manages appointments",
+                color: "green",
+                gradient: "from-green-50 to-emerald-100"
+              }, {
+                icon: Bell,
+                title: "Auto Follow-ups",
+                desc: "Multi-channel reminders",
+                color: "purple",
+                gradient: "from-purple-50 to-purple-100"
+              }, {
+                icon: ClipboardList,
+                title: "Pre-visit Intake",
+                desc: "Handles questionnaires",
+                color: "orange",
+                gradient: "from-orange-50 to-orange-100"
+              }].map((feature, index) => (
+                <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+                  <div className="text-center">
+                    <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
+                      <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
+                    </div>
+                    <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Combined Layout: Animation + Features */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+              {/* Animation Section */}
+              <div className="lg:col-span-1 flex justify-center order-2 lg:order-1">
+                <div className="w-full max-w-md">
                   <AnimatedBRAVO />
                 </div>
               </div>
 
-              {/* Features Section - Right Side */}
-              <div className="space-y-6 order-1 lg:order-2">
-                {/* Key Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Complete Feature Set - Takes remaining space */}
+              <div className="lg:col-span-2 space-y-4 order-1 lg:order-2">
+                <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
+                
+                {/* First Row of Features */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                   {[{
-                  icon: Phone,
-                  title: "AI Chat & Calls",
-                  desc: "Connects with patients 24/7",
-                  color: "blue",
-                  gradient: "from-blue-50 to-blue-100"
-                }, {
-                  icon: Calendar,
-                  title: "Smart Scheduling",
-                  desc: "Books & manages appointments",
-                  color: "green",
-                  gradient: "from-green-50 to-emerald-100"
-                }, {
-                  icon: Bell,
-                  title: "Auto Follow-ups",
-                  desc: "Multi-channel reminders",
-                  color: "purple",
-                  gradient: "from-purple-50 to-purple-100"
-                }, {
-                  icon: ClipboardList,
-                  title: "Pre-visit Intake",
-                  desc: "Handles questionnaires",
-                  color: "orange",
-                  gradient: "from-orange-50 to-orange-100"
-                }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
-                      <div className="text-center">
-                        <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
-                          <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
-                        </div>
-                        <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
-                        <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                    title: "24/7 AI-Powered Patient Interaction",
+                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
+                    icon: MessageCircle
+                  }, {
+                    title: "Seamless Scheduling",
+                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
+                    icon: Calendar
+                  }, {
+                    title: "Help Reduce No-Shows & Boost Revenue",
+                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
+                    icon: TrendingUp
+                  }, {
+                    title: "Revenue Protection",
+                    desc: "Aims to reduce denials through improved data capture and RCM support",
+                    icon: Shield
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <feature.icon className="w-4 h-4 text-blue-600" />
                       </div>
-                    </div>)}
+                      <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                      <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                    </div>
+                  ))}
                 </div>
 
-                {/* Detailed Features */}
-                <div className="space-y-4">
-                  <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
-                  
-                  {/* First Row of Features */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                    {[{
-                      title: "24/7 AI-Powered Patient Interaction",
-                      desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
-                      icon: MessageCircle
-                    }, {
-                      title: "Seamless Scheduling",
-                      desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
-                      icon: Calendar
-                    }, {
-                      title: "Help Reduce No-Shows & Boost Revenue",
-                      desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
-                      icon: TrendingUp
-                    }, {
-                      title: "Revenue Protection",
-                      desc: "Aims to reduce denials through improved data capture and RCM support",
-                      icon: Shield
-                    }].map((feature, index) => (
-                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-4 h-4 text-blue-600" />
-                        </div>
-                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                {/* Second Row of Features */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {[{
+                    title: "Overcome Staffing Shortages",
+                    desc: "AI task assignment with smart delegation to the right person or system",
+                    icon: Users
+                  }, {
+                    title: "Seamless Integration",
+                    desc: "Connects with many common EHR, CRM, and PMS systems",
+                    icon: Plug
+                  }, {
+                    title: "Smarter Referrals",
+                    desc: "Automates aspects of triage & care coordination under clinical guidance",
+                    icon: ArrowRight
+                  }].map((feature, index) => (
+                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <feature.icon className="w-4 h-4 text-blue-600" />
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Second Row of Features */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {[{
-                      title: "Overcome Staffing Shortages",
-                      desc: "AI task assignment with smart delegation to the right person or system",
-                      icon: Users
-                    }, {
-                      title: "Seamless Integration",
-                      desc: "Connects with many common EHR, CRM, and PMS systems",
-                      icon: Plug
-                    }, {
-                      title: "Smarter Referrals",
-                      desc: "Automates aspects of triage & care coordination under clinical guidance",
-                      icon: ArrowRight
-                    }].map((feature, index) => (
-                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-4 h-4 text-blue-600" />
-                        </div>
-                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
-                      </div>
-                    ))}
-                  </div>
+                      <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                      <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
