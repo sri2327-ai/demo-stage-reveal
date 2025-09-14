@@ -430,39 +430,126 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       {/* Logo Marquee Section */}
       <LogoMarquee />
 
-      {/* The Burnout is Real - Responsive Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
-        
+      {/* The Problem Section - Compact Design */}
+      <section className="py-8 sm:py-12 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8 sm:mb-12"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-4 sm:mb-6">
+              The Burnout is Real
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+              Clinicians are drowning in administrative tasks, spending more time on screens than with patients.
+            </p>
+          </motion.div>
+
+          {/* Problem Stats Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            <AnimatedStat icon={Clock} value={4} label="Hours spent on EHRs daily" suffix="+" />
+            <AnimatedStat icon={Frown} value={50} label="Clinicians facing burnout" suffix="%" />
+            <AnimatedStat icon={TrendingDown} value={30} label="Patient no-show rate" suffix="%" />
+            <AnimatedStat icon={DollarSign} value={150} label="Cost per missed appointment" suffix="K" />
+          </div>
+
+          {/* Impact Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white p-4 sm:p-6 rounded-xl border border-red-100 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertTriangle className="w-4 h-4 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base">Staff Burnout Crisis</h3>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                Overwhelmed staff, high turnover, and declining job satisfaction across healthcare teams.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white p-4 sm:p-6 rounded-xl border border-orange-100 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-8 h-8 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <TrendingDown className="w-4 h-4 text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base">Revenue Losses</h3>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                No-shows, scheduling gaps, and administrative inefficiencies drain practice revenue.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-white p-4 sm:p-6 rounded-xl border border-blue-100 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Coffee className="w-4 h-4 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[#143151] text-sm sm:text-base">Work-Life Imbalance</h3>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                Late nights documenting, weekend catch-up, and less time for patient care and personal life.
+              </p>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
-      {/* Meet Your AI Teammates - Redesigned with Separated Layout */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-white to-blue-50/30 scroll-mt-16">
+      {/* Meet Your AI Teammates - Optimized Layout */}
+      <section className="py-6 sm:py-8 lg:py-12 bg-gradient-to-b from-white to-blue-50/30 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#143151] mb-4 sm:mb-6">
+          <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
               Meet Your AI Teammates
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
               CRUSH and BRAVO work 24/7 so you can focus on what matters most - your patients.
             </p>
           </div>
 
           {/* CRUSH Section */}
-          <div className="py-8 sm:py-12 lg:py-16 scroll-mt-16">
-            {/* Header Section */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 lg:mb-12">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151]">
+          <div className="py-4 sm:py-6 lg:py-8 scroll-mt-16">
+            {/* Header Section - Compact */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">
                 CRUSH
               </h3>
-              <p className="text-lg sm:text-xl text-[#387E89] font-semibold">Your AI Medical Scribe</p>
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
-                <CheckCircle className="w-4 h-4" />
-                99.9% Accurate • HIPAA Compliant
+              <p className="text-base sm:text-lg text-[#387E89] font-semibold">Your AI Medical Scribe</p>
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
+                <CheckCircle className="w-3 h-3" />
+                <span className="hidden sm:inline">99.9% Accurate • HIPAA Compliant</span>
+                <span className="sm:hidden">99.9% Accurate</span>
               </div>
             </div>
 
-            {/* Key Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {/* Key Stats Grid - Compact */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
               {[{
                 icon: Clock,
                 title: "Under 60 Seconds",
@@ -575,21 +662,22 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* BRAVO Section */}
-          <div className="py-8 sm:py-12 lg:py-16 scroll-mt-16">
-            {/* Header Section */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 lg:mb-12">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#143151]">
+          <div className="py-4 sm:py-6 lg:py-8 scroll-mt-16 mt-4 sm:mt-6 lg:mt-8">
+            {/* Header Section - Compact */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">
                 BRAVO
               </h3>
-              <p className="text-lg sm:text-xl text-[#387E89] font-semibold">Your AI Front Office Agent</p>
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
-                <UserCheck className="w-4 h-4" />
-                Automates Your Front Office
+              <p className="text-base sm:text-lg text-[#387E89] font-semibold">Your AI Front Office Agent</p>
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
+                <UserCheck className="w-3 h-3" />
+                <span className="hidden sm:inline">Automates Your Front Office</span>
+                <span className="sm:hidden">Front Office AI</span>
               </div>
             </div>
 
-            {/* Key Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {/* Key Stats Grid - Compact */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
               {[{
                 icon: Phone,
                 title: "AI Chat & Calls",
@@ -721,8 +809,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
       </section>
 
-      {/* Before vs After - Compact & Subtle Design */}
-      <section className="py-12 sm:py-16 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/20 relative overflow-hidden">
+      {/* Before vs After - Optimized Design */}
+      <section className="py-8 sm:py-12 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/20 relative overflow-hidden">
         {/* Subtle background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-24 h-24 bg-red-100/60 rounded-full blur-2xl"></div>
@@ -926,8 +1014,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
       </section>
 
-      {/* What You Actually Get - Compact & Subtle Design */}
-      <section className="py-12 bg-gradient-to-b from-blue-50/20 to-white">
+      {/* What You Actually Get - Optimized Design */}
+      <section className="py-8 sm:py-10 bg-gradient-to-b from-blue-50/20 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div initial={{
@@ -1232,81 +1320,81 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
               Trusted by 1,000+ Clinicians
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Real results from real doctors using S10.AI every day
             </p>
           </div>
 
           {/* Featured Testimonials */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
             {/* Featured Card 1 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" alt="Dr. Mitchell" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
-                <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
+                <div className="flex mb-2 sm:mb-3">
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
-                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
+                <blockquote className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed font-medium">
                   "Cut my documentation time by 70%. I actually get to go home on time now."
                 </blockquote>
-                <div className="mb-3 sm:mb-4">
-                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Robert Mitchell</div>
-                  <div className="text-[#387E89] text-sm sm:text-base">Emergency Medicine</div>
+                <div className="mb-2 sm:mb-3">
+                  <div className="font-semibold text-[#143151] text-sm sm:text-base">Dr. Robert Mitchell</div>
+                  <div className="text-[#387E89] text-xs sm:text-sm">Emergency Medicine</div>
                 </div>
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-2 rounded-full border border-blue-200">
-                  <span className="text-sm font-medium text-blue-700">Saves 3+ hours daily</span>
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-3 py-1.5 rounded-full border border-blue-200">
+                  <span className="text-xs font-medium text-blue-700">Saves 3+ hours daily</span>
                 </div>
               </div>
             </div>
 
             {/* Featured Card 2 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" alt="Dr. Johnson" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
-                <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
+                <div className="flex mb-2 sm:mb-3">
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
-                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
+                <blockquote className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed font-medium">
                   "The AI templates are incredibly accurate. Like having a brilliant scribe who never gets tired."
                 </blockquote>
-                <div className="mb-3 sm:mb-4">
-                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Sarah Johnson</div>
-                  <div className="text-[#387E89] text-sm sm:text-base">Family Medicine</div>
+                <div className="mb-2 sm:mb-3">
+                  <div className="font-semibold text-[#143151] text-sm sm:text-base">Dr. Sarah Johnson</div>
+                  <div className="text-[#387E89] text-xs sm:text-sm">Family Medicine</div>
                 </div>
-                <div className="bg-gradient-to-r from-green-50 to-green-100 px-4 py-2 rounded-full border border-green-200">
-                  <span className="text-sm font-medium text-green-700">99.9% accuracy</span>
+                <div className="bg-gradient-to-r from-green-50 to-green-100 px-3 py-1.5 rounded-full border border-green-200">
+                  <span className="text-xs font-medium text-green-700">99.9% accuracy</span>
                 </div>
               </div>
             </div>
 
             {/* Featured Card 3 */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-4 sm:mb-6 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" alt="Dr. Gonzalez" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
-                <div className="flex mb-3 sm:mb-4">
-                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />)}
+                <div className="flex mb-2 sm:mb-3">
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
-                <blockquote className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed font-medium">
+                <blockquote className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed font-medium">
                   "BRAVO handles all our scheduling. Patient no-shows dropped 40% immediately."
                 </blockquote>
-                <div className="mb-3 sm:mb-4">
-                  <div className="font-semibold text-[#143151] text-base sm:text-lg">Dr. Maria Gonzalez</div>
-                  <div className="text-[#387E89] text-sm sm:text-base">Internal Medicine</div>
+                <div className="mb-2 sm:mb-3">
+                  <div className="font-semibold text-[#143151] text-sm sm:text-base">Dr. Maria Gonzalez</div>
+                  <div className="text-[#387E89] text-xs sm:text-sm">Internal Medicine</div>
                 </div>
-                <div className="bg-gradient-to-r from-purple-50 to-purple-100 px-4 py-2 rounded-full border border-purple-200">
-                  <span className="text-sm font-medium text-purple-700">40% less no-shows</span>
+                <div className="bg-gradient-to-r from-purple-50 to-purple-100 px-3 py-1.5 rounded-full border border-purple-200">
+                  <span className="text-xs font-medium text-purple-700">40% less no-shows</span>
                 </div>
               </div>
             </div>
@@ -1402,11 +1490,11 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
         
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="text-center mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
               Built for Your Practice. <span className="text-blue-200">Ready on Day One.</span>
             </h2>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-blue-100 max-w-2xl mx-auto">
               S10.AI supports 50+ specialties with smart clinical prompts and universal compatibility.
             </p>
           </div>
@@ -1513,14 +1601,14 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
       </section>
 
-      {/* Board Advisor Testimonial Section - Compact */}
-      <section className="py-12 bg-gradient-to-b from-gray-50 to-white">
+      {/* Board Advisor Testimonial Section - Optimized */}
+      <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
               Trusted by Advisors Who've Seen It All
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Leaders from innovative healthcare technology companies back S10.AI
             </p>
           </div>
@@ -1558,8 +1646,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
       </section>
 
-      {/* Final CTA - Enhanced */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
+      {/* Final CTA - Optimized */}
+      <section className="py-10 sm:py-14 lg:py-18 bg-gradient-to-b from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-gradient-to-br from-[#387E89]/5 via-transparent to-[#143151]/5"></div>
@@ -1702,13 +1790,13 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 sm:py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#143151] mb-4">
+          <div className="text-center mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Quick answers to common questions from clinicians
             </p>
           </div>
