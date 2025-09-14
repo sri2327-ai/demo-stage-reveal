@@ -505,48 +505,63 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Detailed Features */}
                 <div className="space-y-4">
                   <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
-                  <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+                  
+                  {/* First Row of Features */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                     {[{
-                    title: "Smart Medical Understanding",
-                    desc: "Understands medical language and context—no second-guessing, no errors",
-                    icon: Brain
-                  }, {
-                    title: "Advanced Coding Support",
-                    desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
-                    icon: Code
-                  }, {
-                    title: "Clinical Intelligence",
-                    desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
-                    icon: Lightbulb
-                  }, {
-                    title: "Pre-Visit Preparation",
-                    desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
-                    icon: ClipboardList
-                  }, {
-                    title: "Smart Edit & Natural Language",
-                    desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
-                    icon: MessageSquare
-                  }, {
-                    title: "Patient Visit Summary",
-                    desc: "Automated patient instructions in plain language, ready to email instantly",
-                    icon: FileText
-                  }, {
-                    title: "100% Customizable",
-                    desc: "Learns your preferences and adapts to your unique workflow and documentation style",
-                    icon: Settings
-                  }, {
-                    title: "Complete Automation",
-                    desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
-                    icon: Zap
-                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group">
-                        <div className="w-6 h-6 bg-gradient-to-br from-green-100 to-emerald-100 rounded-md flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-3 h-3 text-green-600" />
+                      title: "Smart Medical Understanding",
+                      desc: "Understands medical language and context—no second-guessing, no errors",
+                      icon: Brain
+                    }, {
+                      title: "Advanced Coding Support",
+                      desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
+                      icon: Code
+                    }, {
+                      title: "Clinical Intelligence",
+                      desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
+                      icon: Lightbulb
+                    }, {
+                      title: "Pre-Visit Preparation",
+                      desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
+                      icon: ClipboardList
+                    }].map((feature, index) => (
+                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                        <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                          <feature.icon className="w-4 h-4 text-green-600" />
                         </div>
-                        <div className="flex-1">
-                          <h5 className="font-semibold text-[#143151] text-sm mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                          <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Second Row of Features */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {[{
+                      title: "Smart Edit & Natural Language",
+                      desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
+                      icon: MessageSquare
+                    }, {
+                      title: "Patient Visit Summary",
+                      desc: "Automated patient instructions in plain language, ready to email instantly",
+                      icon: FileText
+                    }, {
+                      title: "100% Customizable",
+                      desc: "Learns your preferences and adapts to your unique workflow and documentation style",
+                      icon: Settings
+                    }, {
+                      title: "Complete Automation",
+                      desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
+                      icon: Zap
+                    }].map((feature, index) => (
+                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                        <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                          <feature.icon className="w-4 h-4 text-green-600" />
                         </div>
-                      </div>)}
+                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -625,44 +640,59 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* Detailed Features */}
                 <div className="space-y-4">
                   <h4 className="text-base font-bold text-[#143151] border-b border-gray-200 pb-2">Complete Feature Set</h4>
-                  <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+                  
+                  {/* First Row of Features */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                     {[{
-                    title: "24/7 AI-Powered Patient Interaction",
-                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
-                    icon: MessageCircle
-                  }, {
-                    title: "Seamless Scheduling",
-                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
-                    icon: Calendar
-                  }, {
-                    title: "Help Reduce No-Shows & Boost Revenue",
-                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
-                    icon: TrendingUp
-                  }, {
-                    title: "Revenue Protection",
-                    desc: "Aims to reduce denials through improved data capture and RCM support",
-                    icon: Shield
-                  }, {
-                    title: "Overcome Staffing Shortages",
-                    desc: "AI task assignment with smart delegation to the right person or system",
-                    icon: Users
-                  }, {
-                    title: "Seamless Integration",
-                    desc: "Connects with many common EHR, CRM, and PMS systems",
-                    icon: Plug
-                  }, {
-                    title: "Smarter Referrals",
-                    desc: "Automates aspects of triage & care coordination under clinical guidance",
-                    icon: ArrowRight
-                  }].map((feature, index) => <div key={feature.title} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group">
-                        <div className="w-6 h-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-md flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <feature.icon className="w-3 h-3 text-blue-600" />
+                      title: "24/7 AI-Powered Patient Interaction",
+                      desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
+                      icon: MessageCircle
+                    }, {
+                      title: "Seamless Scheduling",
+                      desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
+                      icon: Calendar
+                    }, {
+                      title: "Help Reduce No-Shows & Boost Revenue",
+                      desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
+                      icon: TrendingUp
+                    }, {
+                      title: "Revenue Protection",
+                      desc: "Aims to reduce denials through improved data capture and RCM support",
+                      icon: Shield
+                    }].map((feature, index) => (
+                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                          <feature.icon className="w-4 h-4 text-blue-600" />
                         </div>
-                        <div className="flex-1">
-                          <h5 className="font-semibold text-[#143151] text-sm mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
-                          <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
+                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Second Row of Features */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {[{
+                      title: "Overcome Staffing Shortages",
+                      desc: "AI task assignment with smart delegation to the right person or system",
+                      icon: Users
+                    }, {
+                      title: "Seamless Integration",
+                      desc: "Connects with many common EHR, CRM, and PMS systems",
+                      icon: Plug
+                    }, {
+                      title: "Smarter Referrals",
+                      desc: "Automates aspects of triage & care coordination under clinical guidance",
+                      icon: ArrowRight
+                    }].map((feature, index) => (
+                      <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                          <feature.icon className="w-4 h-4 text-blue-600" />
                         </div>
-                      </div>)}
+                        <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
+                        <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
