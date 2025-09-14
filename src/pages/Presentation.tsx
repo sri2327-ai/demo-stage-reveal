@@ -1281,8 +1281,8 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <div className="text-xs text-gray-600">Setup time</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-[#387E89]">0</div>
-                  <div className="text-xs text-gray-600">IT changes</div>
+                  <div className="text-lg font-bold text-[#387E89]">99.9%</div>
+                  <div className="text-xs text-gray-600">Accuracy rate</div>
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-bold text-[#387E89]">24/7</div>
