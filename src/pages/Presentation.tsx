@@ -729,6 +729,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </div>
           </div>
 
+          {/* Product Divider */}
+          <div className="flex items-center justify-center my-8 sm:my-12 lg:my-16">
+            <div className="flex items-center w-full max-w-md">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+              <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+                  <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+                  <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+                </div>
+              </div>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+            </div>
+          </div>
+
           {/* BRAVO Section */}
           <div className="py-4 sm:py-6 lg:py-8 scroll-mt-16 mt-4 sm:mt-6 lg:mt-8">
             {/* Header Section - Compact */}
