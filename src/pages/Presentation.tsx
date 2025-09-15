@@ -505,12 +505,14 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           {/* CRUSH Section */}
           <div className="py-4 sm:py-6 lg:py-8 scroll-mt-16">
             {/* Header Section - Compact */}
-            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151]">
+            <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-4 sm:mb-6 lg:mb-8 flex-wrap">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#143151] whitespace-nowrap">
                 CRUSH
               </h3>
-              <p className="text-base sm:text-lg text-[#387E89] font-semibold">Your AI Medical Scribe</p>
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
+              <div className="w-px h-6 bg-gray-300 hidden sm:block"></div>
+              <p className="text-base sm:text-lg text-[#387E89] font-semibold whitespace-nowrap">Your AI Medical Scribe</p>
+              <div className="w-px h-6 bg-gray-300 hidden sm:block"></div>
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm whitespace-nowrap">
                 <CheckCircle className="w-3 h-3" />
                 <span className="hidden sm:inline">99.9% Accurate • HIPAA Compliant</span>
                 <span className="sm:hidden">99.9% Accurate</span>
