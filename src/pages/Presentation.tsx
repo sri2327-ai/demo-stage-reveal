@@ -882,7 +882,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 <div className="space-y-3 mb-6">
                   {[{
                   icon: Clock,
-                  text: "4+ hours daily on documentation"
+                  text: "4-6+ hours daily on documentation"
                 }, {
                   icon: Bell,
                   text: "Constant scheduling interruptions"
