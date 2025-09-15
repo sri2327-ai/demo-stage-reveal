@@ -35,7 +35,12 @@ const CountUp = ({
         }
       };
       animationId = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(animationId);
+      
+      return () => {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+      };
     }
   }, [isInView, end, duration, hasStarted]);
   return <span ref={ref}>{count}</span>;
