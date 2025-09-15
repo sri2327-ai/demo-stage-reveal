@@ -166,7 +166,7 @@ export default function Presentation() {
   // Page summary for voice over
   const pageSummary = `Welcome to S10.AI - The AI That Charts and Staffs So You Don't Have To. 
 
-Healthcare burnout is real. Clinicians spend over 4 hours daily on electronic health records, with 1 in 2 facing burnout and 30% patient no-show rates leaving staff understaffed, overwhelmed, and underpaid.
+Healthcare burnout is real. Clinicians spend 4-6+ hours daily on electronic health records, with 50-60% facing burnout and 15-30% patient no-show rates costing $200-$400 per missed appointment, leaving staff understaffed, overwhelmed, and underpaid.
 
 Meet your AI teammates: CRUSH, our Clinical Documentation AI that generates comprehensive SOAP notes in under 60 seconds with 99.9% accuracy, and BRAVO, our Patient Engagement AI that handles appointment scheduling, follow-ups, and reduces no-shows by 40%.
 
@@ -450,10 +450,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* Problem Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-            <AnimatedStat icon={Clock} value={4} label="Hours spent on EHRs daily" suffix="+" />
-            <AnimatedStat icon={Frown} value={50} label="Clinicians facing burnout" suffix="%" />
+            <AnimatedStat icon={Clock} value={6} label="Hours spent on EHRs daily" suffix="+" />
+            <AnimatedStat icon={Frown} value={60} label="Clinicians facing burnout" suffix="%" />
             <AnimatedStat icon={TrendingDown} value={30} label="Patient no-show rate" suffix="%" />
-            <AnimatedStat icon={DollarSign} value={150} label="Cost per missed appointment" suffix="K" />
+            <AnimatedStat icon={DollarSign} value={200} label="Cost per missed appointment" suffix="–$400" />
           </div>
 
           {/* Impact Cards */}
