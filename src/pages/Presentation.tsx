@@ -8,7 +8,13 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
-const StatDisplay = ({ value, suffix }: { value: string; suffix?: string }) => {
+const StatDisplay = ({
+  value,
+  suffix
+}: {
+  value: string;
+  suffix?: string;
+}) => {
   return <span>{value}{suffix}</span>;
 };
 const AnimatedStat = ({
@@ -402,13 +408,17 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       {/* The Problem Section - Compact Design */}
       <section className="py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 sm:mb-8"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="text-center mb-6 sm:mb-8">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#143151] mb-3 sm:mb-4">
               The Burnout is Real
             </h2>
@@ -427,13 +437,18 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* Impact Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white p-4 sm:p-6 rounded-xl border border-red-100 hover:shadow-lg transition-all duration-300"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5,
+            delay: 0.1
+          }} className="bg-white p-4 sm:p-6 rounded-xl border border-red-100 hover:shadow-lg transition-all duration-300">
               <div className="flex items-start gap-3 mb-3">
                 <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
                   <AlertTriangle className="w-4 h-4 text-red-600" />
@@ -447,13 +462,18 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </p>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-4 sm:p-6 rounded-xl border border-orange-100 hover:shadow-lg transition-all duration-300"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5,
+            delay: 0.2
+          }} className="bg-white p-4 sm:p-6 rounded-xl border border-orange-100 hover:shadow-lg transition-all duration-300">
               <div className="flex items-start gap-3 mb-3">
                 <div className="w-8 h-8 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
                   <TrendingDown className="w-4 h-4 text-orange-600" />
@@ -467,13 +487,18 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </p>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white p-4 sm:p-6 rounded-xl border border-blue-100 hover:shadow-lg transition-all duration-300"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 15
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5,
+            delay: 0.3
+          }} className="bg-white p-4 sm:p-6 rounded-xl border border-blue-100 hover:shadow-lg transition-all duration-300">
               <div className="flex items-start gap-3 mb-3">
                 <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Coffee className="w-4 h-4 text-blue-600" />
@@ -522,31 +547,30 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             {/* Key Stats Grid - Compact */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
               {[{
-                icon: Clock,
-                title: "Under 60 Seconds",
-                desc: "Real-time documentation",
-                color: "blue",
-                gradient: "from-blue-50 to-blue-100"
-              }, {
-                icon: Languages,
-                title: "60+ Languages",
-                desc: "Understands accents & context",
-                color: "green",
-                gradient: "from-green-50 to-emerald-100"
-              }, {
-                icon: Database,
-                title: "100+ EHRs",
-                desc: "No API needed",
-                color: "purple",
-                gradient: "from-purple-50 to-purple-100"
-              }, {
-                icon: Stethoscope,
-                title: "50+ Specialties",
-                desc: "Tailored workflows",
-                color: "orange",
-                gradient: "from-orange-50 to-orange-100"
-              }].map((feature, index) => (
-                <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+              icon: Clock,
+              title: "Under 60 Seconds",
+              desc: "Real-time documentation",
+              color: "blue",
+              gradient: "from-blue-50 to-blue-100"
+            }, {
+              icon: Languages,
+              title: "60+ Languages",
+              desc: "Understands accents & context",
+              color: "green",
+              gradient: "from-green-50 to-emerald-100"
+            }, {
+              icon: Database,
+              title: "100+ EHRs",
+              desc: "No API needed",
+              color: "purple",
+              gradient: "from-purple-50 to-purple-100"
+            }, {
+              icon: Stethoscope,
+              title: "50+ Specialties",
+              desc: "Tailored workflows",
+              color: "orange",
+              gradient: "from-orange-50 to-orange-100"
+            }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
                   <div className="text-center">
                     <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
                       <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
@@ -554,8 +578,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
                     <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             {/* Combined Layout: Animation + Features */}
@@ -574,59 +597,55 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* First Row of Features */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                   {[{
-                    title: "Smart Medical Understanding",
-                    desc: "Understands medical language and context—no second-guessing, no errors",
-                    icon: Brain
-                  }, {
-                    title: "Advanced Coding Support",
-                    desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
-                    icon: Code
-                  }, {
-                    title: "Clinical Intelligence",
-                    desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
-                    icon: Lightbulb
-                  }, {
-                    title: "Pre-Visit Preparation",
-                    desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
-                    icon: ClipboardList
-                  }].map((feature, index) => (
-                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                  title: "Smart Medical Understanding",
+                  desc: "Understands medical language and context—no second-guessing, no errors",
+                  icon: Brain
+                }, {
+                  title: "Advanced Coding Support",
+                  desc: "ICD-10, E/M, HCC and CPT Coding with 100% accuracy and real-time validation",
+                  icon: Code
+                }, {
+                  title: "Clinical Intelligence",
+                  desc: "HCC tracking, quality alerts, clinical decision support, and preventive care prompts built-in",
+                  icon: Lightbulb
+                }, {
+                  title: "Pre-Visit Preparation",
+                  desc: "Smart visit prep with patient background, follow-up items, and last visit summary",
+                  icon: ClipboardList
+                }].map((feature, index) => <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
                       <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
                         <feature.icon className="w-4 h-4 text-green-600" />
                       </div>
                       <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                       <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Second Row of Features */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                   {[{
-                    title: "Smart Edit & Natural Language",
-                    desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
-                    icon: MessageSquare
-                  }, {
-                    title: "Patient Visit Summary",
-                    desc: "Automated patient instructions in plain language, ready to email instantly",
-                    icon: FileText
-                  }, {
-                    title: "100% Customizable",
-                    desc: "Learns your preferences and adapts to your unique workflow and documentation style",
-                    icon: Settings
-                  }, {
-                    title: "Complete Automation",
-                    desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
-                    icon: Zap
-                  }].map((feature, index) => (
-                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                  title: "Smart Edit & Natural Language",
+                  desc: "Make complex edits by dictating requests. Understands natural language like popular AIs",
+                  icon: MessageSquare
+                }, {
+                  title: "Patient Visit Summary",
+                  desc: "Automated patient instructions in plain language, ready to email instantly",
+                  icon: FileText
+                }, {
+                  title: "100% Customizable",
+                  desc: "Learns your preferences and adapts to your unique workflow and documentation style",
+                  icon: Settings
+                }, {
+                  title: "Complete Automation",
+                  desc: "Prescriptions, referrals, labs, and follow-ups—all handled automatically",
+                  icon: Zap
+                }].map((feature, index) => <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
                       <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
                         <feature.icon className="w-4 h-4 text-green-600" />
                       </div>
                       <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                       <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </div>
@@ -652,31 +671,30 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             {/* Key Stats Grid - Compact */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
               {[{
-                icon: Phone,
-                title: "AI Chat & Calls",
-                desc: "Connects with patients 24/7",
-                color: "blue",
-                gradient: "from-blue-50 to-blue-100"
-              }, {
-                icon: Calendar,
-                title: "Smart Scheduling",
-                desc: "Books & manages appointments",
-                color: "green",
-                gradient: "from-green-50 to-emerald-100"
-              }, {
-                icon: Bell,
-                title: "Auto Follow-ups",
-                desc: "Multi-channel reminders",
-                color: "purple",
-                gradient: "from-purple-50 to-purple-100"
-              }, {
-                icon: ClipboardList,
-                title: "Pre-visit Intake",
-                desc: "Handles questionnaires",
-                color: "orange",
-                gradient: "from-orange-50 to-orange-100"
-              }].map((feature, index) => (
-                <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
+              icon: Phone,
+              title: "AI Chat & Calls",
+              desc: "Connects with patients 24/7",
+              color: "blue",
+              gradient: "from-blue-50 to-blue-100"
+            }, {
+              icon: Calendar,
+              title: "Smart Scheduling",
+              desc: "Books & manages appointments",
+              color: "green",
+              gradient: "from-green-50 to-emerald-100"
+            }, {
+              icon: Bell,
+              title: "Auto Follow-ups",
+              desc: "Multi-channel reminders",
+              color: "purple",
+              gradient: "from-purple-50 to-purple-100"
+            }, {
+              icon: ClipboardList,
+              title: "Pre-visit Intake",
+              desc: "Handles questionnaires",
+              color: "orange",
+              gradient: "from-orange-50 to-orange-100"
+            }].map((feature, index) => <div key={feature.title} className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-xl border border-white/50 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm`}>
                   <div className="text-center">
                     <div className={`w-10 h-10 bg-gradient-to-br from-white to-${feature.color}-50 rounded-lg flex items-center justify-center shadow-sm mx-auto mb-2`}>
                       <feature.icon className={`w-5 h-5 text-${feature.color}-600`} />
@@ -684,8 +702,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                     <h4 className="font-bold text-[#143151] text-sm mb-1">{feature.title}</h4>
                     <p className="text-xs text-gray-600 leading-relaxed">{feature.desc}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             {/* Combined Layout: Animation + Features */}
@@ -704,55 +721,51 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                 {/* First Row of Features */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                   {[{
-                    title: "24/7 AI-Powered Patient Interaction",
-                    desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
-                    icon: MessageCircle
-                  }, {
-                    title: "Seamless Scheduling",
-                    desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
-                    icon: Calendar
-                  }, {
-                    title: "Help Reduce No-Shows & Boost Revenue",
-                    desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
-                    icon: TrendingUp
-                  }, {
-                    title: "Revenue Protection",
-                    desc: "Aims to reduce denials through improved data capture and RCM support",
-                    icon: Shield
-                  }].map((feature, index) => (
-                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                  title: "24/7 AI-Powered Patient Interaction",
+                  desc: "AI Chat & Phone Agents automate multilingual patient interactions with 24/7 availability",
+                  icon: MessageCircle
+                }, {
+                  title: "Seamless Scheduling",
+                  desc: "AI-driven booking, rescheduling & reminders that never miss an inquiry",
+                  icon: Calendar
+                }, {
+                  title: "Help Reduce No-Shows & Boost Revenue",
+                  desc: "Smart reminders, follow-ups, and automated workflows minimize cancellations",
+                  icon: TrendingUp
+                }, {
+                  title: "Revenue Protection",
+                  desc: "Aims to reduce denials through improved data capture and RCM support",
+                  icon: Shield
+                }].map((feature, index) => <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
                       <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
                         <feature.icon className="w-4 h-4 text-blue-600" />
                       </div>
                       <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                       <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
 
                 {/* Second Row of Features */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {[{
-                    title: "Overcome Staffing Shortages",
-                    desc: "AI task assignment with smart delegation to the right person or system",
-                    icon: Users
-                  }, {
-                    title: "Seamless Integration",
-                    desc: "Connects with many common EHR, CRM, and PMS systems",
-                    icon: Plug
-                  }, {
-                    title: "Smarter Referrals",
-                    desc: "Automates aspects of triage & care coordination under clinical guidance",
-                    icon: ArrowRight
-                  }].map((feature, index) => (
-                    <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
+                  title: "Overcome Staffing Shortages",
+                  desc: "AI task assignment with smart delegation to the right person or system",
+                  icon: Users
+                }, {
+                  title: "Seamless Integration",
+                  desc: "Connects with many common EHR, CRM, and PMS systems",
+                  icon: Plug
+                }, {
+                  title: "Smarter Referrals",
+                  desc: "Automates aspects of triage & care coordination under clinical guidance",
+                  icon: ArrowRight
+                }].map((feature, index) => <div key={feature.title} className="flex flex-col items-center text-center p-3 rounded-lg hover:bg-white/60 transition-all duration-300 group border border-gray-100">
                       <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
                         <feature.icon className="w-4 h-4 text-blue-600" />
                       </div>
                       <h5 className="font-semibold text-[#143151] text-xs mb-1 group-hover:text-[#387E89] transition-colors">{feature.title}</h5>
                       <p className="text-xs text-gray-600 leading-tight">{feature.desc}</p>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </div>
@@ -952,38 +965,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
 
           {/* Compact CTA */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.3
-        }} viewport={{
-          once: true
-        }} className="text-center">
-            <div className="bg-gradient-to-r from-white/80 to-blue-50/60 backdrop-blur-sm p-6 rounded-2xl border border-blue-200/40 shadow-sm max-w-2xl mx-auto">
-              <h3 className="text-xl font-bold text-[#143151] mb-3">
-                Ready for Your Transformation?
-              </h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Join thousands of clinicians who've transformed their practice workflow.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-md hover:shadow-lg transition-all duration-300 text-sm w-full sm:w-auto">
-                  <Play className="w-4 h-4 mr-2" />
-                  See the Transformation
-                </Button>
-                <Button variant="outline" size={isMobile ? "default" : "lg"} className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm w-full sm:w-auto">
-                  <DollarSign className="w-4 h-4 mr-2" />
-                  Calculate Savings
-                </Button>
-              </div>
-            </div>
-          </motion.div>
+          
         </div>
       </section>
 
