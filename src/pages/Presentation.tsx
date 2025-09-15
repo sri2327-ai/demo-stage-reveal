@@ -455,7 +455,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* Problem Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-            <AnimatedStat icon={Clock} value={6} label="Hours spent on EHRs daily" suffix="+" />
+            <AnimatedStat icon={Clock} value={4} label="Hours spent on EHRs daily" suffix="–6" />
             <AnimatedStat icon={Frown} value={60} label="Clinicians facing burnout" suffix="%" />
             <AnimatedStat icon={TrendingDown} value={30} label="Patient no-show rate" suffix="%" />
             <AnimatedStat icon={DollarSign} value={200} label="Cost per missed appointment" suffix="–$400" />
