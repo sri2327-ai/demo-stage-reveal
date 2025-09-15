@@ -483,6 +483,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       {/* Logo Marquee Section */}
       <LogoMarquee />
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
+
       {/* The Problem Section - Compact Design */}
       <section className="py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -592,6 +607,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
 
       {/* Meet Your AI Teammates - Optimized Layout */}
       <section className="py-6 sm:py-8 lg:py-12 bg-gradient-to-b from-white to-blue-50/30 scroll-mt-16">
@@ -888,6 +918,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
+
       {/* Before vs After - Optimized Design */}
       <section className="py-8 sm:py-12 bg-gradient-to-b from-white via-gray-50/30 to-blue-50/20 relative overflow-hidden">
         {/* Subtle background elements */}
@@ -1061,6 +1106,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
 
       {/* What You Actually Get - Optimized Design */}
       <section className="py-6 sm:py-8 bg-gradient-to-b from-blue-50/20 to-white">
@@ -1367,6 +1427,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
+
       {/* Social Proof Section */}
       <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1512,6 +1587,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
       {/* Logo Marquee */}
       <LogoMarquee />
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
+
       {/* Built for Your Practice Section */}
       <section className="py-8 sm:py-10 bg-gradient-to-br from-[#143151] via-[#1a3b5c] to-[#387E89] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -1631,6 +1721,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
+
       {/* Board Advisor Testimonial Section - Optimized */}
       <section className="py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1675,6 +1780,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
 
       {/* Final CTA - Optimized */}
       <section className="py-8 sm:py-10 bg-gradient-to-b from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
@@ -1818,6 +1938,21 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="flex items-center justify-center py-8 sm:py-12">
+        <div className="flex items-center w-full max-w-md">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+          <div className="px-4 py-2 bg-white rounded-full border-2 border-gray-200 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#387E89] rounded-full"></div>
+              <div className="w-2 h-2 bg-[#143151] rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+        </div>
+      </div>
 
       {/* FAQ Section */}
       <section className="py-6 sm:py-8 bg-white">
