@@ -350,55 +350,35 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
-  return <div className="min-h-screen bg-white scroll-smooth">
-      {/* Transparent Header - Enhanced for mobile */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm border-b border-white/10 safe-area-top">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16">
+  return <div className="min-h-screen bg-white">
+      {/* Transparent Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-white text-lg sm:text-xl font-semibold select-none">S10.AI</h1>
+              <h1 className="text-white text-xl font-semibold">S10.AI</h1>
             </div>
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-4">
               {!elevenLabsApiKey}
-              <button 
-                onClick={handleVoiceOver} 
-                disabled={isLoading} 
-                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 active:bg-white/30 transition-all duration-200 rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] touch-manipulation" 
-                title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}
-                aria-label={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}
-                role="button"
-                tabIndex={0}
-              >
-                {isLoading ? <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" /> : <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />}
-                <span className="hidden sm:inline text-sm">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
+              <button onClick={handleVoiceOver} disabled={isLoading} className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all rounded-lg border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed" title={isLoading ? "Generating audio..." : isPlaying ? "Stop voice over" : "Play page summary"}>
+                {isLoading ? <Volume2 className="w-5 h-5 animate-pulse" /> : isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                <span className="hidden sm:inline">{isLoading ? "Loading..." : isPlaying ? "Stop" : "Listen"}</span>
               </button>
             </div>
           </div>
         </div>
         
-        {showApiKeyInput && <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-3 sm:pb-4">
-            <div className="p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
-              <p className="text-white/80 text-xs sm:text-sm mb-2 sm:mb-3">Enter your ElevenLabs API key for high-quality Liam's American voice:</p>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input 
-                  type="password" 
-                  placeholder="sk_..." 
-                  value={elevenLabsApiKey} 
-                  onChange={e => setElevenLabsApiKey(e.target.value)} 
-                  className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all duration-200 text-sm min-h-[44px]" 
-                  aria-label="ElevenLabs API Key"
-                />
-                <button 
-                  onClick={() => {
-                    if (elevenLabsApiKey) {
-                      setShowApiKeyInput(false);
-                      localStorage.setItem('elevenLabsApiKey', elevenLabsApiKey);
-                    }
-                  }} 
-                  disabled={!elevenLabsApiKey} 
-                  className="px-4 py-2 bg-primary/80 hover:bg-primary active:bg-primary/90 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 min-h-[44px] touch-manipulation whitespace-nowrap"
-                  aria-label="Save API Key"
-                >
+        {showApiKeyInput && <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+            <div className="p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/20">
+              <p className="text-white/80 text-sm mb-3">Enter your ElevenLabs API key for high-quality Liam's American voice:</p>
+              <div className="flex gap-2">
+                <input type="password" placeholder="sk_..." value={elevenLabsApiKey} onChange={e => setElevenLabsApiKey(e.target.value)} className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30" />
+                <button onClick={() => {
+              if (elevenLabsApiKey) {
+                setShowApiKeyInput(false);
+                localStorage.setItem('elevenLabsApiKey', elevenLabsApiKey);
+              }
+            }} disabled={!elevenLabsApiKey} className="px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                   Save
                 </button>
               </div>
@@ -407,21 +387,17 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
           </div>}
       </header>
 
-      {/* Hero Section - Enhanced mobile experience */}
-      <motion.section 
-        style={{ backgroundImage }} 
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950 pt-14 sm:pt-16"
-      >
+      {/* Hero Section */}
+      <motion.section style={{
+      backgroundImage
+    }} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
         <div className="absolute inset-0 z-0">
           <Canvas>
-            <Stars radius={50} count={isMobile ? 1500 : 2500} factor={4} fade speed={2} />
+            <Stars radius={50} count={2500} factor={4} fade speed={2} />
           </Canvas>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-3 sm:px-6 lg:px-8 max-w-6xl mx-auto py-8 sm:py-16"
-          role="main" 
-          aria-label="Hero section"
-        >
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <motion.h1 initial={{
           opacity: 0,
           y: 30
@@ -437,61 +413,27 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             <span className="text-white/90 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light">So You Don't Have To</span>
           </motion.h1>
 
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 w-full max-w-lg mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
-          >
-            <motion.button 
-              style={{ boxShadow, border }}
-              className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base shadow-2xl hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 active:scale-95 w-full sm:w-auto min-h-[48px] touch-manipulation"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              role="button"
-              aria-label="Try S10.AI for free"
-            >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" />
-              Try S10.AI Free
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 1.0
+        }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <motion.button style={{
+            border,
+            boxShadow
+          }} whileHover={{
+            scale: 1.05
+          }} whileTap={{
+            scale: 0.95
+          }} className="group relative flex items-center justify-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-white transition-all hover:bg-white/20 text-lg font-semibold border-white/20 w-full sm:w-auto">
+              Try S10.AI
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
-            <motion.button 
-              style={{ border }}
-              className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 active:scale-95 w-full sm:w-auto min-h-[48px] touch-manipulation"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              role="button"
-              aria-label="Watch product demo"
-            >
-              <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" />
-              Watch Demo
-            </motion.button>
-          </motion.div>
-
-          {/* Stats Section - Improved mobile layout */}
-          <motion.div
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 w-full max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-          >
-            {[
-              { icon: Clock, value: "3+", suffix: " hours", label: "Saved daily per clinician" },
-              { icon: Target, value: "99.9%", suffix: "", label: "Clinical accuracy rate" },
-              { icon: TrendingUp, value: "40%", suffix: "", label: "Reduction in no-shows" },
-              { icon: Heart, value: "95%", suffix: "", label: "Patient satisfaction" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center p-3 sm:p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/15 transition-all duration-300">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 bg-white/20 rounded-lg flex items-center justify-center">
-                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">
-                  {stat.value}{stat.suffix}
-                </div>
-                <div className="text-xs sm:text-sm text-blue-200 leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </motion.div>
 
           {/* Feature indicators */}
@@ -916,27 +858,16 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto">
                 See how CRUSH and BRAVO can transform your practice workflow and give you back precious time to focus on patient care.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
-                <Button 
-                  size={isMobile ? "default" : "lg"} 
-                  className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base w-full sm:w-auto min-h-[48px] touch-manipulation"
-                  role="button"
-                  aria-label="Calculate your return on investment"
-                >
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+                <Button size={isMobile ? "default" : "lg"} className="bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base w-full sm:w-auto">
                   <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Calculate Your ROI
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size={isMobile ? "default" : "lg"} 
-                  className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm sm:text-base w-full sm:w-auto min-h-[48px] touch-manipulation"
-                  role="button"
-                  aria-label="Watch product demonstration"
-                >
+                <Button variant="outline" size={isMobile ? "default" : "lg"} className="border-[#387E89]/30 text-[#143151] hover:bg-[#387E89]/10 text-sm sm:text-base w-full sm:w-auto">
                   <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Watch Demo
                 </Button>
-              </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1433,10 +1364,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </p>
           </div>
 
-          {/* Testimonials Grid - Enhanced for mobile */}
+          {/* Featured Testimonials */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
             {/* Featured Card 1 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 touch-manipulation">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img src="/lovable-uploads/6625dda1-7581-4dcf-9922-036bb51f7c8a.png" alt="Dr. Mitchell" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
@@ -1458,14 +1389,14 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </div>
 
             {/* Featured Card 2 - Video Testimonial */}
-            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 touch-manipulation">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <VideoTestimonial />
               </div>
             </div>
 
             {/* Featured Card 3 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 touch-manipulation">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
                   <img src="/lovable-uploads/b5b63f6f-c3a1-43d8-a7d8-0e6bf2390c02.png" alt="Dr. Gonzalez" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
@@ -1487,7 +1418,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             </div>
           </div>
 
-          {/* Additional Testimonials Grid - Better mobile spacing */}
+          {/* Additional Testimonials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-6">
             {[{
             image: "/lovable-uploads/bef17fd5-1e97-4132-b86f-8ed2851b3444.png",
@@ -1513,9 +1444,9 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
             specialty: "Emergency Medicine",
             quote: "Voice recognition works perfectly even in our noisy ER environment.",
             highlight: "Works anywhere"
-          }].map((testimonial, index) => <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300 touch-manipulation">
+          }].map((testimonial, index) => <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#387E89]/20 hover:ring-[#387E89]/40 transition-all duration-300">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#387E89]/20 hover:ring-[#387E89]/40 transition-all duration-300">
                     <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1539,23 +1470,23 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>)}
           </div>
 
-          {/* Trust Indicators - Improved mobile layout */}
+          {/* Trust Indicators */}
           <div className="text-center">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-8 bg-gray-50 rounded-2xl px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 bg-gray-50 rounded-2xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
               <div className="text-center">
-                <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">1,000+</div>
+                <div className="text-xl lg:text-2xl font-bold text-[#143151]">1,000+</div>
                 <div className="text-xs sm:text-sm text-gray-600">Active Clinicians</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">99.9%</div>
+                <div className="text-xl lg:text-2xl font-bold text-[#143151]">99.9%</div>
                 <div className="text-xs sm:text-sm text-gray-600">Accuracy Rate</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">50+</div>
+                <div className="text-xl lg:text-2xl font-bold text-[#143151]">50+</div>
                 <div className="text-xs sm:text-sm text-gray-600">Medical Specialties</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#143151]">HIPAA</div>
+                <div className="text-xl lg:text-2xl font-bold text-[#143151]">HIPAA</div>
                 <div className="text-xs sm:text-sm text-gray-600">Compliant</div>
               </div>
             </div>
