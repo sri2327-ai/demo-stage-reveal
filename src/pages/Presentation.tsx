@@ -8,53 +8,17 @@ import { Heart, Clock, Users, Shield, TrendingUp, Zap, CheckCircle, ArrowRight, 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedCRUSH } from '@/components/AnimatedCRUSH';
 import { AnimatedBRAVO } from '@/components/AnimatedBRAVO';
-const CountUp = ({
-  end,
-  duration = 2
-}: {
-  end: number;
-  duration?: number;
-}) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true
-  });
-  useEffect(() => {
-    if (isInView && !hasStarted) {
-      setHasStarted(true);
-      let startTime: number;
-      let animationId: number;
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-        setCount(Math.floor(progress * end));
-        if (progress < 1) {
-          animationId = requestAnimationFrame(animate);
-        }
-      };
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    }
-  }, [isInView, end, duration, hasStarted]);
-  return <span ref={ref}>{count}</span>;
+const StatDisplay = ({ value, suffix }: { value: string; suffix?: string }) => {
+  return <span>{value}{suffix}</span>;
 };
 const AnimatedStat = ({
   icon: Icon,
-  value,
-  label,
-  suffix = ""
+  displayValue,
+  label
 }: {
   icon: any;
-  value: number;
+  displayValue: string;
   label: string;
-  suffix?: string;
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -82,7 +46,7 @@ const AnimatedStat = ({
         <Icon className="w-8 h-8 text-white" />
       </motion.div>
       <div className="text-3xl sm:text-4xl font-bold text-[#143151] mb-2">
-        <CountUp end={value} />{suffix}
+        <StatDisplay value={displayValue} />
       </div>
       <div className="text-sm text-gray-600">{label}</div>
     </motion.div>;
@@ -455,10 +419,10 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
 
           {/* Problem Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-            <AnimatedStat icon={Clock} value={4} label="Hours spent on EHRs daily" suffix="–6" />
-            <AnimatedStat icon={Frown} value={60} label="Clinicians facing burnout" suffix="%" />
-            <AnimatedStat icon={TrendingDown} value={30} label="Patient no-show rate" suffix="%" />
-            <AnimatedStat icon={DollarSign} value={200} label="Cost per missed appointment" suffix="–$400" />
+            <AnimatedStat icon={Clock} displayValue="4–6+" label="Hours spent on EHRs daily" />
+            <AnimatedStat icon={Frown} displayValue="50–60%" label="Clinicians facing burnout" />
+            <AnimatedStat icon={TrendingDown} displayValue="15–30%" label="Patient no-show rate" />
+            <AnimatedStat icon={DollarSign} displayValue="$200–$400" label="Cost per missed appointment" />
           </div>
 
           {/* Impact Cards */}
