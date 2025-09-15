@@ -1310,11 +1310,26 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
               </div>
             </div>
 
-            {/* Featured Card 2 */}
+            {/* Featured Card 2 - Video Testimonial */}
             <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 ring-4 ring-[#387E89]/10 hover:ring-[#387E89]/20 transition-all duration-300">
-                  <img src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" alt="Dr. Johnson" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                {/* Video Placeholder */}
+                <div className="relative w-full aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300">
+                  <img 
+                    src="/lovable-uploads/6a66a6c9-902e-410b-9e57-1d7f0321b3ae.png" 
+                    alt="Dr. Sarah Johnson Video Testimonial" 
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-all duration-300">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300 shadow-lg">
+                      <Play className="w-5 h-5 sm:w-6 sm:h-6 text-[#387E89] ml-0.5" fill="currentColor" />
+                    </div>
+                  </div>
+                  {/* Video Duration */}
+                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                    2:15
+                  </div>
                 </div>
                 <div className="flex mb-2 sm:mb-3">
                   {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />)}
@@ -1327,7 +1342,7 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
                   <div className="text-[#387E89] text-xs sm:text-sm">Family Medicine</div>
                 </div>
                 <div className="bg-gradient-to-r from-green-50 to-green-100 px-3 py-1.5 rounded-full border border-green-200">
-                  <span className="text-xs font-medium text-green-700">99.9% accuracy</span>
+                  <span className="text-xs font-medium text-green-700">Watch Video Testimonial</span>
                 </div>
               </div>
             </div>
