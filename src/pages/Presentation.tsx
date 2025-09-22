@@ -398,6 +398,17 @@ Join leading healthcare organizations who trust S10.AI to transform their practi
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-6"
+          >
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">
+              #1 Customization Leader
+            </span>
+          </motion.div>
+          
           <motion.h1 initial={{
           opacity: 0,
           y: 30
