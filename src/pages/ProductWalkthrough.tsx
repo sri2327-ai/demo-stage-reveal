@@ -282,6 +282,220 @@ const ProductWalkthrough: React.FC = () => {
     support: false
   });
 
+  // Receptionist clinic configuration
+  const [clinicConfig, setClinicConfig] = useState({
+    clinicName: "Sunrise Family Health",
+    providerName: "Dr. Emily Carter, MD",
+    specialty: "Family Medicine",
+    address: "1245 Oak Street, Suite 200, Austin, TX 78704",
+    mainPhone: "+1 (512) 555-0142",
+    afterHoursPhone: "+1 (512) 555-0188",
+    email: "frontdesk@sunrisefh.com",
+    hours: "Mon–Fri 8:00 AM – 6:00 PM • Sat 9:00 AM – 1:00 PM",
+    timezone: "America/Chicago",
+    languages: "English, Spanish, Vietnamese",
+    voice: "Aria – Warm, Female (en-US)",
+    greeting: "Thank you for calling Sunrise Family Health, this is Aria, your virtual receptionist. How may I help you today?",
+    transferNumber: "+1 (512) 555-0150",
+    insuranceAccepted: "Aetna, BCBS, Cigna, Humana, Medicare, UHC",
+    appointmentTypes: "New Patient, Follow-up, Annual Physical, Telehealth, Sick Visit",
+    refillPolicy: "Allow refills for chronic medications with active Rx in last 12 months. Escalate controlled substances.",
+    emergencyProtocol: "If patient mentions chest pain, stroke symptoms, or suicidal ideation → instruct to call 911 immediately and notify on-call provider."
+  });
+  const testPhoneNumber = "+1 (737) 209-AI10";
+  const [isTestCalling, setIsTestCalling] = useState(false);
+
+  // Call logs sample data
+  type CallLog = {
+    id: string;
+    direction: "inbound" | "outbound";
+    patientName: string;
+    mrn: string;
+    phone: string;
+    dateTime: string;
+    duration: string;
+    summary: string;
+    intent: string;
+    status: "completed" | "transferred" | "voicemail" | "missed";
+    actions: { type: "refill" | "appointment" | "followup" | "message" | "transfer" | "intake"; label: string; status: "triggered" | "scheduled" | "pending" | "sent" | "completed" }[];
+    sentiment: "positive" | "neutral" | "negative";
+    transcript: { speaker: "AI" | "Patient" | "Provider"; text: string; ts: string }[];
+  };
+  const callLogs: CallLog[] = [
+    {
+      id: "CL-1042",
+      direction: "inbound",
+      patientName: "Sarah Johnson",
+      mrn: "MRN-12345",
+      phone: "+1 (512) 555-0199",
+      dateTime: "Today • 9:42 AM",
+      duration: "3m 28s",
+      summary: "Patient requested a refill for Metformin 500mg. Verified active prescription on file (last filled 6 weeks ago). Refill request sent to Dr. Carter for approval. Patient also confirmed Tuesday follow-up appointment.",
+      intent: "Prescription Refill",
+      status: "completed",
+      actions: [
+        { type: "refill", label: "Refill request: Metformin 500mg", status: "triggered" },
+        { type: "appointment", label: "Confirmed: Tue, Dec 17 • 2:15 PM", status: "completed" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health, this is Aria. How may I help you today?", ts: "0:00" },
+        { speaker: "Patient", text: "Hi, I need to refill my Metformin prescription.", ts: "0:06" },
+        { speaker: "AI", text: "I can help with that. Can I confirm your date of birth?", ts: "0:10" },
+        { speaker: "Patient", text: "March 14, 1985.", ts: "0:14" },
+        { speaker: "AI", text: "Thanks Sarah. I see Metformin 500mg twice daily, last filled six weeks ago. I'll send a refill request to Dr. Carter for approval — you'll receive a text once it's sent to your pharmacy.", ts: "0:22" },
+        { speaker: "Patient", text: "Perfect. Also can you confirm my appointment on Tuesday?", ts: "0:38" },
+        { speaker: "AI", text: "Yes, you're confirmed for Tuesday, December 17th at 2:15 PM with Dr. Carter. Anything else?", ts: "0:44" },
+        { speaker: "Patient", text: "No that's all, thank you.", ts: "0:55" }
+      ]
+    },
+    {
+      id: "CL-1041",
+      direction: "outbound",
+      patientName: "Robert Chen",
+      mrn: "MRN-13579",
+      phone: "+1 (512) 555-0177",
+      dateTime: "Today • 9:15 AM",
+      duration: "2m 14s",
+      summary: "Post-visit follow-up call after cardiology consult. Patient reports feeling better, tolerating new medication. No side effects. Scheduled 6-week follow-up.",
+      intent: "Post-Visit Follow-up",
+      status: "completed",
+      actions: [
+        { type: "followup", label: "Follow-up appointment scheduled: Jan 31, 10:00 AM", status: "scheduled" },
+        { type: "message", label: "Care summary sent via SMS", status: "sent" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Hi Robert, this is Aria from Dr. Carter's office calling to check in after your visit last week. Is now a good time?", ts: "0:00" },
+        { speaker: "Patient", text: "Yes, go ahead.", ts: "0:08" },
+        { speaker: "AI", text: "How are you feeling on the new medication?", ts: "0:11" },
+        { speaker: "Patient", text: "Pretty good actually, no side effects.", ts: "0:15" },
+        { speaker: "AI", text: "Great. Dr. Carter recommends a 6-week follow-up. I have January 31st at 10 AM available.", ts: "0:24" },
+        { speaker: "Patient", text: "That works.", ts: "0:38" },
+        { speaker: "AI", text: "Booked. You'll get a text confirmation shortly.", ts: "0:42" }
+      ]
+    },
+    {
+      id: "CL-1040",
+      direction: "inbound",
+      patientName: "Maria Garcia",
+      mrn: "MRN-98765",
+      phone: "+1 (512) 555-0124",
+      dateTime: "Today • 8:51 AM",
+      duration: "1m 47s",
+      summary: "New patient inquiry about scheduling first visit. Verified insurance (BCBS) accepted. Collected demographics. New patient appointment scheduled.",
+      intent: "New Patient Scheduling",
+      status: "completed",
+      actions: [
+        { type: "intake", label: "New patient intake form sent via email", status: "sent" },
+        { type: "appointment", label: "New patient visit: Mon, Dec 23 • 10:30 AM", status: "scheduled" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health. How may I help you?", ts: "0:00" },
+        { speaker: "Patient", text: "Hola, I'd like to become a new patient.", ts: "0:05" },
+        { speaker: "AI", text: "¡Claro! I can help. Do you have insurance?", ts: "0:09" },
+        { speaker: "Patient", text: "Yes, Blue Cross Blue Shield.", ts: "0:14" },
+        { speaker: "AI", text: "Perfect, we accept BCBS. Earliest new patient slot is Monday, December 23rd at 10:30 AM.", ts: "0:18" },
+        { speaker: "Patient", text: "That works for me.", ts: "0:30" },
+        { speaker: "AI", text: "Great, I'll send the intake forms to your email.", ts: "0:34" }
+      ]
+    },
+    {
+      id: "CL-1039",
+      direction: "inbound",
+      patientName: "Unknown Caller",
+      mrn: "—",
+      phone: "+1 (512) 555-0110",
+      dateTime: "Today • 8:12 AM",
+      duration: "0m 48s",
+      summary: "Caller asked about office hours and insurance accepted. Provided info and offered to schedule. Caller will call back.",
+      intent: "General Inquiry",
+      status: "completed",
+      actions: [
+        { type: "message", label: "Office info SMS sent", status: "sent" }
+      ],
+      sentiment: "neutral",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health. How may I help you?", ts: "0:00" },
+        { speaker: "Patient", text: "What are your hours and what insurance do you take?", ts: "0:05" },
+        { speaker: "AI", text: "We're open Mon–Fri 8 AM to 6 PM and Saturday 9 to 1. We accept Aetna, BCBS, Cigna, Humana, Medicare and UHC.", ts: "0:09" },
+        { speaker: "Patient", text: "Thanks, I'll call back.", ts: "0:28" }
+      ]
+    },
+    {
+      id: "CL-1038",
+      direction: "outbound",
+      patientName: "James Wilson",
+      mrn: "MRN-99001",
+      phone: "+1 (512) 555-0166",
+      dateTime: "Yesterday • 4:30 PM",
+      duration: "1m 12s",
+      summary: "Appointment reminder call for tomorrow's orthopedic follow-up. Patient confirmed attendance.",
+      intent: "Appointment Reminder",
+      status: "completed",
+      actions: [
+        { type: "appointment", label: "Appointment confirmed: Tomorrow • 11:00 AM", status: "completed" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Hi James, Aria from Dr. Carter's office. Reminder for your appointment tomorrow at 11 AM.", ts: "0:00" },
+        { speaker: "Patient", text: "Got it, I'll be there.", ts: "0:14" }
+      ]
+    },
+    {
+      id: "CL-1037",
+      direction: "inbound",
+      patientName: "Anna Petrov",
+      mrn: "MRN-12346",
+      phone: "+1 (512) 555-0133",
+      dateTime: "Yesterday • 2:08 PM",
+      duration: "4m 02s",
+      summary: "Patient called with urgent concern about pregnancy symptoms. Triaged as high priority — transferred to on-call nurse.",
+      intent: "Clinical Triage",
+      status: "transferred",
+      actions: [
+        { type: "transfer", label: "Transferred to on-call nurse", status: "completed" },
+        { type: "message", label: "Provider notified via secure message", status: "sent" }
+      ],
+      sentiment: "negative",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling. How may I help?", ts: "0:00" },
+        { speaker: "Patient", text: "I'm 28 weeks pregnant and having some bleeding.", ts: "0:05" },
+        { speaker: "AI", text: "I understand, this needs immediate attention. I'm transferring you to our on-call nurse right now and notifying Dr. Carter. Please stay on the line.", ts: "0:09" }
+      ]
+    },
+    {
+      id: "CL-1036",
+      direction: "inbound",
+      patientName: "David Kim",
+      mrn: "MRN-55667",
+      phone: "+1 (512) 555-0155",
+      dateTime: "Yesterday • 11:22 AM",
+      duration: "0m 22s",
+      summary: "Caller hung up before connecting. Voicemail not left.",
+      intent: "Missed",
+      status: "missed",
+      actions: [
+        { type: "message", label: "Auto-callback scheduled", status: "pending" }
+      ],
+      sentiment: "neutral",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health…", ts: "0:00" }
+      ]
+    }
+  ];
+  const [callFilter, setCallFilter] = useState<"all" | "inbound" | "outbound">("all");
+  const [callSearch, setCallSearch] = useState("");
+  const [selectedCall, setSelectedCall] = useState<CallLog | null>(null);
+  const filteredCallLogs = useMemo(() => {
+    return callLogs.filter(c => {
+      if (callFilter !== "all" && c.direction !== callFilter) return false;
+      if (callSearch && !`${c.patientName} ${c.intent} ${c.summary} ${c.phone}`.toLowerCase().includes(callSearch.toLowerCase())) return false;
+      return true;
+    });
+  }, [callFilter, callSearch]);
+
   // Automation toggles  
   const [automations, setAutomations] = useState({
     patientInstructions: true,
