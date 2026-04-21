@@ -3482,6 +3482,11 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
                 </div>
 
+                <div className="mt-8 mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Capabilities</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Toggle the workflows your AI receptionist should handle.</p>
+                </div>
+                <div className="grid gap-6 lg:grid-cols-2">
                   {[{
                   key: 'followups',
                   title: "Follow-up Call Automation",
