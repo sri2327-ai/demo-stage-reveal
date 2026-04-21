@@ -3563,6 +3563,211 @@ const ProductWalkthrough: React.FC = () => {
               </div>
             </section>
 
+            {/* AI Receptionist – Call Logs Section */}
+            <section id="agent-calls" className={`screen ${active === "agent-calls" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+                <div>
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
+                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-white" aria-hidden />
+                    </div>
+                    <span className="text-gray-900 min-w-0 truncate">Call Logs</span>
+                  </h2>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Every inbound and outbound call handled by your AI receptionist — with full transcripts, AI summaries, intents and triggered actions.</p>
+                </div>
+
+                {/* KPI strip */}
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    { label: "Total calls today", value: "47", sub: "+12% vs yesterday", icon: Phone },
+                    { label: "Inbound", value: "32", sub: "85% AI-handled", icon: PhoneIncoming },
+                    { label: "Outbound", value: "15", sub: "Follow-ups & reminders", icon: PhoneOutgoing },
+                    { label: "Actions triggered", value: "23", sub: "Refills • Bookings • Transfers", icon: Sparkles }
+                  ].map(k => (
+                    <Card key={k.label} className="border">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="text-[10px] sm:text-xs uppercase tracking-wide text-muted-foreground font-semibold">{k.label}</div>
+                          <k.icon className="h-3.5 w-3.5 text-[#387E89]" />
+                        </div>
+                        <div className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{k.value}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{k.sub}</div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Filters */}
+                <div className="mt-5 flex flex-col sm:flex-row gap-2 sm:items-center">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                    <Input className="pl-9 h-9" placeholder="Search by patient, phone or intent…" value={callSearch} onChange={e => setCallSearch(e.target.value)} />
+                  </div>
+                  <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                    {[
+                      { key: "all", label: "All", icon: List },
+                      { key: "inbound", label: "Inbound", icon: PhoneIncoming },
+                      { key: "outbound", label: "Outbound", icon: PhoneOutgoing }
+                    ].map(t => (
+                      <button key={t.key} onClick={() => setCallFilter(t.key as any)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition ${callFilter === t.key ? "bg-white shadow text-[#143151]" : "text-muted-foreground hover:text-gray-900"}`}>
+                        <t.icon className="h-3.5 w-3.5" />
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Call list */}
+                <div className="mt-4 space-y-3">
+                  {filteredCallLogs.length === 0 && (
+                    <div className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">No calls match your filters.</div>
+                  )}
+                  {filteredCallLogs.map(call => {
+                    const statusColor = call.status === "completed" ? "bg-green-100 text-green-700 border-green-200"
+                      : call.status === "transferred" ? "bg-amber-100 text-amber-700 border-amber-200"
+                      : call.status === "voicemail" ? "bg-blue-100 text-blue-700 border-blue-200"
+                      : "bg-gray-100 text-gray-700 border-gray-200";
+                    const sentimentColor = call.sentiment === "positive" ? "text-green-600" : call.sentiment === "negative" ? "text-red-600" : "text-gray-500";
+                    const DirIcon = call.direction === "inbound" ? PhoneIncoming : PhoneOutgoing;
+                    return (
+                      <Card key={call.id} className="border hover:shadow-md transition-shadow">
+                        <CardContent className="p-3 sm:p-4">
+                          <div className="flex flex-col lg:flex-row lg:items-start gap-3 lg:gap-4">
+                            <div className="flex items-start gap-3 flex-1 min-w-0">
+                              <div className={`h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 ${call.direction === "inbound" ? "bg-blue-100 text-blue-700" : "bg-purple-100 text-purple-700"}`}>
+                                <DirIcon className="h-5 w-5" />
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="font-semibold text-gray-900 text-sm sm:text-base truncate">{call.patientName}</span>
+                                  <span className="text-[10px] text-muted-foreground">{call.mrn}</span>
+                                  <span className={`px-2 py-0.5 rounded-full border text-[10px] font-semibold uppercase tracking-wide ${statusColor}`}>{call.status}</span>
+                                  <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium capitalize">{call.direction}</span>
+                                </div>
+                                <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground flex-wrap">
+                                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{call.dateTime}</span>
+                                  <span>•</span>
+                                  <span>{call.duration}</span>
+                                  <span>•</span>
+                                  <span>{call.phone}</span>
+                                  <span>•</span>
+                                  <span className={sentimentColor}>● {call.sentiment}</span>
+                                </div>
+                                <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#387E89]/10 text-[#143151] text-[11px] font-medium">
+                                  <Sparkles className="h-3 w-3" />
+                                  {call.intent}
+                                </div>
+                                <p className="mt-2 text-xs sm:text-sm text-gray-700 line-clamp-2">{call.summary}</p>
+                                {call.actions.length > 0 && (
+                                  <div className="mt-2 flex flex-wrap gap-1.5">
+                                    {call.actions.map((a, i) => {
+                                      const aIcon = a.type === "refill" ? Pill : a.type === "appointment" || a.type === "followup" ? CalendarCheck : a.type === "transfer" ? PhoneCall : a.type === "intake" ? FileText : MessageSquare;
+                                      const Ai = aIcon;
+                                      const color = a.status === "triggered" ? "bg-orange-50 border-orange-200 text-orange-700"
+                                        : a.status === "scheduled" ? "bg-blue-50 border-blue-200 text-blue-700"
+                                        : a.status === "completed" ? "bg-green-50 border-green-200 text-green-700"
+                                        : a.status === "sent" ? "bg-cyan-50 border-cyan-200 text-cyan-700"
+                                        : "bg-gray-50 border-gray-200 text-gray-700";
+                                      return (
+                                        <span key={i} className={`inline-flex items-center gap-1 px-2 py-1 rounded-md border text-[11px] font-medium ${color}`}>
+                                          <Ai className="h-3 w-3" />
+                                          {a.label}
+                                          <span className="ml-1 text-[9px] uppercase opacity-70">{a.status}</span>
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex lg:flex-col gap-2 flex-shrink-0">
+                              <Button size="sm" variant="outline" className="rounded-lg text-xs" onClick={() => setSelectedCall(call)}>
+                                <Eye className="h-3.5 w-3.5 mr-1.5" />
+                                Transcript
+                              </Button>
+                              <Button size="sm" variant="ghost" className="rounded-lg text-xs">
+                                <Play className="h-3.5 w-3.5 mr-1.5" />
+                                Play
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Transcript Dialog */}
+              <AlertDialog open={!!selectedCall} onOpenChange={(o) => !o && setSelectedCall(null)}>
+                <AlertDialogContent className="max-w-2xl max-h-[85vh] overflow-hidden flex flex-col">
+                  <AlertDialogHeader>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <AlertDialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+                          {selectedCall && (selectedCall.direction === "inbound" ? <PhoneIncoming className="h-4 w-4 text-blue-600" /> : <PhoneOutgoing className="h-4 w-4 text-purple-600" />)}
+                          {selectedCall?.patientName} • {selectedCall?.intent}
+                        </AlertDialogTitle>
+                        <AlertDialogDescription className="text-xs mt-1">
+                          {selectedCall?.dateTime} • {selectedCall?.duration} • {selectedCall?.phone}
+                        </AlertDialogDescription>
+                      </div>
+                      <button onClick={() => setSelectedCall(null)} className="p-1 rounded-md hover:bg-gray-100 flex-shrink-0">
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </AlertDialogHeader>
+
+                  {selectedCall && (
+                    <div className="overflow-y-auto flex-1 -mx-6 px-6">
+                      <div className="rounded-lg bg-[#387E89]/5 border border-[#387E89]/20 p-3 mb-4">
+                        <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase text-[#143151] mb-1">
+                          <Sparkles className="h-3 w-3" /> AI Summary
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-800">{selectedCall.summary}</p>
+                      </div>
+
+                      {selectedCall.actions.length > 0 && (
+                        <div className="mb-4">
+                          <div className="text-[11px] font-semibold uppercase text-gray-700 mb-2">Triggered Actions</div>
+                          <div className="space-y-1.5">
+                            {selectedCall.actions.map((a, i) => (
+                              <div key={i} className="flex items-center justify-between p-2 rounded-md bg-gray-50 border text-xs">
+                                <span className="font-medium text-gray-800">{a.label}</span>
+                                <span className="px-2 py-0.5 rounded-full bg-white border text-[10px] uppercase font-semibold text-gray-700">{a.status}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="text-[11px] font-semibold uppercase text-gray-700 mb-2">Full Transcript</div>
+                      <div className="space-y-2">
+                        {selectedCall.transcript.map((t, i) => (
+                          <div key={i} className={`flex gap-2 ${t.speaker === "AI" ? "" : "flex-row-reverse"}`}>
+                            <div className={`flex-shrink-0 h-7 w-7 rounded-full flex items-center justify-center text-[10px] font-bold ${t.speaker === "AI" ? "bg-[#387E89] text-white" : t.speaker === "Patient" ? "bg-gray-200 text-gray-700" : "bg-amber-200 text-amber-800"}`}>
+                              {t.speaker === "AI" ? "AI" : t.speaker === "Patient" ? "P" : "Dr"}
+                            </div>
+                            <div className={`max-w-[80%] rounded-lg px-3 py-2 text-xs ${t.speaker === "AI" ? "bg-[#387E89]/10 text-gray-900" : "bg-gray-100 text-gray-900"}`}>
+                              <div className="text-[9px] uppercase opacity-60 mb-0.5">{t.speaker} • {t.ts}</div>
+                              {t.text}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <AlertDialogFooter className="border-t pt-3 mt-2">
+                    <AlertDialogCancel onClick={() => setSelectedCall(null)}>Close</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => { setSelectedCall(null); toast({ title: "Sent to provider", description: "Transcript shared via secure message." }); }}>
+                      Send to provider
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </section>
+
             {/* Dashboard Section */}
             <section id="dashboard" className={`screen ${active === "dashboard" ? "" : "hidden"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
