@@ -252,7 +252,7 @@ const agentMix = [{
   color: "#64748b"
 }];
 const ProductWalkthrough: React.FC = () => {
-  const [active, setActive] = useState<string>(sections[0].id);
+  const [active, setActive] = useState<string>("setup");
   const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [appointments] = useState<Appointment[]>(defaultAppointments);
