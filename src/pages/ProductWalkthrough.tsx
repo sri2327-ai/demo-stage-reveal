@@ -590,32 +590,40 @@ const ProductWalkthrough: React.FC = () => {
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
           <ul className="nav-list">
-            {sections.map(s => {
-            const Icon = iconById[s.id];
-            return <li key={s.id} className="nav-item">
-                  <div className="relative">
-                    <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
-                  console.log('Hover on', s.id, s.description);
-                  setActiveTooltip(s.id);
-                }} onMouseLeave={() => {
-                  console.log('Leave', s.id);
-                  setActiveTooltip(null);
-                }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description} // For mobile tooltip
-                >
-                      {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
-                      <span className="nav-text">{s.label}</span>
-                    </button>
-                    
-                    {/* Desktop Tooltip */}
-                    {activeTooltip === s.id && <div className="tooltip-container">
-                        <div className="tooltip-content">
-                          <div className="tooltip-title">{s.label}</div>
-                          <div className="tooltip-description">{s.description}</div>
-                        </div>
-                      </div>}
-                  </div>
-                </li>;
-          })}
+            {productGroups.map((group, gIdx) => {
+              const groupSections = sections.filter(s => s.product === group.product);
+              const isComingSoon = groupSections.length === 0;
+              return (
+                <React.Fragment key={group.id}>
+                  {gIdx > 0 && <li className="nav-group-divider" aria-hidden />}
+                  <li className="nav-group-label">
+                    <span className="nav-group-text">{group.label}</span>
+                    {isComingSoon && <span className="nav-group-badge">Soon</span>}
+                  </li>
+                  {groupSections.map(s => {
+                    const Icon = iconById[s.id];
+                    return <li key={s.id} className="nav-item">
+                      <div className="relative">
+                        <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
+                          setActiveTooltip(s.id);
+                        }} onMouseLeave={() => {
+                          setActiveTooltip(null);
+                        }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description}>
+                          {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
+                          <span className="nav-text">{s.label}</span>
+                        </button>
+                        {activeTooltip === s.id && <div className="tooltip-container">
+                          <div className="tooltip-content">
+                            <div className="tooltip-title">{s.label}</div>
+                            <div className="tooltip-description">{s.description}</div>
+                          </div>
+                        </div>}
+                      </div>
+                    </li>;
+                  })}
+                </React.Fragment>
+              );
+            })}
           </ul>
         </aside>
 
