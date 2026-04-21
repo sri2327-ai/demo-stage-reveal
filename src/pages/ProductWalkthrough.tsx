@@ -21,36 +21,51 @@ import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
   id: "setup",
   label: "Setup",
-  description: "Configure your note format and connect to your EHR system"
+  description: "Configure your note format and connect to your EHR system",
+  product: "scribe"
 }, {
   id: "schedule",
   label: "Schedule",
-  description: "View and manage appointments from multiple systems"
+  description: "View and manage appointments from multiple systems",
+  product: "scribe"
 }, {
   id: "capture",
   label: "Capture",
-  description: "Record patient encounters with AI-powered transcription"
+  description: "Record patient encounters with AI-powered transcription",
+  product: "scribe"
 }, {
   id: "coding",
   label: "Coding",
-  description: "Review and validate AI-generated medical codes"
+  description: "Review and validate AI-generated medical codes",
+  product: "scribe"
 }, {
   id: "send",
   label: "Send to EHR",
-  description: "Securely send documentation to your electronic health record"
-}, {
-  id: "automations",
-  label: "Automations",
-  description: "Configure workflow automations to streamline operations"
+  description: "Securely send documentation to your electronic health record",
+  product: "scribe"
 }, {
   id: "agent",
   label: "AI Agent",
-  description: "Set up AI agents for patient communication and support"
+  description: "Set up AI agents for patient communication and support",
+  product: "receptionist"
+}, {
+  id: "automations",
+  label: "Automations",
+  description: "Configure workflow automations to streamline operations",
+  product: "custom"
 }, {
   id: "dashboard",
   label: "Dashboard",
-  description: "Monitor performance metrics and system analytics"
+  description: "Monitor performance metrics and system analytics",
+  product: "custom"
 }];
+
+const productGroups: { id: string; label: string; product: string }[] = [
+  { id: "scribe", label: "AI Medical Scribe", product: "scribe" },
+  { id: "receptionist", label: "AI Receptionist", product: "receptionist" },
+  { id: "custom", label: "Custom AI Automations", product: "custom" },
+  { id: "telehealth", label: "Telehealth", product: "telehealth" }
+];
 const iconById: Record<string, React.ComponentType<any>> = {
   setup: Settings,
   schedule: CalendarDays,
@@ -575,32 +590,40 @@ const ProductWalkthrough: React.FC = () => {
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
           <ul className="nav-list">
-            {sections.map(s => {
-            const Icon = iconById[s.id];
-            return <li key={s.id} className="nav-item">
-                  <div className="relative">
-                    <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
-                  console.log('Hover on', s.id, s.description);
-                  setActiveTooltip(s.id);
-                }} onMouseLeave={() => {
-                  console.log('Leave', s.id);
-                  setActiveTooltip(null);
-                }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description} // For mobile tooltip
-                >
-                      {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
-                      <span className="nav-text">{s.label}</span>
-                    </button>
-                    
-                    {/* Desktop Tooltip */}
-                    {activeTooltip === s.id && <div className="tooltip-container">
-                        <div className="tooltip-content">
-                          <div className="tooltip-title">{s.label}</div>
-                          <div className="tooltip-description">{s.description}</div>
-                        </div>
-                      </div>}
-                  </div>
-                </li>;
-          })}
+            {productGroups.map((group, gIdx) => {
+              const groupSections = sections.filter(s => s.product === group.product);
+              const isComingSoon = groupSections.length === 0;
+              return (
+                <React.Fragment key={group.id}>
+                  {gIdx > 0 && <li className="nav-group-divider" aria-hidden />}
+                  <li className="nav-group-label">
+                    <span className="nav-group-text">{group.label}</span>
+                    {isComingSoon && <span className="nav-group-badge">Soon</span>}
+                  </li>
+                  {groupSections.map(s => {
+                    const Icon = iconById[s.id];
+                    return <li key={s.id} className="nav-item">
+                      <div className="relative">
+                        <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
+                          setActiveTooltip(s.id);
+                        }} onMouseLeave={() => {
+                          setActiveTooltip(null);
+                        }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description}>
+                          {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
+                          <span className="nav-text">{s.label}</span>
+                        </button>
+                        {activeTooltip === s.id && <div className="tooltip-container">
+                          <div className="tooltip-content">
+                            <div className="tooltip-title">{s.label}</div>
+                            <div className="tooltip-description">{s.description}</div>
+                          </div>
+                        </div>}
+                      </div>
+                    </li>;
+                  })}
+                </React.Fragment>
+              );
+            })}
           </ul>
         </aside>
 

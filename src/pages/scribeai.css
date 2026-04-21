@@ -40,6 +40,53 @@
 .nav-list { list-style: none; padding: 0; margin: 0; width: 100%; }
 .nav-item { margin-bottom: 8px; }
 
+/* Product group label in sidebar */
+.nav-group-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  min-height: 28px;
+  list-style: none;
+}
+.left-nav:hover .nav-group-label { opacity: 1; visibility: visible; }
+
+.nav-group-text { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.nav-group-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.04em;
+}
+
+.nav-group-divider {
+  height: 1px;
+  background: hsl(var(--border));
+  margin: 8px 12px;
+  list-style: none;
+  opacity: 1;
+}
+.left-nav:not(:hover) .nav-group-divider { margin: 6px 16px; opacity: 0.6; }
+
+/* On mobile bottom-bar, hide group labels & dividers — keep icons only */
+@media (max-width: 1024px) {
+  .nav-group-label, .nav-group-divider { display: none; }
+}
+
 .nav-button {
   width: 100%;
   display: flex;
