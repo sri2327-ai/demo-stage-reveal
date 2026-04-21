@@ -21,36 +21,51 @@ import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
   id: "setup",
   label: "Setup",
-  description: "Configure your note format and connect to your EHR system"
+  description: "Configure your note format and connect to your EHR system",
+  product: "scribe"
 }, {
   id: "schedule",
   label: "Schedule",
-  description: "View and manage appointments from multiple systems"
+  description: "View and manage appointments from multiple systems",
+  product: "scribe"
 }, {
   id: "capture",
   label: "Capture",
-  description: "Record patient encounters with AI-powered transcription"
+  description: "Record patient encounters with AI-powered transcription",
+  product: "scribe"
 }, {
   id: "coding",
   label: "Coding",
-  description: "Review and validate AI-generated medical codes"
+  description: "Review and validate AI-generated medical codes",
+  product: "scribe"
 }, {
   id: "send",
   label: "Send to EHR",
-  description: "Securely send documentation to your electronic health record"
-}, {
-  id: "automations",
-  label: "Automations",
-  description: "Configure workflow automations to streamline operations"
+  description: "Securely send documentation to your electronic health record",
+  product: "scribe"
 }, {
   id: "agent",
   label: "AI Agent",
-  description: "Set up AI agents for patient communication and support"
+  description: "Set up AI agents for patient communication and support",
+  product: "receptionist"
+}, {
+  id: "automations",
+  label: "Automations",
+  description: "Configure workflow automations to streamline operations",
+  product: "custom"
 }, {
   id: "dashboard",
   label: "Dashboard",
-  description: "Monitor performance metrics and system analytics"
+  description: "Monitor performance metrics and system analytics",
+  product: "custom"
 }];
+
+const productGroups: { id: string; label: string; product: string }[] = [
+  { id: "scribe", label: "AI Medical Scribe", product: "scribe" },
+  { id: "receptionist", label: "AI Receptionist", product: "receptionist" },
+  { id: "custom", label: "Custom AI Automations", product: "custom" },
+  { id: "telehealth", label: "Telehealth", product: "telehealth" }
+];
 const iconById: Record<string, React.ComponentType<any>> = {
   setup: Settings,
   schedule: CalendarDays,
