@@ -929,8 +929,12 @@ const ProductWalkthrough: React.FC = () => {
         <div className="main-content">
           <div className="top-nav">
             <div className="flex-1 min-w-0 px-1 sm:px-0">
-              <h1 className="text-sm sm:text-base lg:text-lg font-semibold truncate">AI Medical Scribe & Agents</h1>
-              <p className="text-[10px] sm:text-xs md:text-sm opacity-70 truncate">Clinical documentation & automation</p>
+              <h1 className="text-sm sm:text-base lg:text-lg font-semibold truncate">
+                {productMetaBySection[active]?.product ?? "AI Medical Scribe & Agents"}
+              </h1>
+              <p className="text-[10px] sm:text-xs md:text-sm opacity-70 truncate">
+                {productMetaBySection[active]?.tagline ?? "Clinical documentation & automation"}
+              </p>
             </div>
             <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 flex-shrink-0">
               <Button variant="ghost" size="sm" onClick={() => setShowDemoGuide(true)} className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full px-1.5 sm:px-2 lg:px-3 min-w-0 h-8 sm:h-9" title="Show demo guide">
