@@ -253,6 +253,21 @@ const agentMix = [{
 }];
 const ProductWalkthrough: React.FC = () => {
   const [active, setActive] = useState<string>(sections[0].id);
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    // Only auto-scroll on desktop where the sidebar is vertical (>=1024px)
+    if (window.innerWidth < 1024) return;
+    const el = nav.querySelector<HTMLElement>('[data-active-nav="true"]');
+    if (!el) return;
+    const navRect = nav.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    if (elRect.top < navRect.top || elRect.bottom > navRect.bottom) {
+      const offset = elRect.top - navRect.top - (navRect.height / 2) + (elRect.height / 2);
+      nav.scrollTo({ top: nav.scrollTop + offset, behavior: "smooth" });
+    }
+  }, [active]);
   const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [appointments] = useState<Appointment[]>(defaultAppointments);
@@ -877,7 +892,7 @@ const ProductWalkthrough: React.FC = () => {
         </div>}
 
       <div className="scribeai-layout">
-        <aside className="left-nav">
+        <aside className="left-nav" ref={navRef}>
           <div className="nav-brand">
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
@@ -931,7 +946,7 @@ const ProductWalkthrough: React.FC = () => {
                     return <li key={s.id} className="nav-item">
                       <div className="relative">
                         <button
-                          ref={isActive ? (el) => { el?.scrollIntoView({ block: "nearest", behavior: "smooth" }); } : undefined}
+                          data-active-nav={isActive ? "true" : undefined}
                           className={`nav-button ${isActive ? "active" : ""}`}
                           onClick={() => onNavClick(s.id)}
                           onMouseEnter={() => { setActiveTooltip(s.id); }}
