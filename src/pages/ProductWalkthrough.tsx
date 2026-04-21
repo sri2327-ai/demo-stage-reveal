@@ -3874,10 +3874,28 @@ const ProductWalkthrough: React.FC = () => {
                     </div>
                     Analytics Dashboard
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-base">Monitor your practice performance and AI agent effectiveness.</p>
+                  <p className="mt-1 text-muted-foreground text-base">Unified performance across all four S10.AI products.</p>
                 </div>
 
-                <div className="grid gap-6 xl:grid-cols-3">
+                {/* Top-line KPIs across all products */}
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    { label: "Total Time Saved", value: "61.2 hrs", change: "+14% WoW" },
+                    { label: "Patients Touched", value: "1,284", change: "+9% WoW" },
+                    { label: "Automation Rate", value: "78%", change: "+5 pts" },
+                    { label: "Est. Revenue Impact", value: "$18.4k", change: "+11% WoW" },
+                  ].map((stat, i) => (
+                    <Card key={i}>
+                      <CardContent className="p-5">
+                        <div className="text-2xl font-bold">{stat.value}</div>
+                        <p className="text-xs text-muted-foreground">{stat.label}</p>
+                        <p className="text-xs text-emerald-600 mt-1">{stat.change}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <div className="mt-6 grid gap-6 xl:grid-cols-3">
                   <Card className="xl:col-span-2">
                     <CardHeader>
                       <CardTitle>Weekly Visit Volume</CardTitle>
@@ -3911,32 +3929,89 @@ const ProductWalkthrough: React.FC = () => {
                       </ResponsiveContainer>
                     </CardContent>
                   </Card>
+                </div>
 
-                  <div className="xl:col-span-3 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {[{
-                    label: "Notes Generated",
-                    value: "147",
-                    change: "+12%"
-                  }, {
-                    label: "Time Saved",
-                    value: "23.5 hrs",
-                    change: "+8%"
-                  }, {
-                    label: "AI Agent Calls",
-                    value: "89",
-                    change: "+15%"
-                  }, {
-                    label: "Patient Satisfaction",
-                    value: "96%",
-                    change: "+2%"
-                  }].map((stat, index) => <Card key={index}>
-                        <CardContent className="p-6">
-                          <div className="text-2xl font-bold">{stat.value}</div>
-                          <p className="text-xs text-muted-foreground">{stat.label}</p>
-                          <p className="text-xs text-green-600 mt-1">{stat.change} from last week</p>
-                        </CardContent>
-                      </Card>)}
-                  </div>
+                {/* Per-product stat groups */}
+                <div className="mt-8 space-y-6">
+                  {[
+                    {
+                      product: "AI Medical Scribe",
+                      number: 1,
+                      icon: FileText,
+                      accent: "from-[#143151] to-[#387E89]",
+                      stats: [
+                        { label: "Notes Generated", value: "147", change: "+12%" },
+                        { label: "Avg. Note Time", value: "1m 42s", change: "-18%" },
+                        { label: "Template Accuracy", value: "98.4%", change: "+1.2%" },
+                        { label: "EHR Sync Success", value: "99.1%", change: "+0.4%" },
+                      ],
+                    },
+                    {
+                      product: "AI Receptionist",
+                      number: 2,
+                      icon: Phone,
+                      accent: "from-[#387E89] to-[#5BA3AE]",
+                      stats: [
+                        { label: "Calls Handled", value: "412", change: "+22%" },
+                        { label: "Appointments Booked", value: "168", change: "+15%" },
+                        { label: "Avg. Handle Time", value: "2m 08s", change: "-9%" },
+                        { label: "After-Hours Coverage", value: "100%", change: "—" },
+                      ],
+                    },
+                    {
+                      product: "Custom AI Automations",
+                      number: 3,
+                      icon: Bot,
+                      accent: "from-[#5B6CFF] to-[#8B5CF6]",
+                      stats: [
+                        { label: "Active Workflows", value: "9", change: "+2" },
+                        { label: "Tasks Automated", value: "2,346", change: "+27%" },
+                        { label: "Hours Saved", value: "31.6 hrs", change: "+19%" },
+                        { label: "Error Rate", value: "0.4%", change: "-0.2%" },
+                      ],
+                    },
+                    {
+                      product: "Telehealth",
+                      number: 4,
+                      icon: Video,
+                      accent: "from-[#0EA5E9] to-[#22D3EE]",
+                      stats: [
+                        { label: "Virtual Visits", value: "186", change: "+18%" },
+                        { label: "Avg. Visit Duration", value: "14m 22s", change: "-4%" },
+                        { label: "Connection Quality", value: "98.7%", change: "+0.6%" },
+                        { label: "Patient Satisfaction", value: "96%", change: "+2%" },
+                      ],
+                    },
+                  ].map((group) => {
+                    const Icon = group.icon;
+                    return (
+                      <div key={group.product}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className={`h-9 w-9 rounded-lg bg-gradient-to-br ${group.accent} text-white flex items-center justify-center shadow-sm`}>
+                            <Icon className="h-4 w-4" aria-hidden />
+                          </div>
+                          <div>
+                            <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
+                              <span className="text-xs font-bold text-muted-foreground">{group.number}.</span>
+                              {group.product}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">Last 7 days</p>
+                          </div>
+                        </div>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                          {group.stats.map((stat, idx) => (
+                            <Card key={idx}>
+                              <CardContent className="p-5">
+                                <div className="text-xl font-bold">{stat.value}</div>
+                                <p className="text-xs text-muted-foreground">{stat.label}</p>
+                                <p className="text-xs text-emerald-600 mt-1">{stat.change} from last week</p>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </section>
