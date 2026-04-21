@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft } from "lucide-react";
+import { CheckCircle2, Settings, CalendarDays, Mic, ClipboardList, Send, Wand2, Bot, BarChart3, ShieldCheck, Upload, FileText, Server, CircleStop, RefreshCw, List, Calendar, Search, Filter, Play, MoreVertical, ArrowLeft, Phone, PhoneIncoming, PhoneOutgoing, PhoneCall, Pill, CalendarCheck, MessageSquare, Building2, Clock, Globe, User, Mail, MapPin, Sparkles, X, Eye, Volume2 } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, Legend } from "recharts";
 import "./scribeai.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -45,8 +45,13 @@ const sections = [{
   product: "scribe"
 }, {
   id: "agent",
-  label: "AI Agent",
-  description: "Set up AI agents for patient communication and support",
+  label: "Configuration",
+  description: "Configure your AI receptionist for your clinic and test it on a live phone number",
+  product: "receptionist"
+}, {
+  id: "agent-calls",
+  label: "Call Logs",
+  description: "Review inbound and outbound calls with transcripts, summaries and triggered actions",
   product: "receptionist"
 }, {
   id: "automations",
@@ -74,6 +79,7 @@ const iconById: Record<string, React.ComponentType<any>> = {
   send: Send,
   automations: Wand2,
   agent: Bot,
+  "agent-calls": Phone,
   dashboard: BarChart3
 };
 type Appointment = {
@@ -276,6 +282,220 @@ const ProductWalkthrough: React.FC = () => {
     support: false
   });
 
+  // Receptionist clinic configuration
+  const [clinicConfig, setClinicConfig] = useState({
+    clinicName: "Sunrise Family Health",
+    providerName: "Dr. Emily Carter, MD",
+    specialty: "Family Medicine",
+    address: "1245 Oak Street, Suite 200, Austin, TX 78704",
+    mainPhone: "+1 (512) 555-0142",
+    afterHoursPhone: "+1 (512) 555-0188",
+    email: "frontdesk@sunrisefh.com",
+    hours: "Mon–Fri 8:00 AM – 6:00 PM • Sat 9:00 AM – 1:00 PM",
+    timezone: "America/Chicago",
+    languages: "English, Spanish, Vietnamese",
+    voice: "Aria – Warm, Female (en-US)",
+    greeting: "Thank you for calling Sunrise Family Health, this is Aria, your virtual receptionist. How may I help you today?",
+    transferNumber: "+1 (512) 555-0150",
+    insuranceAccepted: "Aetna, BCBS, Cigna, Humana, Medicare, UHC",
+    appointmentTypes: "New Patient, Follow-up, Annual Physical, Telehealth, Sick Visit",
+    refillPolicy: "Allow refills for chronic medications with active Rx in last 12 months. Escalate controlled substances.",
+    emergencyProtocol: "If patient mentions chest pain, stroke symptoms, or suicidal ideation → instruct to call 911 immediately and notify on-call provider."
+  });
+  const testPhoneNumber = "+1 (737) 209-AI10";
+  const [isTestCalling, setIsTestCalling] = useState(false);
+
+  // Call logs sample data
+  type CallLog = {
+    id: string;
+    direction: "inbound" | "outbound";
+    patientName: string;
+    mrn: string;
+    phone: string;
+    dateTime: string;
+    duration: string;
+    summary: string;
+    intent: string;
+    status: "completed" | "transferred" | "voicemail" | "missed";
+    actions: { type: "refill" | "appointment" | "followup" | "message" | "transfer" | "intake"; label: string; status: "triggered" | "scheduled" | "pending" | "sent" | "completed" }[];
+    sentiment: "positive" | "neutral" | "negative";
+    transcript: { speaker: "AI" | "Patient" | "Provider"; text: string; ts: string }[];
+  };
+  const callLogs: CallLog[] = [
+    {
+      id: "CL-1042",
+      direction: "inbound",
+      patientName: "Sarah Johnson",
+      mrn: "MRN-12345",
+      phone: "+1 (512) 555-0199",
+      dateTime: "Today • 9:42 AM",
+      duration: "3m 28s",
+      summary: "Patient requested a refill for Metformin 500mg. Verified active prescription on file (last filled 6 weeks ago). Refill request sent to Dr. Carter for approval. Patient also confirmed Tuesday follow-up appointment.",
+      intent: "Prescription Refill",
+      status: "completed",
+      actions: [
+        { type: "refill", label: "Refill request: Metformin 500mg", status: "triggered" },
+        { type: "appointment", label: "Confirmed: Tue, Dec 17 • 2:15 PM", status: "completed" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health, this is Aria. How may I help you today?", ts: "0:00" },
+        { speaker: "Patient", text: "Hi, I need to refill my Metformin prescription.", ts: "0:06" },
+        { speaker: "AI", text: "I can help with that. Can I confirm your date of birth?", ts: "0:10" },
+        { speaker: "Patient", text: "March 14, 1985.", ts: "0:14" },
+        { speaker: "AI", text: "Thanks Sarah. I see Metformin 500mg twice daily, last filled six weeks ago. I'll send a refill request to Dr. Carter for approval — you'll receive a text once it's sent to your pharmacy.", ts: "0:22" },
+        { speaker: "Patient", text: "Perfect. Also can you confirm my appointment on Tuesday?", ts: "0:38" },
+        { speaker: "AI", text: "Yes, you're confirmed for Tuesday, December 17th at 2:15 PM with Dr. Carter. Anything else?", ts: "0:44" },
+        { speaker: "Patient", text: "No that's all, thank you.", ts: "0:55" }
+      ]
+    },
+    {
+      id: "CL-1041",
+      direction: "outbound",
+      patientName: "Robert Chen",
+      mrn: "MRN-13579",
+      phone: "+1 (512) 555-0177",
+      dateTime: "Today • 9:15 AM",
+      duration: "2m 14s",
+      summary: "Post-visit follow-up call after cardiology consult. Patient reports feeling better, tolerating new medication. No side effects. Scheduled 6-week follow-up.",
+      intent: "Post-Visit Follow-up",
+      status: "completed",
+      actions: [
+        { type: "followup", label: "Follow-up appointment scheduled: Jan 31, 10:00 AM", status: "scheduled" },
+        { type: "message", label: "Care summary sent via SMS", status: "sent" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Hi Robert, this is Aria from Dr. Carter's office calling to check in after your visit last week. Is now a good time?", ts: "0:00" },
+        { speaker: "Patient", text: "Yes, go ahead.", ts: "0:08" },
+        { speaker: "AI", text: "How are you feeling on the new medication?", ts: "0:11" },
+        { speaker: "Patient", text: "Pretty good actually, no side effects.", ts: "0:15" },
+        { speaker: "AI", text: "Great. Dr. Carter recommends a 6-week follow-up. I have January 31st at 10 AM available.", ts: "0:24" },
+        { speaker: "Patient", text: "That works.", ts: "0:38" },
+        { speaker: "AI", text: "Booked. You'll get a text confirmation shortly.", ts: "0:42" }
+      ]
+    },
+    {
+      id: "CL-1040",
+      direction: "inbound",
+      patientName: "Maria Garcia",
+      mrn: "MRN-98765",
+      phone: "+1 (512) 555-0124",
+      dateTime: "Today • 8:51 AM",
+      duration: "1m 47s",
+      summary: "New patient inquiry about scheduling first visit. Verified insurance (BCBS) accepted. Collected demographics. New patient appointment scheduled.",
+      intent: "New Patient Scheduling",
+      status: "completed",
+      actions: [
+        { type: "intake", label: "New patient intake form sent via email", status: "sent" },
+        { type: "appointment", label: "New patient visit: Mon, Dec 23 • 10:30 AM", status: "scheduled" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health. How may I help you?", ts: "0:00" },
+        { speaker: "Patient", text: "Hola, I'd like to become a new patient.", ts: "0:05" },
+        { speaker: "AI", text: "¡Claro! I can help. Do you have insurance?", ts: "0:09" },
+        { speaker: "Patient", text: "Yes, Blue Cross Blue Shield.", ts: "0:14" },
+        { speaker: "AI", text: "Perfect, we accept BCBS. Earliest new patient slot is Monday, December 23rd at 10:30 AM.", ts: "0:18" },
+        { speaker: "Patient", text: "That works for me.", ts: "0:30" },
+        { speaker: "AI", text: "Great, I'll send the intake forms to your email.", ts: "0:34" }
+      ]
+    },
+    {
+      id: "CL-1039",
+      direction: "inbound",
+      patientName: "Unknown Caller",
+      mrn: "—",
+      phone: "+1 (512) 555-0110",
+      dateTime: "Today • 8:12 AM",
+      duration: "0m 48s",
+      summary: "Caller asked about office hours and insurance accepted. Provided info and offered to schedule. Caller will call back.",
+      intent: "General Inquiry",
+      status: "completed",
+      actions: [
+        { type: "message", label: "Office info SMS sent", status: "sent" }
+      ],
+      sentiment: "neutral",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health. How may I help you?", ts: "0:00" },
+        { speaker: "Patient", text: "What are your hours and what insurance do you take?", ts: "0:05" },
+        { speaker: "AI", text: "We're open Mon–Fri 8 AM to 6 PM and Saturday 9 to 1. We accept Aetna, BCBS, Cigna, Humana, Medicare and UHC.", ts: "0:09" },
+        { speaker: "Patient", text: "Thanks, I'll call back.", ts: "0:28" }
+      ]
+    },
+    {
+      id: "CL-1038",
+      direction: "outbound",
+      patientName: "James Wilson",
+      mrn: "MRN-99001",
+      phone: "+1 (512) 555-0166",
+      dateTime: "Yesterday • 4:30 PM",
+      duration: "1m 12s",
+      summary: "Appointment reminder call for tomorrow's orthopedic follow-up. Patient confirmed attendance.",
+      intent: "Appointment Reminder",
+      status: "completed",
+      actions: [
+        { type: "appointment", label: "Appointment confirmed: Tomorrow • 11:00 AM", status: "completed" }
+      ],
+      sentiment: "positive",
+      transcript: [
+        { speaker: "AI", text: "Hi James, Aria from Dr. Carter's office. Reminder for your appointment tomorrow at 11 AM.", ts: "0:00" },
+        { speaker: "Patient", text: "Got it, I'll be there.", ts: "0:14" }
+      ]
+    },
+    {
+      id: "CL-1037",
+      direction: "inbound",
+      patientName: "Anna Petrov",
+      mrn: "MRN-12346",
+      phone: "+1 (512) 555-0133",
+      dateTime: "Yesterday • 2:08 PM",
+      duration: "4m 02s",
+      summary: "Patient called with urgent concern about pregnancy symptoms. Triaged as high priority — transferred to on-call nurse.",
+      intent: "Clinical Triage",
+      status: "transferred",
+      actions: [
+        { type: "transfer", label: "Transferred to on-call nurse", status: "completed" },
+        { type: "message", label: "Provider notified via secure message", status: "sent" }
+      ],
+      sentiment: "negative",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling. How may I help?", ts: "0:00" },
+        { speaker: "Patient", text: "I'm 28 weeks pregnant and having some bleeding.", ts: "0:05" },
+        { speaker: "AI", text: "I understand, this needs immediate attention. I'm transferring you to our on-call nurse right now and notifying Dr. Carter. Please stay on the line.", ts: "0:09" }
+      ]
+    },
+    {
+      id: "CL-1036",
+      direction: "inbound",
+      patientName: "David Kim",
+      mrn: "MRN-55667",
+      phone: "+1 (512) 555-0155",
+      dateTime: "Yesterday • 11:22 AM",
+      duration: "0m 22s",
+      summary: "Caller hung up before connecting. Voicemail not left.",
+      intent: "Missed",
+      status: "missed",
+      actions: [
+        { type: "message", label: "Auto-callback scheduled", status: "pending" }
+      ],
+      sentiment: "neutral",
+      transcript: [
+        { speaker: "AI", text: "Thank you for calling Sunrise Family Health…", ts: "0:00" }
+      ]
+    }
+  ];
+  const [callFilter, setCallFilter] = useState<"all" | "inbound" | "outbound">("all");
+  const [callSearch, setCallSearch] = useState("");
+  const [selectedCall, setSelectedCall] = useState<CallLog | null>(null);
+  const filteredCallLogs = useMemo(() => {
+    return callLogs.filter(c => {
+      if (callFilter !== "all" && c.direction !== callFilter) return false;
+      if (callSearch && !`${c.patientName} ${c.intent} ${c.summary} ${c.phone}`.toLowerCase().includes(callSearch.toLowerCase())) return false;
+      return true;
+    });
+  }, [callFilter, callSearch]);
+
   // Automation toggles  
   const [automations, setAutomations] = useState({
     patientInstructions: true,
@@ -293,7 +513,7 @@ const ProductWalkthrough: React.FC = () => {
   const [hasShownPopup, setHasShownPopup] = useState(false);
   const [timeOnPage, setTimeOnPage] = useState(0);
   const [userInteractions, setUserInteractions] = useState(0);
-  const timeOnPageRef = useRef<NodeJS.Timeout | null>(null);
+  const timeOnPageRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Keyboard navigation
   useEffect(() => {
@@ -3071,9 +3291,9 @@ const ProductWalkthrough: React.FC = () => {
                     <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gray-100 flex items-center justify-center">
                       <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" aria-hidden />
                     </div>
-                    <span className="text-gray-900 min-w-0 truncate">AI Agent Configuration</span>
+                    <span className="text-gray-900 min-w-0 truncate">AI Receptionist Configuration</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your AI agent to handle patient communications and administrative tasks. Works with your existing calling software, VOIP, etc. - no rip and replace needed.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your AI receptionist for your clinic. Patient contact details are auto-imported from your EHR — Epic, Cerner, Athena, eClinicalWorks, NextGen, Allscripts, DrChrono, Practice Fusion and 200+ more are all supported out of the box.</p>
                   
                   {/* Agent Status */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
@@ -3095,6 +3315,177 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
                 </div>
 
+                {/* EHR Auto-Import Banner */}
+                <div className="mt-6 p-4 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-lg bg-white border border-blue-200 flex items-center justify-center flex-shrink-0">
+                    <Server className="h-5 w-5 text-blue-700" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-gray-900 text-sm sm:text-base flex items-center gap-2 flex-wrap">
+                      Patient contacts auto-imported from your EHR
+                      <span className="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-semibold uppercase tracking-wide">Live sync</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                      Demographics, phone numbers, insurance, allergies, active medications and appointment history sync from <span className="font-medium">any EHR</span> — Epic, Cerner, Athena, eClinicalWorks, NextGen, Allscripts, DrChrono, Practice Fusion, Greenway, AdvancedMD, Kareo, OpenEMR and 200+ more are all supported.
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {["Epic", "Cerner", "Athena", "eClinicalWorks", "NextGen", "Allscripts", "DrChrono", "+200 more"].map(e => (
+                        <span key={e} className="px-2 py-0.5 rounded-md bg-white border border-blue-200 text-[10px] font-medium text-blue-700">{e}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Clinic Configuration Form */}
+                <div className="mt-6 grid gap-6 lg:grid-cols-3">
+                  <div className="lg:col-span-2">
+                    <Card className="border-2">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                          <Building2 className="h-4 w-4 text-[#387E89]" />
+                          Clinic Information
+                        </CardTitle>
+                        <p className="text-xs text-muted-foreground">The AI receptionist will use these details to answer patient calls accurately.</p>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Building2 className="h-3 w-3" /> Clinic name</Label>
+                            <Input className="mt-1" value={clinicConfig.clinicName} onChange={e => setClinicConfig(c => ({ ...c, clinicName: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><User className="h-3 w-3" /> Provider / Practice owner</Label>
+                            <Input className="mt-1" value={clinicConfig.providerName} onChange={e => setClinicConfig(c => ({ ...c, providerName: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Sparkles className="h-3 w-3" /> Specialty</Label>
+                            <Input className="mt-1" value={clinicConfig.specialty} onChange={e => setClinicConfig(c => ({ ...c, specialty: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Globe className="h-3 w-3" /> Timezone</Label>
+                            <Input className="mt-1" value={clinicConfig.timezone} onChange={e => setClinicConfig(c => ({ ...c, timezone: e.target.value }))} />
+                          </div>
+                          <div className="sm:col-span-2">
+                            <Label className="text-xs flex items-center gap-1.5"><MapPin className="h-3 w-3" /> Address</Label>
+                            <Input className="mt-1" value={clinicConfig.address} onChange={e => setClinicConfig(c => ({ ...c, address: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Phone className="h-3 w-3" /> Main phone</Label>
+                            <Input className="mt-1" value={clinicConfig.mainPhone} onChange={e => setClinicConfig(c => ({ ...c, mainPhone: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><PhoneCall className="h-3 w-3" /> After-hours / transfer line</Label>
+                            <Input className="mt-1" value={clinicConfig.transferNumber} onChange={e => setClinicConfig(c => ({ ...c, transferNumber: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Mail className="h-3 w-3" /> Front desk email</Label>
+                            <Input className="mt-1" value={clinicConfig.email} onChange={e => setClinicConfig(c => ({ ...c, email: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Clock className="h-3 w-3" /> Office hours</Label>
+                            <Input className="mt-1" value={clinicConfig.hours} onChange={e => setClinicConfig(c => ({ ...c, hours: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Globe className="h-3 w-3" /> Languages spoken</Label>
+                            <Input className="mt-1" value={clinicConfig.languages} onChange={e => setClinicConfig(c => ({ ...c, languages: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Volume2 className="h-3 w-3" /> AI voice</Label>
+                            <Input className="mt-1" value={clinicConfig.voice} onChange={e => setClinicConfig(c => ({ ...c, voice: e.target.value }))} />
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label className="text-xs flex items-center gap-1.5"><MessageSquare className="h-3 w-3" /> Greeting script</Label>
+                          <Textarea className="mt-1" rows={2} value={clinicConfig.greeting} onChange={e => setClinicConfig(c => ({ ...c, greeting: e.target.value }))} />
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><ShieldCheck className="h-3 w-3" /> Insurance accepted</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.insuranceAccepted} onChange={e => setClinicConfig(c => ({ ...c, insuranceAccepted: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><CalendarCheck className="h-3 w-3" /> Appointment types</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.appointmentTypes} onChange={e => setClinicConfig(c => ({ ...c, appointmentTypes: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Pill className="h-3 w-3" /> Refill policy</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.refillPolicy} onChange={e => setClinicConfig(c => ({ ...c, refillPolicy: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><ShieldCheck className="h-3 w-3" /> Emergency / escalation protocol</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.emergencyProtocol} onChange={e => setClinicConfig(c => ({ ...c, emergencyProtocol: e.target.value }))} />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end pt-2">
+                          <Button size="sm" className="rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={() => toast({ title: "Configuration saved", description: "Your AI receptionist has been updated." })}>
+                            <CheckCircle2 className="h-4 w-4 mr-1.5" />
+                            Save configuration
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Test the agent panel */}
+                  <div>
+                    <Card className="border-2 border-dashed border-[#387E89]/40 bg-gradient-to-br from-[#387E89]/5 to-[#143151]/5 sticky top-4">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                          <PhoneCall className="h-4 w-4 text-[#387E89]" />
+                          Test your AI receptionist
+                        </CardTitle>
+                        <p className="text-xs text-muted-foreground">Call this number from any phone to talk to your configured agent live.</p>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="rounded-xl bg-white border border-[#387E89]/20 p-4 text-center">
+                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Your test line</div>
+                          <a href={`tel:${testPhoneNumber.replace(/\D/g, "")}`} className="block mt-1 text-2xl font-bold text-[#143151] hover:text-[#387E89] transition-colors">
+                            {testPhoneNumber}
+                          </a>
+                          <div className="mt-1 text-[11px] text-muted-foreground">Available 24/7 • Toll-free</div>
+                        </div>
+
+                        <div className="space-y-2 text-xs text-gray-700">
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "I'd like to book a follow-up appointment"</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "I need a refill for my Metformin"</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "What insurance do you accept?"</span>
+                          </div>
+                        </div>
+
+                        <Button className="w-full rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={() => {
+                          setIsTestCalling(true);
+                          toast({ title: "Initiating test call", description: `Calling ${testPhoneNumber}…` });
+                          setTimeout(() => setIsTestCalling(false), 2500);
+                        }}>
+                          {isTestCalling ? <><div className="h-2 w-2 rounded-full bg-white animate-pulse mr-2" /> Connecting…</> : <><PhoneCall className="h-4 w-4 mr-2" /> Call test agent now</>}
+                        </Button>
+
+                        <div className="pt-2 border-t border-[#387E89]/10">
+                          <Button variant="outline" size="sm" className="w-full" onClick={() => onNavClick('agent-calls')}>
+                            <List className="h-3.5 w-3.5 mr-1.5" />
+                            View call logs
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
+                <div className="mt-8 mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Capabilities</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Toggle the workflows your AI receptionist should handle.</p>
+                </div>
                 <div className="grid gap-6 lg:grid-cols-2">
                   {[{
                   key: 'followups',
@@ -3170,6 +3561,211 @@ const ProductWalkthrough: React.FC = () => {
                   </Button>
                 </div>
               </div>
+            </section>
+
+            {/* AI Receptionist – Call Logs Section */}
+            <section id="agent-calls" className={`screen ${active === "agent-calls" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+                <div>
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gradient-to-br from-[#143151] to-[#387E89] flex items-center justify-center">
+                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-white" aria-hidden />
+                    </div>
+                    <span className="text-gray-900 min-w-0 truncate">Call Logs</span>
+                  </h2>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Every inbound and outbound call handled by your AI receptionist — with full transcripts, AI summaries, intents and triggered actions.</p>
+                </div>
+
+                {/* KPI strip */}
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    { label: "Total calls today", value: "47", sub: "+12% vs yesterday", icon: Phone },
+                    { label: "Inbound", value: "32", sub: "85% AI-handled", icon: PhoneIncoming },
+                    { label: "Outbound", value: "15", sub: "Follow-ups & reminders", icon: PhoneOutgoing },
+                    { label: "Actions triggered", value: "23", sub: "Refills • Bookings • Transfers", icon: Sparkles }
+                  ].map(k => (
+                    <Card key={k.label} className="border">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="text-[10px] sm:text-xs uppercase tracking-wide text-muted-foreground font-semibold">{k.label}</div>
+                          <k.icon className="h-3.5 w-3.5 text-[#387E89]" />
+                        </div>
+                        <div className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{k.value}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{k.sub}</div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Filters */}
+                <div className="mt-5 flex flex-col sm:flex-row gap-2 sm:items-center">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                    <Input className="pl-9 h-9" placeholder="Search by patient, phone or intent…" value={callSearch} onChange={e => setCallSearch(e.target.value)} />
+                  </div>
+                  <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                    {[
+                      { key: "all", label: "All", icon: List },
+                      { key: "inbound", label: "Inbound", icon: PhoneIncoming },
+                      { key: "outbound", label: "Outbound", icon: PhoneOutgoing }
+                    ].map(t => (
+                      <button key={t.key} onClick={() => setCallFilter(t.key as any)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition ${callFilter === t.key ? "bg-white shadow text-[#143151]" : "text-muted-foreground hover:text-gray-900"}`}>
+                        <t.icon className="h-3.5 w-3.5" />
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Call list */}
+                <div className="mt-4 space-y-3">
+                  {filteredCallLogs.length === 0 && (
+                    <div className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">No calls match your filters.</div>
+                  )}
+                  {filteredCallLogs.map(call => {
+                    const statusColor = call.status === "completed" ? "bg-green-100 text-green-700 border-green-200"
+                      : call.status === "transferred" ? "bg-amber-100 text-amber-700 border-amber-200"
+                      : call.status === "voicemail" ? "bg-blue-100 text-blue-700 border-blue-200"
+                      : "bg-gray-100 text-gray-700 border-gray-200";
+                    const sentimentColor = call.sentiment === "positive" ? "text-green-600" : call.sentiment === "negative" ? "text-red-600" : "text-gray-500";
+                    const DirIcon = call.direction === "inbound" ? PhoneIncoming : PhoneOutgoing;
+                    return (
+                      <Card key={call.id} className="border hover:shadow-md transition-shadow">
+                        <CardContent className="p-3 sm:p-4">
+                          <div className="flex flex-col lg:flex-row lg:items-start gap-3 lg:gap-4">
+                            <div className="flex items-start gap-3 flex-1 min-w-0">
+                              <div className={`h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 ${call.direction === "inbound" ? "bg-blue-100 text-blue-700" : "bg-purple-100 text-purple-700"}`}>
+                                <DirIcon className="h-5 w-5" />
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="font-semibold text-gray-900 text-sm sm:text-base truncate">{call.patientName}</span>
+                                  <span className="text-[10px] text-muted-foreground">{call.mrn}</span>
+                                  <span className={`px-2 py-0.5 rounded-full border text-[10px] font-semibold uppercase tracking-wide ${statusColor}`}>{call.status}</span>
+                                  <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium capitalize">{call.direction}</span>
+                                </div>
+                                <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground flex-wrap">
+                                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{call.dateTime}</span>
+                                  <span>•</span>
+                                  <span>{call.duration}</span>
+                                  <span>•</span>
+                                  <span>{call.phone}</span>
+                                  <span>•</span>
+                                  <span className={sentimentColor}>● {call.sentiment}</span>
+                                </div>
+                                <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#387E89]/10 text-[#143151] text-[11px] font-medium">
+                                  <Sparkles className="h-3 w-3" />
+                                  {call.intent}
+                                </div>
+                                <p className="mt-2 text-xs sm:text-sm text-gray-700 line-clamp-2">{call.summary}</p>
+                                {call.actions.length > 0 && (
+                                  <div className="mt-2 flex flex-wrap gap-1.5">
+                                    {call.actions.map((a, i) => {
+                                      const aIcon = a.type === "refill" ? Pill : a.type === "appointment" || a.type === "followup" ? CalendarCheck : a.type === "transfer" ? PhoneCall : a.type === "intake" ? FileText : MessageSquare;
+                                      const Ai = aIcon;
+                                      const color = a.status === "triggered" ? "bg-orange-50 border-orange-200 text-orange-700"
+                                        : a.status === "scheduled" ? "bg-blue-50 border-blue-200 text-blue-700"
+                                        : a.status === "completed" ? "bg-green-50 border-green-200 text-green-700"
+                                        : a.status === "sent" ? "bg-cyan-50 border-cyan-200 text-cyan-700"
+                                        : "bg-gray-50 border-gray-200 text-gray-700";
+                                      return (
+                                        <span key={i} className={`inline-flex items-center gap-1 px-2 py-1 rounded-md border text-[11px] font-medium ${color}`}>
+                                          <Ai className="h-3 w-3" />
+                                          {a.label}
+                                          <span className="ml-1 text-[9px] uppercase opacity-70">{a.status}</span>
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex lg:flex-col gap-2 flex-shrink-0">
+                              <Button size="sm" variant="outline" className="rounded-lg text-xs" onClick={() => setSelectedCall(call)}>
+                                <Eye className="h-3.5 w-3.5 mr-1.5" />
+                                Transcript
+                              </Button>
+                              <Button size="sm" variant="ghost" className="rounded-lg text-xs">
+                                <Play className="h-3.5 w-3.5 mr-1.5" />
+                                Play
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Transcript Dialog */}
+              <AlertDialog open={!!selectedCall} onOpenChange={(o) => !o && setSelectedCall(null)}>
+                <AlertDialogContent className="max-w-2xl max-h-[85vh] overflow-hidden flex flex-col">
+                  <AlertDialogHeader>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <AlertDialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+                          {selectedCall && (selectedCall.direction === "inbound" ? <PhoneIncoming className="h-4 w-4 text-blue-600" /> : <PhoneOutgoing className="h-4 w-4 text-purple-600" />)}
+                          {selectedCall?.patientName} • {selectedCall?.intent}
+                        </AlertDialogTitle>
+                        <AlertDialogDescription className="text-xs mt-1">
+                          {selectedCall?.dateTime} • {selectedCall?.duration} • {selectedCall?.phone}
+                        </AlertDialogDescription>
+                      </div>
+                      <button onClick={() => setSelectedCall(null)} className="p-1 rounded-md hover:bg-gray-100 flex-shrink-0">
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </AlertDialogHeader>
+
+                  {selectedCall && (
+                    <div className="overflow-y-auto flex-1 -mx-6 px-6">
+                      <div className="rounded-lg bg-[#387E89]/5 border border-[#387E89]/20 p-3 mb-4">
+                        <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase text-[#143151] mb-1">
+                          <Sparkles className="h-3 w-3" /> AI Summary
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-800">{selectedCall.summary}</p>
+                      </div>
+
+                      {selectedCall.actions.length > 0 && (
+                        <div className="mb-4">
+                          <div className="text-[11px] font-semibold uppercase text-gray-700 mb-2">Triggered Actions</div>
+                          <div className="space-y-1.5">
+                            {selectedCall.actions.map((a, i) => (
+                              <div key={i} className="flex items-center justify-between p-2 rounded-md bg-gray-50 border text-xs">
+                                <span className="font-medium text-gray-800">{a.label}</span>
+                                <span className="px-2 py-0.5 rounded-full bg-white border text-[10px] uppercase font-semibold text-gray-700">{a.status}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="text-[11px] font-semibold uppercase text-gray-700 mb-2">Full Transcript</div>
+                      <div className="space-y-2">
+                        {selectedCall.transcript.map((t, i) => (
+                          <div key={i} className={`flex gap-2 ${t.speaker === "AI" ? "" : "flex-row-reverse"}`}>
+                            <div className={`flex-shrink-0 h-7 w-7 rounded-full flex items-center justify-center text-[10px] font-bold ${t.speaker === "AI" ? "bg-[#387E89] text-white" : t.speaker === "Patient" ? "bg-gray-200 text-gray-700" : "bg-amber-200 text-amber-800"}`}>
+                              {t.speaker === "AI" ? "AI" : t.speaker === "Patient" ? "P" : "Dr"}
+                            </div>
+                            <div className={`max-w-[80%] rounded-lg px-3 py-2 text-xs ${t.speaker === "AI" ? "bg-[#387E89]/10 text-gray-900" : "bg-gray-100 text-gray-900"}`}>
+                              <div className="text-[9px] uppercase opacity-60 mb-0.5">{t.speaker} • {t.ts}</div>
+                              {t.text}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <AlertDialogFooter className="border-t pt-3 mt-2">
+                    <AlertDialogCancel onClick={() => setSelectedCall(null)}>Close</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => { setSelectedCall(null); toast({ title: "Sent to provider", description: "Transcript shared via secure message." }); }}>
+                      Send to provider
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </section>
 
             {/* Dashboard Section */}

@@ -22,10 +22,10 @@ export const DemoStage: React.FC<DemoStageProps> = ({
   const [userInteracted, setUserInteracted] = useState(false);
   const [highlightInteractivity, setHighlightInteractivity] = useState(true);
   const isMobile = useIsMobile();
-  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoPlayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const inactivityTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const demoContainerRef = useRef<HTMLDivElement>(null);
-  const subStepTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const subStepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Debug log for mobile detection
   useEffect(() => {
