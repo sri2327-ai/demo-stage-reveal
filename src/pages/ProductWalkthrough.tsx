@@ -75,13 +75,28 @@ const sections = [{
   product: "telehealth"
 }];
 
-const productGroups: { id: string; label: string; product: string }[] = [
-  { id: "common", label: "Overview", product: "common" },
-  { id: "scribe", label: "AI Medical Scribe", product: "scribe" },
-  { id: "receptionist", label: "AI Receptionist", product: "receptionist" },
-  { id: "custom", label: "Custom AI Automations", product: "custom" },
-  { id: "telehealth", label: "Telehealth", product: "telehealth" }
+const productGroups: { id: string; label: string; product: string; productNumber?: number }[] = [
+  { id: "scribe", label: "AI Medical Scribe", product: "scribe", productNumber: 1 },
+  { id: "receptionist", label: "AI Receptionist", product: "receptionist", productNumber: 2 },
+  { id: "custom", label: "Custom AI Automations", product: "custom", productNumber: 3 },
+  { id: "telehealth", label: "Telehealth", product: "telehealth", productNumber: 4 },
+  { id: "common", label: "Overview", product: "common" }
 ];
+
+// Map of product name + tagline keyed by section id, used for dynamic page header
+const productMetaBySection: Record<string, { product: string; tagline: string }> = {
+  dashboard: { product: "Overview Dashboard", tagline: "Cross-product performance & analytics" },
+  setup: { product: "AI Medical Scribe", tagline: "Clinical documentation, automated" },
+  schedule: { product: "AI Medical Scribe", tagline: "Clinical documentation, automated" },
+  capture: { product: "AI Medical Scribe", tagline: "Clinical documentation, automated" },
+  coding: { product: "AI Medical Scribe", tagline: "Clinical documentation, automated" },
+  send: { product: "AI Medical Scribe", tagline: "Clinical documentation, automated" },
+  agent: { product: "AI Receptionist", tagline: "Inbound & outbound call automation" },
+  "agent-calls": { product: "AI Receptionist", tagline: "Inbound & outbound call automation" },
+  automations: { product: "Custom AI Automations", tagline: "Workflows tailored to your practice" },
+  "telehealth-meetings": { product: "Telehealth", tagline: "Virtual visits with built-in AI" },
+  "telehealth-consult": { product: "Telehealth", tagline: "Virtual visits with built-in AI" }
+};
 const iconById: Record<string, React.ComponentType<any>> = {
   setup: Settings,
   schedule: CalendarDays,
@@ -808,23 +823,33 @@ const ProductWalkthrough: React.FC = () => {
                 <Wand2 className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="font-semibold text-base sm:text-lg">Interactive Demo</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">Explore S10.AI Medical Scribe & Agents</p>
+                <h3 className="font-semibold text-base sm:text-lg">Welcome — 4 Products, 1 Demo</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Explore each S10.AI product in this guided walkthrough</p>
               </div>
             </div>
-            
+
+            <div className="space-y-2 mb-5 rounded-xl border bg-muted/30 p-3 sm:p-4">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">You're previewing all 4 products</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">1</span><span className="font-medium">AI Medical Scribe</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">2</span><span className="font-medium">AI Receptionist</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">3</span><span className="font-medium">Custom AI Automations</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">4</span><span className="font-medium">Telehealth</span></div>
+              </div>
+            </div>
+
             <div className="space-y-3 sm:space-y-4 mb-6">
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Click on any menu item to explore different modules and features</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">The left menu groups items by product — pick any product to start its demo</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Hover over navigation items to see detailed descriptions</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Hover navigation items for descriptions; click to jump into that module</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Try interactive elements like buttons and forms throughout the demo</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Use the shared <span className="font-medium text-foreground">Dashboard</span> at the bottom for cross-product analytics</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
@@ -864,7 +889,14 @@ const ProductWalkthrough: React.FC = () => {
                 <React.Fragment key={group.id}>
                   {gIdx > 0 && <li className="nav-group-divider" aria-hidden />}
                   <li className="nav-group-label">
-                    <span className="nav-group-text">{group.label}</span>
+                    <span className="nav-group-text flex items-center gap-2">
+                      {group.productNumber && (
+                        <span className="inline-flex h-4 w-4 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[9px] font-bold items-center justify-center flex-shrink-0">
+                          {group.productNumber}
+                        </span>
+                      )}
+                      {group.label}
+                    </span>
                     {isComingSoon && <span className="nav-group-badge">Soon</span>}
                   </li>
                   {groupSections.map(s => {
