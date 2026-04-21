@@ -318,6 +318,40 @@ const ProductWalkthrough: React.FC = () => {
   const testPhoneNumber = "+1 (737) 209-AI10";
   const [isTestCalling, setIsTestCalling] = useState(false);
 
+  // Telehealth state
+  const [meetingForm, setMeetingForm] = useState({
+    patientName: "",
+    patientEmail: "",
+    patientPhone: "",
+    date: "",
+    time: "",
+    duration: "30",
+    visitType: "Follow-up",
+    sendVia: "email" as "email" | "sms" | "both",
+    notes: ""
+  });
+  const [generatedMeeting, setGeneratedMeeting] = useState<{ link: string; id: string; passcode: string } | null>(null);
+  const meetingHistory = [
+    { id: "MTG-2041", patient: "John Doe", mrn: "MRN-12345", date: "Today • 10:30 AM", duration: "18m 22s", status: "completed" as const, type: "Follow-up", scribe: true, interpreter: false, recorded: true },
+    { id: "MTG-2040", patient: "Maria Garcia", mrn: "MRN-98765", date: "Today • 9:00 AM", duration: "24m 11s", status: "completed" as const, type: "Consultation", scribe: true, interpreter: true, recorded: true },
+    { id: "MTG-2039", patient: "Robert Chen", mrn: "MRN-13579", date: "Yesterday • 3:45 PM", duration: "32m 04s", status: "completed" as const, type: "Cardiology", scribe: true, interpreter: true, recorded: false },
+    { id: "MTG-2038", patient: "Emily Rodriguez", mrn: "MRN-77889", date: "Yesterday • 2:00 PM", duration: "—", status: "no-show" as const, type: "Dermatology", scribe: false, interpreter: false, recorded: false },
+    { id: "MTG-2037", patient: "David Kim", mrn: "MRN-55667", date: "Dec 14 • 11:15 AM", duration: "21m 47s", status: "completed" as const, type: "Telemedicine", scribe: true, interpreter: true, recorded: true },
+    { id: "MTG-2036", patient: "Anna Petrov", mrn: "MRN-12346", date: "Dec 13 • 4:30 PM", duration: "—", status: "scheduled" as const, type: "Obstetrics", scribe: true, interpreter: true, recorded: false }
+  ];
+  const [consultFeatures, setConsultFeatures] = useState({
+    aiScribe: true,
+    interpreter: false,
+    recording: false,
+    screenShare: false,
+    annotate: false
+  });
+  const [chatMessages] = useState([
+    { from: "Provider", text: "Hi John, can you hear me okay?", ts: "10:31" },
+    { from: "Patient", text: "Yes, loud and clear.", ts: "10:31" },
+    { from: "Provider", text: "Sharing the lab results now.", ts: "10:34" }
+  ]);
+
   // Call logs sample data
   type CallLog = {
     id: string;
