@@ -293,7 +293,7 @@ const ProductWalkthrough: React.FC = () => {
   const [hasShownPopup, setHasShownPopup] = useState(false);
   const [timeOnPage, setTimeOnPage] = useState(0);
   const [userInteractions, setUserInteractions] = useState(0);
-  const timeOnPageRef = useRef<NodeJS.Timeout | null>(null);
+  const timeOnPageRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Keyboard navigation
   useEffect(() => {

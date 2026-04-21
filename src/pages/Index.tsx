@@ -120,7 +120,7 @@ const Index = () => {
           </section>
         </motion.main>
         
-        {process.env.NODE_ENV === 'development' && (
+        {import.meta.env.DEV && (
           <div className="fixed bottom-0 right-0 bg-black/70 text-white text-xs p-1 z-50">
             Section: {currentSection}
           </div>

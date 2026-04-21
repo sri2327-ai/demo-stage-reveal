@@ -83,7 +83,7 @@ export const DemoScene: React.FC<DemoSceneProps> = ({
   const [transcriptionActive, setTranscriptionActive] = useState(false);
   const [noteGeneration, setNoteGeneration] = useState(false);
   const [activeLabel, setActiveLabel] = useState('');
-  const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const autoPlayIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isMobile = useIsMobile();
 
   // Use external subStep if provided

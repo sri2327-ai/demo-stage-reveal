@@ -20,7 +20,7 @@ export const useInteractionPause = ({
 }: InteractionPauseOptions = {}) => {
   const [isPaused, setIsPaused] = useState(initialPauseState);
   const [lastInteraction, setLastInteraction] = useState<number>(0);
-  const autoResumeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoResumeTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   
   // Function to register an interaction and pause autoplay
   const registerInteraction = useCallback(() => {
