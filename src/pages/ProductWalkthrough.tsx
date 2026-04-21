@@ -4344,14 +4344,15 @@ const ProductWalkthrough: React.FC = () => {
                 Ready to see S10.AI in action?
               </AlertDialogTitle>
               <AlertDialogDescription className="text-sm sm:text-base leading-relaxed">
-                You've explored our product walkthrough. Now discover how S10.AI can transform your practice with a personalized demo tailored to your specialty.
+                You've explored a walkthrough of all four S10.AI products — AI Medical Scribe, AI Receptionist, Telehealth, and Custom AI Agents. Now see how the full suite fits your practice with a personalized demo.
                 <br /><br />
                 <strong>Get your custom demo and see:</strong>
                 <ul className="text-left mt-2 space-y-1 text-sm">
-                  <li>• Live AI transcription with your specialty templates</li>
-                  <li>• EHR integration setup for your practice</li>
-                  <li>• ROI calculations specific to your workflow</li>
-                  <li>• Implementation timeline and support options</li>
+                  <li>• AI Medical Scribe with your specialty templates & EHR</li>
+                  <li>• AI Receptionist handling calls, scheduling & intake</li>
+                  <li>• Telehealth with built-in scribe, interpreter & sharing</li>
+                  <li>• Custom AI Agents automating your unique workflows</li>
+                  <li>• ROI, rollout timeline & support tailored to your practice</li>
                 </ul>
               </AlertDialogDescription>
             </AlertDialogHeader>
