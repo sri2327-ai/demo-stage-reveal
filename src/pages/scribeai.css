@@ -92,9 +92,9 @@
 }
 .left-nav:not(:hover) .nav-group-divider { margin: 6px 16px; opacity: 0.6; }
 
-/* On mobile bottom-bar, hide group labels & dividers — keep icons only */
+/* On mobile bottom-bar, hide group labels, dividers and product strip — keep icons only */
 @media (max-width: 1024px) {
-  .nav-group-label, .nav-group-divider { display: none; }
+  .nav-group-label, .nav-group-divider, .nav-product-strip { display: none; }
 }
 
 .nav-button {
