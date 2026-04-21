@@ -79,6 +79,7 @@ const iconById: Record<string, React.ComponentType<any>> = {
   send: Send,
   automations: Wand2,
   agent: Bot,
+  "agent-calls": Phone,
   dashboard: BarChart3
 };
 type Appointment = {
