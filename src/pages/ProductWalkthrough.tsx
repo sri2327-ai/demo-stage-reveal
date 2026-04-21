@@ -3519,17 +3519,20 @@ const ProductWalkthrough: React.FC = () => {
                       <CardHeader className="pb-3">
                         <CardTitle className="text-base sm:text-lg flex items-center gap-2">
                           <PhoneCall className="h-4 w-4 text-[#387E89]" />
-                          Test your AI receptionist
+                          Experience the AI receptionist
                         </CardTitle>
-                        <p className="text-xs text-muted-foreground">Call this number from any phone to talk to your configured agent live.</p>
+                        <div className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide w-fit">
+                          <span className="h-1.5 w-1.5 rounded-full bg-amber-500" /> Demo line
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-2">Call this shared demo number to hear how an AI receptionist sounds in a real conversation. This is a sample agent — not the one you've configured above. Your configured agent goes live on your own number after onboarding.</p>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="rounded-xl bg-white border border-[#387E89]/20 p-4 text-center">
-                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Your test line</div>
+                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Demo number</div>
                           <a href={`tel:${testPhoneNumber.replace(/\D/g, "")}`} className="block mt-1 text-2xl font-bold text-[#143151] hover:text-[#387E89] transition-colors">
                             {testPhoneNumber}
                           </a>
-                          <div className="mt-1 text-[11px] text-muted-foreground">Available 24/7 • Toll-free</div>
+                          <div className="mt-1 text-[11px] text-muted-foreground">Available 24/7 • Toll-free • Sample agent</div>
                         </div>
 
                         <div className="space-y-2 text-xs text-gray-700">
@@ -3547,13 +3550,22 @@ const ProductWalkthrough: React.FC = () => {
                           </div>
                         </div>
 
-                        <Button className="w-full rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={() => {
-                          setIsTestCalling(true);
-                          toast({ title: "Initiating test call", description: `Calling ${testPhoneNumber}…` });
-                          setTimeout(() => setIsTestCalling(false), 2500);
+                        <Button className="w-full rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={async () => {
+                          try {
+                            await navigator.clipboard.writeText(testPhoneNumber);
+                            setIsTestCalling(true);
+                            toast({ title: "Number copied", description: `${testPhoneNumber} copied to clipboard. Call it from any phone to try the demo.` });
+                            setTimeout(() => setIsTestCalling(false), 2000);
+                          } catch {
+                            toast({ title: "Copy failed", description: "Please copy the number manually." });
+                          }
                         }}>
-                          {isTestCalling ? <><div className="h-2 w-2 rounded-full bg-white animate-pulse mr-2" /> Connecting…</> : <><PhoneCall className="h-4 w-4 mr-2" /> Call test agent now</>}
+                          {isTestCalling ? <><CheckCircle2 className="h-4 w-4 mr-2" /> Copied!</> : <><Copy className="h-4 w-4 mr-2" /> Copy demo number</>}
                         </Button>
+
+                        <p className="text-[11px] text-muted-foreground text-center">
+                          This is a demo experience — your configured agent activates on your own clinic number after go-live.
+                        </p>
 
                         <div className="pt-2 border-t border-[#387E89]/10">
                           <Button variant="outline" size="sm" className="w-full" onClick={() => onNavClick('agent-calls')}>
