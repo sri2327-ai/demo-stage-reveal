@@ -3315,7 +3315,173 @@ const ProductWalkthrough: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid gap-6 lg:grid-cols-2">
+                {/* EHR Auto-Import Banner */}
+                <div className="mt-6 p-4 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-lg bg-white border border-blue-200 flex items-center justify-center flex-shrink-0">
+                    <Server className="h-5 w-5 text-blue-700" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-gray-900 text-sm sm:text-base flex items-center gap-2 flex-wrap">
+                      Patient contacts auto-imported from your EHR
+                      <span className="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-semibold uppercase tracking-wide">Live sync</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                      Demographics, phone numbers, insurance, allergies, active medications and appointment history sync from <span className="font-medium">any EHR</span> — Epic, Cerner, Athena, eClinicalWorks, NextGen, Allscripts, DrChrono, Practice Fusion, Greenway, AdvancedMD, Kareo, OpenEMR and 200+ more are all supported.
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {["Epic", "Cerner", "Athena", "eClinicalWorks", "NextGen", "Allscripts", "DrChrono", "+200 more"].map(e => (
+                        <span key={e} className="px-2 py-0.5 rounded-md bg-white border border-blue-200 text-[10px] font-medium text-blue-700">{e}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Clinic Configuration Form */}
+                <div className="mt-6 grid gap-6 lg:grid-cols-3">
+                  <div className="lg:col-span-2">
+                    <Card className="border-2">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                          <Building2 className="h-4 w-4 text-[#387E89]" />
+                          Clinic Information
+                        </CardTitle>
+                        <p className="text-xs text-muted-foreground">The AI receptionist will use these details to answer patient calls accurately.</p>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Building2 className="h-3 w-3" /> Clinic name</Label>
+                            <Input className="mt-1" value={clinicConfig.clinicName} onChange={e => setClinicConfig(c => ({ ...c, clinicName: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><User className="h-3 w-3" /> Provider / Practice owner</Label>
+                            <Input className="mt-1" value={clinicConfig.providerName} onChange={e => setClinicConfig(c => ({ ...c, providerName: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Sparkles className="h-3 w-3" /> Specialty</Label>
+                            <Input className="mt-1" value={clinicConfig.specialty} onChange={e => setClinicConfig(c => ({ ...c, specialty: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Globe className="h-3 w-3" /> Timezone</Label>
+                            <Input className="mt-1" value={clinicConfig.timezone} onChange={e => setClinicConfig(c => ({ ...c, timezone: e.target.value }))} />
+                          </div>
+                          <div className="sm:col-span-2">
+                            <Label className="text-xs flex items-center gap-1.5"><MapPin className="h-3 w-3" /> Address</Label>
+                            <Input className="mt-1" value={clinicConfig.address} onChange={e => setClinicConfig(c => ({ ...c, address: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Phone className="h-3 w-3" /> Main phone</Label>
+                            <Input className="mt-1" value={clinicConfig.mainPhone} onChange={e => setClinicConfig(c => ({ ...c, mainPhone: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><PhoneCall className="h-3 w-3" /> After-hours / transfer line</Label>
+                            <Input className="mt-1" value={clinicConfig.transferNumber} onChange={e => setClinicConfig(c => ({ ...c, transferNumber: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Mail className="h-3 w-3" /> Front desk email</Label>
+                            <Input className="mt-1" value={clinicConfig.email} onChange={e => setClinicConfig(c => ({ ...c, email: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Clock className="h-3 w-3" /> Office hours</Label>
+                            <Input className="mt-1" value={clinicConfig.hours} onChange={e => setClinicConfig(c => ({ ...c, hours: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Globe className="h-3 w-3" /> Languages spoken</Label>
+                            <Input className="mt-1" value={clinicConfig.languages} onChange={e => setClinicConfig(c => ({ ...c, languages: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Volume2 className="h-3 w-3" /> AI voice</Label>
+                            <Input className="mt-1" value={clinicConfig.voice} onChange={e => setClinicConfig(c => ({ ...c, voice: e.target.value }))} />
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label className="text-xs flex items-center gap-1.5"><MessageSquare className="h-3 w-3" /> Greeting script</Label>
+                          <Textarea className="mt-1" rows={2} value={clinicConfig.greeting} onChange={e => setClinicConfig(c => ({ ...c, greeting: e.target.value }))} />
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><ShieldCheck className="h-3 w-3" /> Insurance accepted</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.insuranceAccepted} onChange={e => setClinicConfig(c => ({ ...c, insuranceAccepted: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><CalendarCheck className="h-3 w-3" /> Appointment types</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.appointmentTypes} onChange={e => setClinicConfig(c => ({ ...c, appointmentTypes: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><Pill className="h-3 w-3" /> Refill policy</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.refillPolicy} onChange={e => setClinicConfig(c => ({ ...c, refillPolicy: e.target.value }))} />
+                          </div>
+                          <div>
+                            <Label className="text-xs flex items-center gap-1.5"><ShieldCheck className="h-3 w-3" /> Emergency / escalation protocol</Label>
+                            <Textarea className="mt-1" rows={2} value={clinicConfig.emergencyProtocol} onChange={e => setClinicConfig(c => ({ ...c, emergencyProtocol: e.target.value }))} />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end pt-2">
+                          <Button size="sm" className="rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={() => toast({ title: "Configuration saved", description: "Your AI receptionist has been updated." })}>
+                            <CheckCircle2 className="h-4 w-4 mr-1.5" />
+                            Save configuration
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Test the agent panel */}
+                  <div>
+                    <Card className="border-2 border-dashed border-[#387E89]/40 bg-gradient-to-br from-[#387E89]/5 to-[#143151]/5 sticky top-4">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                          <PhoneCall className="h-4 w-4 text-[#387E89]" />
+                          Test your AI receptionist
+                        </CardTitle>
+                        <p className="text-xs text-muted-foreground">Call this number from any phone to talk to your configured agent live.</p>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="rounded-xl bg-white border border-[#387E89]/20 p-4 text-center">
+                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Your test line</div>
+                          <a href={`tel:${testPhoneNumber.replace(/\D/g, "")}`} className="block mt-1 text-2xl font-bold text-[#143151] hover:text-[#387E89] transition-colors">
+                            {testPhoneNumber}
+                          </a>
+                          <div className="mt-1 text-[11px] text-muted-foreground">Available 24/7 • Toll-free</div>
+                        </div>
+
+                        <div className="space-y-2 text-xs text-gray-700">
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "I'd like to book a follow-up appointment"</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "I need a refill for my Metformin"</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Try: "What insurance do you accept?"</span>
+                          </div>
+                        </div>
+
+                        <Button className="w-full rounded-lg bg-gradient-to-r from-[#143151] to-[#387E89] text-white" onClick={() => {
+                          setIsTestCalling(true);
+                          toast({ title: "Initiating test call", description: `Calling ${testPhoneNumber}…` });
+                          setTimeout(() => setIsTestCalling(false), 2500);
+                        }}>
+                          {isTestCalling ? <><div className="h-2 w-2 rounded-full bg-white animate-pulse mr-2" /> Connecting…</> : <><PhoneCall className="h-4 w-4 mr-2" /> Call test agent now</>}
+                        </Button>
+
+                        <div className="pt-2 border-t border-[#387E89]/10">
+                          <Button variant="outline" size="sm" className="w-full" onClick={() => onNavClick('agent-calls')}>
+                            <List className="h-3.5 w-3.5 mr-1.5" />
+                            View call logs
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
                   {[{
                   key: 'followups',
                   title: "Follow-up Call Automation",
