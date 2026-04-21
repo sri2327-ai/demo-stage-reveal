@@ -45,8 +45,13 @@ const sections = [{
   product: "scribe"
 }, {
   id: "agent",
-  label: "AI Agent",
-  description: "Set up AI agents for patient communication and support",
+  label: "Configuration",
+  description: "Configure your AI receptionist for your clinic and test it on a live phone number",
+  product: "receptionist"
+}, {
+  id: "agent-calls",
+  label: "Call Logs",
+  description: "Review inbound and outbound calls with transcripts, summaries and triggered actions",
   product: "receptionist"
 }, {
   id: "automations",
