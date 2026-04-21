@@ -253,6 +253,21 @@ const agentMix = [{
 }];
 const ProductWalkthrough: React.FC = () => {
   const [active, setActive] = useState<string>(sections[0].id);
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    // Only auto-scroll on desktop where the sidebar is vertical (>=1024px)
+    if (window.innerWidth < 1024) return;
+    const el = nav.querySelector<HTMLElement>('[data-active-nav="true"]');
+    if (!el) return;
+    const navRect = nav.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    if (elRect.top < navRect.top || elRect.bottom > navRect.bottom) {
+      const offset = elRect.top - navRect.top - (navRect.height / 2) + (elRect.height / 2);
+      nav.scrollTo({ top: nav.scrollTop + offset, behavior: "smooth" });
+    }
+  }, [active]);
   const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [appointments] = useState<Appointment[]>(defaultAppointments);
