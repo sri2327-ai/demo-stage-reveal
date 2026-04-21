@@ -3291,9 +3291,9 @@ const ProductWalkthrough: React.FC = () => {
                     <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gray-100 flex items-center justify-center">
                       <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" aria-hidden />
                     </div>
-                    <span className="text-gray-900 min-w-0 truncate">AI Agent Configuration</span>
+                    <span className="text-gray-900 min-w-0 truncate">AI Receptionist Configuration</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your AI agent to handle patient communications and administrative tasks. Works with your existing calling software, VOIP, etc. - no rip and replace needed.</p>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure your AI receptionist for your clinic. Patient contact details are auto-imported from your EHR — Epic, Cerner, Athena, eClinicalWorks, NextGen, Allscripts, DrChrono, Practice Fusion and 200+ more are all supported out of the box.</p>
                   
                   {/* Agent Status */}
                   <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
