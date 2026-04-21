@@ -19,6 +19,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { specialtyTemplates } from "@/data/specialtyTemplates";
 const sections = [{
+  id: "dashboard",
+  label: "Dashboard",
+  description: "Monitor performance metrics and system analytics across all products",
+  product: "common"
+}, {
   id: "setup",
   label: "Setup",
   description: "Configure your note format and connect to your EHR system",
@@ -59,13 +64,19 @@ const sections = [{
   description: "Configure workflow automations to streamline operations",
   product: "custom"
 }, {
-  id: "dashboard",
-  label: "Dashboard",
-  description: "Monitor performance metrics and system analytics",
-  product: "custom"
+  id: "telehealth-meetings",
+  label: "Meetings",
+  description: "View meeting history and generate invites to share with patients via email or SMS",
+  product: "telehealth"
+}, {
+  id: "telehealth-consult",
+  label: "Consult Room",
+  description: "Live video consult with screen share, group call, annotate, file share, chat, recording, AI scribe and interpreter",
+  product: "telehealth"
 }];
 
 const productGroups: { id: string; label: string; product: string }[] = [
+  { id: "common", label: "Overview", product: "common" },
   { id: "scribe", label: "AI Medical Scribe", product: "scribe" },
   { id: "receptionist", label: "AI Receptionist", product: "receptionist" },
   { id: "custom", label: "Custom AI Automations", product: "custom" },
@@ -80,7 +91,9 @@ const iconById: Record<string, React.ComponentType<any>> = {
   automations: Wand2,
   agent: Bot,
   "agent-calls": Phone,
-  dashboard: BarChart3
+  dashboard: BarChart3,
+  "telehealth-meetings": History,
+  "telehealth-consult": Video
 };
 type Appointment = {
   name: string;
