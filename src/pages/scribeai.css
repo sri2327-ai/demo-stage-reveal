@@ -92,9 +92,9 @@
 }
 .left-nav:not(:hover) .nav-group-divider { margin: 6px 16px; opacity: 0.6; }
 
-/* On mobile bottom-bar, hide group labels, dividers and product strip — keep icons only */
+/* On mobile bottom-bar, hide group labels & dividers — keep icons only */
 @media (max-width: 1024px) {
-  .nav-group-label, .nav-group-divider, .nav-product-strip { display: none; }
+  .nav-group-label, .nav-group-divider { display: none; }
 }
 
 .nav-button {
@@ -124,48 +124,12 @@
   outline-offset: 2px;
 }
 
-.nav-button.active {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--primary) / 0.06));
-  color: hsl(var(--primary));
-  box-shadow: 0 4px 12px hsl(var(--primary) / 0.18), inset 0 0 0 1px hsl(var(--primary) / 0.18);
+.nav-button.active { 
+  background: hsl(var(--primary) / 0.08); 
+  color: hsl(var(--primary)); 
+  box-shadow: 0 2px 4px hsl(var(--primary) / 0.1);
   transform: translateY(-1px);
-  font-weight: 600;
 }
-
-/* Left accent bar on active item */
-.nav-active-bar {
-  position: absolute;
-  left: -12px;
-  top: 8px;
-  bottom: 8px;
-  width: 4px;
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
-  box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
-}
-
-/* Product number badge shown on active row when sidebar is hovered/expanded */
-.nav-active-product-badge {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 18px;
-  min-width: 18px;
-  padding: 0 5px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 700;
-  color: white;
-  background: linear-gradient(135deg, #143151, #387E89);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .25s ease, visibility .25s ease;
-}
-.left-nav:hover .nav-active-product-badge { opacity: 1; visibility: visible; }
-
-/* Highlight the group label of the active product */
-.nav-group-label.active-group { color: hsl(var(--foreground)); }
 
 /* Icons stay visible when collapsed */
 .nav-icon { width: 20px; height: 20px; color: hsl(var(--muted-foreground)); flex-shrink: 0; }
@@ -173,45 +137,6 @@
 
 .nav-text { opacity: 0; visibility: hidden; transition: all .25s ease; white-space: nowrap; }
 .left-nav:hover .nav-text { opacity: 1; visibility: visible; }
-
-/* Product strip — always-visible 1·2·3·4 indicator (collapsed clarity) */
-.nav-product-strip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 0 12px;
-  margin-bottom: 8px;
-  border-bottom: 1px dashed hsl(var(--border));
-  width: 100%;
-}
-.nav-product-chip {
-  width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--muted) / 0.4);
-  color: hsl(var(--muted-foreground));
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .2s ease;
-}
-.nav-product-chip:hover {
-  background: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
-  border-color: hsl(var(--primary) / 0.4);
-  transform: scale(1.05);
-}
-.nav-product-chip.active {
-  background: linear-gradient(135deg, #143151, #387E89);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 10px hsl(var(--primary) / 0.35);
-}
 
 .main-content { flex: 1; min-width: 0; background: hsl(var(--background)); margin-left: 80px; }
 

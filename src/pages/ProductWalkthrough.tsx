@@ -253,21 +253,6 @@ const agentMix = [{
 }];
 const ProductWalkthrough: React.FC = () => {
   const [active, setActive] = useState<string>(sections[0].id);
-  const navRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
-    // Only auto-scroll on desktop where the sidebar is vertical (>=1024px)
-    if (window.innerWidth < 1024) return;
-    const el = nav.querySelector<HTMLElement>('[data-active-nav="true"]');
-    if (!el) return;
-    const navRect = nav.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    if (elRect.top < navRect.top || elRect.bottom > navRect.bottom) {
-      const offset = elRect.top - navRect.top - (navRect.height / 2) + (elRect.height / 2);
-      nav.scrollTo({ top: nav.scrollTop + offset, behavior: "smooth" });
-    }
-  }, [active]);
   const [selectedEhr, setSelectedEhr] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [appointments] = useState<Appointment[]>(defaultAppointments);
@@ -892,44 +877,18 @@ const ProductWalkthrough: React.FC = () => {
         </div>}
 
       <div className="scribeai-layout">
-        <aside className="left-nav" ref={navRef}>
+        <aside className="left-nav">
           <div className="nav-brand">
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
-
-          {/* Collapsed-mode product strip — always visible so providers see 4 products at a glance */}
-          {(() => {
-            const activeProduct = sections.find(s => s.id === active)?.product;
-            return (
-              <div className="nav-product-strip" aria-label="Four products in this demo">
-                {productGroups.filter(g => g.productNumber).map(g => (
-                  <button
-                    key={g.id}
-                    type="button"
-                    className={`nav-product-chip ${activeProduct === g.product ? "active" : ""}`}
-                    title={g.label}
-                    aria-label={`${g.label} — product ${g.productNumber}`}
-                    onClick={() => {
-                      const first = sections.find(s => s.product === g.product);
-                      if (first) onNavClick(first.id);
-                    }}
-                  >
-                    {g.productNumber}
-                  </button>
-                ))}
-              </div>
-            );
-          })()}
-
           <ul className="nav-list">
             {productGroups.map((group, gIdx) => {
               const groupSections = sections.filter(s => s.product === group.product);
               const isComingSoon = groupSections.length === 0;
-              const groupHasActive = groupSections.some(s => s.id === active);
               return (
                 <React.Fragment key={group.id}>
                   {gIdx > 0 && <li className="nav-group-divider" aria-hidden />}
-                  <li className={`nav-group-label ${groupHasActive ? "active-group" : ""}`}>
+                  <li className="nav-group-label">
                     <span className="nav-group-text flex items-center gap-2">
                       {group.productNumber && (
                         <span className="inline-flex h-4 w-4 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[9px] font-bold items-center justify-center flex-shrink-0">
@@ -942,25 +901,15 @@ const ProductWalkthrough: React.FC = () => {
                   </li>
                   {groupSections.map(s => {
                     const Icon = iconById[s.id];
-                    const isActive = active === s.id;
                     return <li key={s.id} className="nav-item">
                       <div className="relative">
-                        <button
-                          data-active-nav={isActive ? "true" : undefined}
-                          className={`nav-button ${isActive ? "active" : ""}`}
-                          onClick={() => onNavClick(s.id)}
-                          onMouseEnter={() => { setActiveTooltip(s.id); }}
-                          onMouseLeave={() => { setActiveTooltip(null); }}
-                          aria-current={isActive ? "step" : undefined}
-                          data-screen={s.id}
-                          title={s.description}
-                        >
-                          {isActive && <span className="nav-active-bar" aria-hidden />}
+                        <button className={`nav-button ${active === s.id ? "active" : ""}`} onClick={() => onNavClick(s.id)} onMouseEnter={() => {
+                          setActiveTooltip(s.id);
+                        }} onMouseLeave={() => {
+                          setActiveTooltip(null);
+                        }} aria-current={active === s.id ? "step" : undefined} data-screen={s.id} title={s.description}>
                           {Icon ? <Icon className="nav-icon" aria-hidden /> : null}
                           <span className="nav-text">{s.label}</span>
-                          {isActive && group.productNumber && (
-                            <span className="nav-active-product-badge" aria-hidden>{group.productNumber}</span>
-                          )}
                         </button>
                         {activeTooltip === s.id && <div className="tooltip-container">
                           <div className="tooltip-content">
