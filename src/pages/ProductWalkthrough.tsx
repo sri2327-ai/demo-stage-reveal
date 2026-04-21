@@ -877,7 +877,7 @@ const ProductWalkthrough: React.FC = () => {
         </div>}
 
       <div className="scribeai-layout">
-        <aside className="left-nav">
+        <aside className="left-nav" ref={navRef}>
           <div className="nav-brand">
             <img src="/lovable-uploads/ce200032-a0a3-4dd3-80e9-8c560c7c1e14.png" alt="S10.AI logo" className="nav-logo" />
           </div>
@@ -931,7 +931,7 @@ const ProductWalkthrough: React.FC = () => {
                     return <li key={s.id} className="nav-item">
                       <div className="relative">
                         <button
-                          ref={isActive ? (el) => { el?.scrollIntoView({ block: "nearest", behavior: "smooth" }); } : undefined}
+                          data-active-nav={isActive ? "true" : undefined}
                           className={`nav-button ${isActive ? "active" : ""}`}
                           onClick={() => onNavClick(s.id)}
                           onMouseEnter={() => { setActiveTooltip(s.id); }}
