@@ -3892,6 +3892,371 @@ const ProductWalkthrough: React.FC = () => {
                 </div>
               </div>
             </section>
+
+            {/* Telehealth – Meetings */}
+            <section id="telehealth-meetings" className={`screen ${active === "telehealth-meetings" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+                <div>
+                  <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                    <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-[#387E89]/10 flex items-center justify-center">
+                      <Video className="h-3 w-3 sm:h-4 sm:w-4 text-[#143151]" aria-hidden />
+                    </div>
+                    <span className="text-gray-900">Telehealth Meetings</span>
+                  </h2>
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Generate meeting invites for patients and review your virtual visit history.</p>
+                </div>
+
+                <div className="mt-6 grid gap-6 lg:grid-cols-5">
+                  {/* Generate Meeting Invite */}
+                  <Card className="lg:col-span-2 border-2 border-dashed border-[#387E89]/40 bg-gradient-to-br from-[#143151]/5 via-background to-[#387E89]/5">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#143151] to-[#387E89] text-white flex items-center justify-center shrink-0">
+                          <UserPlus className="h-5 w-5" aria-hidden />
+                        </div>
+                        <div>
+                          <CardTitle className="text-base sm:text-lg font-semibold text-gray-900">Generate Meeting Invite</CardTitle>
+                          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Send a secure video link to your patient via email or SMS.</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="th-patient" className="text-xs">Patient name</Label>
+                          <Input id="th-patient" value={meetingForm.patientName} onChange={(e) => setMeetingForm({ ...meetingForm, patientName: e.target.value })} placeholder="John Doe" className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="th-type" className="text-xs">Visit type</Label>
+                          <Select value={meetingForm.visitType} onValueChange={(v) => setMeetingForm({ ...meetingForm, visitType: v })}>
+                            <SelectTrigger id="th-type" className="mt-1"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Follow-up">Follow-up</SelectItem>
+                              <SelectItem value="New Patient">New Patient</SelectItem>
+                              <SelectItem value="Consultation">Consultation</SelectItem>
+                              <SelectItem value="Urgent Care">Urgent Care</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="th-email" className="text-xs">Email</Label>
+                          <Input id="th-email" type="email" value={meetingForm.patientEmail} onChange={(e) => setMeetingForm({ ...meetingForm, patientEmail: e.target.value })} placeholder="patient@email.com" className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="th-phone" className="text-xs">Phone (SMS)</Label>
+                          <Input id="th-phone" value={meetingForm.patientPhone} onChange={(e) => setMeetingForm({ ...meetingForm, patientPhone: e.target.value })} placeholder="+1 (555) 555-0123" className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="th-date" className="text-xs">Date</Label>
+                          <Input id="th-date" type="date" value={meetingForm.date} onChange={(e) => setMeetingForm({ ...meetingForm, date: e.target.value })} className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="th-time" className="text-xs">Time</Label>
+                          <Input id="th-time" type="time" value={meetingForm.time} onChange={(e) => setMeetingForm({ ...meetingForm, time: e.target.value })} className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="th-duration" className="text-xs">Duration (min)</Label>
+                          <Select value={meetingForm.duration} onValueChange={(v) => setMeetingForm({ ...meetingForm, duration: v })}>
+                            <SelectTrigger id="th-duration" className="mt-1"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="15">15</SelectItem>
+                              <SelectItem value="30">30</SelectItem>
+                              <SelectItem value="45">45</SelectItem>
+                              <SelectItem value="60">60</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="th-send" className="text-xs">Send via</Label>
+                          <Select value={meetingForm.sendVia} onValueChange={(v) => setMeetingForm({ ...meetingForm, sendVia: v as any })}>
+                            <SelectTrigger id="th-send" className="mt-1"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="email">Email</SelectItem>
+                              <SelectItem value="sms">SMS</SelectItem>
+                              <SelectItem value="both">Email + SMS</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="th-notes" className="text-xs">Notes for the patient (optional)</Label>
+                        <Textarea id="th-notes" value={meetingForm.notes} onChange={(e) => setMeetingForm({ ...meetingForm, notes: e.target.value })} placeholder="Please join 5 minutes early and have your insurance card handy." className="mt-1 min-h-[60px] text-sm" />
+                      </div>
+                      <Button
+                        className="w-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white"
+                        onClick={() => {
+                          const id = `S10-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+                          const passcode = Math.floor(100000 + Math.random() * 900000).toString();
+                          const link = `https://meet.s10.ai/${id}`;
+                          setGeneratedMeeting({ link, id, passcode });
+                          toast({ title: "Invite sent", description: `Meeting invite sent to patient via ${meetingForm.sendVia.toUpperCase()}.` });
+                        }}
+                      >
+                        <Send className="h-4 w-4 mr-2" /> Generate & Send Invite
+                      </Button>
+
+                      {generatedMeeting && (
+                        <div className="rounded-lg border bg-background p-3 space-y-2">
+                          <div className="flex items-center gap-2 text-xs font-semibold text-green-700">
+                            <CheckCircle2 className="h-4 w-4" /> Invite sent successfully
+                          </div>
+                          <div className="text-xs text-muted-foreground">Meeting link</div>
+                          <div className="flex items-center gap-2">
+                            <code className="text-xs bg-muted px-2 py-1 rounded flex-1 truncate">{generatedMeeting.link}</code>
+                            <Button size="sm" variant="outline" onClick={() => { navigator.clipboard.writeText(generatedMeeting.link); toast({ title: "Copied" }); }}>
+                              <Copy className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                          <div className="flex items-center gap-4 text-xs">
+                            <span><span className="text-muted-foreground">ID:</span> <span className="font-mono">{generatedMeeting.id}</span></span>
+                            <span><span className="text-muted-foreground">Passcode:</span> <span className="font-mono">{generatedMeeting.passcode}</span></span>
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+
+                  {/* Meeting History */}
+                  <Card className="lg:col-span-3">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-xl bg-[#387E89]/10 text-[#143151] flex items-center justify-center">
+                            <History className="h-5 w-5" aria-hidden />
+                          </div>
+                          <div>
+                            <CardTitle className="text-base sm:text-lg font-semibold text-gray-900">Meeting History</CardTitle>
+                            <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">All telehealth visits with status, recording and AI feature usage.</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="relative">
+                            <Search className="h-3.5 w-3.5 absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                            <Input placeholder="Search patient" className="h-8 pl-7 text-xs w-40" />
+                          </div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {meetingHistory.map((m) => (
+                          <div key={m.id} className="flex items-center justify-between gap-3 rounded-lg border bg-background p-3 hover:shadow-sm transition-shadow">
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className={`h-9 w-9 rounded-lg flex items-center justify-center shrink-0 ${m.status === "completed" ? "bg-green-50 text-green-700" : m.status === "scheduled" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-700"}`}>
+                                <Video className="h-4 w-4" />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="text-sm font-semibold text-gray-900 truncate">{m.patient} <span className="text-xs font-normal text-muted-foreground">• {m.mrn}</span></div>
+                                <div className="text-xs text-muted-foreground flex items-center gap-2 flex-wrap">
+                                  <span>{m.date}</span>
+                                  <span>•</span>
+                                  <span>{m.type}</span>
+                                  <span>•</span>
+                                  <span>{m.duration}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                              {m.scribe && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#387E89]/10 text-[#143151] font-medium">Scribe</span>}
+                              {m.interpreter && <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-50 text-purple-700 font-medium">Interpreter</span>}
+                              {m.recorded && <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 font-medium">Recorded</span>}
+                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium capitalize ${m.status === "completed" ? "bg-green-50 text-green-700" : m.status === "scheduled" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-700"}`}>{m.status}</span>
+                              <Button size="sm" variant="ghost" className="h-7 px-2 text-xs">
+                                <Eye className="h-3.5 w-3.5 mr-1" /> View
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Telehealth – Consult Room */}
+            <section id="telehealth-consult" className={`screen ${active === "telehealth-consult" ? "" : "hidden"}`}>
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <div>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight flex items-center gap-2">
+                      <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-[#387E89]/10 flex items-center justify-center">
+                        <Video className="h-3 w-3 sm:h-4 sm:w-4 text-[#143151]" aria-hidden />
+                      </div>
+                      <span className="text-gray-900">Live Consult Room</span>
+                    </h2>
+                    <p className="mt-1 text-muted-foreground text-sm sm:text-base">In-call with John Doe • Follow-up • {Math.floor(seconds / 60).toString().padStart(2, "0")}:{(seconds % 60).toString().padStart(2, "0")}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-green-50 text-green-700 font-medium">
+                      <span className="h-2 w-2 rounded-full bg-green-600 animate-pulse" /> Live • Encrypted
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid gap-4 lg:grid-cols-4">
+                  {/* Video stage */}
+                  <div className="lg:col-span-3 space-y-4">
+                    <div className="relative rounded-xl bg-gray-900 aspect-video overflow-hidden border">
+                      {/* Patient video placeholder */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+                        <div className="text-center">
+                          <div className="h-24 w-24 rounded-full bg-gradient-to-br from-[#143151] to-[#387E89] mx-auto flex items-center justify-center text-white text-3xl font-semibold">
+                            JD
+                          </div>
+                          <div className="mt-3 text-white text-sm font-medium">John Doe</div>
+                          <div className="text-gray-400 text-xs">Patient • Camera on</div>
+                        </div>
+                      </div>
+
+                      {/* Provider thumbnail */}
+                      <div className="absolute bottom-3 right-3 h-28 w-44 rounded-lg bg-gray-700 border-2 border-white/20 overflow-hidden flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="h-10 w-10 rounded-full bg-[#387E89] mx-auto flex items-center justify-center text-white text-sm font-semibold">EC</div>
+                          <div className="mt-1 text-white text-[10px]">Dr. Carter (You)</div>
+                        </div>
+                      </div>
+
+                      {/* Active feature badges */}
+                      <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                        {consultFeatures.aiScribe && (
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-[#387E89]/90 text-white font-medium backdrop-blur">
+                            <Mic2 className="h-3 w-3" /> AI Scribe • Listening
+                          </span>
+                        )}
+                        {consultFeatures.interpreter && (
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-purple-600/90 text-white font-medium backdrop-blur">
+                            <Languages className="h-3 w-3" /> Interpreter • EN ↔ ES
+                          </span>
+                        )}
+                        {consultFeatures.recording && (
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-red-600/90 text-white font-medium backdrop-blur">
+                            <Circle className="h-3 w-3 fill-white" /> Recording
+                          </span>
+                        )}
+                        {consultFeatures.screenShare && (
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-amber-500/90 text-white font-medium backdrop-blur">
+                            <ScreenShare className="h-3 w-3" /> Screen sharing
+                          </span>
+                        )}
+                        {consultFeatures.annotate && (
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-blue-600/90 text-white font-medium backdrop-blur">
+                            <PenTool className="h-3 w-3" /> Annotation
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Control bar */}
+                    <Card>
+                      <CardContent className="p-3">
+                        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
+                          {[
+                            { key: "mic", label: "Mute", icon: Mic, active: true },
+                            { key: "cam", label: "Camera", icon: Video, active: true },
+                            { key: "screenShare", label: "Share", icon: ScreenShare, active: consultFeatures.screenShare, toggle: () => setConsultFeatures(f => ({ ...f, screenShare: !f.screenShare })) },
+                            { key: "annotate", label: "Annotate", icon: PenTool, active: consultFeatures.annotate, toggle: () => setConsultFeatures(f => ({ ...f, annotate: !f.annotate })) },
+                            { key: "file", label: "File", icon: Paperclip, active: false, toggle: () => toast({ title: "File shared", description: "lab-results.pdf sent to patient." }) },
+                            { key: "chat", label: "Chat", icon: MessageCircle, active: true },
+                            { key: "group", label: "Invite", icon: Users, active: false, toggle: () => toast({ title: "Invitation sent", description: "Care team member invited to call." }) },
+                            { key: "record", label: "Record", icon: Circle, active: consultFeatures.recording, toggle: () => setConsultFeatures(f => ({ ...f, recording: !f.recording })) },
+                            { key: "end", label: "End", icon: PhoneCall, danger: true }
+                          ].map((b: any) => {
+                            const Icon = b.icon;
+                            return (
+                              <button
+                                key={b.key}
+                                onClick={b.toggle}
+                                className={`flex flex-col items-center justify-center gap-1 rounded-lg border p-2 text-xs font-medium transition-all
+                                  ${b.danger ? "bg-red-600 text-white border-red-600 hover:bg-red-700" : b.active ? "bg-[#143151] text-white border-[#143151]" : "bg-background text-gray-700 hover:bg-muted"}`}
+                              >
+                                <Icon className={`h-4 w-4 ${b.danger ? "rotate-[135deg]" : ""}`} />
+                                {b.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* AI Scribe Live transcript */}
+                    {consultFeatures.aiScribe && (
+                      <Card>
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                            <Mic2 className="h-4 w-4 text-[#387E89]" /> AI Scribe — Live Transcript
+                            {consultFeatures.interpreter && <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-100 text-purple-700">Auto-translated</span>}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2 max-h-48 overflow-auto text-sm">
+                          <div><span className="font-semibold text-[#143151]">Dr. Carter:</span> <span className="text-gray-700">How have you been feeling since we adjusted the dose?</span></div>
+                          <div><span className="font-semibold text-[#387E89]">John:</span> <span className="text-gray-700">Better overall, but I get a mild headache in the mornings.</span></div>
+                          <div><span className="font-semibold text-[#143151]">Dr. Carter:</span> <span className="text-gray-700">Any nausea or dizziness?</span></div>
+                          <div><span className="font-semibold text-[#387E89]">John:</span> <span className="text-gray-700">No, just the headache.</span></div>
+                          <div className="text-xs text-muted-foreground italic">SOAP note generating in the background…</div>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </div>
+
+                  {/* Side panel: features + chat */}
+                  <div className="lg:col-span-1 space-y-4">
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                          <Sparkles className="h-4 w-4 text-[#387E89]" /> AI Features
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div className="min-w-0">
+                            <div className="text-sm font-medium flex items-center gap-1.5"><Mic2 className="h-3.5 w-3.5" /> AI Scribe</div>
+                            <p className="text-[11px] text-muted-foreground">Auto-generates the SOAP note.</p>
+                          </div>
+                          <Switch checked={consultFeatures.aiScribe} onCheckedChange={(v) => setConsultFeatures(f => ({ ...f, aiScribe: v }))} />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="min-w-0">
+                            <div className="text-sm font-medium flex items-center gap-1.5"><Languages className="h-3.5 w-3.5" /> Interpreter</div>
+                            <p className="text-[11px] text-muted-foreground">Real-time translation in 50+ languages.</p>
+                          </div>
+                          <Switch checked={consultFeatures.interpreter} onCheckedChange={(v) => setConsultFeatures(f => ({ ...f, interpreter: v }))} />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="min-w-0">
+                            <div className="text-sm font-medium flex items-center gap-1.5"><Circle className="h-3.5 w-3.5" /> Recording</div>
+                            <p className="text-[11px] text-muted-foreground">Encrypted, consent-required.</p>
+                          </div>
+                          <Switch checked={consultFeatures.recording} onCheckedChange={(v) => setConsultFeatures(f => ({ ...f, recording: v }))} />
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="flex flex-col">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                          <MessageCircle className="h-4 w-4 text-[#387E89]" /> In-call Chat
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 max-h-56 overflow-auto">
+                        {chatMessages.map((m, i) => (
+                          <div key={i} className={`text-xs ${m.from === "Provider" ? "text-right" : "text-left"}`}>
+                            <div className={`inline-block px-2.5 py-1.5 rounded-lg max-w-[85%] ${m.from === "Provider" ? "bg-[#143151] text-white" : "bg-muted text-gray-800"}`}>
+                              {m.text}
+                            </div>
+                            <div className="text-[10px] text-muted-foreground mt-0.5">{m.from} • {m.ts}</div>
+                          </div>
+                        ))}
+                        <div className="flex items-center gap-2 pt-2 border-t">
+                          <Input placeholder="Type a message…" className="h-8 text-xs" />
+                          <Button size="sm" className="h-8 bg-[#143151] hover:bg-[#0d1f31] text-white"><Send className="h-3.5 w-3.5" /></Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
           </main>
         </div>
 
