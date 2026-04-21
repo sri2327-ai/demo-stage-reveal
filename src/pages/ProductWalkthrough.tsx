@@ -3185,94 +3185,13 @@ const ProductWalkthrough: React.FC = () => {
                     <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-lg bg-gray-100 flex items-center justify-center">
                       <Wand2 className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" aria-hidden />
                     </div>
-                    <span className="text-gray-900 min-w-0 truncate">Workflow Automations</span>
+                    <span className="text-gray-900 min-w-0 truncate">Custom AI Automations</span>
                   </h2>
-                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Configure automatic workflows to streamline your practice operations.</p>
-                  
-                  {/* Status Bar */}
-                  <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-50/50 rounded-xl border border-gray-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-gray-600" />
-                        <div>
-                          <div className="font-medium text-gray-800">Automation Engine Active</div>
-                          <div className="text-sm text-gray-600">4 workflows configured • Processing 850+ tasks/month</div>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="h-2 w-2 rounded-full bg-gray-500 animate-pulse"></div>
-                        <span>Real-time monitoring</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid gap-6 lg:grid-cols-2">
-                  {[{
-                  key: "patientInstructions",
-                  title: "Auto-Generate Patient Instructions",
-                  description: "Automatically create after-visit summaries and patient instructions based on the visit notes.",
-                  enabled: automations.patientInstructions,
-                  color: "green",
-                  options: ["Email to Patient", "Send to Patient Portal", "Print Instructions"]
-                }, {
-                  key: "followupReminders",
-                  title: "Schedule Follow-up Reminders",
-                  description: "Set automatic reminders for patients who need follow-up appointments based on their diagnosis.",
-                  enabled: automations.followupReminders,
-                  color: "blue"
-                }, {
-                  key: "labOrders",
-                  title: "Lab Order Processing",
-                  description: "Automatically process and track lab orders mentioned in the current visit notes and send them to the lab.",
-                  enabled: automations.labOrders,
-                  color: "gray"
-                }, {
-                  key: "prescriptionRefills",
-                  title: "Prescription Refill Alerts",
-                  description: "Alert when patients are due for prescription refills and send prescription orders from the current visit to pharmacy.",
-                  enabled: automations.prescriptionRefills,
-                  color: "orange"
-                }].map((automation, index) => <Card key={automation.key} className="border-2 bg-gradient-to-br from-background to-gray-50/20 hover:shadow-lg transition-shadow">
-                      <CardHeader className="pb-4">
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-start gap-3">
-                            <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${automation.enabled ? `bg-${automation.color}-100` : 'bg-gray-100'}`}>
-                              <div className={`h-3 w-3 rounded-full ${automation.enabled ? `bg-${automation.color}-500` : 'bg-gray-400'}`}></div>
-                            </div>
-                            <div>
-                              <CardTitle className="text-lg text-gray-900">{automation.title}</CardTitle>
-                              <p className="text-sm text-muted-foreground mt-1">{automation.description}</p>
-                              {automation.options && automation.enabled && <div className="mt-2 flex flex-wrap gap-1">
-                                  {automation.options.map((option, idx) => <span key={idx} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                                      {option}
-                                    </span>)}
-                                </div>}
-                            </div>
-                          </div>
-                          <Switch checked={automation.enabled} onCheckedChange={checked => setAutomations(prev => ({
-                        ...prev,
-                        [automation.key]: checked
-                      }))} />
-                        </div>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="flex items-center justify-between">
-                          <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-gray-700 hover:bg-gray-50">
-                            <Settings className="h-3 w-3 mr-2" />
-                            Configure
-                          </Button>
-                          {automation.enabled && <div className="text-xs text-green-600 flex items-center gap-1">
-                              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              Active
-                            </div>}
-                        </div>
-                      </CardContent>
-                    </Card>)}
+                  <p className="mt-1 text-muted-foreground text-sm sm:text-base">Any repetitive workflow in your practice — designed, built and maintained by our automation team.</p>
                 </div>
 
                 {/* Build Your Own Custom Automation */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <Card className="border-2 border-dashed border-[#387E89]/40 bg-gradient-to-br from-[#143151]/5 via-background to-[#387E89]/5">
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between gap-3 flex-wrap">
