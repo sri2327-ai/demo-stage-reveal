@@ -330,7 +330,7 @@ const ProductWalkthrough: React.FC = () => {
     refillPolicy: "Allow refills for chronic medications with active Rx in last 12 months. Escalate controlled substances.",
     emergencyProtocol: "If patient mentions chest pain, stroke symptoms, or suicidal ideation → instruct to call 911 immediately and notify on-call provider."
   });
-  const testPhoneNumber = "+1 (737) 209-AI10";
+  const testPhoneNumber = "+1 (518) 520-6214";
   const [isTestCalling, setIsTestCalling] = useState(false);
 
   // Telehealth state
