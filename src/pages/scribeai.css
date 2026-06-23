@@ -430,3 +430,112 @@
   .main-content { padding-bottom: 88px; }
   .screen { min-height: calc(100vh - 56px); }
 }
+
+/* ===========================================================
+   ScribeAI Brand Theme Override
+   Applies new navy/teal palette + Instrument Serif / Inter / JetBrains Mono.
+   Scoped to .scribeai-layout so it doesn't leak elsewhere.
+   =========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+.scribeai-layout {
+  /* Brand palette (HSL approximations of the supplied OKLCH tokens) */
+  --navy: 212 60% 20%;          /* #143151 */
+  --navy-soft: 213 44% 28%;     /* ~#274868 */
+  --teal: 187 42% 38%;          /* #387E89 */
+  --teal-soft: 187 30% 74%;     /* ~#A8CDD2 */
+  --teal-deep: 190 58% 30%;     /* ~#1F6A78 */
+  --teal-bright: 188 55% 60%;   /* ~#5FC4D0 */
+  --steel: 201 36% 50%;         /* #5192AE */
+  --steel-text: 201 42% 43%;    /* ~#3F7E9C */
+  --pink: 340 82% 66%;          /* #F06292 */
+  --pink-text: 343 55% 54%;     /* ~#C84A6E */
+  --pink-soft: 0 67% 94%;       /* ~#FBE4E4 */
+  --paper: 60 33% 98%;          /* warm off-white */
+  --cream: 48 40% 95%;
+  --ink: 225 30% 12%;           /* near-black w/ navy tint */
+  --line: 220 14% 88%;
+
+  /* Map shadcn semantic tokens to the brand palette */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: 0 0% 100%;
+  --card-foreground: var(--ink);
+  --popover: 0 0% 100%;
+  --popover-foreground: var(--ink);
+  --primary: var(--navy);
+  --primary-foreground: var(--paper);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream);
+  --muted-foreground: 225 10% 42%;
+  --accent: var(--teal);
+  --accent-foreground: 0 0% 100%;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--teal);
+  --radius: 0.75rem;
+
+  /* Typography */
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+}
+
+.scribeai-layout h1,
+.scribeai-layout h2,
+.scribeai-layout h3,
+.scribeai-layout .font-display,
+.scribeai-layout [class*="text-3xl"],
+.scribeai-layout [class*="text-4xl"],
+.scribeai-layout [class*="text-5xl"] {
+  font-family: var(--font-display);
+  font-feature-settings: "liga", "dlig";
+  letter-spacing: -0.01em;
+}
+
+.scribeai-layout code,
+.scribeai-layout kbd,
+.scribeai-layout pre,
+.scribeai-layout .font-mono,
+.scribeai-layout [class*="tabular-nums"] {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum", "zero";
+}
+
+/* Signature gradient utilities, scoped */
+.scribeai-layout .btn-gradient,
+.scribeai-layout .bg-gradient-primary {
+  background: linear-gradient(135deg, hsl(var(--navy)), hsl(var(--teal)));
+  color: hsl(var(--paper));
+  box-shadow: 0 6px 20px hsl(var(--navy) / 0.18), 0 2px 6px hsl(var(--teal) / 0.18);
+}
+.scribeai-layout .text-gradient {
+  background: linear-gradient(135deg, hsl(var(--navy)), hsl(var(--teal)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Text selection — 22% teal over ink */
+.scribeai-layout ::selection {
+  background: hsl(var(--teal) / 0.22);
+  color: hsl(var(--ink));
+}
+
+/* Active nav uses the teal accent for a brand-true highlight */
+.scribeai-layout .nav-button.active {
+  background: hsl(var(--teal) / 0.10);
+  color: hsl(var(--teal-deep));
+  box-shadow: 0 2px 4px hsl(var(--teal) / 0.15);
+}
+.scribeai-layout .nav-button.active .nav-icon,
+.scribeai-layout .left-nav:hover .nav-icon {
+  color: hsl(var(--teal-deep));
+}
