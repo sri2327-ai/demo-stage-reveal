@@ -67,8 +67,8 @@ export const WelcomeForm = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-6 text-4xl sm:text-5xl lg:text-6xl text-[#143151] leading-[1.05] font-light"
-            style={{ fontFamily: SERIF, fontWeight: 300, letterSpacing: '-0.02em' }}
+            className="mt-6 text-4xl sm:text-5xl lg:text-6xl text-[#143151] leading-[1.05] font-extralight"
+            style={{ fontFamily: SERIF, fontWeight: 200, letterSpacing: '-0.02em' }}
           >
             Welcome to the S10.AI Interactive Demo.
           </motion.h1>
