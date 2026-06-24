@@ -4410,19 +4410,19 @@ const ProductWalkthrough: React.FC = () => {
 
         {/* Demo Conversion Popup */}
         <AlertDialog open={showDemoPopup} onOpenChange={setShowDemoPopup}>
-          <AlertDialogContent className="max-w-md mx-4 sm:mx-auto">
+          <AlertDialogContent className="max-w-md mx-4 sm:mx-auto bg-white/90 backdrop-blur rounded-2xl shadow-[0_20px_60px_-20px_rgba(20,49,81,0.25)] border border-[#387E89]/15 p-6 sm:p-8">
             <AlertDialogHeader className="text-center space-y-4">
               <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#143151] to-[#387E89] rounded-full flex items-center justify-center shadow-lg">
                 <CalendarDays className="h-8 w-8 text-white" />
               </div>
-              <AlertDialogTitle className="text-lg sm:text-xl font-semibold">
+              <AlertDialogTitle className="text-2xl sm:text-3xl font-extralight text-[#143151]" style={{ fontFamily: "'Instrument Serif', ui-serif, Georgia, serif", letterSpacing: '-0.02em' }}>
                 Ready to see S10.AI in action?
               </AlertDialogTitle>
-              <AlertDialogDescription className="text-sm sm:text-base leading-relaxed">
+              <AlertDialogDescription className="text-sm sm:text-base leading-relaxed text-[#274868]">
                 You've explored a walkthrough of all four S10.AI products — AI Medical Scribe, AI Receptionist, Telehealth, and Custom AI Agents. Now see how the full suite fits your practice with a personalized demo.
                 <br /><br />
-                <strong>Get your custom demo and see:</strong>
-                <ul className="text-left mt-2 space-y-1 text-sm">
+                <span className="text-[#143151] font-medium">Get your custom demo and see:</span>
+                <ul className="text-left mt-2 space-y-1 text-sm text-[#274868]">
                   <li>• AI Medical Scribe with your specialty templates & EHR</li>
                   <li>• AI Receptionist handling calls, scheduling & intake</li>
                   <li>• Telehealth with built-in scribe, interpreter & sharing</li>
@@ -4431,11 +4431,11 @@ const ProductWalkthrough: React.FC = () => {
                 </ul>
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row gap-2">
-              <AlertDialogCancel onClick={handleClosePopup} className="order-2 sm:order-1 w-full sm:w-auto">
+            <AlertDialogFooter className="flex-col space-y-2 sm:space-y-0 sm:flex-row gap-2 mt-2">
+              <AlertDialogCancel onClick={handleClosePopup} className="order-2 sm:order-1 w-full sm:w-auto h-12 rounded-full border-[#387E89]/25 text-[#274868] hover:bg-[#387E89]/5 hover:text-[#143151] transition-all">
                 Maybe Later
               </AlertDialogCancel>
-              <AlertDialogAction onClick={handleBookDemo} className="order-1 sm:order-2 w-full sm:w-auto bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-xl font-semibold px-6 transition-all">
+              <AlertDialogAction onClick={handleBookDemo} className="order-1 sm:order-2 w-full sm:w-auto h-12 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white shadow-[0_10px_30px_-10px_rgba(20,49,81,0.5)] font-medium px-6 transition-all">
                 Book Free Demo
               </AlertDialogAction>
             </AlertDialogFooter>
