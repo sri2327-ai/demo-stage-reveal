@@ -56,8 +56,8 @@ export const WelcomeForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-center">
+    <div className="scribeai-layout min-h-screen bg-gradient-to-b from-[#A8CDD2]/30 via-[#FAF8F2] to-white flex items-center justify-center px-4 py-12 relative overflow-hidden">
+      <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-center relative z-10">
         <div>
           <motion.div
             className="mb-6"
@@ -65,14 +65,15 @@ export const WelcomeForm = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 inline-flex items-center gap-2 rounded-full">
-              <Hospital className="w-4 h-4 text-black" />
-              <span className="text-black text-sm font-medium">Designed for Healthcare Providers</span>
+            <div className="bg-gradient-to-r from-[#143151]/10 to-[#387E89]/15 backdrop-blur-sm border border-[#387E89]/20 px-3 py-1.5 inline-flex items-center gap-2 rounded-full">
+              <Hospital className="w-4 h-4 text-[#143151]" />
+              <span className="text-[#143151] text-sm font-medium">Designed for Healthcare Providers</span>
             </div>
           </motion.div>
 
           <motion.h1 
-            className="text-3xl sm:text-4xl font-bold text-black mb-4"
+            className="text-3xl sm:text-5xl font-normal text-[#143151] mb-4"
+            style={{ fontFamily: "'Instrument Serif', ui-serif, Georgia, serif", letterSpacing: '-0.01em' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -81,7 +82,7 @@ export const WelcomeForm = () => {
           </motion.h1>
           
           <motion.p
-            className="text-gray-700 mb-6"
+            className="text-[#274868] mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -99,24 +100,29 @@ export const WelcomeForm = () => {
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 rounded-full">
                 <Users className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm text-gray-700">Trusted by over 1,000 healthcare professionals</p>
+              <p className="text-sm text-[#274868]">Trusted by over 1,000 healthcare professionals</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-gradient-to-r from-[#143151] to-[#387E89] p-2 rounded-full">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm text-gray-700">Reduces documentation time by up to 75%</p>
+              <p className="text-sm text-[#274868]">Reduces documentation time by up to 75%</p>
             </div>
           </motion.div>
         </div>
         
         <motion.div
-          className="bg-white rounded-2xl shadow-xl border border-[#387E89]/10 p-6 sm:p-8"
+          className="bg-white rounded-2xl shadow-xl border border-[#387E89]/15 p-6 sm:p-8"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="text-xl font-bold mb-6 text-[#143151]">Get Started</h2>
+          <h2
+            className="text-2xl font-normal mb-6 text-[#143151]"
+            style={{ fontFamily: "'Instrument Serif', ui-serif, Georgia, serif", letterSpacing: '-0.01em' }}
+          >
+            Get Started
+          </h2>
           
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -126,9 +132,9 @@ export const WelcomeForm = () => {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>First Name</FormLabel>
+                      <FormLabel className="text-[#274868]">First Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John" {...field} />
+                        <Input placeholder="John" {...field} className="border-[#387E89]/25 focus-visible:ring-[#387E89]" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -140,9 +146,9 @@ export const WelcomeForm = () => {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Last Name</FormLabel>
+                      <FormLabel className="text-[#274868]">Last Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Doe" {...field} />
+                        <Input placeholder="Doe" {...field} className="border-[#387E89]/25 focus-visible:ring-[#387E89]" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,9 +161,9 @@ export const WelcomeForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel className="text-[#274868]">Email Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="you@example.com" type="email" {...field} />
+                      <Input placeholder="you@example.com" type="email" {...field} className="border-[#387E89]/25 focus-visible:ring-[#387E89]" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,9 +175,9 @@ export const WelcomeForm = () => {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number (optional)</FormLabel>
+                    <FormLabel className="text-[#274868]">Phone Number (optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="(123) 456-7890" type="tel" {...field} />
+                      <Input placeholder="(123) 456-7890" type="tel" {...field} className="border-[#387E89]/25 focus-visible:ring-[#387E89]" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -180,7 +186,7 @@ export const WelcomeForm = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#306b75] mt-6"
+                className="w-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white mt-6"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Processing..." : "See Demo Video"}
@@ -189,16 +195,16 @@ export const WelcomeForm = () => {
             </form>
           </Form>
           
-          <p className="text-xs text-center text-gray-500 mt-6">
+          <p className="text-xs text-center text-[#274868]/70 mt-6">
             By submitting this form, you agree to our privacy policy and terms of service.
           </p>
         </motion.div>
       </div>
       
       {/* Animated Gradient Blob Background */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-60 -z-10"></div>
-      <div className="absolute bottom-20 left-20 w-72 h-72 bg-purple-100 rounded-full blur-3xl opacity-70 -z-10"></div>
-      <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-60 -z-10"></div>
+      <div className="absolute top-20 right-20 w-64 h-64 bg-[#A8CDD2] rounded-full blur-3xl opacity-50 -z-0"></div>
+      <div className="absolute bottom-20 left-20 w-72 h-72 bg-[#FBE4E4] rounded-full blur-3xl opacity-60 -z-0"></div>
+      <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-[#5FC4D0]/40 rounded-full blur-3xl opacity-60 -z-0"></div>
     </div>
   );
 };
