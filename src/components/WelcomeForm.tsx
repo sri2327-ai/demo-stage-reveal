@@ -67,8 +67,8 @@ export const WelcomeForm = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-6 text-4xl sm:text-5xl lg:text-6xl text-[#143151] leading-[1.05]"
-            style={{ fontFamily: SERIF, letterSpacing: '-0.015em' }}
+            className="mt-6 text-4xl sm:text-5xl lg:text-6xl text-[#143151] leading-[1.05] font-light"
+            style={{ fontFamily: SERIF, fontWeight: 300, letterSpacing: '-0.02em' }}
           >
             Welcome to the S10.AI Interactive Demo.
           </motion.h1>
@@ -197,11 +197,11 @@ export const WelcomeForm = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 rounded-xl bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white text-base mt-2"
+                className="w-full h-14 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white text-base font-medium tracking-wide shadow-[0_10px_30px_-10px_rgba(20,49,81,0.5)] mt-2"
               >
                 {isSubmitting ? "Processing..." : (
                   <>
-                    See Demo Video
+                    Schedule Demo
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </>
                 )}
