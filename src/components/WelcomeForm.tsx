@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { Hospital, Users, Sparkles, ArrowRight } from 'lucide-react';
+import '../pages/scribeai.css';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
