@@ -817,51 +817,51 @@ const ProductWalkthrough: React.FC = () => {
 
       {/* Interactive Demo Guide */}
       {showDemoGuide && <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
-          <div className="bg-card rounded-2xl shadow-2xl max-w-lg w-full max-w-[95vw] sm:max-w-lg p-4 sm:p-6 animate-scale-in border">
+          <div className="bg-white/90 backdrop-blur rounded-2xl shadow-[0_20px_60px_-20px_rgba(20,49,81,0.25)] border border-[#387E89]/15 max-w-lg w-full max-w-[95vw] sm:max-w-lg p-4 sm:p-6 animate-scale-in">
             <div className="flex items-start sm:items-center gap-3 mb-4">
               <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] flex items-center justify-center flex-shrink-0">
                 <Wand2 className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="font-semibold text-base sm:text-lg">Welcome — 4 Products, 1 Demo</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">Explore each S10.AI product in this guided walkthrough</p>
+                <h3 className="text-base sm:text-lg font-extralight text-[#143151]" style={{ fontFamily: "'Instrument Serif', ui-serif, Georgia, serif", fontWeight: 200, letterSpacing: '-0.02em' }}>Welcome — 4 Products, 1 Demo</h3>
+                <p className="text-xs sm:text-sm text-[#274868]">Explore each S10.AI product in this guided walkthrough</p>
               </div>
             </div>
 
-            <div className="space-y-2 mb-5 rounded-xl border bg-muted/30 p-3 sm:p-4">
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">You're previewing all 4 products</p>
+            <div className="space-y-2 mb-5 rounded-xl border border-[#387E89]/15 bg-[#F4F8F9]/50 p-3 sm:p-4">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#274868]/70 mb-1">You're previewing all 4 products</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
-                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">1</span><span className="font-medium">AI Medical Scribe</span></div>
-                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">2</span><span className="font-medium">AI Receptionist</span></div>
-                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">3</span><span className="font-medium">Custom AI Automations</span></div>
-                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">4</span><span className="font-medium">Telehealth</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">1</span><span className="font-medium text-[#143151]">AI Medical Scribe</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">2</span><span className="font-medium text-[#143151]">AI Receptionist</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">3</span><span className="font-medium text-[#143151]">Custom AI Automations</span></div>
+                <div className="flex items-center gap-2"><span className="h-5 w-5 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] text-white text-[10px] font-bold flex items-center justify-center">4</span><span className="font-medium text-[#143151]">Telehealth</span></div>
               </div>
             </div>
 
             <div className="space-y-3 sm:space-y-4 mb-6">
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">The left menu groups items by product — pick any product to start its demo</p>
+                <p className="text-xs sm:text-sm text-[#274868]">The left menu groups items by product — pick any product to start its demo</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Hover navigation items for descriptions; click to jump into that module</p>
+                <p className="text-xs sm:text-sm text-[#274868]">Hover navigation items for descriptions; click to jump into that module</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Use the shared <span className="font-medium text-foreground">Dashboard</span> at the bottom for cross-product analytics</p>
+                <p className="text-xs sm:text-sm text-[#274868]">Use the shared <span className="font-medium text-[#143151]">Dashboard</span> at the bottom for cross-product analytics</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] mt-2 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">Press <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-muted rounded text-[10px] sm:text-xs font-mono">Ctrl+H</kbd> to reopen this guide anytime</p>
+                <p className="text-xs sm:text-sm text-[#274868]">Press <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-[#F4F8F9] rounded text-[10px] sm:text-xs font-mono border border-[#387E89]/15">Ctrl+H</kbd> to reopen this guide anytime</p>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-              <Button onClick={() => setShowDemoGuide(false)} className="flex-1 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#0d1f31] hover:to-[#2c6269] text-white shadow-lg text-sm sm:text-base">
+              <Button onClick={() => setShowDemoGuide(false)} className="flex-1 h-12 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white shadow-[0_10px_30px_-10px_rgba(20,49,81,0.5)] text-sm sm:text-base font-medium tracking-wide">
                 Start Exploring
               </Button>
-              <Button variant="ghost" onClick={() => setShowDemoGuide(false)} className="px-3 sm:px-4 rounded-full border border-border hover:bg-muted text-sm sm:text-base">
+              <Button variant="ghost" onClick={() => setShowDemoGuide(false)} className="px-3 sm:px-4 h-12 rounded-full border border-[#387E89]/25 text-[#274868] hover:bg-[#387E89]/5 hover:text-[#143151] transition-all text-sm sm:text-base">
                 Skip
               </Button>
             </div>
