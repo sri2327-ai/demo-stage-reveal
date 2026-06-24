@@ -197,11 +197,11 @@ export const WelcomeForm = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 rounded-xl bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white text-base mt-2"
+                className="w-full h-14 rounded-full bg-gradient-to-r from-[#143151] to-[#387E89] hover:from-[#112a46] hover:to-[#1F6A78] text-white text-base font-medium tracking-wide shadow-[0_10px_30px_-10px_rgba(20,49,81,0.5)] mt-2"
               >
                 {isSubmitting ? "Processing..." : (
                   <>
-                    See Demo Video
+                    Schedule Demo
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </>
                 )}
